@@ -1,7 +1,7 @@
 # SPEC
 
 ## G
-G1: Migrate the useful parts of gstack into an enterprise-safe software-engineer agent architecture for an AWS business application focused on experiment design, marketing campaigns, and uplift modeling, with scoped commits, local install, no default external egress, and portable support for Claude, Codex, Copilot, and future hosts.
+G1: Build a reusable enterprise-safe software-engineer agent architecture, separate from upstream `gstack/`, that can be installed locally per project, extended through generic skill directories, and adapted to Claude, Codex, Copilot, Strands/AgentCore, AG-UI, and future hosts.
 
 ## C
 C1: Each commit changes one behavior surface only.
@@ -15,6 +15,7 @@ C8: Target app stack includes AWS, Spring Boot, Databricks, Python, React, C#, P
 C9: Future UI/agent integration should remain AG-UI compatible.
 C10: Migration must explicitly exclude mobile/iOS workflows, public internet scraping, consumer browser automation, generic growth-hacking flows, and unrelated gstack personal-productivity features.
 C11: Skill directories must be easy to add, version, review, and install locally for company teams.
+C12: Core folders must be project-agnostic. Project-specific stacks, domains, tools, and policies live in profiles or optional skill packs.
 
 ## I
 I1: Skill templates: Markdown skill definitions and generated host-specific variants.
@@ -29,6 +30,8 @@ I9: Business app domains: causal inference, experiment design, uplift modeling, 
 I10: Enterprise app stack surfaces: AWS services, Spring Boot APIs, Databricks jobs/notebooks, Python services, React UI, C# services, Postgres, SQL Server.
 I11: Agent framework surfaces: Strands, AgentCore, AG-UI, MCP/tool adapters, skill directories, and host-specific agent prompts.
 I12: Explicitly excluded surfaces: iOS/mobile QA, public web scraping, ngrok/public tunnels, cookie import, social/browser automation, and public data collection workflows.
+I13: Generic package root: `agent-architecture/`.
+I14: Reusable folders: `core/`, `hosts/`, `skills/`, `policies/`, `profiles/`, `docs/`, `tests/`, and optional `adapters/`.
 
 ## V
 V1: No default external egress. Fresh install cannot call remote update, telemetry, tunnel, model, or analytics endpoints before explicit user/admin opt-in.
@@ -53,6 +56,8 @@ V19: No mobile carry-over. iOS QA, device tunnels, Swift templates, mobile debug
 V20: No public scraping carry-over. Internet scraping/browser harvesting skills are excluded unless later replaced by approved internal data-source connectors.
 V21: Data access is governed. Skills that touch Postgres, SQL Server, Databricks, or campaign data must require policy-defined read/write permissions and audit trails.
 V22: Domain correctness requires review lanes. Causal claims, experiment validity, uplift interpretation, and campaign recommendations require statistics/measurement review checks.
+V23: Core package is domain-neutral. Domain skills such as causal inference or marketing uplift are installable packs, not hardcoded into the compiler, host registry, or policy engine.
+V24: Stack support is modular. AWS, Spring Boot, Databricks, Python, React, C#, Postgres, and SQL Server support lives in reusable stack packs or profiles.
 
 ## T
 id|status|task|cites
@@ -75,13 +80,14 @@ T16|.|Write migration guide from upstream gstack to enterprise architecture, inc
 T17|.|Add security review checklist for new skills and optional modules|V1,V5,V12
 T18|.|Add tests for no-egress defaults, install path containment, host generation, disabled modules, and policy gates|V1,V3,V4,V5,V7,V8,V9,V10
 T19|.|Define keep/change/drop inventory specific to the target app: keep host configs and skill compiler; change review/QA/docs/security skills; drop mobile, scraping, public tunnels, telemetry, cookie import|V14,V19,V20,I8,I12
-T20|.|Create domain skill map for causal inference, experiment design, uplift modeling, campaign measurement, data governance, and model interpretation|V15,V22,I9
-T21|.|Create stack skill map for AWS, Spring Boot, Databricks, Python, React, C#, Postgres, and SQL Server|V16,V21,I10
+T20|.|Create optional domain skill-pack map for causal inference, experiment design, uplift modeling, campaign measurement, data governance, and model interpretation|V15,V22,V23,I9
+T21|.|Create optional stack skill-pack map for AWS, Spring Boot, Databricks, Python, React, C#, Postgres, and SQL Server|V16,V21,V24,I10
 T22|.|Design Strands/AgentCore adapter boundary for invoking skills and tools without making core architecture depend on those frameworks|V18,I11
 T23|.|Define AG-UI-compatible output/event contract for skill results, approval requests, tool actions, progress, and audit references|V17,I11
 T24|.|Add local skill directory layout for company teams, including versioning, ownership, review, and install rules|C11,V4,I1,I5
 T25|.|Add data-permission policy gates for Databricks, Postgres, SQL Server, campaign datasets, and model outputs|V21,I10
 T26|.|Add measurement-review checklist for causal inference, experiment validity, uplift modeling leakage, treatment/control balance, and campaign recommendation risk|V22,I9
+T27|.|Create top-level `agent-architecture/` package boundary and keep all migrated architecture files outside `gstack/`|C12,I13,I14,V23,V24
 
 ## B
 id|date|cause|fix
