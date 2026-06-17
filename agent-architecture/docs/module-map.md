@@ -26,6 +26,7 @@ Initial host targets:
 - `hosts/copilot`
 - `hosts/strands`
 - `hosts/agentcore`
+- `hosts/google-adk`
 
 Host modules should stay declarative. Runtime-specific logic belongs in
 adapters only when a declarative rewrite is insufficient.
@@ -88,6 +89,7 @@ Candidate adapters:
 - `adapters/browser`
 - `adapters/agentcore`
 - `adapters/strands`
+- `adapters/google-adk`
 
 Adapters must expose narrow interfaces to core. Core should not import a heavy
 runtime SDK directly.

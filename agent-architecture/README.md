@@ -21,11 +21,11 @@ inside this package.
 ```text
 agent-architecture/
   core/        # host-neutral compiler, policy loader, shared types
-  hosts/       # Claude, Codex, Copilot, Strands, AgentCore host adapters
+  hosts/       # Claude, Codex, Copilot, Strands, AgentCore, Google ADK host adapters
   skills/      # generic reusable skill packs
   policies/    # default and enterprise policy profiles
   profiles/    # project or stack profiles that compose skills and policies
-  adapters/    # optional integrations such as AG-UI, MCP, CodeGraph
+  adapters/    # optional integrations such as AG-UI, MCP, CodeGraph, Google ADK
   docs/        # migration notes, security posture, architecture decisions
   tests/       # no-egress, generation, policy, install, and adapter tests
 ```

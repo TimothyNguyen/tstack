@@ -1,7 +1,7 @@
 # SPEC
 
 ## G
-G1: Build a reusable enterprise-safe software-engineer agent architecture, separate from upstream `gstack/`, that can be installed locally per project, extended through generic skill directories, and adapted to Claude, Codex, Copilot, Strands/AgentCore, AG-UI, and future hosts.
+G1: Build a reusable enterprise-safe software-engineer agent architecture, separate from upstream `gstack/`, that can be installed locally per project, extended through generic skill directories, and adapted to Claude, Codex, Copilot, Strands/AgentCore, Google ADK, AG-UI, and future hosts.
 
 ## C
 C1: Each commit changes one behavior surface only.
@@ -28,7 +28,7 @@ I7: Optional tool runtimes: browser daemon, codebase understanding index, test r
 I8: Migration source: `gstack/` repo contents, especially `hosts/`, `scripts/gen-skill-docs.ts`, `scripts/host-config.ts`, skill directories, and browser docs.
 I9: Business app domains: causal inference, experiment design, uplift modeling, campaign planning, measurement, data quality, governance, and model interpretation.
 I10: Enterprise app stack surfaces: AWS services, Spring Boot APIs, Databricks jobs/notebooks, Python services, React UI, C# services, Postgres, SQL Server.
-I11: Agent framework surfaces: Strands, AgentCore, AG-UI, MCP/tool adapters, skill directories, and host-specific agent prompts.
+I11: Agent framework surfaces: Strands, AgentCore, Google ADK, AG-UI, MCP/tool adapters, skill directories, and host-specific agent prompts.
 I12: Explicitly excluded surfaces: iOS/mobile QA, public web scraping, ngrok/public tunnels, cookie import, social/browser automation, and public data collection workflows.
 I13: Generic package root: `agent-architecture/`.
 I14: Reusable folders: `core/`, `hosts/`, `skills/`, `policies/`, `profiles/`, `docs/`, `tests/`, and optional `adapters/`.
@@ -51,7 +51,7 @@ V14: Migration preserves useful workflow taxonomy. Keep plan, build, review, QA,
 V15: Domain skills are first-class. Causal inference, experiment design, uplift modeling, campaign measurement, and data governance get explicit skills rather than generic coding prompts.
 V16: Stack skills are first-class. AWS, Spring Boot, Databricks, Python, React, C#, Postgres, and SQL Server workflows get targeted skill directories or modules.
 V17: AG-UI compatibility is preserved. Agent outputs and future UI action events should be structured enough to map into AG-UI concepts without rewriting skills.
-V18: Strands/AgentCore are integration targets, not hard dependencies in the core. The core skill system must run without them and adapt to them through host/tool adapters.
+V18: Strands, AgentCore, and Google ADK are integration targets, not hard dependencies in the core. The core skill system must run without them and adapt to them through host/tool adapters.
 V19: No mobile carry-over. iOS QA, device tunnels, Swift templates, mobile debug bridge, and mobile-specific gstack skills are excluded.
 V20: No public scraping carry-over. Internet scraping/browser harvesting skills are excluded unless later replaced by approved internal data-source connectors.
 V21: Data access is governed. Skills that touch Postgres, SQL Server, Databricks, or campaign data must require policy-defined read/write permissions and audit trails.
@@ -82,7 +82,7 @@ T18|.|Add tests for no-egress defaults, install path containment, host generatio
 T19|.|Define keep/change/drop inventory specific to the target app: keep host configs and skill compiler; change review/QA/docs/security skills; drop mobile, scraping, public tunnels, telemetry, cookie import|V14,V19,V20,I8,I12
 T20|.|Create optional domain skill-pack map for causal inference, experiment design, uplift modeling, campaign measurement, data governance, and model interpretation|V15,V22,V23,I9
 T21|.|Create optional stack skill-pack map for AWS, Spring Boot, Databricks, Python, React, C#, Postgres, and SQL Server|V16,V21,V24,I10
-T22|.|Design Strands/AgentCore adapter boundary for invoking skills and tools without making core architecture depend on those frameworks|V18,I11
+T22|.|Design Strands/AgentCore/Google ADK adapter boundary for invoking skills and tools without making core architecture depend on those frameworks|V18,I11
 T23|.|Define AG-UI-compatible output/event contract for skill results, approval requests, tool actions, progress, and audit references|V17,I11
 T24|.|Add local skill directory layout for company teams, including versioning, ownership, review, and install rules|C11,V4,I1,I5
 T25|.|Add data-permission policy gates for Databricks, Postgres, SQL Server, campaign datasets, and model outputs|V21,I10
