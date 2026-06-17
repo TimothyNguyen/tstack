@@ -1,0 +1,11 @@
+{
+  "name": "agent-architecture",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Reusable enterprise-safe agent skill architecture.",
+  "scripts": {
+    "build:skills": "node scripts/gen-skill-docs.mjs",
+    "check:skills": "node scripts/gen-skill-docs.mjs --check"
+  }
+}

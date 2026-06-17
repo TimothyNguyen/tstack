@@ -22,7 +22,7 @@ inside this package.
 agent-architecture/
   core/        # host-neutral compiler, policy loader, shared types
   hosts/       # Claude, Codex, Copilot, Strands, AgentCore, Google ADK host adapters
-  skills/      # one folder per skill or agent workflow, each with SKILL.md
+  <skill>/     # top-level skill folders, each with SKILL.md.tmpl and SKILL.md
   policies/    # default and enterprise policy profiles
   profiles/    # project or stack profiles that compose skills and policies
   adapters/    # optional integrations such as AG-UI, MCP, CodeGraph, Google ADK
@@ -49,26 +49,28 @@ different project can enable a different set without forking core.
 Skills follow the gstack-style source layout:
 
 ```text
-skills/
-  review/
-    SKILL.md
-    commands.md
-    references/
-    templates/
-    tests/
-  security-review/
-    SKILL.md
-  domain/
-    causal-inference/
-      SKILL.md
-  stack/
-    aws/
-      SKILL.md
+review/
+  SKILL.md.tmpl
+  SKILL.md
+  checklist.md
+security-review/
+  SKILL.md.tmpl
+  SKILL.md
+  sections/
+    manifest.json
+    review-sections.md.tmpl
+    review-sections.md
+domain-causal-inference/
+  SKILL.md.tmpl
+  SKILL.md
+stack-aws/
+  SKILL.md.tmpl
+  SKILL.md
 ```
 
-`SKILL.md` is the required entrypoint. Supporting files are optional and live
-next to the skill so each workflow can be reviewed, versioned, and installed as
-a unit.
+`SKILL.md.tmpl` is the source. `SKILL.md` is generated from it. Supporting files
+are optional and live next to the skill so each workflow can be reviewed,
+versioned, and installed as a unit.
 
 ## Carry-Over Rules
 

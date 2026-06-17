@@ -6,10 +6,13 @@ and close to its supporting references, commands, templates, and tests.
 ## Required Shape
 
 ```text
-skills/<skill-name>/SKILL.md
+<skill-name>/SKILL.md.tmpl
+<skill-name>/SKILL.md
 ```
 
-`SKILL.md` is the required entrypoint. It contains:
+`SKILL.md.tmpl` is the required source entrypoint. `SKILL.md` is generated from
+it. The generated file is committed so agent hosts that cannot run the generator
+can still install the skill. The source file contains:
 
 - Skill name.
 - Short description.
@@ -22,11 +25,13 @@ skills/<skill-name>/SKILL.md
 ## Optional Files
 
 ```text
-skills/<skill-name>/commands.md
-skills/<skill-name>/references/
-skills/<skill-name>/templates/
-skills/<skill-name>/tests/
-skills/<skill-name>/manifest.json
+<skill-name>/commands.md
+<skill-name>/references/
+<skill-name>/templates/
+<skill-name>/tests/
+<skill-name>/sections/manifest.json
+<skill-name>/sections/*.md.tmpl
+<skill-name>/sections/*.md
 ```
 
 Use optional files only when they have a clear purpose:
@@ -35,24 +40,26 @@ Use optional files only when they have a clear purpose:
 - `references/`: longer instructions, checklists, schemas, or examples.
 - `templates/`: generated report, ticket, plan, or prompt templates.
 - `tests/`: validation fixtures for generated skills or tool behavior.
-- `manifest.json`: metadata used by the compiler when frontmatter is not enough.
+- `sections/manifest.json`: section registry for large on-demand references.
+- `sections/*.md.tmpl`: source for generated section references.
+- `sections/*.md`: generated section references.
 
 ## Domain And Stack Packs
 
 Domain and stack packs use nested directories:
 
 ```text
-skills/domain/causal-inference/SKILL.md
-skills/domain/experiment-design/SKILL.md
-skills/domain/uplift-modeling/SKILL.md
-skills/stack/aws/SKILL.md
-skills/stack/spring-boot/SKILL.md
-skills/stack/databricks/SKILL.md
-skills/stack/python/SKILL.md
-skills/stack/react/SKILL.md
-skills/stack/csharp/SKILL.md
-skills/stack/postgres/SKILL.md
-skills/stack/sql-server/SKILL.md
+domain-causal-inference/SKILL.md.tmpl
+domain-experiment-design/SKILL.md.tmpl
+domain-uplift-modeling/SKILL.md.tmpl
+stack-aws/SKILL.md.tmpl
+stack-spring-boot/SKILL.md.tmpl
+stack-databricks/SKILL.md.tmpl
+stack-python/SKILL.md.tmpl
+stack-react/SKILL.md.tmpl
+stack-csharp/SKILL.md.tmpl
+stack-postgres/SKILL.md.tmpl
+stack-sql-server/SKILL.md.tmpl
 ```
 
 These packs are optional. A project profile chooses which packs to install.

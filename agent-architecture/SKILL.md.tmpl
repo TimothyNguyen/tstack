@@ -1,0 +1,37 @@
+---
+name: agent-architecture
+version: 0.1.0
+description: |
+  Enterprise-safe software engineering skill pack. Routes work to scoped skills for
+  spec writing, code review, QA, security review, documentation, learnings, and release
+  workflows. Designed for local project installs and no default public egress.
+allowed-tools:
+  - Read
+  - Grep
+  - Glob
+  - Bash
+---
+
+{{PREAMBLE}}
+
+# Agent Architecture Skill Pack
+
+Use this root skill as the router for project-local software engineering
+workflows.
+
+## Routing
+
+- New requirement, design, or issue: invoke `spec`.
+- Code or PR review: invoke `review`.
+- Manual or automated test planning: invoke `qa`.
+- Security or data-governance review: invoke `security-review`.
+- Documentation work: invoke `documentation`.
+- Project memory or lessons: invoke `learnings`.
+- Release preparation: invoke `release`.
+
+When a project profile installs domain or stack packs, route to those skills
+only when the user task names that domain or stack.
+
+{{POLICY_REQUIREMENTS}}
+
+{{BASE_OUTPUT_RULES}}

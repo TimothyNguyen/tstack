@@ -14,16 +14,16 @@ enterprise package boundary.
 | `hosts/*.ts` | Keep pattern, reimplement | Declarative host configs are the cleanest portability boundary. | `hosts/` |
 | `scripts/host-config.ts` | Keep concept, simplify | Strong typed schema, validation, and uniqueness checks are reusable. Strip gstack-specific fields. | `core/host-config` |
 | `scripts/gen-skill-docs.ts` | Change heavily | Template generation is useful, but upstream resolver/preamble behavior includes update checks, telemetry, and Claude-specific assumptions. | `core/skill-compiler` |
-| Skill directory convention | Keep | Directory-per-skill with `SKILL.md` is reviewable, versionable, and easy to install locally. | `skills/` |
+| Skill directory convention | Keep | Top-level directory-per-skill with `SKILL.md.tmpl` source and generated `SKILL.md` is reviewable, versionable, and easy to install locally. | `<skill>/` |
 | Generated host variants | Keep pattern | Claude, Codex, Copilot, Strands, AgentCore, and future hosts should receive generated artifacts from one source. | `hosts/`, `core/skill-compiler` |
 | Workflow taxonomy | Keep selectively | Planning, review, QA, security, docs, learnings, and ship lanes are useful. Keep generic engineering workflow names. | `skills/` |
-| `/review` | Change | Review skill is useful, but must be policy-aware and stack-neutral by default. | `skills/review` |
-| `/cso` | Change | Security review is useful, but must focus on enterprise app, data, cloud, and agent-tool risks. | `skills/security-review` |
-| `/qa` and `/qa-only` | Change | QA methodology is useful. Browser-driven testing is optional and cannot assume cookie import or public sites. | `skills/qa` |
-| `/document-*` | Change | Documentation generation/release checks are useful, but must avoid public browsing and telemetry. | `skills/documentation` |
-| `/learn` | Change | Project learnings are useful if local-only and secret-safe. | `skills/learnings`, `policies/` |
-| `/spec` | Keep concept | Spec-first work fits scoped commits and reviewable behavior. Use generic format, not personal workflow assumptions. | `skills/spec` |
-| `/ship` and `/land-and-deploy` | Change or defer | Release automation is useful but high risk. Keep as optional policy-gated skill. | `skills/release` |
+| `/review` | Change | Review skill is useful, but must be policy-aware and stack-neutral by default. | `review/` |
+| `/cso` | Change | Security review is useful, but must focus on enterprise app, data, cloud, and agent-tool risks. | `security-review/` |
+| `/qa` and `/qa-only` | Change | QA methodology is useful. Browser-driven testing is optional and cannot assume cookie import or public sites. | `qa/` |
+| `/document-*` | Change | Documentation generation/release checks are useful, but must avoid public browsing and telemetry. | `documentation/` |
+| `/learn` | Change | Project learnings are useful if local-only and secret-safe. | `learnings/`, `policies/` |
+| `/spec` | Keep concept | Spec-first work fits scoped commits and reviewable behavior. Use generic format, not personal workflow assumptions. | `spec/` |
+| `/ship` and `/land-and-deploy` | Change or defer | Release automation is useful but high risk. Keep as optional policy-gated skill. | `release/` |
 | `/browse` daemon | Defer as optional | Local browser control can help UI QA but is not core. Disable by default; no tunnels or cookie import. | `adapters/browser` |
 | `pair-agent` | Drop by default | Public or cross-machine remote control is too sensitive for the default company profile. | none |
 | ngrok tunnel support | Drop | Public tunnels violate no-default-egress and enterprise network posture. | none |
@@ -61,17 +61,17 @@ auditable, and no-egress by default.
 Domain and stack support should be optional packs, not core:
 
 - `profiles/marketing-measurement`
-- `skills/domain/causal-inference`
-- `skills/domain/experiment-design`
-- `skills/domain/uplift-modeling`
-- `skills/stack/aws`
-- `skills/stack/spring-boot`
-- `skills/stack/databricks`
-- `skills/stack/python`
-- `skills/stack/react`
-- `skills/stack/csharp`
-- `skills/stack/postgres`
-- `skills/stack/sql-server`
+- `domain-causal-inference`
+- `domain-experiment-design`
+- `domain-uplift-modeling`
+- `stack-aws`
+- `stack-spring-boot`
+- `stack-databricks`
+- `stack-python`
+- `stack-react`
+- `stack-csharp`
+- `stack-postgres`
+- `stack-sql-server`
 
 These packs can be installed together for the first target app, but another
 project should be able to use the core without them.

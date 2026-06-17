@@ -9,7 +9,7 @@ integrations.
 | Module | Responsibility | May depend on | Must not depend on |
 |---|---|---|---|
 | `core/host-config` | Validate host adapter definitions and expose the host registry contract. | Standard library, shared types | Skills, profiles, cloud stacks |
-| `core/skill-compiler` | Render source skills into host-specific artifacts. | Host configs, policy metadata, shared types | Network, telemetry, global config |
+| `core/skill-compiler` | Render top-level `SKILL.md.tmpl` sources and `sections/*.md.tmpl` sources into generated Markdown. | Host configs, policy metadata, shared types | Network, telemetry, global config |
 | `core/policy` | Load and evaluate local policy for tools, egress, install paths, and audit events. | Shared types | Host runtime internals |
 | `core/install` | Install generated artifacts into declared local targets. | Host configs, policy | Public update checks, global mutation by default |
 | `core/audit` | Write local audit events for privileged actions and policy decisions. | Policy, shared types | Secrets, full prompts, file contents |
@@ -33,33 +33,37 @@ adapters only when a declarative rewrite is insufficient.
 
 ## Skill Modules
 
-Generic skills live under `skills/` and should be useful across projects. Each
-skill or agent workflow owns a directory with a required `SKILL.md` entrypoint:
+Generic skills follow the gstack layout and live as top-level directories. Each
+skill or agent workflow owns a directory with a required `SKILL.md.tmpl` source
+and generated `SKILL.md` output:
 
 ```text
-skills/<skill-name>/SKILL.md
+<skill-name>/SKILL.md.tmpl
+<skill-name>/SKILL.md
 ```
 
 Optional supporting files live beside that entrypoint:
 
 ```text
-skills/<skill-name>/commands.md
-skills/<skill-name>/references/
-skills/<skill-name>/templates/
-skills/<skill-name>/tests/
-skills/<skill-name>/manifest.json
+<skill-name>/commands.md
+<skill-name>/references/
+<skill-name>/templates/
+<skill-name>/tests/
+<skill-name>/sections/manifest.json
+<skill-name>/sections/*.md.tmpl
+<skill-name>/sections/*.md
 ```
 
 This preserves the gstack ergonomics while keeping the new package generic.
 
-- `skills/spec`
-- `skills/review`
-- `skills/qa`
-- `skills/security-review`
-- `skills/documentation`
-- `skills/learnings`
-- `skills/release`
-- `skills/codebase-understanding`
+- `spec`
+- `review`
+- `qa`
+- `security-review`
+- `documentation`
+- `learnings`
+- `release`
+- `codebase-understanding`
 
 Each skill owns its instructions, examples, policy requirements, and generated
 host variants. Skills must not assume a specific project stack unless they live

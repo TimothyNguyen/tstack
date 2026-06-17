@@ -1,0 +1,30 @@
+---
+name: qa
+version: 0.1.0
+description: |
+  Enterprise-safe QA workflow. Plans and verifies user-facing or service behavior using
+  local tests and approved tools. Browser automation is optional and disabled by default.
+allowed-tools:
+  - Read
+  - Grep
+  - Glob
+  - Bash
+---
+
+{{PREAMBLE}}
+
+# QA
+
+Use this workflow to verify a feature, bug fix, or release candidate.
+
+## Steps
+
+1. Identify the behavior under test.
+2. List the smallest useful verification path.
+3. Prefer local tests and deterministic fixtures.
+4. Use browser automation only when the active policy enables it.
+5. Record bugs with reproduction steps and expected behavior.
+
+{{POLICY_REQUIREMENTS}}
+
+{{BASE_OUTPUT_RULES}}

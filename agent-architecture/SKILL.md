@@ -1,0 +1,50 @@
+---
+name: agent-architecture
+version: 0.1.0
+description: |
+  Enterprise-safe software engineering skill pack. Routes work to scoped skills for
+  spec writing, code review, QA, security review, documentation, learnings, and release
+  workflows. Designed for local project installs and no default public egress.
+allowed-tools:
+  - Read
+  - Grep
+  - Glob
+  - Bash
+---
+
+## Enterprise Preamble
+
+- Stay inside the current project unless the user explicitly names another path.
+- Do not call public telemetry, public update checks, public tunnels, cookie import, or public scraping flows.
+- Use policy-gated tools only when the active profile allows them.
+- Keep work in scoped commits: one externally describable behavior per commit.
+
+# Agent Architecture Skill Pack
+
+Use this root skill as the router for project-local software engineering
+workflows.
+
+## Routing
+
+- New requirement, design, or issue: invoke `spec`.
+- Code or PR review: invoke `review`.
+- Manual or automated test planning: invoke `qa`.
+- Security or data-governance review: invoke `security-review`.
+- Documentation work: invoke `documentation`.
+- Project memory or lessons: invoke `learnings`.
+- Release preparation: invoke `release`.
+
+When a project profile installs domain or stack packs, route to those skills
+only when the user task names that domain or stack.
+
+## Policy Requirements
+
+- Read-only code inspection is allowed.
+- Shell write, git write, deployment, database read, ticket creation, and browser use require policy approval unless the active profile says otherwise.
+- Credential reads, cookie import, public tunnels, public telemetry, and public scraping are disabled by default.
+
+## Output Rules
+
+- Report findings with file paths, concrete evidence, and recommended actions.
+- Do not include secrets, raw credentials, cookie values, full prompts, or full data extracts.
+- Prefer structured summaries that can map to AG-UI events later.
