@@ -51,7 +51,7 @@ The first implementation slice should carry over only:
 - Enterprise policy model.
 - Local install layout.
 - Generic starter skills for spec, review, QA, security review, documentation,
-  learnings, and release.
+  learnings, release, plan review, investigation, and codebase understanding.
 
 Everything else remains excluded or deferred until the core proves local,
 auditable, and no-egress by default.

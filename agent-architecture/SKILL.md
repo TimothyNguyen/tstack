@@ -27,12 +27,15 @@ workflows.
 ## Routing
 
 - New requirement, design, or issue: invoke `spec`.
+- Review a plan before implementation: invoke `plan-review`.
+- Debug a bug, failure, or unexpected behavior: invoke `investigate`.
 - Code or PR review: invoke `review`.
 - Manual or automated test planning: invoke `qa`.
 - Security or data-governance review: invoke `security-review`.
 - Documentation work: invoke `documentation`.
 - Project memory or lessons: invoke `learnings`.
 - Release preparation: invoke `release`.
+- Codebase map, architecture lookup, or dependency tracing: invoke `codebase-understanding`.
 
 When a project profile installs domain or stack packs, route to those skills
 only when the user task names that domain or stack.

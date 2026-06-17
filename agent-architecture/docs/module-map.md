@@ -57,6 +57,8 @@ Optional supporting files live beside that entrypoint:
 This preserves the gstack ergonomics while keeping the new package generic.
 
 - `spec`
+- `plan-review`
+- `investigate`
 - `review`
 - `qa`
 - `security-review`
