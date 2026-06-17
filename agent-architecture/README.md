@@ -22,7 +22,7 @@ inside this package.
 agent-architecture/
   core/        # host-neutral compiler, policy loader, shared types
   hosts/       # Claude, Codex, Copilot, Strands, AgentCore, Google ADK host adapters
-  skills/      # generic reusable skill packs
+  skills/      # one folder per skill or agent workflow, each with SKILL.md
   policies/    # default and enterprise policy profiles
   profiles/    # project or stack profiles that compose skills and policies
   adapters/    # optional integrations such as AG-UI, MCP, CodeGraph, Google ADK
@@ -43,6 +43,32 @@ Profiles are where a project composes reusable pieces. A marketing measurement
 application can enable AWS, Spring Boot, Databricks, Python, React, C#, Postgres,
 SQL Server, causal inference, experiment design, and uplift modeling packs. A
 different project can enable a different set without forking core.
+
+## Skill Directory Shape
+
+Skills follow the gstack-style source layout:
+
+```text
+skills/
+  review/
+    SKILL.md
+    commands.md
+    references/
+    templates/
+    tests/
+  security-review/
+    SKILL.md
+  domain/
+    causal-inference/
+      SKILL.md
+  stack/
+    aws/
+      SKILL.md
+```
+
+`SKILL.md` is the required entrypoint. Supporting files are optional and live
+next to the skill so each workflow can be reviewed, versioned, and installed as
+a unit.
 
 ## Carry-Over Rules
 

@@ -33,7 +33,24 @@ adapters only when a declarative rewrite is insufficient.
 
 ## Skill Modules
 
-Generic skills live under `skills/` and should be useful across projects:
+Generic skills live under `skills/` and should be useful across projects. Each
+skill or agent workflow owns a directory with a required `SKILL.md` entrypoint:
+
+```text
+skills/<skill-name>/SKILL.md
+```
+
+Optional supporting files live beside that entrypoint:
+
+```text
+skills/<skill-name>/commands.md
+skills/<skill-name>/references/
+skills/<skill-name>/templates/
+skills/<skill-name>/tests/
+skills/<skill-name>/manifest.json
+```
+
+This preserves the gstack ergonomics while keeping the new package generic.
 
 - `skills/spec`
 - `skills/review`
