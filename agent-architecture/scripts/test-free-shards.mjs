@@ -2,6 +2,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { spawnSync } from 'node:child_process';
+import { pathToFileURL } from 'node:url';
 
 const ROOT = path.resolve(import.meta.dirname, '..');
 const TEST_ROOTS = ['tests', 'test', 'e2e'];
@@ -13,7 +14,7 @@ const DEFAULT_EXCLUDES = [
   /\/build\//,
   /\/generated\//,
   /\/fixtures\//,
-  /e2e.*paid/i,
+  /(?:e2e.*paid|paid.*e2e)/i,
   /llm.*eval/i,
   /external.*service/i,
 ];
@@ -43,7 +44,7 @@ function walk(dir) {
   return files;
 }
 
-function collectTests(root = ROOT) {
+export function collectTests(root = ROOT) {
   const files = new Set();
   for (const testRoot of TEST_ROOTS) {
     for (const full of walk(path.join(root, testRoot))) {
@@ -54,7 +55,7 @@ function collectTests(root = ROOT) {
   return [...files].sort();
 }
 
-function detectWindowsFragility(root, rel) {
+export function detectWindowsFragility(root, rel) {
   const content = fs.readFileSync(path.join(root, rel), 'utf8');
   for (const { pattern, reason } of WINDOWS_FRAGILE_PATTERNS) {
     if (pattern.test(content)) return reason;
@@ -62,7 +63,7 @@ function detectWindowsFragility(root, rel) {
   return null;
 }
 
-function stableHash(input) {
+export function stableHash(input) {
   let hash = 0x811c9dc5;
   for (let index = 0; index < input.length; index += 1) {
     hash ^= input.charCodeAt(index);
@@ -71,13 +72,13 @@ function stableHash(input) {
   return hash >>> 0;
 }
 
-function shard(files, count) {
+export function shard(files, count) {
   const buckets = Array.from({ length: count }, () => []);
   for (const file of files) buckets[stableHash(file) % count].push(file);
   return buckets.map((bucket) => bucket.sort()).filter((bucket) => bucket.length > 0);
 }
 
-function parseArgs(argv) {
+export function parseArgs(argv) {
   const options = { list: false, windowsOnly: false, shards: 8, shard: null, command: null };
   for (let index = 0; index < argv.length; index += 1) {
     const arg = argv[index];
@@ -91,14 +92,14 @@ function parseArgs(argv) {
   return options;
 }
 
-function main() {
-  const options = parseArgs(process.argv.slice(2));
-  let files = collectTests();
+export function main(argv = process.argv.slice(2), root = ROOT) {
+  const options = parseArgs(argv);
+  let files = collectTests(root);
   const excluded = [];
 
   if (options.windowsOnly) {
     files = files.filter((file) => {
-      const reason = detectWindowsFragility(ROOT, file);
+      const reason = detectWindowsFragility(root, file);
       if (reason) excluded.push({ file, reason });
       return !reason;
     });
@@ -122,12 +123,14 @@ function main() {
   }
 
   const [cmd, ...prefixArgs] = options.command.split(' ');
-  const result = spawnSync(cmd, [...prefixArgs, ...selected], {
-    cwd: ROOT,
+    const result = spawnSync(cmd, [...prefixArgs, ...selected], {
+    cwd: root,
     stdio: 'inherit',
     shell: process.platform === 'win32',
   });
   return result.status ?? 1;
 }
 
-process.exitCode = main();
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
+  process.exitCode = main();
+}
