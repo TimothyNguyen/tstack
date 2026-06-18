@@ -53,6 +53,7 @@ workflows.
 - Restrict or harden tool use: invoke `guard`.
 - Upgrade this skill pack: invoke `architecture-agent-upgrade`.
 - Codebase map, architecture lookup, or dependency tracing: invoke `codebase-understanding`.
+- Token/cost reduction for noisy shell output: invoke `rtk-token-optimizer`.
 
 When a project profile installs domain or stack packs, route to those skills
 only when the user task names that domain or stack.

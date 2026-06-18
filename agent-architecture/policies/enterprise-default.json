@@ -61,6 +61,7 @@
     "mcp": "optional",
     "googleAdk": "optional",
     "strands": "optional",
-    "agentCore": "optional"
+    "agentCore": "optional",
+    "rtkTokenOptimizer": "optional"
   }
 }

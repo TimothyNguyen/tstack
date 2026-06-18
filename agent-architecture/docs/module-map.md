@@ -77,6 +77,7 @@ This preserves the gstack ergonomics while keeping the new package generic.
 - `release`
 - `ship`
 - `codebase-understanding`
+- `rtk-token-optimizer`
 
 Each skill owns its instructions, examples, policy requirements, and generated
 host variants. Skills must not assume a specific project stack unless they live
