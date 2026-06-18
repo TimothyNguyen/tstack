@@ -1,8 +1,9 @@
 ---
-name: tstack-upgrade
+name: architecture-agent-upgrade
 version: 0.1.0
 description: |
-  Upgrades this local skill pack through a policy-approved internal or manual flow.
+  Upgrades an installed architecture-agent skill pack through a policy-approved internal,
+  mirrored, or manual flow. Public update checks are disabled by default.
 allowed-tools:
   - Read
   - Grep
@@ -17,16 +18,27 @@ allowed-tools:
 - Use policy-gated tools only when the active profile allows them.
 - Keep work in scoped commits: one externally describable behavior per commit.
 
-# Tstack Upgrade
+# Architecture Agent Upgrade
 
-Upgrades this local skill pack through a policy-approved internal or manual flow.
+Use this workflow to upgrade an installed architecture-agent skill pack in a
+project or approved local install directory.
+
+## Rules
+
+- Do not call public update endpoints by default.
+- Do not mutate global agent config unless the active policy and user allow it.
+- Prefer internal mirrors, pinned artifacts, or manual copy workflows.
+- Verify generated skills after upgrade.
+- Preserve project-local profiles and policy overrides.
 
 ## Steps
 
-1. Confirm the user goal and scope.
-2. Read the relevant local project files.
-3. Check policy requirements before any privileged action.
-4. Produce a concise result with evidence, risks, and next actions.
+1. Identify the installed architecture-agent root.
+2. Identify the approved upgrade source: internal mirror, local path, or manual artifact.
+3. Check policy before any file write.
+4. Compare versions and changed files.
+5. Run `npm run check:skills` after applying the upgrade.
+6. Report changed skill folders, generated files, and required follow-up actions.
 
 ## Policy Requirements
 

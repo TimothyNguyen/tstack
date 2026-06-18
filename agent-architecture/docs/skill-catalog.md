@@ -46,7 +46,7 @@ Each skill is a top-level folder with:
 | `claude` | Optional Claude host bridge. | `claude/SKILL.md.tmpl` |
 | `codex` | Optional Codex host bridge. | `codex/SKILL.md.tmpl` |
 | `copilot` | Optional GitHub Copilot host bridge. | `copilot/SKILL.md.tmpl` |
-| `tstack-upgrade` | Policy-approved local upgrade workflow. | `tstack-upgrade/SKILL.md.tmpl` |
+| `architecture-agent-upgrade` | Policy-approved local upgrade workflow. | `architecture-agent-upgrade/SKILL.md.tmpl` |
 
 ## Deferred Optional Packs
 

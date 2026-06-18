@@ -51,7 +51,7 @@ workflows.
 - Weekly/project retrospective: invoke `retro`.
 - Convert a repeated workflow into a reusable skill: invoke `skillify`.
 - Restrict or harden tool use: invoke `guard`.
-- Upgrade this skill pack: invoke `tstack-upgrade`.
+- Upgrade this skill pack: invoke `architecture-agent-upgrade`.
 - Codebase map, architecture lookup, or dependency tracing: invoke `codebase-understanding`.
 
 When a project profile installs domain or stack packs, route to those skills
