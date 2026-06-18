@@ -68,6 +68,7 @@ This preserves the gstack ergonomics while keeping the new package generic.
 - `review`
 - `qa`
 - `test`
+- `health`
 - `security-review`
 - `documentation`
 - `document-generate`

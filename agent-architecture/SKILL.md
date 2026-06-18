@@ -39,6 +39,7 @@ workflows.
 - Cross-model/code-agent second opinion: invoke `codex`, `claude`, or `copilot` only when the host profile enables it.
 - Manual or automated test planning: invoke `qa`.
 - Test automation design or execution: invoke `test`.
+- Code quality dashboard or full local checkup: invoke `health`.
 - Security or data-governance review: invoke `security-review`.
 - Documentation work: invoke `documentation`, `document-generate`, or `document-release`.
 - UI/design implementation review: invoke `design-review` or `design-html`.

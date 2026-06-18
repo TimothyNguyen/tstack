@@ -50,6 +50,11 @@ Designs and runs approved automated tests, including Playwright or Selenium when
 - Screenshots, traces, and logs must avoid secrets and raw customer data.
 - Public scraping and public tunnel usage are forbidden by default.
 
+## Extended Guidance
+
+When choosing test strategy, sharding, Playwright, Selenium, or CI layout, read
+`test/sections/automation-matrix.md`.
+
 ## Policy Requirements
 
 - Read-only code inspection is allowed.

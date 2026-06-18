@@ -1,0 +1,13 @@
+{
+  "$schema": "https://example.local/schemas/section-manifest.json",
+  "skill": "test",
+  "version": 1,
+  "sections": [
+    {
+      "id": "automation-matrix",
+      "file": "automation-matrix.md",
+      "title": "Test automation matrix and runner guidance",
+      "trigger": "choosing test type, runner, sharding, Playwright, Selenium, or CI strategy"
+    }
+  ]
+}

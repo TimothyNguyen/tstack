@@ -26,6 +26,7 @@ Each skill is a top-level folder with:
 | `review` | Review code, diffs, and PRs before landing. | `review/SKILL.md.tmpl` |
 | `qa` | Verify behavior with tests and approved local tools. | `qa/SKILL.md.tmpl` |
 | `test` | Design and run approved test automation, including Playwright/Selenium when enabled. | `test/SKILL.md.tmpl` |
+| `health` | Run a read-only local code health dashboard. | `health/SKILL.md.tmpl` |
 | `security-review` | Review security, governance, data access, and agent-tool risk. | `security-review/SKILL.md.tmpl` |
 | `documentation` | Generic documentation workflow. | `documentation/SKILL.md.tmpl` |
 | `document-generate` | Generate missing local project documentation. | `document-generate/SKILL.md.tmpl` |
