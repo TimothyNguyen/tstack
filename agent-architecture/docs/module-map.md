@@ -57,14 +57,23 @@ Optional supporting files live beside that entrypoint:
 This preserves the gstack ergonomics while keeping the new package generic.
 
 - `spec`
+- `autoplan`
 - `plan-review`
+- `plan-ceo-review`
+- `plan-eng-review`
+- `plan-design-review`
+- `plan-devex-review`
 - `investigate`
 - `review`
 - `qa`
+- `test`
 - `security-review`
 - `documentation`
+- `document-generate`
+- `document-release`
 - `learnings`
 - `release`
+- `ship`
 - `codebase-understanding`
 
 Each skill owns its instructions, examples, policy requirements, and generated

@@ -15,15 +15,35 @@ Each skill is a top-level folder with:
 | Skill | Purpose | Source |
 |---|---|---|
 | `spec` | Convert intent into scoped requirements, invariants, and tasks. | `spec/SKILL.md.tmpl` |
+| `autoplan` | Run a composed plan-review pipeline before implementation. | `autoplan/SKILL.md.tmpl` |
 | `plan-review` | Review implementation plans before code changes. | `plan-review/SKILL.md.tmpl` |
+| `plan-ceo-review` | Review plans for product scope and business value. | `plan-ceo-review/SKILL.md.tmpl` |
+| `plan-eng-review` | Review plans for architecture and testability. | `plan-eng-review/SKILL.md.tmpl` |
+| `plan-design-review` | Review plans for UI and interaction quality. | `plan-design-review/SKILL.md.tmpl` |
+| `plan-devex-review` | Review plans for developer experience and operability. | `plan-devex-review/SKILL.md.tmpl` |
 | `investigate` | Debug failures through evidence and root-cause analysis. | `investigate/SKILL.md.tmpl` |
 | `review` | Review code, diffs, and PRs before landing. | `review/SKILL.md.tmpl` |
 | `qa` | Verify behavior with tests and approved local tools. | `qa/SKILL.md.tmpl` |
+| `test` | Design and run approved test automation, including Playwright/Selenium when enabled. | `test/SKILL.md.tmpl` |
 | `security-review` | Review security, governance, data access, and agent-tool risk. | `security-review/SKILL.md.tmpl` |
-| `documentation` | Generate or update local project documentation. | `documentation/SKILL.md.tmpl` |
+| `documentation` | Generic documentation workflow. | `documentation/SKILL.md.tmpl` |
+| `document-generate` | Generate missing local project documentation. | `document-generate/SKILL.md.tmpl` |
+| `document-release` | Update docs after shipped behavior changes. | `document-release/SKILL.md.tmpl` |
 | `learnings` | Capture local project conventions and lessons safely. | `learnings/SKILL.md.tmpl` |
 | `release` | Prepare human-approved merge/deploy handoff. | `release/SKILL.md.tmpl` |
+| `ship` | Prepare PR, merge, or release handoff. | `ship/SKILL.md.tmpl` |
 | `codebase-understanding` | Map architecture, dependencies, and implementation context. | `codebase-understanding/SKILL.md.tmpl` |
+| `context-save` | Save local working context for future sessions. | `context-save/SKILL.md.tmpl` |
+| `context-restore` | Restore saved local working context. | `context-restore/SKILL.md.tmpl` |
+| `design-html` | Produce implementation-ready HTML guidance from approved design direction. | `design-html/SKILL.md.tmpl` |
+| `design-review` | Review UI and interaction quality. | `design-review/SKILL.md.tmpl` |
+| `diagram` | Create architecture and workflow diagrams. | `diagram/SKILL.md.tmpl` |
+| `retro` | Produce local project retrospectives. | `retro/SKILL.md.tmpl` |
+| `skillify` | Convert repeated workflows into reusable skills. | `skillify/SKILL.md.tmpl` |
+| `guard` | Apply stricter local safety posture. | `guard/SKILL.md.tmpl` |
+| `claude` | Optional Claude host bridge. | `claude/SKILL.md.tmpl` |
+| `codex` | Optional Codex host bridge. | `codex/SKILL.md.tmpl` |
+| `tstack-upgrade` | Policy-approved local upgrade workflow. | `tstack-upgrade/SKILL.md.tmpl` |
 
 ## Deferred Optional Packs
 

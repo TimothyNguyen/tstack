@@ -5,6 +5,7 @@
   "type": "module",
   "description": "Reusable enterprise-safe agent skill architecture.",
   "scripts": {
+    "scaffold:skills": "node scripts/scaffold-skills.mjs",
     "build:skills": "node scripts/gen-skill-docs.mjs",
     "check:skills": "node scripts/gen-skill-docs.mjs --check"
   }

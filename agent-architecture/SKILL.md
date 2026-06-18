@@ -27,14 +27,29 @@ workflows.
 ## Routing
 
 - New requirement, design, or issue: invoke `spec`.
+- Fully reviewed plan pipeline: invoke `autoplan`.
 - Review a plan before implementation: invoke `plan-review`.
+- CEO/product plan review: invoke `plan-ceo-review`.
+- engineering plan review: invoke `plan-eng-review`.
+- design plan review: invoke `plan-design-review`.
+- developer-experience plan review: invoke `plan-devex-review`.
 - Debug a bug, failure, or unexpected behavior: invoke `investigate`.
 - Code or PR review: invoke `review`.
+- Cross-model/code-agent second opinion: invoke `codex` or `claude` only when the host profile enables it.
 - Manual or automated test planning: invoke `qa`.
+- Test automation design or execution: invoke `test`.
 - Security or data-governance review: invoke `security-review`.
-- Documentation work: invoke `documentation`.
+- Documentation work: invoke `documentation`, `document-generate`, or `document-release`.
+- UI/design implementation review: invoke `design-review` or `design-html`.
+- Diagrams or architecture visuals: invoke `diagram`.
 - Project memory or lessons: invoke `learnings`.
+- Save or restore working context: invoke `context-save` or `context-restore`.
 - Release preparation: invoke `release`.
+- Ship/PR handoff: invoke `ship`.
+- Weekly/project retrospective: invoke `retro`.
+- Convert a repeated workflow into a reusable skill: invoke `skillify`.
+- Restrict or harden tool use: invoke `guard`.
+- Upgrade this skill pack: invoke `tstack-upgrade`.
 - Codebase map, architecture lookup, or dependency tracing: invoke `codebase-understanding`.
 
 When a project profile installs domain or stack packs, route to those skills

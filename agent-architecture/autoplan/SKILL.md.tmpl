@@ -1,0 +1,28 @@
+---
+name: autoplan
+version: 0.1.0
+description: |
+  Runs the plan review pipeline and produces a reviewed implementation plan before coding begins.
+allowed-tools:
+  - Read
+  - Grep
+  - Glob
+  - Bash
+---
+
+{{PREAMBLE}}
+
+# Autoplan
+
+Runs the plan review pipeline and produces a reviewed implementation plan before coding begins.
+
+## Steps
+
+1. Confirm the user goal and scope.
+2. Read the relevant local project files.
+3. Check policy requirements before any privileged action.
+4. Produce a concise result with evidence, risks, and next actions.
+
+{{POLICY_REQUIREMENTS}}
+
+{{BASE_OUTPUT_RULES}}
