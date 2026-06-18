@@ -6,6 +6,24 @@ This package is separate from `gstack/`. The upstream gstack checkout is source
 material only. Anything carried forward must be copied, adapted, and reviewed
 inside this package.
 
+## What This Builds
+
+This directory is a reusable skill pack for software-engineering agents. It is
+intended to be installed into other repositories as a local architecture-agent
+toolkit.
+
+It follows gstack's useful shape:
+
+- Top-level folder per skill.
+- `SKILL.md.tmpl` as source.
+- generated `SKILL.md` committed beside the template.
+- optional `sections/*.md.tmpl` and generated `sections/*.md`.
+- local generator and tests.
+
+It intentionally does not carry over gstack's public telemetry, public update
+checks, ngrok/public tunnels, cookie import, mobile/iOS flows, or public web
+scraping.
+
 ## Goals
 
 - Install locally per project or in an approved user directory.
@@ -16,22 +34,49 @@ inside this package.
 - Let teams add project-specific stacks, domains, and policies without changing
   the core.
 
+## Quick Commands
+
+Run from this directory:
+
+```bash
+npm run build:skills
+npm run check:skills
+npm test
+```
+
+Useful test discovery commands:
+
+```bash
+npm run test:free:list
+npm run test:free:windows
+```
+
 ## Folder Layout
 
 ```text
 agent-architecture/
-  core/        # host-neutral compiler, policy loader, shared types
-  hosts/       # Claude, Codex, Copilot, Strands, AgentCore, Google ADK host adapters
+  AGENTS.md    # coding-agent instructions
+  CLAUDE.md    # Claude Code instructions
+  SKILL.md.tmpl
+  SKILL.md
   <skill>/     # top-level skill folders, each with SKILL.md.tmpl and SKILL.md
+  scripts/     # template generation and test discovery
   policies/    # default and enterprise policy profiles
-  profiles/    # project or stack profiles that compose skills and policies
-  adapters/    # optional integrations such as AG-UI, MCP, CodeGraph, Google ADK
   docs/        # migration notes, security posture, architecture decisions
   tests/       # no-egress, generation, policy, install, and adapter tests
 ```
 
 Folders are created when their first scoped change needs them. Empty placeholder
 directories are avoided unless a tool requires them.
+
+Future folders may include:
+
+```text
+hosts/       # generated host adapter configs
+profiles/    # project or stack profiles
+adapters/    # AG-UI, MCP, CodeGraph, Google ADK, Strands, AgentCore
+core/        # shared compiler/policy/install code if the scripts outgrow scripts/
+```
 
 ## Core Versus Profiles
 
@@ -71,6 +116,18 @@ stack-aws/
 `SKILL.md.tmpl` is the source. `SKILL.md` is generated from it. Supporting files
 are optional and live next to the skill so each workflow can be reviewed,
 versioned, and installed as a unit.
+
+Current core skills are listed in:
+
+```text
+docs/skill-catalog.md
+```
+
+Install behavior is specified in:
+
+```text
+docs/install-spec.md
+```
 
 ## Carry-Over Rules
 
