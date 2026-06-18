@@ -16,7 +16,7 @@ enterprise package boundary.
 | `scripts/gen-skill-docs.ts` | Change heavily | Template generation is useful, but upstream resolver/preamble behavior includes update checks, telemetry, and Claude-specific assumptions. | `core/skill-compiler` |
 | Skill directory convention | Keep | Top-level directory-per-skill with `SKILL.md.tmpl` source and generated `SKILL.md` is reviewable, versionable, and easy to install locally. | `<skill>/` |
 | Generated host variants | Keep pattern | Claude, Codex, Copilot, Strands, AgentCore, and future hosts should receive generated artifacts from one source. | `hosts/`, `core/skill-compiler` |
-| Workflow taxonomy | Keep selectively | Planning, review, QA, security, docs, learnings, and ship lanes are useful. Keep generic engineering workflow names. | `skills/` |
+| Workflow taxonomy | Keep selectively | Planning, review, QA, security, docs, learnings, and ship lanes are useful. Adapt leadership labels to company roles such as PM, director, and senior principal. | top-level skill folders |
 | `/review` | Change | Review skill is useful, but must be policy-aware and stack-neutral by default. | `review/` |
 | `/cso` | Change | Security review is useful, but must focus on enterprise app, data, cloud, and agent-tool risks. | `security-review/` |
 | `/qa` and `/qa-only` | Change | QA methodology is useful. Browser-driven testing is optional and cannot assume cookie import or public sites. | `qa/` |

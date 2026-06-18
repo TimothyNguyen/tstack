@@ -17,7 +17,8 @@ Each skill is a top-level folder with:
 | `spec` | Convert intent into scoped requirements, invariants, and tasks. | `spec/SKILL.md.tmpl` |
 | `autoplan` | Run a composed plan-review pipeline before implementation. | `autoplan/SKILL.md.tmpl` |
 | `plan-review` | Review implementation plans before code changes. | `plan-review/SKILL.md.tmpl` |
-| `plan-ceo-review` | Review plans for product scope and business value. | `plan-ceo-review/SKILL.md.tmpl` |
+| `plan-director-review` | Review plans from a director or senior-principal engineering perspective. | `plan-director-review/SKILL.md.tmpl` |
+| `plan-pm-review` | Review plans from a product manager perspective. | `plan-pm-review/SKILL.md.tmpl` |
 | `plan-eng-review` | Review plans for architecture and testability. | `plan-eng-review/SKILL.md.tmpl` |
 | `plan-design-review` | Review plans for UI and interaction quality. | `plan-design-review/SKILL.md.tmpl` |
 | `plan-devex-review` | Review plans for developer experience and operability. | `plan-devex-review/SKILL.md.tmpl` |
@@ -43,6 +44,7 @@ Each skill is a top-level folder with:
 | `guard` | Apply stricter local safety posture. | `guard/SKILL.md.tmpl` |
 | `claude` | Optional Claude host bridge. | `claude/SKILL.md.tmpl` |
 | `codex` | Optional Codex host bridge. | `codex/SKILL.md.tmpl` |
+| `copilot` | Optional GitHub Copilot host bridge. | `copilot/SKILL.md.tmpl` |
 | `tstack-upgrade` | Policy-approved local upgrade workflow. | `tstack-upgrade/SKILL.md.tmpl` |
 
 ## Deferred Optional Packs

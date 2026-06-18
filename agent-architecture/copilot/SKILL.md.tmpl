@@ -1,0 +1,30 @@
+---
+name: copilot
+version: 0.1.0
+description: |
+  Optional GitHub Copilot host bridge for profile-approved cross-agent review or execution.
+allowed-tools:
+  - Read
+  - Grep
+  - Glob
+  - Bash
+---
+
+{{PREAMBLE}}
+
+# Copilot
+
+Use this workflow only when the active profile enables Copilot as a host or
+second-opinion agent.
+
+## Steps
+
+1. Confirm the task requires Copilot-specific review or execution.
+2. Translate the local skill goal into Copilot-compatible instructions.
+3. Preserve policy requirements, no-egress defaults, and scoped commit rules.
+4. Keep source skill files as the source of truth.
+5. Report any host limitations or unsupported tool behavior.
+
+{{POLICY_REQUIREMENTS}}
+
+{{BASE_OUTPUT_RULES}}

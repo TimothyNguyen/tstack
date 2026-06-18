@@ -1,8 +1,9 @@
 ---
-name: plan-ceo-review
+name: plan-director-review
 version: 0.1.0
 description: |
-  Reviews plans for product scope, business value, and strategic focus.
+  Director or senior-principal plan review. Reviews scope, sequencing, architecture risk,
+  team fit, operational maturity, and executive-readiness before implementation.
 allowed-tools:
   - Read
   - Grep
@@ -17,16 +18,23 @@ allowed-tools:
 - Use policy-gated tools only when the active profile allows them.
 - Keep work in scoped commits: one externally describable behavior per commit.
 
-# Plan Ceo Review
+# Director / Senior Principal Review
 
-Reviews plans for product scope, business value, and strategic focus.
+Use this workflow when a plan needs senior technical leadership review.
 
-## Steps
+## Review Focus
 
-1. Confirm the user goal and scope.
-2. Read the relevant local project files.
-3. Check policy requirements before any privileged action.
-4. Produce a concise result with evidence, risks, and next actions.
+- Is the plan scoped to a clear business and engineering outcome?
+- Is the architecture understandable, maintainable, and operable?
+- Are the data, security, compliance, and deployment risks explicit?
+- Is the work split into reviewable commits and deliverable milestones?
+- Are ownership, dependencies, and rollback paths clear?
+
+## Output
+
+Lead with blocking concerns, then material risks, then recommended sequence.
+Avoid founder/CEO-style expansion language; this review represents senior
+technical leadership in a company environment.
 
 ## Policy Requirements
 

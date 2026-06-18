@@ -29,13 +29,14 @@ workflows.
 - New requirement, design, or issue: invoke `spec`.
 - Fully reviewed plan pipeline: invoke `autoplan`.
 - Review a plan before implementation: invoke `plan-review`.
-- CEO/product plan review: invoke `plan-ceo-review`.
+- Director/principal plan review: invoke `plan-director-review`.
+- Product manager plan review: invoke `plan-pm-review`.
 - engineering plan review: invoke `plan-eng-review`.
 - design plan review: invoke `plan-design-review`.
 - developer-experience plan review: invoke `plan-devex-review`.
 - Debug a bug, failure, or unexpected behavior: invoke `investigate`.
 - Code or PR review: invoke `review`.
-- Cross-model/code-agent second opinion: invoke `codex` or `claude` only when the host profile enables it.
+- Cross-model/code-agent second opinion: invoke `codex`, `claude`, or `copilot` only when the host profile enables it.
 - Manual or automated test planning: invoke `qa`.
 - Test automation design or execution: invoke `test`.
 - Security or data-governance review: invoke `security-review`.

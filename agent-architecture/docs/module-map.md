@@ -59,7 +59,8 @@ This preserves the gstack ergonomics while keeping the new package generic.
 - `spec`
 - `autoplan`
 - `plan-review`
-- `plan-ceo-review`
+- `plan-director-review`
+- `plan-pm-review`
 - `plan-eng-review`
 - `plan-design-review`
 - `plan-devex-review`
