@@ -258,12 +258,63 @@ pip install graphifyy
 
 ---
 
+## Host Integration: Claude + Copilot
+
+This org uses Claude Code and GitHub Copilot. Integration differs per host.
+
+### Claude Code
+
+| Item | Detail |
+|---|---|
+| Skill file | `graphify/graphify/skill.md` (installed by `graphify install`) |
+| Always-on injection | `graphify/graphify/always_on/claude-md.md` → appended to project `CLAUDE.md` |
+| Invocation | `/graphify` in Claude Code session |
+| Graph query | `graphify query "<q>"` from terminal or Bash tool |
+| Enterprise adapter | `agent-architecture/claude/SKILL.md` |
+
+`graphify install` writes a `## graphify` section to the project's `CLAUDE.md`.
+Local file write only — no external calls. The injected block tells Claude to
+prefer `graphify query` over grep for codebase questions.
+
+### GitHub Copilot (VS Code)
+
+| Item | Detail |
+|---|---|
+| Skill file | `graphify/graphify/skill-copilot.md` (installed by `graphify install`) |
+| Always-on injection | `graphify/graphify/always_on/vscode-instructions.md` → `.github/copilot-instructions.md` |
+| Invocation | `/graphify` in Copilot Chat |
+| Graph query | Terminal only (`graphify query` — Copilot Chat cannot run arbitrary Bash) |
+| Enterprise adapter | `agent-architecture/copilot/SKILL.md` |
+
+`graphify install` writes a `## graphify` section to
+`.github/copilot-instructions.md`. Local file write only, no external calls.
+
+### What `graphify install` Does (both hosts)
+
+Writes to (local only):
+- `CLAUDE.md` — Claude Code always-on block
+- `.github/copilot-instructions.md` — Copilot always-on block
+- `.claude/skills/graphify/SKILL.md` — Claude skill entrypoint
+
+Does NOT:
+- Make external network calls
+- Send code to any API
+- Set up telemetry
+- Modify global config outside the project directory
+
+Corporate review: inspect the three written files before committing, especially
+`CLAUDE.md` (read by every Claude Code session in the project).
+
+---
+
 ## Tasks for Integration
 
 | Task | Status |
 |---|---|
-| Update `codebase-understander/SKILL.md.tmpl` to check for `graphify-out/graph.json` | Pending |
-| Add graph-first query path to skill steps | Pending |
-| Add file-read fallback when graph absent | Pending |
-| Document `GRAPHIFY_QUERY_LOG_DISABLE=1` in enterprise install notes | Pending |
+| Update `codebase-understanding/SKILL.md.tmpl` to check for `graphify-out/graph.json` | Done |
+| Add graph-first query path to skill steps | Done |
+| Add file-read fallback when graph absent | Done |
+| Document `GRAPHIFY_QUERY_LOG_DISABLE=1` in enterprise install notes | Done |
+| Expand `claude/SKILL.md.tmpl` with graphify + enterprise instructions | Done |
+| Expand `copilot/SKILL.md.tmpl` with graphify + enterprise instructions | Done |
 | Add graphify adapter note to `docs/skill-catalog.md` deferred packs | Pending |
