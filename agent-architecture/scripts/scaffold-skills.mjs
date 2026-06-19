@@ -16,14 +16,14 @@ const skills = [
   ['document-generate', 'Generates missing local project documentation from code-backed evidence.'],
   ['document-release', 'Updates documentation after shipped behavior changes.'],
   ['guard', 'Applies stricter local safety posture for risky tools and filesystem boundaries.'],
-  ['plan-ceo-review', 'Reviews plans for product scope, business value, and strategic focus.'],
+  ['plan-pm-review', 'Reviews plans for product scope, business value, and strategic focus.'],
   ['plan-eng-review', 'Reviews plans for architecture, data flow, reliability, and testability.'],
   ['plan-design-review', 'Reviews plans for user experience, UI quality, and product interaction risk.'],
   ['plan-devex-review', 'Reviews plans for developer experience, APIs, onboarding, and operability.'],
   ['retro', 'Produces a local project retrospective from commits, incidents, decisions, and outcomes.'],
   ['ship', 'Prepares a human-approved PR, merge, or release handoff.'],
   ['skillify', 'Turns a repeated local workflow into a reusable skill folder with template files.'],
-  ['tstack-upgrade', 'Upgrades this local skill pack through a policy-approved internal or manual flow.'],
+  ['architecture-agent-upgrade', 'Upgrades this local skill pack through a policy-approved internal or manual flow.'],
   ['test', 'Designs and runs approved automated tests, including Playwright or Selenium when enabled by policy.'],
 ];
 
