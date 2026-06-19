@@ -1,0 +1,39 @@
+---
+name: documentation
+version: 0.1.0
+description: |
+  Documentation workflow for generating, updating, and reviewing project docs after implementation.
+  Focuses on accurate code-backed docs without public browsing or telemetry.
+allowed-tools:
+  - Read
+  - Grep
+  - Glob
+  - Bash
+---
+
+{{PREAMBLE}}
+
+# Documentation
+
+Use this workflow to create or update docs from local project evidence.
+
+## Steps
+
+1. Identify the target audience and documentation type.
+2. Read the relevant local code, tests, config, and existing docs.
+3. Write docs that match the implementation.
+4. Remove stale or contradictory claims.
+5. Include setup, usage, verification, and operational notes when relevant.
+
+## Documentation Types
+
+- Reference.
+- How-to.
+- Tutorial.
+- Explanation.
+- Release notes.
+- Architecture decision notes.
+
+{{POLICY_REQUIREMENTS}}
+
+{{BASE_OUTPUT_RULES}}

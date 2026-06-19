@@ -1,0 +1,50 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import path from 'node:path';
+import test from 'node:test';
+
+const root = path.resolve(import.meta.dirname, '..');
+
+function read(rel) {
+  return fs.readFileSync(path.join(root, rel), 'utf8');
+}
+
+function catalogRows() {
+  const catalog = read('docs/skill-catalog.md');
+  const rows = [];
+  for (const line of catalog.split(/\r?\n/)) {
+    const match = line.match(/^\| `([^`]+)` \| ([^|]+) \| `([^`]+)` \|$/);
+    if (match) rows.push({ skill: match[1], purpose: match[2].trim(), source: match[3] });
+  }
+  return rows;
+}
+
+test('skill catalog rows point to generated top-level skills', () => {
+  const rows = catalogRows();
+  assert.ok(rows.length >= 30, `expected substantial default catalog, found ${rows.length}`);
+
+  for (const row of rows) {
+    assert.equal(row.source, `${row.skill}/SKILL.md.tmpl`, `${row.skill} source must match folder contract`);
+    assert.equal(fs.existsSync(path.join(root, row.source)), true, `${row.skill} template missing`);
+    assert.equal(fs.existsSync(path.join(root, row.skill, 'SKILL.md')), true, `${row.skill} generated skill missing`);
+    assert.notEqual(row.purpose, '', `${row.skill} purpose missing`);
+  }
+});
+
+test('root router mentions every cataloged default skill', () => {
+  const rootSkill = read('SKILL.md.tmpl');
+  const rows = catalogRows();
+
+  for (const { skill } of rows) {
+    assert.match(rootSkill, new RegExp(`\\\`${skill}\\\``), `${skill} is cataloged but not routed by root skill`);
+  }
+});
+
+test('catalog excludes gstack-only or disallowed defaults', () => {
+  const catalog = read('docs/skill-catalog.md');
+
+  assert.doesNotMatch(catalog, /plan-ceo-review/);
+  assert.doesNotMatch(catalog, /gstack-upgrade/);
+  assert.doesNotMatch(catalog, /ios-/i);
+  assert.doesNotMatch(catalog, /hackernews|scrape/i);
+});

@@ -1,0 +1,33 @@
+# Security Review Sections
+
+## Agent Tooling
+
+- Check tool allowlists.
+- Check approval requirements.
+- Check audit events.
+- Check that generated instructions do not bypass policy.
+
+## Data Access
+
+- Check database read/write boundaries.
+- Check customer, campaign, experiment, and model-output access.
+- Check that findings do not expose raw sensitive data.
+
+## Network And Egress
+
+- Check for public telemetry.
+- Check for public update checks.
+- Check for public tunnels.
+- Check for public scraping.
+
+## Credential And Session Safety
+
+- Check for credential reads.
+- Check for cookie/session import.
+- Check for secrets in logs, events, prompts, or generated artifacts.
+
+## Output Rules
+
+- Report findings with file paths, concrete evidence, and recommended actions.
+- Do not include secrets, raw credentials, cookie values, full prompts, or full data extracts.
+- Prefer structured summaries that can map to AG-UI events later.
