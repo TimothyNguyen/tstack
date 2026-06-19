@@ -15,7 +15,7 @@
     "allowGlobalMutation": false,
     "allowedTargets": [
       "agent-architecture/generated",
-      ".agent-architecture"
+      ".architecture-agent"
     ]
   },
   "tools": {
@@ -37,7 +37,7 @@
   "audit": {
     "enabled": true,
     "destination": "local-file",
-    "path": ".agent-architecture/audit/events.jsonl",
+    "path": ".architecture-agent/audit/events.jsonl",
     "forbiddenFields": [
       "token",
       "cookie",
