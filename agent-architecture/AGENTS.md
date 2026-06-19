@@ -5,7 +5,7 @@ Instructions for AI coding agents working in `agent-architecture/`.
 ## Purpose
 
 `agent-architecture/` is a reusable, enterprise-safe skill pack for software
-engineering agents. It is separate from `../gstack/`.
+engineering agents.
 
 `../gstack/` is reference material only. Do not edit it when working on this
 package.
@@ -116,9 +116,6 @@ Core skills must stay domain-neutral.
 
 Put project-specific or stack-specific behavior in optional packs such as:
 
-- `domain-causal-inference`
-- `domain-experiment-design`
-- `domain-uplift-modeling`
 - `stack-aws`
 - `stack-spring-boot`
 - `stack-databricks`
