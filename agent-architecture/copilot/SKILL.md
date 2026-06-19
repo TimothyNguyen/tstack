@@ -36,17 +36,10 @@ directly — graph queries must run in the terminal.
 
 | Capability | Claude Code | Copilot Chat |
 |---|---|---|
-| Subagent extraction | Native via skill | Via `/graphify` in chat |
+| Subagent extraction | Native via skill | Terminal + paste results into chat |
 | Graph query | In-session + terminal | Terminal only |
 | Tool use (Bash, Read, Grep) | Full | Limited to Copilot tools |
 | Policy enforcement | Via enterprise-default.json | Via org Copilot policy |
-
-## Enterprise Settings
-
-```bash
-export GRAPHIFY_QUERY_LOG_DISABLE=1
-export GRAPHIFY_MAX_GRAPH_BYTES=1GB
-```
 
 ## Steps
 
