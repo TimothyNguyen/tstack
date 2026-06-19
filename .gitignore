@@ -1,4 +1,4 @@
 gstack/
-graphify/
+/graphify/
 *.tmp
 *_tests.txt

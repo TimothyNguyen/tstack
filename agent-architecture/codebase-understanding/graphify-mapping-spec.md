@@ -317,4 +317,4 @@ Corporate review: inspect the three written files before committing, especially
 | Document `GRAPHIFY_QUERY_LOG_DISABLE=1` in enterprise install notes | Done |
 | Expand `claude/SKILL.md.tmpl` with graphify + enterprise instructions | Done |
 | Expand `copilot/SKILL.md.tmpl` with graphify + enterprise instructions | Done |
-| Add graphify adapter note to `docs/skill-catalog.md` deferred packs | Pending |
+| Add graphify adapter note to `docs/skill-catalog.md` deferred packs | Done |

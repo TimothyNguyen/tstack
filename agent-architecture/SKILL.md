@@ -54,6 +54,7 @@ workflows.
 - Destructive command guardrails, production safety mode: invoke `careful`.
 - Upgrade this skill pack: invoke `architecture-agent-upgrade`.
 - Codebase map, architecture lookup, or dependency tracing: invoke `codebase-understanding`.
+- Build or query a local knowledge graph of the codebase: invoke `graphify`.
 - Token/cost reduction for noisy shell output: invoke `rtk-token-optimizer`.
 
 When a project profile installs domain or stack packs, route to those skills
