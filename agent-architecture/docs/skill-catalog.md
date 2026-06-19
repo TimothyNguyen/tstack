@@ -35,7 +35,6 @@ Each skill is a top-level folder with:
 | `release` | Prepare human-approved merge/deploy handoff. | `release/SKILL.md.tmpl` |
 | `ship` | Prepare PR, merge, or release handoff. | `ship/SKILL.md.tmpl` |
 | `codebase-understanding` | Map architecture, dependencies, and implementation context. | `codebase-understanding/SKILL.md.tmpl` |
-| `graphify` | Build or query a local knowledge graph of any codebase. Enterprise-safe, no external egress. | `graphify/SKILL.md.tmpl` |
 | `rtk-token-optimizer` | Optional Rust Token Killer guidance for reducing noisy shell output. | `rtk-token-optimizer/SKILL.md.tmpl` |
 | `context-save` | Save local working context for future sessions. | `context-save/SKILL.md.tmpl` |
 | `context-restore` | Restore saved local working context. | `context-restore/SKILL.md.tmpl` |

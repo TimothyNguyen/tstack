@@ -27,27 +27,30 @@ change.
 ## Steps
 
 1. Identify the target behavior, symbol, module, or workflow.
-2. Check for a pre-built graphify graph:
-   - If `graphify-out/graph.json` exists, run `graphify query "<question>" graphify-out/graph.json` first.
-   - Never run `graphify .` or `graphify extract . --backend <name>` — graph builds are a separate user-initiated step and may send data to external APIs.
-   - Enterprise-safe graphify query commands (local only, no egress):
-     - `graphify query "what calls <symbol>" graphify-out/graph.json`
-     - `graphify query "what does <module> depend on" graphify-out/graph.json`
-     - `graphify callflow graphify-out/graph.json`
-     - `graphify affected graphify-out/graph.json --files <path>`
-3. If no graph or query insufficient, fall back to local file search (Grep + Read).
+2. Check for a knowledge graph index (`.codegraph/` dir or equivalent local index).
+   - If present, use graph queries for symbol lookup, call tracing, and impact analysis.
+   - Spawn an Explore agent for broad questions — never call explore tools directly in the main session.
+   - Local graph queries only. No external API calls, no external egress.
+3. If no index or query insufficient, fall back to local file search (Grep + Read).
 4. Summarize entrypoints, data flow, dependencies, and ownership boundaries.
 5. Identify tests and docs that verify the behavior.
 6. Note uncertainty explicitly.
 
+## Knowledge Graph (when index exists)
+
+Prefer graph queries over raw file reads for:
+- Symbol lookup by name
+- Call tracing (callers / callees)
+- Impact analysis before edits
+- File-level dependency survey
+
+Fall back to Grep + Read when the index is absent, stale, or returns no results.
+
 ## Adapter Boundary
 
-This skill can use graphify (local `graphify-out/graph.json`), CodeGraph, MCP,
-or an internal embedding/index service. The core skill remains useful without
-any adapter — Grep + Read is always the fallback.
-
-See `graphify-mapping-spec.md` in this directory for the full enterprise egress
-audit and integration plan before enabling any graphify feature.
+Core skill works without any adapter — Grep + Read is always the fallback.
+Supported adapters: CodeGraph MCP, any local embedding/index service.
+No external APIs, no third-party egress.
 
 ## Policy Requirements
 
