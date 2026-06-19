@@ -8,18 +8,18 @@ classes that protect this package's behavior: gstack-style skill templates,
 safe defaults, installability in other repos, host portability, and automation
 support.
 
-## Carry Over Now
+## Coverage Status
 
-| gstack test family | What it protects | Architecture-agent equivalent |
-|---|---|---|
-| `gen-skill-docs*` | Generated skills are fresh, placeholders resolve, templates produce outputs. | `tests/skill-generation.test.mjs` |
-| `discover-section-templates`, `section-manifest-consistency` | Carved sections are discoverable and manifest references are valid. | Section manifest tests for `*/sections/manifest.json`. |
-| `skill-parser`, `skill-validation` | Skill Markdown has valid frontmatter and expected shape. | Frontmatter and required-field tests for every generated `SKILL.md`. |
-| `host-config` | Hosts are declarative, validated, unique, and safe. | Future `tests/host-config.test.mjs` after host configs are added. |
-| `test-free-shards` | Free test discovery, sharding, and Windows-safe curation. | `scripts/test-free-shards.mjs` plus tests around discovery output. |
-| `telemetry-repo-strip`, `document-skills-redaction`, `secret-sink-harness` | Secrets and telemetry do not leak. | Forbidden-string and policy tests over generated skills/docs. |
-| `setup-*`, `uninstall`, `upgrade-*` | Install, upgrade, migration, and cleanup safety. | Install spec tests now; installer tests when implementation exists. |
-| `template-context-parity`, `parity-suite` | Generated outputs are consistent across targets. | Host parity tests after Claude/Codex/Copilot/ADK generation exists. |
+| gstack test family | What it protects | Architecture-agent equivalent | Status |
+|---|---|---|---|
+| `gen-skill-docs*` | Generated skills are fresh, placeholders resolve, templates produce outputs. | `tests/skill-generation.test.mjs` | Done |
+| `discover-section-templates`, `section-manifest-consistency` | Carved sections are discoverable, PASSIVE contract, orphan detection, id uniqueness. | `tests/section-manifest.test.mjs` | Done |
+| `skill-coverage-floor` | Skill body non-trivial, description within size cap. | `tests/skill-structure.test.mjs` | Done |
+| `test-free-shards` | Free test discovery, sharding, and Windows-safe curation. | `tests/test-free-shards.test.mjs` | Done |
+| `telemetry-repo-strip`, `document-skills-redaction`, `secret-sink-harness` | Secrets and telemetry do not leak. | Policy contract + forbidden-string checks in `tests/skill-generation.test.mjs` | Done |
+| `setup-*`, `uninstall`, `upgrade-*` | Install, upgrade, migration, and cleanup safety. | `tests/install-contract.test.mjs` | Done |
+| `host-config` | Hosts are declarative, validated, unique, and safe. | Future `tests/host-config.test.mjs` after host configs are added. | Deferred |
+| `template-context-parity`, `parity-suite` | Generated outputs are consistent across targets. | Host parity tests after Claude/Codex/Copilot/ADK generation exists. | Deferred |
 
 ## Defer
 
@@ -50,10 +50,8 @@ The local suite should cover:
 
 ## Near-Term Test Work
 
-- Expand `tests/skill-generation.test.mjs` with dynamic template discovery.
-- Add section manifest consistency checks.
-- Add forbidden default string checks.
-- Add frontmatter required-field checks.
-- Add test-free-shards smoke checks.
+- Add `tests/host-config.test.mjs` once host config objects land.
+- Add host parity tests once Claude/Codex/Copilot/ADK adapters generate output.
+- Add E2E skill invocation tests once the agent harness is wired.
 
-These are high signal and run without external services.
+These require implementation work before tests can be written.
