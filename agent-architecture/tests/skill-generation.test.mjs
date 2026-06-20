@@ -62,7 +62,6 @@ test('core skills have template and generated output', () => {
     'test',
     'review',
     'security-review',
-    'codebase-understanding',
     'rtk-token-optimizer',
   ];
 
@@ -139,6 +138,11 @@ test('upgrade skill uses architecture-agent name', () => {
   assert.equal(fs.existsSync(path.join(root, 'architecture-agent-upgrade', 'SKILL.md.tmpl')), true);
   assert.equal(fs.existsSync(path.join(root, 'architecture-agent-upgrade', 'SKILL.md')), true);
   assert.equal(fs.existsSync(path.join(root, 'tstack-upgrade')), false);
+});
+
+test('no standalone codebase-understanding skill folder exists (merged into codebase-engine)', () => {
+  assert.equal(fs.existsSync(path.join(root, 'codebase-understanding')), false,
+    'codebase-understanding/ must not exist — workflow merged into codebase-engine/');
 });
 
 test('install spec documents safe repo-local install contract', () => {

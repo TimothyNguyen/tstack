@@ -162,3 +162,94 @@ test('codebase-engine SKILL.md documents local-only LLM backend constraint', () 
   assert.match(skill, /CODEBASE_ENGINE_LLM_/, 'SKILL.md must reference LLM env var prefix');
   assert.match(skill, /approved internal endpoint|internal.*endpoint/i, 'SKILL.md must state internal-only LLM requirement');
 });
+
+// ── CLI backends (codex-cli, copilot-cli) ────────────────────────────────────
+
+test('codex-cli and copilot-cli are registered in BACKENDS', () => {
+  const llm = readSrc('llm.py');
+  assert.match(llm, /"codex-cli"\s*:\s*\{/, 'codex-cli missing from BACKENDS dict');
+  assert.match(llm, /"copilot-cli"\s*:\s*\{/, 'copilot-cli missing from BACKENDS dict');
+});
+
+test('codex-cli BACKENDS entry has required keys', () => {
+  const llm = readSrc('llm.py');
+  const start = llm.indexOf('"codex-cli":');
+  assert.ok(start !== -1, 'codex-cli block not found');
+  // Grab the next 600 chars which covers the full entry
+  const block = llm.slice(start, start + 600);
+  assert.match(block, /default_model/, 'codex-cli missing default_model');
+  assert.match(block, /max_tokens/, 'codex-cli missing max_tokens');
+  assert.match(block, /"vision"\s*:\s*False/, 'codex-cli must have vision: False');
+});
+
+test('copilot-cli BACKENDS entry has required keys and reduced max_tokens', () => {
+  const llm = readSrc('llm.py');
+  const start = llm.indexOf('"copilot-cli":');
+  assert.ok(start !== -1, 'copilot-cli block not found');
+  const block = llm.slice(start, start + 800);
+  assert.match(block, /"max_tokens"\s*:\s*4096/, 'copilot-cli max_tokens must be 4096 (gh copilot designed for short inputs)');
+  assert.match(block, /"vision"\s*:\s*False/, 'copilot-cli must have vision: False');
+});
+
+test('codex-cli raises RuntimeError with install hint when CLI missing', () => {
+  const llm = readSrc('llm.py');
+  assert.match(llm, /Codex CLI not found on \$PATH/, 'codex-cli missing PATH error message');
+  assert.match(llm, /github\.com\/openai\/codex/, 'codex-cli error must include install URL');
+});
+
+test('copilot-cli raises RuntimeError with install hint when gh CLI missing', () => {
+  const llm = readSrc('llm.py');
+  assert.match(llm, /GitHub CLI \(gh\) not found on \$PATH/, 'copilot-cli missing gh PATH error message');
+  assert.match(llm, /cli\.github\.com/, 'copilot-cli error must include gh install URL');
+});
+
+test('codex-cli and copilot-cli have serial-by-default parallel guards', () => {
+  const llm = readSrc('llm.py');
+  assert.match(llm, /CODEBASE_ENGINE_CODEX_CLI_PARALLEL/, 'codex-cli parallel guard env var missing');
+  assert.match(llm, /CODEBASE_ENGINE_COPILOT_CLI_PARALLEL/, 'copilot-cli parallel guard env var missing');
+});
+
+test('codex-cli and copilot-cli excluded from key requirement check', () => {
+  const llm = readSrc('llm.py');
+  // Both instances of the key-check exclusion must include codex-cli and copilot-cli
+  const exclusionPattern = /backend not in \([^)]*"codex-cli"[^)]*"copilot-cli"[^)]*\)|backend not in \([^)]*"copilot-cli"[^)]*"codex-cli"[^)]*\)/g;
+  const matches = [...llm.matchAll(exclusionPattern)];
+  assert.ok(matches.length >= 2, 'both key-check exclusions must include codex-cli and copilot-cli');
+});
+
+test('codex-cli and copilot-cli excluded from detect_backend auto-resolution', () => {
+  const llm = readSrc('llm.py');
+  assert.match(llm, /"codex-cli"[^)]*"copilot-cli"|"copilot-cli"[^)]*"codex-cli"/, 'detect_backend exclusion must include both CLI backends');
+});
+
+test('_strip_ansi helper defined in llm.py', () => {
+  const llm = readSrc('llm.py');
+  assert.match(llm, /def _strip_ansi\(/, '_strip_ansi helper missing');
+  assert.match(llm, /\\x1b\\\[/, '_strip_ansi must match ANSI escape sequences');
+});
+
+test('_call_codex_cli defined and uses _strip_ansi before _parse_llm_json', () => {
+  const llm = readSrc('llm.py');
+  assert.match(llm, /def _call_codex_cli\(/, '_call_codex_cli function missing');
+  // _strip_ansi must appear before _parse_llm_json in the function body
+  const fnStart = llm.indexOf('def _call_codex_cli(');
+  const fnEnd = llm.indexOf('\ndef _call_copilot_cli(', fnStart);
+  const fnBody = llm.slice(fnStart, fnEnd);
+  const stripIdx = fnBody.indexOf('_strip_ansi(');
+  const parseIdx = fnBody.indexOf('_parse_llm_json(');
+  assert.ok(stripIdx !== -1, '_call_codex_cli must call _strip_ansi');
+  assert.ok(parseIdx !== -1, '_call_codex_cli must call _parse_llm_json');
+  assert.ok(stripIdx < parseIdx, '_strip_ansi must precede _parse_llm_json in _call_codex_cli');
+});
+
+test('_call_copilot_cli defined and uses gh copilot explain', () => {
+  const llm = readSrc('llm.py');
+  assert.match(llm, /def _call_copilot_cli\(/, '_call_copilot_cli function missing');
+  assert.match(llm, /gh.*copilot.*explain|"gh", "copilot", "explain"/, '_call_copilot_cli must invoke gh copilot explain');
+});
+
+test('codex-cli and copilot-cli wired into extract_files_direct dispatch', () => {
+  const llm = readSrc('llm.py');
+  assert.match(llm, /backend == "codex-cli"[\s\S]{0,50}_call_codex_cli/, 'codex-cli not dispatched in extract_files_direct');
+  assert.match(llm, /backend == "copilot-cli"[\s\S]{0,50}_call_copilot_cli/, 'copilot-cli not dispatched in extract_files_direct');
+});

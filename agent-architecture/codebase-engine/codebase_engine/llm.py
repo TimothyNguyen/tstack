@@ -165,6 +165,31 @@ BACKENDS: dict[str, dict] = {
         # CLI's Read tool rather than as inline base64 (see `_call_claude_cli`).
         "vision": True,
     },
+    "codex-cli": {
+        # Subprocess: `codex --quiet [--model M]` with prompt via stdin.
+        # codex reads OPENAI_API_KEY from its own environment — codebase-engine
+        # never touches the key. Output is plain text with ANSI escape codes;
+        # _call_codex_cli strips ANSI then extracts JSON via _parse_llm_json.
+        # Override model with CODEBASE_ENGINE_CODEX_CLI_MODEL.
+        "default_model": "o4-mini",
+        "pricing": {"input": 0.0, "output": 0.0},
+        "temperature": 0,
+        "max_tokens": 16384,
+        "vision": False,
+    },
+    "copilot-cli": {
+        # Subprocess: `gh copilot explain` with prompt piped via stdin.
+        # Authentication uses whatever `gh auth login` has stored — codebase-engine
+        # never reads or touches the credential. NOTE: `gh copilot explain` is
+        # designed for short shell-command explanations. Passing large corpus
+        # chunks may produce prose rather than JSON. For production workloads
+        # prefer the copilot-api (OpenAI-compat) backend.
+        "default_model": "copilot",
+        "pricing": {"input": 0.0, "output": 0.0},
+        "temperature": 0,
+        "max_tokens": 4096,
+        "vision": False,
+    },
 }
 
 
@@ -1194,6 +1219,125 @@ def _call_claude_cli(user_message: str, max_tokens: int = 8192, *, deep_mode: bo
     return result
 
 
+def _strip_ansi(text: str) -> str:
+    """Strip ANSI escape codes from CLI stdout before JSON parsing."""
+    import re
+    return re.sub(r'\x1b\[[0-9;]*[mKABCDEFGHJKSTsuhl]', '', text)
+
+
+def _call_codex_cli(user_message: str, max_tokens: int = 8192, *, deep_mode: bool = False, images: list[_ImageRef] | None = None) -> dict:
+    """Call OpenAI Codex via the locally-installed `codex` CLI.
+
+    Routes through the user's OpenAI account; codex reads OPENAI_API_KEY from
+    its own environment — codebase-engine never touches the key. Output is plain
+    text with ANSI escape codes; _strip_ansi + _parse_llm_json extract the JSON
+    payload. Override the model with CODEBASE_ENGINE_CODEX_CLI_MODEL.
+    """
+    import platform
+    import shutil
+    import subprocess
+
+    codex_cmd = "codex"
+    if platform.system() == "Windows":
+        cmd_path = shutil.which("codex.cmd")
+        if cmd_path:
+            codex_cmd = cmd_path
+        elif shutil.which("codex") is None:
+            raise RuntimeError(
+                "Codex CLI not found on $PATH. Install from "
+                "https://github.com/openai/codex and run `codex login` to authenticate."
+            )
+    elif shutil.which("codex") is None:
+        raise RuntimeError(
+            "Codex CLI not found on $PATH. Install from "
+            "https://github.com/openai/codex and run `codex login` to authenticate."
+        )
+
+    cli_args = [codex_cmd, "--quiet"]
+    cli_model = os.environ.get("CODEBASE_ENGINE_CODEX_CLI_MODEL", "").strip()
+    if cli_model:
+        cli_args.extend(["--model", cli_model])
+
+    proc = subprocess.run(
+        cli_args,
+        input=user_message,
+        capture_output=True,
+        text=True,
+        encoding="utf-8",
+        timeout=_resolve_api_timeout(),
+        check=False,
+        **_no_window_kwargs(),
+    )
+    if proc.returncode != 0:
+        raise RuntimeError(
+            f"codex --quiet exited {proc.returncode}: {proc.stderr.strip()[:500]}"
+        )
+
+    raw_content = _strip_ansi(proc.stdout)
+    result = _parse_llm_json(raw_content or "{}")
+    result["input_tokens"] = 0
+    result["output_tokens"] = 0
+    result["model"] = cli_model or "o4-mini"
+    result["finish_reason"] = "stop"
+    if _response_is_hollow(raw_content, result):
+        print(
+            "[codebase-engine] codex-cli returned a hollow response; treating as "
+            "truncation so adaptive retry can bisect the chunk.",
+            file=sys.stderr,
+        )
+        result["finish_reason"] = "length"
+    return result
+
+
+def _call_copilot_cli(user_message: str, max_tokens: int = 4096, *, deep_mode: bool = False, images: list[_ImageRef] | None = None) -> dict:
+    """Call GitHub Copilot via `gh copilot explain` with prompt piped via stdin.
+
+    Authentication uses whatever `gh auth login` has stored — codebase-engine
+    never reads or touches the credential. `gh copilot explain` is designed for
+    short shell-command explanations; large corpus chunks may produce prose
+    rather than JSON. For production workloads prefer the copilot-api
+    (OpenAI-compat) backend.
+    """
+    import shutil
+    import subprocess
+
+    if shutil.which("gh") is None:
+        raise RuntimeError(
+            "GitHub CLI (gh) not found on $PATH. Install from "
+            "https://cli.github.com/ and run `gh auth login` to authenticate."
+        )
+
+    proc = subprocess.run(
+        ["gh", "copilot", "explain"],
+        input=user_message,
+        capture_output=True,
+        text=True,
+        encoding="utf-8",
+        timeout=_resolve_api_timeout(),
+        check=False,
+        **_no_window_kwargs(),
+    )
+    if proc.returncode != 0:
+        raise RuntimeError(
+            f"gh copilot explain exited {proc.returncode}: {proc.stderr.strip()[:500]}"
+        )
+
+    raw_content = _strip_ansi(proc.stdout)
+    result = _parse_llm_json(raw_content or "{}")
+    result["input_tokens"] = 0
+    result["output_tokens"] = 0
+    result["model"] = "copilot"
+    result["finish_reason"] = "stop"
+    if _response_is_hollow(raw_content, result):
+        print(
+            "[codebase-engine] copilot-cli returned a hollow response; treating as "
+            "truncation so adaptive retry can bisect the chunk.",
+            file=sys.stderr,
+        )
+        result["finish_reason"] = "length"
+    return result
+
+
 def _azure_client(api_key: str, endpoint: str):
     """Construct an AzureOpenAI client with env-driven api_version and timeout."""
     try:
@@ -1349,7 +1493,7 @@ def extract_files_direct(
             file=sys.stderr,
         )
         key = "ollama"
-    if not key and backend not in ("bedrock", "claude-cli"):
+    if not key and backend not in ("bedrock", "claude-cli", "codex-cli", "copilot-cli"):
         raise ValueError(
             f"No API key for backend '{backend}'. "
             f"Set {_format_backend_env_keys(backend)} or pass api_key=."
@@ -1373,6 +1517,10 @@ def extract_files_direct(
         return _call_claude(key, mdl, user_msg, max_tokens=max_out, deep_mode=deep_mode, images=image_refs)
     if backend == "claude-cli":
         return _call_claude_cli(user_msg, max_tokens=max_out, deep_mode=deep_mode, images=image_refs)
+    if backend == "codex-cli":
+        return _call_codex_cli(user_msg, max_tokens=max_out, deep_mode=deep_mode)
+    if backend == "copilot-cli":
+        return _call_copilot_cli(user_msg, max_tokens=max_out, deep_mode=deep_mode)
     if backend == "bedrock":
         return _call_bedrock(mdl, user_msg, max_tokens=max_out, deep_mode=deep_mode, images=image_refs)
     if backend == "azure":
@@ -1794,6 +1942,10 @@ def extract_corpus_parallel(
     # over session state. Force serial unless the user explicitly opts in.
     if backend == "claude-cli" and os.environ.get("CODEBASE_ENGINE_CLAUDE_CLI_PARALLEL", "").strip() != "1":
         max_concurrency = 1
+    if backend == "codex-cli" and os.environ.get("CODEBASE_ENGINE_CODEX_CLI_PARALLEL", "").strip() != "1":
+        max_concurrency = 1
+    if backend == "copilot-cli" and os.environ.get("CODEBASE_ENGINE_COPILOT_CLI_PARALLEL", "").strip() != "1":
+        max_concurrency = 1
     workers = max(1, min(max_concurrency, total))
     if workers == 1:
         # Avoid thread pool overhead for single-worker runs (and keep
@@ -1872,7 +2024,7 @@ def _call_llm(
         ollama_url = os.environ.get("OLLAMA_BASE_URL", cfg.get("base_url", ""))
         _validate_ollama_base_url(ollama_url)
         key = "ollama"
-    if not key and backend not in ("bedrock", "claude-cli"):
+    if not key and backend not in ("bedrock", "claude-cli", "codex-cli", "copilot-cli"):
         raise ValueError(
             f"No API key for backend '{backend}'. Set {_format_backend_env_keys(backend)}."
         )
@@ -1923,6 +2075,52 @@ def _call_llm(
         envelope = _claude_cli_envelope(proc.stdout)
         return envelope.get("result", "")
 
+    if backend == "codex-cli":
+        import platform, shutil, subprocess
+        codex_cmd = "codex"
+        if platform.system() == "Windows":
+            cmd_path = shutil.which("codex.cmd")
+            if cmd_path:
+                codex_cmd = cmd_path
+            elif shutil.which("codex") is None:
+                raise RuntimeError("Codex CLI not found on $PATH")
+        elif shutil.which("codex") is None:
+            raise RuntimeError("Codex CLI not found on $PATH")
+        cli_args = [codex_cmd, "--quiet"]
+        cli_model_env = os.environ.get("CODEBASE_ENGINE_CODEX_CLI_MODEL", "").strip()
+        if cli_model_env:
+            cli_args.extend(["--model", cli_model_env])
+        proc = subprocess.run(
+            cli_args,
+            input=prompt,
+            capture_output=True,
+            text=True,
+            encoding="utf-8",
+            timeout=_resolve_api_timeout(),
+            check=False,
+            **_no_window_kwargs(),
+        )
+        if proc.returncode != 0:
+            raise RuntimeError(f"codex --quiet exited {proc.returncode}: {proc.stderr.strip()[:500]}")
+        return _strip_ansi(proc.stdout)
+
+    if backend == "copilot-cli":
+        import shutil, subprocess
+        if shutil.which("gh") is None:
+            raise RuntimeError("GitHub CLI (gh) not found on $PATH")
+        proc = subprocess.run(
+            ["gh", "copilot", "explain"],
+            input=prompt,
+            capture_output=True,
+            text=True,
+            encoding="utf-8",
+            timeout=_resolve_api_timeout(),
+            check=False,
+            **_no_window_kwargs(),
+        )
+        if proc.returncode != 0:
+            raise RuntimeError(f"gh copilot explain exited {proc.returncode}: {proc.stderr.strip()[:500]}")
+        return _strip_ansi(proc.stdout)
 
     if backend == "bedrock":
         try:
@@ -2093,7 +2291,7 @@ def detect_backend() -> str | None:
         _validate_ollama_base_url(ollama_url)
         return "ollama"
     for name in BACKENDS:
-        if name not in ("gemini", "kimi", "claude", "openai", "deepseek", "azure", "bedrock", "ollama", "claude-cli"):
+        if name not in ("gemini", "kimi", "claude", "openai", "deepseek", "azure", "bedrock", "ollama", "claude-cli", "codex-cli", "copilot-cli"):
             if _get_backend_api_key(name):
                 return name
     return None

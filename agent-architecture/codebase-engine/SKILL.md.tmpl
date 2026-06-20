@@ -124,6 +124,31 @@ codebase-engine affected src/auth/middleware.py
 5. Use `codebase-engine affected` before edits to understand blast radius.
 6. Fall back to Grep + Read when the query returns no results (index may lag by ~1s after edits).
 
+## Understanding Workflow
+
+<!-- Use this section when a user asks how a system works, where behavior is
+     implemented, what code depends on a module, or what context is needed before a change. -->
+
+Use this workflow when answering architecture, ownership, or dependency questions:
+
+1. Identify the target behavior, symbol, module, or workflow.
+2. Check for a knowledge graph index (`codebase-out/` directory with graph files).
+   - If present, use `codebase-engine query`, `explain`, `path`, and `affected` for lookups.
+   - Spawn an Explore agent for broad questions when using CodeGraph MCP — never call explore tools directly in the main session.
+   - Local graph queries only. No external egress.
+3. If no index or query returns no results, fall back to local file search (Grep + Read).
+4. Summarize entrypoints, data flow, dependencies, and ownership boundaries.
+5. Identify tests and docs that verify the behavior.
+6. Note uncertainty explicitly.
+
+## Adapter Boundary
+
+<!-- Core workflow functions without any adapter — Grep + Read is always the fallback. -->
+
+Core skill works without any adapter — Grep + Read is always the fallback.
+Supported adapters: CodeGraph MCP, any local embedding/index service.
+No external APIs, no third-party egress.
+
 ## Enterprise Constraints
 
 <!-- These are hard build-time removals, not runtime flags.

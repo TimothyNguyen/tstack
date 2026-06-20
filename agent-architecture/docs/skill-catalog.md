@@ -34,8 +34,7 @@ Each skill is a top-level folder with:
 | `learnings` | Capture local project conventions and lessons safely. | `learnings/SKILL.md.tmpl` |
 | `release` | Prepare human-approved merge/deploy handoff. | `release/SKILL.md.tmpl` |
 | `ship` | Prepare PR, merge, or release handoff. | `ship/SKILL.md.tmpl` |
-| `codebase-understanding` | Map architecture, dependencies, and implementation context. | `codebase-understanding/SKILL.md.tmpl` |
-| `codebase-engine` | Enterprise-safe AST knowledge graph — index, query, explain, path, affected. No external egress. | `codebase-engine/SKILL.md.tmpl` |
+| `codebase-engine` | Enterprise-safe AST knowledge graph — index, query, explain, path, affected, and codebase understanding workflow. No external egress. | `codebase-engine/SKILL.md.tmpl` |
 | `rtk-token-optimizer` | Optional Rust Token Killer guidance for reducing noisy shell output. | `rtk-token-optimizer/SKILL.md.tmpl` |
 | `context-save` | Save local working context for future sessions. | `context-save/SKILL.md.tmpl` |
 | `context-restore` | Restore saved local working context. | `context-restore/SKILL.md.tmpl` |
