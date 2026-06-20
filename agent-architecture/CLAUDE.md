@@ -2,6 +2,20 @@
 
 Claude Code guidance for `agent-architecture/`.
 
+## Knowledge Graph
+
+A knowledge graph of this codebase lives at `codebase-out/GRAPH_REPORT.md`.
+
+**Read `codebase-out/GRAPH_REPORT.md` BEFORE reading individual files.** It maps
+the 300+ communities, god nodes, and surprising connections across the 5 000+ node
+graph. Use it to orient exploration and reduce token usage — one report read replaces
+reading dozens of files.
+
+To rebuild after major changes:
+```bash
+codebase-engine extract .
+```
+
 ## What This Is
 
 This directory is a reusable architecture-agent skill pack. It borrows the

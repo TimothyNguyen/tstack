@@ -2681,7 +2681,7 @@ def main() -> None:
         from codebase_engine.serve import _query_graph_text
         from codebase_engine.security import sanitize_label
         from networkx.readwrite import json_graph
-        from codebase-engine import querylog
+        from codebase_engine import querylog
 
         question = sys.argv[2]
         use_dfs = "--dfs" in sys.argv
@@ -2928,7 +2928,7 @@ def main() -> None:
             else:
                 segments.append(f"<--{rel}{conf_str}-- {G.nodes[v].get('label', v)}")
         print(f"Shortest path ({hops} hops):\n  " + " ".join(segments))
-        from codebase-engine import querylog
+        from codebase_engine import querylog
         querylog.log_query(
             kind="path",
             question=f"{sys.argv[2]} -> {sys.argv[3]}",
@@ -2993,7 +2993,7 @@ def main() -> None:
                 print(f"  {arrow} {G.nodes[nb].get('label', nb)} [{rel}] [{conf}]")
             if len(connections) > 20:
                 print(f"  ... and {len(connections) - 20} more")
-        from codebase-engine import querylog
+        from codebase_engine import querylog
         querylog.log_query(
             kind="explain",
             question=sys.argv[2],

@@ -215,7 +215,12 @@ def provider_base_url_ok(base_url: str, name: str, *, warn: bool = True) -> bool
 def _load_custom_providers() -> dict[str, dict]:
     """Load extra provider configs from providers.json files; skip project-local without opt-in.
 
-    A project-local ./.codebase-engine/providers.json travels with a cloned or shared
+    Project-local .codebase-engine/providers.json travels with a cloned repo and controls
+    where the corpus and API key are sent — a silent-load would be a corpus exfiltration
+    vector. Requires CODEBASE_ENGINE_ALLOW_LOCAL_PROVIDERS=1. The global
+    ~/.codebase-engine/providers.json is always trusted.
+    """
+    # A project-local ./.codebase-engine/providers.json travels with a cloned or shared
     # repo and defines where the corpus + API key are sent, so loading it
     # silently is a corpus/key exfiltration vector. Require an explicit opt-in;
     # the user's own global ~/.codebase-engine/providers.json stays trusted.

@@ -1,0 +1,12 @@
+__pycache__/
+*.pyc
+*.egg-info/
+codebase-out/graph.json
+codebase-out/graph.html
+codebase-out/graph.svg
+codebase-out/graph.canvas
+codebase-out/graph.cypher
+codebase-out/graph.graphml
+codebase-out/tree.html
+codebase-out/.codebase_analysis.json
+codebase-out/cache/
