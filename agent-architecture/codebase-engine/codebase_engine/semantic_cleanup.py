@@ -142,6 +142,11 @@ def load_validated_semantic_fragment(path: Path) -> tuple[dict | None, list[str]
 
 
 def _validate_semantic_id(errors: list[str], field: str, value: object) -> None:
+    """Append error strings to `errors` if `value` is not a valid semantic node ID.
+
+    Valid IDs are non-empty strings under MAX_SEMANTIC_ID_LENGTH chars with no
+    path separators or '..' sequences (which would allow path traversal in node IDs).
+    """
     if not isinstance(value, str):
         errors.append(f"{field} must be a string")
         return

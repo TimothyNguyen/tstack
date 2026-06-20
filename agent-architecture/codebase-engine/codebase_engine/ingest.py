@@ -93,6 +93,7 @@ def _detect_url_type(url: str) -> str:
 
 
 def _fetch_html(url: str) -> str:
+    """Fetch raw HTML through the SSRF-guarded security layer."""
     return safe_fetch_text(url)
 
 

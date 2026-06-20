@@ -218,6 +218,7 @@ def cohesion_score(G: nx.Graph, community_nodes: list[str]) -> float:
 
 
 def score_all(G: nx.Graph, communities: dict[int, list[str]]) -> dict[int, float]:
+    """Compute cohesion scores for all communities; returns {community_id: score}."""
     return {cid: cohesion_score(G, nodes) for cid, nodes in communities.items()}
 
 

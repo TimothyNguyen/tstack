@@ -43,6 +43,11 @@ def _shingles(text: str, k: int = 3) -> set[str]:
 
 
 def _make_minhash(text: str, num_perm: int = 128) -> MinHash:
+    """Build a MinHash sketch from character-4-shingles of `text`.
+
+    Spaces are stripped before shingling so 'graph extractor' and 'graphextractor'
+    produce the same shingles and are correctly identified as duplicates.
+    """
     # Strip spaces so "graph extractor" and "graphextractor" share shingles
     m = MinHash(num_perm=num_perm)
     for shingle in _shingles(text.replace(" ", "")):
@@ -138,10 +143,13 @@ def _crossfile_fileanchored_blocked(node: dict, neighbor: dict) -> bool:
 # ── union-find ────────────────────────────────────────────────────────────────
 
 class _UF:
+    """Path-compressed union-find for grouping duplicate node IDs."""
+
     def __init__(self) -> None:
         self._parent: dict[str, str] = {}
 
     def find(self, x: str) -> str:
+        """Find root of x with path compression."""
         self._parent.setdefault(x, x)
         while self._parent[x] != x:
             self._parent[x] = self._parent[self._parent[x]]
@@ -149,6 +157,7 @@ class _UF:
         return x
 
     def union(self, x: str, y: str) -> None:
+        """Merge the sets containing x and y."""
         self._parent.setdefault(x, x)
         self._parent.setdefault(y, y)
         rx, ry = self.find(x), self.find(y)
@@ -156,6 +165,7 @@ class _UF:
             self._parent[ry] = rx
 
     def components(self) -> dict[str, list[str]]:
+        """Return all connected components as {root: [members]} dict."""
         groups: dict[str, list[str]] = defaultdict(list)
         for x in self._parent:
             groups[self.find(x)].append(x)
@@ -436,6 +446,7 @@ def _pick_winner(nodes: list[dict]) -> dict:
         raise ValueError("Cannot pick winner from empty list")
 
     def _score(n: dict) -> tuple[int, int]:
+        """Sort key: (0=no chunk suffix, 1=has suffix), then shorter ID wins."""
         has_suffix = bool(_CHUNK_SUFFIX.search(n["id"]))
         return (1 if has_suffix else 0, len(n["id"]))
 

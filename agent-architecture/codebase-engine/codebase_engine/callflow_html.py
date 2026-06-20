@@ -795,6 +795,7 @@ SECTION_ARCHETYPES = [
 
 
 def _community_text(nodes: list, label: str = "") -> str:
+    """Build a lowercased text blob from a community's nodes for archetype scoring."""
     parts = [label]
     for node in nodes[:80]:
         parts.append(str(node.get("label", "")))
@@ -805,6 +806,7 @@ def _community_text(nodes: list, label: str = "") -> str:
 
 
 def _keyword_score(text: str, keywords: set[str]) -> int:
+    """Count whole-word keyword hits in `text` for section archetype matching."""
     score = 0
     for keyword in keywords:
         score += len(re.findall(rf"(?<![a-z0-9]){re.escape(keyword)}(?![a-z0-9])", text))
@@ -989,6 +991,7 @@ def select_diagram_nodes(nodes: list, edges: list, max_nodes: int) -> list:
     seen = set()
 
     def add_node(nid: str) -> bool:
+        """Add node to selected if not seen yet; returns True when max_nodes reached."""
         node = node_by_id.get(nid)
         if not node or nid in seen:
             return False
@@ -1015,6 +1018,7 @@ def select_diagram_nodes(nodes: list, edges: list, max_nodes: int) -> list:
                 return selected
 
     def fallback_key(node: dict) -> tuple:
+        """Sort key: deprioritise concept nodes, then rank by edge score + importance."""
         nid = node.get("id", "")
         kind_penalty = 1 if node_kind(node) == "concept" else 0
         return (

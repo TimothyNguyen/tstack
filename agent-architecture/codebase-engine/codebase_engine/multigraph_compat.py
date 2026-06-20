@@ -59,6 +59,7 @@ class MultigraphCapabilityResult:
 
 
 def _check(name: str, func: Callable[[], bool | str]) -> CapabilityCheck:
+    """Run one probe function and wrap its result in a CapabilityCheck dataclass."""
     try:
         detail = func()
     except Exception as exc:
@@ -71,6 +72,7 @@ def _check(name: str, func: Callable[[], bool | str]) -> CapabilityCheck:
 
 
 def _build_probe_graph() -> nx.MultiDiGraph:
+    """Build a minimal two-node, two-edge directed multigraph for probe tests."""
     graph = nx.MultiDiGraph()
     graph.add_node("a", label="A")
     graph.add_node("b", label="B")
@@ -80,6 +82,7 @@ def _build_probe_graph() -> nx.MultiDiGraph:
 
 
 def _probe_keyed_parallel_edges() -> bool | str:
+    """Verify that two edges with different keys between the same nodes are preserved."""
     graph = _build_probe_graph()
     if not graph.is_multigraph() or not graph.is_directed():
         return f"probe graph type was {type(graph).__name__}"
@@ -93,6 +96,7 @@ def _probe_keyed_parallel_edges() -> bool | str:
 
 
 def _probe_node_link_round_trip() -> bool | str:
+    """Verify that node-link serialise → deserialise preserves all edge keys and attrs."""
     graph = _build_probe_graph()
     data = json_graph.node_link_data(graph, edges="links")
     if data.get("multigraph") is not True:
@@ -124,6 +128,7 @@ def _probe_node_link_round_trip() -> bool | str:
 
 
 def _probe_duplicate_key_overwrite_semantics() -> bool | str:
+    """Verify that adding a second edge with the same key overwrites (not appends) the first."""
     graph = nx.MultiDiGraph()
     graph.add_edge("x", "y", key="same", marker="first")
     graph.add_edge("x", "y", key="same", marker="second")
@@ -159,6 +164,7 @@ def _probe_reserved_key_attr_rejected() -> bool | str:
 
 
 def _probe_remove_edges_from_two_tuple_semantics() -> bool | str:
+    """Verify that remove_edges_from with a 2-tuple removes exactly one parallel edge."""
     graph = nx.MultiDiGraph()
     graph.add_edge("a", "b", key="one")
     graph.add_edge("a", "b", key="two")
@@ -170,6 +176,7 @@ def _probe_remove_edges_from_two_tuple_semantics() -> bool | str:
 
 
 def _probe_to_undirected_preserves_multigraph_type() -> bool | str:
+    """Verify that to_undirected() returns a MultiGraph (not a plain Graph)."""
     graph = _build_probe_graph()
     undirected = graph.to_undirected()
     undirected_view = graph.to_undirected(as_view=True)
@@ -182,6 +189,11 @@ def _probe_to_undirected_preserves_multigraph_type() -> bool | str:
 
 @lru_cache(maxsize=1)
 def probe_multigraph_capabilities() -> MultigraphCapabilityResult:
+    """Run all NetworkX multigraph compatibility probes and return a cached result.
+
+    Cached so the probe suite runs at most once per process — subsequent calls
+    (from build.py, serve.py, etc.) return the same result instantly.
+    """
     checks = (
         _check("keyed_parallel_edges", _probe_keyed_parallel_edges),
         _check("node_link_edges_links_round_trip", _probe_node_link_round_trip),

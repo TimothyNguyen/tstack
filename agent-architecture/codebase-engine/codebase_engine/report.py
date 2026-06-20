@@ -36,6 +36,13 @@ def generate(
     min_community_size: int = 3,
     built_at_commit: str | None = None,
 ) -> str:
+    """Render GRAPH_REPORT.md as a Markdown string.
+
+    Sections: corpus check, summary stats, graph freshness, community navigation
+    wikilinks, god nodes, surprising connections, import cycles, hyperedges,
+    per-community node lists, ambiguous edges, knowledge gaps, suggested questions.
+    Communities with fewer than min_community_size real nodes are omitted.
+    """
     today = date.today().isoformat()
 
     # JSON deserialization produces string keys; normalize to int so .get(cid) works.

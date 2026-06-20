@@ -89,6 +89,7 @@ _JSON_NOISE_LABELS: frozenset[str] = frozenset({
 
 
 def _is_json_key_node(G: nx.Graph, node_id: str) -> bool:
+    """Return True if the node is a low-signal JSON config key that should be filtered from analysis."""
     attrs = G.nodes[node_id]
     src = (attrs.get("source_file") or "").lower()
     if not src.endswith(".json"):
@@ -176,6 +177,7 @@ from codebase_engine.detect import CODE_EXTENSIONS, DOC_EXTENSIONS, PAPER_EXTENS
 
 
 def _file_category(path: str) -> str:
+    """Classify a file path as 'code', 'paper', 'image', or 'document' by extension."""
     ext = ("." + path.rsplit(".", 1)[-1].lower()) if "." in path else ""
     if ext in CODE_EXTENSIONS:
         return "code"
@@ -569,6 +571,7 @@ def graph_diff(G_old: nx.Graph, G_new: nx.Graph) -> dict:
     ]
 
     def edge_key(G: nx.Graph, u: str, v: str, data: dict) -> tuple:
+        """Canonical edge key for diff comparison; undirected graphs sort node pair."""
         if G.is_directed():
             return (u, v, data.get("relation", ""))
         return (min(u, v), max(u, v), data.get("relation", ""))
@@ -650,6 +653,7 @@ def find_import_cycles(
         }
     """
     def _endpoint_source_file(node_id: str) -> str:
+        """Return the source_file attribute of a node, or empty string if absent."""
         attrs = G.nodes.get(node_id, {})
         src_file = attrs.get("source_file", "")
         return src_file if isinstance(src_file, str) else ""

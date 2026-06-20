@@ -200,12 +200,14 @@ _CODE_EXTENSIONS = CODE_EXTENSIONS
 
 
 def _report_root_label(watch_path: Path) -> str:
+    """Return a short human-readable label for the watched directory."""
     if watch_path.is_absolute():
         return watch_path.name or str(watch_path)
     return Path.cwd().name if watch_path == Path(".") else str(watch_path)
 
 
 def _is_relative_to(path: Path, root: Path) -> bool:
+    """Return True if `path` is under `root` (Python 3.9 Path.is_relative_to backport)."""
     try:
         path.relative_to(root)
         return True
@@ -236,6 +238,11 @@ def _changed_path_candidates(raw: Path, *, change_root: Path, watch_root: Path) 
 
 
 def _relativize_source_files(payload: dict, root: Path) -> None:
+    """Rewrite absolute source_file paths in a payload to be relative to `root`.
+
+    Absolute paths come from node_link_data when the watched corpus is outside cwd.
+    Relativising them keeps graph.json portable and diff-friendly.
+    """
     for bucket in ("nodes", "edges", "hyperedges"):
         for item in payload.get(bucket, []):
             source = item.get("source_file")
@@ -251,6 +258,7 @@ def _relativize_source_files(payload: dict, root: Path) -> None:
 
 
 def _node_community_map(graph_data: dict) -> dict[str, int]:
+    """Build a {node_id: community_int} lookup from raw graph JSON data."""
     out: dict[str, int] = {}
     for node in graph_data.get("nodes", []):
         node_id = node.get("id")
@@ -270,6 +278,11 @@ def _node_community_map(graph_data: dict) -> dict[str, int]:
 
 
 def _canonical_graph_for_compare(graph_data: dict) -> dict:
+    """Produce a deterministic, sorted copy of graph_data suitable for equality comparison.
+
+    Strips built_at_commit so timestamp-only changes don't register as diffs.
+    Sorts all node/edge/hyperedge arrays by their JSON representation.
+    """
     canonical = dict(graph_data)
     canonical.pop("built_at_commit", None)
     for key in ("nodes", "links", "edges", "hyperedges"):
@@ -282,6 +295,11 @@ def _canonical_graph_for_compare(graph_data: dict) -> dict:
 
 
 def _canonical_topology_for_compare(graph_data: dict) -> dict:
+    """Like _canonical_graph_for_compare but also strips community assignments and confidence_scores.
+
+    Used to detect structural changes (new edges/nodes) while ignoring re-clustering
+    and confidence updates that don't change the graph topology.
+    """
     canonical = dict(graph_data)
     canonical.pop("built_at_commit", None)
 
@@ -338,6 +356,7 @@ def _canonical_topology_for_compare(graph_data: dict) -> dict:
 
 
 def _topology_from_graph(G) -> dict:
+    """Serialise a NetworkX graph to a node-link dict including hyperedges graph attribute."""
     from networkx.readwrite import json_graph
     try:
         data = json_graph.node_link_data(G, edges="links")
@@ -385,10 +404,12 @@ def _check_shrink(
 
 
 def _report_for_compare(report_text: str) -> str:
+    """Strip the 'Built from commit' line so reports with different SHAs compare equal."""
     return re.sub(r"^- Built from commit: `[^`]+`\n?", "", report_text, flags=re.MULTILINE)
 
 
 def _json_text(data: dict) -> str:
+    """Serialise a dict to indented JSON with a trailing newline."""
     return json.dumps(data, indent=2, ensure_ascii=False) + "\n"
 
 

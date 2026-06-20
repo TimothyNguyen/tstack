@@ -127,6 +127,7 @@ def _coerce_deps(value: Any) -> list[str]:
 
 
 def _parse_apm(text: str) -> dict | None:
+    """Parse an Atom package manifest (apm.yml) using PyYAML or the line-by-line fallback."""
     try:
         import yaml
     except ImportError:
@@ -172,6 +173,7 @@ def _pep508_name(spec: str) -> str:
 
 
 def _parse_pyproject(text: str) -> dict | None:
+    """Parse pyproject.toml for package name, version, and dependencies (PEP 621 + Poetry)."""
     try:
         import tomllib as _toml
     except ImportError:
@@ -194,6 +196,7 @@ def _parse_pyproject(text: str) -> dict | None:
 
 
 def _parse_gomod(text: str) -> dict | None:
+    """Parse go.mod for module name and direct require dependencies."""
     name = None
     deps: list[str] = []
     in_block = False
@@ -222,6 +225,7 @@ def _parse_gomod(text: str) -> dict | None:
 
 
 def _parse_pom(text: str) -> dict | None:
+    """Parse a Maven pom.xml for groupId:artifactId name and dependency list."""
     # Drop the default namespace so findtext/findall don't need the {uri} prefix.
     text = re.sub(r'\sxmlns="[^"]*"', '', text, count=1)
     root = ET.fromstring(text)

@@ -2,6 +2,7 @@
 
 
 def __getattr__(name):
+    """Lazy-load heavy submodule symbols so the package imports without tree-sitter/numpy."""
     # Lazy imports so the CLI works before heavy deps are in place.
     _map = {
         "extract": ("codebase_engine.extract", "extract"),

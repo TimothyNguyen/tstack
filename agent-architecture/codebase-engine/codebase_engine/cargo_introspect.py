@@ -10,6 +10,7 @@ _CONFIDENCE_EXTRACTED = "EXTRACTED"
 
 
 def _load_toml(path: Path) -> dict[str, Any]:
+    """Parse a TOML file using tomllib (stdlib 3.11+) or the tomli backport."""
     try:
         import tomllib  # type: ignore[import-not-found]
     except ModuleNotFoundError:
@@ -25,6 +26,7 @@ def _load_toml(path: Path) -> dict[str, Any]:
 
 
 def _member_manifest_paths(root: Path, root_data: dict[str, Any]) -> list[Path]:
+    """Expand workspace.members globs to a list of member Cargo.toml paths."""
     paths: list[Path] = []
     if isinstance(root_data.get("package"), dict):
         paths.append(root / "Cargo.toml")

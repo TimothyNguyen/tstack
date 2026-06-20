@@ -468,6 +468,7 @@ def status(path: Path = Path(".")) -> str:
     hooks_dir = _user_hooks_dir(_hooks_dir(root))
 
     def _check(name: str, marker: str) -> str:
+        """Return installation status string for a single git hook file."""
         p = hooks_dir / name
         if not p.exists():
             return "not installed"

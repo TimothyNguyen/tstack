@@ -25,6 +25,11 @@ _MH_COEFFS: dict[int, tuple[np.ndarray, np.ndarray]] = {}
 
 
 def _mh_coeffs(num_perm: int) -> tuple[np.ndarray, np.ndarray]:
+    """Return cached (a, b) coefficient arrays for the given permutation count.
+
+    Uses a fixed random seed so hashes are deterministic across process restarts.
+    Coefficients are shared across all MinHash instances with the same num_perm.
+    """
     if num_perm not in _MH_COEFFS:
         rng = np.random.RandomState(1)
         a = rng.randint(1, int(_MP), num_perm, dtype=np.uint64)
@@ -39,11 +44,13 @@ class MinHash:
     __slots__ = ("num_perm", "hashvalues", "_a", "_b")
 
     def __init__(self, num_perm: int = 128) -> None:
+        """Initialise sketch with `num_perm` hash permutations, all set to max value."""
         self.num_perm = num_perm
         self.hashvalues = np.full(num_perm, int(_MH), dtype=np.uint64)
         self._a, self._b = _mh_coeffs(num_perm)
 
     def update(self, v: bytes) -> None:
+        """Hash one token and update the min-value sketch (standard MinHash update)."""
         hv = np.uint64(struct.unpack("<I", hashlib.sha1(v).digest()[:4])[0])
         phv = np.bitwise_and((self._a * hv + self._b) % _MP, _MH)
         self.hashvalues = np.minimum(self.hashvalues, phv)
@@ -85,11 +92,13 @@ class MinHashLSH:
     """Band-hashing LSH — same API as datasketch.MinHashLSH for the subset used here."""
 
     def __init__(self, threshold: float = 0.5, num_perm: int = 128) -> None:
+        """Build band tables optimised for the given Jaccard similarity threshold."""
         self.b, self.r = _optimal_lsh_params(threshold, num_perm)
         self._tables: list[dict[bytes, list[str]]] = [{} for _ in range(self.b)]
         self._keys: set[str] = set()
 
     def insert(self, key: str, minhash: MinHash) -> None:
+        """Insert a MinHash sketch under `key`; raises if key already present."""
         if key in self._keys:
             raise ValueError(f"Key {key!r} already exists in MinHashLSH")
         self._keys.add(key)
@@ -99,6 +108,7 @@ class MinHashLSH:
             table.setdefault(band, []).append(key)
 
     def query(self, minhash: MinHash) -> list[str]:
+        """Return all candidate keys that share at least one LSH band with `minhash`."""
         hv = minhash.hashvalues
         candidates: set[str] = set()
         for i, table in enumerate(self._tables):

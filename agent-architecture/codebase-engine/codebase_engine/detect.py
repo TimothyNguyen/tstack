@@ -386,6 +386,12 @@ def _shebang_file_type(path: Path) -> FileType | None:
 
 
 def classify_file(path: Path) -> FileType | None:
+    """Return the FileType for a path based on its extension, or None to skip.
+
+    Package manifests are classified as CODE so they go through deterministic
+    AST extraction rather than LLM document extraction — this avoids producing
+    duplicate file-anchored nodes for the same manifest.
+    """
     # Package manifests (apm.yml, pyproject.toml, go.mod, pom.xml) are parsed
     # deterministically, so route them to the AST path (CODE) rather than the LLM
     # document path — otherwise apm.yml (a .yml "document") would be LLM-extracted
@@ -518,6 +524,7 @@ def xlsx_extract_structure(path: Path) -> dict:
     Used in addition to xlsx_to_markdown so Claude sees both structure and content.
     """
     def _nid(*parts: str) -> str:
+        """Build a safe lowercase node ID from path parts by replacing non-alphanumeric chars."""
         return re.sub(r"[^a-z0-9_]", "_", "_".join(p.lower() for p in parts).strip("_"))
 
     try:
@@ -544,12 +551,14 @@ def xlsx_extract_structure(path: Path) -> dict:
     seen: set[str] = {file_nid}
 
     def _add(nid: str, label: str) -> None:
+        """Append a document node if it hasn't been added yet."""
         if nid not in seen:
             seen.add(nid)
             nodes.append({"id": nid, "label": label, "file_type": "document",
                            "source_file": str_path, "source_location": None})
 
     def _edge(src: str, tgt: str, relation: str) -> None:
+        """Append an EXTRACTED edge between two node IDs."""
         edges.append({"source": src, "target": tgt, "relation": relation,
                        "confidence": "EXTRACTED", "source_file": str_path,
                        "source_location": None, "weight": 1.0})
@@ -643,6 +652,7 @@ def convert_office_file(path: Path, out_dir: Path) -> Path | None:
 
 
 def count_words(path: Path) -> int:
+    """Count whitespace-delimited words in a file; used for corpus-size estimation."""
     try:
         ext = path.suffix.lower()
         if ext == ".pdf":
@@ -915,6 +925,7 @@ def _is_included(path: Path, root: Path, patterns: list[tuple[Path, str]]) -> bo
         return False
 
     def _matches(rel: str, p: str, anchored: bool) -> bool:
+        """Return True if `rel` path matches glob pattern `p` (anchored or floating)."""
         if anchored:
             return fnmatch.fnmatch(rel, p)
         parts = rel.split("/")
@@ -1010,6 +1021,13 @@ def _auto_follow_symlinks(root: Path) -> bool:
 
 
 def detect(root: Path, *, follow_symlinks: bool | None = None, extra_excludes: list[str] | None = None) -> dict:
+    """Walk `root` and return a corpus description dict.
+
+    Keys: files (by FileType), total_files, total_words, skipped_sensitive,
+    skipped_files, warning (set when corpus is too small or too large).
+    Reads .codebaseignore, .gitignore, and CODEBASE_ENGINE_EXCLUDE env var to
+    determine which files to skip.
+    """
     root = root.resolve()
     if follow_symlinks is None:
         follow_symlinks = _auto_follow_symlinks(root)
@@ -1259,6 +1277,7 @@ def save_manifest(
     existing = load_manifest(manifest_path, root=root)
 
     def _normalise_entry(entry):
+        """Coerce legacy manifest entry formats to the current {mtime, ast_hash, semantic_hash} dict."""
         if isinstance(entry, (int, float)):
             return {"mtime": entry, "ast_hash": "", "semantic_hash": ""}
         if isinstance(entry, dict) and "hash" in entry and "ast_hash" not in entry:

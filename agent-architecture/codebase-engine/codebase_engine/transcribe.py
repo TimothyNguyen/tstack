@@ -24,10 +24,12 @@ _FALLBACK_PROMPT = "Use proper punctuation and paragraph breaks."
 
 
 def _model_name() -> str:
+    """Return the Whisper model name from env var, defaulting to 'base'."""
     return os.environ.get("CODEBASE_ENGINE_WHISPER_MODEL", _DEFAULT_MODEL)
 
 
 def _get_whisper():
+    """Import and return WhisperModel, raising ImportError with install hint if missing."""
     try:
         from faster_whisper import WhisperModel
         return WhisperModel
@@ -39,6 +41,7 @@ def _get_whisper():
 
 
 def _get_yt_dlp():
+    """Import and return yt_dlp module, raising ImportError with install hint if missing."""
     try:
         import yt_dlp
         return yt_dlp
