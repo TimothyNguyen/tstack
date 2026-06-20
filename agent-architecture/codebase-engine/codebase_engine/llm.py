@@ -1,6 +1,6 @@
 # Gemini, and OpenAI.
-# Used by `graphify extract . --backend gemini` and the benchmark scripts.
-# The default graphify pipeline uses Claude Code subagents via skill.md;
+# Used by `codebase-engine extract . --backend gemini` and the benchmark scripts.
+# The default codebase-engine pipeline uses Claude Code subagents via skill.md;
 # this module provides a direct API path for non-Claude-Code environments.
 from __future__ import annotations
 
@@ -92,7 +92,7 @@ BACKENDS: dict[str, dict] = {
         "base_url": "https://generativelanguage.googleapis.com/v1beta/openai/",
         "default_model": "gemini-3-flash-preview",
         "env_keys": ["GEMINI_API_KEY", "GOOGLE_API_KEY"],
-        "model_env_key": "GRAPHIFY_GEMINI_MODEL",
+        "model_env_key": "CODEBASE_ENGINE_GEMINI_MODEL",
         "pricing": {"input": 0.50, "output": 3.00},  # USD per 1M tokens
         "temperature": 0,
         "reasoning_effort": "low",
@@ -102,17 +102,17 @@ BACKENDS: dict[str, dict] = {
     "openai": {
         # OPENAI_BASE_URL points the backend at any OpenAI-compatible server
         # (llama.cpp, vLLM, LM Studio, ...); OPENAI_MODEL overrides the default
-        # model. GRAPHIFY_OPENAI_MODEL still wins over OPENAI_MODEL when both
+        # model. CODEBASE_ENGINE_OPENAI_MODEL still wins over OPENAI_MODEL when both
         # are set (via model_env_key).
         "base_url": os.environ.get("OPENAI_BASE_URL", "https://api.openai.com/v1"),
         "default_model": os.environ.get("OPENAI_MODEL", "gpt-4.1-mini"),
         "env_key": "OPENAI_API_KEY",
-        "model_env_key": "GRAPHIFY_OPENAI_MODEL",
+        "model_env_key": "CODEBASE_ENGINE_OPENAI_MODEL",
         "max_tokens": 16384,
         "pricing": {"input": 0.40, "output": 1.60},  # USD per 1M tokens
         # Default (gpt-4.1-mini) accepts temperature=0. Reasoning models
         # (o1/o3/o4/gpt-5) reject any explicit temperature and have it omitted
-        # automatically by _resolve_temperature; GRAPHIFY_LLM_TEMPERATURE
+        # automatically by _resolve_temperature; CODEBASE_ENGINE_LLM_TEMPERATURE
         # overrides either way (#1191).
         "temperature": 0,
         "vision": True,
@@ -121,7 +121,7 @@ BACKENDS: dict[str, dict] = {
         "base_url": "https://api.deepseek.com",
         "default_model": "deepseek-v4-flash",
         "env_key": "DEEPSEEK_API_KEY",
-        "model_env_key": "GRAPHIFY_DEEPSEEK_MODEL",
+        "model_env_key": "CODEBASE_ENGINE_DEEPSEEK_MODEL",
         "pricing": {"input": 0.14, "output": 0.28},  # USD per 1M tokens (v4-flash)
         # deepseek-reasoner / thinking-mode models silently ignore temperature;
         # deepseek-chat / v4-flash (non-thinking) accept 0-2. Safe to send 0.
@@ -133,19 +133,19 @@ BACKENDS: dict[str, dict] = {
         # OpenAI client, so it has its own call path (_call_azure).
         # Required env vars: AZURE_OPENAI_API_KEY, AZURE_OPENAI_ENDPOINT.
         # Optional: AZURE_OPENAI_API_VERSION (defaults to 2024-12-01-preview),
-        #           AZURE_OPENAI_DEPLOYMENT or GRAPHIFY_AZURE_MODEL (deployment name).
+        #           AZURE_OPENAI_DEPLOYMENT or CODEBASE_ENGINE_AZURE_MODEL (deployment name).
         # base_url is intentionally absent — prevents accidental routing through
         # _call_openai_compat, which requires it and uses the wrong SDK client class.
-        "default_model": os.environ.get("AZURE_OPENAI_DEPLOYMENT", os.environ.get("GRAPHIFY_AZURE_MODEL", "gpt-4o")),
+        "default_model": os.environ.get("AZURE_OPENAI_DEPLOYMENT", os.environ.get("CODEBASE_ENGINE_AZURE_MODEL", "gpt-4o")),
         "env_key": "AZURE_OPENAI_API_KEY",
-        "model_env_key": "GRAPHIFY_AZURE_MODEL",
+        "model_env_key": "CODEBASE_ENGINE_AZURE_MODEL",
         "pricing": {"input": 2.50, "output": 10.00},  # USD per 1M tokens (gpt-4o; may mis-estimate other deployments)
         "temperature": 0,
         "max_tokens": 16384,
     },
     "bedrock": {
         "default_model": "anthropic.claude-3-5-sonnet-20241022-v2:0",
-        "model_env_key": "GRAPHIFY_BEDROCK_MODEL",
+        "model_env_key": "CODEBASE_ENGINE_BEDROCK_MODEL",
         "pricing": {"input": 3.0, "output": 15.0},  # USD per 1M tokens
         "temperature": 0,
         "max_tokens": 16384,
@@ -169,8 +169,8 @@ BACKENDS: dict[str, dict] = {
 
 def _custom_providers_path(global_: bool = True) -> Path:
     if global_:
-        return Path.home() / ".graphify" / "providers.json"
-    return Path(".graphify") / "providers.json"
+        return Path.home() / ".codebase-engine" / "providers.json"
+    return Path(".codebase-engine") / "providers.json"
 
 
 def provider_base_url_ok(base_url: str, name: str, *, warn: bool = True) -> bool:
@@ -182,19 +182,19 @@ def provider_base_url_ok(base_url: str, name: str, *, warn: bool = True) -> bool
     legitimate on-prem corporate LLM gateways. Instead we reject non-http(s)
     schemes outright and warn loudly when the corpus would leave over plaintext
     http to a non-loopback host. The primary control against trusting injected
-    config is the GRAPHIFY_ALLOW_LOCAL_PROVIDERS gate on project-local files.
+    config is the CODEBASE_ENGINE_ALLOW_LOCAL_PROVIDERS gate on project-local files.
     """
     from urllib.parse import urlparse
     try:
         parsed = urlparse(base_url)
     except Exception:
         if warn:
-            print(f"[graphify] WARNING: provider {name!r} has an unparseable base_url; ignoring.", file=sys.stderr)
+            print(f"[codebase-engine] WARNING: provider {name!r} has an unparseable base_url; ignoring.", file=sys.stderr)
         return False
     if parsed.scheme not in ("http", "https"):
         if warn:
             print(
-                f"[graphify] WARNING: provider {name!r} base_url scheme {parsed.scheme!r} is not "
+                f"[codebase-engine] WARNING: provider {name!r} base_url scheme {parsed.scheme!r} is not "
                 "http/https; ignoring.",
                 file=sys.stderr,
             )
@@ -203,7 +203,7 @@ def provider_base_url_ok(base_url: str, name: str, *, warn: bool = True) -> bool
     is_loopback = host in ("localhost", "127.0.0.1", "::1") or host.startswith("127.")
     if warn and parsed.scheme == "http" and not is_loopback:
         print(
-            f"[graphify] WARNING: provider {name!r} sends your corpus to {host!r} over plaintext "
+            f"[codebase-engine] WARNING: provider {name!r} sends your corpus to {host!r} over plaintext "
             "http. Use https unless this is a trusted local endpoint.",
             file=sys.stderr,
         )
@@ -211,17 +211,17 @@ def provider_base_url_ok(base_url: str, name: str, *, warn: bool = True) -> bool
 
 
 def _load_custom_providers() -> dict[str, dict]:
-    # A project-local ./.graphify/providers.json travels with a cloned or shared
+    # A project-local ./.codebase-engine/providers.json travels with a cloned or shared
     # repo and defines where the corpus + API key are sent, so loading it
     # silently is a corpus/key exfiltration vector. Require an explicit opt-in;
-    # the user's own global ~/.graphify/providers.json stays trusted.
+    # the user's own global ~/.codebase-engine/providers.json stays trusted.
     local_path = _custom_providers_path(global_=False)
     global_path = _custom_providers_path(global_=True)
-    allow_local = os.environ.get("GRAPHIFY_ALLOW_LOCAL_PROVIDERS", "").strip().lower() in ("1", "true", "yes")
+    allow_local = os.environ.get("CODEBASE_ENGINE_ALLOW_LOCAL_PROVIDERS", "").strip().lower() in ("1", "true", "yes")
     if local_path.is_file() and not allow_local:
         print(
-            f"[graphify] WARNING: ignoring project-local {local_path} (custom providers control "
-            "where your corpus and API key are sent). Set GRAPHIFY_ALLOW_LOCAL_PROVIDERS=1 to load it.",
+            f"[codebase-engine] WARNING: ignoring project-local {local_path} (custom providers control "
+            "where your corpus and API key are sent). Set CODEBASE_ENGINE_ALLOW_LOCAL_PROVIDERS=1 to load it.",
             file=sys.stderr,
         )
 
@@ -251,8 +251,8 @@ BACKENDS.update(_load_custom_providers())
 
 
 def _resolve_max_tokens(default: int) -> int:
-    """Honour GRAPHIFY_MAX_OUTPUT_TOKENS env var override, else use backend default."""
-    raw = os.environ.get("GRAPHIFY_MAX_OUTPUT_TOKENS", "").strip()
+    """Honour CODEBASE_ENGINE_MAX_OUTPUT_TOKENS env var override, else use backend default."""
+    raw = os.environ.get("CODEBASE_ENGINE_MAX_OUTPUT_TOKENS", "").strip()
     if raw:
         try:
             v = int(raw)
@@ -292,10 +292,10 @@ def _model_requires_default_temperature(model: str) -> bool:
 
 
 def _resolve_temperature(default: float | None, model: str = "") -> float | None:
-    """Resolve the temperature to send, honouring GRAPHIFY_LLM_TEMPERATURE.
+    """Resolve the temperature to send, honouring CODEBASE_ENGINE_LLM_TEMPERATURE.
 
     Precedence (issue #1191):
-      1. GRAPHIFY_LLM_TEMPERATURE env var, if set:
+      1. CODEBASE_ENGINE_LLM_TEMPERATURE env var, if set:
            - a numeric value (e.g. "0", "0.2", "1") is used verbatim;
            - the literal "none"/"omit"/"default" (case-insensitive) means
              "omit the temperature parameter entirely" (-> None).
@@ -306,7 +306,7 @@ def _resolve_temperature(default: float | None, model: str = "") -> float | None
     Returns None when the temperature parameter should be omitted from the
     request; the call sites already guard `if temperature is not None`.
     """
-    raw = os.environ.get("GRAPHIFY_LLM_TEMPERATURE", "").strip()
+    raw = os.environ.get("CODEBASE_ENGINE_LLM_TEMPERATURE", "").strip()
     if raw:
         if raw.lower() in ("none", "omit", "default"):
             return None
@@ -314,7 +314,7 @@ def _resolve_temperature(default: float | None, model: str = "") -> float | None
             return float(raw)
         except ValueError:
             print(
-                f"[graphify] GRAPHIFY_LLM_TEMPERATURE={raw!r} is not a number or "
+                f"[codebase-engine] CODEBASE_ENGINE_LLM_TEMPERATURE={raw!r} is not a number or "
                 "'none'; falling back to the backend default.",
                 file=sys.stderr,
             )
@@ -324,7 +324,7 @@ def _resolve_temperature(default: float | None, model: str = "") -> float | None
 
 
 def _bedrock_inference_config(max_tokens: int, model: str = "") -> dict:
-    """Build Bedrock inferenceConfig, honouring GRAPHIFY_LLM_TEMPERATURE.
+    """Build Bedrock inferenceConfig, honouring CODEBASE_ENGINE_LLM_TEMPERATURE.
 
     Bedrock's Converse API treats `temperature` as optional; omitting it uses
     the model default. We default to 0 for deterministic extraction but let the
@@ -350,8 +350,8 @@ def _no_window_kwargs() -> dict:
 
 
 def _resolve_api_timeout(default: float = 600.0) -> float:
-    """Honour GRAPHIFY_API_TIMEOUT env var override, else use default (seconds)."""
-    raw = os.environ.get("GRAPHIFY_API_TIMEOUT", "").strip()
+    """Honour CODEBASE_ENGINE_API_TIMEOUT env var override, else use default (seconds)."""
+    raw = os.environ.get("CODEBASE_ENGINE_API_TIMEOUT", "").strip()
     if raw:
         try:
             v = float(raw)
@@ -362,7 +362,7 @@ def _resolve_api_timeout(default: float = 600.0) -> float:
     return default
 
 _EXTRACTION_SYSTEM = """\
-You are a graphify semantic extraction agent. Extract a knowledge graph fragment from the files provided.
+You are a codebase-engine semantic extraction agent. Extract a knowledge graph fragment from the files provided.
 Output ONLY valid JSON — no explanation, no markdown fences, no preamble.
 
 Rules:
@@ -592,11 +592,11 @@ def _build_image_refs(image_files: list[Path], root: Path, *, read_bytes: bool =
             try:
                 raw = p.read_bytes()
             except OSError as exc:
-                print(f"[graphify] could not read image {rel}: {exc}", file=sys.stderr)
+                print(f"[codebase-engine] could not read image {rel}: {exc}", file=sys.stderr)
                 raw = None
             if raw is not None and len(raw) > _MAX_IMAGE_BYTES:
                 print(
-                    f"[graphify] image {rel} is {len(raw) // 1024} KB, over the "
+                    f"[codebase-engine] image {rel} is {len(raw) // 1024} KB, over the "
                     f"{_MAX_IMAGE_BYTES // (1024 * 1024)} MB inline-image limit for this "
                     "backend; sending it as a reference node without inline pixels.",
                     file=sys.stderr,
@@ -619,11 +619,11 @@ def _backend_supports_vision(backend: str) -> bool:
     """Whether `backend`'s configured model can see images.
 
     Ollama is special-cased: its default model is text-only, so vision is
-    opt-in via GRAPHIFY_OLLAMA_VISION=1 once the user selects a vision model
+    opt-in via CODEBASE_ENGINE_OLLAMA_VISION=1 once the user selects a vision model
     (e.g. --model llama3.2-vision).
     """
     if backend == "ollama":
-        return os.environ.get("GRAPHIFY_OLLAMA_VISION", "").strip() == "1"
+        return os.environ.get("CODEBASE_ENGINE_OLLAMA_VISION", "").strip() == "1"
     return bool(BACKENDS.get(backend, {}).get("vision", False))
 
 
@@ -723,7 +723,7 @@ def _parse_llm_json(raw: str) -> dict:
     """
     if len(raw) > _LLM_JSON_MAX_BYTES:
         print(
-            f"[graphify] LLM response exceeds {_LLM_JSON_MAX_BYTES} bytes "
+            f"[codebase-engine] LLM response exceeds {_LLM_JSON_MAX_BYTES} bytes "
             f"({len(raw)} bytes); refusing to parse and dropping chunk.",
             file=sys.stderr,
         )
@@ -788,7 +788,7 @@ def _parse_llm_json(raw: str) -> dict:
                     except json.JSONDecodeError:
                         break
     print(
-        f"[graphify] LLM returned invalid JSON, skipping chunk "
+        f"[codebase-engine] LLM returned invalid JSON, skipping chunk "
         f"(first 200 chars: {raw[:200]!r})",
         file=sys.stderr,
     )
@@ -856,14 +856,14 @@ def _default_model_for_backend(backend: str) -> str:
 def _backend_pkg_hint(pkg: str, extra: str) -> str:
     """Package-missing message that works for the recommended `uv tool` install.
 
-    `uv tool install graphifyy` puts graphify in an isolated venv, so a plain
+    `uv tool install codebase-engine` puts codebase-engine in an isolated venv, so a plain
     `pip install <pkg>` never reaches it - the friction a user hits when a
     backend needs anthropic/openai/boto3 and the only advice was "pip install".
     Point at the extra and the uv path first, then the pip/venv fallback.
     """
     return (
         f"the '{pkg}' package is required for this backend but is not installed. "
-        f"Install it with:  uv tool install \"graphifyy[{extra}]\" --force  "
+        f"Install it with:  uv tool install \"codebase-engine[{extra}]\" --force  "
         f"(uv tool), or  pip install {pkg}  (pip/venv install)."
     )
 
@@ -891,7 +891,7 @@ def _call_openai_compat(
 
     # Local backends (ollama, llama.cpp, vLLM) routinely take >60s for a
     # single chunk on a large model — far longer than the openai SDK's
-    # default. Honour GRAPHIFY_API_TIMEOUT (seconds) for explicit override;
+    # default. Honour CODEBASE_ENGINE_API_TIMEOUT (seconds) for explicit override;
     # default to 600s, which is long enough for a 31B model on a 16k chunk
     # but still bounds runaway connections (issue #792 addendum).
     client = OpenAI(api_key=api_key, base_url=base_url, timeout=_resolve_api_timeout())
@@ -927,7 +927,7 @@ def _call_openai_compat(
     # The ollama num_ctx auto-derive is a default. A custom provider that
     # explicitly sets extra_body has opted out — respect their request shape.
     if backend == "ollama" and extra_body is None:
-        num_ctx_raw = os.environ.get("GRAPHIFY_OLLAMA_NUM_CTX", "").strip()
+        num_ctx_raw = os.environ.get("CODEBASE_ENGINE_OLLAMA_NUM_CTX", "").strip()
         # Auto-derive num_ctx from actual chunk size regardless — used as the
         # fallback and for the mismatch check below.
         estimated_input = len(user_message) // _CHARS_PER_TOKEN + 400
@@ -940,7 +940,7 @@ def _call_openai_compat(
                 # Bad env var: fall through to auto-derivation (not 131072 —
                 # hardcoding the cap is what causes OOM on constrained VRAM).
                 print(
-                    f"[graphify] GRAPHIFY_OLLAMA_NUM_CTX={num_ctx_raw!r} is not a valid integer; "
+                    f"[codebase-engine] CODEBASE_ENGINE_OLLAMA_NUM_CTX={num_ctx_raw!r} is not a valid integer; "
                     f"using auto-derived value ({auto_num_ctx}).",
                     file=sys.stderr,
                 )
@@ -950,7 +950,7 @@ def _call_openai_compat(
                 # Ollama silently truncates the prompt and returns empty responses.
                 if num_ctx < estimated_input:
                     print(
-                        f"[graphify] warning: GRAPHIFY_OLLAMA_NUM_CTX={num_ctx} is smaller than "
+                        f"[codebase-engine] warning: CODEBASE_ENGINE_OLLAMA_NUM_CTX={num_ctx} is smaller than "
                         f"the estimated chunk input (~{estimated_input} tokens). Ollama will "
                         f"silently truncate the prompt and return empty responses. "
                         f"Try --token-budget {max(1024, num_ctx // 3)} or increase NUM_CTX.",
@@ -960,7 +960,7 @@ def _call_openai_compat(
             # Estimate input tokens: user_message chars / 4 (standard BPE
             # heuristic) + 400 for the system prompt, then add output headroom.
             num_ctx = auto_num_ctx
-        keep_alive = os.environ.get("GRAPHIFY_OLLAMA_KEEP_ALIVE", "30m")
+        keep_alive = os.environ.get("CODEBASE_ENGINE_OLLAMA_KEEP_ALIVE", "30m")
         kwargs["extra_body"] = {"options": {"num_ctx": num_ctx}, "keep_alive": keep_alive}
     resp = client.chat.completions.create(**kwargs)
     if not resp.choices or resp.choices[0].message is None:
@@ -981,7 +981,7 @@ def _call_openai_compat(
     # layer bisects the chunk — same recovery as a true truncation.
     if _response_is_hollow(raw_content, result) and result["finish_reason"] != "length":
         print(
-            f"[graphify] {backend or 'backend'} returned a hollow response "
+            f"[codebase-engine] {backend or 'backend'} returned a hollow response "
             f"(content={'empty' if not (raw_content or '').strip() else 'no nodes/edges'}, "
             f"output_tokens={result['output_tokens']}); "
             "treating as truncation so adaptive retry can bisect the chunk.",
@@ -991,10 +991,10 @@ def _call_openai_compat(
     output_tokens = result["output_tokens"]
     if output_tokens < 50 and backend == "ollama":
         print(
-            "[graphify] warning: ollama returned very few tokens — likely causes: "
+            "[codebase-engine] warning: ollama returned very few tokens — likely causes: "
             "(1) VRAM pressure: check `nvidia-smi` and reduce chunk size with "
             "--token-budget (e.g. --token-budget 4096) or set "
-            "GRAPHIFY_OLLAMA_NUM_CTX to a smaller value; "
+            "CODEBASE_ENGINE_OLLAMA_NUM_CTX to a smaller value; "
             "(2) model too small for JSON instruction following — "
             "try a larger model with --model (e.g. --model qwen2.5-coder:14b).",
             file=sys.stderr,
@@ -1031,7 +1031,7 @@ def _call_claude(api_key: str, model: str, user_message: str, max_tokens: int = 
     result["finish_reason"] = "length" if resp.stop_reason == "max_tokens" else "stop"
     if _response_is_hollow(raw_content, result) and result["finish_reason"] != "length":
         print(
-            "[graphify] claude returned a hollow response; treating as "
+            "[codebase-engine] claude returned a hollow response; treating as "
             "truncation so adaptive retry can bisect the chunk.",
             file=sys.stderr,
         )
@@ -1076,7 +1076,7 @@ def _call_claude_cli(user_message: str, max_tokens: int = 8192, *, deep_mode: bo
 
     Routes through the user's Claude Code subscription auth instead of a separate
     ANTHROPIC_API_KEY. Useful for Pro/Max subscribers who don't want to provision
-    a pay-as-you-go API key just to run graphify's semantic pass.
+    a pay-as-you-go API key just to run codebase-engine's semantic pass.
 
     Images are passed by absolute path rather than inline base64: the prompt asks
     the model to open each one with its Read tool, and each containing directory
@@ -1136,11 +1136,11 @@ def _call_claude_cli(user_message: str, max_tokens: int = 8192, *, deep_mode: bo
         "--system-prompt", _extraction_system(deep=deep_mode),
     ]
     # claude-cli defaults to Opus, which is overkill for the structured-JSON
-    # extraction graphify performs. GRAPHIFY_CLAUDE_CLI_MODEL=haiku (or
+    # extraction codebase-engine performs. CODEBASE_ENGINE_CLAUDE_CLI_MODEL=haiku (or
     # sonnet, or a full model ID like claude-haiku-4-5-20251001) lets users
     # opt into a cheaper / faster model. Default behaviour unchanged when
     # the env var is unset.
-    cli_model = os.environ.get("GRAPHIFY_CLAUDE_CLI_MODEL", "").strip()
+    cli_model = os.environ.get("CODEBASE_ENGINE_CLAUDE_CLI_MODEL", "").strip()
     if cli_model:
         cli_args.extend(["--model", cli_model])
     proc = subprocess.run(
@@ -1175,7 +1175,7 @@ def _call_claude_cli(user_message: str, max_tokens: int = 8192, *, deep_mode: bo
     result["finish_reason"] = "length" if stop_reason == "max_tokens" else "stop"
     if _response_is_hollow(raw_content, result) and result["finish_reason"] != "length":
         print(
-            "[graphify] claude-cli returned a hollow response; treating as "
+            "[codebase-engine] claude-cli returned a hollow response; treating as "
             "truncation so adaptive retry can bisect the chunk.",
             file=sys.stderr,
         )
@@ -1192,7 +1192,7 @@ def _azure_client(api_key: str, endpoint: str):
             "Azure OpenAI requires the openai package. Run: pip install openai"
         ) from exc
     api_version = os.environ.get("AZURE_OPENAI_API_VERSION", "2024-12-01-preview").strip()
-    timeout_raw = os.environ.get("GRAPHIFY_API_TIMEOUT", "").strip()
+    timeout_raw = os.environ.get("CODEBASE_ENGINE_API_TIMEOUT", "").strip()
     timeout_s: float = 600.0
     if timeout_raw:
         try:
@@ -1237,7 +1237,7 @@ def _call_azure(
     result["finish_reason"] = resp.choices[0].finish_reason
     if _response_is_hollow(raw_content, result) and result["finish_reason"] != "length":
         print(
-            "[graphify] azure returned a hollow response; treating as "
+            "[codebase-engine] azure returned a hollow response; treating as "
             "truncation so adaptive retry can bisect the chunk.",
             file=sys.stderr,
         )
@@ -1252,7 +1252,7 @@ def _call_bedrock(model: str, user_message: str, max_tokens: int = 8192, *, deep
         import botocore.exceptions
     except ImportError as exc:
         raise ImportError(
-            "AWS Bedrock extraction requires boto3. Run: pip install graphifyy[bedrock]"
+            "AWS Bedrock extraction requires boto3. Run: pip install codebase-engine[bedrock]"
         ) from exc
 
     region = os.environ.get("AWS_REGION") or os.environ.get("AWS_DEFAULT_REGION") or "us-east-1"
@@ -1281,7 +1281,7 @@ def _call_bedrock(model: str, user_message: str, max_tokens: int = 8192, *, deep
     result["finish_reason"] = "length" if resp.get("stopReason") == "max_tokens" else "stop"
     if _response_is_hollow(text, result) and result["finish_reason"] != "length":
         print(
-            "[graphify] bedrock returned a hollow response; treating as "
+            "[codebase-engine] bedrock returned a hollow response; treating as "
             "truncation so adaptive retry can bisect the chunk.",
             file=sys.stderr,
         )
@@ -1332,7 +1332,7 @@ def extract_files_direct(
         ollama_url = os.environ.get("OLLAMA_BASE_URL", cfg.get("base_url", ""))
         _validate_ollama_base_url(ollama_url)
         print(
-            "[graphify] WARNING: ollama backend selected with no OLLAMA_API_KEY set; "
+            "[codebase-engine] WARNING: ollama backend selected with no OLLAMA_API_KEY set; "
             f"sending corpus to {ollama_url}. Set OLLAMA_API_KEY (any non-empty value) "
             "to suppress this warning.",
             file=sys.stderr,
@@ -1594,26 +1594,26 @@ def _extract_with_adaptive_retry(
             halves = _split_lone_slice()
             if halves is not None:
                 print(
-                    f"[graphify] slice of {unit_path(chunk[0])} exceeded context at "
+                    f"[codebase-engine] slice of {unit_path(chunk[0])} exceeded context at "
                     f"depth {_depth}; splitting the slice and retrying",
                     file=sys.stderr,
                 )
                 return _merge_two([halves[0]], [halves[1]])
             print(
-                f"[graphify] single-file chunk {unit_path(chunk[0])} exceeds model context "
+                f"[codebase-engine] single-file chunk {unit_path(chunk[0])} exceeds model context "
                 f"and cannot be split further: {exc}",
                 file=sys.stderr,
             )
             return {"nodes": [], "edges": [], "hyperedges": [], "input_tokens": 0, "output_tokens": 0, "model": model, "finish_reason": "stop"}
         if _depth >= max_depth:
             print(
-                f"[graphify] chunk of {len(chunk)} still overflows context at "
+                f"[codebase-engine] chunk of {len(chunk)} still overflows context at "
                 f"recursion depth {_depth} (max {max_depth}) — dropping",
                 file=sys.stderr,
             )
             return {"nodes": [], "edges": [], "hyperedges": [], "input_tokens": 0, "output_tokens": 0, "model": model, "finish_reason": "stop"}
         print(
-            f"[graphify] chunk of {len(chunk)} exceeded context at depth "
+            f"[codebase-engine] chunk of {len(chunk)} exceeded context at depth "
             f"{_depth} ({type(exc).__name__}); splitting in half and retrying",
             file=sys.stderr,
         )
@@ -1641,13 +1641,13 @@ def _extract_with_adaptive_retry(
         halves = _split_lone_slice()
         if halves is not None:
             print(
-                f"[graphify] slice of {unit_path(chunk[0])} truncated at depth {_depth}; "
+                f"[codebase-engine] slice of {unit_path(chunk[0])} truncated at depth {_depth}; "
                 f"splitting the slice and retrying",
                 file=sys.stderr,
             )
             return _merge_two([halves[0]], [halves[1]])
         print(
-            f"[graphify] single-file chunk {unit_path(chunk[0])} truncated at "
+            f"[codebase-engine] single-file chunk {unit_path(chunk[0])} truncated at "
             f"max_completion_tokens — partial result kept",
             file=sys.stderr,
         )
@@ -1655,14 +1655,14 @@ def _extract_with_adaptive_retry(
 
     if _depth >= max_depth:
         print(
-            f"[graphify] chunk of {len(chunk)} still truncated at recursion "
+            f"[codebase-engine] chunk of {len(chunk)} still truncated at recursion "
             f"depth {_depth} (max {max_depth}) — partial result kept",
             file=sys.stderr,
         )
         return result
 
     print(
-        f"[graphify] chunk of {len(chunk)} truncated at depth {_depth}, "
+        f"[codebase-engine] chunk of {len(chunk)} truncated at depth {_depth}, "
         f"splitting into halves of {len(chunk) // 2} and "
         f"{len(chunk) - len(chunk) // 2}",
         file=sys.stderr,
@@ -1776,11 +1776,11 @@ def extract_corpus_parallel(
     # Ollama serves one request at a time per loaded model on a single GPU.
     # Four concurrent 60k-token requests cause VRAM pressure and hollow
     # responses after 3-4 chunks (#798). Force serial unless the user opts in.
-    if backend == "ollama" and os.environ.get("GRAPHIFY_OLLAMA_PARALLEL", "").strip() != "1":
+    if backend == "ollama" and os.environ.get("CODEBASE_ENGINE_OLLAMA_PARALLEL", "").strip() != "1":
         max_concurrency = 1
     # claude-cli shells out to a Claude Code session; parallel subprocesses conflict
     # over session state. Force serial unless the user explicitly opts in.
-    if backend == "claude-cli" and os.environ.get("GRAPHIFY_CLAUDE_CLI_PARALLEL", "").strip() != "1":
+    if backend == "claude-cli" and os.environ.get("CODEBASE_ENGINE_CLAUDE_CLI_PARALLEL", "").strip() != "1":
         max_concurrency = 1
     workers = max(1, min(max_concurrency, total))
     if workers == 1:
@@ -1789,7 +1789,7 @@ def extract_corpus_parallel(
         for idx, chunk in enumerate(chunks):
             _, result, exc = _run_one(idx, chunk)
             if exc is not None:
-                print(f"[graphify] chunk {idx + 1}/{total} failed: {exc}", file=sys.stderr)
+                print(f"[codebase-engine] chunk {idx + 1}/{total} failed: {exc}", file=sys.stderr)
                 merged["failed_chunks"] += 1
                 continue
             assert result is not None
@@ -1803,7 +1803,7 @@ def extract_corpus_parallel(
                 idx, result, exc = future.result()
                 if exc is not None:
                     print(
-                        f"[graphify] chunk {idx + 1}/{total} failed: {exc}",
+                        f"[codebase-engine] chunk {idx + 1}/{total} failed: {exc}",
                         file=sys.stderr,
                     )
                     merged["failed_chunks"] += 1
@@ -1818,7 +1818,7 @@ def extract_corpus_parallel(
     # summary block makes the problem visible.
     if merged["failed_chunks"] > 0:
         print(
-            f"[graphify] WARNING: {merged['failed_chunks']}/{total} semantic chunk(s) failed"
+            f"[codebase-engine] WARNING: {merged['failed_chunks']}/{total} semantic chunk(s) failed"
             " — see errors above. Partial results returned.",
             file=sys.stderr,
         )
@@ -1843,12 +1843,12 @@ def _call_llm(
 ) -> str:
     """Send a plain-text prompt to `backend` and return the model's text reply.
 
-    Used by lightweight callers (e.g. `graphify.dedup` LLM tiebreaker) that
+    Used by lightweight callers (e.g. `codebase_engine.dedup` LLM tiebreaker) that
     don't need the full extraction prompt or JSON-shaped output. Mirrors the
     backend dispatch logic of `extract_files_direct` but skips the
     `_EXTRACTION_SYSTEM` prompt and JSON parsing.
 
-    Previously `graphify.dedup` imported a `_call_llm` symbol that did not
+    Previously `codebase_engine.dedup` imported a `_call_llm` symbol that did not
     exist in this module, so the LLM tiebreaker silently no-op'd on
     `ImportError` (F-038). Adding the function here re-enables it.
     """
@@ -2029,14 +2029,14 @@ def _validate_ollama_base_url(url: str, *, warn: bool = True) -> None:
     except Exception:
         if warn:
             print(
-                f"[graphify] WARNING: OLLAMA_BASE_URL={url!r} is not a parseable URL.",
+                f"[codebase-engine] WARNING: OLLAMA_BASE_URL={url!r} is not a parseable URL.",
                 file=sys.stderr,
             )
         return
     if parsed.scheme not in ("http", "https"):
         if warn:
             print(
-                f"[graphify] WARNING: OLLAMA_BASE_URL has unexpected scheme {parsed.scheme!r}; "
+                f"[codebase-engine] WARNING: OLLAMA_BASE_URL has unexpected scheme {parsed.scheme!r}; "
                 "expected http or https.",
                 file=sys.stderr,
             )
@@ -2051,7 +2051,7 @@ def _validate_ollama_base_url(url: str, *, warn: bool = True) -> None:
     if warn and not is_loopback:
         scheme_note = " (UNENCRYPTED)" if parsed.scheme == "http" else ""
         print(
-            f"[graphify] WARNING: OLLAMA_BASE_URL points to non-loopback host {host!r}{scheme_note}. "
+            f"[codebase-engine] WARNING: OLLAMA_BASE_URL points to non-loopback host {host!r}{scheme_note}. "
             "Your full corpus will be sent to that endpoint. "
             "Set OLLAMA_BASE_URL=http://localhost:11434/v1 to keep extraction local.",
             file=sys.stderr,
@@ -2088,10 +2088,10 @@ def detect_backend() -> str | None:
 
 
 # ── Community labeling ────────────────────────────────────────────────────────
-# When graphify runs inside an orchestrating agent (Claude Code / Gemini CLI),
+# When codebase-engine runs inside an orchestrating agent (Claude Code / Gemini CLI),
 # the agent names communities itself per skill.md Step 5 - it reads the analysis
 # file and writes 2-5 word names with its own reasoning, no API call. When
-# graphify is run as a bare CLI (``graphify extract . --backend X``), there is no
+# codebase-engine is run as a bare CLI (``codebase-engine extract . --backend X``), there is no
 # agent to do that step, so community labels stay ``Community 0/1/2...``. These
 # helpers fill that gap: ask the configured backend to name communities in ONE
 # batched call and return a complete ``{cid: name}`` map (#1097).
@@ -2200,7 +2200,7 @@ def _label_batch_with_retry(
         # case (single community or max depth) re-raise so the caller skips it.
         if len(batch_cids) <= 1 or depth >= max_depth:
             print(
-                f"[graphify label] batch of {len(batch_cids)} still unparseable "
+                f"[codebase-engine label] batch of {len(batch_cids)} still unparseable "
                 f"at depth {depth} (cids={batch_cids[:5]}"
                 f"{'...' if len(batch_cids) > 5 else ''}): {exc}",
                 file=sys.stderr,
@@ -2272,7 +2272,7 @@ def label_communities(
             if first_error is None:
                 first_error = exc
             print(
-                f"[graphify label] batch {batch_idx + 1}/{n_batches} "
+                f"[codebase-engine label] batch {batch_idx + 1}/{n_batches} "
                 f"({len(batch_cids)} communities) failed: {exc}",
                 file=sys.stderr,
             )
@@ -2305,7 +2305,7 @@ def generate_community_labels(
     if not backend:
         if not quiet:
             print(
-                "[graphify label] no LLM backend configured; keeping Community N "
+                "[codebase-engine label] no LLM backend configured; keeping Community N "
                 "placeholders. Set an API key (e.g. GOOGLE_API_KEY) or pass --backend.",
                 file=sys.stderr,
             )
@@ -2316,7 +2316,7 @@ def generate_community_labels(
     except Exception as exc:
         if not quiet:
             print(
-                f"[graphify label] warning: community labeling failed ({exc}); "
+                f"[codebase-engine label] warning: community labeling failed ({exc}); "
                 "using Community N placeholders.",
                 file=sys.stderr,
             )

@@ -10,12 +10,12 @@ VIDEO_EXTENSIONS = {'.mp4', '.mov', '.webm', '.mkv', '.avi', '.m4v', '.mp3', '.w
 URL_PREFIXES = ('http://', 'https://', 'www.')
 
 _DEFAULT_MODEL = "base"
-_TRANSCRIPTS_DIR = "graphify-out/transcripts"
+_TRANSCRIPTS_DIR = "codebase-out/transcripts"
 _FALLBACK_PROMPT = "Use proper punctuation and paragraph breaks."
 
 
 def _model_name() -> str:
-    return os.environ.get("GRAPHIFY_WHISPER_MODEL", _DEFAULT_MODEL)
+    return os.environ.get("CODEBASE_ENGINE_WHISPER_MODEL", _DEFAULT_MODEL)
 
 
 def _get_whisper():
@@ -25,7 +25,7 @@ def _get_whisper():
     except ImportError as exc:
         raise ImportError(
             "Video transcription requires faster-whisper. "
-            "Run: pip install 'graphifyy[video]'"
+            "Run: pip install 'codebase-engine[video]'"
         ) from exc
 
 
@@ -36,7 +36,7 @@ def _get_yt_dlp():
     except ImportError as exc:
         raise ImportError(
             "YouTube/URL download requires yt-dlp. "
-            "Run: pip install 'graphifyy[video]'"
+            "Run: pip install 'codebase-engine[video]'"
         ) from exc
 
 
@@ -95,13 +95,13 @@ def build_whisper_prompt(god_nodes: list[dict]) -> str:
 
     Formats the top god node labels into a topic string for Whisper.
     The coding agent (Claude Code, Codex, etc.) generates the actual one-sentence
-    domain hint from these labels and passes it via GRAPHIFY_WHISPER_PROMPT or
+    domain hint from these labels and passes it via CODEBASE_ENGINE_WHISPER_PROMPT or
     as initial_prompt — no separate API call needed here.
     """
     if not god_nodes:
         return _FALLBACK_PROMPT
 
-    override = os.environ.get("GRAPHIFY_WHISPER_PROMPT")
+    override = os.environ.get("CODEBASE_ENGINE_WHISPER_PROMPT")
     if override:
         return override
 

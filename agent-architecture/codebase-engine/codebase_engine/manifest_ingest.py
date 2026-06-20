@@ -5,7 +5,7 @@ declare a package and its dependencies. Left to the LLM document path, the same
 package gets a different file-anchored node id from its own manifest than from
 each dependent's dependency reference, so it splits into duplicate nodes. This
 module parses manifests deterministically and emits ONE canonical package node
-per package -- keyed by NAME via :func:`graphify.ids.make_id` -- plus
+per package -- keyed by NAME via :func:`codebase_engine.ids.make_id` -- plus
 ``depends_on`` edges, so a package referenced from N manifests collapses to a
 single hub node (the dependency stub and the package's own definition node share
 the canonical id and merge at build time).

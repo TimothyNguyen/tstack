@@ -9,12 +9,12 @@ import re
 import tempfile
 from pathlib import Path
 
-# Output directory name — override with GRAPHIFY_OUT env var for worktrees or
-# shared-output setups. Accepts a relative name ("graphify-out-feature") or an
-# absolute path ("/shared/graphify-out").
-_GRAPHIFY_OUT = os.environ.get("GRAPHIFY_OUT", "graphify-out")
+# Output directory name — override with CODEBASE_OUT env var for worktrees or
+# shared-output setups. Accepts a relative name ("codebase-out-feature") or an
+# absolute path ("/shared/codebase-out").
+_CODEBASE_OUT = os.environ.get("CODEBASE_OUT", "codebase-out")
 
-# AST cache entries are the output of graphify's own extractor code, so they
+# AST cache entries are the output of codebase-engine's own extractor code, so they
 # are only valid for the version that wrote them: keying purely on file
 # content means extractor fixes shipped in a new release keep serving stale
 # pre-fix results. The AST cache is therefore namespaced by package version
@@ -25,7 +25,7 @@ _GRAPHIFY_OUT = os.environ.get("GRAPHIFY_OUT", "graphify-out")
 try:
     from importlib.metadata import version as _pkg_version
 
-    _EXTRACTOR_VERSION = _pkg_version("graphifyy")
+    _EXTRACTOR_VERSION = _pkg_version("codebase-engine")
 except Exception:
     _EXTRACTOR_VERSION = "unknown"
 
@@ -34,7 +34,7 @@ _cleaned_ast_dirs: set[str] = set()
 
 
 def _cleanup_stale_ast_entries(ast_base: Path, current_dir: Path) -> None:
-    """Remove AST cache entries left behind by other graphify versions.
+    """Remove AST cache entries left behind by other codebase-engine versions.
 
     Sweeps sibling ``v*/`` directories and unversioned ``*.json`` entries
     (the pre-versioning layout) under ``cache/ast/``. Best-effort: failures
@@ -87,14 +87,14 @@ def _body_content(content: bytes) -> bytes:
 # size+mtime_ns are unchanged — same trade-off as make(1).
 # Correctness risks: `touch` causes a harmless extra re-hash; same-size edits
 # within NFS second-resolution mtime have a 1-second window (same as make).
-# Use `graphify extract --force` to bypass when needed.
+# Use `codebase-engine extract --force` to bypass when needed.
 _stat_index: dict[str, dict] = {}
 _stat_index_root: Path | None = None
 _stat_index_dirty: bool = False
 
 
 def _stat_index_file(root: Path) -> Path:
-    _out = Path(_GRAPHIFY_OUT)
+    _out = Path(_CODEBASE_OUT)
     base = _out if _out.is_absolute() else Path(root).resolve() / _out
     return base / "cache" / "stat-index.json"
 
@@ -208,14 +208,14 @@ def _relativize_source_files_in(payload: dict, root: Path) -> None:
     """Mutate ``payload`` to rewrite absolute ``source_file`` fields as
     forward-slash relative paths from ``root``.
 
-    Mirror of :func:`graphify.watch._relativize_source_files` so cached
+    Mirror of :func:`codebase_engine.watch._relativize_source_files` so cached
     extraction fragments persist in portable form (#777). Already-relative
     fields and out-of-root paths pass through unchanged.
 
     Only ``root`` is resolved — ``source_file`` itself is relativized
     symbolically so in-root symlinks keep their original name rather than
     pointing at the resolved target. Same reasoning as
-    :func:`graphify.detect._to_relative_for_storage`.
+    :func:`codebase_engine.detect._to_relative_for_storage`.
     """
     try:
         root_resolved = Path(root).resolve()
@@ -274,12 +274,12 @@ def cache_dir(root: Path = Path("."), kind: str = "ast") -> Path:
     kind is "ast" or "semantic". Separate subdirectories prevent semantic cache
     entries from overwriting AST cache entries for the same source_file (#582).
 
-    AST entries live in graphify-out/cache/ast/v{version}/ — namespaced by
-    graphify version because they depend on extractor code, not just file
-    contents. Semantic entries live unversioned in graphify-out/cache/semantic/
+    AST entries live in codebase-out/cache/ast/v{version}/ — namespaced by
+    codebase-engine version because they depend on extractor code, not just file
+    contents. Semantic entries live unversioned in codebase-out/cache/semantic/
     (re-extraction costs LLM calls).
     """
-    _out = Path(_GRAPHIFY_OUT)
+    _out = Path(_CODEBASE_OUT)
     base = _out if _out.is_absolute() else Path(root).resolve() / _out
     d = base / "cache" / kind
     if kind == "ast":
@@ -293,10 +293,10 @@ def load_cached(path: Path, root: Path = Path("."), kind: str = "ast") -> dict |
     """Return cached extraction for this file if hash matches, else None.
 
     Cache key: SHA256 of file contents.
-    Cache value: stored as graphify-out/cache/{kind}/{hash}.json (AST entries
+    Cache value: stored as codebase-out/cache/{kind}/{hash}.json (AST entries
     under the per-version subdirectory, see :func:`cache_dir`).
 
-    AST entries written by other graphify versions — including the legacy
+    AST entries written by other codebase-engine versions — including the legacy
     flat cache/ layout (pre-0.5.3) and the unversioned cache/ast/ layout —
     are deliberately not consulted: they were produced by a different
     extractor and may be stale.
@@ -324,7 +324,7 @@ def load_cached(path: Path, root: Path = Path("."), kind: str = "ast") -> dict |
 def save_cached(path: Path, result: dict, root: Path = Path("."), kind: str = "ast") -> None:
     """Save extraction result for this file.
 
-    Stores as graphify-out/cache/{kind}/{hash}.json where hash = SHA256 of current file contents.
+    Stores as codebase-out/cache/{kind}/{hash}.json where hash = SHA256 of current file contents.
     result should be a dict with 'nodes' and 'edges' lists.
 
     No-ops if `path` is not a regular file. Subagent-produced semantic fragments
@@ -378,7 +378,7 @@ def save_cached(path: Path, result: dict, root: Path = Path("."), kind: str = "a
 
 def cached_files(root: Path = Path(".")) -> set[str]:
     """Return set of file hashes that have a valid cache entry (any kind)."""
-    base = Path(root).resolve() / _GRAPHIFY_OUT / "cache"
+    base = Path(root).resolve() / _CODEBASE_OUT / "cache"
     hashes: set[str] = set()
     # Legacy flat entries
     if base.is_dir():
@@ -393,7 +393,7 @@ def cached_files(root: Path = Path(".")) -> set[str]:
 
 def clear_cache(root: Path = Path(".")) -> None:
     """Delete all cache entries (ast/, semantic/, and legacy flat entries)."""
-    base = Path(root).resolve() / _GRAPHIFY_OUT / "cache"
+    base = Path(root).resolve() / _CODEBASE_OUT / "cache"
     # Legacy flat entries
     if base.is_dir():
         for f in base.glob("*.json"):

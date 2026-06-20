@@ -158,7 +158,7 @@ def build_from_json(extraction: dict, *, directed: bool = False, root: str | Pat
                 if e.get("source") == node_id or e.get("target") == node_id
             )
             print(
-                f"[graphify] WARNING: node '{node_id}' uses field 'source' instead of "
+                f"[codebase-engine] WARNING: node '{node_id}' uses field 'source' instead of "
                 f"'source_file' — {affected_edges} edge(s) may be misrouted. "
                 f"Rename the field to 'source_file' to silence this warning.",
                 file=sys.stderr,
@@ -166,7 +166,7 @@ def build_from_json(extraction: dict, *, directed: bool = False, root: str | Pat
             node["source_file"] = node.pop("source")
         # Default missing/None file_type to "concept" so legacy graph.json
         # entries (and stub nodes preserved by `_rebuild_code` from older
-        # graphify versions that didn't always populate file_type) don't
+        # codebase-engine versions that didn't always populate file_type) don't
         # trigger spurious "invalid file_type 'None'" validator warnings (#660).
         if node.get("file_type") in (None, ""):
             node["file_type"] = "concept"
@@ -178,7 +178,7 @@ def build_from_json(extraction: dict, *, directed: bool = False, root: str | Pat
     # Dangling edges (stdlib/external imports) are expected - only warn about real schema errors.
     real_errors = [e for e in errors if "does not match any node id" not in e]
     if real_errors:
-        print(f"[graphify] Extraction warning ({len(real_errors)} issues): {real_errors[0]}", file=sys.stderr)
+        print(f"[codebase-engine] Extraction warning ({len(real_errors)} issues): {real_errors[0]}", file=sys.stderr)
     G: nx.Graph = nx.DiGraph() if directed else nx.Graph()
     for node in extraction.get("nodes", []):
         if "source_file" in node:
@@ -415,7 +415,7 @@ def deduplicate_by_label(nodes: list[dict], edges: list[dict]) -> tuple[list[dic
     if not remap:
         return nodes, edges
 
-    print(f"[graphify] Deduplicated {len(remap)} duplicate node(s) by label.", file=sys.stderr)
+    print(f"[codebase-engine] Deduplicated {len(remap)} duplicate node(s) by label.", file=sys.stderr)
     deduped_nodes = list(canonical.values())
     deduped_edges = []
     for edge in edges:
@@ -429,7 +429,7 @@ def deduplicate_by_label(nodes: list[dict], edges: list[dict]) -> tuple[list[dic
 
 def build_merge(
     new_chunks: list[dict],
-    graph_path: str | Path = "graphify-out/graph.json",
+    graph_path: str | Path = "codebase-out/graph.json",
     prune_sources: list[str] | None = None,
     *,
     directed: bool = False,
@@ -525,7 +525,7 @@ def build_merge(
         n_nodes = len(to_remove)
         if n_nodes:
             print(
-                f"[graphify] Pruned {n_nodes} node(s) from {n_files} deleted source file(s).",
+                f"[codebase-engine] Pruned {n_nodes} node(s) from {n_files} deleted source file(s).",
                 file=sys.stderr,
             )
 
@@ -536,13 +536,13 @@ def build_merge(
         if edges_to_remove:
             G.remove_edges_from(edges_to_remove)
             print(
-                f"[graphify] Pruned {len(edges_to_remove)} edge(s) from deleted source file(s).",
+                f"[codebase-engine] Pruned {len(edges_to_remove)} edge(s) from deleted source file(s).",
                 file=sys.stderr,
             )
 
         if not n_nodes and not edges_to_remove:
             print(
-                f"[graphify] {n_files} source file(s) deleted since last run — "
+                f"[codebase-engine] {n_files} source file(s) deleted since last run — "
                 f"no matching nodes or edges in graph, already clean.",
                 file=sys.stderr,
             )
@@ -554,7 +554,7 @@ def build_merge(
         new_n = G.number_of_nodes()
         if new_n < existing_n:
             raise ValueError(
-                f"graphify: build_merge would shrink graph from {existing_n} → {new_n} nodes. "
+                f"codebase-engine: build_merge would shrink graph from {existing_n} → {new_n} nodes. "
                 f"Pass prune_sources explicitly if you intend to remove nodes."
             )
 

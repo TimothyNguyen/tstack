@@ -217,7 +217,7 @@ def _download_binary(url: str, suffix: str, target_dir: Path) -> Path:
 
 def ingest(url: str, target_dir: Path, author: str | None = None, contributor: str | None = None) -> Path:
     """
-    Fetch a URL and save it into target_dir as a graphify-ready file.
+    Fetch a URL and save it into target_dir as a codebase-engine-ready file.
 
     Returns the path of the saved file.
     """
@@ -278,8 +278,8 @@ def save_query_result(
 ) -> Path:
     """Save a Q&A result as markdown so it gets extracted into the graph on next --update.
 
-    Files are stored in memory_dir (typically graphify-out/memory/) with YAML frontmatter
-    that graphify's extractor reads as node metadata. This closes the feedback loop:
+    Files are stored in memory_dir (typically codebase-out/memory/) with YAML frontmatter
+    that codebase-engine's extractor reads as node metadata. This closes the feedback loop:
     the system grows smarter from both what you add AND what you ask.
     """
     memory_dir = Path(memory_dir)
@@ -294,7 +294,7 @@ def save_query_result(
         f'type: "{query_type}"',
         f'date: "{now.isoformat()}"',
         f'question: "{_yaml_str(question)}"',
-        'contributor: "graphify"',
+        'contributor: "codebase-engine"',
     ]
     if source_nodes:
         nodes_str = ", ".join(f'"{n}"' for n in source_nodes[:10])
@@ -321,11 +321,11 @@ def save_query_result(
 
 if __name__ == "__main__":
     import argparse
-    parser = argparse.ArgumentParser(description="Fetch a URL into a graphify /raw folder")
+    parser = argparse.ArgumentParser(description="Fetch a URL into a codebase-engine /raw folder")
     parser.add_argument("url", help="URL to fetch")
     parser.add_argument("target_dir", nargs="?", default="./raw", help="Target directory (default: ./raw)")
     parser.add_argument("--author", help="Your name (stored as node metadata)")
     parser.add_argument("--contributor", help="Contributor name for team graphs")
     args = parser.parse_args()
     out = ingest(args.url, Path(args.target_dir), author=args.author, contributor=args.contributor)
-    print(f"Ready for graphify: {out}")
+    print(f"Ready for codebase-engine: {out}")

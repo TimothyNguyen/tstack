@@ -56,7 +56,7 @@ def _safe_extract(extractor: Callable, path: Path) -> dict:
         print(f"  warning: skipped {path} (recursion limit exceeded)", file=sys.stderr, flush=True)
         return {"nodes": [], "edges": [], "error": "recursion_limit_exceeded"}
     except Exception as e:
-        if os.environ.get("GRAPHIFY_DEBUG"):
+        if os.environ.get("CODEBASE_ENGINE_DEBUG"):
             import traceback
             traceback.print_exc(file=sys.stderr)
         print(f"  warning: skipped {path} ({type(e).__name__}: {e})", file=sys.stderr, flush=True)
@@ -66,7 +66,7 @@ def _safe_extract(extractor: Callable, path: Path) -> dict:
 def _make_id(*parts: str) -> str:
     r"""Build a stable node ID from one or more name parts.
 
-    Thin wrapper over :func:`graphify.ids.make_id`, the single source of truth
+    Thin wrapper over :func:`codebase_engine.ids.make_id`, the single source of truth
     shared with ``build._normalize_id`` so the two can no longer drift (#811).
     Preserves Unicode letters/digits (CJK, Cyrillic, Arabic, accented Latin,
     etc.) so non-ASCII identifiers produce distinct IDs and don't collapse to a
@@ -9678,7 +9678,7 @@ _MD_REF_DEF_RE = re.compile(r'^\s{0,3}\[[^\]]+\]:\s*<?([^\s>]+)>?')
 # Obsidian-style wikilink: [[target]] / [[target|alias]] / [[target#anchor]].
 _MD_WIKILINK_RE = re.compile(r'(?<!\!)\[\[([^\]|#]+)(?:[#|][^\]]*)?\]\]')
 
-# Extensions graphify creates document file nodes for. A link to one of these
+# Extensions codebase-engine creates document file nodes for. A link to one of these
 # resolves to that file's node; links to code/assets are skipped (left to the
 # language extractors).
 _MD_LINKABLE_EXTS = {".md", ".mdx", ".qmd", ".markdown", ".rst", ".txt"}
@@ -9881,7 +9881,7 @@ def _pascal_project_root(from_path: Path) -> Path:
 
 
 def _pascal_resolve_unit(from_path: Path, unit_name: str) -> str:
-    """Resolve a Pascal unit name to the graphify node ID of its source file.
+    """Resolve a Pascal unit name to the codebase-engine node ID of its source file.
 
     Scans all Pascal files under the project root (the highest ancestor that
     directly contains .pas/.dpr files) and returns _make_id(str(matched_path)).
@@ -10770,7 +10770,7 @@ def _check_tree_sitter_version() -> None:
         import tree_sitter as _ts
         raise RuntimeError(
             f"tree-sitter {getattr(_ts, '__version__', 'unknown')} is too old. "
-            f"graphify requires tree-sitter >= 0.23.0 (Language API v2). "
+            f"codebase-engine requires tree-sitter >= 0.23.0 (Language API v2). "
             f"Run: pip install --upgrade tree-sitter"
         )
 
@@ -12439,12 +12439,12 @@ def _extract_parallel(
     import concurrent.futures
 
     if max_workers is None:
-        # Honour GRAPHIFY_MAX_WORKERS env override; otherwise scale to the
+        # Honour CODEBASE_ENGINE_MAX_WORKERS env override; otherwise scale to the
         # full CPU. The historical `, 8)` cap was a safety bound for laptops
         # in 2023 — on a 32-thread workstation it costs a 4x slowdown
         # (issue #792). Capping at len(uncached_work) keeps small jobs
         # from spawning useless idle workers.
-        env_raw = os.environ.get("GRAPHIFY_MAX_WORKERS", "").strip()
+        env_raw = os.environ.get("CODEBASE_ENGINE_MAX_WORKERS", "").strip()
         env_cap = None
         if env_raw:
             try:
@@ -12458,7 +12458,7 @@ def _extract_parallel(
 
     # Windows ProcessPoolExecutor hard-caps at 61 workers (CPython limitation
     # tied to WaitForMultipleObjects). Clamp here so every path — auto-compute,
-    # GRAPHIFY_MAX_WORKERS, and --max-workers — stays valid on >61-core boxes
+    # CODEBASE_ENGINE_MAX_WORKERS, and --max-workers — stays valid on >61-core boxes
     # (issue #1298). Guard against 0 from an empty work list.
     if sys.platform == "win32":
         max_workers = min(max_workers, 61)
@@ -12567,13 +12567,13 @@ def extract(
 
     Args:
         paths: files to extract from
-        cache_root: explicit root for graphify-out/cache/ (overrides the
+        cache_root: explicit root for codebase-out/cache/ (overrides the
             inferred common path prefix). Pass Path('.') when running on a
-            subdirectory so the cache stays at ./graphify-out/cache/.
+            subdirectory so the cache stays at ./codebase-out/cache/.
         parallel: if True and there are >= _PARALLEL_THRESHOLD uncached files,
             use ProcessPoolExecutor for multi-core extraction.
         max_workers: max subprocess count. Defaults to cpu_count (or the
-            value of GRAPHIFY_MAX_WORKERS if set), bounded by len(uncached_work).
+            value of CODEBASE_ENGINE_MAX_WORKERS if set), bounded by len(uncached_work).
     """
     paths = [Path(p) for p in paths]
     _check_tree_sitter_version()
@@ -12925,9 +12925,9 @@ def collect_files(target: Path, *, follow_symlinks: bool = False, root: Path | N
     if target.is_file():
         return [target]
     _EXTENSIONS = set(_DISPATCH.keys())
-    from codebase_engine.detect import _is_ignored, _is_noise_dir, _load_graphifyignore
+    from codebase_engine.detect import _is_ignored, _is_noise_dir, _load_codebaseignore
     ignore_root = root if root is not None else target
-    patterns = _load_graphifyignore(ignore_root)
+    patterns = _load_codebaseignore(ignore_root)
     # Shared across all _is_ignored calls in this scan so ancestor-directory
     # results are memoised instead of re-evaluated per file.
     ignore_cache: dict[Path, bool] = {}
@@ -12977,7 +12977,7 @@ def collect_files(target: Path, *, follow_symlinks: bool = False, root: Path | N
 
 if __name__ == "__main__":
     if len(sys.argv) < 2:
-        print("Usage: python -m graphify.extract <file_or_dir> ...", file=sys.stderr)
+        print("Usage: python -m codebase_engine.extract <file_or_dir> ...", file=sys.stderr)
         sys.exit(1)
 
     paths: list[Path] = []

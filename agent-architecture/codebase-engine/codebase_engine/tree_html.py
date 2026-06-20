@@ -19,7 +19,7 @@ Tree-data shape:
       "children": [ { "name", "total_count", "children": [...] }, ... ]
     }
 
-CLI: ``graphify tree [--graph PATH] [--output HTML] [--root PATH]
+CLI: ``codebase-engine tree [--graph PATH] [--output HTML] [--root PATH]
 [--max-children N] [--label NAME]``.
 
 Implementation notes:
@@ -125,7 +125,7 @@ def build_tree(
         sym_children: List[Dict[str, Any]] = []
         for n in syms:
             label = n.get("label", n.get("id", "?"))
-            # Skip the redundant file-name node graphify emits.
+            # Skip the redundant file-name node codebase-engine emits.
             if label == src_path.name and n.get("file_type") == "code":
                 continue
             sym_children.append({
@@ -574,7 +574,7 @@ def write_tree_html(
     graph = json.loads(graph_path.read_text(encoding="utf-8"))
     tree = build_tree(graph, root=root, max_children=max_children,
                       project_label=project_label)
-    title = f"{tree['name']} — graphify tree viewer"
+    title = f"{tree['name']} — codebase-engine tree viewer"
     header = f"{tree['name']} — Knowledge Graph"
     html = emit_html(tree, title=title, header=header)
     output_path.parent.mkdir(parents=True, exist_ok=True)

@@ -5,7 +5,7 @@ and turns the `mcpServers` map into Graphify nodes and edges.
 
 Symmetry with `serve.py`: Graphify exposes itself AS an MCP server. This module
 indexes MCP servers AS a corpus type, completing the loop — an agent that runs
-graphify with `--mcp` can now query its own configured MCP layer.
+codebase-engine with `--mcp` can now query its own configured MCP layer.
 
 Entry point:
   extract_mcp_config(path: Path) -> dict[str, list[dict]]

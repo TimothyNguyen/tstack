@@ -29,7 +29,7 @@ class FileType(str, Enum):
     VIDEO = "video"
 
 
-_MANIFEST_PATH = "graphify-out/manifest.json"
+_MANIFEST_PATH = "codebase-out/manifest.json"
 
 CODE_EXTENSIONS = {'.py', '.ts', '.tsx', '.js', '.jsx', '.mjs', '.ejs', '.ets', '.go', '.rs', '.java', '.groovy', '.gradle', '.cpp', '.cc', '.cxx', '.c', '.h', '.hpp', '.rb', '.swift', '.kt', '.kts', '.cs', '.scala', '.php', '.lua', '.luau', '.toc', '.zig', '.ps1', '.psm1', '.psd1', '.ex', '.exs', '.m', '.mm', '.jl', '.vue', '.svelte', '.astro', '.dart', '.v', '.sv', '.svh', '.sql', '.r', '.f', '.F', '.f90', '.F90', '.f95', '.F95', '.f03', '.F03', '.f08', '.F08', '.pas', '.pp', '.dpr', '.dpk', '.lpr', '.inc', '.dfm', '.lfm', '.lpk', '.sh', '.bash', '.json', '.tf', '.tfvars', '.hcl', '.dm', '.dme', '.dmi', '.dmm', '.dmf', '.sln', '.slnx', '.csproj', '.fsproj', '.vbproj', '.razor', '.cshtml', '.cls', '.trigger'}
 DOC_EXTENSIONS = {'.md', '.mdx', '.qmd', '.txt', '.rst', '.html', '.yaml', '.yml'}
@@ -43,7 +43,7 @@ CORPUS_UPPER_THRESHOLD = 500_000  # words - above this, warn about token cost
 FILE_COUNT_UPPER = 500             # files - above this, warn about token cost
 
 # Resource caps for parsing untrusted office/PDF files (F2). A corpus is
-# attacker-controllable (graphify runs on cloned/shared folders), and .docx/.xlsx
+# attacker-controllable (codebase-engine runs on cloned/shared folders), and .docx/.xlsx
 # are zip+XML containers: a few-KB zip-bomb can decompress to gigabytes and
 # OOM-kill the process at load_workbook/Document time. Screen the file before any
 # parser touches it.
@@ -518,7 +518,7 @@ def xlsx_to_markdown(path: Path) -> str:
 def xlsx_extract_structure(path: Path) -> dict:
     """Extract structural nodes (sheets, named tables, column headers) from an .xlsx file.
 
-    Returns a nodes/edges dict compatible with the graphify extract pipeline.
+    Returns a nodes/edges dict compatible with the codebase-engine extract pipeline.
     Used in addition to xlsx_to_markdown so Claude sees both structure and content.
     """
     def _nid(*parts: str) -> str:
@@ -668,7 +668,7 @@ _SKIP_DIRS = {
     "site-packages", "lib64",
     ".pytest_cache", ".mypy_cache", ".ruff_cache",
     ".tox", ".eggs", "*.egg-info",
-    "graphify-out",  # never treat own output as source input (#524)
+    "codebase-out",  # never treat own output as source input (#524)
     # Coverage/test-artefact dirs — generated, never architecturally meaningful
     "coverage", "lcov-report",              # Vitest/Istanbul/nyc HTML reports (#870)
     "visual-tests", "visual-test",          # Playwright/visual-regression bundles (#869)
@@ -678,7 +678,7 @@ _SKIP_DIRS = {
     # Framework cache/build dirs — generated, never architecturally meaningful (#873)
     ".next", ".nuxt", ".turbo", ".angular",
     ".idea", ".cache", ".parcel-cache", ".svelte-kit", ".terraform", ".serverless",
-    ".graphify",  # graphify's own extraction cache — never index self-generated data
+    ".codebase-engine",  # codebase-engine's own extraction cache — never index self-generated data
     ".worktrees",  # git worktree convention (#947) — sibling checkouts, always redundant
 }
 
@@ -708,7 +708,7 @@ _VCS_MARKERS = (".git", ".hg", ".svn", "_darcs", ".fossil")
 
 
 def _parse_gitignore_line(raw: str) -> str:
-    """Parse one raw line from a .graphifyignore file per gitignore spec.
+    """Parse one raw line from a .codebaseignore file per gitignore spec.
 
     - Strip newline chars
     - Strip inline comments (whitespace + # suffix), but only when # is
@@ -744,8 +744,8 @@ def _find_vcs_root(start: Path) -> Path | None:
         current = parent
 
 
-def _load_graphifyignore(root: Path) -> list[tuple[Path, str]]:
-    """Read .graphifyignore files and return (anchor_dir, pattern) pairs.
+def _load_codebaseignore(root: Path) -> list[tuple[Path, str]]:
+    """Read .codebaseignore files and return (anchor_dir, pattern) pairs.
 
     Patterns are returned outer-first so that inner (closer) rules are
     appended last and win via last-match-wins semantics — matching gitignore
@@ -769,17 +769,17 @@ def _load_graphifyignore(root: Path) -> list[tuple[Path, str]]:
 
     patterns: list[tuple[Path, str]] = []
     for d in dirs:
-        # Merge .gitignore and .graphifyignore for this dir (#1363). Previously
-        # the presence of a .graphifyignore made graphify skip that dir's
+        # Merge .gitignore and .codebaseignore for this dir (#1363). Previously
+        # the presence of a .codebaseignore made codebase-engine skip that dir's
         # .gitignore entirely, so a file excluded only by .gitignore (e.g. a
         # neutrally-named secret like prod-dump.sql) silently got indexed into
         # the graph — whose artifacts embed file contents and are often
-        # committed. .gitignore is read first and .graphifyignore last, so
-        # .graphifyignore patterns (including `!` negations) win on conflict via
-        # last-match-wins; adding a .graphifyignore can only ever exclude MORE,
+        # committed. .gitignore is read first and .codebaseignore last, so
+        # .codebaseignore patterns (including `!` negations) win on conflict via
+        # last-match-wins; adding a .codebaseignore can only ever exclude MORE,
         # never re-include a .gitignore-excluded file (#945 kept: a project with
         # only a .gitignore still gets sensible defaults).
-        for fname in (".gitignore", ".graphifyignore"):
+        for fname in (".gitignore", ".codebaseignore"):
             ignore_file = d / fname
             if ignore_file.exists():
                 for raw in ignore_file.read_text(encoding="utf-8", errors="ignore").splitlines():
@@ -796,7 +796,7 @@ def _is_ignored(
     *,
     _cache: dict[Path, bool] | None = None,
 ) -> bool:
-    """Return True if the path should be ignored per .graphifyignore patterns.
+    """Return True if the path should be ignored per .codebaseignore patterns.
 
     Uses gitignore last-match-wins semantics: all patterns are evaluated in
     order; the final matching pattern determines the result. Negation patterns
@@ -883,12 +883,12 @@ def _is_ignored(
     return _eval(path)
 
 
-def _load_graphifyinclude(root: Path) -> list[tuple[Path, str]]:
-    """Read .graphifyinclude allowlist patterns from root and ancestors.
+def _load_codebaseinclude(root: Path) -> list[tuple[Path, str]]:
+    """Read .codebaseinclude allowlist patterns from root and ancestors.
 
     Include patterns opt matching hidden files/dirs into traversal. Sensitive
     files and hard-skipped noise directories are still excluded later.
-    Uses the same VCS-root ceiling logic as _load_graphifyignore.
+    Uses the same VCS-root ceiling logic as _load_codebaseignore.
     """
     root = root.resolve()
     ceiling = _find_vcs_root(root) or root
@@ -904,7 +904,7 @@ def _load_graphifyinclude(root: Path) -> list[tuple[Path, str]]:
 
     patterns: list[tuple[Path, str]] = []
     for d in dirs:
-        include_file = d / ".graphifyinclude"
+        include_file = d / ".codebaseinclude"
         if include_file.exists():
             for raw in include_file.read_text(encoding="utf-8", errors="ignore").splitlines():
                 line = _parse_gitignore_line(raw)
@@ -914,7 +914,7 @@ def _load_graphifyinclude(root: Path) -> list[tuple[Path, str]]:
 
 
 def _is_included(path: Path, root: Path, patterns: list[tuple[Path, str]]) -> bool:
-    """Return True if path matches any .graphifyinclude allowlist pattern."""
+    """Return True if path matches any .codebaseinclude allowlist pattern."""
     if not patterns:
         return False
 
@@ -963,7 +963,7 @@ def _is_included(path: Path, root: Path, patterns: list[tuple[Path, str]]) -> bo
 
 
 def _could_contain_included_path(path: Path, root: Path, patterns: list[tuple[Path, str]]) -> bool:
-    """Return True if a directory may contain files matched by .graphifyinclude."""
+    """Return True if a directory may contain files matched by .codebaseinclude."""
     if not patterns:
         return False
 
@@ -1028,19 +1028,19 @@ def detect(root: Path, *, follow_symlinks: bool | None = None, google_workspace:
     total_words = 0
 
     skipped_sensitive: list[str] = []
-    ignore_patterns = _load_graphifyignore(root)
+    ignore_patterns = _load_codebaseignore(root)
     ignore_cache: dict[Path, bool] = {}  # shared across all _is_ignored calls in this scan
     # CLI --exclude patterns are anchored at the scan root and appended last
-    # so they win over any .graphifyignore/.gitignore rules (#947).
+    # so they win over any .codebaseignore/.gitignore rules (#947).
     if extra_excludes:
         for pat in extra_excludes:
             line = _parse_gitignore_line(pat)
             if line:
                 ignore_patterns.append((root, line))
-    include_patterns = _load_graphifyinclude(root)
+    include_patterns = _load_codebaseinclude(root)
 
-    # Always include graphify-out/memory/ - query results filed back into the graph
-    memory_dir = root / "graphify-out" / "memory"
+    # Always include codebase-out/memory/ - query results filed back into the graph
+    memory_dir = root / "codebase-out" / "memory"
     scan_paths = [root]
     if memory_dir.exists():
         scan_paths.append(memory_dir)
@@ -1086,7 +1086,7 @@ def detect(root: Path, *, follow_symlinks: bool | None = None, google_workspace:
 
     all_files.sort(key=lambda p: str(p))
 
-    converted_dir = root / "graphify-out" / "converted"
+    converted_dir = root / "codebase-out" / "converted"
 
     for p in all_files:
         # For memory dir files, skip hidden/noise filtering
@@ -1107,7 +1107,7 @@ def detect(root: Path, *, follow_symlinks: bool | None = None, google_workspace:
                     skipped_sensitive.append(
                         str(p)
                         + " [Google Workspace shortcut skipped - pass --google-workspace "
-                        "or set GRAPHIFY_GOOGLE_WORKSPACE=1]"
+                        "or set CODEBASE_ENGINE_GOOGLE_WORKSPACE=1]"
                     )
                     continue
                 try:
@@ -1133,7 +1133,7 @@ def detect(root: Path, *, follow_symlinks: bool | None = None, google_workspace:
                     total_words += count_words(md_path)
                 else:
                     # Conversion failed (library not installed) - skip with note
-                    skipped_sensitive.append(str(p) + " [office conversion failed - pip install graphifyy[office]]")
+                    skipped_sensitive.append(str(p) + " [office conversion failed - pip install codebase-engine[office]]")
                 continue
             files[ftype].append(str(p))
             if ftype != FileType.VIDEO:
@@ -1166,7 +1166,7 @@ def detect(root: Path, *, follow_symlinks: bool | None = None, google_workspace:
         "needs_graph": needs_graph,
         "warning": warning,
         "skipped_sensitive": skipped_sensitive,
-        "graphifyignore_patterns": len(ignore_patterns),
+        "codebase-engineignore_patterns": len(ignore_patterns),
         "scan_root": str(root.resolve()),
     }
 
@@ -1198,7 +1198,7 @@ def _to_relative_for_storage(key: str, root: Path) -> str:
 
     Keys outside ``root`` (out-of-tree symlinked sources, external --include
     paths) and already-relative keys pass through unchanged — mirrors the
-    fallback in :func:`graphify.watch._relativize_source_files` so the
+    fallback in :func:`codebase_engine.watch._relativize_source_files` so the
     on-disk artifact survives the round-trip even when some paths cannot be
     portably encoded.
 
@@ -1247,7 +1247,7 @@ def load_manifest(
 
     When ``root`` is provided, stored relative keys are re-anchored against
     it so callers see absolute paths regardless of on-disk format. Legacy
-    manifests with absolute keys pass through unchanged, so a graphify-out/
+    manifests with absolute keys pass through unchanged, so a codebase-out/
     written by an older version (or by a caller that didn't supply ``root``
     to :func:`save_manifest`) remains readable.
     """
@@ -1269,10 +1269,10 @@ def save_manifest(
 ) -> None:
     """Save current file mtimes + content hashes for change detection.
 
-    kind="ast"      — written by `graphify update` (AST-only rebuild). Stamps
+    kind="ast"      — written by `codebase-engine update` (AST-only rebuild). Stamps
                       ast_hash; preserves an existing semantic_hash only when
                       the file content is unchanged (mtime + hash match).
-    kind="semantic" — written by `graphify extract` after semantic extraction.
+    kind="semantic" — written by `codebase-engine extract` after semantic extraction.
                       Stamps semantic_hash; preserves existing ast_hash.
     kind="both"     — full pipeline: stamps both hashes (default).
 
@@ -1354,11 +1354,11 @@ def detect_incremental(
 
     kind="semantic" (default for extract): a file is "changed" when its
         semantic_hash is missing or its content has changed since the last
-        semantic extraction pass. Use this for `graphify extract` so that
-        files touched by `graphify update` (AST-only) are re-extracted
+        semantic extraction pass. Use this for `codebase-engine extract` so that
+        files touched by `codebase-engine update` (AST-only) are re-extracted
         semantically.
     kind="ast": a file is "changed" when its ast_hash is missing or its
-        content has changed. Use this for `graphify update`.
+        content has changed. Use this for `codebase-engine update`.
 
     Fast path: mtime unchanged + hash matches → unchanged (free, no disk IO
     beyond stat). Slow path: mtime bumped → compare MD5 against the relevant

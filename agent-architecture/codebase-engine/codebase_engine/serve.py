@@ -37,7 +37,7 @@ def _load_graph(graph_path: str) -> nx.Graph:
         print(f"error: {exc}", file=sys.stderr)
         sys.exit(1)
     except json.JSONDecodeError as exc:
-        print(f"error: graph.json is corrupted ({exc}). Re-run /graphify to rebuild.", file=sys.stderr)
+        print(f"error: graph.json is corrupted ({exc}). Re-run /codebase-engine to rebuild.", file=sys.stderr)
         sys.exit(1)
 
 
@@ -383,7 +383,7 @@ def _subgraph_to_text(G: nx.Graph, nodes: set[str], edges: list[tuple], token_bu
         d = G.nodes[nid]
         # Every LLM-derived field passes through sanitize_label before being
         # concatenated into MCP tool output (F-010): an attacker who controls a
-        # corpus document can otherwise inject ANSI escapes, fake graphify-out
+        # corpus document can otherwise inject ANSI escapes, fake codebase-out
         # log lines, or prompt-injection markup into the model's context via
         # source_file / source_location / community.
         line = (
@@ -525,7 +525,7 @@ def _build_server(graph_path: str):
         from mcp import types
         from mcp.types import AnyUrl
     except ImportError as e:
-        raise ImportError('mcp not installed. Run: pip install "graphifyy[mcp]"') from e
+        raise ImportError('mcp not installed. Run: pip install "codebase-engine[mcp]"') from e
 
     G = _load_graph(graph_path)
     communities = _communities_from_graph(G)
@@ -565,7 +565,7 @@ def _build_server(graph_path: str):
             communities = _communities_from_graph(new_G)
             _reload_state["mtime_ns"], _reload_state["size"] = key
 
-    server = Server("graphify")
+    server = Server("codebase-engine")
 
     @server.list_tools()
     async def list_tools() -> list[types.Tool]:
@@ -693,7 +693,7 @@ def _build_server(graph_path: str):
 
     def _tool_query_graph(arguments: dict) -> str:
         import time as _time
-        from graphify import querylog
+        from codebase-engine import querylog
         question = arguments["question"]
         mode = arguments.get("mode", "bfs")
         depth = min(int(arguments.get("depth", 3)), 6)
@@ -880,7 +880,7 @@ def _build_server(graph_path: str):
     }
 
     def _load_community_labels() -> dict[int, str]:
-        labels_path = Path(graph_path).parent / ".graphify_labels.json"
+        labels_path = Path(graph_path).parent / ".codebase_labels.json"
         if labels_path.exists():
             try:
                 return {int(k): v for k, v in json.loads(labels_path.read_text(encoding="utf-8")).items()}
@@ -891,28 +891,28 @@ def _build_server(graph_path: str):
     @server.list_resources()
     async def list_resources() -> list[types.Resource]:
         return [
-            types.Resource(uri=AnyUrl("graphify://report"), name="Graph Report", description="Full GRAPH_REPORT.md", mimeType="text/markdown"),
-            types.Resource(uri=AnyUrl("graphify://stats"), name="Graph Stats", description="Node/edge/community counts and confidence breakdown", mimeType="text/plain"),
-            types.Resource(uri=AnyUrl("graphify://god-nodes"), name="God Nodes", description="Top 10 most-connected nodes", mimeType="text/plain"),
-            types.Resource(uri=AnyUrl("graphify://surprises"), name="Surprising Connections", description="Cross-community surprising connections", mimeType="text/plain"),
-            types.Resource(uri=AnyUrl("graphify://audit"), name="Confidence Audit", description="EXTRACTED/INFERRED/AMBIGUOUS edge breakdown", mimeType="text/plain"),
-            types.Resource(uri=AnyUrl("graphify://questions"), name="Suggested Questions", description="Suggested questions for this codebase", mimeType="text/plain"),
+            types.Resource(uri=AnyUrl("codebase-engine://report"), name="Graph Report", description="Full GRAPH_REPORT.md", mimeType="text/markdown"),
+            types.Resource(uri=AnyUrl("codebase-engine://stats"), name="Graph Stats", description="Node/edge/community counts and confidence breakdown", mimeType="text/plain"),
+            types.Resource(uri=AnyUrl("codebase-engine://god-nodes"), name="God Nodes", description="Top 10 most-connected nodes", mimeType="text/plain"),
+            types.Resource(uri=AnyUrl("codebase-engine://surprises"), name="Surprising Connections", description="Cross-community surprising connections", mimeType="text/plain"),
+            types.Resource(uri=AnyUrl("codebase-engine://audit"), name="Confidence Audit", description="EXTRACTED/INFERRED/AMBIGUOUS edge breakdown", mimeType="text/plain"),
+            types.Resource(uri=AnyUrl("codebase-engine://questions"), name="Suggested Questions", description="Suggested questions for this codebase", mimeType="text/plain"),
         ]
 
     @server.read_resource()
     async def read_resource(uri: AnyUrl) -> str:
         _maybe_reload()
         uri_str = str(uri)
-        if uri_str == "graphify://report":
+        if uri_str == "codebase-engine://report":
             report_path = Path(graph_path).parent / "GRAPH_REPORT.md"
             if report_path.exists():
                 return report_path.read_text(encoding="utf-8")
-            return "GRAPH_REPORT.md not found. Run graphify extract first."
-        if uri_str == "graphify://stats":
+            return "GRAPH_REPORT.md not found. Run codebase-engine extract first."
+        if uri_str == "codebase-engine://stats":
             return _tool_graph_stats({})
-        if uri_str == "graphify://god-nodes":
+        if uri_str == "codebase-engine://god-nodes":
             return _tool_god_nodes({"top_n": 10})
-        if uri_str == "graphify://surprises":
+        if uri_str == "codebase-engine://surprises":
             try:
                 from codebase_engine.analyze import surprising_connections
                 surprises = surprising_connections(G, communities, top_n=10)
@@ -924,7 +924,7 @@ def _build_server(graph_path: str):
                 return "\n".join(lines)
             except Exception as exc:
                 return f"Could not compute surprising connections: {exc}"
-        if uri_str == "graphify://audit":
+        if uri_str == "codebase-engine://audit":
             confs = [d.get("confidence", "EXTRACTED") for _, _, d in G.edges(data=True)]
             total = len(confs) or 1
             return (
@@ -933,7 +933,7 @@ def _build_server(graph_path: str):
                 f"INFERRED: {confs.count('INFERRED')} ({round(confs.count('INFERRED')/total*100)}%)\n"
                 f"AMBIGUOUS: {confs.count('AMBIGUOUS')} ({round(confs.count('AMBIGUOUS')/total*100)}%)\n"
             )
-        if uri_str == "graphify://questions":
+        if uri_str == "codebase-engine://questions":
             try:
                 from codebase_engine.analyze import suggest_questions
                 community_labels = _load_community_labels()
@@ -965,12 +965,12 @@ def _build_server(graph_path: str):
     return server
 
 
-def serve(graph_path: str = "graphify-out/graph.json") -> None:
+def serve(graph_path: str = "codebase-out/graph.json") -> None:
     """Start the MCP server over stdio (the default, per-developer transport)."""
     try:
         from mcp.server.stdio import stdio_server
     except ImportError as e:
-        raise ImportError('mcp not installed. Run: pip install "graphifyy[mcp]"') from e
+        raise ImportError('mcp not installed. Run: pip install "codebase-engine[mcp]"') from e
     import asyncio
 
     server = _build_server(graph_path)
@@ -1073,10 +1073,10 @@ def _build_http_app(
     except ImportError as e:
         raise ImportError(
             'HTTP transport needs the mcp extra (mcp + starlette + uvicorn). '
-            'Run: pip install "graphifyy[mcp]"'
+            'Run: pip install "codebase-engine[mcp]"'
         ) from e
 
-    # A blank key (e.g. --api-key "" or an empty GRAPHIFY_API_KEY) must not be
+    # A blank key (e.g. --api-key "" or an empty CODEBASE_ENGINE_API_KEY) must not be
     # mistaken for "auth on" — normalize it to None so the gate is unambiguous.
     api_key = (api_key or "").strip() or None
 
@@ -1123,7 +1123,7 @@ def _build_http_app(
 
 
 def serve_http(
-    graph_path: str = "graphify-out/graph.json",
+    graph_path: str = "codebase-out/graph.json",
     *,
     host: str = "127.0.0.1",
     port: int = 8080,
@@ -1139,7 +1139,7 @@ def serve_http(
     process can host the graph for a whole team. Clients point their IDE MCP
     config at ``http://<host>:<port><path>`` (default ``/mcp``).
 
-    ``api_key`` (or the ``GRAPHIFY_API_KEY`` env var) enables a simple header
+    ``api_key`` (or the ``CODEBASE_ENGINE_API_KEY`` env var) enables a simple header
     check (``Authorization: Bearer <key>`` or ``X-API-Key: <key>``). OAuth is a
     deliberate follow-up. Binding ``0.0.0.0`` exposes the server beyond
     localhost — set an api_key when you do.
@@ -1149,7 +1149,7 @@ def serve_http(
     except ImportError as e:
         raise ImportError(
             'HTTP transport needs the mcp extra (mcp + starlette + uvicorn). '
-            'Run: pip install "graphifyy[mcp]"'
+            'Run: pip install "codebase-engine[mcp]"'
         ) from e
 
     api_key = (api_key or "").strip() or None
@@ -1167,13 +1167,13 @@ def serve_http(
 
     auth_note = "api-key required" if api_key else "no auth (set --api-key to require one)"
     print(
-        f"graphify MCP server (streamable-http) on http://{host}:{port}{path} - {auth_note}",
+        f"codebase-engine MCP server (streamable-http) on http://{host}:{port}{path} - {auth_note}",
         file=sys.stderr,
     )
     if host in ("0.0.0.0", "::", "") and not api_key:
         print(
             f"WARNING: binding {host or '0.0.0.0'} with no api-key exposes the graph "
-            "unauthenticated on the network. Set --api-key (or GRAPHIFY_API_KEY).",
+            "unauthenticated on the network. Set --api-key (or CODEBASE_ENGINE_API_KEY).",
             file=sys.stderr,
         )
     uvicorn.run(app, host=host, port=port)
@@ -1184,14 +1184,14 @@ def _main(argv: list[str] | None = None) -> None:
     import os
 
     parser = argparse.ArgumentParser(
-        prog="python -m graphify.serve",
-        description="Serve a graphify knowledge graph over MCP (stdio or Streamable HTTP).",
+        prog="python -m codebase_engine.serve",
+        description="Serve a codebase-engine knowledge graph over MCP (stdio or Streamable HTTP).",
     )
     parser.add_argument(
         "graph_path",
         nargs="?",
         default=None,
-        help="Path to graph.json (default: graphify-out/graph.json)",
+        help="Path to graph.json (default: codebase-out/graph.json)",
     )
     parser.add_argument(
         "--graph",
@@ -1210,8 +1210,8 @@ def _main(argv: list[str] | None = None) -> None:
     parser.add_argument("--port", type=int, default=8080, help="HTTP bind port (default: 8080)")
     parser.add_argument(
         "--api-key",
-        default=os.environ.get("GRAPHIFY_API_KEY"),
-        help="Require this key on the HTTP transport (env: GRAPHIFY_API_KEY)",
+        default=os.environ.get("CODEBASE_ENGINE_API_KEY"),
+        help="Require this key on the HTTP transport (env: CODEBASE_ENGINE_API_KEY)",
     )
     parser.add_argument("--path", default="/mcp", help="HTTP mount path (default: /mcp)")
     parser.add_argument(
@@ -1231,7 +1231,7 @@ def _main(argv: list[str] | None = None) -> None:
         help="Reap stateful sessions idle this many seconds (default: 3600; 0 disables)",
     )
     args = parser.parse_args(argv)
-    graph_path = args.graph_flag or args.graph_path or "graphify-out/graph.json"
+    graph_path = args.graph_flag or args.graph_path or "codebase-out/graph.json"
 
     if args.transport == "http":
         serve_http(

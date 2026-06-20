@@ -1,4 +1,4 @@
-"""Query logging for graphify — append-only JSONL, fail-silent."""
+"""Query logging for codebase-engine — append-only JSONL, fail-silent."""
 from __future__ import annotations
 
 import json
@@ -13,16 +13,16 @@ _NODES_RE = re.compile(r"(\d+)\s+nodes?\s+found")
 
 
 def _log_path() -> Path | None:
-    if os.environ.get("GRAPHIFY_QUERY_LOG_DISABLE", "").lower() in ("1", "true", "yes"):
+    if os.environ.get("CODEBASE_ENGINE_QUERY_LOG_DISABLE", "").lower() in ("1", "true", "yes"):
         return None
-    override = os.environ.get("GRAPHIFY_QUERY_LOG", "").strip()
+    override = os.environ.get("CODEBASE_ENGINE_QUERY_LOG", "").strip()
     if override:
         return Path(override).expanduser()
-    return Path.home() / ".cache" / "graphify-queries.log"
+    return Path.home() / ".cache" / "codebase-engine-queries.log"
 
 
 def _log_responses() -> bool:
-    return os.environ.get("GRAPHIFY_QUERY_LOG_RESPONSES", "").lower() in ("1", "true", "yes")
+    return os.environ.get("CODEBASE_ENGINE_QUERY_LOG_RESPONSES", "").lower() in ("1", "true", "yes")
 
 
 def nodes_from_result(result: str) -> int | None:

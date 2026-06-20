@@ -1,4 +1,4 @@
-"""Token-reduction benchmark - measures how much context graphify saves vs naive full-corpus approach."""
+"""Token-reduction benchmark - measures how much context codebase-engine saves vs naive full-corpus approach."""
 from __future__ import annotations
 import json
 import sys
@@ -85,11 +85,11 @@ _SAMPLE_QUESTIONS = [
 
 
 def run_benchmark(
-    graph_path: str = "graphify-out/graph.json",
+    graph_path: str = "codebase-out/graph.json",
     corpus_words: int | None = None,
     questions: list[str] | None = None,
 ) -> dict:
-    """Measure token reduction: corpus tokens vs graphify query tokens.
+    """Measure token reduction: corpus tokens vs codebase-engine query tokens.
 
     Args:
         graph_path: path to the built graph
@@ -142,7 +142,7 @@ def print_benchmark(result: dict) -> None:
         print(f"Benchmark error: {result['error']}")
         return
 
-    print(f"\ngraphify token reduction benchmark")
+    print(f"\ncodebase-engine token reduction benchmark")
     print(_hr(50))
     arrow = _safe("→", "->")
     print(f"  Corpus:          {result['corpus_words']:,} words {arrow} ~{result['corpus_tokens']:,} tokens (naive)")

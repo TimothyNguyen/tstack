@@ -26,14 +26,14 @@ _MAX_TEXT_BYTES  = 10_485_760   # 10 MB hard cap for HTML / text
 # Default fallback cap. Kept as a module-level constant so the value is
 # discoverable and so existing callers/tests that reference it directly keep
 # working; the effective cap is resolved at call time by
-# ``_max_graph_file_bytes`` (which lets ``GRAPHIFY_MAX_GRAPH_BYTES`` override it).
+# ``_max_graph_file_bytes`` (which lets ``CODEBASE_ENGINE_MAX_GRAPH_BYTES`` override it).
 _MAX_GRAPH_FILE_BYTES = 512 * 1024 * 1024   # 512 MiB
 
 
 def _max_graph_file_bytes() -> int:
     """Return the graph.json size cap in bytes.
 
-    Honors the ``GRAPHIFY_MAX_GRAPH_BYTES`` environment variable so users with
+    Honors the ``CODEBASE_ENGINE_MAX_GRAPH_BYTES`` environment variable so users with
     large codebases can raise the limit without editing source. The value may
     be plain bytes (``671088640``) or carry an ``MB`` / ``GB`` suffix
     (``640MB``, ``2GB`` — case-insensitive, decimal multipliers of 1024).
@@ -43,7 +43,7 @@ def _max_graph_file_bytes() -> int:
     Read fresh on every call so the env var can be set before import and still
     take effect.
     """
-    raw = os.environ.get("GRAPHIFY_MAX_GRAPH_BYTES", "").strip()
+    raw = os.environ.get("CODEBASE_ENGINE_MAX_GRAPH_BYTES", "").strip()
     if not raw:
         return _MAX_GRAPH_FILE_BYTES
     text = raw.upper()
@@ -270,7 +270,7 @@ def safe_fetch(url: str, max_bytes: int = _MAX_FETCH_BYTES, timeout: int = 30) -
     """
     validate_url(url)
     opener = _build_opener()
-    req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0 graphify/1.0"})
+    req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0 codebase-engine/1.0"})
 
     with opener.open(req, timeout=timeout) as resp:
         # urllib raises HTTPError for non-2xx when using urlopen directly;
@@ -312,9 +312,9 @@ def safe_fetch_text(url: str, max_bytes: int = _MAX_TEXT_BYTES, timeout: int = 1
 def validate_graph_path(path: str | Path, base: Path | None = None) -> Path:
     """Resolve *path* and verify it stays inside *base*.
 
-    *base* defaults to the `graphify-out` directory relative to CWD.
+    *base* defaults to the `codebase-out` directory relative to CWD.
     Also requires the base directory to exist, so a caller cannot
-    trick graphify into reading files before any graph has been built.
+    trick codebase-engine into reading files before any graph has been built.
 
     Raises:
         ValueError  - path escapes base, or base does not exist
@@ -323,17 +323,17 @@ def validate_graph_path(path: str | Path, base: Path | None = None) -> Path:
     if base is None:
         resolved_hint = Path(path).resolve()
         for candidate in [resolved_hint, *resolved_hint.parents]:
-            if candidate.name == "graphify-out":
+            if candidate.name == "codebase-out":
                 base = candidate
                 break
         if base is None:
-            base = Path("graphify-out").resolve()
+            base = Path("codebase-out").resolve()
 
     base = base.resolve()
     if not base.exists():
         raise ValueError(
             f"Graph base directory does not exist: {base}. "
-            "Run /graphify first to build the graph."
+            "Run /codebase-engine first to build the graph."
         )
 
     resolved = Path(path).resolve()
@@ -342,7 +342,7 @@ def validate_graph_path(path: str | Path, base: Path | None = None) -> Path:
     except ValueError:
         raise ValueError(
             f"Path {path!r} escapes the allowed directory {base}. "
-            "Only paths inside graphify-out/ are permitted."
+            "Only paths inside codebase-out/ are permitted."
         )
 
     if not resolved.exists():
@@ -360,7 +360,7 @@ def check_graph_file_size_cap(path: Path) -> None:
     is expected to surface a clearer error in that case.
 
     The cap is resolved on every call via :func:`_max_graph_file_bytes`, so the
-    ``GRAPHIFY_MAX_GRAPH_BYTES`` env var can be set before import and still
+    ``CODEBASE_ENGINE_MAX_GRAPH_BYTES`` env var can be set before import and still
     apply.
 
     Raises:
@@ -375,8 +375,8 @@ def check_graph_file_size_cap(path: Path) -> None:
     if size > cap:
         raise ValueError(
             f"graph file {path} is {size:_d} bytes, exceeds {cap:_d}-byte cap\n"
-            f"(set GRAPHIFY_MAX_GRAPH_BYTES=<bytes> or "
-            f"GRAPHIFY_MAX_GRAPH_BYTES=<N>GB to raise the limit)"
+            f"(set CODEBASE_ENGINE_MAX_GRAPH_BYTES=<bytes> or "
+            f"CODEBASE_ENGINE_MAX_GRAPH_BYTES=<N>GB to raise the limit)"
         )
 
 

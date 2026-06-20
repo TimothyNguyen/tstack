@@ -333,7 +333,7 @@ def format_diagnostic_json(summary: dict[str, Any]) -> dict[str, Any]:
 def format_diagnostic_report(summary: dict[str, Any]) -> str:
     suppression = summary.get("producer_suppression", {})
     lines = [
-        "[graphify] MultiDiGraph edge-collapse diagnostic",
+        "[codebase-engine] MultiDiGraph edge-collapse diagnostic",
         f"input: {summary.get('input_path', '<in-memory>')}",
         "input_stage: provided JSON (normal graph.json is post-build)",
         f"effective_directed: {summary.get('effective_directed', '<direct-call>')}",

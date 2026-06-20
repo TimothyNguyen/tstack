@@ -360,7 +360,7 @@ def resolve_cross_file_raw_calls(
 def _bash_make_id(*parts: str) -> str:
     """Bash symbol node ID via the single shared recipe (#1378).
 
-    Previously an inline copy to dodge an import cycle; ``graphify.ids`` is
+    Previously an inline copy to dodge an import cycle; ``codebase_engine.ids`` is
     dependency-free, so it can be imported directly.
     """
     return _shared_make_id(*parts)
