@@ -93,12 +93,6 @@ test('codebase_engine env vars use CODEBASE_ENGINE_ prefix not GRAPHIFY_', () =>
 
 // ── Enterprise egress stubs ──────────────────────────────────────────────────
 
-test('detect.py stubs Google Workspace as empty frozenset (no external API egress)', () => {
-  const detect = readSrc('detect.py');
-  assert.match(detect, /GOOGLE_WORKSPACE_EXTENSIONS.*=.*frozenset\(\)/, 'Google Workspace extensions must be stubbed empty');
-  assert.match(detect, /def google_workspace_enabled.*:\n\s+return False/s, 'google_workspace_enabled must always return False');
-});
-
 test('serve.py stubs PR tools with enterprise-build error messages', () => {
   const serve = readSrc('serve.py');
   assert.match(serve, /def _tool_list_prs/, '_tool_list_prs stub missing');

@@ -8,11 +8,6 @@ Entry points:
 FileType classification is purely extension-based (no content sniffing) so it
 is deterministic and fast across large repos. The manifest tracks SHA-256 hashes
 to enable incremental re-extraction without a full re-scan.
-
-Enterprise modifications:
-  - Google Workspace support removed (no external Google API egress).
-  - GOOGLE_WORKSPACE_EXTENSIONS is an empty frozenset; google_workspace_enabled()
-    always returns False; convert_google_workspace_file() always returns None.
 """
 from __future__ import annotations
 import fnmatch
@@ -23,18 +18,6 @@ import shlex
 from concurrent.futures import ThreadPoolExecutor
 from enum import Enum
 from pathlib import Path
-
-# Google Workspace support removed (enterprise policy: no external API egress).
-GOOGLE_WORKSPACE_EXTENSIONS: frozenset[str] = frozenset()
-
-
-def google_workspace_enabled() -> bool:
-    return False
-
-
-def convert_google_workspace_file(p, converted_dir, *, xlsx_to_markdown: bool = False):
-    return None
-
 
 class FileType(str, Enum):
     CODE = "code"
@@ -431,8 +414,6 @@ def classify_file(path: Path) -> FileType | None:
             return FileType.PAPER
         return FileType.DOCUMENT
     if ext in OFFICE_EXTENSIONS:
-        return FileType.DOCUMENT
-    if ext in GOOGLE_WORKSPACE_EXTENSIONS:
         return FileType.DOCUMENT
     if ext in VIDEO_EXTENSIONS:
         return FileType.VIDEO
@@ -1028,11 +1009,10 @@ def _auto_follow_symlinks(root: Path) -> bool:
     return False
 
 
-def detect(root: Path, *, follow_symlinks: bool | None = None, google_workspace: bool | None = None, extra_excludes: list[str] | None = None) -> dict:
+def detect(root: Path, *, follow_symlinks: bool | None = None, extra_excludes: list[str] | None = None) -> dict:
     root = root.resolve()
     if follow_symlinks is None:
         follow_symlinks = _auto_follow_symlinks(root)
-    google_workspace = google_workspace_enabled() if google_workspace is None else google_workspace
     files: dict[FileType, list[str]] = {
         FileType.CODE: [],
         FileType.DOCUMENT: [],
@@ -1117,27 +1097,6 @@ def detect(root: Path, *, follow_symlinks: bool | None = None, google_workspace:
             continue
         ftype = classify_file(p)
         if ftype:
-            if p.suffix.lower() in GOOGLE_WORKSPACE_EXTENSIONS:
-                if not google_workspace:
-                    skipped_sensitive.append(
-                        str(p)
-                        + " [Google Workspace shortcut skipped - pass --google-workspace "
-                        "or set CODEBASE_ENGINE_GOOGLE_WORKSPACE=1]"
-                    )
-                    continue
-                try:
-                    md_path = convert_google_workspace_file(p, converted_dir, xlsx_to_markdown=xlsx_to_markdown)
-                except Exception as exc:
-                    skipped_sensitive.append(str(p) + f" [Google Workspace export failed: {exc}]")
-                    continue
-                if md_path:
-                    if _is_ignored(md_path, root, ignore_patterns, _cache=ignore_cache):
-                        continue
-                    files[ftype].append(str(md_path))
-                    total_words += count_words(md_path)
-                else:
-                    skipped_sensitive.append(str(p) + " [Google Workspace export produced no readable text]")
-                continue
             # Office files: convert to markdown sidecar so subagents can read them
             if p.suffix.lower() in OFFICE_EXTENSIONS:
                 md_path = convert_office_file(p, converted_dir)
@@ -1361,7 +1320,6 @@ def detect_incremental(
     manifest_path: str = _MANIFEST_PATH,
     *,
     follow_symlinks: bool | None = None,
-    google_workspace: bool | None = None,
     kind: str = "semantic",
     extra_excludes: list[str] | None = None,
 ) -> dict:
@@ -1388,7 +1346,7 @@ def detect_incremental(
     incremental runs. ``None`` (default) means auto-detect: ``True`` when ``root``
     contains at least one direct symlinked child, ``False`` otherwise.
     """
-    full = detect(root, follow_symlinks=follow_symlinks, google_workspace=google_workspace, extra_excludes=extra_excludes)
+    full = detect(root, follow_symlinks=follow_symlinks, extra_excludes=extra_excludes)
     # Pass ``root`` so a manifest written with relative keys (post-#777) is
     # re-anchored to the absolute form the rest of this function compares
     # against. Legacy absolute-keyed manifests pass through unchanged.

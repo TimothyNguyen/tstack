@@ -34,7 +34,7 @@ V8: Security helpers are not bypassable. `sanitize_label` and `check_graph_file_
 id|status|task|cites
 T1|x|Port graphify core: copy source, rename module (graphify → codebase_engine), stub egress modules|C1,C2,V5
 T2|x|Remove always_on/ directory and install injection blocks|C4
-T3|x|Stub google_workspace.py: empty frozenset, always-False enabled(), None-returning converter|C2,V4
+T3|x|Remove Google Workspace support entirely (no stubs, no extensions, no CLI flag)|C2,V4
 T4|x|Stub prs.py and wiki.py callers in serve.py with enterprise-build error strings|C2,V4
 T5|x|Complete brand rename across all .py source files (445+ graphify refs → 0)|V5
 T6|x|Port test suite (98 files) and apply same brand rename|V5

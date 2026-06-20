@@ -132,7 +132,7 @@ codebase-engine affected src/auth/middleware.py
 ## Enterprise Constraints
 
 <!-- These are hard build-time removals, not runtime flags.
-     google_workspace.py, prs.py, and wiki.py are absent from this build.
+     prs.py and wiki.py are absent from this build.
      CODEBASE_ENGINE_LLM_* env vars must point to internal endpoints only. -->
 
 - Local extraction only. No LLM backend required for AST extraction.

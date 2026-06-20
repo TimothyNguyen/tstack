@@ -2199,7 +2199,6 @@ def main() -> None:
         print("    --max-concurrency N     parallel semantic chunks in flight (default: 4; set 1 for local LLMs)")
         print("    --api-timeout S         per-request timeout in seconds for the LLM client (default: 600)")
         print("    --out DIR               output dir (default: <path>); writes <DIR>/codebase-out/")
-        print("    --google-workspace      export .gdoc/.gsheet/.gslides shortcuts via gws before extraction")
         print("    --no-cluster            skip clustering, write raw extraction only")
         print("    --postgres DSN          extract schema from a live PostgreSQL database")
         print("                            maps tables, views, functions + FK relationships;")
@@ -3986,7 +3985,6 @@ def main() -> None:
         cli_cargo: bool = False
         no_cluster = False
         dedup_llm = False
-        google_workspace = False
         global_merge = False
         global_repo_tag: str | None = None
         # Performance/tuning knobs (issue #792). None means "use library default".
@@ -4045,8 +4043,6 @@ def main() -> None:
                 no_cluster = True; i += 1
             elif a == "--dedup-llm":
                 dedup_llm = True; i += 1
-            elif a == "--google-workspace":
-                google_workspace = True; i += 1
             elif a == "--global":
                 global_merge = True; i += 1
             elif a == "--as" and i + 1 < len(args):
@@ -4141,7 +4137,6 @@ def main() -> None:
             detection = _detect_incremental(
                 target,
                 manifest_path=str(manifest_path),
-                google_workspace=google_workspace or None,
                 extra_excludes=cli_excludes or None,
             )
             files_by_type = detection.get("files", {})
@@ -4154,7 +4149,7 @@ def main() -> None:
             unchanged_total = sum(len(v) for v in detection.get("unchanged_files", {}).values())
         else:
             print(f"[codebase-engine extract] scanning {target}")
-            detection = _detect(target, google_workspace=google_workspace or None, extra_excludes=cli_excludes or None)
+            detection = _detect(target, extra_excludes=cli_excludes or None)
             files_by_type = detection.get("files", {})
             code_files = [Path(p) for p in files_by_type.get("code", [])]
             doc_files = [Path(p) for p in files_by_type.get("document", [])]
