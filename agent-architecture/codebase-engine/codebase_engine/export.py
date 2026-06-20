@@ -1,4 +1,14 @@
-# write graph to HTML, JSON, SVG, GraphML, Obsidian vault, and Neo4j Cypher
+"""export.py — serialise the in-memory NetworkX graph to every supported output format.
+
+Formats and WHY each exists:
+  graph.html  — self-contained D3 force-directed visualisation; no server needed.
+  graph.json  — canonical interchange; every other tool reads this.
+  graph.svg   — static snapshot for docs/CI diff artifacts (requires matplotlib extra).
+  graph.graphml — GraphML for Gephi/yEd power users who need attribute-rich XML.
+  obsidian/   — Markdown vault where each node becomes a note with wikilinks;
+                 lets teams browse the graph inside Obsidian without installing anything.
+  cypher.txt  — Neo4j MERGE statements for teams that want the graph in a graph DB.
+"""
 from __future__ import annotations
 import hashlib
 import html as _html

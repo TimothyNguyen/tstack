@@ -1,5 +1,14 @@
-# Video transcription using faster-whisper
-# Converts video/audio files to text transcripts for graph extraction
+"""transcribe.py — convert video/audio to text transcripts for graph extraction.
+
+Why: meeting recordings, demo videos, and podcasts contain architecture decisions
+that never make it into source code or written docs. Transcribing them with
+faster-whisper (local Whisper model, no cloud API) makes that knowledge
+indexable without sending audio to a third party.
+
+Requires the `[video]` extra (`pip install codebase-engine[video]`).
+Transcripts land in codebase-out/transcripts/ and are included in the
+next extraction run as plain-text documents.
+"""
 from __future__ import annotations
 
 import os

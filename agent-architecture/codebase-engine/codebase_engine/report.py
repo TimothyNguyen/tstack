@@ -1,4 +1,14 @@
-# generate GRAPH_REPORT.md - the human-readable audit trail
+"""report.py — generate GRAPH_REPORT.md, the human-readable audit trail.
+
+GRAPH_REPORT.md is the primary deliverable agents read after extraction:
+  - God nodes (highest-degree hubs) indicate architectural choke-points.
+  - Community names + per-community node lists map the codebase into domains.
+  - Surprising connections (cross-community edges) flag unexpected coupling.
+  - Suggested questions seed the first query session.
+
+Written to codebase-out/ alongside graph.json so it survives incremental
+updates without a re-read of the full graph by the calling agent.
+"""
 from __future__ import annotations
 import re
 from datetime import date

@@ -1,4 +1,19 @@
-# file discovery, type classification, and corpus health checks
+"""detect.py — file discovery, type classification, and corpus health checks.
+
+Entry points:
+  collect_files(root)      → list of (Path, FileType) for the whole corpus.
+  detect_incremental(root) → changed/deleted files since last manifest.
+  save_manifest / load_manifest → persist file-hash manifest to codebase-out/.
+
+FileType classification is purely extension-based (no content sniffing) so it
+is deterministic and fast across large repos. The manifest tracks SHA-256 hashes
+to enable incremental re-extraction without a full re-scan.
+
+Enterprise modifications:
+  - Google Workspace support removed (no external Google API egress).
+  - GOOGLE_WORKSPACE_EXTENSIONS is an empty frozenset; google_workspace_enabled()
+    always returns False; convert_google_workspace_file() always returns None.
+"""
 from __future__ import annotations
 import fnmatch
 import json
