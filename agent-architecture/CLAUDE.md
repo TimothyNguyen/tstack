@@ -89,6 +89,17 @@ architecture-agent-upgrade
 
 Do not reintroduce `tstack-upgrade`.
 
+## Anti-Bloat Skills
+
+Three ponytail skills live alongside the architecture skills:
+
+- `/ponytail` — lazy-senior-dev mode. Use whenever generating new code.
+- `/ponytail-review` — diff review focused exclusively on over-engineering.
+- `/ponytail-audit` — whole-repo audit for what to delete.
+
+Activate `/ponytail` at the start of any development session so the code we
+generate is never over-built.
+
 ## Before Completion
 
 Before reporting work complete, run:
