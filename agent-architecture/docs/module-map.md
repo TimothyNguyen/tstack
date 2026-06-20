@@ -77,7 +77,21 @@ This preserves the gstack ergonomics while keeping the new package generic.
 - `release`
 - `ship`
 - `codebase-understanding`
+- `codebase-engine`
 - `rtk-token-optimizer`
+- `context-save`
+- `context-restore`
+- `design-html`
+- `design-review`
+- `diagram`
+- `retro`
+- `skillify`
+- `guard`
+- `careful`
+- `claude`
+- `codex`
+- `copilot`
+- `architecture-agent-upgrade`
 
 Each skill owns its instructions, examples, policy requirements, and generated
 host variants. Skills must not assume a specific project stack unless they live

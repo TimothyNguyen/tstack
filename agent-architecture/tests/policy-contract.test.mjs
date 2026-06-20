@@ -11,7 +11,7 @@ test('enterprise default policy is repo-local and avoids global mutation', () =>
   assert.equal(policy.install.allowGlobalMutation, false);
   assert.deepEqual(policy.install.allowedTargets, [
     'agent-architecture/generated',
-    '.agent-architecture',
+    '.architecture-agent',
   ]);
 
   for (const target of policy.install.allowedTargets) {
@@ -46,7 +46,7 @@ test('enterprise default policy keeps sensitive and side-effecting tools gated',
 test('enterprise default policy redacts prompt, file, and secret-like audit fields', () => {
   assert.equal(policy.audit.enabled, true);
   assert.equal(policy.audit.destination, 'local-file');
-  assert.match(policy.audit.path, /^\.agent-architecture\//);
+  assert.match(policy.audit.path, /^\.architecture-agent\//);
 
   for (const field of ['token', 'cookie', 'apiKey', 'password', 'secret', 'credential', 'fullPrompt', 'fileContents']) {
     assert.equal(policy.audit.forbiddenFields.includes(field), true, `${field} must be forbidden from audit payloads`);

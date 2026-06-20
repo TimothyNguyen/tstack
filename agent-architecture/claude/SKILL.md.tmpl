@@ -2,7 +2,8 @@
 name: claude
 version: 0.1.0
 description: |
-  Optional Claude host bridge for profile-approved cross-agent review or execution.
+  Claude Code host adapter. Covers enterprise-safe tool use, knowledge graph
+  queries via CodeGraph MCP, and cross-agent review when profile-approved.
 allowed-tools:
   - Read
   - Grep
@@ -12,16 +13,41 @@ allowed-tools:
 
 {{PREAMBLE}}
 
-# Claude
+# Claude Host Adapter
 
-Optional Claude host bridge for profile-approved cross-agent review or execution.
+Use this adapter when targeting Claude Code as the primary agent host.
+
+## Knowledge Graph Integration (local, no egress)
+
+If `.codegraph/` exists, prefer graph queries over raw file reads for codebase questions.
+
+**In the main session** — lightweight lookups only:
+
+- Symbol lookup by name
+- Call tracing (callers / callees)
+- Impact check before editing
+
+**For broad exploration** — spawn an Explore agent. Never call explore tools
+directly in the main session; they return large source payloads that saturate context.
+
+After modifying code, let the file watcher sync the index (~1 second) before
+running follow-up queries.
+
+## Enterprise Settings
+
+```bash
+# Disable local query log if required by policy
+export GRAPHIFY_QUERY_LOG_DISABLE=1
+```
 
 ## Steps
 
 1. Confirm the user goal and scope.
-2. Read the relevant local project files.
-3. Check policy requirements before any privileged action.
-4. Produce a concise result with evidence, risks, and next actions.
+2. Check for a knowledge graph index before reading source files.
+3. Use graph queries for symbol lookup, dependency tracing, and impact analysis.
+4. Fall back to Grep + Read when index absent or query insufficient.
+5. Check policy requirements before any privileged action.
+6. Produce a concise result with evidence, risks, and next actions.
 
 {{POLICY_REQUIREMENTS}}
 

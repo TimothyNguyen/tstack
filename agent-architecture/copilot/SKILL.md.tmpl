@@ -2,7 +2,8 @@
 name: copilot
 version: 0.1.0
 description: |
-  Optional GitHub Copilot host bridge for profile-approved cross-agent review or execution.
+  GitHub Copilot host adapter. Covers knowledge graph queries via CodeGraph,
+  VS Code instructions injection, and enterprise-safe defaults.
 allowed-tools:
   - Read
   - Grep
@@ -12,18 +13,39 @@ allowed-tools:
 
 {{PREAMBLE}}
 
-# Copilot
+# Copilot Host Adapter
 
-Use this workflow only when the active profile enables Copilot as a host or
-second-opinion agent.
+Use this adapter when targeting GitHub Copilot (VS Code or GitHub.com) as the
+primary agent host.
+
+## Knowledge Graph Integration (local, no egress)
+
+When a local knowledge graph index exists (`.codegraph/` or equivalent), prefer
+graph queries over raw file reads for codebase questions.
+
+For codebase questions in Copilot Chat, query the index first via terminal,
+then bring results into the chat. Copilot Chat cannot run arbitrary Bash
+directly — graph queries must run in the terminal.
+
+## Copilot Limitations vs. Claude Code
+
+| Capability | Claude Code | Copilot Chat |
+|---|---|---|
+| Subagent extraction | Native via skill | Terminal + paste results into chat |
+| Graph query | In-session + terminal | Terminal only |
+| Tool use (Bash, Read, Grep) | Full | Limited to Copilot tools |
+| Policy enforcement | Via enterprise-default.json | Via org Copilot policy |
 
 ## Steps
 
-1. Confirm the task requires Copilot-specific review or execution.
-2. Translate the local skill goal into Copilot-compatible instructions.
-3. Preserve policy requirements, no-egress defaults, and scoped commit rules.
-4. Keep source skill files as the source of truth.
-5. Report any host limitations or unsupported tool behavior.
+1. Confirm the task requires Copilot-specific context or the user is in a
+   Copilot Chat session.
+2. Check for a knowledge graph index before reading source files.
+3. Use graph queries for codebase questions (terminal-side for Copilot).
+4. Fall back to Grep + Read when index absent.
+5. Preserve policy requirements, no-egress defaults, and scoped commit rules.
+6. Keep source skill templates as the source of truth for skill behavior.
+7. Report any host limitations or unsupported tool behavior.
 
 {{POLICY_REQUIREMENTS}}
 

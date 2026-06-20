@@ -35,6 +35,7 @@ Each skill is a top-level folder with:
 | `release` | Prepare human-approved merge/deploy handoff. | `release/SKILL.md.tmpl` |
 | `ship` | Prepare PR, merge, or release handoff. | `ship/SKILL.md.tmpl` |
 | `codebase-understanding` | Map architecture, dependencies, and implementation context. | `codebase-understanding/SKILL.md.tmpl` |
+| `codebase-engine` | Enterprise-safe AST knowledge graph — index, query, explain, path, affected. No external egress. | `codebase-engine/SKILL.md.tmpl` |
 | `rtk-token-optimizer` | Optional Rust Token Killer guidance for reducing noisy shell output. | `rtk-token-optimizer/SKILL.md.tmpl` |
 | `context-save` | Save local working context for future sessions. | `context-save/SKILL.md.tmpl` |
 | `context-restore` | Restore saved local working context. | `context-restore/SKILL.md.tmpl` |
@@ -47,6 +48,7 @@ Each skill is a top-level folder with:
 | `claude` | Optional Claude host bridge. | `claude/SKILL.md.tmpl` |
 | `codex` | Optional Codex host bridge. | `codex/SKILL.md.tmpl` |
 | `copilot` | Optional GitHub Copilot host bridge. | `copilot/SKILL.md.tmpl` |
+| `careful` | Destructive command guardrails for production and shared environments. | `careful/SKILL.md.tmpl` |
 | `architecture-agent-upgrade` | Policy-approved local upgrade workflow. | `architecture-agent-upgrade/SKILL.md.tmpl` |
 
 ## Deferred Optional Packs

@@ -18,6 +18,9 @@ support.
 | `test-free-shards` | Free test discovery, sharding, and Windows-safe curation. | `tests/test-free-shards.test.mjs` | Done |
 | `telemetry-repo-strip`, `document-skills-redaction`, `secret-sink-harness` | Secrets and telemetry do not leak. | Policy contract + forbidden-string checks in `tests/skill-generation.test.mjs` | Done |
 | `setup-*`, `uninstall`, `upgrade-*` | Install, upgrade, migration, and cleanup safety. | `tests/install-contract.test.mjs` | Done |
+| `enterprise-policy` | Policy file has correct defaults, egress disabled, repo-local install. | `tests/policy-contract.test.mjs` | Done |
+| `skill-catalog-integrity` | Catalog lists every skill folder; no orphans. | `tests/skill-catalog.test.mjs` | Done |
+| `codebase-engine-contract` | Package name, entry points, brand rename, enterprise egress stubs, skill co-location. | `tests/codebase-engine.test.mjs` | Done |
 | `host-config` | Hosts are declarative, validated, unique, and safe. | Future `tests/host-config.test.mjs` after host configs are added. | Deferred |
 | `template-context-parity`, `parity-suite` | Generated outputs are consistent across targets. | Host parity tests after Claude/Codex/Copilot/ADK generation exists. | Deferred |
 

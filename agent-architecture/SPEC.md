@@ -61,33 +61,33 @@ V24: Stack support is modular. AWS, Spring Boot, Databricks, Python, React, C#, 
 
 ## T
 id|status|task|cites
-T1|.|Inventory gstack carry-over candidates: host configs, generator, skill templates, docs, browser daemon, telemetry, update, pair-agent, cookie import|V1,V4,V14,I8
-T2|.|Create enterprise module map: core, optional-browser, optional-codebase-understanding, optional-release, disabled-public-egress|V1,V6,V11,I7
-T3|.|Define commit discipline doc with examples of allowed and disallowed commit scopes|V2
-T4|.|Extract host config model into enterprise core and add Claude, Codex, Copilot starter configs|V4,I2
-T5|.|Extract skill compiler with frontmatter transforms, path rewrites, suppressed sections, and metadata generation|V4,V13,I3
-T6|.|Create enterprise policy schema for tools, egress, approvals, install paths, audit settings, and optional modules|V5,V12,I4
-T7|.|Build local installer profile that writes only to repo-local or admin-approved user paths|V3,I5
-T8|.|Remove or stub public telemetry and Supabase sync from enterprise profile|V1,V7
-T9|.|Remove or disable public GitHub update checks from enterprise profile; document internal mirror option|V1,V8
-T10|.|Disable ngrok and remote pair-agent flows in enterprise profile; keep design notes only as future internal-tunnel option|V9
-T11|.|Disable cookie import and authenticated browser state by default; define approval and audit requirements for re-enable|V10
+T1|x|Inventory gstack carry-over candidates: host configs, generator, skill templates, docs, browser daemon, telemetry, update, pair-agent, cookie import|V1,V4,V14,I8
+T2|x|Create enterprise module map: core, optional-browser, optional-codebase-understanding, optional-release, disabled-public-egress|V1,V6,V11,I7
+T3|x|Define commit discipline doc with examples of allowed and disallowed commit scopes|V2
+T4|x|Extract host config model into enterprise core and add Claude, Codex, Copilot starter configs|V4,I2
+T5|x|Extract skill compiler with frontmatter transforms, path rewrites, suppressed sections, and metadata generation|V4,V13,I3
+T6|x|Create enterprise policy schema for tools, egress, approvals, install paths, audit settings, and optional modules|V5,V12,I4
+T7|x|Build local installer profile that writes only to repo-local or admin-approved user paths|V3,I5
+T8|x|Remove or stub public telemetry and Supabase sync from enterprise profile|V1,V7
+T9|x|Remove or disable public GitHub update checks from enterprise profile; document internal mirror option|V1,V8
+T10|x|Disable ngrok and remote pair-agent flows in enterprise profile; keep design notes only as future internal-tunnel option|V9
+T11|x|Disable cookie import and authenticated browser state by default; define approval and audit requirements for re-enable|V10
 T12|.|Keep browser daemon as optional module with local-only binding, scoped tokens, no tunnel, no cookie import default|V6,V9,V10,I7
-T13|.|Add codebase-understanding extension spec for CodeGraph or internal indexer integration|V11,I7
+T13|x|Add codebase-understanding extension spec for CodeGraph or internal indexer integration|V11,I7
 T14|.|Add audit log writer and event taxonomy for privileged action requests and decisions|V12,I6
-T15|.|Generate enterprise skills for Claude, Codex, and Copilot and verify no upstream path, telemetry, update, or tunnel references leak into generated output|V1,V4,V7,V8,V9,V13
-T16|.|Write migration guide from upstream gstack to enterprise architecture, including keep/change/drop table|V14,I8
-T17|.|Add security review checklist for new skills and optional modules|V1,V5,V12
-T18|.|Add tests for no-egress defaults, install path containment, host generation, disabled modules, and policy gates|V1,V3,V4,V5,V7,V8,V9,V10
-T19|.|Define keep/change/drop inventory specific to the target app: keep host configs and skill compiler; change review/QA/docs/security skills; drop mobile, scraping, public tunnels, telemetry, cookie import|V14,V19,V20,I8,I12
+T15|x|Generate enterprise skills for Claude, Codex, and Copilot and verify no upstream path, telemetry, update, or tunnel references leak into generated output|V1,V4,V7,V8,V9,V13
+T16|x|Write migration guide from upstream gstack to enterprise architecture, including keep/change/drop table|V14,I8
+T17|x|Add security review checklist for new skills and optional modules|V1,V5,V12
+T18|x|Add tests for no-egress defaults, install path containment, host generation, disabled modules, and policy gates|V1,V3,V4,V5,V7,V8,V9,V10
+T19|x|Define keep/change/drop inventory specific to the target app: keep host configs and skill compiler; change review/QA/docs/security skills; drop mobile, scraping, public tunnels, telemetry, cookie import|V14,V19,V20,I8,I12
 T20|.|Create optional domain skill-pack map for causal inference, experiment design, uplift modeling, campaign measurement, data governance, and model interpretation|V15,V22,V23,I9
 T21|.|Create optional stack skill-pack map for AWS, Spring Boot, Databricks, Python, React, C#, Postgres, and SQL Server|V16,V21,V24,I10
-T22|.|Design Strands/AgentCore/Google ADK adapter boundary for invoking skills and tools without making core architecture depend on those frameworks|V18,I11
-T23|.|Define AG-UI-compatible output/event contract for skill results, approval requests, tool actions, progress, and audit references|V17,I11
-T24|.|Add local skill directory layout for company teams, including versioning, ownership, review, and install rules|C11,V4,I1,I5
+T22|~|Design Strands/AgentCore/Google ADK adapter boundary for invoking skills and tools without making core architecture depend on those frameworks|V18,I11
+T23|x|Define AG-UI-compatible output/event contract for skill results, approval requests, tool actions, progress, and audit references|V17,I11
+T24|x|Add local skill directory layout for company teams, including versioning, ownership, review, and install rules|C11,V4,I1,I5
 T25|.|Add data-permission policy gates for Databricks, Postgres, SQL Server, campaign datasets, and model outputs|V21,I10
 T26|.|Add measurement-review checklist for causal inference, experiment validity, uplift modeling leakage, treatment/control balance, and campaign recommendation risk|V22,I9
-T27|.|Create top-level `agent-architecture/` package boundary and keep all migrated architecture files outside `gstack/`|C12,I13,I14,V23,V24
+T27|x|Create top-level `agent-architecture/` package boundary and keep all migrated architecture files outside `gstack/`|C12,I13,I14,V23,V24
 
 ## B
 id|date|cause|fix
