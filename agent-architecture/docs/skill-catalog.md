@@ -50,6 +50,17 @@ Each skill is a top-level folder with:
 | `careful` | Destructive command guardrails for production and shared environments. | `careful/SKILL.md.tmpl` |
 | `architecture-agent-upgrade` | Policy-approved local upgrade workflow. | `architecture-agent-upgrade/SKILL.md.tmpl` |
 
+## Anti-Bloat Skills
+
+| Skill | Purpose | Source |
+|---|---|---|
+| `ponytail` | Lazy-senior-dev mode — enforce YAGNI ladder, stdlib-first, shortest diff. | `ponytail/SKILL.md.tmpl` |
+| `ponytail-review` | Diff review for over-engineering: delete/stdlib/native/yagni/shrink tags. | `ponytail-review/SKILL.md.tmpl` |
+| `ponytail-audit` | Whole-repo audit ranked by cut size. | `ponytail-audit/SKILL.md.tmpl` |
+| `ponytail-debt` | Harvest `ponytail:` comments into a debt ledger. | `ponytail-debt/SKILL.md.tmpl` |
+| `ponytail-gain` | Scoreboard of measured ponytail impact (lines, cost, speed). | `ponytail-gain/SKILL.md.tmpl` |
+| `ponytail-help` | Quick-reference card for all ponytail modes and skills. | `ponytail-help/SKILL.md.tmpl` |
+
 ## Deferred Optional Packs
 
 These should follow the same folder pattern when added:

@@ -55,6 +55,12 @@ workflows.
 - Upgrade this skill pack: invoke `architecture-agent-upgrade`.
 - Codebase map, architecture lookup, dependency tracing, or AST graph indexing: invoke `codebase-engine`.
 - Token/cost reduction for noisy shell output: invoke `rtk-token-optimizer`.
+- Simplest/laziest solution, YAGNI enforcement: invoke `ponytail`.
+- Over-engineering diff review: invoke `ponytail-review`.
+- Whole-repo bloat audit: invoke `ponytail-audit`.
+- List deferred `ponytail:` shortcuts: invoke `ponytail-debt`.
+- Ponytail impact scoreboard: invoke `ponytail-gain`.
+- Ponytail quick reference: invoke `ponytail-help`.
 
 When a project profile installs domain or stack packs, route to those skills
 only when the user task names that domain or stack.

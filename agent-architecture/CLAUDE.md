@@ -91,11 +91,14 @@ Do not reintroduce `tstack-upgrade`.
 
 ## Anti-Bloat Skills
 
-Three ponytail skills live alongside the architecture skills:
+Six ponytail skills live alongside the architecture skills:
 
 - `/ponytail` — lazy-senior-dev mode. Use whenever generating new code.
 - `/ponytail-review` — diff review focused exclusively on over-engineering.
 - `/ponytail-audit` — whole-repo audit for what to delete.
+- `/ponytail-debt` — harvests `ponytail:` comments into a tracked debt ledger.
+- `/ponytail-gain` — scoreboard of measured impact (lines, cost, speed).
+- `/ponytail-help` — quick-reference card for all ponytail modes and skills.
 
 Activate `/ponytail` at the start of any development session so the code we
 generate is never over-built.
