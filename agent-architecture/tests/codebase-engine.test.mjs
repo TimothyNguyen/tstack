@@ -58,6 +58,31 @@ test('codebase_engine source files contain no graphify brand references', () => 
   assert.deepEqual(survivors, [], `graphify found in: ${survivors.join(', ')}`);
 });
 
+test('skill reference markdown files contain no graphify brand references', () => {
+  const skillsRoot = path.join(pkgRoot, 'codebase_engine', 'skills');
+  if (!fs.existsSync(skillsRoot)) return;
+
+  function walk(dir) {
+    const entries = fs.readdirSync(dir, { withFileTypes: true });
+    const mdFiles = [];
+    for (const e of entries) {
+      const full = path.join(dir, e.name);
+      if (e.isDirectory()) mdFiles.push(...walk(full));
+      else if (e.name.endsWith('.md')) mdFiles.push(full);
+    }
+    return mdFiles;
+  }
+
+  const survivors = [];
+  for (const file of walk(skillsRoot)) {
+    if (/graphify/i.test(fs.readFileSync(file, 'utf8'))) {
+      survivors.push(path.relative(pkgRoot, file));
+    }
+  }
+
+  assert.deepEqual(survivors, [], `graphify found in: ${survivors.join(', ')}`);
+});
+
 test('codebase_engine env vars use CODEBASE_ENGINE_ prefix not GRAPHIFY_', () => {
   const pyFiles = fs.readdirSync(srcRoot).filter((f) => f.endsWith('.py'));
   for (const file of pyFiles) {

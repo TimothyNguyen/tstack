@@ -1,4 +1,4 @@
-# graphify reference: GitHub clone and cross-repo merge
+﻿# codebase-engine reference: GitHub clone and cross-repo merge
 
 Load this when the user passed one or more `https://github.com/...` URLs, or named several local subfolders to merge into one graph.
 
@@ -6,24 +6,24 @@ Load this when the user passed one or more `https://github.com/...` URLs, or nam
 
 **Single repo:**
 ```bash
-LOCAL_PATH=$(graphify clone <github-url> [--branch <branch>])
+LOCAL_PATH=$(codebase-engine clone <github-url> [--branch <branch>])
 # Use LOCAL_PATH as the target for all subsequent steps
 ```
 
 **Multiple repos (cross-repo graph):**
 ```bash
 # Clone each repo, run the full pipeline on each, then merge
-graphify clone <url1>   # → ~/.graphify/repos/<owner1>/<repo1>
-graphify clone <url2>   # → ~/.graphify/repos/<owner2>/<repo2>
-# Run /graphify on each local path to produce their graph.json files
+codebase-engine clone <url1>   # → ~/.codebase-engine/repos/<owner1>/<repo1>
+codebase-engine clone <url2>   # → ~/.codebase-engine/repos/<owner2>/<repo2>
+# Run /codebase-engine on each local path to produce their graph.json files
 # Then merge:
 codebase-engine merge-graphs \
-  ~/.graphify/repos/<owner1>/<repo1>/codebase-out/graph.json \
-  ~/.graphify/repos/<owner2>/<repo2>/codebase-out/graph.json \
+  ~/.codebase-engine/repos/<owner1>/<repo1>/codebase-out/graph.json \
+  ~/.codebase-engine/repos/<owner2>/<repo2>/codebase-out/graph.json \
   --out codebase-out/cross-repo-graph.json
 ```
 
-Graphify clones into `~/.graphify/repos/<owner>/<repo>` and reuses existing clones on repeat runs. Each node in the merged graph carries a `repo` attribute so you can filter by origin.
+codebase-engine clones into `~/.codebase-engine/repos/<owner>/<repo>` and reuses existing clones on repeat runs. Each node in the merged graph carries a `repo` attribute so you can filter by origin.
 
 **Multiple local subfolders (monorepo or multi-service layout):**
 

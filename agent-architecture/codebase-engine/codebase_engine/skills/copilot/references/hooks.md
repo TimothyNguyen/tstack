@@ -1,6 +1,6 @@
-# graphify reference: commit hook and native CLAUDE.md integration
+﻿# codebase-engine reference: commit hook and native CLAUDE.md integration
 
-Load this when the user asked to install the post-commit hook or wire graphify into a project's CLAUDE.md.
+Load this when the user asked to install the post-commit hook or wire codebase-engine into a project's CLAUDE.md.
 
 ## For git commit hook
 
@@ -12,22 +12,22 @@ codebase-engine hook uninstall  # remove
 codebase-engine hook status     # check
 ```
 
-After every `git commit`, the hook detects which code files changed (via `git diff HEAD~1`), re-runs AST extraction on those files, and rebuilds `graph.json` and `GRAPH_REPORT.md`. Doc/image changes are ignored by the hook - run `/graphify --update` manually for those.
+After every `git commit`, the hook detects which code files changed (via `git diff HEAD~1`), re-runs AST extraction on those files, and rebuilds `graph.json` and `GRAPH_REPORT.md`. Doc/image changes are ignored by the hook - run `/codebase-engine --update` manually for those.
 
-If a post-commit hook already exists, graphify appends to it rather than replacing it.
+If a post-commit hook already exists, codebase-engine appends to it rather than replacing it.
 
 ---
 
 ## For native CLAUDE.md integration
 
-Run once per project to make graphify always-on in Claude Code sessions:
+Run once per project to make codebase-engine always-on in Claude Code sessions:
 
 ```bash
-graphify claude install
+codebase-engine claude install
 ```
 
-This writes a `## graphify` section to the local `CLAUDE.md` that instructs Claude to check the graph before answering codebase questions and rebuild it after code changes. No manual `/graphify` needed in future sessions.
+This writes a `## codebase-engine` section to the local `CLAUDE.md` that instructs Claude to check the graph before answering codebase questions and rebuild it after code changes. No manual `/codebase-engine` needed in future sessions.
 
 ```bash
-graphify claude uninstall  # remove the section
+codebase-engine claude uninstall  # remove the section
 ```

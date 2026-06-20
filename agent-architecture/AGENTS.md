@@ -106,6 +106,7 @@ Current targets include:
 - AgentCore
 - AG-UI
 - MCP
+- codebase-engine (local AST knowledge graph, no external egress)
 - CodeGraph or another codebase-understanding adapter
 
 Do not make any of these a hard dependency of the core package.

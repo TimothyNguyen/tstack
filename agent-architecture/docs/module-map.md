@@ -77,6 +77,7 @@ This preserves the gstack ergonomics while keeping the new package generic.
 - `release`
 - `ship`
 - `codebase-understanding`
+- `codebase-engine`
 - `rtk-token-optimizer`
 - `context-save`
 - `context-restore`
