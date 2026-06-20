@@ -47,6 +47,7 @@ DEFAULT_MAX_CHILDREN = 200
 
 
 def _common_root(paths: List[str]) -> str:
+    """Return the longest common directory path prefix shared by all paths."""
     if not paths:
         return ""
     parts = [Path(p).parts for p in paths if p]
@@ -62,6 +63,7 @@ def _common_root(paths: List[str]) -> str:
 
 
 def _make_truncation_leaf(extra: int) -> Dict[str, Any]:
+    """Build a placeholder leaf node indicating how many children were truncated."""
     return {"name": f"(+{extra} more)", "total_count": extra, "children": []}
 
 
@@ -100,6 +102,7 @@ def build_tree(
     dir_index[str(root_path)] = root_node
 
     def _ensure_dir(abs_path: Path) -> Dict[str, Any]:
+        """Return or create the tree node for an absolute directory path."""
         key = str(abs_path)
         if key in dir_index:
             return dir_index[key]
@@ -152,6 +155,7 @@ def build_tree(
 
     # Sort each dir's children + propagate total_count up.
     def _finalise(d: Dict[str, Any]) -> int:
+        """Sort a tree node's children and propagate total_count upward; returns total."""
         kids = d.get("children") or []
         kids.sort(key=lambda c: (
             0 if (c.get("children") and len(c["children"]) > 0) else 1,
@@ -547,6 +551,7 @@ def emit_html(
     svg_width: int = 6000,
     svg_height: int = 8000,
 ) -> str:
+    """Render a tree dict to a self-contained D3 collapsible-tree HTML string."""
     # Escape </script> sequences so embedded JSON cannot break out of the
     # <script> tag, and HTML-escape values that land in <title>/<h1>.
     data_json = json.dumps(tree, ensure_ascii=True, separators=(",", ":")).replace("</", "<\\/")
@@ -569,6 +574,7 @@ def write_tree_html(
     # kept for CLI compatibility with the older signature; ignored now
     top_k_edges: int = 0,
 ) -> Path:
+    """Load graph.json from `graph_path`, build a file tree, write D3 HTML to `output_path`."""
     from codebase_engine.security import check_graph_file_size_cap
     check_graph_file_size_cap(graph_path)
     graph = json.loads(graph_path.read_text(encoding="utf-8"))

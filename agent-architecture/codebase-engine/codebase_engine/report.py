@@ -1,4 +1,14 @@
-# generate GRAPH_REPORT.md - the human-readable audit trail
+"""report.py — generate GRAPH_REPORT.md, the human-readable audit trail.
+
+GRAPH_REPORT.md is the primary deliverable agents read after extraction:
+  - God nodes (highest-degree hubs) indicate architectural choke-points.
+  - Community names + per-community node lists map the codebase into domains.
+  - Surprising connections (cross-community edges) flag unexpected coupling.
+  - Suggested questions seed the first query session.
+
+Written to codebase-out/ alongside graph.json so it survives incremental
+updates without a re-read of the full graph by the calling agent.
+"""
 from __future__ import annotations
 import re
 from datetime import date
@@ -26,6 +36,13 @@ def generate(
     min_community_size: int = 3,
     built_at_commit: str | None = None,
 ) -> str:
+    """Render GRAPH_REPORT.md as a Markdown string.
+
+    Sections: corpus check, summary stats, graph freshness, community navigation
+    wikilinks, god nodes, surprising connections, import cycles, hyperedges,
+    per-community node lists, ambiguous edges, knowledge gaps, suggested questions.
+    Communities with fewer than min_community_size real nodes are omitted.
+    """
     today = date.today().isoformat()
 
     # JSON deserialization produces string keys; normalize to int so .get(cid) works.

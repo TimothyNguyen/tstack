@@ -1,3 +1,7 @@
+# pg_introspect.py — PostgreSQL schema introspection via psycopg3.
+# Reconstructs CREATE TABLE / CREATE INDEX DDL from information_schema and
+# pg_indexes, then feeds it into extract_sql() so the schema is part of the
+# knowledge graph without requiring source SQL migration files to be present.
 from __future__ import annotations
 from pathlib import Path
 from codebase_engine.extract import extract_sql

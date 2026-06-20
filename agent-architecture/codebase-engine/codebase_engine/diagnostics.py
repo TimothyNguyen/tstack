@@ -17,6 +17,7 @@ _TYPE_TUPLE_RE = re.compile(r"set\[tuple\[(?P<inside>[^\]]+)\]\]")
 
 
 def _safe_text(value: Any) -> str:
+    """Coerce any value to a plain string, JSON-serialising complex types."""
     if value is None:
         return ""
     if isinstance(value, (str, int, float, bool)):
@@ -25,6 +26,7 @@ def _safe_text(value: Any) -> str:
 
 
 def _edge_list(extraction: dict[str, Any]) -> list[Any]:
+    """Return the edges list from an extraction dict, accepting both 'edges' and 'links' keys."""
     edges = extraction.get("edges")
     if edges is None:
         edges = extraction.get("links")
@@ -32,6 +34,7 @@ def _edge_list(extraction: dict[str, Any]) -> list[Any]:
 
 
 def _node_ids(extraction: dict[str, Any]) -> set[str]:
+    """Return the set of non-null node ID strings from an extraction dict."""
     nodes = extraction.get("nodes", [])
     if not isinstance(nodes, list):
         return set()
@@ -43,6 +46,11 @@ def _node_ids(extraction: dict[str, Any]) -> set[str]:
 
 
 def _canonical_edge(edge: Any) -> dict[str, str]:
+    """Normalise an edge dict to a canonical form with all required string fields.
+
+    Accepts 'from'/'to' aliases for 'source'/'target' and coerces all fields to strings.
+    Non-object edges get an '_invalid' marker so callers can filter them.
+    """
     if not isinstance(edge, dict):
         return {
             "source": "",
@@ -69,6 +77,7 @@ def _canonical_edge(edge: Any) -> dict[str, str]:
 
 
 def _exact_signature(edge: Any) -> str:
+    """Return a deterministic JSON signature for an edge, normalising from/to → source/target."""
     if not isinstance(edge, dict):
         return "<non-object>"
     normalized = dict(edge)
@@ -88,6 +97,7 @@ def _exact_signature(edge: Any) -> str:
 
 
 def _count_extra(counter: Counter[Any]) -> int:
+    """Count total duplicate occurrences across all counter keys (sum of count-1 for count>1)."""
     return sum(count - 1 for count in counter.values() if count > 1)
 
 
@@ -97,6 +107,11 @@ def _variant_group_count(
     *,
     relation_sensitive: bool = False,
 ) -> int:
+    """Count source/target pairs where `field` takes more than one distinct value.
+
+    With relation_sensitive=True, groups edges by relation first — so the same
+    source/target pair with two different relations counts as two separate groups.
+    """
     groups = 0
     for edges in grouped_edges.values():
         if relation_sensitive:
@@ -110,6 +125,7 @@ def _variant_group_count(
 
 
 def _tuple_arity_from_annotation(line: str) -> int:
+    """Parse 'tuple[T, ...]' type annotation on a line and return the element count."""
     match = _TYPE_TUPLE_RE.search(line)
     if not match:
         return 0

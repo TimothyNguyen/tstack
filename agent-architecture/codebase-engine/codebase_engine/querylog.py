@@ -13,6 +13,7 @@ _NODES_RE = re.compile(r"(\d+)\s+nodes?\s+found")
 
 
 def _log_path() -> Path | None:
+    """Return the JSONL log file path, or None if logging is disabled."""
     if os.environ.get("CODEBASE_ENGINE_QUERY_LOG_DISABLE", "").lower() in ("1", "true", "yes"):
         return None
     override = os.environ.get("CODEBASE_ENGINE_QUERY_LOG", "").strip()
@@ -22,10 +23,12 @@ def _log_path() -> Path | None:
 
 
 def _log_responses() -> bool:
+    """Return True if full response text should be included in log records."""
     return os.environ.get("CODEBASE_ENGINE_QUERY_LOG_RESPONSES", "").lower() in ("1", "true", "yes")
 
 
 def nodes_from_result(result: str) -> int | None:
+    """Parse 'N nodes found' from a result string; returns None if not present."""
     m = _NODES_RE.search(result or "")
     return int(m.group(1)) if m else None
 

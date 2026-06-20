@@ -94,12 +94,19 @@ _stat_index_dirty: bool = False
 
 
 def _stat_index_file(root: Path) -> Path:
+    """Return the path to stat-index.json relative to codebase-out/cache/."""
     _out = Path(_CODEBASE_OUT)
     base = _out if _out.is_absolute() else Path(root).resolve() / _out
     return base / "cache" / "stat-index.json"
 
 
 def _ensure_stat_index(root: Path) -> None:
+    """Load stat-index.json into the in-process cache on first access.
+
+    Registers _flush_stat_index via atexit so the index is written back
+    exactly once when the process exits, avoiding repeated disk writes during
+    a multi-file extraction run.
+    """
     global _stat_index, _stat_index_root, _stat_index_dirty
     if _stat_index_root is not None:
         return
@@ -116,6 +123,11 @@ def _ensure_stat_index(root: Path) -> None:
 
 
 def _flush_stat_index() -> None:
+    """Atomically write the in-process stat-index back to disk if it has been modified.
+
+    Uses a temp-file + os.replace for crash-safety — a partial write never
+    corrupts the existing index.
+    """
     global _stat_index_dirty, _stat_index_root
     if not _stat_index_dirty or _stat_index_root is None:
         return

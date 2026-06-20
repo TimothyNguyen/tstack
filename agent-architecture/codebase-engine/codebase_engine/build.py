@@ -489,6 +489,7 @@ def build_merge(
                 new_sources.add(norm)
     if new_sources:
         def _kept(item: dict) -> bool:
+            """Return True if the item's source_file is NOT in the set of newly-extracted files."""
             sf = item.get("source_file")
             return sf not in new_sources and _norm_source_file(sf, _replace_root) not in new_sources
         existing_nodes = [n for n in existing_nodes if _kept(n)]

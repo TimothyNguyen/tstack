@@ -179,6 +179,7 @@ class _SSRFGuardedHTTPConnection(http.client.HTTPConnection):
     exact validated IP (no second resolution = no DNS-rebind TOCTOU)."""
 
     def connect(self) -> None:
+        """Resolve hostname, validate against SSRF blocklist, then open TCP socket."""
         family, ip = _resolve_and_validate(self.host, self.port)
         self.sock = socket.create_connection(
             (ip, self.port),
@@ -198,6 +199,7 @@ class _SSRFGuardedHTTPSConnection(http.client.HTTPSConnection):
     """
 
     def connect(self) -> None:
+        """Resolve + validate hostname, open TCP socket, then wrap with TLS using original hostname for SNI."""
         family, ip = _resolve_and_validate(self.host, self.port)
         sock = socket.create_connection(
             (ip, self.port),
@@ -215,6 +217,7 @@ class _SSRFGuardedHTTPHandler(urllib.request.HTTPHandler):
     """urllib handler that routes http:// through _SSRFGuardedHTTPConnection."""
 
     def http_open(self, req):
+        """Open an HTTP connection via the SSRF-guarded handler."""
         return self.do_open(_SSRFGuardedHTTPConnection, req)
 
 
@@ -222,6 +225,7 @@ class _SSRFGuardedHTTPSHandler(urllib.request.HTTPSHandler):
     """urllib handler that routes https:// through _SSRFGuardedHTTPSConnection."""
 
     def https_open(self, req):
+        """Open an HTTPS connection via the SSRF-guarded handler."""
         return self.do_open(_SSRFGuardedHTTPSConnection, req)
 
 
@@ -233,14 +237,18 @@ class _NoFileRedirectHandler(urllib.request.HTTPRedirectHandler):
     """
 
     def redirect_request(self, req, fp, code, msg, headers, newurl):
+        """Validate redirect target URL before following; raises ValueError on bad schemes."""
         validate_url(newurl)          # raises ValueError if scheme is wrong
         return super().redirect_request(req, fp, code, msg, headers, newurl)
 
 
 def _build_opener() -> urllib.request.OpenerDirector:
-    # build_opener replaces the default HTTP(S)Handlers with our SSRF-guarded
-    # subclasses, so every connection resolves+validates DNS once and connects
-    # to that exact IP. Thread-safe: no process-global state is mutated.
+    """Build a urllib OpenerDirector that routes all HTTP(S) through SSRF-guarded handlers.
+
+    Each connection resolves DNS once, validates the resolved IP against the private-range
+    blocklist, then connects to that exact IP — eliminating DNS-rebind TOCTOU windows.
+    Thread-safe: no process-global state is mutated.
+    """
     return urllib.request.build_opener(
         _SSRFGuardedHTTPHandler,
         _SSRFGuardedHTTPSHandler,

@@ -1,4 +1,14 @@
-# file discovery, type classification, and corpus health checks
+"""detect.py — file discovery, type classification, and corpus health checks.
+
+Entry points:
+  collect_files(root)      → list of (Path, FileType) for the whole corpus.
+  detect_incremental(root) → changed/deleted files since last manifest.
+  save_manifest / load_manifest → persist file-hash manifest to codebase-out/.
+
+FileType classification is purely extension-based (no content sniffing) so it
+is deterministic and fast across large repos. The manifest tracks SHA-256 hashes
+to enable incremental re-extraction without a full re-scan.
+"""
 from __future__ import annotations
 import fnmatch
 import json
@@ -8,18 +18,6 @@ import shlex
 from concurrent.futures import ThreadPoolExecutor
 from enum import Enum
 from pathlib import Path
-
-# Google Workspace support removed (enterprise policy: no external API egress).
-GOOGLE_WORKSPACE_EXTENSIONS: frozenset[str] = frozenset()
-
-
-def google_workspace_enabled() -> bool:
-    return False
-
-
-def convert_google_workspace_file(p, converted_dir, *, xlsx_to_markdown: bool = False):
-    return None
-
 
 class FileType(str, Enum):
     CODE = "code"
@@ -388,6 +386,12 @@ def _shebang_file_type(path: Path) -> FileType | None:
 
 
 def classify_file(path: Path) -> FileType | None:
+    """Return the FileType for a path based on its extension, or None to skip.
+
+    Package manifests are classified as CODE so they go through deterministic
+    AST extraction rather than LLM document extraction — this avoids producing
+    duplicate file-anchored nodes for the same manifest.
+    """
     # Package manifests (apm.yml, pyproject.toml, go.mod, pom.xml) are parsed
     # deterministically, so route them to the AST path (CODE) rather than the LLM
     # document path — otherwise apm.yml (a .yml "document") would be LLM-extracted
@@ -416,8 +420,6 @@ def classify_file(path: Path) -> FileType | None:
             return FileType.PAPER
         return FileType.DOCUMENT
     if ext in OFFICE_EXTENSIONS:
-        return FileType.DOCUMENT
-    if ext in GOOGLE_WORKSPACE_EXTENSIONS:
         return FileType.DOCUMENT
     if ext in VIDEO_EXTENSIONS:
         return FileType.VIDEO
@@ -522,6 +524,7 @@ def xlsx_extract_structure(path: Path) -> dict:
     Used in addition to xlsx_to_markdown so Claude sees both structure and content.
     """
     def _nid(*parts: str) -> str:
+        """Build a safe lowercase node ID from path parts by replacing non-alphanumeric chars."""
         return re.sub(r"[^a-z0-9_]", "_", "_".join(p.lower() for p in parts).strip("_"))
 
     try:
@@ -548,12 +551,14 @@ def xlsx_extract_structure(path: Path) -> dict:
     seen: set[str] = {file_nid}
 
     def _add(nid: str, label: str) -> None:
+        """Append a document node if it hasn't been added yet."""
         if nid not in seen:
             seen.add(nid)
             nodes.append({"id": nid, "label": label, "file_type": "document",
                            "source_file": str_path, "source_location": None})
 
     def _edge(src: str, tgt: str, relation: str) -> None:
+        """Append an EXTRACTED edge between two node IDs."""
         edges.append({"source": src, "target": tgt, "relation": relation,
                        "confidence": "EXTRACTED", "source_file": str_path,
                        "source_location": None, "weight": 1.0})
@@ -647,6 +652,7 @@ def convert_office_file(path: Path, out_dir: Path) -> Path | None:
 
 
 def count_words(path: Path) -> int:
+    """Count whitespace-delimited words in a file; used for corpus-size estimation."""
     try:
         ext = path.suffix.lower()
         if ext == ".pdf":
@@ -919,6 +925,7 @@ def _is_included(path: Path, root: Path, patterns: list[tuple[Path, str]]) -> bo
         return False
 
     def _matches(rel: str, p: str, anchored: bool) -> bool:
+        """Return True if `rel` path matches glob pattern `p` (anchored or floating)."""
         if anchored:
             return fnmatch.fnmatch(rel, p)
         parts = rel.split("/")
@@ -1013,11 +1020,17 @@ def _auto_follow_symlinks(root: Path) -> bool:
     return False
 
 
-def detect(root: Path, *, follow_symlinks: bool | None = None, google_workspace: bool | None = None, extra_excludes: list[str] | None = None) -> dict:
+def detect(root: Path, *, follow_symlinks: bool | None = None, extra_excludes: list[str] | None = None) -> dict:
+    """Walk `root` and return a corpus description dict.
+
+    Keys: files (by FileType), total_files, total_words, skipped_sensitive,
+    skipped_files, warning (set when corpus is too small or too large).
+    Reads .codebaseignore, .gitignore, and CODEBASE_ENGINE_EXCLUDE env var to
+    determine which files to skip.
+    """
     root = root.resolve()
     if follow_symlinks is None:
         follow_symlinks = _auto_follow_symlinks(root)
-    google_workspace = google_workspace_enabled() if google_workspace is None else google_workspace
     files: dict[FileType, list[str]] = {
         FileType.CODE: [],
         FileType.DOCUMENT: [],
@@ -1102,27 +1115,6 @@ def detect(root: Path, *, follow_symlinks: bool | None = None, google_workspace:
             continue
         ftype = classify_file(p)
         if ftype:
-            if p.suffix.lower() in GOOGLE_WORKSPACE_EXTENSIONS:
-                if not google_workspace:
-                    skipped_sensitive.append(
-                        str(p)
-                        + " [Google Workspace shortcut skipped - pass --google-workspace "
-                        "or set CODEBASE_ENGINE_GOOGLE_WORKSPACE=1]"
-                    )
-                    continue
-                try:
-                    md_path = convert_google_workspace_file(p, converted_dir, xlsx_to_markdown=xlsx_to_markdown)
-                except Exception as exc:
-                    skipped_sensitive.append(str(p) + f" [Google Workspace export failed: {exc}]")
-                    continue
-                if md_path:
-                    if _is_ignored(md_path, root, ignore_patterns, _cache=ignore_cache):
-                        continue
-                    files[ftype].append(str(md_path))
-                    total_words += count_words(md_path)
-                else:
-                    skipped_sensitive.append(str(p) + " [Google Workspace export produced no readable text]")
-                continue
             # Office files: convert to markdown sidecar so subagents can read them
             if p.suffix.lower() in OFFICE_EXTENSIONS:
                 md_path = convert_office_file(p, converted_dir)
@@ -1285,6 +1277,7 @@ def save_manifest(
     existing = load_manifest(manifest_path, root=root)
 
     def _normalise_entry(entry):
+        """Coerce legacy manifest entry formats to the current {mtime, ast_hash, semantic_hash} dict."""
         if isinstance(entry, (int, float)):
             return {"mtime": entry, "ast_hash": "", "semantic_hash": ""}
         if isinstance(entry, dict) and "hash" in entry and "ast_hash" not in entry:
@@ -1346,7 +1339,6 @@ def detect_incremental(
     manifest_path: str = _MANIFEST_PATH,
     *,
     follow_symlinks: bool | None = None,
-    google_workspace: bool | None = None,
     kind: str = "semantic",
     extra_excludes: list[str] | None = None,
 ) -> dict:
@@ -1373,7 +1365,7 @@ def detect_incremental(
     incremental runs. ``None`` (default) means auto-detect: ``True`` when ``root``
     contains at least one direct symlinked child, ``False`` otherwise.
     """
-    full = detect(root, follow_symlinks=follow_symlinks, google_workspace=google_workspace, extra_excludes=extra_excludes)
+    full = detect(root, follow_symlinks=follow_symlinks, extra_excludes=extra_excludes)
     # Pass ``root`` so a manifest written with relative keys (post-#777) is
     # re-anchored to the absolute form the rest of this function compares
     # against. Legacy absolute-keyed manifests pass through unchanged.

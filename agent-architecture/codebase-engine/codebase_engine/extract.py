@@ -45,11 +45,13 @@ _LANGUAGE_BUILTIN_GLOBALS: frozenset[str] = frozenset({
 
 
 def _raise_recursion_limit() -> None:
+    """Raise Python's recursion limit to handle deeply nested ASTs."""
     if sys.getrecursionlimit() < _RECURSION_LIMIT:
         sys.setrecursionlimit(_RECURSION_LIMIT)
 
 
 def _safe_extract(extractor: Callable, path: Path) -> dict:
+    """Run extractor, catching RecursionError and all other exceptions; returns empty result on failure."""
     try:
         return extractor(path)
     except RecursionError:
@@ -114,6 +116,7 @@ REFERENCE_CONTEXTS = frozenset({
 
 
 def _source_location(line: int | str | None) -> str | None:
+    """Normalise a line number or location string to the `Lnn` format, or None."""
     if line is None:
         return None
     if isinstance(line, str):
@@ -128,6 +131,7 @@ def _semantic_reference_edge(
     source_file: str,
     line: int | str | None,
 ) -> dict:
+    """Build a `references` edge dict for a type annotation or field reference."""
     if context not in REFERENCE_CONTEXTS:
         raise ValueError(f"unknown reference context: {context}")
     return {
@@ -294,6 +298,7 @@ def _load_tsconfig_aliases(start_dir: Path) -> dict[str, str]:
 
 
 def _find_workspace_root(start_dir: Path) -> Path | None:
+    """Walk up from start_dir to find the nearest pnpm-workspace.yaml or package.json with workspaces."""
     current = start_dir.resolve()
     for candidate in [current, *current.parents]:
         if (candidate / "pnpm-workspace.yaml").exists():
@@ -310,6 +315,7 @@ def _find_workspace_root(start_dir: Path) -> Path | None:
 
 
 def _pnpm_workspace_globs(workspace_file: Path) -> list[str]:
+    """Parse the `packages:` section from pnpm-workspace.yaml without a YAML parser dep."""
     globs: list[str] = []
     in_packages = False
     for raw_line in workspace_file.read_text(encoding="utf-8", errors="replace").splitlines():
@@ -330,6 +336,7 @@ def _pnpm_workspace_globs(workspace_file: Path) -> list[str]:
 
 
 def _workspace_globs(root: Path) -> list[str]:
+    """Return workspace member globs from pnpm-workspace.yaml or package.json workspaces field."""
     pnpm_workspace = root / "pnpm-workspace.yaml"
     if pnpm_workspace.exists():
         return _pnpm_workspace_globs(pnpm_workspace)
@@ -351,6 +358,7 @@ def _workspace_globs(root: Path) -> list[str]:
 
 
 def _load_workspace_packages(start_dir: Path) -> dict[str, Path]:
+    """Return {package_name: package_dir} map for the enclosing workspace; cached by mtime."""
     root = _find_workspace_root(start_dir)
     if root is None:
         return {}
@@ -382,6 +390,7 @@ def _load_workspace_packages(start_dir: Path) -> dict[str, Path]:
 
 
 def _package_entry_candidates(package_dir: Path, subpath: str) -> list[Path]:
+    """Return candidate entry file paths for a workspace package (from exports/main/svelte fields)."""
     manifest = package_dir / "package.json"
     manifest_data: dict[str, Any] = {}
     try:
@@ -416,6 +425,7 @@ def _package_entry_candidates(package_dir: Path, subpath: str) -> list[Path]:
 
 
 def _resolve_workspace_import(raw: str, start_dir: Path) -> Path | None:
+    """Resolve a workspace package import specifier to a local file path."""
     packages = _load_workspace_packages(start_dir)
     for package_name, package_dir in packages.items():
         if raw == package_name:
@@ -503,6 +513,7 @@ class LanguageConfig:
 # ── Generic helpers ───────────────────────────────────────────────────────────
 
 def _read_text(node, source: bytes) -> str:
+    """Extract the UTF-8 text span of a tree-sitter node from the source byte buffer."""
     return source[node.start_byte:node.end_byte].decode("utf-8", errors="replace")
 
 
@@ -12922,6 +12933,7 @@ def extract(
 
 
 def collect_files(target: Path, *, follow_symlinks: bool = False, root: Path | None = None) -> list[Path]:
+    """Recursively collect all extractable source files under `target`, respecting .codebaseignore."""
     if target.is_file():
         return [target]
     _EXTENSIONS = set(_DISPATCH.keys())

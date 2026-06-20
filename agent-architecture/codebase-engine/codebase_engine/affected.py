@@ -1,3 +1,6 @@
+# affected.py — reverse-reachability analysis: given a changed file, find every
+# graph node that could be impacted via calls/imports/inheritance/re-exports.
+# Used by `codebase-engine affected <file>` to estimate blast radius before an edit.
 from __future__ import annotations
 
 from collections import deque
@@ -32,11 +35,13 @@ class AffectedHit:
 
 
 def _node_label(graph: nx.Graph, node_id: str) -> str:
+    """Return the human-readable label for a node, falling back to its ID."""
     data = graph.nodes[node_id]
     return str(data.get("label") or node_id)
 
 
 def _format_location(data: dict) -> str:
+    """Format source_file + source_location into a 'file:line' display string."""
     source_file = data.get("source_file") or "-"
     source_location = data.get("source_location")
     if source_location:
@@ -51,10 +56,17 @@ def _bare_name(label: str) -> str:
 
 
 def _normalize_label(label: str) -> str:
+    """NFC-normalise and casefold a label for locale-safe comparison."""
     return unicodedata.normalize("NFC", label).casefold()
 
 
 def resolve_seed(graph: nx.Graph, query: str) -> str | None:
+    """Find the single best-match node ID for a query string.
+
+    Resolution order: exact node-ID match → exact label → bare name (strips
+    trailing '()') → exact source_file → label substring. Returns None when
+    there is no unique match.
+    """
     if query in graph:
         return query
     query_lower = _normalize_label(query)
@@ -100,6 +112,12 @@ def affected_nodes(
     relations: Iterable[str] = DEFAULT_AFFECTED_RELATIONS,
     depth: int = 2,
 ) -> list[AffectedHit]:
+    """BFS backwards over incoming edges to collect nodes that depend on `seed`.
+
+    Only edges whose 'relation' attribute is in `relations` are followed.
+    `depth` controls how many hops back from the seed are explored.
+    Returns AffectedHit records sorted by discovery order (breadth-first).
+    """
     relation_set = set(relations)
     seen = {seed}
     queue: deque[tuple[str, int]] = deque([(seed, 0)])
@@ -139,6 +157,7 @@ def format_affected(
     relations: Iterable[str] = DEFAULT_AFFECTED_RELATIONS,
     depth: int = 2,
 ) -> str:
+    """Resolve query to a seed node, run BFS, and format results as plain text."""
     relation_list = tuple(relations)
     seed = resolve_seed(graph, query)
     if seed is None:
@@ -163,6 +182,11 @@ def format_affected(
 
 
 def load_graph(path: Path) -> nx.Graph:
+    """Load graph.json from disk as a directed NetworkX graph.
+
+    Normalises both the 'directed' flag and the 'edges'/'links' key rename so
+    graph.json files produced by different codebase-engine versions all load cleanly.
+    """
     import json
     from networkx.readwrite import json_graph
 

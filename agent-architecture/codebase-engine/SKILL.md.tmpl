@@ -1,4 +1,7 @@
 ---
+# Agent skill metadata — name must match the folder name so catalog tests pass.
+# allowed-tools restricts which tools this skill may invoke by default;
+# shell write, git write, and deploy remain policy-gated (see POLICY_REQUIREMENTS below).
 name: codebase-engine
 version: 0.1.0
 description: |
@@ -16,6 +19,10 @@ allowed-tools:
 
 # Codebase Engine
 
+<!-- Skill purpose: offline AST indexing + graph query for any local codebase.
+     No LLM required for extraction (tree-sitter handles parsing).
+     LLM backends are optional and must point to approved internal endpoints. -->
+
 Use this skill to index a local codebase and answer architecture, dependency,
 and symbol questions using the `codebase-engine` package.
 
@@ -23,6 +30,9 @@ and symbol questions using the `codebase-engine` package.
 run locally. No data leaves the machine.
 
 ## Setup
+
+<!-- One-time install. uv tool install is preferred in enterprise envs because
+     it isolates deps and avoids polluting the system Python. -->
 
 Install once per environment:
 
@@ -39,6 +49,10 @@ codebase-engine --version
 ```
 
 ## Index the Codebase
+
+<!-- extract runs: detect → tree-sitter AST → build NetworkX graph → Leiden cluster.
+     Output is codebase-out/graph.json + GRAPH_REPORT.md.
+     CODEBASE_OUT lets CI or worktree setups redirect output without touching source. -->
 
 Run from the project root (or pass the path explicitly):
 
@@ -68,6 +82,10 @@ codebase-engine watch
 
 ## Query
 
+<!-- query uses case-folded substring + IDF against node labels — no stemming,
+     no cross-language synonym. If zero results, expand query terms from the
+     graph vocabulary (see skills/*/references/query.md for the full protocol). -->
+
 Semantic fuzzy search across the graph:
 
 ```bash
@@ -96,6 +114,9 @@ codebase-engine affected src/auth/middleware.py
 
 ## Workflow
 
+<!-- Step 6 exists because the file watcher debounces at ~500ms; a query
+     immediately after an edit may miss the latest nodes. -->
+
 1. Confirm `codebase-engine` is installed (`codebase-engine --version`).
 2. Run `codebase-engine extract .` if no index exists (`codebase-out/` absent).
 3. Use `codebase-engine query` for broad questions; `codebase-engine explain` for symbols.
@@ -104,6 +125,10 @@ codebase-engine affected src/auth/middleware.py
 6. Fall back to Grep + Read when the query returns no results (index may lag by ~1s after edits).
 
 ## Enterprise Constraints
+
+<!-- These are hard build-time removals, not runtime flags.
+     prs.py and wiki.py are absent from this build.
+     CODEBASE_ENGINE_LLM_* env vars must point to internal endpoints only. -->
 
 - Local extraction only. No LLM backend required for AST extraction.
 - If an LLM backend is configured (`CODEBASE_ENGINE_LLM_*`), it must be an approved internal endpoint.

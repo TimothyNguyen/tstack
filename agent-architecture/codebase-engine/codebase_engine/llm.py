@@ -1,7 +1,8 @@
-# Gemini, and OpenAI.
-# Used by `codebase-engine extract . --backend gemini` and the benchmark scripts.
-# The default codebase-engine pipeline uses Claude Code subagents via skill.md;
-# this module provides a direct API path for non-Claude-Code environments.
+# llm.py — LLM adapter for semantic extraction: Anthropic (Claude), Google Gemini, and OpenAI.
+# Used by `codebase-engine extract . --backend <provider>` and the benchmark scripts.
+# The default codebase-engine pipeline uses Claude Code subagents via SKILL.md;
+# this module provides a direct API path for non-Claude-Code / headless environments.
+# Configure via CODEBASE_ENGINE_LLM_* env vars. Only approved internal endpoints.
 from __future__ import annotations
 
 import base64
@@ -168,6 +169,7 @@ BACKENDS: dict[str, dict] = {
 
 
 def _custom_providers_path(global_: bool = True) -> Path:
+    """Return path to providers.json — global (~/.codebase-engine/) or project-local."""
     if global_:
         return Path.home() / ".codebase-engine" / "providers.json"
     return Path(".codebase-engine") / "providers.json"
@@ -211,6 +213,13 @@ def provider_base_url_ok(base_url: str, name: str, *, warn: bool = True) -> bool
 
 
 def _load_custom_providers() -> dict[str, dict]:
+    """Load extra provider configs from providers.json files; skip project-local without opt-in.
+
+    Project-local .codebase-engine/providers.json travels with a cloned repo and controls
+    where the corpus and API key are sent — a silent-load would be a corpus exfiltration
+    vector. Requires CODEBASE_ENGINE_ALLOW_LOCAL_PROVIDERS=1. The global
+    ~/.codebase-engine/providers.json is always trusted.
+    """
     # A project-local ./.codebase-engine/providers.json travels with a cloned or shared
     # repo and defines where the corpus + API key are sent, so loading it
     # silently is a corpus/key exfiltration vector. Require an explicit opt-in;
@@ -273,7 +282,8 @@ _FIXED_TEMPERATURE_MODEL_MARKERS = ("o1", "o1-", "o3", "o3-", "o4", "o4-", "gpt-
 
 
 def _model_requires_default_temperature(model: str) -> bool:
-    """True if `model` is a reasoning model that rejects an explicit temperature.
+    """
+    True if `model` is a reasoning model that rejects an explicit temperature.
 
     OpenAI's o-series (o1, o3, o4...) and gpt-5 family only accept the default
     temperature (1) and return HTTP 400 if any value — including 0 — is sent.
@@ -554,6 +564,7 @@ class _ImageRef:
 
 
 def _is_vision_image(path: Path) -> bool:
+    """True if path is a raster image a vision model can process (png/jpg/gif/webp)."""
     return path.suffix.lower() in _VISION_IMAGE_EXTENSIONS
 
 
@@ -1560,6 +1571,7 @@ def _extract_with_adaptive_retry(
     itself, so we return what we got and warn.
     """
     def _merge_two(left_units, right_units) -> dict:
+        """Recursively extract two sub-chunks and merge their dicts."""
         left = _extract_with_adaptive_retry(
             left_units, backend, api_key, model, root, max_depth, _depth + 1, deep_mode=deep_mode
         )
@@ -1577,8 +1589,7 @@ def _extract_with_adaptive_retry(
         }
 
     def _split_lone_slice() -> "tuple[FileSlice, FileSlice] | None":
-        # When a single-unit chunk is a slice, bisect the slice so we can retry
-        # on a smaller range rather than give up (#1369).
+        """Bisect a single-slice chunk so it can be retried on a smaller range (#1369)."""
         if len(chunk) == 1 and isinstance(chunk[0], FileSlice) and _depth < max_depth:
             return bisect_slice(chunk[0])
         return None
@@ -1757,6 +1768,7 @@ def extract_corpus_parallel(
     total = len(chunks)
 
     def _run_one(idx: int, chunk: list[Path]) -> tuple[int, dict | None, Exception | None]:
+        """Run adaptive-retry extraction for one chunk; return (idx, result, exc)."""
         t0 = time.time()
         try:
             result = _extract_with_adaptive_retry(

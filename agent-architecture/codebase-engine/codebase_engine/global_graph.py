@@ -1,3 +1,7 @@
+# global_graph.py — multi-repo graph registry stored in ~/.codebase-engine/.
+# Merges per-repo graph.json files into a single cross-repo graph for queries
+# that span multiple codebases (e.g. monorepo split across Git origins).
+# Local only; never syncs to a remote.
 from __future__ import annotations
 import json
 import hashlib
@@ -13,6 +17,7 @@ _GLOBAL_MANIFEST = _GLOBAL_DIR / "global-manifest.json"
 
 
 def _load_manifest() -> dict:
+    """Load the global manifest JSON, backing up and resetting on parse failure."""
     if _GLOBAL_MANIFEST.exists():
         try:
             return json.loads(_GLOBAL_MANIFEST.read_text(encoding="utf-8"))
@@ -41,11 +46,13 @@ def _load_manifest() -> dict:
 
 
 def _save_manifest(manifest: dict) -> None:
+    """Persist the global manifest to ~/.codebase-engine/global-manifest.json."""
     _GLOBAL_DIR.mkdir(parents=True, exist_ok=True)
     _GLOBAL_MANIFEST.write_text(json.dumps(manifest, indent=2), encoding="utf-8")
 
 
 def _load_global_graph() -> nx.Graph:
+    """Load global-graph.json as a NetworkX graph, normalising edge key names."""
     if _GLOBAL_GRAPH.exists():
         from codebase_engine.security import check_graph_file_size_cap
         check_graph_file_size_cap(_GLOBAL_GRAPH)
@@ -60,6 +67,7 @@ def _load_global_graph() -> nx.Graph:
 
 
 def _save_global_graph(G: nx.Graph) -> None:
+    """Serialise a NetworkX graph to global-graph.json using node-link format."""
     _GLOBAL_DIR.mkdir(parents=True, exist_ok=True)
     try:
         data = _jg.node_link_data(G, edges="links")
@@ -69,6 +77,7 @@ def _save_global_graph(G: nx.Graph) -> None:
 
 
 def _file_hash(path: Path) -> str:
+    """Return a 16-hex-char SHA-256 fingerprint of a file — used to detect unchanged graphs."""
     h = hashlib.sha256()
     h.update(path.read_bytes())
     return h.hexdigest()[:16]
@@ -179,4 +188,5 @@ def global_list() -> dict:
 
 
 def global_path() -> Path:
+    """Return the filesystem path of the global graph file."""
     return _GLOBAL_GRAPH

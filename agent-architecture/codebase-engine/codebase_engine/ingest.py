@@ -1,4 +1,15 @@
-# fetch URLs (tweet/arxiv/pdf/web) and save as annotated markdown
+"""ingest.py — fetch external URLs and save as annotated Markdown for graph extraction.
+
+URLs (tweets, arXiv papers, web pages) are treated as first-class corpus members:
+fetched once, saved to codebase-out/ingested/, and included in subsequent extractions.
+This lets teams link external references (design docs, papers, decisions) into the
+knowledge graph without manually downloading them.
+
+All fetches go through security.safe_fetch / safe_fetch_text, which enforce:
+  - SSRF guard: private IP ranges and localhost are rejected.
+  - Scheme whitelist: http/https only.
+  - Size cap: 10 MB text / 50 MB binary.
+"""
 from __future__ import annotations
 import json
 import re
@@ -82,6 +93,7 @@ def _detect_url_type(url: str) -> str:
 
 
 def _fetch_html(url: str) -> str:
+    """Fetch raw HTML through the SSRF-guarded security layer."""
     return safe_fetch_text(url)
 
 

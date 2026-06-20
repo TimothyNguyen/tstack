@@ -1,0 +1,8 @@
+*.md
+*.txt
+*.html
+*.yaml
+*.yml
+docs/
+node_modules/
+codebase-out/

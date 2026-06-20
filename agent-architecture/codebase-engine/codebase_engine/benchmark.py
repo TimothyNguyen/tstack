@@ -33,6 +33,7 @@ def _hr(width: int = 50) -> str:
 
 
 def _estimate_tokens(text: str) -> int:
+    """Estimate token count from character length using a fixed chars-per-token ratio."""
     return max(1, len(text) // _CHARS_PER_TOKEN)
 
 
