@@ -1,3 +1,7 @@
+# global_graph.py — multi-repo graph registry stored in ~/.codebase-engine/.
+# Merges per-repo graph.json files into a single cross-repo graph for queries
+# that span multiple codebases (e.g. monorepo split across Git origins).
+# Local only; never syncs to a remote.
 from __future__ import annotations
 import json
 import hashlib

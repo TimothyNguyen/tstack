@@ -1,3 +1,6 @@
+# affected.py — reverse-reachability analysis: given a changed file, find every
+# graph node that could be impacted via calls/imports/inheritance/re-exports.
+# Used by `codebase-engine affected <file>` to estimate blast radius before an edit.
 from __future__ import annotations
 
 from collections import deque

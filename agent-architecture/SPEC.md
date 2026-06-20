@@ -45,6 +45,8 @@ V8: Update checks are disabled by default. Version discovery must use an interna
 V9: Remote pairing is disabled by default. ngrok and public tunnel flows cannot be installed or invoked in enterprise profile.
 V10: Cookie/session import is disabled by default. Authenticated browser testing requires explicit policy, audit log, and local-only storage.
 V11: Codebase understanding is a pluggable module. CodeGraph, embeddings, or another indexer can attach through a stable skill/tool interface later.
+V25: codebase-engine runs fully offline. AST extraction and graph queries require no API key and open no network connections.
+V26: Enterprise egress removals are build-time, not runtime flags. google_workspace.py, prs.py, and wiki.py are absent from the enterprise build; their callers return error strings via the MCP protocol rather than raising exceptions.
 V12: Audit logs avoid secrets. Logs may include action type, path, command category, host, and decision, but not tokens, cookie values, API keys, prompts with secrets, or full file contents.
 V13: Generated skills include enterprise boundary text. Skills must tell agents not to read unrelated skill packs, secret stores, or global agent configs unless the active task requires it.
 V14: Migration preserves useful workflow taxonomy. Keep plan, build, review, QA, security, ship, learn, docs, and codebase-understanding lanes as separate skills or skill families.
@@ -88,6 +90,10 @@ T24|x|Add local skill directory layout for company teams, including versioning, 
 T25|.|Add data-permission policy gates for Databricks, Postgres, SQL Server, campaign datasets, and model outputs|V21,I10
 T26|.|Add measurement-review checklist for causal inference, experiment validity, uplift modeling leakage, treatment/control balance, and campaign recommendation risk|V22,I9
 T27|x|Create top-level `agent-architecture/` package boundary and keep all migrated architecture files outside `gstack/`|C12,I13,I14,V23,V24
+T28|x|Port graphify core as enterprise-safe `codebase-engine` Python package: stub egress modules, remove always_on/, complete brand rename across 35 source + 98 test files|V25,V26,C3
+T29|x|Add `codebase-engine/SKILL.md.tmpl` agent skill co-located with Python package; register in catalog and root router|V11,C5
+T30|x|Complete brand rename in 104 skill reference markdown files (13 host dirs × 8 topics)|V25
+T31|x|Add `tests/codebase-engine.test.mjs` contract suite covering package metadata, egress stubs, brand completeness, skill co-location, and CLI documentation|V25,V26
 
 ## B
 id|date|cause|fix

@@ -1,7 +1,8 @@
-# Gemini, and OpenAI.
-# Used by `codebase-engine extract . --backend gemini` and the benchmark scripts.
-# The default codebase-engine pipeline uses Claude Code subagents via skill.md;
-# this module provides a direct API path for non-Claude-Code environments.
+# llm.py — LLM adapter for semantic extraction: Anthropic (Claude), Google Gemini, and OpenAI.
+# Used by `codebase-engine extract . --backend <provider>` and the benchmark scripts.
+# The default codebase-engine pipeline uses Claude Code subagents via SKILL.md;
+# this module provides a direct API path for non-Claude-Code / headless environments.
+# Configure via CODEBASE_ENGINE_LLM_* env vars. Only approved internal endpoints.
 from __future__ import annotations
 
 import base64
