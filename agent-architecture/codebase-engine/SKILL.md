@@ -1,5 +1,5 @@
 ---
-name: codebase-understander
+name: codebase-engine
 version: 0.1.0
 description: |
   Enterprise-safe AST knowledge graph for local codebases. Indexes source
@@ -19,7 +19,7 @@ allowed-tools:
 - Use policy-gated tools only when the active profile allows them.
 - Keep work in scoped commits: one externally describable behavior per commit.
 
-# Codebase Understander
+# Codebase Engine
 
 Use this skill to index a local codebase and answer architecture, dependency,
 and symbol questions using the `codebase-engine` package.
@@ -114,7 +114,6 @@ codebase-engine affected src/auth/middleware.py
 - If an LLM backend is configured (`CODEBASE_ENGINE_LLM_*`), it must be an approved internal endpoint.
 - No Google Workspace, GitHub PR, or wiki egress in this build.
 - Graph files stay in `codebase-out/` (local). Do not upload or sync externally.
-- `codebase-engine install` is disabled in this build — use the skill directly.
 
 ## Policy Requirements
 
