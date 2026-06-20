@@ -269,7 +269,7 @@ def diagnose_extraction(
 
 
 def _read_json_file(path: str | Path) -> dict[str, Any]:
-    """Read a JSON graph after applying Graphify's graph-load size cap."""
+    """Read a JSON graph after applying codebase-engine's graph-load size cap."""
     from codebase_engine.security import check_graph_file_size_cap
 
     json_path = Path(path)

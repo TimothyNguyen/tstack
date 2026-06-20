@@ -1,16 +1,16 @@
 """mcp_ingest.py — Extract MCP (Model Context Protocol) server configuration files.
 
 Reads `.mcp.json` / `claude_desktop_config.json` / `mcp.json` / `mcp_servers.json`
-and turns the `mcpServers` map into Graphify nodes and edges.
+and turns the `mcpServers` map into codebase-engine nodes and edges.
 
-Symmetry with `serve.py`: Graphify exposes itself AS an MCP server. This module
+Symmetry with `serve.py`: codebase-engine exposes itself AS an MCP server. This module
 indexes MCP servers AS a corpus type, completing the loop — an agent that runs
 codebase-engine with `--mcp` can now query its own configured MCP layer.
 
 Entry point:
   extract_mcp_config(path: Path) -> dict[str, list[dict]]
 
-  Returns `{"nodes": [...], "edges": [...]}` compatible with Graphify's
+  Returns `{"nodes": [...], "edges": [...]}` compatible with codebase-engine's
   extraction-result format. Returns `{"nodes": [...], "edges": [...], "error": "..."}`
   when the file is malformed, too large, or has no `mcpServers` map — the empty
   result keeps it indistinguishable from "no MCP config here" for downstream
@@ -84,7 +84,7 @@ def is_mcp_config_path(path: Path) -> bool:
 
 
 def extract_mcp_config(path: Path) -> dict[str, Any]:
-    """Parse an MCP config file into Graphify nodes and edges.
+    """Parse an MCP config file into codebase-engine nodes and edges.
 
     Behaviour matches other extractors in `extract.py`:
       - returns ``{"nodes": [...], "edges": [...]}`` on success
@@ -313,7 +313,7 @@ def _strip_version(pkg: str) -> str:
     return pkg if version_at == -1 else pkg[:version_at]
 
 
-# ── Node / edge construction (Graphify schema) ────────────────────────────────
+# ── Node / edge construction (codebase-engine schema) ────────────────────────
 
 
 def _add_node(

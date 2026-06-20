@@ -1210,7 +1210,7 @@ _KILO_PLUGIN_JS = """\
 import { existsSync } from "fs";
 import { join } from "path";
 
-export const GraphifyPlugin = async ({ directory }) => {
+export const CodebaseEnginePlugin = async ({ directory }) => {
   let reminded = false;
 
   return {
@@ -1381,7 +1381,7 @@ _OPENCODE_PLUGIN_JS = """\
 import { existsSync } from "fs";
 import { join } from "path";
 
-export const GraphifyPlugin = async ({ directory }) => {
+export const CodebaseEnginePlugin = async ({ directory }) => {
   let reminded = false;
 
   return {
