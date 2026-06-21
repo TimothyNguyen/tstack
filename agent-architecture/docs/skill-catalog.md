@@ -29,6 +29,7 @@ Each skill is a top-level folder with:
 | `health` | Run a read-only local code health dashboard. | `health/SKILL.md.tmpl` |
 | `security-review` | Review security, governance, data access, and agent-tool risk. | `security-review/SKILL.md.tmpl` |
 | `documentation` | Generic documentation workflow. | `documentation/SKILL.md.tmpl` |
+| `atlassian-docs` | Read approved Jira and Confluence product documentation through a read-only connector. | `atlassian-docs/SKILL.md.tmpl` |
 | `document-generate` | Generate missing local project documentation. | `document-generate/SKILL.md.tmpl` |
 | `document-release` | Update docs after shipped behavior changes. | `document-release/SKILL.md.tmpl` |
 | `learnings` | Capture local project conventions and lessons safely. | `learnings/SKILL.md.tmpl` |

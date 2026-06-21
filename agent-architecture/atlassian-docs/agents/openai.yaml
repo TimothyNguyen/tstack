@@ -1,0 +1,4 @@
+interface:
+  display_name: "Atlassian Docs"
+  short_description: "Read-only Atlassian product docs connector"
+  default_prompt: "Use $atlassian-docs to answer a coding question from approved Jira or Confluence documentation."

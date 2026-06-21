@@ -54,6 +54,7 @@ workflows.
 - Destructive command guardrails, production safety mode: invoke `careful`.
 - Upgrade this skill pack: invoke `architecture-agent-upgrade`.
 - Codebase map, architecture lookup, dependency tracing, or AST graph indexing: invoke `codebase-engine`.
+- Internal Atlassian product docs, requirements, or Jira issue context for coding questions: invoke `atlassian-docs` only when an approved read-only connector is configured.
 - Token/cost reduction for noisy shell output: invoke `rtk-token-optimizer`.
 - Simplest/laziest solution, YAGNI enforcement: invoke `ponytail`.
 - Over-engineering diff review: invoke `ponytail-review`.

@@ -59,6 +59,7 @@
     "codebaseUnderstanding": "optional",
     "agUi": "optional",
     "mcp": "optional",
+    "atlassianDocs": "optional",
     "googleAdk": "optional",
     "strands": "optional",
     "agentCore": "optional",
