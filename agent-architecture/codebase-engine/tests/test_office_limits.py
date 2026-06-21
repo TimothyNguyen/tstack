@@ -6,7 +6,7 @@ pre-parse screen rejects bombs before openpyxl/python-docx ever decompress them.
 """
 import zipfile
 
-from codebase-engine import detect
+from codebase_engine import detect
 
 
 def _write_zip(path, name, payload):

@@ -13,7 +13,7 @@ from unittest.mock import patch
 
 import pytest
 
-from codebase-engine import llm
+from codebase_engine import llm
 
 
 # ---------- _parse_llm_json: the four canonical failure modes ----------

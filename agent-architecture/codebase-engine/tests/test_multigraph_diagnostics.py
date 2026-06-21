@@ -279,7 +279,7 @@ def test_scan_producer_suppression_sites_handles_unknown_tuple_arity(tmp_path: P
 def test_diagnose_file_rejects_oversized_graph(monkeypatch, tmp_path: Path) -> None:
     graph_path = tmp_path / "graph.json"
     graph_path.write_text(json.dumps(_diagnostic_fixture()), encoding="utf-8")
-    monkeypatch.setattr("codebase-engine.security._MAX_GRAPH_FILE_BYTES", 16)
+    monkeypatch.setattr("codebase_engine.security._MAX_GRAPH_FILE_BYTES", 16)
 
     with pytest.raises(ValueError, match="exceeds"):
         diagnose_file(graph_path)

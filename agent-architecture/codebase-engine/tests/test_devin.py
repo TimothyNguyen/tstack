@@ -15,7 +15,7 @@ def _devin_install_user(tmp_path):
     try:
         import os
         os.chdir(tmp_path)
-        with patch("codebase-engine.__main__.Path.home", return_value=tmp_path):
+        with patch("codebase_engine.__main__.Path.home", return_value=tmp_path):
             install(platform="devin")
     finally:
         import os
@@ -79,7 +79,7 @@ def test_devin_install_project_creates_skill_file(tmp_path, monkeypatch):
     project.mkdir()
     monkeypatch.chdir(project)
     monkeypatch.setattr(sys, "argv", ["codebase-engine", "devin", "install", "--project"])
-    with patch("codebase-engine.__main__.Path.home", return_value=home):
+    with patch("codebase_engine.__main__.Path.home", return_value=home):
         main()
     assert _skill_path_project(project).exists()
     assert not _skill_path_user(home).exists()
@@ -93,7 +93,7 @@ def test_devin_install_project_creates_rules_file(tmp_path, monkeypatch):
     project.mkdir()
     monkeypatch.chdir(project)
     monkeypatch.setattr(sys, "argv", ["codebase-engine", "devin", "install", "--project"])
-    with patch("codebase-engine.__main__.Path.home", return_value=home):
+    with patch("codebase_engine.__main__.Path.home", return_value=home):
         main()
     rules = _rules_path(project)
     assert rules.exists()
@@ -128,7 +128,7 @@ def test_devin_install_project_hints_git_add(tmp_path, monkeypatch, capsys):
     project.mkdir()
     monkeypatch.chdir(project)
     monkeypatch.setattr(sys, "argv", ["codebase-engine", "devin", "install", "--project"])
-    with patch("codebase-engine.__main__.Path.home", return_value=home):
+    with patch("codebase_engine.__main__.Path.home", return_value=home):
         main()
     out = capsys.readouterr().out
     assert "git add" in out
@@ -145,7 +145,7 @@ def test_devin_uninstall_user_removes_skill_file(tmp_path):
     assert skill.exists()
 
     from codebase_engine.__main__ import _remove_skill_file
-    with patch("codebase-engine.__main__.Path.home", return_value=tmp_path):
+    with patch("codebase_engine.__main__.Path.home", return_value=tmp_path):
         _remove_skill_file("devin")
     assert not skill.exists()
 
@@ -157,7 +157,7 @@ def test_devin_uninstall_user_noop_when_not_installed(tmp_path, capsys):
     old_cwd = Path.cwd()
     try:
         os.chdir(tmp_path)
-        with patch("codebase-engine.__main__.Path.home", return_value=tmp_path):
+        with patch("codebase_engine.__main__.Path.home", return_value=tmp_path):
             sys.argv = ["codebase-engine", "devin", "uninstall"]
             main()
     finally:
@@ -177,7 +177,7 @@ def test_devin_uninstall_project_removes_skill_file(tmp_path, monkeypatch):
     project = tmp_path / "project"
     project.mkdir()
     monkeypatch.chdir(project)
-    with patch("codebase-engine.__main__.Path.home", return_value=home):
+    with patch("codebase_engine.__main__.Path.home", return_value=home):
         monkeypatch.setattr(sys, "argv", ["codebase-engine", "devin", "install", "--project"])
         main()
         monkeypatch.setattr(sys, "argv", ["codebase-engine", "devin", "uninstall", "--project"])
@@ -192,7 +192,7 @@ def test_devin_uninstall_project_removes_rules_file(tmp_path, monkeypatch):
     project = tmp_path / "project"
     project.mkdir()
     monkeypatch.chdir(project)
-    with patch("codebase-engine.__main__.Path.home", return_value=home):
+    with patch("codebase_engine.__main__.Path.home", return_value=home):
         monkeypatch.setattr(sys, "argv", ["codebase-engine", "devin", "install", "--project"])
         main()
         monkeypatch.setattr(sys, "argv", ["codebase-engine", "devin", "uninstall", "--project"])
@@ -211,7 +211,7 @@ def test_devin_uninstall_project_does_not_touch_user_scope(tmp_path, monkeypatch
     user_skill.parent.mkdir(parents=True, exist_ok=True)
     user_skill.write_text("user skill")
     monkeypatch.chdir(project)
-    with patch("codebase-engine.__main__.Path.home", return_value=home):
+    with patch("codebase_engine.__main__.Path.home", return_value=home):
         monkeypatch.setattr(sys, "argv", ["codebase-engine", "devin", "install", "--project"])
         main()
         monkeypatch.setattr(sys, "argv", ["codebase-engine", "devin", "uninstall", "--project"])
@@ -275,7 +275,7 @@ def test_devin_in_platform_config():
 def test_devin_platform_skill_destination_user_scope(tmp_path):
     """User-scope destination must be ~/.config/devin/skills/codebase-engine/SKILL.md."""
     from codebase_engine.__main__ import _platform_skill_destination
-    with patch("codebase-engine.__main__.Path.home", return_value=tmp_path):
+    with patch("codebase_engine.__main__.Path.home", return_value=tmp_path):
         dst = _platform_skill_destination("devin", project=False)
     assert dst == tmp_path / ".config" / "devin" / "skills" / "codebase-engine" / "SKILL.md"
 

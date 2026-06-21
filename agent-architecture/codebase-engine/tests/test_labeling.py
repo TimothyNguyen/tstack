@@ -33,7 +33,7 @@ def test_label_communities_happy_path(monkeypatch):
         captured["backend"] = backend
         return '{"0": "Order Management", "1": "Payment Flow"}'
 
-    monkeypatch.setattr("codebase-engine.llm._call_llm", fake_call)
+    monkeypatch.setattr("codebase_engine.llm._call_llm", fake_call)
     labels = label_communities(G, communities, backend="gemini")
 
     assert labels == {0: "Order Management", 1: "Payment Flow"}
@@ -52,7 +52,7 @@ def test_label_communities_passes_model_override(monkeypatch):
         captured["model"] = model
         return '{"0": "Order Management", "1": "Payment Flow"}'
 
-    monkeypatch.setattr("codebase-engine.llm._call_llm", fake_call)
+    monkeypatch.setattr("codebase_engine.llm._call_llm", fake_call)
     labels = label_communities(
         G,
         communities,
@@ -86,8 +86,8 @@ def test_label_cli_passes_model_override(tmp_path, monkeypatch):
         captured["model"] = model
         return {0: "Orders"}, "llm"
 
-    monkeypatch.setattr("codebase-engine.llm.generate_community_labels", fake_generate)
-    monkeypatch.setattr("codebase-engine.export.to_html", lambda *args, **kwargs: None)
+    monkeypatch.setattr("codebase_engine.llm.generate_community_labels", fake_generate)
+    monkeypatch.setattr("codebase_engine.export.to_html", lambda *args, **kwargs: None)
     monkeypatch.setattr(
         sys,
         "argv",
@@ -110,7 +110,7 @@ def test_label_cli_passes_model_override(tmp_path, monkeypatch):
 
 def test_label_communities_partial_reply_fills_placeholder(monkeypatch):
     G, communities = _graph()
-    monkeypatch.setattr("codebase-engine.llm._call_llm",
+    monkeypatch.setattr("codebase_engine.llm._call_llm",
                         lambda p, *, backend, max_tokens=200: '{"0": "Order Management"}')
     labels = label_communities(G, communities, backend="gemini")
     assert labels[0] == "Order Management"
@@ -129,7 +129,7 @@ def test_label_communities_strips_code_fences(monkeypatch):
 
 def test_label_communities_malformed_raises(monkeypatch):
     G, communities = _graph()
-    monkeypatch.setattr("codebase-engine.llm._call_llm",
+    monkeypatch.setattr("codebase_engine.llm._call_llm",
                         lambda p, *, backend, max_tokens=200: "sorry, I cannot help")
     with pytest.raises(Exception):
         label_communities(G, communities, backend="gemini")
@@ -137,7 +137,7 @@ def test_label_communities_malformed_raises(monkeypatch):
 
 def test_generate_community_labels_degrades_on_error(monkeypatch):
     G, communities = _graph()
-    monkeypatch.setattr("codebase-engine.llm._call_llm",
+    monkeypatch.setattr("codebase_engine.llm._call_llm",
                         lambda p, *, backend, max_tokens=200: "not json")
     labels, source = generate_community_labels(G, communities, backend="gemini", quiet=True)
     assert source == "placeholder"
@@ -146,7 +146,7 @@ def test_generate_community_labels_degrades_on_error(monkeypatch):
 
 def test_generate_community_labels_no_backend(monkeypatch):
     G, communities = _graph()
-    monkeypatch.setattr("codebase-engine.llm.detect_backend", lambda: None)
+    monkeypatch.setattr("codebase_engine.llm.detect_backend", lambda: None)
     labels, source = generate_community_labels(G, communities, backend=None, quiet=True)
     assert source == "placeholder"
     assert labels == {0: "Community 0", 1: "Community 1"}
@@ -154,7 +154,7 @@ def test_generate_community_labels_no_backend(monkeypatch):
 
 def test_generate_community_labels_success(monkeypatch):
     G, communities = _graph()
-    monkeypatch.setattr("codebase-engine.llm._call_llm",
+    monkeypatch.setattr("codebase_engine.llm._call_llm",
                         lambda p, *, backend, max_tokens=200: '{"0":"Orders","1":"Payments"}')
     labels, source = generate_community_labels(G, communities, backend="gemini", quiet=True)
     assert source == "llm"
@@ -164,7 +164,7 @@ def test_generate_community_labels_success(monkeypatch):
 def test_gods_as_dicts_do_not_crash(monkeypatch):
     """god_nodes() returns list[dict] with an 'id' key, not bare ids."""
     G, communities = _graph()
-    monkeypatch.setattr("codebase-engine.llm._call_llm",
+    monkeypatch.setattr("codebase_engine.llm._call_llm",
                         lambda p, *, backend, max_tokens=200: '{"0":"Orders","1":"Pay"}')
     gods = [{"id": "order_repo", "label": "OrderRepository"}]
     labels = label_communities(G, communities, backend="gemini", gods=gods)
@@ -180,7 +180,7 @@ def test_empty_communities_returns_placeholders(monkeypatch):
         called = True
         return "{}"
 
-    monkeypatch.setattr("codebase-engine.llm._call_llm", fake_call)
+    monkeypatch.setattr("codebase_engine.llm._call_llm", fake_call)
     # community with no resolvable nodes -> no prompt line -> no backend call
     labels = label_communities(G, {0: []}, backend="gemini")
     assert labels == {0: "Community 0"}
@@ -216,7 +216,7 @@ def test_label_communities_batches_when_over_batch_size(monkeypatch):
         calls.append(len(cids))
         return "{" + ", ".join(f'"{c}": "Cluster {c}"' for c in cids) + "}"
 
-    monkeypatch.setattr("codebase-engine.llm._call_llm", fake_call)
+    monkeypatch.setattr("codebase_engine.llm._call_llm", fake_call)
     labels = label_communities(G, communities, backend="gemini", batch_size=100)
 
     # 250 communities / 100 per batch -> 3 batches (100, 100, 50)
@@ -239,7 +239,7 @@ def test_label_communities_partial_batch_failure_keeps_successful_batches(monkey
             raise RuntimeError("simulated transient backend failure")
         return "{" + ", ".join(f'"{c}": "Named {c}"' for c in cids) + "}"
 
-    monkeypatch.setattr("codebase-engine.llm._call_llm", fake_call)
+    monkeypatch.setattr("codebase_engine.llm._call_llm", fake_call)
     labels = label_communities(G, communities, backend="gemini", batch_size=50)
 
     # 3 batches; second one fails. First and third produce real labels;
@@ -256,7 +256,7 @@ def test_label_communities_all_batches_fail_raises(monkeypatch):
     def always_fail(prompt, *, backend, max_tokens=200):
         raise RuntimeError("backend down")
 
-    monkeypatch.setattr("codebase-engine.llm._call_llm", always_fail)
+    monkeypatch.setattr("codebase_engine.llm._call_llm", always_fail)
     # Every batch fails -> propagate so generate_community_labels can degrade.
     with pytest.raises(RuntimeError, match="backend down"):
         label_communities(G, communities, backend="gemini", batch_size=50)
@@ -274,7 +274,7 @@ def test_label_communities_max_communities_caps_total(monkeypatch):
         captured_cids.extend(cids)
         return "{" + ", ".join(f'"{c}": "X{c}"' for c in cids) + "}"
 
-    monkeypatch.setattr("codebase-engine.llm._call_llm", fake_call)
+    monkeypatch.setattr("codebase_engine.llm._call_llm", fake_call)
     label_communities(G, communities, backend="gemini", max_communities=40, batch_size=100)
     # Only 40 communities should have been sent to the backend.
     assert len(captured_cids) == 40

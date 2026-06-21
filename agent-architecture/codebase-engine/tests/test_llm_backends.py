@@ -5,7 +5,7 @@ from unittest.mock import patch
 
 import pytest
 
-from codebase-engine import llm
+from codebase_engine import llm
 
 
 def _clear_backend_env(monkeypatch):
@@ -63,7 +63,7 @@ def test_extract_files_direct_routes_gemini_through_openai_compat(tmp_path, monk
     source.write_text("# Architecture\n\nThe runner emits a snapshot.\n")
     result = {"nodes": [], "edges": [], "hyperedges": [], "input_tokens": 1, "output_tokens": 1}
 
-    with patch("codebase-engine.llm._call_openai_compat", return_value=result) as call:
+    with patch("codebase_engine.llm._call_openai_compat", return_value=result) as call:
         assert llm.extract_files_direct([source], backend="gemini", root=tmp_path) is result
 
     assert call.call_args.args[:3] == (
@@ -103,7 +103,7 @@ def test_openai_compat_backends_resolve_full_output_cap(tmp_path, monkeypatch, b
     source.write_text("# Architecture\n")
     result = {"nodes": [], "edges": [], "hyperedges": [], "input_tokens": 1, "output_tokens": 1}
 
-    with patch("codebase-engine.llm._call_openai_compat", return_value=result) as call:
+    with patch("codebase_engine.llm._call_openai_compat", return_value=result) as call:
         llm.extract_files_direct([source], backend=backend, root=tmp_path)
 
     assert call.call_args.kwargs["max_completion_tokens"] == 16384
@@ -117,7 +117,7 @@ def test_gemini_model_can_be_overridden_by_env(tmp_path, monkeypatch):
     source.write_text("# Architecture\n")
     result = {"nodes": [], "edges": [], "hyperedges": [], "input_tokens": 1, "output_tokens": 1}
 
-    with patch("codebase-engine.llm._call_openai_compat", return_value=result) as call:
+    with patch("codebase_engine.llm._call_openai_compat", return_value=result) as call:
         llm.extract_files_direct([source], backend="gemini", root=tmp_path)
 
     assert call.call_args.args[2] == "gemini-3.1-pro-preview"
@@ -145,7 +145,7 @@ def test_extract_files_direct_accepts_str_paths(tmp_path, monkeypatch):
     result = {"nodes": [], "edges": [], "hyperedges": [], "input_tokens": 1, "output_tokens": 1}
 
     # str path must not raise AttributeError: 'str' object has no attribute 'suffix'
-    with patch("codebase-engine.llm._call_openai_compat", return_value=result):
+    with patch("codebase_engine.llm._call_openai_compat", return_value=result):
         assert llm.extract_files_direct([str(source)], backend="gemini", root=tmp_path) is result
 
 
@@ -158,7 +158,7 @@ def test_extract_corpus_parallel_accepts_str_and_mixed_paths(tmp_path, monkeypat
     f2.write_text("# B\n\nNode two.\n")
     result = {"nodes": [], "edges": [], "hyperedges": [], "input_tokens": 1, "output_tokens": 1}
 
-    with patch("codebase-engine.llm._call_openai_compat", return_value=result):
+    with patch("codebase_engine.llm._call_openai_compat", return_value=result):
         # all-str, all-Path, and mixed must each pack + run without AttributeError
         for files in ([str(f1), str(f2)], [f1, f2], [str(f1), f2]):
             merged = llm.extract_corpus_parallel(
@@ -179,7 +179,7 @@ def test_corpus_parallel_oversized_markdown_does_not_crash_on_fileslice(tmp_path
     assert len(big.read_text()) > _FILE_CHAR_CAP  # guarantees slicing kicks in
     result = {"nodes": [], "edges": [], "hyperedges": [], "input_tokens": 1, "output_tokens": 1}
 
-    with patch("codebase-engine.llm._call_openai_compat", return_value=result):
+    with patch("codebase_engine.llm._call_openai_compat", return_value=result):
         # both a str path and a FileSlice unit must flow through without TypeError
         merged = llm.extract_corpus_parallel(
             [str(big)], backend="gemini", root=tmp_path, max_concurrency=1
@@ -192,7 +192,7 @@ def test_str_path_entry_points_handle_edge_cases(tmp_path, monkeypatch):
     monkeypatch.setenv("GOOGLE_API_KEY", "google-key")
     result = {"nodes": [], "edges": [], "hyperedges": [], "input_tokens": 1, "output_tokens": 1}
 
-    with patch("codebase-engine.llm._call_openai_compat", return_value=result):
+    with patch("codebase_engine.llm._call_openai_compat", return_value=result):
         # empty list: no chunks, nothing to extract, no crash
         empty = llm.extract_corpus_parallel([], backend="gemini", root=tmp_path)
         assert empty["nodes"] == [] and empty["failed_chunks"] == 0
@@ -254,7 +254,7 @@ def test_adaptive_retry_splits_on_context_exceeded(tmp_path):
             raise RuntimeError("Error 400: Context size has been exceeded.")
         return _ok(nodes=[{"id": f.stem} for f in chunk])
 
-    with patch("codebase-engine.llm.extract_files_direct", side_effect=fake_extract):
+    with patch("codebase_engine.llm.extract_files_direct", side_effect=fake_extract):
         result = llm._extract_with_adaptive_retry(
             files, backend="kimi", api_key="k", model="m", root=tmp_path, max_depth=3
         )
@@ -270,7 +270,7 @@ def test_adaptive_retry_gives_up_on_single_file_overflow(tmp_path):
     def fake_extract(*_, **__):
         raise RuntimeError("context_length_exceeded")
 
-    with patch("codebase-engine.llm.extract_files_direct", side_effect=fake_extract):
+    with patch("codebase_engine.llm.extract_files_direct", side_effect=fake_extract):
         result = llm._extract_with_adaptive_retry(
             [f], backend="kimi", api_key="k", model="m", root=tmp_path, max_depth=3
         )
@@ -289,7 +289,7 @@ def test_adaptive_retry_re_raises_unrelated_errors(tmp_path):
     def fake_extract(*_, **__):
         raise RuntimeError("rate limit hit")
 
-    with patch("codebase-engine.llm.extract_files_direct", side_effect=fake_extract):
+    with patch("codebase_engine.llm.extract_files_direct", side_effect=fake_extract):
         with pytest.raises(RuntimeError, match="rate limit"):
             llm._extract_with_adaptive_retry(
                 [f], backend="kimi", api_key="k", model="m", root=tmp_path, max_depth=3
@@ -601,8 +601,8 @@ def test_extract_corpus_parallel_ollama_runs_serially(tmp_path, monkeypatch):
 
     monkeypatch.delenv("CODEBASE_ENGINE_OLLAMA_PARALLEL", raising=False)
 
-    with patch("codebase-engine.llm.extract_files_direct", side_effect=fake_extract):
-        with patch("codebase-engine.llm.ThreadPoolExecutor") as mock_pool:
+    with patch("codebase_engine.llm.extract_files_direct", side_effect=fake_extract):
+        with patch("codebase_engine.llm.ThreadPoolExecutor") as mock_pool:
             result = llm.extract_corpus_parallel(
                 files, backend="ollama", api_key="ollama", model="qwen2.5-coder:7b",
                 root=tmp_path, token_budget=None, chunk_size=2, max_concurrency=4,
@@ -619,8 +619,8 @@ def test_extract_corpus_parallel_ollama_parallel_env_restores_concurrency(tmp_pa
 
     monkeypatch.setenv("CODEBASE_ENGINE_OLLAMA_PARALLEL", "1")
 
-    with patch("codebase-engine.llm.extract_files_direct", return_value=_ok()):
-        with patch("codebase-engine.llm.ThreadPoolExecutor") as mock_pool:
+    with patch("codebase_engine.llm.extract_files_direct", return_value=_ok()):
+        with patch("codebase_engine.llm.ThreadPoolExecutor") as mock_pool:
             mock_pool.return_value.__enter__ = lambda s: s
             mock_pool.return_value.__exit__ = lambda s, *a: False
             mock_pool.return_value.submit = lambda fn, *a, **kw: type(
@@ -661,7 +661,7 @@ def test_adaptive_retry_bisects_on_hollow_ollama_response(tmp_path):
             }
         return _ok(nodes=[{"id": f.stem} for f in chunk])
 
-    with patch("codebase-engine.llm.extract_files_direct", side_effect=fake_extract):
+    with patch("codebase_engine.llm.extract_files_direct", side_effect=fake_extract):
         result = llm._extract_with_adaptive_retry(
             files, backend="ollama", api_key="ollama", model="qwen2.5-coder:7b",
             root=tmp_path, max_depth=3,

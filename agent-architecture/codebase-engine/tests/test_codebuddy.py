@@ -17,7 +17,7 @@ def _codebuddy_install_user(tmp_path):
     try:
         import os
         os.chdir(tmp_path)
-        with patch("codebase-engine.__main__.Path.home", return_value=tmp_path):
+        with patch("codebase_engine.__main__.Path.home", return_value=tmp_path):
             install(platform="codebuddy")
     finally:
         import os
@@ -167,7 +167,7 @@ def test_codebuddy_install_hint_git_add(tmp_path, capsys):
     try:
         import os
         os.chdir(project)
-        with patch("codebase-engine.__main__.Path.home", return_value=home):
+        with patch("codebase_engine.__main__.Path.home", return_value=home):
             sys.argv = ["codebase-engine", "codebuddy", "install"]
             main()
     finally:
@@ -241,7 +241,7 @@ def test_uninstall_all_removes_codebuddy_md(tmp_path, monkeypatch):
     project = tmp_path / "project"
     project.mkdir()
     monkeypatch.chdir(project)
-    with patch("codebase-engine.__main__.Path.home", return_value=home):
+    with patch("codebase_engine.__main__.Path.home", return_value=home):
         monkeypatch.setattr(sys, "argv", ["codebase-engine", "codebuddy", "install"])
         main()
         md = _codebuddy_md_path(project)
@@ -258,7 +258,7 @@ def test_uninstall_all_removes_codebuddy_hook(tmp_path, monkeypatch):
     project = tmp_path / "project"
     project.mkdir()
     monkeypatch.chdir(project)
-    with patch("codebase-engine.__main__.Path.home", return_value=home):
+    with patch("codebase_engine.__main__.Path.home", return_value=home):
         monkeypatch.setattr(sys, "argv", ["codebase-engine", "codebuddy", "install"])
         main()
         monkeypatch.setattr(sys, "argv", ["codebase-engine", "uninstall"])
@@ -285,7 +285,7 @@ def test_codebuddy_in_platform_config():
 def test_codebuddy_platform_skill_destination_user_scope(tmp_path):
     """User-scope destination must be ~/.codebuddy/skills/codebase-engine/SKILL.md."""
     from codebase_engine.__main__ import _platform_skill_destination
-    with patch("codebase-engine.__main__.Path.home", return_value=tmp_path):
+    with patch("codebase_engine.__main__.Path.home", return_value=tmp_path):
         dst = _platform_skill_destination("codebuddy", project=False)
     assert dst == tmp_path / ".codebuddy" / "skills" / "codebase-engine" / "SKILL.md"
 

@@ -10,7 +10,7 @@ from unittest.mock import MagicMock, patch
 
 import pytest
 
-from codebase-engine import llm
+from codebase_engine import llm
 
 _ENVELOPE = {
     "type": "result",

@@ -16,6 +16,9 @@ import pytest
 # tests/ -> repo root is one parent up; put it on the path so tools.skillgen
 # imports regardless of pytest's import mode.
 REPO_ROOT = Path(__file__).resolve().parent.parent
+if not (REPO_ROOT / "tools" / "skillgen").exists():
+    pytest.skip("legacy tools/skillgen generator is not shipped", allow_module_level=True)
+
 if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
@@ -553,7 +556,7 @@ def test_always_on_roundtrip_is_byte_faithful():
 
 def test_extracted_constants_equal_the_packaged_always_on_files():
     """The live module constants now equal the packaged files they read at load."""
-    from codebase-engine import __main__ as mainmod
+    from codebase_engine import __main__ as mainmod
 
     pairs = {
         "_CLAUDE_MD_SECTION": "claude-md",

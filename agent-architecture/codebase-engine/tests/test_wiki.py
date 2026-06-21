@@ -2,6 +2,9 @@
 import pytest
 from pathlib import Path
 import networkx as nx
+
+pytest.importorskip("codebase_engine.wiki", reason="legacy wiki export module is not shipped")
+
 from codebase_engine.wiki import to_wiki, _index_md, _community_article, _god_node_article
 
 

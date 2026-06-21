@@ -68,7 +68,7 @@ def _install(tmp_path, platform):
     old_cwd = Path.cwd()
     try:
         os.chdir(tmp_path)
-        with patch("codebase-engine.__main__.Path.home", return_value=tmp_path):
+        with patch("codebase_engine.__main__.Path.home", return_value=tmp_path):
             mainmod.install(platform=platform)
     finally:
         os.chdir(old_cwd)
@@ -125,7 +125,7 @@ def test_uninstall_removes_references_then_walks_dirs(tmp_path, fake_bundle):
     skill_dir = tmp_path / ".claude" / "skills" / "codebase-engine"
     assert (skill_dir / "references").is_dir()
 
-    with patch("codebase-engine.__main__.Path.home", return_value=tmp_path):
+    with patch("codebase_engine.__main__.Path.home", return_value=tmp_path):
         removed = mainmod._remove_skill_file(platform)
 
     assert removed
@@ -200,7 +200,7 @@ def test_hard_fail_when_bundle_dir_present_but_references_missing(tmp_path, monk
     (bundle_dir / "SKILL.md").write_text("body\n", encoding="utf-8")
     try:
         with pytest.raises(SystemExit) as exc:
-            with patch("codebase-engine.__main__.Path.home", return_value=tmp_path):
+            with patch("codebase_engine.__main__.Path.home", return_value=tmp_path):
                 monkeypatch.chdir(tmp_path)
                 mainmod._copy_skill_file("claude")
         assert exc.value.code == 1
@@ -250,7 +250,7 @@ def test_unbuilt_bundle_host_falls_back_to_monolith(tmp_path):
         pytest.skip("every progressive host bundle has shipped; nothing to fall back")
     assert not (PKG_DIR / "skills" / mainmod._PLATFORM_CONFIG[host]["skill_refs"]).exists()
     _install(tmp_path, host)
-    with patch("codebase-engine.__main__.Path.home", return_value=tmp_path):
+    with patch("codebase_engine.__main__.Path.home", return_value=tmp_path):
         dst = mainmod._platform_skill_destination(host)
     skill_dir = dst.parent
     assert (skill_dir / "SKILL.md").exists()
@@ -501,7 +501,7 @@ def test_amp_user_install_carries_references(tmp_path, monkeypatch):
     project = tmp_path / "project"
     project.mkdir()
     monkeypatch.chdir(project)
-    with patch("codebase-engine.__main__.Path.home", return_value=home):
+    with patch("codebase_engine.__main__.Path.home", return_value=home):
         monkeypatch.setattr(sys, "argv", ["codebase-engine", "amp", "install"])
         main()
         skill_dir = home / ".config" / "agents" / "skills" / "codebase-engine"

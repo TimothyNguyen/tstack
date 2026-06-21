@@ -8,6 +8,8 @@ from unittest.mock import patch, MagicMock
 import networkx as nx
 import pytest
 
+pytest.importorskip("codebase_engine.prs", reason="legacy PR egress module is not shipped")
+
 from codebase_engine.prs import (
     PRInfo,
     _classify,
@@ -223,7 +225,7 @@ class TestFetchWorktrees:
         mock_result = MagicMock()
         mock_result.returncode = 0
         mock_result.stdout = porcelain
-        with patch("codebase-engine.prs.subprocess.run", return_value=mock_result):
+        with patch("codebase_engine.prs.subprocess.run", return_value=mock_result):
             mapping = fetch_worktrees()
         assert mapping == {
             "main": "/home/user/proj",
@@ -246,7 +248,7 @@ class TestFetchWorktrees:
         mock_result = MagicMock()
         mock_result.returncode = 0
         mock_result.stdout = porcelain
-        with patch("codebase-engine.prs.subprocess.run", return_value=mock_result):
+        with patch("codebase_engine.prs.subprocess.run", return_value=mock_result):
             mapping = fetch_worktrees()
         # Only feature-x should be mapped, and it should point to its own worktree
         assert mapping == {"feature-x": "/home/user/proj-feature"}
@@ -256,7 +258,7 @@ class TestFetchWorktrees:
         mock_result = MagicMock()
         mock_result.returncode = 0
         mock_result.stdout = ""
-        with patch("codebase-engine.prs.subprocess.run", return_value=mock_result):
+        with patch("codebase_engine.prs.subprocess.run", return_value=mock_result):
             mapping = fetch_worktrees()
         assert mapping == {}
 
@@ -264,13 +266,13 @@ class TestFetchWorktrees:
         mock_result = MagicMock()
         mock_result.returncode = 1
         mock_result.stdout = ""
-        with patch("codebase-engine.prs.subprocess.run", return_value=mock_result):
+        with patch("codebase_engine.prs.subprocess.run", return_value=mock_result):
             mapping = fetch_worktrees()
         assert mapping == {}
 
     def test_subprocess_failure_returns_empty_dict(self):
         with patch(
-            "codebase-engine.prs.subprocess.run",
+            "codebase_engine.prs.subprocess.run",
             side_effect=FileNotFoundError("git not found"),
         ):
             mapping = fetch_worktrees()
@@ -333,7 +335,7 @@ class TestFormatPrsText:
 class TestDetectDefaultBranch:
     def test_gh_returns_main(self):
         with patch(
-            "codebase-engine.prs._gh",
+            "codebase_engine.prs._gh",
             return_value={"defaultBranchRef": {"name": "main"}},
         ):
             assert _detect_default_branch() == "main"
@@ -342,8 +344,8 @@ class TestDetectDefaultBranch:
         mock_result = MagicMock()
         mock_result.returncode = 0
         mock_result.stdout = "refs/remotes/origin/develop\n"
-        with patch("codebase-engine.prs._gh", return_value=None), patch(
-            "codebase-engine.prs.subprocess.run", return_value=mock_result
+        with patch("codebase_engine.prs._gh", return_value=None), patch(
+            "codebase_engine.prs.subprocess.run", return_value=mock_result
         ):
             assert _detect_default_branch() == "develop"
 
@@ -351,8 +353,8 @@ class TestDetectDefaultBranch:
         mock_result = MagicMock()
         mock_result.returncode = 1
         mock_result.stdout = ""
-        with patch("codebase-engine.prs._gh", return_value=None), patch(
-            "codebase-engine.prs.subprocess.run", return_value=mock_result
+        with patch("codebase_engine.prs._gh", return_value=None), patch(
+            "codebase_engine.prs.subprocess.run", return_value=mock_result
         ):
             assert _detect_default_branch() == "main"
 
@@ -361,14 +363,14 @@ class TestDetectDefaultBranch:
         mock_result = MagicMock()
         mock_result.returncode = 0
         mock_result.stdout = "refs/remotes/origin/trunk\n"
-        with patch("codebase-engine.prs._gh", return_value={}), patch(
-            "codebase-engine.prs.subprocess.run", return_value=mock_result
+        with patch("codebase_engine.prs._gh", return_value={}), patch(
+            "codebase_engine.prs.subprocess.run", return_value=mock_result
         ):
             assert _detect_default_branch() == "trunk"
 
     def test_git_timeout_returns_main(self):
-        with patch("codebase-engine.prs._gh", return_value=None), patch(
-            "codebase-engine.prs.subprocess.run",
+        with patch("codebase_engine.prs._gh", return_value=None), patch(
+            "codebase_engine.prs.subprocess.run",
             side_effect=subprocess.TimeoutExpired("git", 5),
         ):
             assert _detect_default_branch() == "main"

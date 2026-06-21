@@ -58,7 +58,7 @@ def test_skill_roundtrip_at_real_destination(platform, project, tmp_path, monkey
     project_dir.mkdir()
     monkeypatch.chdir(project_dir)
 
-    with patch("codebase-engine.__main__.Path.home", return_value=home):
+    with patch("codebase_engine.__main__.Path.home", return_value=home):
         dst = mainmod._platform_skill_destination(
             platform, project=project, project_dir=project_dir
         )
@@ -99,7 +99,7 @@ def test_amp_user_install_at_corrected_agents_path(tmp_path, monkeypatch):
     home = tmp_path / "home"
     home.mkdir()
     monkeypatch.chdir(tmp_path)
-    with patch("codebase-engine.__main__.Path.home", return_value=home):
+    with patch("codebase_engine.__main__.Path.home", return_value=home):
         dst = mainmod._copy_skill_file("amp", project=False)
         assert dst == home / ".config" / "agents" / "skills" / "codebase-engine" / "SKILL.md"
         assert dst.exists()
@@ -114,7 +114,7 @@ def test_amp_project_install_at_agents_path(tmp_path, monkeypatch):
     project_dir = tmp_path / "proj"
     project_dir.mkdir()
     monkeypatch.chdir(project_dir)
-    with patch("codebase-engine.__main__.Path.home", return_value=tmp_path / "home"):
+    with patch("codebase_engine.__main__.Path.home", return_value=tmp_path / "home"):
         dst = mainmod._copy_skill_file("amp", project=True, project_dir=project_dir)
         assert dst == project_dir / ".agents" / "skills" / "codebase-engine" / "SKILL.md"
         assert dst.exists()
@@ -129,7 +129,7 @@ def test_vscode_install_uninstall_roundtrip(tmp_path, monkeypatch):
     home.mkdir()
     project_dir.mkdir()
     monkeypatch.chdir(project_dir)
-    with patch("codebase-engine.__main__.Path.home", return_value=home):
+    with patch("codebase_engine.__main__.Path.home", return_value=home):
         mainmod.vscode_install(project_dir=project_dir)
         skill = home / ".copilot" / "skills" / "codebase-engine" / "SKILL.md"
         instructions = project_dir / ".github" / "copilot-instructions.md"
@@ -152,7 +152,7 @@ def _install_via_entrypoint(tmp_path, platform):
     old_cwd = Path.cwd()
     try:
         os.chdir(tmp_path)
-        with patch("codebase-engine.__main__.Path.home", return_value=tmp_path):
+        with patch("codebase_engine.__main__.Path.home", return_value=tmp_path):
             mainmod.install(platform=platform)
     finally:
         os.chdir(old_cwd)
@@ -163,7 +163,7 @@ def _copy_in_tmp(tmp_path, platform):
     old_cwd = Path.cwd()
     try:
         os.chdir(tmp_path)
-        with patch("codebase-engine.__main__.Path.home", return_value=tmp_path):
+        with patch("codebase_engine.__main__.Path.home", return_value=tmp_path):
             mainmod._copy_skill_file(platform)
     finally:
         os.chdir(old_cwd)
@@ -187,7 +187,7 @@ def test_install_entrypoint_roundtrip_for_progressive_and_monolith(tmp_path):
             assert (skill_dir / "references").is_dir()
         else:
             assert not (skill_dir / "references").exists()
-        with patch("codebase-engine.__main__.Path.home", return_value=tmp_path):
+        with patch("codebase_engine.__main__.Path.home", return_value=tmp_path):
             mainmod._remove_skill_file(platform)
         assert not (skill_dir / "SKILL.md").exists()
 
@@ -307,7 +307,7 @@ def test_failed_copytree_leaves_no_partial_references(tmp_path, fake_progressive
     (good / "keep.md").write_text("keep\n", encoding="utf-8")
 
     boom = RuntimeError("disk full")
-    with patch("codebase-engine.__main__.shutil.copytree", side_effect=boom):
+    with patch("codebase_engine.__main__.shutil.copytree", side_effect=boom):
         with pytest.raises(RuntimeError):
             mainmod._install_skill_references(skill_dst, PKG_DIR / "skills" / "claude" / "references")
 

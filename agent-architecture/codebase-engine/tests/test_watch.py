@@ -349,7 +349,7 @@ def test_rebuild_lock_non_blocking_does_not_clobber_holder(tmp_path):
 
 
 def test_rebuild_code_is_idempotent_when_cluster_ids_flap(tmp_path, monkeypatch):
-    from codebase-engine import cluster as cluster_mod
+    from codebase_engine import cluster as cluster_mod
     from codebase_engine.watch import _rebuild_code
 
     src = tmp_path / "app.py"
@@ -382,7 +382,7 @@ def test_rebuild_code_is_idempotent_when_cluster_ids_flap(tmp_path, monkeypatch)
 
 
 def test_rebuild_code_skips_cluster_when_topology_unchanged(tmp_path, monkeypatch):
-    from codebase-engine import cluster as cluster_mod
+    from codebase_engine import cluster as cluster_mod
     from codebase_engine.watch import _rebuild_code
 
     src = tmp_path / "app.py"
@@ -422,7 +422,7 @@ def test_watch_handler_honors_codebaseignore(tmp_path, monkeypatch):
     Time Machine writes, …) don't wake the rebuild pipeline.
     """
     import threading
-    from codebase-engine import watch as watch_mod
+    from codebase_engine import watch as watch_mod
 
     watch_root = tmp_path / ".hidden-parent" / "corpus"
     watch_root.mkdir(parents=True)
@@ -468,8 +468,8 @@ def test_watch_loads_codebaseignore_once(tmp_path, monkeypatch):
     thousands of times per second.
     """
     import threading
-    from codebase-engine import watch as watch_mod
-    from codebase-engine import detect as detect_mod
+    from codebase_engine import watch as watch_mod
+    from codebase_engine import detect as detect_mod
 
     (tmp_path / ".codebaseignore").write_text("ignored/\n", encoding="utf-8")
     (tmp_path / "ignored").mkdir()
@@ -778,7 +778,7 @@ def test_rebuild_code_queues_on_lock_contention(tmp_path, monkeypatch, capsys):
 def test_rebuild_code_merges_pending_on_acquire(tmp_path, monkeypatch):
     """#1059: the process that acquires the lock must drain .pending_changes
     and pass the merged change set to the inner rebuild call."""
-    from codebase-engine import watch as watch_mod
+    from codebase_engine import watch as watch_mod
 
     out = tmp_path / "codebase-out"
     out.mkdir()
@@ -818,7 +818,7 @@ def test_rebuild_code_merges_pending_on_acquire(tmp_path, monkeypatch):
 def test_rebuild_code_drains_late_arrivals(tmp_path, monkeypatch):
     """#1059: after the primary rebuild, the lock-holder must loop and drain
     any paths queued by hooks that arrived mid-rebuild."""
-    from codebase-engine import watch as watch_mod
+    from codebase_engine import watch as watch_mod
     from codebase_engine.watch import _rebuild_code as orig_rebuild
 
     out = tmp_path / "codebase-out"
@@ -856,7 +856,7 @@ def test_rebuild_code_full_corpus_skips_pending_queue(tmp_path, monkeypatch):
     """#1059: changed_paths=None means a full-corpus rebuild — the queue
     must not be touched on the failure path because there is nothing
     incremental to preserve."""
-    from codebase-engine import watch as watch_mod
+    from codebase_engine import watch as watch_mod
     from codebase_engine.watch import _rebuild_code as orig_rebuild
 
     out = tmp_path / "codebase-out"

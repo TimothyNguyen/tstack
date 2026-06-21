@@ -221,7 +221,7 @@ def test_extract_without_key_still_errors_when_docs_present(
     out_dir = tmp_path / "out"
     _clear_backend_keys(monkeypatch)
     # Patch detect_backend too so ambient AWS/ollama env can't slip through.
-    monkeypatch.setattr("codebase-engine.llm.detect_backend", lambda: None)
+    monkeypatch.setattr("codebase_engine.llm.detect_backend", lambda: None)
     monkeypatch.setattr(mainmod, "_check_skill_version", lambda _: None)
     monkeypatch.setattr(
         mainmod.sys, "argv",

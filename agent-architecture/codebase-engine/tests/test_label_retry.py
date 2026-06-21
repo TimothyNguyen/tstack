@@ -6,7 +6,7 @@ from __future__ import annotations
 import json
 import re
 
-from codebase-engine import llm as llm_mod
+from codebase_engine import llm as llm_mod
 
 
 def test_label_batch_recovers_via_split_on_invalid_json(monkeypatch):

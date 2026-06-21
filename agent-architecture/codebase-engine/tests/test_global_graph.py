@@ -96,9 +96,9 @@ def test_global_add_creates_global_graph(tmp_path):
     _graph_to_json(G, src_graph)
 
     global_dir = tmp_path / ".codebase-engine"
-    with patch("codebase-engine.global_graph._GLOBAL_DIR", global_dir), \
-         patch("codebase-engine.global_graph._GLOBAL_GRAPH", global_dir / "global-graph.json"), \
-         patch("codebase-engine.global_graph._GLOBAL_MANIFEST", global_dir / "global-manifest.json"):
+    with patch("codebase_engine.global_graph._GLOBAL_DIR", global_dir), \
+         patch("codebase_engine.global_graph._GLOBAL_GRAPH", global_dir / "global-graph.json"), \
+         patch("codebase_engine.global_graph._GLOBAL_MANIFEST", global_dir / "global-manifest.json"):
         from codebase_engine.global_graph import global_add
         result = global_add(src_graph, "repoA")
 
@@ -116,9 +116,9 @@ def test_global_add_skip_on_unchanged_hash(tmp_path):
     _graph_to_json(G, src_graph)
 
     global_dir = tmp_path / ".codebase-engine"
-    with patch("codebase-engine.global_graph._GLOBAL_DIR", global_dir), \
-         patch("codebase-engine.global_graph._GLOBAL_GRAPH", global_dir / "global-graph.json"), \
-         patch("codebase-engine.global_graph._GLOBAL_MANIFEST", global_dir / "global-manifest.json"):
+    with patch("codebase_engine.global_graph._GLOBAL_DIR", global_dir), \
+         patch("codebase_engine.global_graph._GLOBAL_GRAPH", global_dir / "global-graph.json"), \
+         patch("codebase_engine.global_graph._GLOBAL_MANIFEST", global_dir / "global-manifest.json"):
         from codebase_engine.global_graph import global_add
         global_add(src_graph, "repoA")
         result2 = global_add(src_graph, "repoA")
@@ -137,9 +137,9 @@ def test_global_add_two_repos_no_collision(tmp_path):
     global_dir = tmp_path / ".codebase-engine"
     global_graph_path = global_dir / "global-graph.json"
     global_manifest_path = global_dir / "global-manifest.json"
-    with patch("codebase-engine.global_graph._GLOBAL_DIR", global_dir), \
-         patch("codebase-engine.global_graph._GLOBAL_GRAPH", global_graph_path), \
-         patch("codebase-engine.global_graph._GLOBAL_MANIFEST", global_manifest_path):
+    with patch("codebase_engine.global_graph._GLOBAL_DIR", global_dir), \
+         patch("codebase_engine.global_graph._GLOBAL_GRAPH", global_graph_path), \
+         patch("codebase_engine.global_graph._GLOBAL_MANIFEST", global_manifest_path):
         from codebase_engine.global_graph import global_add, _load_global_graph
         global_add(g1, "repoA")
         global_add(g2, "repoB")
@@ -156,9 +156,9 @@ def test_global_remove(tmp_path):
     _graph_to_json(G, src_graph)
 
     global_dir = tmp_path / ".codebase-engine"
-    with patch("codebase-engine.global_graph._GLOBAL_DIR", global_dir), \
-         patch("codebase-engine.global_graph._GLOBAL_GRAPH", global_dir / "global-graph.json"), \
-         patch("codebase-engine.global_graph._GLOBAL_MANIFEST", global_dir / "global-manifest.json"):
+    with patch("codebase_engine.global_graph._GLOBAL_DIR", global_dir), \
+         patch("codebase_engine.global_graph._GLOBAL_GRAPH", global_dir / "global-graph.json"), \
+         patch("codebase_engine.global_graph._GLOBAL_MANIFEST", global_dir / "global-manifest.json"):
         from codebase_engine.global_graph import global_add, global_remove
         global_add(src_graph, "repoA")
         removed = global_remove("repoA")
@@ -166,9 +166,9 @@ def test_global_remove(tmp_path):
     assert removed > 0
     # manifest should no longer list repoA - need to re-patch for list call
     global_dir2 = global_dir  # same dir
-    with patch("codebase-engine.global_graph._GLOBAL_DIR", global_dir2), \
-         patch("codebase-engine.global_graph._GLOBAL_GRAPH", global_dir2 / "global-graph.json"), \
-         patch("codebase-engine.global_graph._GLOBAL_MANIFEST", global_dir2 / "global-manifest.json"):
+    with patch("codebase_engine.global_graph._GLOBAL_DIR", global_dir2), \
+         patch("codebase_engine.global_graph._GLOBAL_GRAPH", global_dir2 / "global-graph.json"), \
+         patch("codebase_engine.global_graph._GLOBAL_MANIFEST", global_dir2 / "global-manifest.json"):
         from codebase_engine.global_graph import global_list
         repos = global_list()
     assert "repoA" not in repos
@@ -176,9 +176,9 @@ def test_global_remove(tmp_path):
 
 def test_global_remove_unknown_tag_raises(tmp_path):
     global_dir = tmp_path / ".codebase-engine"
-    with patch("codebase-engine.global_graph._GLOBAL_DIR", global_dir), \
-         patch("codebase-engine.global_graph._GLOBAL_GRAPH", global_dir / "global-graph.json"), \
-         patch("codebase-engine.global_graph._GLOBAL_MANIFEST", global_dir / "global-manifest.json"):
+    with patch("codebase_engine.global_graph._GLOBAL_DIR", global_dir), \
+         patch("codebase_engine.global_graph._GLOBAL_GRAPH", global_dir / "global-graph.json"), \
+         patch("codebase_engine.global_graph._GLOBAL_MANIFEST", global_dir / "global-manifest.json"):
         from codebase_engine.global_graph import global_remove
         with pytest.raises(KeyError):
             global_remove("nonexistent")
@@ -192,9 +192,9 @@ def test_global_add_collision_warning(tmp_path, capsys):
     _graph_to_json(G, g2)
 
     global_dir = tmp_path / ".codebase-engine"
-    with patch("codebase-engine.global_graph._GLOBAL_DIR", global_dir), \
-         patch("codebase-engine.global_graph._GLOBAL_GRAPH", global_dir / "global-graph.json"), \
-         patch("codebase-engine.global_graph._GLOBAL_MANIFEST", global_dir / "global-manifest.json"):
+    with patch("codebase_engine.global_graph._GLOBAL_DIR", global_dir), \
+         patch("codebase_engine.global_graph._GLOBAL_GRAPH", global_dir / "global-graph.json"), \
+         patch("codebase_engine.global_graph._GLOBAL_MANIFEST", global_dir / "global-manifest.json"):
         from codebase_engine.global_graph import global_add
         global_add(g1, "myrepo")
         global_add(g2, "myrepo")  # different source path, same tag
@@ -302,9 +302,9 @@ def test_global_add_rewires_edges_to_deduplicated_externals(tmp_path):
     _graph_to_json(GB, g2)
 
     global_dir = tmp_path / ".codebase-engine"
-    with patch("codebase-engine.global_graph._GLOBAL_DIR", global_dir), \
-         patch("codebase-engine.global_graph._GLOBAL_GRAPH", global_dir / "global-graph.json"), \
-         patch("codebase-engine.global_graph._GLOBAL_MANIFEST", global_dir / "global-manifest.json"):
+    with patch("codebase_engine.global_graph._GLOBAL_DIR", global_dir), \
+         patch("codebase_engine.global_graph._GLOBAL_GRAPH", global_dir / "global-graph.json"), \
+         patch("codebase_engine.global_graph._GLOBAL_MANIFEST", global_dir / "global-manifest.json"):
         from codebase_engine.global_graph import global_add, _load_global_graph
         global_add(g1, "repoA")
         global_add(g2, "repoB")
@@ -330,10 +330,10 @@ def test_global_add_rejects_oversized_source_graph(monkeypatch, tmp_path):
     _graph_to_json(G, src_graph)
 
     global_dir = tmp_path / ".codebase-engine"
-    monkeypatch.setattr("codebase-engine.security._MAX_GRAPH_FILE_BYTES", 8)
-    with patch("codebase-engine.global_graph._GLOBAL_DIR", global_dir), \
-         patch("codebase-engine.global_graph._GLOBAL_GRAPH", global_dir / "global-graph.json"), \
-         patch("codebase-engine.global_graph._GLOBAL_MANIFEST", global_dir / "global-manifest.json"):
+    monkeypatch.setattr("codebase_engine.security._MAX_GRAPH_FILE_BYTES", 8)
+    with patch("codebase_engine.global_graph._GLOBAL_DIR", global_dir), \
+         patch("codebase_engine.global_graph._GLOBAL_GRAPH", global_dir / "global-graph.json"), \
+         patch("codebase_engine.global_graph._GLOBAL_MANIFEST", global_dir / "global-manifest.json"):
         from codebase_engine.global_graph import global_add
         with pytest.raises(ValueError, match="exceeds"):
             global_add(src_graph, "repoA")

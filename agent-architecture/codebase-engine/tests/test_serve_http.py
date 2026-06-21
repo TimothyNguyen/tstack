@@ -16,7 +16,7 @@ pytest.importorskip("starlette")
 
 from starlette.testclient import TestClient  # noqa: E402
 
-from codebase-engine import serve as serve_mod  # noqa: E402
+from codebase_engine import serve as serve_mod  # noqa: E402
 
 SAMPLE_GRAPH = {
     "directed": True,

@@ -674,6 +674,6 @@ def test_build_merge_rejects_oversized_existing_graph(monkeypatch, tmp_path):
 
     graph_path = tmp_path / "graph.json"
     graph_path.write_text(json.dumps({"nodes": [], "links": []}), encoding="utf-8")
-    monkeypatch.setattr("codebase-engine.security._MAX_GRAPH_FILE_BYTES", 8)
+    monkeypatch.setattr("codebase_engine.security._MAX_GRAPH_FILE_BYTES", 8)
     with pytest.raises(ValueError, match="exceeds"):
         build_merge([], graph_path, dedup=False)

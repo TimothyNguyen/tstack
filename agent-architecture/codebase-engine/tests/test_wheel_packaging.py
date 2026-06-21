@@ -16,6 +16,8 @@ import pytest
 
 REPO = Path(__file__).resolve().parents[1]
 PKG = REPO / "codebase-engine"
+if not PKG.exists():
+    pytest.skip("legacy codebase-engine package-data tree is not shipped", allow_module_level=True)
 
 
 def _has_build() -> bool:

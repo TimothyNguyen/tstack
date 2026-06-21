@@ -1,7 +1,7 @@
 import unicodedata
 from pathlib import Path
 from codebase_engine.detect import classify_file, count_words, detect, detect_incremental, save_manifest, FileType, _looks_like_paper, _is_ignored, _load_codebaseignore, _is_sensitive
-from codebase-engine import detect as detect_mod
+from codebase_engine import detect as detect_mod
 
 FIXTURES = Path(__file__).parent / "fixtures"
 

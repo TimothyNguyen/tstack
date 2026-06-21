@@ -29,7 +29,7 @@ def _install(tmp_path, platform):
     old_cwd = Path.cwd()
     try:
         os.chdir(tmp_path)
-        with patch("codebase-engine.__main__.Path.home", return_value=tmp_path):
+        with patch("codebase_engine.__main__.Path.home", return_value=tmp_path):
             install(platform=platform)
     finally:
         os.chdir(old_cwd)
@@ -61,7 +61,7 @@ def test_install_positional_platform_opencode(tmp_path, monkeypatch):
     from codebase_engine.__main__ import main
     monkeypatch.chdir(tmp_path)
     monkeypatch.setattr(sys, "argv", ["codebase-engine", "install", "opencode"])
-    with patch("codebase-engine.__main__.Path.home", return_value=tmp_path):
+    with patch("codebase_engine.__main__.Path.home", return_value=tmp_path):
         main()
     assert (tmp_path / ".config" / "opencode" / "skills" / "codebase-engine" / "SKILL.md").exists()
     assert not (tmp_path / ".claude" / "skills" / "codebase-engine" / "SKILL.md").exists()
@@ -74,7 +74,7 @@ def test_install_project_claude_writes_project_scope(tmp_path, monkeypatch, caps
     project.mkdir()
     monkeypatch.chdir(project)
     monkeypatch.setattr(sys, "argv", ["codebase-engine", "install", "--project"])
-    with patch("codebase-engine.__main__.Path.home", return_value=home):
+    with patch("codebase_engine.__main__.Path.home", return_value=home):
         main()
     assert (project / ".claude" / "skills" / "codebase-engine" / "SKILL.md").exists()
     assert (project / ".claude" / "CLAUDE.md").exists()
@@ -91,7 +91,7 @@ def test_install_project_codex_writes_skill_and_agents(tmp_path, monkeypatch):
     project.mkdir()
     monkeypatch.chdir(project)
     monkeypatch.setattr(sys, "argv", ["codebase-engine", "install", "--project", "--platform", "codex"])
-    with patch("codebase-engine.__main__.Path.home", return_value=home):
+    with patch("codebase_engine.__main__.Path.home", return_value=home):
         main()
     assert (project / ".codex" / "skills" / "codebase-engine" / "SKILL.md").exists()
     assert (project / "AGENTS.md").exists()
@@ -108,7 +108,7 @@ def test_claude_subcommand_project_install_and_uninstall_are_project_scoped(tmp_
     user_skill.parent.mkdir(parents=True)
     user_skill.write_text("user skill")
     monkeypatch.chdir(project)
-    with patch("codebase-engine.__main__.Path.home", return_value=home):
+    with patch("codebase_engine.__main__.Path.home", return_value=home):
         monkeypatch.setattr(sys, "argv", ["codebase-engine", "claude", "install", "--project"])
         main()
         assert (project / ".claude" / "skills" / "codebase-engine" / "SKILL.md").exists()
@@ -134,7 +134,7 @@ def test_codex_subcommand_project_install_and_uninstall_are_project_scoped(tmp_p
     user_skill.parent.mkdir(parents=True)
     user_skill.write_text("user skill")
     monkeypatch.chdir(project)
-    with patch("codebase-engine.__main__.Path.home", return_value=home):
+    with patch("codebase_engine.__main__.Path.home", return_value=home):
         monkeypatch.setattr(sys, "argv", ["codebase-engine", "codex", "install", "--project"])
         main()
         assert (project / ".codex" / "skills" / "codebase-engine" / "SKILL.md").exists()
@@ -160,7 +160,7 @@ def test_antigravity_install_project_writes_project_skill(tmp_path, monkeypatch)
     project.mkdir()
     monkeypatch.chdir(project)
     monkeypatch.setattr(sys, "argv", ["codebase-engine", "antigravity", "install", "--project"])
-    with patch("codebase-engine.__main__.Path.home", return_value=home):
+    with patch("codebase_engine.__main__.Path.home", return_value=home):
         main()
     assert (project / ".agents" / "skills" / "codebase-engine" / "SKILL.md").exists()
     assert not (home / ".agents" / "skills" / "codebase-engine" / "SKILL.md").exists()
@@ -170,7 +170,7 @@ def test_install_help_does_not_install_default(tmp_path, monkeypatch, capsys):
     from codebase_engine.__main__ import main
     monkeypatch.chdir(tmp_path)
     monkeypatch.setattr(sys, "argv", ["codebase-engine", "install", "opencode", "--help"])
-    with patch("codebase-engine.__main__.Path.home", return_value=tmp_path):
+    with patch("codebase_engine.__main__.Path.home", return_value=tmp_path):
         main()
     out = capsys.readouterr().out
     assert "Usage: codebase-engine install" in out
@@ -410,7 +410,7 @@ def test_uninstall_project_removes_project_skill_only(tmp_path, monkeypatch):
     user_skill.parent.mkdir(parents=True)
     user_skill.write_text("user skill")
     monkeypatch.chdir(project)
-    with patch("codebase-engine.__main__.Path.home", return_value=home):
+    with patch("codebase_engine.__main__.Path.home", return_value=home):
         monkeypatch.setattr(sys, "argv", ["codebase-engine", "install", "--project", "--platform", "codex"])
         main()
         monkeypatch.setattr(sys, "argv", ["codebase-engine", "uninstall", "--project", "--platform", "codex"])
@@ -429,7 +429,7 @@ def test_uninstall_project_without_platform_removes_project_installs(tmp_path, m
     user_skill.parent.mkdir(parents=True)
     user_skill.write_text("user skill")
     monkeypatch.chdir(project)
-    with patch("codebase-engine.__main__.Path.home", return_value=home):
+    with patch("codebase_engine.__main__.Path.home", return_value=home):
         monkeypatch.setattr(sys, "argv", ["codebase-engine", "install", "--project"])
         main()
         monkeypatch.setattr(sys, "argv", ["codebase-engine", "uninstall", "--project"])
@@ -449,7 +449,7 @@ def test_antigravity_uninstall_project_removes_project_skill_only(tmp_path, monk
     global_skill.parent.mkdir(parents=True)
     global_skill.write_text("global skill")
     monkeypatch.chdir(project)
-    with patch("codebase-engine.__main__.Path.home", return_value=home):
+    with patch("codebase_engine.__main__.Path.home", return_value=home):
         monkeypatch.setattr(sys, "argv", ["codebase-engine", "antigravity", "install", "--project"])
         main()
         monkeypatch.setattr(sys, "argv", ["codebase-engine", "antigravity", "uninstall", "--project"])
@@ -465,7 +465,7 @@ def test_antigravity_global_install_writes_gemini_config_skills(tmp_path, monkey
     project = tmp_path / "project"
     project.mkdir()
     monkeypatch.chdir(project)
-    with patch("codebase-engine.__main__.Path.home", return_value=home):
+    with patch("codebase_engine.__main__.Path.home", return_value=home):
         monkeypatch.setattr(sys, "argv", ["codebase-engine", "antigravity", "install"])
         main()
     global_skill = home / ".gemini" / "config" / "skills" / "codebase-engine" / "SKILL.md"
@@ -484,7 +484,7 @@ def test_antigravity_global_uninstall_removes_gemini_config_skill(tmp_path, monk
     project = tmp_path / "project"
     project.mkdir()
     monkeypatch.chdir(project)
-    with patch("codebase-engine.__main__.Path.home", return_value=home):
+    with patch("codebase_engine.__main__.Path.home", return_value=home):
         monkeypatch.setattr(sys, "argv", ["codebase-engine", "antigravity", "install"])
         main()
         global_skill = home / ".gemini" / "config" / "skills" / "codebase-engine" / "SKILL.md"
@@ -515,14 +515,14 @@ def _agents_uninstall(tmp_path, platform=""):
 def _kilo_install(project_dir, home_dir):
     from codebase_engine.__main__ import _kilo_install as _install_fn
 
-    with patch("codebase-engine.__main__.Path.home", return_value=home_dir):
+    with patch("codebase_engine.__main__.Path.home", return_value=home_dir):
         _install_fn(project_dir)
 
 
 def _kilo_uninstall(project_dir, home_dir):
     from codebase_engine.__main__ import _kilo_uninstall as _uninstall_fn
 
-    with patch("codebase-engine.__main__.Path.home", return_value=home_dir):
+    with patch("codebase_engine.__main__.Path.home", return_value=home_dir):
         _uninstall_fn(project_dir)
 
 
@@ -881,7 +881,7 @@ def test_amp_user_install_lands_in_config_agents(tmp_path, monkeypatch):
     project.mkdir()
     monkeypatch.chdir(project)
     monkeypatch.setattr(sys, "argv", ["codebase-engine", "amp", "install"])
-    with patch("codebase-engine.__main__.Path.home", return_value=home):
+    with patch("codebase_engine.__main__.Path.home", return_value=home):
         main()
 
     correct = home / ".config" / "agents" / "skills" / "codebase-engine" / "SKILL.md"
@@ -904,7 +904,7 @@ def test_amp_install_cleans_legacy_amp_skills_dir(tmp_path, monkeypatch):
     (legacy / "SKILL.md").write_text("old amp skill", encoding="utf-8")
     monkeypatch.chdir(project)
     monkeypatch.setattr(sys, "argv", ["codebase-engine", "amp", "install"])
-    with patch("codebase-engine.__main__.Path.home", return_value=home):
+    with patch("codebase_engine.__main__.Path.home", return_value=home):
         main()
 
     assert not legacy.exists(), "legacy ~/.amp/skills/codebase-engine should be cleaned up"
@@ -919,7 +919,7 @@ def test_amp_user_uninstall_removes_skill_and_agents(tmp_path, monkeypatch):
     project = tmp_path / "project"
     project.mkdir()
     monkeypatch.chdir(project)
-    with patch("codebase-engine.__main__.Path.home", return_value=home):
+    with patch("codebase_engine.__main__.Path.home", return_value=home):
         monkeypatch.setattr(sys, "argv", ["codebase-engine", "amp", "install"])
         main()
         skill = home / ".config" / "agents" / "skills" / "codebase-engine" / "SKILL.md"
@@ -942,7 +942,7 @@ def test_amp_project_install_lands_in_dot_agents(tmp_path, monkeypatch):
     project.mkdir()
     monkeypatch.chdir(project)
     monkeypatch.setattr(sys, "argv", ["codebase-engine", "amp", "install", "--project"])
-    with patch("codebase-engine.__main__.Path.home", return_value=home):
+    with patch("codebase_engine.__main__.Path.home", return_value=home):
         main()
 
     assert (project / ".agents" / "skills" / "codebase-engine" / "SKILL.md").exists()
@@ -960,7 +960,7 @@ def test_uninstall_all_removes_amp_user_skill(tmp_path, monkeypatch):
     project = tmp_path / "project"
     project.mkdir()
     monkeypatch.chdir(project)
-    with patch("codebase-engine.__main__.Path.home", return_value=home):
+    with patch("codebase_engine.__main__.Path.home", return_value=home):
         monkeypatch.setattr(sys, "argv", ["codebase-engine", "amp", "install"])
         main()
         skill = home / ".config" / "agents" / "skills" / "codebase-engine" / "SKILL.md"

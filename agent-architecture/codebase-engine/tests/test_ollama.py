@@ -28,7 +28,7 @@ def test_ollama_loopback_and_lan_do_not_raise(capsys):
 
 def test_ollama_alias_resolving_to_link_local_blocked(monkeypatch):
     """A hostname that RESOLVES to a link-local IP is blocked, not just literals (F3)."""
-    from codebase-engine import llm
+    from codebase_engine import llm
 
     def fake_getaddrinfo(host, *a, **k):
         return [(2, 1, 6, "", ("169.254.169.254", 0))]  # alias -> metadata IP
@@ -102,7 +102,7 @@ def test_ollama_api_key_sentinel(monkeypatch):
         "output_tokens": 10,
         "finish_reason": "stop",
     }
-    with patch("codebase-engine.llm._call_openai_compat", return_value=fake_result) as mock_call:
+    with patch("codebase_engine.llm._call_openai_compat", return_value=fake_result) as mock_call:
         from codebase_engine.llm import extract_files_direct
         with tempfile.NamedTemporaryFile(suffix=".py", mode="w", delete=False) as f:
             f.write("x = 1\n")

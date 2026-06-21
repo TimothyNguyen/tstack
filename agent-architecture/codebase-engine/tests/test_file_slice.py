@@ -4,7 +4,7 @@ from pathlib import Path
 
 import pytest
 
-from codebase-engine import llm
+from codebase_engine import llm
 from codebase_engine.file_slice import (
     FileSlice,
     bisect_slice,

@@ -57,7 +57,7 @@ def test_query_cli_rejects_oversized_graph(monkeypatch, tmp_path, capsys):
 
     graph_path = _write_graph(tmp_path)
     monkeypatch.setattr(mainmod, "_check_skill_version", lambda _: None)
-    monkeypatch.setattr("codebase-engine.security._MAX_GRAPH_FILE_BYTES", 16)
+    monkeypatch.setattr("codebase_engine.security._MAX_GRAPH_FILE_BYTES", 16)
     monkeypatch.setattr(
         mainmod.sys,
         "argv",

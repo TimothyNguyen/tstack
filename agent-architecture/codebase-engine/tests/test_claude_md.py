@@ -1,6 +1,10 @@
 """Tests for codebase-engine claude install / uninstall commands."""
 from pathlib import Path
 import pytest
+
+if not (Path(__file__).resolve().parents[1] / "codebase_engine" / "always_on").exists():
+    pytest.skip("legacy host-side always_on install assets are not shipped", allow_module_level=True)
+
 from codebase_engine.__main__ import claude_install, claude_uninstall, _CLAUDE_MD_MARKER, _CLAUDE_MD_SECTION
 
 

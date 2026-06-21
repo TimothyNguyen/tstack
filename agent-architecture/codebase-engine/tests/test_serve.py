@@ -288,7 +288,7 @@ def test_load_graph_rejects_oversized_file(monkeypatch, tmp_path, capsys):
     data = json_graph.node_link_data(G, edges="links")
     p = tmp_path / "graph.json"
     p.write_text(json.dumps(data))
-    monkeypatch.setattr("codebase-engine.security._MAX_GRAPH_FILE_BYTES", 16)
+    monkeypatch.setattr("codebase_engine.security._MAX_GRAPH_FILE_BYTES", 16)
     with pytest.raises(SystemExit):
         _load_graph(str(p))
     err = capsys.readouterr().err
@@ -303,7 +303,7 @@ def test_load_graph_accepts_under_cap(monkeypatch, tmp_path):
     p = tmp_path / "graph.json"
     p.write_text(json.dumps(data))
     # Cap well above the actual file size — load proceeds.
-    monkeypatch.setattr("codebase-engine.security._MAX_GRAPH_FILE_BYTES", 10 * 1024 * 1024)
+    monkeypatch.setattr("codebase_engine.security._MAX_GRAPH_FILE_BYTES", 10 * 1024 * 1024)
     G2 = _load_graph(str(p))
     assert G2.number_of_nodes() == G.number_of_nodes()
 

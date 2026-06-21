@@ -178,6 +178,6 @@ def test_run_benchmark_rejects_oversized_graph(monkeypatch, tmp_path):
     G = _make_graph()
     graph_file = tmp_path / "graph.json"
     _write_graph(G, graph_file)
-    monkeypatch.setattr("codebase-engine.security._MAX_GRAPH_FILE_BYTES", 8)
+    monkeypatch.setattr("codebase_engine.security._MAX_GRAPH_FILE_BYTES", 8)
     with pytest.raises(ValueError, match="exceeds"):
         run_benchmark(str(graph_file))

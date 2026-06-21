@@ -94,7 +94,7 @@ def test_transcribe_force_reruns(tmp_path):
     fake_model = MagicMock()
     fake_model.transcribe.return_value = ([fake_segment], fake_info)
 
-    with patch("codebase-engine.transcribe._get_whisper", return_value=lambda *a, **kw: fake_model):
+    with patch("codebase_engine.transcribe._get_whisper", return_value=lambda *a, **kw: fake_model):
         result = transcribe(video, output_dir=out_dir, force=True)
 
     assert result.read_text() == "New transcript segment."
@@ -105,7 +105,7 @@ def test_transcribe_missing_faster_whisper(tmp_path):
     video = tmp_path / "clip.mp4"
     video.write_bytes(b"fake")
 
-    with patch("codebase-engine.transcribe._get_whisper", side_effect=ImportError("faster-whisper not installed")):
+    with patch("codebase_engine.transcribe._get_whisper", side_effect=ImportError("faster-whisper not installed")):
         with pytest.raises(ImportError):
             transcribe(video, output_dir=tmp_path / "out")
 
@@ -141,7 +141,7 @@ def test_transcribe_all_skips_failed(tmp_path):
     def raise_import(*args, **kwargs):
         raise ImportError("faster_whisper not installed")
 
-    with patch("codebase-engine.transcribe.transcribe", side_effect=RuntimeError("boom")):
+    with patch("codebase_engine.transcribe.transcribe", side_effect=RuntimeError("boom")):
         results = transcribe_all([str(video)], output_dir=tmp_path / "out")
 
     assert results == []

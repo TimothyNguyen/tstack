@@ -181,7 +181,7 @@ def test_load_graph_rejects_oversized_file(monkeypatch, tmp_path):
         json.dumps({"nodes": [], "links": []}),
         encoding="utf-8",
     )
-    monkeypatch.setattr("codebase-engine.security._MAX_GRAPH_FILE_BYTES", 8)
+    monkeypatch.setattr("codebase_engine.security._MAX_GRAPH_FILE_BYTES", 8)
     with pytest.raises(SystemExit) as excinfo:
         load_graph(graph_path)
     assert "exceeds" in str(excinfo.value)

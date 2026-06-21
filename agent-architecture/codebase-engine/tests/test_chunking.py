@@ -12,7 +12,7 @@ def no_tokenizer():
     of whether tiktoken is installed in the test environment. tiktoken's BPE
     compresses repeated/synthetic content heavily, which would make pack-size
     assertions tied to specific input sizes flaky."""
-    from codebase-engine import llm
+    from codebase_engine import llm
     with patch.object(llm, "_TOKENIZER", None):
         yield
 
@@ -110,7 +110,7 @@ def test_pack_chunks_rejects_non_positive_budget(tmp_path):
 def test_estimate_file_tokens_uses_tiktoken_when_available(tmp_path):
     """When tiktoken is installed, the estimator should call into it for
     accurate counts rather than the chars/4 heuristic."""
-    from codebase-engine import llm
+    from codebase_engine import llm
 
     f = tmp_path / "sample.py"
     text = "def hello():\n    return 'world'\n" * 50  # ~1500 chars
@@ -126,7 +126,7 @@ def test_estimate_file_tokens_uses_tiktoken_when_available(tmp_path):
 
 def test_estimate_file_tokens_falls_back_to_chars_when_no_tokenizer(tmp_path):
     """Without tiktoken installed, the estimator falls back to chars/4."""
-    from codebase-engine import llm
+    from codebase_engine import llm
 
     f = tmp_path / "sample.py"
     f.write_text("x" * 1_000)  # 1000 bytes
@@ -164,7 +164,7 @@ def test_corpus_parallel_runs_chunks_concurrently(tmp_path):
         time.sleep(0.3)
         return _stub_chunk_result(len(chunk), 0)
 
-    with patch("codebase-engine.llm.extract_files_direct", side_effect=slow_extract):
+    with patch("codebase_engine.llm.extract_files_direct", side_effect=slow_extract):
         t0 = time.time()
         # Force 4 chunks of 2 files each by setting a tight token budget.
         result = extract_corpus_parallel(
@@ -192,7 +192,7 @@ def test_corpus_parallel_sequential_when_max_concurrency_is_one(tmp_path):
         call_order.append(tuple(p.name for p in chunk))
         return _stub_chunk_result(len(chunk), len(call_order))
 
-    with patch("codebase-engine.llm.extract_files_direct", side_effect=record):
+    with patch("codebase_engine.llm.extract_files_direct", side_effect=record):
         extract_corpus_parallel(
             files, backend="kimi", token_budget=None, chunk_size=1, max_concurrency=1
         )
@@ -219,7 +219,7 @@ def test_corpus_parallel_continues_after_chunk_failure(tmp_path, capsys):
             raise RuntimeError("simulated API error")
         return _stub_chunk_result(len(chunk), call_count["n"])
 
-    with patch("codebase-engine.llm.extract_files_direct", side_effect=maybe_fail):
+    with patch("codebase_engine.llm.extract_files_direct", side_effect=maybe_fail):
         result = extract_corpus_parallel(
             files, backend="kimi", token_budget=None, chunk_size=1, max_concurrency=1
         )
@@ -245,7 +245,7 @@ def test_corpus_parallel_legacy_mode_when_token_budget_is_none(tmp_path):
         chunks_seen.append(len(chunk))
         return _stub_chunk_result(len(chunk), len(chunks_seen))
 
-    with patch("codebase-engine.llm.extract_files_direct", side_effect=record):
+    with patch("codebase_engine.llm.extract_files_direct", side_effect=record):
         extract_corpus_parallel(
             files, backend="kimi", token_budget=None, chunk_size=20, max_concurrency=1
         )
@@ -269,7 +269,7 @@ def test_corpus_parallel_token_budget_default_packs_files(tmp_path):
         chunks_seen.append(len(chunk))
         return _stub_chunk_result(len(chunk), len(chunks_seen))
 
-    with patch("codebase-engine.llm.extract_files_direct", side_effect=record):
+    with patch("codebase_engine.llm.extract_files_direct", side_effect=record):
         extract_corpus_parallel(files, backend="kimi", max_concurrency=1)
 
     # 50 tiny files at default 60k token budget should pack into 1 chunk
@@ -305,7 +305,7 @@ def test_adaptive_retry_returns_directly_when_not_truncated(tmp_path):
         calls.append(len(chunk))
         return _stub_with_finish(len(chunk), finish_reason="stop")
 
-    with patch("codebase-engine.llm.extract_files_direct", side_effect=stub):
+    with patch("codebase_engine.llm.extract_files_direct", side_effect=stub):
         result = _extract_with_adaptive_retry(
             files, backend="kimi", api_key=None, model=None, root=tmp_path, max_depth=3
         )
@@ -330,7 +330,7 @@ def test_adaptive_retry_splits_when_finish_reason_length(tmp_path):
         finish = "length" if len(chunk) == 4 else "stop"
         return _stub_with_finish(len(chunk), finish_reason=finish)
 
-    with patch("codebase-engine.llm.extract_files_direct", side_effect=stub):
+    with patch("codebase_engine.llm.extract_files_direct", side_effect=stub):
         result = _extract_with_adaptive_retry(
             files, backend="kimi", api_key=None, model=None, root=tmp_path, max_depth=3
         )
@@ -356,7 +356,7 @@ def test_adaptive_retry_recurses_for_persistent_truncation(tmp_path):
         finish = "length" if len(chunk) > 2 else "stop"
         return _stub_with_finish(len(chunk), finish_reason=finish)
 
-    with patch("codebase-engine.llm.extract_files_direct", side_effect=stub):
+    with patch("codebase_engine.llm.extract_files_direct", side_effect=stub):
         result = _extract_with_adaptive_retry(
             files, backend="kimi", api_key=None, model=None, root=tmp_path, max_depth=3
         )
@@ -382,7 +382,7 @@ def test_adaptive_retry_caps_at_max_depth(tmp_path, capsys):
         calls.append(len(chunk))
         return _stub_with_finish(len(chunk), finish_reason="length")
 
-    with patch("codebase-engine.llm.extract_files_direct", side_effect=always_truncate):
+    with patch("codebase_engine.llm.extract_files_direct", side_effect=always_truncate):
         _extract_with_adaptive_retry(
             files, backend="kimi", api_key=None, model=None, root=tmp_path, max_depth=2
         )
@@ -406,7 +406,7 @@ def test_adaptive_retry_single_file_truncation_does_not_recurse(tmp_path, capsys
         calls.append(len(chunk))
         return _stub_with_finish(len(chunk), finish_reason="length")
 
-    with patch("codebase-engine.llm.extract_files_direct", side_effect=stub):
+    with patch("codebase_engine.llm.extract_files_direct", side_effect=stub):
         _extract_with_adaptive_retry(
             [f], backend="kimi", api_key=None, model=None, root=tmp_path, max_depth=3
         )
@@ -434,7 +434,7 @@ def test_corpus_parallel_uses_adaptive_retry(tmp_path):
         return _stub_with_finish(len(chunk), finish_reason=finish)
 
     chunk_done_args = []
-    with patch("codebase-engine.llm.extract_files_direct", side_effect=stub):
+    with patch("codebase_engine.llm.extract_files_direct", side_effect=stub):
         result = extract_corpus_parallel(
             files,
             backend="kimi",

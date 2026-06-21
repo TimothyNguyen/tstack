@@ -21,7 +21,7 @@ from unittest.mock import MagicMock, call, patch
 
 import pytest
 
-from codebase-engine import llm
+from codebase_engine import llm
 
 # ── Helpers ────────────────────────────────────────────────────────────────────
 

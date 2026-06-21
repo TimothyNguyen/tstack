@@ -2,7 +2,7 @@
 
 import json
 
-from codebase-engine import semantic_cleanup as sc
+from codebase_engine import semantic_cleanup as sc
 
 
 def _valid_fragment():

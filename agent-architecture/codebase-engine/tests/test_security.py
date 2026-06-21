@@ -79,7 +79,7 @@ def test_safe_fetch_rejects_ftp_url():
 
 def test_safe_fetch_returns_bytes(tmp_path):
     mock_resp = _make_mock_response(b"hello world")
-    with patch("codebase-engine.security._build_opener") as mock_opener_fn:
+    with patch("codebase_engine.security._build_opener") as mock_opener_fn:
         mock_opener = MagicMock()
         mock_opener.open.return_value = mock_resp
         mock_opener_fn.return_value = mock_opener
@@ -88,7 +88,7 @@ def test_safe_fetch_returns_bytes(tmp_path):
 
 def test_safe_fetch_raises_on_non_2xx():
     mock_resp = _make_mock_response(b"Not Found", status=404)
-    with patch("codebase-engine.security._build_opener") as mock_opener_fn:
+    with patch("codebase_engine.security._build_opener") as mock_opener_fn:
         mock_opener = MagicMock()
         mock_opener.open.return_value = mock_resp
         mock_opener_fn.return_value = mock_opener
@@ -106,7 +106,7 @@ def test_safe_fetch_raises_on_size_exceeded():
     # Return the chunk twice so total > max_bytes=65536
     mock_resp.read.side_effect = [big_chunk, big_chunk, b""]
 
-    with patch("codebase-engine.security._build_opener") as mock_opener_fn:
+    with patch("codebase_engine.security._build_opener") as mock_opener_fn:
         mock_opener = MagicMock()
         mock_opener.open.return_value = mock_resp
         mock_opener_fn.return_value = mock_opener
@@ -121,7 +121,7 @@ def test_safe_fetch_raises_on_size_exceeded():
 def test_safe_fetch_text_decodes_utf8():
     content = "héllo wörld".encode("utf-8")
     mock_resp = _make_mock_response(content)
-    with patch("codebase-engine.security._build_opener") as mock_opener_fn:
+    with patch("codebase_engine.security._build_opener") as mock_opener_fn:
         mock_opener = MagicMock()
         mock_opener.open.return_value = mock_resp
         mock_opener_fn.return_value = mock_opener
@@ -131,7 +131,7 @@ def test_safe_fetch_text_decodes_utf8():
 def test_safe_fetch_text_replaces_bad_bytes():
     bad = b"hello \xff world"
     mock_resp = _make_mock_response(bad)
-    with patch("codebase-engine.security._build_opener") as mock_opener_fn:
+    with patch("codebase_engine.security._build_opener") as mock_opener_fn:
         mock_opener = MagicMock()
         mock_opener.open.return_value = mock_resp
         mock_opener_fn.return_value = mock_opener
@@ -212,7 +212,7 @@ def test_graph_size_cap_under_limit_returns_none(tmp_path):
 
 
 def test_graph_size_cap_over_limit_raises(monkeypatch, tmp_path):
-    monkeypatch.setattr("codebase-engine.security._MAX_GRAPH_FILE_BYTES", 16)
+    monkeypatch.setattr("codebase_engine.security._MAX_GRAPH_FILE_BYTES", 16)
     p = tmp_path / "graph.json"
     p.write_text('{"nodes": [], "links": [], "padding": "x" * 50}', encoding="utf-8")
     with pytest.raises(ValueError, match="exceeds"):
@@ -220,7 +220,7 @@ def test_graph_size_cap_over_limit_raises(monkeypatch, tmp_path):
 
 
 def test_graph_size_cap_error_message_includes_size_and_cap(monkeypatch, tmp_path):
-    monkeypatch.setattr("codebase-engine.security._MAX_GRAPH_FILE_BYTES", 8)
+    monkeypatch.setattr("codebase_engine.security._MAX_GRAPH_FILE_BYTES", 8)
     p = tmp_path / "graph.json"
     p.write_text("AAAAAAAAAAAAAAAA", encoding="utf-8")  # 16 bytes
     with pytest.raises(ValueError) as excinfo:
@@ -236,9 +236,9 @@ def test_graph_size_cap_at_boundary_passes(monkeypatch, tmp_path):
     p = tmp_path / "graph.json"
     payload = "A" * 32
     p.write_text(payload, encoding="utf-8")
-    monkeypatch.setattr("codebase-engine.security._MAX_GRAPH_FILE_BYTES", 32)
+    monkeypatch.setattr("codebase_engine.security._MAX_GRAPH_FILE_BYTES", 32)
     assert check_graph_file_size_cap(p) is None
-    monkeypatch.setattr("codebase-engine.security._MAX_GRAPH_FILE_BYTES", 31)
+    monkeypatch.setattr("codebase_engine.security._MAX_GRAPH_FILE_BYTES", 31)
     with pytest.raises(ValueError):
         check_graph_file_size_cap(p)
 

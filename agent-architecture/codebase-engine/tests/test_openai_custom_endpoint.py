@@ -6,7 +6,7 @@ These env vars point `--backend openai` at any OpenAI-compatible server
 
 import importlib
 
-from codebase-engine import llm
+from codebase_engine import llm
 
 
 def test_openai_defaults_without_env(monkeypatch):
