@@ -41,6 +41,10 @@ test('enterprise default policy keeps sensitive and side-effecting tools gated',
   for (const tool of ['browserRead', 'browserWrite', 'cookieImport', 'credentialRead', 'databaseWrite']) {
     assert.equal(policy.tools[tool], 'disabled', `${tool} must be disabled by default`);
   }
+
+  for (const tool of ['playwrightCli', 'devtoolsInspect']) {
+    assert.equal(policy.tools[tool], 'approval-required', `${tool} must require approval`);
+  }
 });
 
 test('enterprise default policy redacts prompt, file, and secret-like audit fields', () => {
@@ -55,6 +59,7 @@ test('enterprise default policy redacts prompt, file, and secret-like audit fiel
 
 test('enterprise default modules are disabled or optional, never enabled by default', () => {
   assert.equal(policy.modules.browser, 'disabled');
+  assert.equal(policy.modules.devtools, 'optional');
 
   for (const [moduleName, state] of Object.entries(policy.modules)) {
     assert.match(state, /^(disabled|optional)$/, `${moduleName} must not be enabled by default`);

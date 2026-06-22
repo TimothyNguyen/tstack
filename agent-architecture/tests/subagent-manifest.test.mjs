@@ -56,6 +56,20 @@ test('subagent manifest rejects secret-like manifest fields', () => {
   }), /forbidden field token/);
 });
 
+test('subagent manifest supports read-only devtools agent for Playwright evidence', () => {
+  const manifest = createSubagentManifest({
+    id: 'devtools-local-ui',
+    role: 'devtools-agent',
+    task: 'Inspect local UI buttons with Playwright and collect console evidence',
+    tools: ['browserRead', 'devtoolsInspect', 'playwrightCli'],
+  });
+
+  assert.equal(manifest.role, 'devtools-agent');
+  assert.equal(manifest.egress, 'disabled');
+  assert.equal(manifest.writes, 'disabled');
+  assert.equal(manifest.output, 'summary-and-evidence');
+});
+
 test('subagent artifacts stay under declared repo-local directory and redact results', () => {
   const baseDir = fs.mkdtempSync(path.join(os.tmpdir(), 'arch-subagents-'));
   const manifest = createSubagentManifest({

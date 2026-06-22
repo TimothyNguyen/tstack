@@ -33,6 +33,7 @@ artifacts by default, and report auditable outputs.
 | Test Engineer | Write scoped tests | Add or repair tests for assigned behavior. | Test paths only |
 | Reviewer | Read-only or patch | Find bugs, missing tests, unsafe behavior, and regressions. | No by default |
 | QA Agent | Optional browser/test | Run local app/test/browser checks and record evidence. | No by default |
+| Devtools Agent | Optional browser/devtools | Use Playwright CLI/MCP-style evidence collection for buttons, console, network, traces, and screenshots. | No |
 | Docs Agent | Write docs | Update README, docs, changelog, and release notes. | Docs only |
 | Release Agent | Git/release handoff | Prepare branch state, PR body, release checklist, and deployment notes. | Git write approval-required |
 
@@ -240,6 +241,8 @@ The first local-only deployment slice is implemented:
   audit envelopes.
 - `docs/subagent-e2e-spec.md` defines the implemented happy-path, reject, and
   boundary e2e flows and links them to automated tests.
+- `playwright.config.mjs` and `e2e/subagent-devtools.spec.mjs` provide a local
+  Playwright CLI smoke for button behavior and console-error checks.
 
 Run:
 

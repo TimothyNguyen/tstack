@@ -15,7 +15,9 @@
   ],
   "optionalModules": [
     "subagents",
-    "codebaseUnderstanding"
+    "codebaseUnderstanding",
+    "browser",
+    "devtools"
   ],
   "disabledByDefault": [
     "publicTelemetry",

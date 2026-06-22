@@ -77,6 +77,8 @@ test('subagents local profile enables orchestration skills without browser or eg
   for (const skill of ['autoplan', 'investigate', 'review', 'test', 'ship']) {
     assert.equal(profile.skills.includes(skill), true, `subagents-local should include ${skill}`);
   }
-  assert.equal(profile.optionalModules.includes('browser'), false);
+  assert.equal(profile.optionalModules.includes('browser'), true);
+  assert.equal(profile.optionalModules.includes('devtools'), true);
+  assert.equal(profile.disabledByDefault.includes('cookieImport'), true);
   assert.equal(profile.disabledByDefault.includes('publicTunnels'), true);
 });

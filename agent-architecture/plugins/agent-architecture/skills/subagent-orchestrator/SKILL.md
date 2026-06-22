@@ -20,7 +20,7 @@ allowed-tools:
 # Subagent Orchestrator
 
 Use this skill when a task should be split across planner, explorer,
-implementer, test-engineer, reviewer, QA, docs, or release roles.
+implementer, test-engineer, reviewer, QA, devtools, docs, or release roles.
 
 ## Rules
 
@@ -92,9 +92,12 @@ Start with:
 - `implementer`
 - `test-engineer`
 - `reviewer`
+- `devtools-agent` only when browser/devtools profile and policy gates are
+  active
 
-Defer browser QA and release automation until the browser and release policies
-are explicitly enabled.
+Defer product browser QA and release automation until the browser and release
+policies are explicitly enabled. `devtools-agent` may run local Playwright CLI
+smoke checks for buttons, console errors, traces, and screenshots when approved.
 
 ## Policy Requirements
 

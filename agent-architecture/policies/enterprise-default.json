@@ -26,6 +26,8 @@
     "testExecution": "allow",
     "browserRead": "disabled",
     "browserWrite": "disabled",
+    "playwrightCli": "approval-required",
+    "devtoolsInspect": "approval-required",
     "cookieImport": "disabled",
     "credentialRead": "disabled",
     "deploy": "approval-required",
@@ -56,6 +58,7 @@
   },
   "modules": {
     "browser": "disabled",
+    "devtools": "optional",
     "codebaseUnderstanding": "optional",
     "agUi": "optional",
     "mcp": "optional",

@@ -44,8 +44,22 @@ test('subagent e2e spec includes current pros, cons, and explicit exclusions', (
     'Local-first and private by default',
     'Git worktrees isolate write-capable agents',
     'orchestration plumbing, not true autonomous multi-agent runtime yet',
-    'No Playwright/browser QA subagent yet',
+    'Playwright smoke exists, but no product app/browser QA subagent yet',
     'Not Yet Covered',
+  ]) {
+    assert.match(spec, new RegExp(phrase.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')));
+  }
+});
+
+test('subagent e2e spec includes Playwright CLI and devtools agent coverage', () => {
+  const spec = read('docs/subagent-e2e-spec.md');
+  for (const phrase of [
+    'Playwright CLI Flow',
+    'Devtools Agent Flow',
+    'npm run test:e2e',
+    'devtools-agent',
+    'console errors',
+    'buttons respond',
   ]) {
     assert.match(spec, new RegExp(phrase.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')));
   }

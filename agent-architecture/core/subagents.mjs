@@ -56,6 +56,12 @@ const ROLE_DEFAULTS = {
     writeTools: false,
     requiresAllowedPaths: false,
   },
+  'devtools-agent': {
+    writes: 'disabled',
+    output: 'summary-and-evidence',
+    writeTools: false,
+    requiresAllowedPaths: false,
+  },
   'docs-agent': {
     writes: 'approval-required',
     output: 'summary-and-changed-files',
@@ -78,6 +84,8 @@ const ALLOWED_TOOLS = new Set([
   'testExecution',
   'browserRead',
   'browserWrite',
+  'devtoolsInspect',
+  'playwrightCli',
   'humanEscalation',
 ]);
 
