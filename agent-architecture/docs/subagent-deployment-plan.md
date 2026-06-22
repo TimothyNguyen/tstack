@@ -238,6 +238,8 @@ The first local-only deployment slice is implemented:
 - `subagent-orchestrator/` provides the user-facing skill entrypoint.
 - `subagent.*` event types are available for AG-UI-compatible progress and
   audit envelopes.
+- `docs/subagent-e2e-spec.md` defines the implemented happy-path, reject, and
+  boundary e2e flows and links them to automated tests.
 
 Run:
 
