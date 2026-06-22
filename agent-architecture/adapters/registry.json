@@ -1,0 +1,105 @@
+{
+  "version": 1,
+  "defaultEgress": "deny",
+  "adapters": [
+    {
+      "id": "ag-ui",
+      "skill": "adapter-ag-ui",
+      "module": "agUi",
+      "runtime": "event-transform",
+      "egress": "disabled",
+      "writes": "disabled",
+      "state": "local-only"
+    },
+    {
+      "id": "agentcore",
+      "skill": "adapter-agentcore",
+      "module": "agentCore",
+      "runtime": "host-adapter",
+      "egress": "disabled",
+      "writes": "approval-required",
+      "state": "local-only"
+    },
+    {
+      "id": "codegraph",
+      "skill": "adapter-codegraph",
+      "module": "codegraph",
+      "runtime": "code-index-adapter",
+      "egress": "disabled",
+      "writes": "disabled",
+      "state": "local-only"
+    },
+    {
+      "id": "databricks",
+      "skill": "adapter-databricks",
+      "module": "databricks",
+      "runtime": "sdk-adapter",
+      "egress": "approval-required",
+      "writes": "approval-required",
+      "state": "local-only"
+    },
+    {
+      "id": "github",
+      "skill": "adapter-github",
+      "module": "github",
+      "runtime": "mcp-or-cli-adapter",
+      "egress": "approval-required",
+      "writes": "approval-required",
+      "state": "local-only"
+    },
+    {
+      "id": "google-adk",
+      "skill": "adapter-google-adk",
+      "module": "googleAdk",
+      "runtime": "host-adapter",
+      "egress": "disabled",
+      "writes": "approval-required",
+      "state": "local-only"
+    },
+    {
+      "id": "langgraph",
+      "skill": "adapter-langgraph",
+      "module": "langgraph",
+      "runtime": "orchestration-adapter",
+      "egress": "disabled",
+      "writes": "approval-required",
+      "state": "local-only"
+    },
+    {
+      "id": "mcp",
+      "skill": "adapter-mcp",
+      "module": "mcp",
+      "runtime": "mcp-boundary",
+      "egress": "disabled",
+      "writes": "disabled",
+      "state": "local-only"
+    },
+    {
+      "id": "openapi",
+      "skill": "adapter-openapi",
+      "module": "openapi",
+      "runtime": "generator-boundary",
+      "egress": "disabled",
+      "writes": "approval-required",
+      "state": "local-only"
+    },
+    {
+      "id": "ponytail",
+      "skill": "adapter-ponytail",
+      "module": "ponytail",
+      "runtime": "hook-and-mcp-adapter",
+      "egress": "disabled",
+      "writes": "disabled",
+      "state": "declared-local-paths"
+    },
+    {
+      "id": "strands",
+      "skill": "adapter-strands",
+      "module": "strands",
+      "runtime": "host-adapter",
+      "egress": "disabled",
+      "writes": "approval-required",
+      "state": "local-only"
+    }
+  ]
+}

@@ -62,6 +62,40 @@ workflows.
 - List deferred `ponytail:` shortcuts: invoke `ponytail-debt`.
 - Ponytail impact scoreboard: invoke `ponytail-gain`.
 - Ponytail quick reference: invoke `ponytail-help`.
+- .NET and SQL Server modernization: invoke `migration-dotnet-sqlserver-modernization`.
+- Legacy frontend migration: invoke `stack-legacy-frontend`.
+- React and TypeScript modernization: invoke `stack-react-typescript`.
+- SQL Server to Postgres migration: invoke `stack-sqlserver-to-postgres`.
+- AWS DMS/SCT migration planning: invoke `stack-aws-dms`.
+- Spring Boot upgrades: invoke `stack-spring-boot`.
+- Spring AI application integration: invoke `stack-spring-ai`.
+- Databricks jobs, notebooks, and bundles: invoke `stack-databricks`.
+- Databricks MLOps workflows: invoke `domain-mlops-databricks`.
+- dbt on Databricks: invoke `stack-databricks-dbt`.
+- MCP connector design: invoke `adapter-mcp`.
+- GitHub repo/issue/PR connector design: invoke `adapter-github`.
+- AG-UI event integration: invoke `adapter-ag-ui`.
+- OpenAPI generator integration: invoke `adapter-openapi`.
+- LangGraph orchestration boundary: invoke `adapter-langgraph`.
+- Databricks SDK connector design: invoke `adapter-databricks`.
+- Ponytail hook or MCP runtime integration: invoke `adapter-ponytail`.
+- GStack migration pattern reference: invoke `reference-gstack-patterns`.
+- AWS application modernization: invoke `stack-aws`.
+- Python service/data workflow modernization: invoke `stack-python`.
+- C#/.NET stack work: invoke `stack-csharp`.
+- Postgres schema/query/migration work: invoke `stack-postgres`.
+- SQL Server schema/T-SQL/data-access work: invoke `stack-sql-server`.
+- Experiment design review: invoke `domain-experiment-design`.
+- Data governance review: invoke `domain-data-governance`.
+- Model interpretation review: invoke `domain-model-interpretation`.
+- Google ADK adapter design: invoke `adapter-google-adk`.
+- AgentCore adapter design: invoke `adapter-agentcore`.
+- Strands adapter design: invoke `adapter-strands`.
+- CodeGraph adapter design: invoke `adapter-codegraph`.
+- Migration plan review: invoke `migration-review`.
+- Privacy-safe release notes: invoke `release-notes`.
+- Local benchmark/regression workflow: invoke `benchmark`.
+- Canary monitoring handoff: invoke `canary`.
 
 When a project profile installs domain or stack packs, route to those skills
 only when the user task names that domain or stack.

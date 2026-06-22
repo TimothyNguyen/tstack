@@ -1,0 +1,42 @@
+{
+  "name": "architecture-agent",
+  "version": "0.1.0",
+  "mode": "repo-local",
+  "source": "agent-architecture",
+  "policy": "policies/enterprise-default.json",
+  "profiles": [
+    "privacy-default",
+    "enterprise-modernization"
+  ],
+  "hosts": [
+    "claude",
+    "codex",
+    "copilot"
+  ],
+  "adapters": [
+    "ponytail",
+    "mcp",
+    "ag-ui"
+  ],
+  "writePlan": [
+    ".architecture-agent/VERSION",
+    ".architecture-agent/SKILL.md",
+    ".architecture-agent/policies/enterprise-default.json",
+    ".architecture-agent/profiles/privacy-default.json",
+    ".architecture-agent/profiles/enterprise-modernization.json",
+    ".architecture-agent/generated/claude/SKILL.md",
+    ".architecture-agent/generated/codex/SKILL.md",
+    ".architecture-agent/generated/copilot/SKILL.md",
+    ".architecture-agent/install-manifest.json"
+  ],
+  "skippedByDefault": [
+    "publicTelemetry",
+    "publicUpdateChecks",
+    "publicTunnels",
+    "publicWebScraping",
+    "cookieImport",
+    "credentialRead",
+    "databaseWrite",
+    "deploy"
+  ]
+}

@@ -63,6 +63,18 @@
     "googleAdk": "optional",
     "strands": "optional",
     "agentCore": "optional",
-    "rtkTokenOptimizer": "optional"
+    "rtkTokenOptimizer": "optional",
+    "github": "optional",
+    "openapi": "optional",
+    "langgraph": "optional",
+    "databricks": "optional",
+    "ponytail": "optional",
+    "codegraph": "optional",
+    "aws": "optional",
+    "postgres": "optional",
+    "sqlServer": "optional",
+    "python": "optional",
+    "csharp": "optional",
+    "spring": "optional"
   }
 }

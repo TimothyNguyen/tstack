@@ -49,9 +49,8 @@ Use optional files only when they have a clear purpose:
 Domain and stack packs use nested directories:
 
 ```text
-domain-causal-inference/SKILL.md.tmpl
 domain-experiment-design/SKILL.md.tmpl
-domain-uplift-modeling/SKILL.md.tmpl
+domain-data-governance/SKILL.md.tmpl
 stack-aws/SKILL.md.tmpl
 stack-spring-boot/SKILL.md.tmpl
 stack-databricks/SKILL.md.tmpl

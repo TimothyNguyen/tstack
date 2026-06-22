@@ -1,0 +1,26 @@
+---
+name: migration-review
+version: 0.1.0
+description: |
+  Review modernization and migration plans for sequencing, rollback,
+  compatibility, data safety, privacy, and production readiness.
+---
+
+{{PREAMBLE}}
+
+# Migration Review
+
+Use for reviewing migration plans before implementation or cutover.
+
+## Checklist
+
+- Verify inventory, dependencies, owners, timelines, and blast radius.
+- Check rollback, parallel run, data reconciliation, and monitoring plans.
+- Confirm privacy posture: no telemetry, no public tunnels, no raw data export,
+  no credential leakage.
+- Require tests or dry-runs for mechanical codemods and generated code.
+- Flag missing human approvals for production or data changes.
+
+{{POLICY_REQUIREMENTS}}
+
+{{BASE_OUTPUT_RULES}}

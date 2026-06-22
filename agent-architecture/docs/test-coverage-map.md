@@ -21,7 +21,13 @@ support.
 | `enterprise-policy` | Policy file has correct defaults, egress disabled, repo-local install. | `tests/policy-contract.test.mjs` | Done |
 | `skill-catalog-integrity` | Catalog lists every skill folder; no orphans. | `tests/skill-catalog.test.mjs` | Done |
 | `codebase-engine-contract` | Package name, entry points, brand rename, enterprise egress stubs, skill co-location. | `tests/codebase-engine.test.mjs` | Done |
-| `host-config` | Hosts are declarative, validated, unique, and safe. | Future `tests/host-config.test.mjs` after host configs are added. | Deferred |
+| `adapter-registry` | Optional adapters are registered, default-deny, and point to real skills/modules. | `tests/adapter-registry.test.mjs` | Done |
+| `profile-contract` | Profiles reference existing skills and optional modules while preserving privacy-disabled defaults. | `tests/profile-contract.test.mjs` | Done |
+| `mcp-manifest` | MCP tools stay read-only, closed-world, no secrets, and no default egress. | `tests/mcp-manifest.test.mjs` | Done |
+| `install-dry-run` | Installer write plan stays repo-local and contains no secret-like fields. | `tests/install-dry-run.test.mjs` | Done |
+| `audit-writer` | Audit events are local JSONL and redacted. | `tests/audit-writer.test.mjs` | Done |
+| `event-contract` | AG-UI-compatible event envelopes redact sensitive payload fields. | `tests/event-contract.test.mjs` | Done |
+| `host-config` | Hosts are declarative, validated, unique, and safe. | `tests/host-registry.test.mjs` | Done |
 | `template-context-parity`, `parity-suite` | Generated outputs are consistent across targets. | Host parity tests after Claude/Codex/Copilot/ADK generation exists. | Deferred |
 
 ## Defer
@@ -53,7 +59,6 @@ The local suite should cover:
 
 ## Near-Term Test Work
 
-- Add `tests/host-config.test.mjs` once host config objects land.
 - Add host parity tests once Claude/Codex/Copilot/ADK adapters generate output.
 - Add E2E skill invocation tests once the agent harness is wired.
 

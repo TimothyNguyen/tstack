@@ -1,0 +1,28 @@
+---
+name: adapter-github
+version: 0.1.0
+description: |
+  Optional GitHub MCP/CLI adapter guidance for repo, issue, and PR context
+  with read-only/default-deny safety.
+---
+
+{{PREAMBLE}}
+
+# GitHub Adapter
+
+Use for optional GitHub repo, issue, and PR context.
+
+## References
+
+- `github/github-mcp-server`: optional MCP reference.
+
+## Rules
+
+- Prefer local git reads before remote GitHub calls.
+- Default to read-only scopes.
+- Require explicit approval for issue/PR creation, comments, labels, branch writes, or merge actions.
+- Never print tokens, full private issue bodies, or confidential PR contents into audit events.
+
+{{POLICY_REQUIREMENTS}}
+
+{{BASE_OUTPUT_RULES}}

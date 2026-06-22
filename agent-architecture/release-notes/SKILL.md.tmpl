@@ -1,0 +1,24 @@
+---
+name: release-notes
+version: 0.1.0
+description: |
+  Generate privacy-safe release notes from local changes, tests, and docs
+  without sending change data to third-party services.
+---
+
+{{PREAMBLE}}
+
+# Release Notes
+
+Use for local release-note drafting after changes are complete.
+
+## Rules
+
+- Use local git history, local docs, and local test output only.
+- Do not call public changelog generators or telemetry services.
+- Exclude secrets, customer data, raw prompts, and private issue text.
+- Summarize behavior changes, migration notes, verification, and known risks.
+
+{{POLICY_REQUIREMENTS}}
+
+{{BASE_OUTPUT_RULES}}

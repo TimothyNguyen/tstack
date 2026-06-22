@@ -1,0 +1,20 @@
+{
+  "name": "agent-architecture",
+  "interface": {
+    "displayName": "agent-architecture"
+  },
+  "plugins": [
+    {
+      "name": "agent-architecture",
+      "source": {
+        "source": "local",
+        "path": "./plugins/agent-architecture"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "OPTIONAL"
+      },
+      "category": "Coding"
+    }
+  ]
+}

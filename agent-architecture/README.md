@@ -34,6 +34,55 @@ scraping.
 - Let teams add project-specific stacks, domains, and policies without changing
   the core.
 
+## Install (as a plugin marketplace)
+
+This repo ships marketplace manifests so it can be installed as a plugin in
+Claude Code, Codex CLI, and Cursor — same shape as `pydantic/skills` and
+`dotnet/skills`.
+
+### Claude Code
+
+```text
+/plugin marketplace add <owner>/<repo>
+/plugin install agent-architecture@agent-architecture
+```
+
+Replace `<owner>/<repo>` with the GitHub coordinates of this repo. Restart
+Claude Code and run `/skills` to list the installed skills, `/commands` for
+slash commands.
+
+### Codex CLI
+
+```bash
+codex plugin marketplace add <owner>/<repo>
+```
+
+Then open the Codex plugin UI (`/plugins`) and enable
+`agent-architecture` from the marketplace.
+
+### Cursor
+
+```bash
+git clone https://github.com/<owner>/<repo>
+mkdir -p ~/.cursor/plugins/local
+cp -R <repo>/agent-architecture/plugins/agent-architecture ~/.cursor/plugins/local/agent-architecture
+```
+
+Then **Developer: Reload Window**.
+
+### Manual (any agentskills.io-compatible host)
+
+```bash
+# Symlink each top-level skill into your host's skills directory.
+# Bash:
+for skill in <repo>/agent-architecture/*/; do
+  name=$(basename "$skill")
+  [ -f "$skill/SKILL.md" ] && ln -s "$(realpath "$skill")" "$HOME/.claude/skills/$name"
+done
+```
+
+PowerShell equivalent uses `New-Item -ItemType SymbolicLink`.
+
 ## Quick Commands
 
 Run from this directory:
@@ -105,7 +154,7 @@ security-review/
     manifest.json
     review-sections.md.tmpl
     review-sections.md
-domain-causal-inference/
+domain-experiment-design/
   SKILL.md.tmpl
   SKILL.md
 stack-aws/

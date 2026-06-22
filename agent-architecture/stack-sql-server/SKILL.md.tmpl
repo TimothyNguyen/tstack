@@ -1,0 +1,31 @@
+---
+name: stack-sql-server
+version: 0.1.0
+description: |
+  SQL Server schema, T-SQL, stored procedure, job, and application data-access
+  modernization with governed database access.
+---
+
+{{PREAMBLE}}
+
+# SQL Server Stack
+
+Use for SQL Server schemas, stored procedures, T-SQL, jobs, migration readiness,
+and application data-access code.
+
+## Workflow
+
+- Inventory schemas, procedures, functions, jobs, linked servers, permissions,
+  and application query paths from repo-local artifacts first.
+- Require approval for live database reads, exports, writes, and migration runs.
+- Avoid raw row dumps; report aggregates, schema facts, and narrow examples.
+- Use compatibility assessment before porting to Postgres.
+
+## Routes
+
+- .NET modernization: `migration-dotnet-sqlserver-modernization`.
+- Postgres migration: `stack-sqlserver-to-postgres`.
+
+{{POLICY_REQUIREMENTS}}
+
+{{BASE_OUTPUT_RULES}}

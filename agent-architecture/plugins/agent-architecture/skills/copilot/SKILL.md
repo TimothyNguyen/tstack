@@ -1,0 +1,65 @@
+---
+name: copilot
+version: 0.1.0
+description: |
+  GitHub Copilot host adapter. Covers knowledge graph queries via CodeGraph,
+  VS Code instructions injection, and enterprise-safe defaults.
+allowed-tools:
+  - Read
+  - Grep
+  - Glob
+  - Bash
+---
+
+## Enterprise Preamble
+
+- Stay inside the current project unless the user explicitly names another path.
+- Do not call public telemetry, public update checks, public tunnels, cookie import, or public scraping flows.
+- Use policy-gated tools only when the active profile allows them.
+- Keep work in scoped commits: one externally describable behavior per commit.
+
+# Copilot Host Adapter
+
+Use this adapter when targeting GitHub Copilot (VS Code or GitHub.com) as the
+primary agent host.
+
+## Knowledge Graph Integration (local, no egress)
+
+When a local knowledge graph index exists (`.codegraph/` or equivalent), prefer
+graph queries over raw file reads for codebase questions.
+
+For codebase questions in Copilot Chat, query the index first via terminal,
+then bring results into the chat. Copilot Chat cannot run arbitrary Bash
+directly — graph queries must run in the terminal.
+
+## Copilot Limitations vs. Claude Code
+
+| Capability | Claude Code | Copilot Chat |
+|---|---|---|
+| Subagent extraction | Native via skill | Terminal + paste results into chat |
+| Graph query | In-session + terminal | Terminal only |
+| Tool use (Bash, Read, Grep) | Full | Limited to Copilot tools |
+| Policy enforcement | Via enterprise-default.json | Via org Copilot policy |
+
+## Steps
+
+1. Confirm the task requires Copilot-specific context or the user is in a
+   Copilot Chat session.
+2. Check for a knowledge graph index before reading source files.
+3. Use graph queries for codebase questions (terminal-side for Copilot).
+4. Fall back to Grep + Read when index absent.
+5. Preserve policy requirements, no-egress defaults, and scoped commit rules.
+6. Keep source skill templates as the source of truth for skill behavior.
+7. Report any host limitations or unsupported tool behavior.
+
+## Policy Requirements
+
+- Read-only code inspection is allowed.
+- Shell write, git write, deployment, database read, ticket creation, and browser use require policy approval unless the active profile says otherwise.
+- Credential reads, cookie import, public tunnels, public telemetry, and public scraping are disabled by default.
+
+## Output Rules
+
+- Report findings with file paths, concrete evidence, and recommended actions.
+- Do not include secrets, raw credentials, cookie values, full prompts, or full data extracts.
+- Prefer structured summaries that can map to AG-UI events later.

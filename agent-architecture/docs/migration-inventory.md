@@ -61,9 +61,7 @@ auditable, and no-egress by default.
 Domain and stack support should be optional packs, not core:
 
 - `profiles/marketing-measurement`
-- `domain-causal-inference`
 - `domain-experiment-design`
-- `domain-uplift-modeling`
 - `stack-aws`
 - `stack-spring-boot`
 - `stack-databricks`

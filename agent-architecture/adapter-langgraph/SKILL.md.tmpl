@@ -1,0 +1,28 @@
+---
+name: adapter-langgraph
+version: 0.1.0
+description: |
+  Optional LangGraph orchestration boundary for durable app-level agents
+  without expanding the core runtime dependency surface.
+---
+
+{{PREAMBLE}}
+
+# LangGraph Adapter
+
+Use when evaluating or integrating LangGraph for app-level agent workflows.
+
+## References
+
+- `langchain-ai/langgraph`: durable/stateful orchestration reference.
+
+## Rules
+
+- Keep LangGraph optional; core skills and compiler must not import it.
+- Define state schemas, persistence, retries, and human approval nodes explicitly.
+- Gate external tools and model calls by policy.
+- Add tests around graph transitions and failure behavior before production use.
+
+{{POLICY_REQUIREMENTS}}
+
+{{BASE_OUTPUT_RULES}}

@@ -1,0 +1,30 @@
+---
+name: stack-spring-boot
+version: 0.1.0
+description: |
+  Spring Boot upgrade and API modernization using OpenRewrite recipes,
+  OpenAPI contracts, and local verification.
+---
+
+{{PREAMBLE}}
+
+# Spring Boot
+
+Use for Spring Boot upgrades, API modernization, dependency cleanup, and Java
+service migration.
+
+## References
+
+- `openrewrite/rewrite-spring`: automated Spring/Spring Boot upgrade recipes.
+- `OpenAPITools/openapi-generator`: optional OpenAPI contract generation.
+
+## Workflow
+
+- Inventory Java version, Spring Boot version, build tool, dependency BOMs, and test profile.
+- Use OpenRewrite for mechanical upgrades when available.
+- Preserve API contracts with OpenAPI diffs or generated client checks.
+- Verify with unit/integration tests and one representative service startup path.
+
+{{POLICY_REQUIREMENTS}}
+
+{{BASE_OUTPUT_RULES}}

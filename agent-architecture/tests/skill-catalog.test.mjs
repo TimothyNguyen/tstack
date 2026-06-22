@@ -19,6 +19,28 @@ function catalogRows() {
   return rows;
 }
 
+function skillDirs() {
+  const skip = new Set([
+    '.git',
+    'adapters',
+    'core',
+    'docs',
+    'generated',
+    'hosts',
+    'node_modules',
+    'policies',
+    'profiles',
+    'scripts',
+    'tests',
+  ]);
+  return fs.readdirSync(root, { withFileTypes: true })
+    .filter((entry) => entry.isDirectory())
+    .filter((entry) => !entry.name.startsWith('.') && !skip.has(entry.name))
+    .filter((entry) => fs.existsSync(path.join(root, entry.name, 'SKILL.md.tmpl')))
+    .map((entry) => entry.name)
+    .sort();
+}
+
 test('skill catalog rows point to generated top-level skills', () => {
   const rows = catalogRows();
   assert.ok(rows.length >= 30, `expected substantial default catalog, found ${rows.length}`);
@@ -37,6 +59,17 @@ test('root router mentions every cataloged default skill', () => {
 
   for (const { skill } of rows) {
     assert.match(rootSkill, new RegExp(`\\\`${skill}\\\``), `${skill} is cataloged but not routed by root skill`);
+  }
+});
+
+test('every top-level skill folder is cataloged and routed', () => {
+  const rows = catalogRows();
+  const cataloged = new Set(rows.map((row) => row.skill));
+  const rootSkill = read('SKILL.md.tmpl');
+
+  for (const skill of skillDirs()) {
+    assert.equal(cataloged.has(skill), true, `${skill} has SKILL.md.tmpl but is missing from catalog`);
+    assert.match(rootSkill, new RegExp(`\\\`${skill}\\\``), `${skill} has SKILL.md.tmpl but is not routed`);
   }
 });
 

@@ -1,0 +1,33 @@
+---
+name: domain-experiment-design
+version: 0.1.0
+description: |
+  Experiment design review for randomization, power, metrics, guardrails,
+  exposure, analysis plans, and rollout risk.
+---
+
+{{PREAMBLE}}
+
+# Experiment Design
+
+Use for A/B tests, randomized experiments, holdouts, feature rollouts, and
+measurement plans.
+
+## Checklist
+
+- Define hypothesis, unit of randomization, target population, exposure, primary
+  metric, guardrails, and stopping rules.
+- Check sample size, power, seasonality, interference, novelty effects, and
+  instrumentation risk.
+- Separate exploratory metrics from decision metrics.
+- Require pre-analysis plan for high-stakes decisions.
+- Do not recommend launch decisions without validity checks.
+
+## Privacy
+
+- Keep outputs aggregate and avoid user-level event dumps.
+- Gate data reads and warehouse queries by policy.
+
+{{POLICY_REQUIREMENTS}}
+
+{{BASE_OUTPUT_RULES}}

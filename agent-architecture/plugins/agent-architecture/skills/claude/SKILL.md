@@ -1,0 +1,67 @@
+---
+name: claude
+version: 0.1.0
+description: |
+  Claude Code host adapter. Covers enterprise-safe tool use, knowledge graph
+  queries via CodeGraph MCP, and cross-agent review when profile-approved.
+allowed-tools:
+  - Read
+  - Grep
+  - Glob
+  - Bash
+---
+
+## Enterprise Preamble
+
+- Stay inside the current project unless the user explicitly names another path.
+- Do not call public telemetry, public update checks, public tunnels, cookie import, or public scraping flows.
+- Use policy-gated tools only when the active profile allows them.
+- Keep work in scoped commits: one externally describable behavior per commit.
+
+# Claude Host Adapter
+
+Use this adapter when targeting Claude Code as the primary agent host.
+
+## Knowledge Graph Integration (local, no egress)
+
+If `.codegraph/` exists, prefer graph queries over raw file reads for codebase questions.
+
+**In the main session** — lightweight lookups only:
+
+- Symbol lookup by name
+- Call tracing (callers / callees)
+- Impact check before editing
+
+**For broad exploration** — spawn an Explore agent. Never call explore tools
+directly in the main session; they return large source payloads that saturate context.
+
+After modifying code, let the file watcher sync the index (~1 second) before
+running follow-up queries.
+
+## Enterprise Settings
+
+```bash
+# Disable local query log if required by policy
+export GRAPHIFY_QUERY_LOG_DISABLE=1
+```
+
+## Steps
+
+1. Confirm the user goal and scope.
+2. Check for a knowledge graph index before reading source files.
+3. Use graph queries for symbol lookup, dependency tracing, and impact analysis.
+4. Fall back to Grep + Read when index absent or query insufficient.
+5. Check policy requirements before any privileged action.
+6. Produce a concise result with evidence, risks, and next actions.
+
+## Policy Requirements
+
+- Read-only code inspection is allowed.
+- Shell write, git write, deployment, database read, ticket creation, and browser use require policy approval unless the active profile says otherwise.
+- Credential reads, cookie import, public tunnels, public telemetry, and public scraping are disabled by default.
+
+## Output Rules
+
+- Report findings with file paths, concrete evidence, and recommended actions.
+- Do not include secrets, raw credentials, cookie values, full prompts, or full data extracts.
+- Prefer structured summaries that can map to AG-UI events later.

@@ -1,0 +1,30 @@
+---
+name: stack-spring-ai
+version: 0.1.0
+description: |
+  Spring-native AI application patterns using Spring AI and Spring AI examples
+  as references, without making them core dependencies.
+---
+
+{{PREAMBLE}}
+
+# Spring AI
+
+Use for Spring applications that integrate model calls, tools, vector stores, or
+AI workflows.
+
+## References
+
+- `spring-projects/spring-ai`: Spring-native AI app patterns.
+- `spring-projects/spring-ai-examples`: implementation references.
+
+## Workflow
+
+- Keep model/provider configuration externalized and environment-specific.
+- Gate network/model calls by policy; no default public egress.
+- Treat examples as reference implementations, not production defaults.
+- Require tests around prompt/tool contracts and failure behavior.
+
+{{POLICY_REQUIREMENTS}}
+
+{{BASE_OUTPUT_RULES}}

@@ -62,16 +62,72 @@ Each skill is a top-level folder with:
 | `ponytail-gain` | Scoreboard of measured ponytail impact (lines, cost, speed). | `ponytail-gain/SKILL.md.tmpl` |
 | `ponytail-help` | Quick-reference card for all ponytail modes and skills. | `ponytail-help/SKILL.md.tmpl` |
 
+## Modernization Profile And Optional Packs
+
+These follow the same folder pattern but should be installed only when the
+project profile needs them:
+
+| Skill | Purpose | Source |
+|---|---|
+| `migration-dotnet-sqlserver-modernization` | Plan .NET Framework and SQL Server modernization. | `migration-dotnet-sqlserver-modernization/SKILL.md.tmpl` |
+| `stack-legacy-frontend` | Migrate Knockout, YUI, and legacy browser UI toward modern frontend patterns. | `stack-legacy-frontend/SKILL.md.tmpl` |
+| `stack-react-typescript` | React/TypeScript modernization with codemods and Redux Toolkit patterns. | `stack-react-typescript/SKILL.md.tmpl` |
+| `stack-sqlserver-to-postgres` | SQL Server to Postgres migration planning and compatibility checks. | `stack-sqlserver-to-postgres/SKILL.md.tmpl` |
+| `stack-aws-dms` | AWS DMS/SCT migration experiment and cutover planning. | `stack-aws-dms/SKILL.md.tmpl` |
+| `stack-spring-boot` | Spring Boot upgrade and API modernization. | `stack-spring-boot/SKILL.md.tmpl` |
+| `stack-spring-ai` | Spring-native AI app integration patterns. | `stack-spring-ai/SKILL.md.tmpl` |
+| `stack-databricks` | Databricks jobs, notebooks, Asset Bundles, and SDK-aware workflows. Bundles vendored `databricks/databricks-agent-skills` (10 stable + 21 experimental packs), `databricks/databricks-sdk-py` reference subset (examples + docs), and `databricks/bundle-examples` Asset Bundle templates. | `stack-databricks/SKILL.md.tmpl` |
+| `domain-mlops-databricks` | Production ML lifecycle and MLOps structure on Databricks. | `domain-mlops-databricks/SKILL.md.tmpl` |
+| `stack-databricks-dbt` | dbt on Databricks transformations, tests, docs, and lineage. | `stack-databricks-dbt/SKILL.md.tmpl` |
+| `adapter-mcp` | Optional MCP server/client adapter design. | `adapter-mcp/SKILL.md.tmpl` |
+| `adapter-github` | Optional GitHub MCP/CLI adapter guidance. | `adapter-github/SKILL.md.tmpl` |
+| `adapter-ag-ui` | AG-UI-compatible event adapter guidance. | `adapter-ag-ui/SKILL.md.tmpl` |
+| `adapter-openapi` | OpenAPI generator adapter and contract boundary guidance. | `adapter-openapi/SKILL.md.tmpl` |
+| `adapter-langgraph` | Optional LangGraph orchestration boundary guidance. | `adapter-langgraph/SKILL.md.tmpl` |
+| `adapter-databricks` | Optional Databricks SDK connector boundary guidance. | `adapter-databricks/SKILL.md.tmpl` |
+| `adapter-ponytail` | Optional Ponytail hook and MCP runtime integration. | `adapter-ponytail/SKILL.md.tmpl` |
+| `reference-gstack-patterns` | Mine gstack role/workflow patterns without unsafe carry-over. | `reference-gstack-patterns/SKILL.md.tmpl` |
+| `stack-aws` | AWS application modernization with least-privilege local validation. | `stack-aws/SKILL.md.tmpl` |
+| `stack-python` | Python service, library, and data workflow modernization. | `stack-python/SKILL.md.tmpl` |
+| `stack-csharp` | C#/.NET projects, services, tests, and framework modernization. Bundles vendored `dotnet/skills` plugins under `stack-csharp/dotnet-skills/plugins/` for ASP.NET Core, Blazor, EF Core, MSBuild, NuGet, MAUI, test, AI, diagnostics, upgrades, templates. | `stack-csharp/SKILL.md.tmpl` |
+| `stack-postgres` | Postgres schema, query, migration, and data-governance workflows. | `stack-postgres/SKILL.md.tmpl` |
+| `stack-sql-server` | SQL Server schema, T-SQL, jobs, and data-access modernization. | `stack-sql-server/SKILL.md.tmpl` |
+| `domain-experiment-design` | Experiment design, power, metrics, guardrails, and rollout risk. | `domain-experiment-design/SKILL.md.tmpl` |
+| `domain-data-governance` | Data classification, lineage, permissions, retention, and privacy review. | `domain-data-governance/SKILL.md.tmpl` |
+| `domain-model-interpretation` | Model explanation, calibration, drift, and recommendation-risk review. | `domain-model-interpretation/SKILL.md.tmpl` |
+| `adapter-google-adk` | Optional Google ADK host adapter boundary. | `adapter-google-adk/SKILL.md.tmpl` |
+| `adapter-agentcore` | Optional AgentCore adapter boundary. | `adapter-agentcore/SKILL.md.tmpl` |
+| `adapter-strands` | Optional Strands adapter boundary. | `adapter-strands/SKILL.md.tmpl` |
+| `adapter-codegraph` | Optional CodeGraph or semantic code-index adapter boundary. | `adapter-codegraph/SKILL.md.tmpl` |
+| `migration-review` | Review migration plans for sequencing, rollback, privacy, and readiness. | `migration-review/SKILL.md.tmpl` |
+| `release-notes` | Generate privacy-safe release notes from local changes. | `release-notes/SKILL.md.tmpl` |
+| `benchmark` | Local benchmark and regression workflow without public uploads. | `benchmark/SKILL.md.tmpl` |
+| `canary` | Privacy-safe canary planning and monitoring handoff. | `canary/SKILL.md.tmpl` |
+
+## Vendored Third-Party Skill Packs
+
+Upstream skills copied into `agent-architecture/<stack>/` and gated by the
+parent stack's Enterprise Preamble. Update by re-pulling from upstream and
+re-vetting any guidance that calls public telemetry or unscoped credential
+reads.
+
+| Pack | Source | Vendored Path |
+|---|---|---|
+| `dotnet/skills` (14 plugins / ~99 skills) | <https://github.com/dotnet/skills> | `stack-csharp/dotnet-skills/plugins/` |
+| `databricks/databricks-agent-skills` (10 stable + 21 experimental skill packs) | <https://github.com/databricks/databricks-agent-skills> | `stack-databricks/databricks-agent-skills/` |
+| `databricks/databricks-sdk-py` (reference subset: examples + curated docs; library installed via pip) | <https://github.com/databricks/databricks-sdk-py> | `stack-databricks/databricks-sdk-py/` |
+| `databricks/bundle-examples` (Asset Bundle templates) | <https://github.com/databricks/bundle-examples> | `stack-databricks/bundle-examples/` |
+
 ## Deferred Optional Packs
 
-These should follow the same folder pattern when added:
+These are still planned but not yet added:
 
 | Pack | Candidate skills |
 |---|---|
-| Domain pack | `domain-causal-inference`, `domain-experiment-design`, `domain-uplift-modeling`, `domain-campaign-measurement` |
-| Stack pack | `stack-aws`, `stack-spring-boot`, `stack-databricks`, `stack-python`, `stack-react`, `stack-csharp`, `stack-postgres`, `stack-sql-server` |
-| Adapter pack | `adapter-google-adk`, `adapter-agentcore`, `adapter-strands`, `adapter-ag-ui`, `adapter-codegraph` |
-| Delivery pack | `benchmark`, `canary`, `release-notes`, `migration-review` |
+| Domain pack | Additional industry-specific measurement and governance skills. |
+| Stack pack | Additional stack packs discovered during project migrations. |
+| Adapter pack | Additional approved internal connectors. |
+| Delivery pack | Additional internal release and operations workflows. |
 
 ## Excluded From Default Pack
 

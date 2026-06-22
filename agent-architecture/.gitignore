@@ -1,6 +1,7 @@
 __pycache__/
 *.pyc
 *.egg-info/
+codebase-engine/tests/fixtures/obj/
 codebase-out/graph.json
 codebase-out/graph.html
 codebase-out/graph.svg

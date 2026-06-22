@@ -1,0 +1,31 @@
+---
+name: stack-legacy-frontend
+version: 0.1.0
+description: |
+  Modernize legacy frontend stacks such as Knockout, YUI, old jQuery widgets,
+  and ad hoc browser code toward React/TypeScript.
+---
+
+{{PREAMBLE}}
+
+# Legacy Frontend
+
+Use for legacy UI migration and strangler-style rewrites.
+
+## References
+
+- `wireapp/wire-webapp` Knockout-to-React migration wiki: migration sequencing reference.
+- `yui/yui3`: detection/reference only; do not vendor or extend.
+- `reactjs/react-codemod` and `codemod/react-codemod`: codemod patterns.
+
+## Workflow
+
+- Inventory UI frameworks, templates, global state, routing, and browser-only assumptions.
+- Keep legacy behavior stable while replacing islands one at a time.
+- Prefer native browser APIs and small codemods before new dependencies.
+- Preserve accessibility and form semantics during migration.
+- Route React/TypeScript implementation details to `stack-react-typescript`.
+
+{{POLICY_REQUIREMENTS}}
+
+{{BASE_OUTPUT_RULES}}

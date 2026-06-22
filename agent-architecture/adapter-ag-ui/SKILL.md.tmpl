@@ -1,0 +1,29 @@
+---
+name: adapter-ag-ui
+version: 0.1.0
+description: |
+  Map skill progress, approvals, tool actions, findings, and artifacts into
+  AG-UI-compatible event concepts.
+---
+
+{{PREAMBLE}}
+
+# AG-UI Adapter
+
+Use for agent-to-frontend event design.
+
+## References
+
+- `ag-ui-protocol/ag-ui`: protocol reference.
+- Local contract: `docs/ag-ui-event-contract.md`.
+
+## Rules
+
+- Emit structured local events first; transform to AG-UI at the adapter boundary.
+- Do not put secrets, raw datasets, full prompts, or full file contents into events.
+- Keep UI transport optional and disabled unless policy enables it.
+- Preserve correlation ids for approvals, tool calls, findings, and audit records.
+
+{{POLICY_REQUIREMENTS}}
+
+{{BASE_OUTPUT_RULES}}

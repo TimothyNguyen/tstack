@@ -1,0 +1,44 @@
+{
+  "name": "privacy-default",
+  "version": 1,
+  "description": "Default local profile: core skills only, no public egress, telemetry, tunnels, cookie import, or connector writes.",
+  "policy": "policies/enterprise-default.json",
+  "skills": [
+    "spec",
+    "autoplan",
+    "plan-review",
+    "investigate",
+    "review",
+    "qa",
+    "test",
+    "health",
+    "security-review",
+    "documentation",
+    "document-generate",
+    "document-release",
+    "learnings",
+    "release",
+    "ship",
+    "codebase-engine",
+    "context-save",
+    "context-restore",
+    "guard",
+    "careful",
+    "ponytail",
+    "ponytail-review",
+    "ponytail-audit"
+  ],
+  "optionalModules": [
+    "codebaseUnderstanding",
+    "ponytail"
+  ],
+  "disabledByDefault": [
+    "publicTelemetry",
+    "publicUpdateChecks",
+    "publicTunnels",
+    "publicWebScraping",
+    "cookieImport",
+    "credentialRead",
+    "globalMutation"
+  ]
+}

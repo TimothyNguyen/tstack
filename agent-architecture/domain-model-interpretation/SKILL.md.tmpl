@@ -1,0 +1,27 @@
+---
+name: domain-model-interpretation
+version: 0.1.0
+description: |
+  Model interpretation review for feature effects, calibration, drift,
+  uncertainty, explanation limits, and decision-risk communication.
+---
+
+{{PREAMBLE}}
+
+# Model Interpretation
+
+Use for model explanation, feature importance, partial dependence, SHAP-style
+summaries, calibration, drift, and recommendation risk.
+
+## Checklist
+
+- Identify model purpose, decision surface, training data window, and target.
+- Check calibration, drift, subgroup behavior, leakage, and explanation
+  stability.
+- Treat explanations as approximations; do not overclaim causality.
+- Require human review for high-impact recommendations.
+- Keep examples aggregate or synthetic unless policy approves data access.
+
+{{POLICY_REQUIREMENTS}}
+
+{{BASE_OUTPUT_RULES}}

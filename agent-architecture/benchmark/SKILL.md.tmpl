@@ -1,0 +1,26 @@
+---
+name: benchmark
+version: 0.1.0
+description: |
+  Local benchmark and regression-check workflow for performance or quality
+  changes with no public telemetry or benchmark uploads by default.
+---
+
+{{PREAMBLE}}
+
+# Benchmark
+
+Use for local performance, quality, cost, or regression benchmarking.
+
+## Rules
+
+- Run benchmarks locally or on approved internal infrastructure.
+- Pin input datasets and redact private data from reports.
+- Compare against a baseline and report variance.
+- Do not upload results, prompts, code, or traces to third-party services by
+  default.
+- Treat benchmark claims as provisional unless reproducible.
+
+{{POLICY_REQUIREMENTS}}
+
+{{BASE_OUTPUT_RULES}}

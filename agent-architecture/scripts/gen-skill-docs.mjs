@@ -41,10 +41,21 @@ function render(content, tmplPath) {
   });
 }
 
+const PLUGIN_SKILLS_DIR = path.join(ROOT, 'plugins', 'agent-architecture', 'skills');
+
+function pluginMirrorFor(outputRel) {
+  // outputRel is "<skill>/SKILL.md" — mirror only top-level SKILL.md (skip
+  // sections/* and the repo-root SKILL.md which has no skill folder).
+  const parts = outputRel.split('/');
+  if (parts.length !== 2 || parts[1] !== 'SKILL.md') return null;
+  return path.join(PLUGIN_SKILLS_DIR, parts[0], 'SKILL.md');
+}
+
 function writeRendered(tmplRel, outputRel) {
   const tmplPath = path.join(ROOT, tmplRel);
   const outputPath = path.join(ROOT, outputRel);
   const rendered = render(fs.readFileSync(tmplPath, 'utf8'), tmplRel);
+  const mirrorPath = pluginMirrorFor(outputRel);
 
   if (CHECK) {
     const current = fs.existsSync(outputPath) ? fs.readFileSync(outputPath, 'utf8') : '';
@@ -52,10 +63,22 @@ function writeRendered(tmplRel, outputRel) {
       console.error(`${outputRel} is stale; run npm run build:skills from agent-architecture/`);
       process.exitCode = 1;
     }
+    if (mirrorPath) {
+      const mirrorCurrent = fs.existsSync(mirrorPath) ? fs.readFileSync(mirrorPath, 'utf8') : '';
+      if (mirrorCurrent !== rendered) {
+        const rel = path.relative(ROOT, mirrorPath).split(path.sep).join('/');
+        console.error(`${rel} is stale; run npm run build:skills from agent-architecture/`);
+        process.exitCode = 1;
+      }
+    }
     return;
   }
 
   fs.writeFileSync(outputPath, rendered);
+  if (mirrorPath) {
+    fs.mkdirSync(path.dirname(mirrorPath), { recursive: true });
+    fs.writeFileSync(mirrorPath, rendered);
+  }
 }
 
 for (const item of discoverTemplates(ROOT)) {

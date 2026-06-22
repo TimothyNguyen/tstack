@@ -130,6 +130,10 @@ Shape:
 The manifest must not include secrets, access tokens, credentials, full prompts,
 or raw project data.
 
+A machine-checkable dry-run example lives at
+`docs/install-dry-run.example.json`. It is intentionally repo-local and may be
+used by installer tests before any write-capable installer exists.
+
 ## Upgrade
 
 Use `architecture-agent-upgrade`.

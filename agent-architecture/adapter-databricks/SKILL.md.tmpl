@@ -1,0 +1,28 @@
+---
+name: adapter-databricks
+version: 0.1.0
+description: |
+  Optional Databricks SDK adapter boundary for workspace, job, and bundle
+  operations with explicit policy gates.
+---
+
+{{PREAMBLE}}
+
+# Databricks Adapter
+
+Use when adding Databricks SDK automation or workspace connector behavior.
+
+## References
+
+- `databricks/databricks-sdk-py`: SDK integration patterns.
+
+## Rules
+
+- Keep SDK usage optional and profile-enabled.
+- Gate workspace reads, writes, job runs, and deploys through policy and audit.
+- Never log tokens, secret scope values, raw table data, or notebook outputs with private data.
+- Prefer dry-run/validate commands before mutations.
+
+{{POLICY_REQUIREMENTS}}
+
+{{BASE_OUTPUT_RULES}}

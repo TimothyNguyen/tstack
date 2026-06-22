@@ -13,6 +13,7 @@ integrations.
 | `core/policy` | Load and evaluate local policy for tools, egress, install paths, and audit events. | Shared types | Host runtime internals |
 | `core/install` | Install generated artifacts into declared local targets. | Host configs, policy | Public update checks, global mutation by default |
 | `core/audit` | Write local audit events for privileged actions and policy decisions. | Policy, shared types | Secrets, full prompts, file contents |
+| `core/events` | Create AG-UI-compatible local event envelopes with redacted payloads. | Audit redaction helper | External telemetry transports |
 
 ## Host Modules
 
@@ -27,6 +28,9 @@ Initial host targets:
 - `hosts/strands`
 - `hosts/agentcore`
 - `hosts/google-adk`
+
+`hosts/registry.json` declares the current host targets, generated paths, and
+default privacy posture.
 
 Host modules should stay declarative. Runtime-specific logic belongs in
 adapters only when a declarative rewrite is insufficient.
@@ -92,6 +96,40 @@ This preserves the gstack ergonomics while keeping the new package generic.
 - `codex`
 - `copilot`
 - `architecture-agent-upgrade`
+- `migration-dotnet-sqlserver-modernization`
+- `stack-legacy-frontend`
+- `stack-react-typescript`
+- `stack-sqlserver-to-postgres`
+- `stack-aws-dms`
+- `stack-spring-boot`
+- `stack-spring-ai`
+- `stack-databricks`
+- `domain-mlops-databricks`
+- `stack-databricks-dbt`
+- `adapter-mcp`
+- `adapter-github`
+- `adapter-ag-ui`
+- `adapter-openapi`
+- `adapter-langgraph`
+- `adapter-databricks`
+- `adapter-ponytail`
+- `reference-gstack-patterns`
+- `stack-aws`
+- `stack-python`
+- `stack-csharp`
+- `stack-postgres`
+- `stack-sql-server`
+- `domain-experiment-design`
+- `domain-data-governance`
+- `domain-model-interpretation`
+- `adapter-google-adk`
+- `adapter-agentcore`
+- `adapter-strands`
+- `adapter-codegraph`
+- `migration-review`
+- `release-notes`
+- `benchmark`
+- `canary`
 
 Each skill owns its instructions, examples, policy requirements, and generated
 host variants. Skills must not assume a specific project stack unless they live
@@ -125,6 +163,11 @@ Example profile families:
 - `profiles/frontend-app`
 - `profiles/backend-service`
 
+Current profile manifests:
+
+- `profiles/privacy-default.json`
+- `profiles/enterprise-modernization.json`
+
 ## Optional Adapters
 
 Adapters integrate external runtimes or tools. They are optional and disabled
@@ -139,9 +182,13 @@ Candidate adapters:
 - `adapters/agentcore`
 - `adapters/strands`
 - `adapters/google-adk`
+- `adapters/ponytail`
 
 Adapters must expose narrow interfaces to core. Core should not import a heavy
 runtime SDK directly.
+
+`adapters/registry.json` is the source of truth for optional adapter id, skill,
+policy module, runtime type, egress posture, write posture, and state posture.
 
 ## First Implementation Order
 
