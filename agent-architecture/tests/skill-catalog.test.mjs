@@ -81,3 +81,11 @@ test('catalog excludes gstack-only or disallowed defaults', () => {
   assert.doesNotMatch(catalog, /ios-/i);
   assert.doesNotMatch(catalog, /hackernews|scrape/i);
 });
+
+test('subagent orchestrator is cataloged and routed', () => {
+  const catalog = read('docs/skill-catalog.md');
+  const rootSkill = read('SKILL.md.tmpl');
+
+  assert.match(catalog, /\| `subagent-orchestrator` \|/);
+  assert.match(rootSkill, /invoke `subagent-orchestrator`/);
+});

@@ -28,6 +28,7 @@ workflows.
 
 - New requirement, design, or issue: invoke `spec`.
 - Fully reviewed plan pipeline: invoke `autoplan`.
+- Split a task into scoped local subagents: invoke `subagent-orchestrator`.
 - Review a plan before implementation: invoke `plan-review`.
 - Director/principal plan review: invoke `plan-director-review`.
 - Product manager plan review: invoke `plan-pm-review`.

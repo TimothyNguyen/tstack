@@ -7,6 +7,10 @@ test('event helper supports documented AG-UI-compatible event types', () => {
     'run.started',
     'approval.requested',
     'tool.completed',
+    'subagent.started',
+    'subagent.action',
+    'subagent.completed',
+    'subagent.blocked',
     'finding.created',
     'audit.recorded',
   ]) {

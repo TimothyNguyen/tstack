@@ -69,3 +69,14 @@ test('enterprise modernization extends privacy default', () => {
   assert.equal(profile.skills.includes('migration-dotnet-sqlserver-modernization'), true);
   assert.equal(profile.skills.includes('security-review'), false, 'base privacy profile supplies core security-review');
 });
+
+test('subagents local profile enables orchestration skills without browser or egress defaults', () => {
+  const profile = readJson(path.join(profilesDir, 'subagents-local.json'));
+  assert.equal(profile.extends, 'privacy-default');
+  assert.equal(profile.optionalModules.includes('subagents'), true);
+  for (const skill of ['autoplan', 'investigate', 'review', 'test', 'ship']) {
+    assert.equal(profile.skills.includes(skill), true, `subagents-local should include ${skill}`);
+  }
+  assert.equal(profile.optionalModules.includes('browser'), false);
+  assert.equal(profile.disabledByDefault.includes('publicTunnels'), true);
+});

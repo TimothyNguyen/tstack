@@ -16,6 +16,7 @@ Each skill is a top-level folder with:
 |---|---|---|
 | `spec` | Convert intent into scoped requirements, invariants, and tasks. | `spec/SKILL.md.tmpl` |
 | `autoplan` | Run a composed plan-review pipeline before implementation. | `autoplan/SKILL.md.tmpl` |
+| `subagent-orchestrator` | Plan and materialize local-only subagent manifests for scoped parallel work. | `subagent-orchestrator/SKILL.md.tmpl` |
 | `plan-review` | Review implementation plans before code changes. | `plan-review/SKILL.md.tmpl` |
 | `plan-director-review` | Review plans from a director or senior-principal engineering perspective. | `plan-director-review/SKILL.md.tmpl` |
 | `plan-pm-review` | Review plans from a product manager perspective. | `plan-pm-review/SKILL.md.tmpl` |

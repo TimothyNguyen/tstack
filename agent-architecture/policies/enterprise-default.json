@@ -68,6 +68,7 @@
     "openapi": "optional",
     "langgraph": "optional",
     "databricks": "optional",
+    "subagents": "optional",
     "ponytail": "optional",
     "codegraph": "optional",
     "aws": "optional",
