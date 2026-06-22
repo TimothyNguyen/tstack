@@ -23,12 +23,12 @@ Skills grouped by concern:
 | Group | Skills |
 |---|---|
 | Core workflow | `spec`, `autoplan`, `plan-review`, `plan-*-review`, `investigate`, `review`, `qa`, `test`, `health`, `security-review`, `documentation`, `document-generate`, `document-release`, `learnings`, `release`, `ship`, `codebase-engine`, `context-save`, `context-restore`, `design-html`, `design-review`, `diagram`, `retro`, `skillify` |
-| Anti-bloat | `ponytail`, `ponytail-review`, `ponytail-audit`, `ponytail-debt`, `ponytail-gain`, `ponytail-help` |
+| Anti-bloat | `seniorswe-concise`, `seniorswe-concise-review`, `seniorswe-concise-audit`, `seniorswe-concise-debt`, `seniorswe-concise-gain`, `seniorswe-concise-help` |
 | Host bridges | `claude`, `codex`, `copilot` |
 | Safety | `guard`, `careful` |
 | Stacks | `stack-csharp` (vendored .NET skills), `stack-databricks` (vendored Databricks agent skills + bundle examples + SDK docs), `stack-postgres`, `stack-sql-server`, `stack-python`, `stack-aws`, `stack-aws-dms`, `stack-sqlserver-to-postgres`, `stack-react-typescript`, `stack-legacy-frontend`, `stack-spring-boot`, `stack-spring-ai`, `stack-databricks-dbt` |
 | Domain | `domain-mlops-databricks`, `domain-experiment-design`, `domain-data-governance`, `domain-model-interpretation` |
-| Adapters | `adapter-mcp`, `adapter-github`, `adapter-ag-ui`, `adapter-openapi`, `adapter-langgraph`, `adapter-databricks`, `adapter-ponytail`, `adapter-google-adk`, `adapter-agentcore`, `adapter-strands`, `adapter-codegraph` |
+| Adapters | `adapter-mcp`, `adapter-github`, `adapter-ag-ui`, `adapter-openapi`, `adapter-langgraph`, `adapter-databricks`, `adapter-seniorswe-concise`, `adapter-google-adk`, `adapter-agentcore`, `adapter-strands`, `adapter-codegraph` |
 | Migrations / references | `migration-dotnet-sqlserver-modernization`, `migration-review`, `reference-gstack-patterns`, `release-notes`, `benchmark`, `canary`, `atlassian-docs`, `architecture-agent-upgrade`, `rtk-token-optimizer` |
 
 ## Policy

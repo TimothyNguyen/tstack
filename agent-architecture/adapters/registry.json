@@ -48,6 +48,24 @@
       "state": "local-only"
     },
     {
+      "id": "figma-mcp",
+      "skill": "design-review",
+      "module": "figmaMcp",
+      "runtime": "design-mcp-adapter",
+      "egress": "approval-required",
+      "writes": "approval-required",
+      "state": "local-only"
+    },
+    {
+      "id": "open-pencil-mcp",
+      "skill": "design-review",
+      "module": "openPencilMcp",
+      "runtime": "design-mcp-adapter",
+      "egress": "approval-required",
+      "writes": "approval-required",
+      "state": "local-only"
+    },
+    {
       "id": "google-adk",
       "skill": "adapter-google-adk",
       "module": "googleAdk",
@@ -84,9 +102,9 @@
       "state": "local-only"
     },
     {
-      "id": "ponytail",
-      "skill": "adapter-ponytail",
-      "module": "ponytail",
+      "id": "seniorswe-concise",
+      "skill": "adapter-seniorswe-concise",
+      "module": "seniorswe-concise",
       "runtime": "hook-and-mcp-adapter",
       "egress": "disabled",
       "writes": "disabled",
