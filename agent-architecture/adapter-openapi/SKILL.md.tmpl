@@ -1,0 +1,28 @@
+---
+name: adapter-openapi
+version: 0.1.0
+description: |
+  Use OpenAPI contracts and optional generated clients/servers while keeping
+  generated code isolated and reviewed.
+---
+
+{{PREAMBLE}}
+
+# OpenAPI Adapter
+
+Use for API contract generation, client/server stubs, and compatibility checks.
+
+## References
+
+- `OpenAPITools/openapi-generator`: generator reference.
+
+## Rules
+
+- Treat generated code as an adapter boundary, not hand-edited core.
+- Pin generator version and config in project files.
+- Review generated diffs for breaking API changes.
+- Require tests around at least one request/response path for changed contracts.
+
+{{POLICY_REQUIREMENTS}}
+
+{{BASE_OUTPUT_RULES}}

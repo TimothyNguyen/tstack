@@ -1,0 +1,26 @@
+---
+name: adapter-agentcore
+version: 0.1.0
+description: |
+  Optional AgentCore adapter boundary for skills, tools, approvals, audit
+  events, and local privacy controls.
+---
+
+{{PREAMBLE}}
+
+# AgentCore Adapter
+
+Use when integrating with an AgentCore-style runtime.
+
+## Contract
+
+- Core skills remain runtime-neutral Markdown.
+- Adapter maps skills to runtime agents, tools, approval requests, and audit
+  events.
+- Tool writes, deploys, database access, and connector calls require policy.
+- Disable public telemetry, update checks, and remote pairing by default.
+- Preserve local audit correlation ids for human review.
+
+{{POLICY_REQUIREMENTS}}
+
+{{BASE_OUTPUT_RULES}}

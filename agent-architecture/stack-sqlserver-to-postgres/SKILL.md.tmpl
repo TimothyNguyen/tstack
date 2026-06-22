@@ -1,0 +1,31 @@
+---
+name: stack-sqlserver-to-postgres
+version: 0.1.0
+description: |
+  SQL Server to Postgres migration planning with T-SQL compatibility checks,
+  pgloader experiments, and production cutover guardrails.
+---
+
+{{PREAMBLE}}
+
+# SQL Server to Postgres
+
+Use for schema, query, and data migration from SQL Server to Postgres.
+
+## References
+
+- `babelfish-for-postgresql/babelfish_compass`: T-SQL compatibility assessment.
+- `dimitri/pgloader`: local experiment/data-copy reference.
+- `aws-samples/aws-database-migration-samples`: DMS/SCT lab patterns.
+
+## Workflow
+
+- Inventory schema objects, stored procedures, functions, jobs, data volumes, and application query paths.
+- Run compatibility assessment before rewriting SQL.
+- Separate local migration experiments from production cutover.
+- Require rollback, reconciliation, and performance validation plans.
+- Gate all database access through policy and audit.
+
+{{POLICY_REQUIREMENTS}}
+
+{{BASE_OUTPUT_RULES}}

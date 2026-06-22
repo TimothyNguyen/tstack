@@ -1,0 +1,26 @@
+---
+name: domain-data-governance
+version: 0.1.0
+description: |
+  Data governance review for classification, lineage, permissions, retention,
+  auditability, quality checks, and privacy-safe agent outputs.
+---
+
+{{PREAMBLE}}
+
+# Data Governance
+
+Use for datasets, warehouses, reports, model inputs/outputs, and agent access to
+business data.
+
+## Checklist
+
+- Classify data sensitivity and approved purpose.
+- Check lineage, owner, retention, permissions, quality gates, and audit trail.
+- Prefer summaries and schema metadata over raw records.
+- Gate reads, writes, exports, notebook execution, and model output access.
+- Redact secrets and private data from events, logs, prompts, and reports.
+
+{{POLICY_REQUIREMENTS}}
+
+{{BASE_OUTPUT_RULES}}

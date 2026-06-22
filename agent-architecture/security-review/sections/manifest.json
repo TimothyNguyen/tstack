@@ -1,0 +1,13 @@
+{
+  "$schema": "https://example.local/schemas/section-manifest.json",
+  "skill": "security-review",
+  "version": 1,
+  "sections": [
+    {
+      "id": "review-sections",
+      "file": "review-sections.md",
+      "title": "Enterprise security review checks",
+      "trigger": "running security, governance, data-access, or agent-tool review"
+    }
+  ]
+}

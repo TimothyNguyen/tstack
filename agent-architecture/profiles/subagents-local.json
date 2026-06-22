@@ -1,0 +1,31 @@
+{
+  "name": "subagents-local",
+  "extends": "privacy-default",
+  "policy": "policies/enterprise-default.json",
+  "description": "Local-only subagent orchestration profile for planner, explorer, implementer, test, review, and ship workflows.",
+  "skills": [
+    "autoplan",
+    "spec",
+    "investigate",
+    "review",
+    "test",
+    "ship",
+    "learnings",
+    "guard"
+  ],
+  "optionalModules": [
+    "subagents",
+    "codebaseUnderstanding",
+    "browser",
+    "devtools"
+  ],
+  "disabledByDefault": [
+    "publicTelemetry",
+    "publicUpdateChecks",
+    "publicTunnels",
+    "publicWebScraping",
+    "cookieImport",
+    "credentialRead",
+    "globalMutation"
+  ]
+}

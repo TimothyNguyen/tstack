@@ -1,0 +1,24 @@
+{
+  "name": "architecture-agent-seniorswe-concise",
+  "version": "0.1.0",
+  "module": "seniorswe-concise",
+  "transport": "stdio",
+  "egress": "disabled",
+  "state": "declared-local-paths",
+  "tools": [
+    {
+      "name": "seniorswe_concise_instructions",
+      "readOnly": true,
+      "openWorld": false,
+      "writes": "disabled",
+      "secrets": "not-required"
+    }
+  ],
+  "prompts": [
+    {
+      "name": "seniorswe-concise",
+      "readOnly": true,
+      "openWorld": false
+    }
+  ]
+}

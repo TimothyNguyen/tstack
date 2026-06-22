@@ -1,0 +1,99 @@
+---
+name: subagent-orchestrator
+version: 0.1.0
+description: |
+  Plans and materializes local-only subagent manifests for scoped parallel work.
+allowed-tools:
+  - Read
+  - Grep
+  - Glob
+  - Bash
+---
+
+{{PREAMBLE}}
+
+# Subagent Orchestrator
+
+Use this skill when a task should be split across planner, explorer,
+implementer, test-engineer, reviewer, QA, devtools, docs, or release roles.
+
+## Rules
+
+1. Keep the coordinator in charge of integration and final verification.
+2. Give every subagent a narrow role, task, tool list, and allowed path set.
+3. Keep egress disabled unless the active profile and policy explicitly allow it.
+4. Use write-capable roles only with scoped `allowedPaths`.
+5. Do not allow subagents to read credentials, cookies, secret stores, or global
+   agent configuration.
+6. Subagents must not revert or overwrite work owned by another agent.
+
+## Manifest Shape
+
+```json
+{
+  "id": "implementer-auth-api",
+  "role": "implementer",
+  "task": "Add token refresh endpoint",
+  "allowedPaths": ["src/auth/**", "tests/auth/**"],
+  "disallowedPaths": [".env", "secrets/**"],
+  "tools": ["shellRead", "shellWrite", "testExecution"]
+}
+```
+
+## Local Deployment
+
+Write a plan JSON with an `agents` array, then run:
+
+```bash
+npm run subagents:deploy -- path/to/subagents.json <repo>
+```
+
+For write-capable implementer/test/docs/release roles that should receive
+isolated worktrees:
+
+```bash
+npm run subagents:deploy -- path/to/subagents.json <repo> allocate-worktrees
+```
+
+This writes repo-local artifacts under:
+
+```text
+.architecture-agent/subagents/<agent-id>/manifest.json
+.architecture-agent/subagents/<agent-id>/allocation.json
+.architecture-agent/subagents/<agent-id>/worktree/
+.architecture-agent/subagents/deployment.json
+```
+
+## Coordinator Import Or Reject
+
+After a write-capable subagent finishes, inspect and choose:
+
+```bash
+npm run subagents:import -- export <agent-id> <repo>
+npm run subagents:import -- apply <agent-id> <repo>
+npm run subagents:import -- reject <agent-id> <repo> "wrong approach"
+```
+
+`apply` checks the patch, enforces `allowedPaths`, and imports changes into the
+coordinator worktree. `reject` records a local rejection artifact and leaves the
+coordinator worktree unchanged.
+
+## First Roles
+
+Start with:
+
+- `planner`
+- `explorer`
+- `implementer`
+- `test-engineer`
+- `reviewer`
+- `devtools-agent` only when browser/devtools profile and policy gates are
+  active
+
+Defer product browser QA and release automation until the browser and release
+policies are explicitly enabled. `devtools-agent` may run local Playwright CLI
+smoke checks for buttons, console errors, traces, and screenshots when approved.
+
+{{POLICY_REQUIREMENTS}}
+
+{{BASE_OUTPUT_RULES}}

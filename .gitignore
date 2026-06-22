@@ -1,0 +1,10 @@
+gstack/
+/graphify/
+/mcp-atlassian/
+/ponytail/
+__pycache__/
+*.py[cod]
+codebase-out/
+**/codebase-out/
+*.tmp
+*_tests.txt

@@ -1,0 +1,30 @@
+---
+name: adapter-mcp
+version: 0.1.0
+description: |
+  Design optional Model Context Protocol adapters with default-deny tools,
+  narrow schemas, and local audit boundaries.
+---
+
+{{PREAMBLE}}
+
+# MCP Adapter
+
+Use when adding or reviewing an MCP server/client integration.
+
+## References
+
+- `modelcontextprotocol/servers`: server pattern reference.
+- Existing local adapter: `adapters/ponytail/mcp`.
+
+## Rules
+
+- Keep MCP optional; core skills must work without it.
+- Default tools to read-only and closed-world where possible.
+- Use narrow schemas and explicit annotations.
+- Gate credentials, writes, network egress, and privileged tools by policy.
+- Add tests for instruction builders separately from SDK startup.
+
+{{POLICY_REQUIREMENTS}}
+
+{{BASE_OUTPUT_RULES}}

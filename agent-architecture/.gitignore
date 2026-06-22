@@ -1,0 +1,16 @@
+__pycache__/
+node_modules/
+test-results/
+playwright-report/
+*.pyc
+*.egg-info/
+codebase-engine/tests/fixtures/obj/
+codebase-out/graph.json
+codebase-out/graph.html
+codebase-out/graph.svg
+codebase-out/graph.canvas
+codebase-out/graph.cypher
+codebase-out/graph.graphml
+codebase-out/tree.html
+codebase-out/.codebase_analysis.json
+codebase-out/cache/

@@ -1,0 +1,82 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "codebase-engine"
+version = "0.1.0"
+description = "Enterprise-safe AST knowledge graph for AI coding agents. Extracts, builds, clusters, and queries local codebases. No external egress."
+readme = "README.md"
+license = { file = "LICENSE" }
+keywords = ["knowledge-graph", "ast", "tree-sitter", "code-intelligence", "enterprise"]
+requires-python = ">=3.10"
+dependencies = [
+    "networkx>=3.4",
+    "numpy>=1.21",
+    "rapidfuzz>=3.0",
+    "tree-sitter>=0.23.0,<0.26",
+    "tree-sitter-python>=0.23,<0.26",
+    "tree-sitter-javascript>=0.23,<0.26",
+    "tree-sitter-typescript>=0.23,<0.25",
+    "tree-sitter-go>=0.23,<0.26",
+    "tree-sitter-rust>=0.23,<0.25",
+    "tree-sitter-java>=0.23,<0.25",
+    "tree-sitter-groovy>=0.1,<0.3",
+    "tree-sitter-c>=0.23,<0.25",
+    "tree-sitter-cpp>=0.23,<0.25",
+    "tree-sitter-ruby>=0.23,<0.25",
+    "tree-sitter-c-sharp>=0.23,<0.25",
+    "tree-sitter-kotlin>=1.0,<2.0",
+    "tree-sitter-scala>=0.23,<0.27",
+    "tree-sitter-php>=0.23,<0.25",
+    "tree-sitter-swift>=0.7,<0.9",
+    "tree-sitter-lua>=0.2,<0.6",
+    "tree-sitter-zig>=1.0,<2.0",
+    "tree-sitter-powershell>=0.26,<0.28",
+    "tree-sitter-elixir>=0.3,<0.5",
+    "tree-sitter-objc>=3.0,<4.0",
+    "tree-sitter-julia>=0.23,<0.25",
+    "tree-sitter-verilog>=1.0,<2.0",
+    "tree-sitter-fortran>=0.6,<0.8",
+    "tree-sitter-bash>=0.23,<0.27",
+    "tree-sitter-json>=0.23,<0.26",
+]
+
+[project.optional-dependencies]
+mcp = ["mcp"]
+neo4j = ["neo4j"]
+falkordb = ["falkordb"]
+pdf = ["pypdf>=6.12.0", "markdownify"]
+watch = ["watchdog"]
+svg = ["matplotlib", "numpy>=2.0; python_version >= '3.13'"]
+leiden = ["graspologic; python_version < '3.13'"]
+office = ["python-docx", "openpyxl"]
+postgres = ["psycopg[binary]"]
+video = ["faster-whisper; python_version >= '3.11'"]
+# LLM adapters (local/internal only — configure via CODEBASE_ENGINE_LLM_* env vars)
+anthropic = ["anthropic"]
+openai = ["openai", "tiktoken"]
+bedrock = ["boto3"]
+sql = ["tree-sitter-sql"]
+all = ["mcp", "neo4j", "falkordb", "pypdf>=6.12.0", "markdownify", "watchdog", "graspologic; python_version < '3.13'", "python-docx", "openpyxl", "faster-whisper; python_version >= '3.11'", "matplotlib", "numpy>=2.0; python_version >= '3.13'", "openai", "tiktoken", "boto3", "anthropic", "tree-sitter-sql"]
+
+[project.scripts]
+codebase-engine = "codebase_engine.__main__:main"
+codebase-engine-mcp = "codebase_engine.serve:_main"
+
+[tool.setuptools]
+packages = ["codebase_engine"]
+include-package-data = true
+
+[tool.setuptools.package-data]
+codebase_engine = ["skills/*/references/*.md"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E9", "F63", "F7", "F82"]

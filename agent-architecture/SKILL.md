@@ -1,0 +1,118 @@
+---
+name: agent-architecture
+version: 0.1.0
+description: |
+  Enterprise-safe software engineering skill pack. Routes work to scoped skills for
+  spec writing, code review, QA, security review, documentation, learnings, and release
+  workflows. Designed for local project installs and no default public egress.
+allowed-tools:
+  - Read
+  - Grep
+  - Glob
+  - Bash
+---
+
+## Enterprise Preamble
+
+- Stay inside the current project unless the user explicitly names another path.
+- Do not call public telemetry, public update checks, public tunnels, cookie import, or public scraping flows.
+- Use policy-gated tools only when the active profile allows them.
+- Commit after each discrete behavior change — do not accumulate unrelated edits across multiple files before committing.
+- Each commit message must follow Conventional Commits: `<type>[scope]: <description>` (types: feat, fix, docs, refactor, test, chore, perf, ci).
+- Never use `--no-verify`, `--force` (use `--force-with-lease`), or `--no-gpg-sign` unless explicitly instructed.
+- Sequence for rebasing: stage → commit → fetch → rebase → push.
+
+# Agent Architecture Skill Pack
+
+Use this root skill as the router for project-local software engineering
+workflows.
+
+## Routing
+
+- New requirement, design, or issue: invoke `spec`.
+- Fully reviewed plan pipeline: invoke `autoplan`.
+- Split a task into scoped local subagents: invoke `subagent-orchestrator`.
+- Review a plan before implementation: invoke `plan-review`.
+- Director/principal plan review: invoke `plan-director-review`.
+- Product manager plan review: invoke `plan-pm-review`.
+- engineering plan review: invoke `plan-eng-review`.
+- design plan review: invoke `plan-design-review`.
+- developer-experience plan review: invoke `plan-devex-review`.
+- Debug a bug, failure, or unexpected behavior: invoke `investigate`.
+- Code or PR review: invoke `review`.
+- Cross-model/code-agent second opinion: invoke `codex`, `claude`, or `copilot` only when the host profile enables it.
+- Manual or automated test planning: invoke `qa`.
+- Test automation design or execution: invoke `test`.
+- Code quality dashboard or full local checkup: invoke `health`.
+- Security or data-governance review: invoke `security-review`.
+- Documentation work: invoke `documentation`, `document-generate`, or `document-release`.
+- UI/design implementation review: invoke `design-review` or `design-html`.
+- Diagrams or architecture visuals: invoke `diagram`.
+- Project memory or lessons: invoke `learnings`.
+- Save or restore working context: invoke `context-save` or `context-restore`.
+- Release preparation: invoke `release`.
+- Ship/PR handoff: invoke `ship`.
+- Weekly/project retrospective: invoke `retro`.
+- Convert a repeated workflow into a reusable skill: invoke `skillify`.
+- Restrict or harden tool use: invoke `guard`.
+- Destructive command guardrails, production safety mode: invoke `careful`.
+- Upgrade this skill pack: invoke `architecture-agent-upgrade`.
+- Codebase map, architecture lookup, dependency tracing, or AST graph indexing: invoke `codebase-engine`.
+- Internal Atlassian product docs, requirements, or Jira issue context for coding questions: invoke `atlassian-docs` only when an approved read-only connector is configured.
+- Token/cost reduction for noisy shell output: invoke `rtk-token-optimizer`.
+- Commit after completing discrete work, Conventional Commits format, atomic-commit guidance: invoke `commit`.
+- Simplest/laziest solution, YAGNI enforcement: invoke `seniorswe-concise`.
+- Over-engineering diff review: invoke `seniorswe-concise-review`.
+- Whole-repo bloat audit: invoke `seniorswe-concise-audit`.
+- List deferred `seniorswe-concise:` shortcuts: invoke `seniorswe-concise-debt`.
+- Seniorswe-Concise impact scoreboard: invoke `seniorswe-concise-gain`.
+- Seniorswe-Concise quick reference: invoke `seniorswe-concise-help`.
+- .NET and SQL Server modernization: invoke `migration-dotnet-sqlserver-modernization`.
+- Legacy frontend migration: invoke `stack-legacy-frontend`.
+- React and TypeScript modernization: invoke `stack-react-typescript`.
+- SQL Server to Postgres migration: invoke `stack-sqlserver-to-postgres`.
+- AWS DMS/SCT migration planning: invoke `stack-aws-dms`.
+- Spring Boot upgrades: invoke `stack-spring-boot`.
+- Spring AI application integration: invoke `stack-spring-ai`.
+- Databricks jobs, notebooks, and bundles: invoke `stack-databricks`.
+- Databricks MLOps workflows: invoke `domain-mlops-databricks`.
+- dbt on Databricks: invoke `stack-databricks-dbt`.
+- MCP connector design: invoke `adapter-mcp`.
+- GitHub repo/issue/PR connector design: invoke `adapter-github`.
+- AG-UI event integration: invoke `adapter-ag-ui`.
+- OpenAPI generator integration: invoke `adapter-openapi`.
+- LangGraph orchestration boundary: invoke `adapter-langgraph`.
+- Databricks SDK connector design: invoke `adapter-databricks`.
+- Seniorswe-Concise hook or MCP runtime integration: invoke `adapter-seniorswe-concise`.
+- GStack migration pattern reference: invoke `reference-gstack-patterns`.
+- AWS application modernization: invoke `stack-aws`.
+- Python service/data workflow modernization: invoke `stack-python`.
+- C#/.NET stack work: invoke `stack-csharp`.
+- Postgres schema/query/migration work: invoke `stack-postgres`.
+- SQL Server schema/T-SQL/data-access work: invoke `stack-sql-server`.
+- Experiment design review: invoke `domain-experiment-design`.
+- Data governance review: invoke `domain-data-governance`.
+- Model interpretation review: invoke `domain-model-interpretation`.
+- Google ADK adapter design: invoke `adapter-google-adk`.
+- AgentCore adapter design: invoke `adapter-agentcore`.
+- Strands adapter design: invoke `adapter-strands`.
+- CodeGraph adapter design: invoke `adapter-codegraph`.
+- Migration plan review: invoke `migration-review`.
+- Privacy-safe release notes: invoke `release-notes`.
+- Local benchmark/regression workflow: invoke `benchmark`.
+- Canary monitoring handoff: invoke `canary`.
+
+When a project profile installs domain or stack packs, route to those skills
+only when the user task names that domain or stack.
+
+## Policy Requirements
+
+- Read-only code inspection is allowed.
+- Shell write, git write, deployment, database read, ticket creation, and browser use require policy approval unless the active profile says otherwise.
+- Credential reads, cookie import, public tunnels, public telemetry, and public scraping are disabled by default.
+
+## Output Rules
+
+- Report findings with file paths, concrete evidence, and recommended actions.
+- Do not include secrets, raw credentials, cookie values, full prompts, or full data extracts.
+- Prefer structured summaries that can map to AG-UI events later.

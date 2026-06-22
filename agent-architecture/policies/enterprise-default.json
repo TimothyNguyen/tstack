@@ -1,0 +1,88 @@
+{
+  "name": "enterprise-default",
+  "version": 1,
+  "description": "Default local policy for enterprise-safe agent architecture installs.",
+  "egress": {
+    "default": "deny",
+    "allowedHosts": [],
+    "allowPublicUpdateChecks": false,
+    "allowPublicTelemetry": false,
+    "allowPublicTunnels": false,
+    "allowPublicWebScraping": false
+  },
+  "install": {
+    "defaultMode": "repo-local",
+    "allowGlobalMutation": false,
+    "allowedTargets": [
+      "agent-architecture/generated",
+      ".architecture-agent"
+    ]
+  },
+  "tools": {
+    "shellRead": "allow",
+    "shellWrite": "approval-required",
+    "gitRead": "allow",
+    "gitWrite": "approval-required",
+    "testExecution": "allow",
+    "browserRead": "disabled",
+    "browserWrite": "disabled",
+    "playwrightCli": "approval-required",
+    "devtoolsInspect": "approval-required",
+    "figmaMcp": "approval-required",
+    "openPencilMcp": "approval-required",
+    "cookieImport": "disabled",
+    "credentialRead": "disabled",
+    "deploy": "approval-required",
+    "databaseRead": "approval-required",
+    "databaseWrite": "disabled",
+    "ticketCreate": "approval-required",
+    "humanEscalation": "allow"
+  },
+  "audit": {
+    "enabled": true,
+    "destination": "local-file",
+    "path": ".architecture-agent/audit/events.jsonl",
+    "forbiddenFields": [
+      "token",
+      "cookie",
+      "apiKey",
+      "password",
+      "secret",
+      "credential",
+      "fullPrompt",
+      "fileContents"
+    ]
+  },
+  "state": {
+    "default": "deny",
+    "declaredPathsOnly": true,
+    "logStateValues": false
+  },
+  "modules": {
+    "browser": "disabled",
+    "devtools": "optional",
+    "figmaMcp": "optional",
+    "openPencilMcp": "optional",
+    "codebaseUnderstanding": "optional",
+    "agUi": "optional",
+    "mcp": "optional",
+    "atlassianDocs": "optional",
+    "googleAdk": "optional",
+    "strands": "optional",
+    "agentCore": "optional",
+    "rtkTokenOptimizer": "optional",
+    "github": "optional",
+    "openapi": "optional",
+    "langgraph": "optional",
+    "databricks": "optional",
+    "subagents": "optional",
+    "seniorswe-concise": "optional",
+    "codegraph": "optional",
+    "aws": "optional",
+    "postgres": "optional",
+    "sqlServer": "optional",
+    "python": "optional",
+    "csharp": "optional",
+    "spring": "optional"
+  }
+}

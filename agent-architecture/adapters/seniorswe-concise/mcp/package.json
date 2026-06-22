@@ -1,0 +1,15 @@
+{
+  "name": "@architecture-agent/seniorswe-concise-mcp",
+  "version": "0.1.0",
+  "description": "Optional MCP server that exposes the architecture-agent Seniorswe-Concise instructions.",
+  "private": true,
+  "type": "module",
+  "license": "MIT",
+  "scripts": {
+    "test": "node --test ./test/*.test.js"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.19.0",
+    "zod": "^3.23.0"
+  }
+}

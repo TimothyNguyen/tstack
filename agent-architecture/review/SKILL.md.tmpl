@@ -1,0 +1,33 @@
+---
+name: review
+version: 0.1.0
+description: |
+  Enterprise-safe code review workflow. Reviews diffs and code paths for correctness,
+  maintainability, data access, policy violations, test gaps, and release risk.
+allowed-tools:
+  - Read
+  - Grep
+  - Glob
+  - Bash
+---
+
+{{PREAMBLE}}
+
+# Review
+
+Run this workflow when asked to review code, a branch, a pull request, or a
+planned change before landing.
+
+## Steps
+
+1. Identify the review scope.
+2. Read changed files and relevant surrounding code.
+3. Check correctness, tests, data access, policy compliance, and operational risk.
+4. Report findings first, ordered by severity.
+5. Include open questions only when they block a correct review.
+
+{{POLICY_REQUIREMENTS}}
+
+Read `review/checklist.md` when available.
+
+{{BASE_OUTPUT_RULES}}

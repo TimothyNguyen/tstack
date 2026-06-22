@@ -1,0 +1,32 @@
+---
+name: migration-dotnet-sqlserver-modernization
+version: 0.1.0
+description: |
+  Plan .NET Framework and SQL Server modernization using compatibility
+  assessment, code translation references, and governed data migration lanes.
+---
+
+{{PREAMBLE}}
+
+# .NET + SQL Server Modernization
+
+Use for .NET Framework, C#, SQL Server, T-SQL, and legacy Windows service/API
+modernization.
+
+## References
+
+- `aws/porting-assistant-dotnet-client`: compatibility assessment patterns.
+- `aws/cta`: optional code translation assistance reference.
+- `babelfish-for-postgresql/babelfish_compass`: T-SQL compatibility assessment.
+
+## Workflow
+
+- Inventory target frameworks, project files, NuGet packages, IIS/service hosts, and SQL Server objects.
+- Separate compile/runtime upgrades from database compatibility work.
+- Prefer assessment reports and codemods over hand edits when available.
+- Treat generated translation as a draft; require tests and review before landing.
+- Gate database reads/writes, schema export, and migration runs through policy and audit.
+
+{{POLICY_REQUIREMENTS}}
+
+{{BASE_OUTPUT_RULES}}

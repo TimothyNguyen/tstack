@@ -1,0 +1,28 @@
+---
+name: stack-databricks-dbt
+version: 0.1.0
+description: |
+  dbt on Databricks patterns for models, tests, docs, lineage, and governed
+  transformations.
+---
+
+{{PREAMBLE}}
+
+# dbt on Databricks
+
+Use for dbt projects that target Databricks.
+
+## References
+
+- `databricks/dbt-databricks`: adapter and project pattern reference.
+
+## Workflow
+
+- Inventory profiles, targets, models, seeds, snapshots, tests, and exposures.
+- Keep credentials out of project files and outputs.
+- Prefer dbt tests and docs generation for migration confidence.
+- Gate warehouse/job execution by policy.
+
+{{POLICY_REQUIREMENTS}}
+
+{{BASE_OUTPUT_RULES}}

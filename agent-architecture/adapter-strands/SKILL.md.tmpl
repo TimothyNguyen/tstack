@@ -1,0 +1,25 @@
+---
+name: adapter-strands
+version: 0.1.0
+description: |
+  Optional Strands adapter boundary for composing skills and tools with
+  privacy-first policy gates and no core runtime dependency.
+---
+
+{{PREAMBLE}}
+
+# Strands Adapter
+
+Use when designing or reviewing Strands integration.
+
+## Contract
+
+- Keep Strands optional and adapter-owned.
+- Map skills to runtime instructions without editing every skill.
+- Keep tool allowlists, egress decisions, and approvals explicit.
+- Disable public telemetry, tunnels, and global mutation by default.
+- Do not emit raw prompts, secrets, or private data to external observability.
+
+{{POLICY_REQUIREMENTS}}
+
+{{BASE_OUTPUT_RULES}}
