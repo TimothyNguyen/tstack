@@ -8,7 +8,7 @@ This backlog tracks privacy-first follow-up work for `agent-architecture`.
 |---|---|---|
 | Add missing modernization stack/domain/adapter skills | Done | `npm run check:skills`, `npm test` |
 | Add privacy-first adapter contract | Done | `tests/privacy-adapter-contract.test.mjs` |
-| Port Ponytail hook/MCP runtime as optional adapter | Done | `tests/ponytail-adapter.test.mjs` |
+| Port Seniorswe-Concise hook/MCP runtime as optional adapter | Done | `tests/seniorswe-concise-adapter.test.mjs` |
 | Ensure every top-level skill is cataloged and routed | Done | `tests/skill-catalog.test.mjs` |
 | Ignore generated .NET fixture `obj/` output | Done | `.gitignore` |
 | Add privacy/default profile manifests | Done | `tests/profile-contract.test.mjs` |

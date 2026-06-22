@@ -91,16 +91,16 @@ Do not reintroduce `tstack-upgrade`.
 
 ## Anti-Bloat Skills
 
-Six ponytail skills live alongside the architecture skills:
+Six seniorswe-concise skills live alongside the architecture skills:
 
-- `/ponytail` — lazy-senior-dev mode. Use whenever generating new code.
-- `/ponytail-review` — diff review focused exclusively on over-engineering.
-- `/ponytail-audit` — whole-repo audit for what to delete.
-- `/ponytail-debt` — harvests `ponytail:` comments into a tracked debt ledger.
-- `/ponytail-gain` — scoreboard of measured impact (lines, cost, speed).
-- `/ponytail-help` — quick-reference card for all ponytail modes and skills.
+- `/seniorswe-concise` — lazy-senior-dev mode. Use whenever generating new code.
+- `/seniorswe-concise-review` — diff review focused exclusively on over-engineering.
+- `/seniorswe-concise-audit` — whole-repo audit for what to delete.
+- `/seniorswe-concise-debt` — harvests `seniorswe-concise:` comments into a tracked debt ledger.
+- `/seniorswe-concise-gain` — scoreboard of measured impact (lines, cost, speed).
+- `/seniorswe-concise-help` — quick-reference card for all seniorswe-concise modes and skills.
 
-Activate `/ponytail` at the start of any development session so the code we
+Activate `/seniorswe-concise` at the start of any development session so the code we
 generate is never over-built.
 
 ## Before Completion

@@ -17,7 +17,10 @@ allowed-tools:
 - Stay inside the current project unless the user explicitly names another path.
 - Do not call public telemetry, public update checks, public tunnels, cookie import, or public scraping flows.
 - Use policy-gated tools only when the active profile allows them.
-- Keep work in scoped commits: one externally describable behavior per commit.
+- Commit after each discrete behavior change — do not accumulate unrelated edits across multiple files before committing.
+- Each commit message must follow Conventional Commits: `<type>[scope]: <description>` (types: feat, fix, docs, refactor, test, chore, perf, ci).
+- Never use `--no-verify`, `--force` (use `--force-with-lease`), or `--no-gpg-sign` unless explicitly instructed.
+- Sequence for rebasing: stage → commit → fetch → rebase → push.
 
 # Agent Architecture Skill Pack
 
@@ -57,12 +60,13 @@ workflows.
 - Codebase map, architecture lookup, dependency tracing, or AST graph indexing: invoke `codebase-engine`.
 - Internal Atlassian product docs, requirements, or Jira issue context for coding questions: invoke `atlassian-docs` only when an approved read-only connector is configured.
 - Token/cost reduction for noisy shell output: invoke `rtk-token-optimizer`.
-- Simplest/laziest solution, YAGNI enforcement: invoke `ponytail`.
-- Over-engineering diff review: invoke `ponytail-review`.
-- Whole-repo bloat audit: invoke `ponytail-audit`.
-- List deferred `ponytail:` shortcuts: invoke `ponytail-debt`.
-- Ponytail impact scoreboard: invoke `ponytail-gain`.
-- Ponytail quick reference: invoke `ponytail-help`.
+- Commit after completing discrete work, Conventional Commits format, atomic-commit guidance: invoke `commit`.
+- Simplest/laziest solution, YAGNI enforcement: invoke `seniorswe-concise`.
+- Over-engineering diff review: invoke `seniorswe-concise-review`.
+- Whole-repo bloat audit: invoke `seniorswe-concise-audit`.
+- List deferred `seniorswe-concise:` shortcuts: invoke `seniorswe-concise-debt`.
+- Seniorswe-Concise impact scoreboard: invoke `seniorswe-concise-gain`.
+- Seniorswe-Concise quick reference: invoke `seniorswe-concise-help`.
 - .NET and SQL Server modernization: invoke `migration-dotnet-sqlserver-modernization`.
 - Legacy frontend migration: invoke `stack-legacy-frontend`.
 - React and TypeScript modernization: invoke `stack-react-typescript`.
@@ -79,7 +83,7 @@ workflows.
 - OpenAPI generator integration: invoke `adapter-openapi`.
 - LangGraph orchestration boundary: invoke `adapter-langgraph`.
 - Databricks SDK connector design: invoke `adapter-databricks`.
-- Ponytail hook or MCP runtime integration: invoke `adapter-ponytail`.
+- Seniorswe-Concise hook or MCP runtime integration: invoke `adapter-seniorswe-concise`.
 - GStack migration pattern reference: invoke `reference-gstack-patterns`.
 - AWS application modernization: invoke `stack-aws`.
 - Python service/data workflow modernization: invoke `stack-python`.

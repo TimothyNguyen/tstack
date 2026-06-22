@@ -11,7 +11,10 @@ description: |
 - Stay inside the current project unless the user explicitly names another path.
 - Do not call public telemetry, public update checks, public tunnels, cookie import, or public scraping flows.
 - Use policy-gated tools only when the active profile allows them.
-- Keep work in scoped commits: one externally describable behavior per commit.
+- Commit after each discrete behavior change — do not accumulate unrelated edits across multiple files before committing.
+- Each commit message must follow Conventional Commits: `<type>[scope]: <description>` (types: feat, fix, docs, refactor, test, chore, perf, ci).
+- Never use `--no-verify`, `--force` (use `--force-with-lease`), or `--no-gpg-sign` unless explicitly instructed.
+- Sequence for rebasing: stage → commit → fetch → rebase → push.
 
 # Skill Pattern Reference
 
@@ -32,7 +35,10 @@ generator substitutes `## Enterprise Preamble
 - Stay inside the current project unless the user explicitly names another path.
 - Do not call public telemetry, public update checks, public tunnels, cookie import, or public scraping flows.
 - Use policy-gated tools only when the active profile allows them.
-- Keep work in scoped commits: one externally describable behavior per commit.`, `## Policy Requirements
+- Commit after each discrete behavior change — do not accumulate unrelated edits across multiple files before committing.
+- Each commit message must follow Conventional Commits: `<type>[scope]: <description>` (types: feat, fix, docs, refactor, test, chore, perf, ci).
+- Never use `--no-verify`, `--force` (use `--force-with-lease`), or `--no-gpg-sign` unless explicitly instructed.
+- Sequence for rebasing: stage → commit → fetch → rebase → push.`, `## Policy Requirements
 
 - Read-only code inspection is allowed.
 - Shell write, git write, deployment, database read, ticket creation, and browser use require policy approval unless the active profile says otherwise.
@@ -51,7 +57,10 @@ generator substitutes `## Enterprise Preamble
 - Stay inside the current project unless the user explicitly names another path.
 - Do not call public telemetry, public update checks, public tunnels, cookie import, or public scraping flows.
 - Use policy-gated tools only when the active profile allows them.
-- Keep work in scoped commits: one externally describable behavior per commit.`) — scope, no public egress, policy-gated tools, scoped commits.
+- Commit after each discrete behavior change — do not accumulate unrelated edits across multiple files before committing.
+- Each commit message must follow Conventional Commits: `<type>[scope]: <description>` (types: feat, fix, docs, refactor, test, chore, perf, ci).
+- Never use `--no-verify`, `--force` (use `--force-with-lease`), or `--no-gpg-sign` unless explicitly instructed.
+- Sequence for rebasing: stage → commit → fetch → rebase → push.`) — scope, no public egress, policy-gated tools, scoped commits.
 - Activation triggers — when to invoke.
 - Workflow — concrete steps.
 - Policy requirements (via `## Policy Requirements

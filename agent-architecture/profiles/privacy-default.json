@@ -24,13 +24,13 @@
     "context-restore",
     "guard",
     "careful",
-    "ponytail",
-    "ponytail-review",
-    "ponytail-audit"
+    "seniorswe-concise",
+    "seniorswe-concise-review",
+    "seniorswe-concise-audit"
   ],
   "optionalModules": [
     "codebaseUnderstanding",
-    "ponytail"
+    "seniorswe-concise"
   ],
   "disabledByDefault": [
     "publicTelemetry",

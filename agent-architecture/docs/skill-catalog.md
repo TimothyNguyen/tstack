@@ -14,6 +14,7 @@ Each skill is a top-level folder with:
 
 | Skill | Purpose | Source |
 |---|---|---|
+| `commit` | Atomic commit discipline: Conventional Commits format, one-behavior-per-commit, safe rebase sequence. | `commit/SKILL.md.tmpl` |
 | `spec` | Convert intent into scoped requirements, invariants, and tasks. | `spec/SKILL.md.tmpl` |
 | `autoplan` | Run a composed plan-review pipeline before implementation. | `autoplan/SKILL.md.tmpl` |
 | `subagent-orchestrator` | Plan and materialize local-only subagent manifests for scoped parallel work. | `subagent-orchestrator/SKILL.md.tmpl` |
@@ -56,12 +57,12 @@ Each skill is a top-level folder with:
 
 | Skill | Purpose | Source |
 |---|---|---|
-| `ponytail` | Lazy-senior-dev mode — enforce YAGNI ladder, stdlib-first, shortest diff. | `ponytail/SKILL.md.tmpl` |
-| `ponytail-review` | Diff review for over-engineering: delete/stdlib/native/yagni/shrink tags. | `ponytail-review/SKILL.md.tmpl` |
-| `ponytail-audit` | Whole-repo audit ranked by cut size. | `ponytail-audit/SKILL.md.tmpl` |
-| `ponytail-debt` | Harvest `ponytail:` comments into a debt ledger. | `ponytail-debt/SKILL.md.tmpl` |
-| `ponytail-gain` | Scoreboard of measured ponytail impact (lines, cost, speed). | `ponytail-gain/SKILL.md.tmpl` |
-| `ponytail-help` | Quick-reference card for all ponytail modes and skills. | `ponytail-help/SKILL.md.tmpl` |
+| `seniorswe-concise` | Lazy-senior-dev mode — enforce YAGNI ladder, stdlib-first, shortest diff. | `seniorswe-concise/SKILL.md.tmpl` |
+| `seniorswe-concise-review` | Diff review for over-engineering: delete/stdlib/native/yagni/shrink tags. | `seniorswe-concise-review/SKILL.md.tmpl` |
+| `seniorswe-concise-audit` | Whole-repo audit ranked by cut size. | `seniorswe-concise-audit/SKILL.md.tmpl` |
+| `seniorswe-concise-debt` | Harvest `seniorswe-concise:` comments into a debt ledger. | `seniorswe-concise-debt/SKILL.md.tmpl` |
+| `seniorswe-concise-gain` | Scoreboard of measured seniorswe-concise impact (lines, cost, speed). | `seniorswe-concise-gain/SKILL.md.tmpl` |
+| `seniorswe-concise-help` | Quick-reference card for all seniorswe-concise modes and skills. | `seniorswe-concise-help/SKILL.md.tmpl` |
 
 ## Modernization Profile And Optional Packs
 
@@ -86,7 +87,7 @@ project profile needs them:
 | `adapter-openapi` | OpenAPI generator adapter and contract boundary guidance. | `adapter-openapi/SKILL.md.tmpl` |
 | `adapter-langgraph` | Optional LangGraph orchestration boundary guidance. | `adapter-langgraph/SKILL.md.tmpl` |
 | `adapter-databricks` | Optional Databricks SDK connector boundary guidance. | `adapter-databricks/SKILL.md.tmpl` |
-| `adapter-ponytail` | Optional Ponytail hook and MCP runtime integration. | `adapter-ponytail/SKILL.md.tmpl` |
+| `adapter-seniorswe-concise` | Optional Seniorswe-Concise hook and MCP runtime integration. | `adapter-seniorswe-concise/SKILL.md.tmpl` |
 | `reference-gstack-patterns` | Mine gstack role/workflow patterns without unsafe carry-over. | `reference-gstack-patterns/SKILL.md.tmpl` |
 | `stack-aws` | AWS application modernization with least-privilege local validation. | `stack-aws/SKILL.md.tmpl` |
 | `stack-python` | Python service, library, and data workflow modernization. | `stack-python/SKILL.md.tmpl` |

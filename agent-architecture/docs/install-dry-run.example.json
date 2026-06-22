@@ -14,7 +14,7 @@
     "copilot"
   ],
   "adapters": [
-    "ponytail",
+    "seniorswe-concise",
     "mcp",
     "ag-ui"
   ],

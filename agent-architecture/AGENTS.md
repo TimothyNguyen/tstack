@@ -10,6 +10,22 @@ engineering agents.
 `../gstack/` is reference material only. Do not edit it when working on this
 package.
 
+## Commit Discipline
+
+Every commit is one externally describable behavior change. Invoke the
+`commit` skill when committing, or follow these rules directly:
+
+- Format: `<type>[scope]: <description>` (Conventional Commits).
+- Types: `feat`, `fix`, `docs`, `refactor`, `test`, `chore`, `perf`, `ci`.
+- Never use `--no-verify`, `--force` (use `--force-with-lease`).
+- Sequence for rebasing: stage → commit → fetch → rebase → push.
+
+For Codex: reference skills by task purpose, not slash commands:
+```
+Use the spec skill to convert this requirement into scoped tasks.
+Use the commit skill to stage and commit only the authentication fix.
+```
+
 ## Architecture Pattern
 
 Follow the gstack-style skill layout:

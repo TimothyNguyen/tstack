@@ -112,7 +112,7 @@ This preserves the gstack ergonomics while keeping the new package generic.
 - `adapter-openapi`
 - `adapter-langgraph`
 - `adapter-databricks`
-- `adapter-ponytail`
+- `adapter-seniorswe-concise`
 - `reference-gstack-patterns`
 - `stack-aws`
 - `stack-python`
@@ -182,7 +182,7 @@ Candidate adapters:
 - `adapters/agentcore`
 - `adapters/strands`
 - `adapters/google-adk`
-- `adapters/ponytail`
+- `adapters/seniorswe-concise`
 
 Adapters must expose narrow interfaces to core. Core should not import a heavy
 runtime SDK directly.
