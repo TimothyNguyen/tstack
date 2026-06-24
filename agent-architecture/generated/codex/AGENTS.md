@@ -8,6 +8,19 @@ Do not edit directly — edit `SKILL.md.tmpl` and regenerate.
 This skill pack provides enterprise-safe software engineering workflows.
 Codex activates skills by task description, not slash commands.
 
+## Role-Based Agents
+
+- `/cloud` — Cloud and DevOps engineer agent. Handles AWS infrastructure, DMS migrations,
+- `/data` — Data and MLOps engineer agent. Handles Databricks jobs, dbt transformations,
+- `/design-agent` — UI and design agent. Handles design review, implementation-ready HTML
+- `/interviewer` — Technical interviewer agent. Conducts interviews grounded in the actual
+- `/migration` — Migration engineer agent. Handles .NET/SQL Server modernization, SQL-to-Postgres
+- `/orchestrate` — Coordinator agent for large features. Decomposes work into parallel subagents
+- `/pm` — Product manager agent. Handles strategy, prioritization, PRDs, retrospectives,
+- `/qa-agent` — QA engineer agent. Tests, validates, benchmarks, and monitors post-deploy.
+- `/spec-agent` — Spec writer and planner agent. Converts vague intent into precise, reviewable
+- `/swe` — General software engineer agent. Handles implementation, debugging, code
+
 ## How to Invoke Skills
 
 Reference the skill by purpose in your task:

@@ -41,6 +41,24 @@ function stripFrontmatter(content) {
   return content.slice(end + 4).replace(/^\n/, '');
 }
 
+function buildAgentsSection() {
+  const agentsDir = path.join(ROOT, 'agents');
+  if (!fs.existsSync(agentsDir)) return '';
+  const lines = ['## Role-Based Agents', ''];
+  for (const name of fs.readdirSync(agentsDir).sort()) {
+    const tmplPath = path.join(agentsDir, name, 'SKILL.md.tmpl');
+    if (!fs.existsSync(tmplPath)) continue;
+    const content = fs.readFileSync(tmplPath, 'utf8');
+    const descMatch = content.match(/^description:\s*\|?\s*\n((?:[ \t]+.+\n?)*)/m);
+    const desc = descMatch
+      ? descMatch[1].replace(/^[ \t]{2}/gm, '').trim().split('\n')[0]
+      : '';
+    lines.push(`- \`/${name}\` — ${desc}`);
+  }
+  lines.push('');
+  return lines.join('\n');
+}
+
 function routingSection(rootSkill) {
   const stripped = stripFrontmatter(rootSkill);
   const start = stripped.indexOf('## Routing');
@@ -66,6 +84,7 @@ function buildAgentsMd() {
     'This skill pack provides enterprise-safe software engineering workflows.',
     'Codex activates skills by task description, not slash commands.',
     '',
+    buildAgentsSection(),
     '## How to Invoke Skills',
     '',
     'Reference the skill by purpose in your task:',
@@ -131,6 +150,7 @@ function buildCopilotInstructions() {
     'This skill pack provides enterprise-safe software engineering workflows.',
     'Copilot activates skills by task description, not slash commands.',
     '',
+    buildAgentsSection(),
     '## How to Invoke Skills',
     '',
     'Reference the skill by purpose in your task or Copilot Chat prompt:',
