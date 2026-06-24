@@ -8,3 +8,4 @@ codebase-out/
 **/codebase-out/
 *.tmp
 *_tests.txt
+/tinyurl
