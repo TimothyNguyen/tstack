@@ -4,6 +4,7 @@ version: 0.1.0
 description: |
   Map skill progress, approvals, tool actions, findings, and artifacts into
   AG-UI-compatible event concepts.
+agents: [orchestrate, _infrastructure]
 ---
 
 ## Enterprise Preamble

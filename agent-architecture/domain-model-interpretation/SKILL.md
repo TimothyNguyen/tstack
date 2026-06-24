@@ -4,6 +4,7 @@ version: 0.1.0
 description: |
   Model interpretation review for feature effects, calibration, drift,
   uncertainty, explanation limits, and decision-risk communication.
+agents: [data, pm]
 ---
 
 ## Enterprise Preamble

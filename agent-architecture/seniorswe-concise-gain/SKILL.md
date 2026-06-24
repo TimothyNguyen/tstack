@@ -6,6 +6,7 @@ description: |
   less code, less cost, more speed, from benchmark medians. One-shot display,
   not a persistent mode. Invoke via /seniorswe-concise-gain, or "what does
   concise mode save", "show impact", "scoreboard".
+agents: [swe]
 ---
 
 # Senior SWE Concise: Impact Scoreboard

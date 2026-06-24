@@ -4,6 +4,7 @@ version: 0.1.0
 description: |
   Optional Seniorswe-Concise hook and MCP adapter for YAGNI mode injection across
   Claude, Codex, Copilot, and MCP hosts.
+agents: [swe, _infrastructure]
 ---
 
 ## Enterprise Preamble

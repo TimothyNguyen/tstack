@@ -4,6 +4,7 @@ version: 0.1.0
 description: |
   Spring-native AI application patterns using Spring AI and Spring AI examples
   as references, without making them core dependencies.
+agents: [swe]
 ---
 
 ## Enterprise Preamble

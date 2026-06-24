@@ -4,6 +4,7 @@ version: 0.1.0
 description: |
   Local benchmark and regression-check workflow for performance or quality
   changes with no public telemetry or benchmark uploads by default.
+agents: [qa-agent]
 ---
 
 ## Enterprise Preamble

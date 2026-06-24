@@ -9,6 +9,7 @@ allowed-tools:
   - Grep
   - Glob
   - Bash
+agents: [orchestrate, pm]
 ---
 
 ## Enterprise Preamble

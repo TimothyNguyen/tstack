@@ -4,6 +4,7 @@ version: 0.1.0
 description: |
   SQL Server schema, T-SQL, stored procedure, job, and application data-access
   modernization with governed database access.
+agents: [swe, migration]
 ---
 
 ## Enterprise Preamble

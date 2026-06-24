@@ -12,6 +12,7 @@ description: |
   boilerplate.
 argument-hint: "[lite|full|ultra]"
 license: MIT
+agents: [swe, data]
 ---
 
 # Senior SWE: Concise Mode

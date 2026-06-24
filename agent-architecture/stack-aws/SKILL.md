@@ -4,6 +4,7 @@ version: 0.1.0
 description: |
   AWS application modernization planning with least-privilege, local-first
   validation, explicit approvals, and no default cloud mutation.
+agents: [cloud]
 ---
 
 ## Enterprise Preamble

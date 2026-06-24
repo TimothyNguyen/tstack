@@ -4,6 +4,7 @@ version: 0.1.0
 description: |
   Optional Google ADK host adapter boundary for invoking skills and tools
   without making core architecture depend on ADK runtime packages.
+agents: [orchestrate, _infrastructure]
 ---
 
 ## Enterprise Preamble

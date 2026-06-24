@@ -7,6 +7,7 @@ description: |
   Invoke via /seniorswe-concise-debt, or "what shortcuts did we defer", "list
   the seniorswe-concise markers", "debt ledger", or "what did we mark to do
   later". One-shot report, changes nothing.
+agents: [swe]
 ---
 
 Every deliberate shortcut made in concise mode is marked with a `seniorswe-concise:`

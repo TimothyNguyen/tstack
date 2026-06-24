@@ -4,6 +4,7 @@ version: 0.1.0
 description: |
   Review modernization and migration plans for sequencing, rollback,
   compatibility, data safety, privacy, and production readiness.
+agents: [migration]
 ---
 
 ## Enterprise Preamble

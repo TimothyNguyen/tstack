@@ -4,6 +4,7 @@ version: 0.1.0
 description: |
   Optional CodeGraph or semantic code-index adapter boundary with local index
   ownership, scoped reads, and no default external egress.
+agents: [swe, orchestrate, _infrastructure]
 ---
 
 ## Enterprise Preamble

@@ -8,6 +8,7 @@ allowed-tools:
   - Grep
   - Glob
   - Bash
+agents: [spec-agent, design-agent, orchestrate]
 ---
 
 ## Enterprise Preamble

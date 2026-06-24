@@ -4,6 +4,7 @@ version: 0.1.0
 description: |
   Python service, library, and data workflow modernization with minimal
   dependencies, local tests, packaging hygiene, and privacy-safe execution.
+agents: [swe, data]
 ---
 
 ## Enterprise Preamble

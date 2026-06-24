@@ -8,6 +8,7 @@ description: |
   /seniorswe-concise-audit, or "audit this codebase", "audit for
   over-engineering", "what can I delete", "find bloat". One-shot report, does
   not apply fixes.
+agents: [swe]
 ---
 
 /seniorswe-concise-review, repo-wide. Scan the whole tree instead of a diff.

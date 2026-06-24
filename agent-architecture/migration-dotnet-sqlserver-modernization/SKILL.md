@@ -4,6 +4,7 @@ version: 0.1.0
 description: |
   Plan .NET Framework and SQL Server modernization using compatibility
   assessment, code translation references, and governed data migration lanes.
+agents: [migration]
 ---
 
 ## Enterprise Preamble

@@ -4,6 +4,7 @@ version: 0.1.0
 description: |
   Optional GitHub MCP/CLI adapter guidance for repo, issue, and PR context
   with read-only/default-deny safety.
+agents: [swe]
 ---
 
 ## Enterprise Preamble

@@ -4,6 +4,7 @@ version: 0.1.0
 description: |
   SQL Server to Postgres migration planning with T-SQL compatibility checks,
   pgloader experiments, and production cutover guardrails.
+agents: [migration]
 ---
 
 ## Enterprise Preamble
