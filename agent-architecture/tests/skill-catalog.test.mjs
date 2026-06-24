@@ -23,6 +23,7 @@ function skillDirs() {
   const skip = new Set([
     '.git',
     'adapters',
+    'agents',
     'core',
     'docs',
     'generated',
@@ -31,6 +32,7 @@ function skillDirs() {
     'policies',
     'profiles',
     'scripts',
+    'stack',
     'tests',
   ]);
   return fs.readdirSync(root, { withFileTypes: true })

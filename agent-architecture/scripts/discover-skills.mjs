@@ -35,7 +35,50 @@ export function discoverTemplates(root) {
     }
   }
 
+  const agentsDir = path.join(root, 'agents');
+  if (fs.existsSync(agentsDir)) {
+    for (const name of fs.readdirSync(agentsDir).sort()) {
+      const rel = `agents/${name}/SKILL.md.tmpl`;
+      if (fs.existsSync(path.join(root, rel))) {
+        templates.push({ tmpl: rel, output: rel.replace(/\.tmpl$/, '') });
+      }
+    }
+  }
+
   return templates;
+}
+
+export function parseFrontmatterAgents(content) {
+  // Strip UTF-8 BOM if present
+  const text = content.charCodeAt(0) === 0xFEFF ? content.slice(1) : content;
+  // Normalize CRLF → LF for consistent parsing
+  const normalized = text.replace(/\r\n/g, '\n').replace(/\r/g, '\n');
+  if (!normalized.startsWith('---\n')) return [];
+  const end = normalized.indexOf('\n---', 4);
+  if (end === -1) return [];
+  const block = normalized.slice(4, end);
+  const match = block.match(/^agents:\s*\[([^\]]*)\]/m);
+  if (!match) return [];
+  return match[1].split(',').map((s) => s.trim()).filter(Boolean);
+}
+
+export function discoverSkillAgents(root) {
+  const map = new Map();
+  const rootDirs = subdirs(root).filter((d) => fs.existsSync(path.join(root, d, 'SKILL.md.tmpl')));
+  const agentsDir = path.join(root, 'agents');
+  const agentDirs = fs.existsSync(agentsDir)
+    ? fs.readdirSync(agentsDir).sort().filter((d) => fs.existsSync(path.join(agentsDir, d, 'SKILL.md.tmpl')))
+    : [];
+
+  for (const dir of rootDirs) {
+    const tmpl = fs.readFileSync(path.join(root, dir, 'SKILL.md.tmpl'), 'utf8');
+    map.set(dir, parseFrontmatterAgents(tmpl));
+  }
+  for (const dir of agentDirs) {
+    const tmpl = fs.readFileSync(path.join(agentsDir, dir, 'SKILL.md.tmpl'), 'utf8');
+    map.set(`agents/${dir}`, parseFrontmatterAgents(tmpl));
+  }
+  return map;
 }
 
 export function discoverSectionTemplates(root) {
