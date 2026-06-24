@@ -23,6 +23,44 @@ gstack skill structure but is not gstack.
 
 Use `../gstack/` only as reference material. Do not modify it.
 
+## Role-Based Agents
+
+Ten role-based agents live in `agents/`. Each owns a cluster of skills:
+
+| Agent | Role | Key Skills |
+|---|---|---|
+| `/orchestrate` | Coordinator | `subagent-orchestrator`, `autoplan`, `context-save` |
+| `/swe` | Software Engineer | `seniorswe-concise`, `commit`, `investigate`, `ship` |
+| `/qa-agent` | QA Engineer | `qa`, `test`, `benchmark`, `canary` |
+| `/pm` | Product Manager | `spec`, `retro`, `release-notes`, `atlassian-docs` |
+| `/spec-agent` | Spec Writer | `spec`, `autoplan`, `diagram`, `atlassian-docs` |
+| `/design-agent` | UI/Design | `design-review`, `design-html`, `plan-design-review` |
+| `/migration` | Migration Eng | `migration-review`, `stack-sqlserver-to-postgres`, `careful` |
+| `/data` | Data/MLOps | `stack-databricks`, `domain-mlops-databricks`, `commit` |
+| `/cloud` | Cloud/DevOps | `stack-aws`, `stack-aws-dms`, `canary`, `careful` |
+| `/interviewer` | Tech Interviewer | `codebase-engine`, `atlassian-docs`, `diagram` |
+
+Every skill declares `agents:` in its frontmatter. Orphan check runs in `npm test`.
+
+## Install Into Another Repo
+
+```bash
+npx agent-architecture install        # private mode, auto-detects config
+npx agent-architecture install --target .agent --hosts claude,codex
+npx agent-architecture doctor         # verify install health
+```
+
+Reads `.agent-config.json` from the repo root. Example:
+
+```json
+{
+  "private": true,
+  "hosts": ["claude", "codex", "copilot"],
+  "agents": ["swe", "qa-agent", "spec-agent", "pm"],
+  "mcps": [{ "name": "db", "command": "uvx", "args": ["mcp-server-postgres"], "credentialEnvVars": ["DATABASE_URL"] }]
+}
+```
+
 ## Work Style
 
 - Keep commits scoped.
