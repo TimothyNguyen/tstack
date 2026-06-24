@@ -1,0 +1,13 @@
+{
+  "private": true,
+  "hosts": ["claude", "codex", "copilot"],
+  "agents": ["swe", "qa-agent", "spec-agent", "pm"],
+  "mcps": [
+    {
+      "name": "db",
+      "command": "uvx",
+      "args": ["mcp-server-postgres"],
+      "credentialEnvVars": ["DATABASE_URL"]
+    }
+  ]
+}
