@@ -76,6 +76,7 @@ Use commit discipline to stage and commit only the authentication fix.
 - UI/design implementation review: invoke `design-review` or `design-html`.
 - Diagrams or architecture visuals: invoke `diagram`.
 - Project memory or lessons: invoke `learnings`.
+- Capture Q&A flashcards from a session, export to Quizlet, or push to Confluence: invoke `learn`.
 - Save or restore working context: invoke `context-save` or `context-restore`.
 - Release preparation: invoke `release`.
 - Ship/PR handoff: invoke `ship`.

@@ -36,6 +36,7 @@ Each skill is a top-level folder with:
 | `document-generate` | Generate missing local project documentation. | `document-generate/SKILL.md.tmpl` |
 | `document-release` | Update docs after shipped behavior changes. | `document-release/SKILL.md.tmpl` |
 | `learnings` | Capture local project conventions and lessons safely. | `learnings/SKILL.md.tmpl` |
+| `learn` | Knowledge capture workflow: extract Q&A flashcards from session context, persist to learn-out/, export Quizlet CSV, optionally push to Confluence. | `learn/SKILL.md.tmpl` |
 | `release` | Prepare human-approved merge/deploy handoff. | `release/SKILL.md.tmpl` |
 | `ship` | Prepare PR, merge, or release handoff. | `ship/SKILL.md.tmpl` |
 | `codebase-engine` | Enterprise-safe AST knowledge graph — index, query, explain, path, affected, and codebase understanding workflow. No external egress. | `codebase-engine/SKILL.md.tmpl` |
