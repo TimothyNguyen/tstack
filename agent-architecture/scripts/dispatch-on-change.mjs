@@ -159,6 +159,8 @@ function agentRoleFor(agentName) {
     'orchestrate': 'coordinator',
     'pm': 'docs-agent',
     'interviewer': 'reviewer',
+    'release-agent': 'implementer',
+    'security': 'reviewer',
   };
   return roleMap[agentName] || 'implementer';
 }

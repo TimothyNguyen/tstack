@@ -74,6 +74,12 @@ const ROLE_DEFAULTS = {
     writeTools: true,
     requiresAllowedPaths: false,
   },
+  'security': {
+    writes: 'disabled',
+    output: 'summary-and-evidence',
+    writeTools: false,
+    requiresAllowedPaths: false,
+  },
 };
 
 const ALLOWED_TOOLS = new Set([

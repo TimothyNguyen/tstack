@@ -16,14 +16,16 @@ Commands:
   doctor     Check install health
 
 Options:
-  --target <dir>   Install to a custom directory (default: .agent/)
-  --hosts <list>   Comma-separated host list: claude,codex,copilot
-  --dry-run        Print what would be installed without writing files
-  --help           Show this message
+  --target <dir>        Install to a custom directory (default: .agent/)
+  --hosts <list>        Comma-separated host list: claude,codex,copilot
+  --docker-mcp [prof]   Wire Docker MCP Gateway (profile name, default: "default")
+  --dry-run             Print what would be installed without writing files
+  --help                Show this message
 
 Examples:
   npx agent-architecture install
   npx agent-architecture install --target ./.agent --hosts claude,codex
+  npx agent-architecture install --docker-mcp backend
   npx agent-architecture upgrade
   npx agent-architecture doctor
 `.trim();

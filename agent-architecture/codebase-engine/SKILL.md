@@ -13,7 +13,7 @@ allowed-tools:
   - Grep
   - Glob
   - Bash
-agents: [swe, migration, data, orchestrate, qa-agent, spec-agent, cloud, design-agent, interviewer]
+agents: [swe, migration, data, orchestrate, qa-agent, spec-agent, cloud, design-agent, interviewer, release-agent, security]
 ---
 
 ## Enterprise Preamble

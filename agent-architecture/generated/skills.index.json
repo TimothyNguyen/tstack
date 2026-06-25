@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-06-25T21:47:17.626Z",
-  "count": 92,
+  "generatedAt": "2026-06-25T22:57:42.618Z",
+  "count": 95,
   "skills": [
     {
       "name": "adapter-ag-ui",
@@ -9,7 +9,9 @@
       "path": "adapter-ag-ui/SKILL.md.tmpl",
       "agents": [
         "orchestrate",
-        "_infrastructure"
+        "_infrastructure",
+        "swe",
+        "cloud"
       ]
     },
     {
@@ -19,7 +21,8 @@
       "path": "adapter-agentcore/SKILL.md.tmpl",
       "agents": [
         "orchestrate",
-        "_infrastructure"
+        "_infrastructure",
+        "cloud"
       ]
     },
     {
@@ -32,12 +35,27 @@
       ]
     },
     {
+      "name": "adapter-docker-mcp",
+      "version": "0.1.0",
+      "description": "Docker MCP Registry and Toolkit adapter. Wires 300+ pre-built containerized",
+      "path": "adapter-docker-mcp/SKILL.md.tmpl",
+      "agents": [
+        "cloud",
+        "release-agent",
+        "orchestrate",
+        "swe",
+        "_infrastructure"
+      ]
+    },
+    {
       "name": "adapter-github",
       "version": "0.1.0",
       "description": "Optional GitHub MCP/CLI adapter guidance for repo, issue, and PR context",
       "path": "adapter-github/SKILL.md.tmpl",
       "agents": [
-        "swe"
+        "swe",
+        "orchestrate",
+        "pm"
       ]
     },
     {
@@ -47,7 +65,8 @@
       "path": "adapter-google-adk/SKILL.md.tmpl",
       "agents": [
         "orchestrate",
-        "_infrastructure"
+        "_infrastructure",
+        "cloud"
       ]
     },
     {
@@ -67,7 +86,9 @@
       "path": "adapter-mcp/SKILL.md.tmpl",
       "agents": [
         "swe",
-        "_infrastructure"
+        "_infrastructure",
+        "orchestrate",
+        "cloud"
       ]
     },
     {
@@ -76,7 +97,8 @@
       "description": "Use OpenAPI contracts and optional generated clients/servers while keeping",
       "path": "adapter-openapi/SKILL.md.tmpl",
       "agents": [
-        "swe"
+        "swe",
+        "spec-agent"
       ]
     },
     {
@@ -96,7 +118,8 @@
       "path": "adapter-strands/SKILL.md.tmpl",
       "agents": [
         "orchestrate",
-        "_infrastructure"
+        "_infrastructure",
+        "cloud"
       ]
     },
     {
@@ -145,7 +168,9 @@
       "description": "Local benchmark and regression-check workflow for performance or quality",
       "path": "benchmark/SKILL.md.tmpl",
       "agents": [
-        "qa-agent"
+        "qa-agent",
+        "swe",
+        "data"
       ]
     },
     {
@@ -155,7 +180,8 @@
       "path": "canary/SKILL.md.tmpl",
       "agents": [
         "qa-agent",
-        "cloud"
+        "cloud",
+        "release-agent"
       ]
     },
     {
@@ -166,7 +192,9 @@
       "agents": [
         "migration",
         "cloud",
-        "_infrastructure"
+        "_infrastructure",
+        "security",
+        "release-agent"
       ]
     },
     {
@@ -221,7 +249,9 @@
         "spec-agent",
         "cloud",
         "design-agent",
-        "interviewer"
+        "interviewer",
+        "release-agent",
+        "security"
       ]
     },
     {
@@ -242,7 +272,8 @@
         "swe",
         "migration",
         "data",
-        "cloud"
+        "cloud",
+        "release-agent"
       ]
     },
     {
@@ -251,7 +282,10 @@
       "description": "Restores previously saved local working context without relying on external services.",
       "path": "context-restore/SKILL.md.tmpl",
       "agents": [
-        "_infrastructure"
+        "_infrastructure",
+        "swe",
+        "orchestrate",
+        "migration"
       ]
     },
     {
@@ -260,7 +294,10 @@
       "description": "Captures local working context so a future agent session can resume safely.",
       "path": "context-save/SKILL.md.tmpl",
       "agents": [
-        "_infrastructure"
+        "_infrastructure",
+        "swe",
+        "orchestrate",
+        "migration"
       ]
     },
     {
@@ -296,7 +333,8 @@
       "description": "Turns approved UI design direction into implementation-ready HTML guidance.",
       "path": "design-html/SKILL.md.tmpl",
       "agents": [
-        "design-agent"
+        "design-agent",
+        "swe"
       ]
     },
     {
@@ -305,7 +343,9 @@
       "description": "Reviews product UI and interaction quality for practical design issues.",
       "path": "design-review/SKILL.md.tmpl",
       "agents": [
-        "design-agent"
+        "design-agent",
+        "swe",
+        "qa-agent"
       ]
     },
     {
@@ -335,7 +375,10 @@
       "description": "Updates documentation after shipped behavior changes.",
       "path": "document-release/SKILL.md.tmpl",
       "agents": [
-        "pm"
+        "pm",
+        "swe",
+        "spec-agent",
+        "release-agent"
       ]
     },
     {
@@ -397,7 +440,8 @@
         "swe",
         "migration",
         "cloud",
-        "_infrastructure"
+        "_infrastructure",
+        "security"
       ]
     },
     {
@@ -408,7 +452,8 @@
       "agents": [
         "swe",
         "qa-agent",
-        "cloud"
+        "cloud",
+        "security"
       ]
     },
     {
@@ -426,7 +471,9 @@
       "description": "Root-cause investigation workflow for bugs, failing tests, broken integrations, and unexpected behavior.",
       "path": "investigate/SKILL.md.tmpl",
       "agents": [
-        "swe"
+        "swe",
+        "qa-agent",
+        "security"
       ]
     },
     {
@@ -436,7 +483,9 @@
       "path": "learnings/SKILL.md.tmpl",
       "agents": [
         "swe",
-        "_infrastructure"
+        "_infrastructure",
+        "orchestrate",
+        "pm"
       ]
     },
     {
@@ -463,7 +512,9 @@
       "description": "Review modernization and migration plans for sequencing, rollback,",
       "path": "migration-review/SKILL.md.tmpl",
       "agents": [
-        "migration"
+        "migration",
+        "swe",
+        "cloud"
       ]
     },
     {
@@ -481,7 +532,9 @@
       "description": "Reviews plans for user experience, UI quality, and product interaction risk.",
       "path": "plan-design-review/SKILL.md.tmpl",
       "agents": [
-        "design-agent"
+        "design-agent",
+        "spec-agent",
+        "pm"
       ]
     },
     {
@@ -490,7 +543,9 @@
       "description": "Reviews plans for developer experience, APIs, onboarding, and operability.",
       "path": "plan-devex-review/SKILL.md.tmpl",
       "agents": [
-        "qa-agent"
+        "qa-agent",
+        "swe",
+        "spec-agent"
       ]
     },
     {
@@ -552,7 +607,8 @@
       "description": "Enterprise-safe QA workflow. Plans and verifies user-facing or service behavior using",
       "path": "qa/SKILL.md.tmpl",
       "agents": [
-        "qa-agent"
+        "qa-agent",
+        "swe"
       ]
     },
     {
@@ -570,7 +626,9 @@
       "description": "Repo-local quick reference for the skill-pack pattern this repo uses.",
       "path": "reference-gstack-patterns/SKILL.md.tmpl",
       "agents": [
-        "_infrastructure"
+        "_infrastructure",
+        "swe",
+        "orchestrate"
       ]
     },
     {
@@ -580,7 +638,17 @@
       "path": "release/SKILL.md.tmpl",
       "agents": [
         "pm",
-        "cloud"
+        "cloud",
+        "release-agent"
+      ]
+    },
+    {
+      "name": "release-agent",
+      "version": "0.1.0",
+      "description": "Release engineer agent. Handles release preparation, release notes, retros,",
+      "path": "agents/release-agent/SKILL.md.tmpl",
+      "agents": [
+        "_infrastructure"
       ]
     },
     {
@@ -589,7 +657,9 @@
       "description": "Generate privacy-safe release notes from local changes, tests, and docs",
       "path": "release-notes/SKILL.md.tmpl",
       "agents": [
-        "pm"
+        "pm",
+        "swe",
+        "release-agent"
       ]
     },
     {
@@ -598,7 +668,9 @@
       "description": "Produces a local project retrospective from commits, incidents, decisions, and outcomes.",
       "path": "retro/SKILL.md.tmpl",
       "agents": [
-        "pm"
+        "pm",
+        "orchestrate",
+        "release-agent"
       ]
     },
     {
@@ -617,6 +689,17 @@
       "description": "Optional Rust Token Killer integration guidance. Uses RTK to reduce noisy shell output",
       "path": "rtk-token-optimizer/SKILL.md.tmpl",
       "agents": [
+        "_infrastructure",
+        "swe",
+        "data"
+      ]
+    },
+    {
+      "name": "security",
+      "version": "0.1.0",
+      "description": "Security engineer agent. Handles security reviews, threat modeling, access",
+      "path": "agents/security/SKILL.md.tmpl",
+      "agents": [
         "_infrastructure"
       ]
     },
@@ -628,7 +711,8 @@
       "agents": [
         "swe",
         "qa-agent",
-        "cloud"
+        "cloud",
+        "security"
       ]
     },
     {
@@ -684,7 +768,8 @@
       "description": "Code review focused exclusively on over-engineering. Finds what to delete:",
       "path": "seniorswe-concise-review/SKILL.md.tmpl",
       "agents": [
-        "swe"
+        "swe",
+        "orchestrate"
       ]
     },
     {
@@ -694,7 +779,8 @@
       "path": "ship/SKILL.md.tmpl",
       "agents": [
         "swe",
-        "cloud"
+        "cloud",
+        "release-agent"
       ]
     },
     {
@@ -703,7 +789,9 @@
       "description": "Turns a repeated local workflow into a reusable skill folder with template files.",
       "path": "skillify/SKILL.md.tmpl",
       "agents": [
-        "_infrastructure"
+        "_infrastructure",
+        "swe",
+        "orchestrate"
       ]
     },
     {
@@ -731,7 +819,8 @@
       "description": "Tech stack meta-loader. Auto-detects project tech stack from repo signals and",
       "path": "stack/SKILL.md.tmpl",
       "agents": [
-        "_infrastructure"
+        "_infrastructure",
+        "swe"
       ]
     },
     {
@@ -818,7 +907,8 @@
       "description": "React and TypeScript application modernization, including codemods, Redux",
       "path": "stack-react-typescript/SKILL.md.tmpl",
       "agents": [
-        "swe"
+        "swe",
+        "design-agent"
       ]
     },
     {

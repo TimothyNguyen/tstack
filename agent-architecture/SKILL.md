@@ -99,6 +99,7 @@ workflows.
 - Google ADK adapter design: invoke `adapter-google-adk`.
 - AgentCore adapter design: invoke `adapter-agentcore`.
 - Strands adapter design: invoke `adapter-strands`.
+- Docker MCP Registry / Gateway adapter: invoke `adapter-docker-mcp`.
 - Codebase graph, AST index, dependency tracing: invoke `codebase-engine`.
 - Migration plan review: invoke `migration-review`.
 - Privacy-safe release notes: invoke `release-notes`.

@@ -59,4 +59,5 @@ Skills that declare this agent in their frontmatter `agents:` field.
 | `design-review` | Reviews product UI and interaction quality for practical design issues. |
 | `diagram` | Creates text-first architecture and workflow diagrams from local project context. |
 | `plan-design-review` | Reviews plans for user experience, UI quality, and product interaction risk. |
+| `stack-react-typescript` | React and TypeScript application modernization, including codemods, Redux |
 <!-- agent-skills:end -->

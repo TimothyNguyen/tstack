@@ -69,8 +69,10 @@ Skills that declare this agent in their frontmatter `agents:` field.
 | `canary` | Privacy-safe canary planning for post-deploy monitoring, rollback signals, |
 | `chrome-devtools` | Chrome DevTools MCP integration for browser automation, debugging, performance analysis, |
 | `codebase-engine` | Enterprise-safe AST knowledge graph for local codebases. Indexes source |
+| `design-review` | Reviews product UI and interaction quality for practical design issues. |
 | `documentation` | Documentation workflow for generating, updating, and reviewing project docs after implementation. |
 | `health` | Enterprise-safe code health dashboard. Detects and runs approved local quality checks |
+| `investigate` | Root-cause investigation workflow for bugs, failing tests, broken integrations, and unexpected behavior. |
 | `plan-devex-review` | Reviews plans for developer experience, APIs, onboarding, and operability. |
 | `plan-review` | Enterprise-safe plan review workflow. Reviews a proposed implementation plan for scope, |
 | `qa` | Enterprise-safe QA workflow. Plans and verifies user-facing or service behavior using |

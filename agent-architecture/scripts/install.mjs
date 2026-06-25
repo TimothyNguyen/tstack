@@ -10,6 +10,7 @@
  */
 import fs from 'node:fs';
 import path from 'node:path';
+import { execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -27,6 +28,12 @@ const hostsIdx = args.indexOf('--hosts');
 const HOSTS = hostsIdx !== -1
   ? args[hostsIdx + 1].split(',').map((h) => h.trim())
   : ['claude', 'codex', 'copilot'];
+
+// --docker-mcp [profile]  — inject Docker MCP gateway into settings.json
+const dockerMcpIdx = args.indexOf('--docker-mcp');
+const DOCKER_MCP_PROFILE = dockerMcpIdx !== -1
+  ? (args[dockerMcpIdx + 1] && !args[dockerMcpIdx + 1].startsWith('--') ? args[dockerMcpIdx + 1] : 'default')
+  : null;
 
 // Agents not installed in private mode by default (stripped)
 const PRIVATE_STRIP_MCPS = new Set(['cavemem', 'gstack-analytics', 'gstack-update-check', 'gbrain']);
@@ -112,6 +119,15 @@ function generateSettings(config) {
       command: mcp.command,
       args: mcp.args || [],
       env,
+    };
+  }
+
+  // --docker-mcp flag: inject gateway entry if not already declared in config.mcps
+  if (DOCKER_MCP_PROFILE && !mcps['docker-gateway']) {
+    mcps['docker-gateway'] = {
+      command: 'docker',
+      args: ['mcp', 'gateway', 'run', '--profile', DOCKER_MCP_PROFILE],
+      env: {},
     };
   }
 
@@ -327,6 +343,21 @@ function doctor() {
   const settingsPath = path.join(TARGET, 'settings.json');
   if (!fs.existsSync(settingsPath)) {
     errors.push(`settings.json missing at ${TARGET}/settings.json`);
+  } else {
+    // If docker-gateway MCP is configured, verify Docker Desktop + MCP Toolkit
+    const settings = JSON.parse(fs.readFileSync(settingsPath, 'utf8'));
+    if (settings.mcpServers && settings.mcpServers['docker-gateway']) {
+      try {
+        execFileSync('docker', ['info'], { stdio: 'pipe' });
+      } catch {
+        errors.push('docker-gateway configured but "docker info" failed — ensure Docker Desktop is running');
+      }
+      try {
+        execFileSync('docker', ['mcp', '--help'], { stdio: 'pipe' });
+      } catch {
+        errors.push('docker-gateway configured but "docker mcp --help" failed — requires Docker Desktop 4.62+');
+      }
+    }
   }
 
   if (errors.length > 0) {

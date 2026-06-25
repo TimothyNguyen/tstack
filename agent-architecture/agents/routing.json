@@ -66,6 +66,23 @@
     },
     {
       "patterns": [
+        "CHANGELOG*", "RELEASE*", "release/**", "releases/**",
+        ".github/releases/**", "**/release-notes/**"
+      ],
+      "agents": ["release-agent"],
+      "reason": "Release artifacts"
+    },
+    {
+      "patterns": [
+        "security/**", ".github/SECURITY.md", "SECURITY*",
+        "**/.snyk", "**/snyk.yml", "**/.trivyignore",
+        "**/*.audit.json", "**/cve/**"
+      ],
+      "agents": ["security"],
+      "reason": "Security policy and audit files"
+    },
+    {
+      "patterns": [
         "agents/**", "scripts/**", "core/**", "policies/**",
         "adapters/**", "hosts/**", "plugins/**", "*.mjs"
       ],

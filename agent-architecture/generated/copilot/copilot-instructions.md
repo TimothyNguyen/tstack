@@ -19,6 +19,8 @@ Copilot activates skills by task description, not slash commands.
 - `/orchestrate` — Coordinator agent for large features. Decomposes work into parallel subagents
 - `/pm` — Product manager agent. Handles strategy, prioritization, PRDs, retrospectives,
 - `/qa-agent` — QA engineer agent. Tests, validates, benchmarks, and monitors post-deploy.
+- `/release-agent` — Release engineer agent. Handles release preparation, release notes, retros,
+- `/security` — Security engineer agent. Handles security reviews, threat modeling, access
 - `/spec-agent` — Spec writer and planner agent. Converts vague intent into precise, reviewable
 - `/swe` — General software engineer agent. Handles implementation, debugging, code
 
@@ -123,6 +125,7 @@ Use commit discipline to stage and commit only the authentication fix.
 - Google ADK adapter design: invoke `adapter-google-adk`.
 - AgentCore adapter design: invoke `adapter-agentcore`.
 - Strands adapter design: invoke `adapter-strands`.
+- Docker MCP Registry / Gateway adapter: invoke `adapter-docker-mcp`.
 - Codebase graph, AST index, dependency tracing: invoke `codebase-engine`.
 - Migration plan review: invoke `migration-review`.
 - Privacy-safe release notes: invoke `release-notes`.

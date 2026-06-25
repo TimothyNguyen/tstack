@@ -9,6 +9,7 @@ const root = path.resolve(import.meta.dirname, '..');
 const VALID_AGENTS = new Set([
   'orchestrate', 'swe', 'qa-agent', 'pm', 'spec-agent',
   'design-agent', 'migration', 'data', 'cloud', 'interviewer',
+  'release-agent', 'security',
   '_infrastructure',
 ]);
 
@@ -29,11 +30,12 @@ test('no skill is missing agents: field', () => {
   assert.deepEqual(missing, [], `orphan skills (missing agents: field): ${missing.join(', ')}`);
 });
 
-test('all 10 role agents exist in agents/ directory', () => {
+test('all 12 role agents exist in agents/ directory', () => {
   const agentsDir = path.join(root, 'agents');
   assert.ok(fs.existsSync(agentsDir), 'agents/ directory missing');
   const EXPECTED = ['orchestrate', 'swe', 'qa-agent', 'pm', 'spec-agent',
-    'design-agent', 'migration', 'data', 'cloud', 'interviewer'];
+    'design-agent', 'migration', 'data', 'cloud', 'interviewer',
+    'release-agent', 'security'];
   for (const agent of EXPECTED) {
     const skillPath = path.join(agentsDir, agent, 'SKILL.md.tmpl');
     assert.ok(fs.existsSync(skillPath), `agents/${agent}/SKILL.md.tmpl missing`);

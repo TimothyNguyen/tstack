@@ -103,6 +103,7 @@ project profile needs them:
 | `adapter-google-adk` | Optional Google ADK host adapter boundary. | `adapter-google-adk/SKILL.md.tmpl` |
 | `adapter-agentcore` | Optional AgentCore adapter boundary. | `adapter-agentcore/SKILL.md.tmpl` |
 | `adapter-strands` | Optional Strands adapter boundary. | `adapter-strands/SKILL.md.tmpl` |
+| `adapter-docker-mcp` | Docker MCP Registry gateway adapter. Wires 300+ containerized MCP servers (GitHub, Postgres, Playwright, Docker ops, etc.) through one stdio multiplexer. Use for Docker-based deployments or docker/mcp-registry catalog consumption. | `adapter-docker-mcp/SKILL.md.tmpl` |
 | `migration-review` | Review migration plans for sequencing, rollback, privacy, and readiness. | `migration-review/SKILL.md.tmpl` |
 | `release-notes` | Generate privacy-safe release notes from local changes. | `release-notes/SKILL.md.tmpl` |
 | `benchmark` | Local benchmark and regression workflow without public uploads. | `benchmark/SKILL.md.tmpl` |

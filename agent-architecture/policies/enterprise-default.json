@@ -70,6 +70,7 @@
     "googleAdk": "optional",
     "strands": "optional",
     "agentCore": "optional",
+    "dockerMcp": "optional",
     "rtkTokenOptimizer": "optional",
     "github": "optional",
     "openapi": "optional",

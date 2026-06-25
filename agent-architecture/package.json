@@ -1,6 +1,6 @@
 {
   "name": "agent-architecture",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "private": false,
   "type": "module",
   "description": "Reusable enterprise-safe agent skill architecture.",
@@ -14,7 +14,7 @@
     "stack/",
     "adapter-ag-ui/",
     "adapter-agentcore/",
-"adapter-databricks/",
+    "adapter-databricks/",
     "adapter-github/",
     "adapter-google-adk/",
     "adapter-langgraph/",
