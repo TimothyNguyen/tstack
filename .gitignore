@@ -9,3 +9,5 @@ codebase-out/
 *.tmp
 *_tests.txt
 /tinyurl
+.env
+*.env

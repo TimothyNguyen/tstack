@@ -1,15 +1,11 @@
-from __future__ import annotations
+"""
+mcp-atlassian-agent — thin launcher shim.
 
-import asyncio
-import sys
-from typing import Any
+Three servers are bundled here; run each independently:
 
+    mcp-jira        →  jira_mcp_server.server:main
+    mcp-confluence  →  confluence_mcp_server.server:main
+    mcp-bitbucket   →  bitbucket_mcp_server.server:main
 
-def main() -> None:
-    """Entry point — delegates to mcp_atlassian server."""
-    try:
-        from mcp_atlassian import main as _main  # type: ignore[import-untyped]
-    except ImportError as exc:
-        print(f"mcp-atlassian not installed: {exc}", file=sys.stderr)
-        sys.exit(1)
-    asyncio.run(_main())
+Each server reads its config from environment variables (see README.md).
+"""
