@@ -79,6 +79,7 @@ workflows.
 - dbt on Databricks: invoke `stack-databricks-dbt`.
 - MCP connector design: invoke `adapter-mcp`.
 - GitHub repo/issue/PR connector design: invoke `adapter-github`.
+- Browser automation, UI testing, performance tracing, or network debugging: invoke `chrome-devtools`.
 - AG-UI event integration: invoke `adapter-ag-ui`.
 - OpenAPI generator integration: invoke `adapter-openapi`.
 - LangGraph orchestration boundary: invoke `adapter-langgraph`.

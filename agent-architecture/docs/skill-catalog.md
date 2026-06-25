@@ -83,6 +83,7 @@ project profile needs them:
 | `stack-databricks-dbt` | dbt on Databricks transformations, tests, docs, and lineage. | `stack-databricks-dbt/SKILL.md.tmpl` |
 | `adapter-mcp` | Optional MCP server/client adapter design. | `adapter-mcp/SKILL.md.tmpl` |
 | `adapter-github` | Optional GitHub MCP/CLI adapter guidance. | `adapter-github/SKILL.md.tmpl` |
+| `chrome-devtools` | Browser automation, UI testing, performance tracing, and network debugging via Chrome DevTools MCP. | `chrome-devtools/SKILL.md.tmpl` |
 | `adapter-ag-ui` | AG-UI-compatible event adapter guidance. | `adapter-ag-ui/SKILL.md.tmpl` |
 | `adapter-openapi` | OpenAPI generator adapter and contract boundary guidance. | `adapter-openapi/SKILL.md.tmpl` |
 | `adapter-langgraph` | Optional LangGraph orchestration boundary guidance. | `adapter-langgraph/SKILL.md.tmpl` |
