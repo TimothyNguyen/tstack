@@ -1,4 +1,4 @@
-# Install Spec
+﻿# Install Spec
 
 This spec defines how to install `agent-architecture/` into another codebase.
 

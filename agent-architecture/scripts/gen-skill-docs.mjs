@@ -57,11 +57,11 @@ function pluginMirrorFor(outputRel) {
 function writeRendered(tmplRel, outputRel) {
   const tmplPath = path.join(ROOT, tmplRel);
   const outputPath = path.join(ROOT, outputRel);
-  const rendered = render(fs.readFileSync(tmplPath, 'utf8'), tmplRel);
+  const rendered = render(fs.readFileSync(tmplPath, 'utf8').replace(/\r\n/g, '\n'), tmplRel);
   const mirrorPath = pluginMirrorFor(outputRel);
 
   if (CHECK) {
-    const current = fs.existsSync(outputPath) ? fs.readFileSync(outputPath, 'utf8') : '';
+    const current = fs.existsSync(outputPath) ? fs.readFileSync(outputPath, 'utf8').replace(/\r\n/g, '\n') : '';
     if (current !== rendered) {
       console.error(`${outputRel} is stale; run npm run build:skills from agent-architecture/`);
       process.exitCode = 1;
