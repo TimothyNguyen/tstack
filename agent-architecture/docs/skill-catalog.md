@@ -39,6 +39,7 @@ Each skill is a top-level folder with:
 | `ship` | Prepare PR, merge, or release handoff. | `ship/SKILL.md.tmpl` |
 | `codebase-engine` | Enterprise-safe AST knowledge graph — index, query, explain, path, affected, and codebase understanding workflow. No external egress. | `codebase-engine/SKILL.md.tmpl` |
 | `rtk-token-optimizer` | Optional Rust Token Killer guidance for reducing noisy shell output. | `rtk-token-optimizer/SKILL.md.tmpl` |
+| `token-optimizer` | Token reduction for Python objects, API responses, logs, diffs, and code before LLM injection. Bundles ptk with zero required dependencies and a bundled fallback. | `token-optimizer/SKILL.md.tmpl` |
 | `context-save` | Save local working context for future sessions. | `context-save/SKILL.md.tmpl` |
 | `context-restore` | Restore saved local working context. | `context-restore/SKILL.md.tmpl` |
 | `design-html` | Produce implementation-ready HTML guidance from approved design direction. | `design-html/SKILL.md.tmpl` |

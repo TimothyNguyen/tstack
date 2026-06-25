@@ -213,6 +213,32 @@ function installAgentSkill(agentName) {
   writeFile(`skills/${agentName}/SKILL.md`, content);
 }
 
+function copyDirRecursive(srcDir, destRelDir) {
+  if (!fs.existsSync(srcDir)) return;
+  for (const entry of fs.readdirSync(srcDir, { withFileTypes: true })) {
+    if (entry.name === '__pycache__' || entry.name.endsWith('.pyc')) continue;
+    const srcPath = path.join(srcDir, entry.name);
+    const destRel = `${destRelDir}/${entry.name}`;
+    if (entry.isDirectory()) {
+      copyDirRecursive(srcPath, destRel);
+    } else {
+      writeFile(destRel, fs.readFileSync(srcPath));
+    }
+  }
+}
+
+function installTokenOptimizer() {
+  const src = path.join(ROOT, 'token-optimizer');
+  if (!fs.existsSync(src)) return;
+  // Copy ptk_minimize.py
+  const scriptSrc = path.join(src, 'ptk_minimize.py');
+  if (fs.existsSync(scriptSrc)) {
+    writeFile('token-optimizer/ptk_minimize.py', fs.readFileSync(scriptSrc));
+  }
+  // Copy bundled lib/ptk/
+  copyDirRecursive(path.join(src, 'lib'), 'token-optimizer/lib');
+}
+
 function install() {
   const config = readConfig();
   const version = readPackageVersion();
@@ -226,6 +252,9 @@ function install() {
   for (const agent of agents) {
     installAgentSkill(agent);
   }
+
+  // Install token-optimizer CLI + bundled lib
+  installTokenOptimizer();
 
   // Generate host artifacts
   const activeHosts = config.hosts || HOSTS;
