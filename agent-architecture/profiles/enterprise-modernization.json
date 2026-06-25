@@ -35,7 +35,6 @@
     "adapter-google-adk",
     "adapter-agentcore",
     "adapter-strands",
-    "adapter-codegraph",
     "benchmark",
     "canary",
     "release-notes"
@@ -51,7 +50,6 @@
     "googleAdk",
     "agentCore",
     "strands",
-    "codegraph",
     "aws",
     "postgres",
     "sqlServer",

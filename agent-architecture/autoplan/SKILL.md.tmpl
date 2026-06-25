@@ -1,8 +1,8 @@
 ---
 name: autoplan
-version: 0.1.0
+version: 0.1.1
 description: |
-  Runs the plan review pipeline and produces a reviewed implementation plan before coding begins.
+  Runs the plan review pipeline before coding begins, then a post-implementation critic gate before surfacing results.
 allowed-tools:
   - Read
   - Grep
@@ -15,15 +15,39 @@ agents: [swe, orchestrate, spec-agent]
 
 # Autoplan
 
-Runs the plan review pipeline and produces a reviewed implementation plan before coding begins.
+Runs the plan review pipeline before coding begins and a post-implementation critic gate before surfacing results to the user.
 
-## Steps
+## Phase 1 — Pre-Implementation Plan Review
 
 1. Confirm the user goal and scope.
 2. Read the relevant local project files.
-3. Check policy requirements before any privileged action.
-4. Produce a concise result with evidence, risks, and next actions.
+3. Run the plan review pipeline: invoke `plan-eng-review`, `plan-director-review`, and any relevant domain or design reviews.
+4. Revise the plan based on review findings.
+5. Confirm the reviewed plan with the user before proceeding to implementation.
+
+## Phase 2 — Implementation
+
+6. Implement the reviewed plan using the appropriate role agents (`/swe`, `/data`, `/cloud`, or `/migration`).
+7. Commit after each discrete behavior change.
+
+## Phase 3 — Post-Implementation Critic Gate
+
+After implementation and before surfacing results to the user:
+
+8. Run `security-review` — check for credential exposure, unsafe tool access, and policy violations.
+9. Run `seniorswe-concise-review` — check for over-engineering, unnecessary dependencies, and YAGNI violations.
+10. Run `qa` — verify that tests exist, pass, and cover the changed behavior.
+11. Collect critic findings. If any critic finds a blocking issue, return to Phase 2 to fix it.
+12. Surface a final summary: reviewed plan, implementation diff, critic results, and any deferred items.
 
 {{POLICY_REQUIREMENTS}}
+
+## Critic Gate Rules
+
+- A blocking finding from `security-review` must be resolved before surfacing results.
+- A blocking finding from `seniorswe-concise-review` should be resolved unless the user explicitly accepts the debt.
+- Test failures from `qa` block surfacing results.
+- Non-blocking `seniorswe-concise-review` findings may be recorded as `seniorswe-concise:` debt comments in place of immediate fixes.
+- Skip the critic gate only when the user explicitly requests `--no-critic` or the active profile disables it.
 
 {{BASE_OUTPUT_RULES}}

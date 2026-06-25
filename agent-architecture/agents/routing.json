@@ -1,0 +1,103 @@
+{
+  "rules": [
+    {
+      "patterns": [
+        "tests/**", "**/*.test.ts", "**/*.test.js", "**/*.test.mjs",
+        "**/*.spec.ts", "**/*.spec.js", "**/__tests__/**",
+        "**/*.test.py", "**/conftest.py", "playwright/**", "e2e/**"
+      ],
+      "agents": ["qa-agent"],
+      "reason": "Test files"
+    },
+    {
+      "patterns": [
+        "**/*.sql", "migrations/**", "db/migrations/**", "schema/**",
+        "alembic/**", "flyway/**"
+      ],
+      "agents": ["migration"],
+      "reason": "Database / migration files"
+    },
+    {
+      "patterns": [
+        "**/*.tf", "**/*.hcl", "cdk.json", "**/cdk.json",
+        "**/serverless.yml", "**/serverless.yaml",
+        "**/cloudformation/**", "**/infrastructure/**",
+        "**/*.cfn.yml", "Dockerfile", "**/Dockerfile*",
+        "docker-compose*.yml", "docker-compose*.yaml",
+        ".github/workflows/**", "k8s/**", "helm/**"
+      ],
+      "agents": ["cloud"],
+      "reason": "Infrastructure / cloud configuration"
+    },
+    {
+      "patterns": [
+        "**/*.py", "**/*.ipynb", "**/databricks.yml", "**/databricks.yaml",
+        "**/pyproject.toml", "**/requirements*.txt", "**/setup.py", "**/setup.cfg",
+        "dbt/**", "**/*.dbt.yml", "mlflow/**", "notebooks/**"
+      ],
+      "agents": ["data"],
+      "reason": "Python / data / ML files"
+    },
+    {
+      "patterns": [
+        "**/*.cs", "**/*.sln", "**/*.csproj", "**/*.vbproj",
+        "**/*.fs", "**/*.fsproj", "**/global.json", "NuGet.Config"
+      ],
+      "agents": ["swe"],
+      "reason": ".NET / C# files"
+    },
+    {
+      "patterns": [
+        "**/*.tsx", "**/*.jsx",
+        "**/*.css", "**/*.scss", "**/*.sass", "**/*.less",
+        "**/styles/**", "**/components/**", "**/design-tokens/**",
+        "figma/**", "storybook/**", "**/.storybook/**"
+      ],
+      "agents": ["design-agent"],
+      "reason": "UI / design files"
+    },
+    {
+      "patterns": [
+        "docs/**", "runbooks/**", "**/*.md", "CHANGELOG*", "README*",
+        "wiki/**", "rfcs/**", "adrs/**", "decisions/**"
+      ],
+      "agents": ["spec-agent"],
+      "reason": "Documentation / spec files"
+    },
+    {
+      "patterns": [
+        "CHANGELOG*", "RELEASE*", "release/**", "releases/**",
+        ".github/releases/**", "**/release-notes/**"
+      ],
+      "agents": ["release-agent"],
+      "reason": "Release artifacts"
+    },
+    {
+      "patterns": [
+        "security/**", ".github/SECURITY.md", "SECURITY*",
+        "**/.snyk", "**/snyk.yml", "**/.trivyignore",
+        "**/*.audit.json", "**/cve/**"
+      ],
+      "agents": ["security"],
+      "reason": "Security policy and audit files"
+    },
+    {
+      "patterns": [
+        "agents/**", "scripts/**", "core/**", "policies/**",
+        "adapters/**", "hosts/**", "plugins/**", "*.mjs"
+      ],
+      "agents": ["orchestrate"],
+      "reason": "Agent infrastructure files"
+    },
+    {
+      "patterns": [
+        "**/*.ts", "**/*.js", "**/*.mjs", "**/*.cjs",
+        "**/package.json", "**/tsconfig.json", "**/jest.config.*",
+        "**/vite.config.*", "**/webpack.config.*"
+      ],
+      "agents": ["swe"],
+      "reason": "TypeScript / JavaScript files"
+    }
+  ],
+  "default": ["swe"]
+}

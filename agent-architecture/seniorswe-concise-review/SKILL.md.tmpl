@@ -9,7 +9,7 @@ description: |
   delete", "is this over-engineered", "simplify review", or invokes
   /seniorswe-concise-review. Complements correctness-focused review, this one only
   hunts complexity.
-agents: [swe]
+agents: [swe, orchestrate]
 ---
 
 Review diffs for unnecessary complexity. One line per finding: location, what

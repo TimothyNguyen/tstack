@@ -1,0 +1,992 @@
+{
+  "generatedAt": "2026-06-25T22:57:42.618Z",
+  "count": 95,
+  "skills": [
+    {
+      "name": "adapter-ag-ui",
+      "version": "0.1.0",
+      "description": "Map skill progress, approvals, tool actions, findings, and artifacts into",
+      "path": "adapter-ag-ui/SKILL.md.tmpl",
+      "agents": [
+        "orchestrate",
+        "_infrastructure",
+        "swe",
+        "cloud"
+      ]
+    },
+    {
+      "name": "adapter-agentcore",
+      "version": "0.1.0",
+      "description": "Optional AgentCore adapter boundary for skills, tools, approvals, audit",
+      "path": "adapter-agentcore/SKILL.md.tmpl",
+      "agents": [
+        "orchestrate",
+        "_infrastructure",
+        "cloud"
+      ]
+    },
+    {
+      "name": "adapter-databricks",
+      "version": "0.1.0",
+      "description": "Optional Databricks SDK adapter boundary for workspace, job, and bundle",
+      "path": "adapter-databricks/SKILL.md.tmpl",
+      "agents": [
+        "data"
+      ]
+    },
+    {
+      "name": "adapter-docker-mcp",
+      "version": "0.1.0",
+      "description": "Docker MCP Registry and Toolkit adapter. Wires 300+ pre-built containerized",
+      "path": "adapter-docker-mcp/SKILL.md.tmpl",
+      "agents": [
+        "cloud",
+        "release-agent",
+        "orchestrate",
+        "swe",
+        "_infrastructure"
+      ]
+    },
+    {
+      "name": "adapter-github",
+      "version": "0.1.0",
+      "description": "Optional GitHub MCP/CLI adapter guidance for repo, issue, and PR context",
+      "path": "adapter-github/SKILL.md.tmpl",
+      "agents": [
+        "swe",
+        "orchestrate",
+        "pm"
+      ]
+    },
+    {
+      "name": "adapter-google-adk",
+      "version": "0.1.0",
+      "description": "Optional Google ADK host adapter boundary for invoking skills and tools",
+      "path": "adapter-google-adk/SKILL.md.tmpl",
+      "agents": [
+        "orchestrate",
+        "_infrastructure",
+        "cloud"
+      ]
+    },
+    {
+      "name": "adapter-langgraph",
+      "version": "0.1.0",
+      "description": "Optional LangGraph orchestration boundary for durable app-level agents",
+      "path": "adapter-langgraph/SKILL.md.tmpl",
+      "agents": [
+        "orchestrate",
+        "_infrastructure"
+      ]
+    },
+    {
+      "name": "adapter-mcp",
+      "version": "0.1.0",
+      "description": "Design optional Model Context Protocol adapters with default-deny tools,",
+      "path": "adapter-mcp/SKILL.md.tmpl",
+      "agents": [
+        "swe",
+        "_infrastructure",
+        "orchestrate",
+        "cloud"
+      ]
+    },
+    {
+      "name": "adapter-openapi",
+      "version": "0.1.0",
+      "description": "Use OpenAPI contracts and optional generated clients/servers while keeping",
+      "path": "adapter-openapi/SKILL.md.tmpl",
+      "agents": [
+        "swe",
+        "spec-agent"
+      ]
+    },
+    {
+      "name": "adapter-seniorswe-concise",
+      "version": "0.1.0",
+      "description": "Optional Seniorswe-Concise hook and MCP adapter for YAGNI mode injection across",
+      "path": "adapter-seniorswe-concise/SKILL.md.tmpl",
+      "agents": [
+        "swe",
+        "_infrastructure"
+      ]
+    },
+    {
+      "name": "adapter-strands",
+      "version": "0.1.0",
+      "description": "Optional Strands adapter boundary for composing skills and tools with",
+      "path": "adapter-strands/SKILL.md.tmpl",
+      "agents": [
+        "orchestrate",
+        "_infrastructure",
+        "cloud"
+      ]
+    },
+    {
+      "name": "agent-architecture",
+      "version": "0.1.0",
+      "description": "Enterprise-safe software engineering skill pack. Routes work to scoped skills for",
+      "path": "SKILL.md.tmpl",
+      "agents": []
+    },
+    {
+      "name": "architecture-agent-upgrade",
+      "version": "0.1.0",
+      "description": "Upgrades an installed architecture-agent skill pack through a policy-approved internal,",
+      "path": "architecture-agent-upgrade/SKILL.md.tmpl",
+      "agents": [
+        "_infrastructure"
+      ]
+    },
+    {
+      "name": "atlassian-docs",
+      "version": "0.2.0",
+      "description": "Atlassian MCP integration for Jira, Confluence, and Bitbucket. Provides read and write",
+      "path": "atlassian-docs/SKILL.md.tmpl",
+      "agents": [
+        "spec-agent",
+        "pm",
+        "qa-agent",
+        "interviewer",
+        "swe"
+      ]
+    },
+    {
+      "name": "autoplan",
+      "version": "0.1.1",
+      "description": "Runs the plan review pipeline before coding begins, then a post-implementation critic gate before surfacing results.",
+      "path": "autoplan/SKILL.md.tmpl",
+      "agents": [
+        "swe",
+        "orchestrate",
+        "spec-agent"
+      ]
+    },
+    {
+      "name": "benchmark",
+      "version": "0.1.0",
+      "description": "Local benchmark and regression-check workflow for performance or quality",
+      "path": "benchmark/SKILL.md.tmpl",
+      "agents": [
+        "qa-agent",
+        "swe",
+        "data"
+      ]
+    },
+    {
+      "name": "canary",
+      "version": "0.1.0",
+      "description": "Privacy-safe canary planning for post-deploy monitoring, rollback signals,",
+      "path": "canary/SKILL.md.tmpl",
+      "agents": [
+        "qa-agent",
+        "cloud",
+        "release-agent"
+      ]
+    },
+    {
+      "name": "careful",
+      "version": "0.1.0",
+      "description": "Destructive command guardrails. Warns before rm -rf, DROP TABLE, force-push,",
+      "path": "careful/SKILL.md.tmpl",
+      "agents": [
+        "migration",
+        "cloud",
+        "_infrastructure",
+        "security",
+        "release-agent"
+      ]
+    },
+    {
+      "name": "change-router",
+      "version": "0.1.1",
+      "description": "Routes changed files to the appropriate agent roles using agents/routing.json.",
+      "path": "change-router/SKILL.md.tmpl",
+      "agents": [
+        "orchestrate"
+      ]
+    },
+    {
+      "name": "chrome-devtools",
+      "version": "0.1.0",
+      "description": "Chrome DevTools MCP integration for browser automation, debugging, performance analysis,",
+      "path": "chrome-devtools/SKILL.md.tmpl",
+      "agents": [
+        "qa-agent",
+        "design-agent",
+        "swe"
+      ]
+    },
+    {
+      "name": "claude",
+      "version": "0.1.0",
+      "description": "Claude Code host adapter. Covers enterprise-safe tool use, knowledge graph",
+      "path": "claude/SKILL.md.tmpl",
+      "agents": [
+        "_infrastructure"
+      ]
+    },
+    {
+      "name": "cloud",
+      "version": "0.1.0",
+      "description": "Cloud and DevOps engineer agent. Handles AWS infrastructure, DMS migrations,",
+      "path": "agents/cloud/SKILL.md.tmpl",
+      "agents": [
+        "_infrastructure"
+      ]
+    },
+    {
+      "name": "codebase-engine",
+      "version": "0.1.0",
+      "description": "Enterprise-safe AST knowledge graph for local codebases. Indexes source",
+      "path": "codebase-engine/SKILL.md.tmpl",
+      "agents": [
+        "swe",
+        "migration",
+        "data",
+        "orchestrate",
+        "qa-agent",
+        "spec-agent",
+        "cloud",
+        "design-agent",
+        "interviewer",
+        "release-agent",
+        "security"
+      ]
+    },
+    {
+      "name": "codex",
+      "version": "0.1.0",
+      "description": "OpenAI Codex host adapter. Covers how to use this skill pack inside a",
+      "path": "codex/SKILL.md.tmpl",
+      "agents": [
+        "_infrastructure"
+      ]
+    },
+    {
+      "name": "commit",
+      "version": "0.1.0",
+      "description": "Atomic commit discipline for any code change. Enforces Conventional Commits",
+      "path": "commit/SKILL.md.tmpl",
+      "agents": [
+        "swe",
+        "migration",
+        "data",
+        "cloud",
+        "release-agent"
+      ]
+    },
+    {
+      "name": "context-restore",
+      "version": "0.1.0",
+      "description": "Restores previously saved local working context without relying on external services.",
+      "path": "context-restore/SKILL.md.tmpl",
+      "agents": [
+        "_infrastructure",
+        "swe",
+        "orchestrate",
+        "migration"
+      ]
+    },
+    {
+      "name": "context-save",
+      "version": "0.1.0",
+      "description": "Captures local working context so a future agent session can resume safely.",
+      "path": "context-save/SKILL.md.tmpl",
+      "agents": [
+        "_infrastructure",
+        "swe",
+        "orchestrate",
+        "migration"
+      ]
+    },
+    {
+      "name": "copilot",
+      "version": "0.1.0",
+      "description": "GitHub Copilot host adapter. Covers how to install this skill pack into a",
+      "path": "copilot/SKILL.md.tmpl",
+      "agents": [
+        "_infrastructure"
+      ]
+    },
+    {
+      "name": "data",
+      "version": "0.1.0",
+      "description": "Data and MLOps engineer agent. Handles Databricks jobs, dbt transformations,",
+      "path": "agents/data/SKILL.md.tmpl",
+      "agents": [
+        "_infrastructure"
+      ]
+    },
+    {
+      "name": "design-agent",
+      "version": "0.1.0",
+      "description": "UI and design agent. Handles design review, implementation-ready HTML",
+      "path": "agents/design-agent/SKILL.md.tmpl",
+      "agents": [
+        "_infrastructure"
+      ]
+    },
+    {
+      "name": "design-html",
+      "version": "0.1.0",
+      "description": "Turns approved UI design direction into implementation-ready HTML guidance.",
+      "path": "design-html/SKILL.md.tmpl",
+      "agents": [
+        "design-agent",
+        "swe"
+      ]
+    },
+    {
+      "name": "design-review",
+      "version": "0.1.0",
+      "description": "Reviews product UI and interaction quality for practical design issues.",
+      "path": "design-review/SKILL.md.tmpl",
+      "agents": [
+        "design-agent",
+        "swe",
+        "qa-agent"
+      ]
+    },
+    {
+      "name": "diagram",
+      "version": "0.1.0",
+      "description": "Creates text-first architecture and workflow diagrams from local project context.",
+      "path": "diagram/SKILL.md.tmpl",
+      "agents": [
+        "spec-agent",
+        "design-agent",
+        "orchestrate"
+      ]
+    },
+    {
+      "name": "document-generate",
+      "version": "0.1.0",
+      "description": "Generates missing local project documentation from code-backed evidence.",
+      "path": "document-generate/SKILL.md.tmpl",
+      "agents": [
+        "spec-agent",
+        "pm"
+      ]
+    },
+    {
+      "name": "document-release",
+      "version": "0.1.0",
+      "description": "Updates documentation after shipped behavior changes.",
+      "path": "document-release/SKILL.md.tmpl",
+      "agents": [
+        "pm",
+        "swe",
+        "spec-agent",
+        "release-agent"
+      ]
+    },
+    {
+      "name": "documentation",
+      "version": "0.1.0",
+      "description": "Documentation workflow for generating, updating, and reviewing project docs after implementation.",
+      "path": "documentation/SKILL.md.tmpl",
+      "agents": [
+        "qa-agent",
+        "pm",
+        "spec-agent"
+      ]
+    },
+    {
+      "name": "domain-data-governance",
+      "version": "0.1.0",
+      "description": "Data governance review for classification, lineage, permissions, retention,",
+      "path": "domain-data-governance/SKILL.md.tmpl",
+      "agents": [
+        "data",
+        "pm"
+      ]
+    },
+    {
+      "name": "domain-experiment-design",
+      "version": "0.1.0",
+      "description": "Experiment design review for randomization, power, metrics, guardrails,",
+      "path": "domain-experiment-design/SKILL.md.tmpl",
+      "agents": [
+        "data",
+        "pm"
+      ]
+    },
+    {
+      "name": "domain-mlops-databricks",
+      "version": "0.1.0",
+      "description": "Databricks MLOps project structure, model lifecycle, CI/CD, monitoring, and",
+      "path": "domain-mlops-databricks/SKILL.md.tmpl",
+      "agents": [
+        "data"
+      ]
+    },
+    {
+      "name": "domain-model-interpretation",
+      "version": "0.1.0",
+      "description": "Model interpretation review for feature effects, calibration, drift,",
+      "path": "domain-model-interpretation/SKILL.md.tmpl",
+      "agents": [
+        "data",
+        "pm"
+      ]
+    },
+    {
+      "name": "guard",
+      "version": "0.1.0",
+      "description": "Applies stricter local safety posture for risky tools and filesystem boundaries.",
+      "path": "guard/SKILL.md.tmpl",
+      "agents": [
+        "swe",
+        "migration",
+        "cloud",
+        "_infrastructure",
+        "security"
+      ]
+    },
+    {
+      "name": "health",
+      "version": "0.1.0",
+      "description": "Enterprise-safe code health dashboard. Detects and runs approved local quality checks",
+      "path": "health/SKILL.md.tmpl",
+      "agents": [
+        "swe",
+        "qa-agent",
+        "cloud",
+        "security"
+      ]
+    },
+    {
+      "name": "interviewer",
+      "version": "0.1.0",
+      "description": "Technical interviewer agent. Conducts interviews grounded in the actual",
+      "path": "agents/interviewer/SKILL.md.tmpl",
+      "agents": [
+        "_infrastructure"
+      ]
+    },
+    {
+      "name": "investigate",
+      "version": "0.1.0",
+      "description": "Root-cause investigation workflow for bugs, failing tests, broken integrations, and unexpected behavior.",
+      "path": "investigate/SKILL.md.tmpl",
+      "agents": [
+        "swe",
+        "qa-agent",
+        "security"
+      ]
+    },
+    {
+      "name": "learnings",
+      "version": "0.1.0",
+      "description": "Local project learning workflow. Captures reusable project conventions, pitfalls, decisions,",
+      "path": "learnings/SKILL.md.tmpl",
+      "agents": [
+        "swe",
+        "_infrastructure",
+        "orchestrate",
+        "pm"
+      ]
+    },
+    {
+      "name": "migration",
+      "version": "0.1.0",
+      "description": "Migration engineer agent. Handles .NET/SQL Server modernization, SQL-to-Postgres",
+      "path": "agents/migration/SKILL.md.tmpl",
+      "agents": [
+        "_infrastructure"
+      ]
+    },
+    {
+      "name": "migration-dotnet-sqlserver-modernization",
+      "version": "0.1.0",
+      "description": "Plan .NET Framework and SQL Server modernization using compatibility",
+      "path": "migration-dotnet-sqlserver-modernization/SKILL.md.tmpl",
+      "agents": [
+        "migration"
+      ]
+    },
+    {
+      "name": "migration-review",
+      "version": "0.1.0",
+      "description": "Review modernization and migration plans for sequencing, rollback,",
+      "path": "migration-review/SKILL.md.tmpl",
+      "agents": [
+        "migration",
+        "swe",
+        "cloud"
+      ]
+    },
+    {
+      "name": "orchestrate",
+      "version": "0.1.0",
+      "description": "Coordinator agent for large features. Decomposes work into parallel subagents",
+      "path": "agents/orchestrate/SKILL.md.tmpl",
+      "agents": [
+        "_infrastructure"
+      ]
+    },
+    {
+      "name": "plan-design-review",
+      "version": "0.1.0",
+      "description": "Reviews plans for user experience, UI quality, and product interaction risk.",
+      "path": "plan-design-review/SKILL.md.tmpl",
+      "agents": [
+        "design-agent",
+        "spec-agent",
+        "pm"
+      ]
+    },
+    {
+      "name": "plan-devex-review",
+      "version": "0.1.0",
+      "description": "Reviews plans for developer experience, APIs, onboarding, and operability.",
+      "path": "plan-devex-review/SKILL.md.tmpl",
+      "agents": [
+        "qa-agent",
+        "swe",
+        "spec-agent"
+      ]
+    },
+    {
+      "name": "plan-director-review",
+      "version": "0.1.0",
+      "description": "Director or senior-principal plan review. Reviews scope, sequencing, architecture risk,",
+      "path": "plan-director-review/SKILL.md.tmpl",
+      "agents": [
+        "orchestrate",
+        "pm"
+      ]
+    },
+    {
+      "name": "plan-eng-review",
+      "version": "0.1.0",
+      "description": "Reviews plans for architecture, data flow, reliability, and testability.",
+      "path": "plan-eng-review/SKILL.md.tmpl",
+      "agents": [
+        "swe",
+        "migration",
+        "data",
+        "cloud"
+      ]
+    },
+    {
+      "name": "plan-pm-review",
+      "version": "0.1.0",
+      "description": "Product manager plan review. Reviews user value, requirements clarity, acceptance",
+      "path": "plan-pm-review/SKILL.md.tmpl",
+      "agents": [
+        "pm",
+        "spec-agent"
+      ]
+    },
+    {
+      "name": "plan-review",
+      "version": "0.1.0",
+      "description": "Enterprise-safe plan review workflow. Reviews a proposed implementation plan for scope,",
+      "path": "plan-review/SKILL.md.tmpl",
+      "agents": [
+        "swe",
+        "qa-agent",
+        "spec-agent",
+        "orchestrate"
+      ]
+    },
+    {
+      "name": "pm",
+      "version": "0.1.0",
+      "description": "Product manager agent. Handles strategy, prioritization, PRDs, retrospectives,",
+      "path": "agents/pm/SKILL.md.tmpl",
+      "agents": [
+        "_infrastructure"
+      ]
+    },
+    {
+      "name": "qa",
+      "version": "0.1.0",
+      "description": "Enterprise-safe QA workflow. Plans and verifies user-facing or service behavior using",
+      "path": "qa/SKILL.md.tmpl",
+      "agents": [
+        "qa-agent",
+        "swe"
+      ]
+    },
+    {
+      "name": "qa-agent",
+      "version": "0.1.0",
+      "description": "QA engineer agent. Tests, validates, benchmarks, and monitors post-deploy.",
+      "path": "agents/qa-agent/SKILL.md.tmpl",
+      "agents": [
+        "_infrastructure"
+      ]
+    },
+    {
+      "name": "reference-gstack-patterns",
+      "version": "0.2.0",
+      "description": "Repo-local quick reference for the skill-pack pattern this repo uses.",
+      "path": "reference-gstack-patterns/SKILL.md.tmpl",
+      "agents": [
+        "_infrastructure",
+        "swe",
+        "orchestrate"
+      ]
+    },
+    {
+      "name": "release",
+      "version": "0.1.0",
+      "description": "Policy-gated release preparation workflow. Checks readiness, tests, docs, risk, and rollback",
+      "path": "release/SKILL.md.tmpl",
+      "agents": [
+        "pm",
+        "cloud",
+        "release-agent"
+      ]
+    },
+    {
+      "name": "release-agent",
+      "version": "0.1.0",
+      "description": "Release engineer agent. Handles release preparation, release notes, retros,",
+      "path": "agents/release-agent/SKILL.md.tmpl",
+      "agents": [
+        "_infrastructure"
+      ]
+    },
+    {
+      "name": "release-notes",
+      "version": "0.1.0",
+      "description": "Generate privacy-safe release notes from local changes, tests, and docs",
+      "path": "release-notes/SKILL.md.tmpl",
+      "agents": [
+        "pm",
+        "swe",
+        "release-agent"
+      ]
+    },
+    {
+      "name": "retro",
+      "version": "0.1.0",
+      "description": "Produces a local project retrospective from commits, incidents, decisions, and outcomes.",
+      "path": "retro/SKILL.md.tmpl",
+      "agents": [
+        "pm",
+        "orchestrate",
+        "release-agent"
+      ]
+    },
+    {
+      "name": "review",
+      "version": "0.1.0",
+      "description": "Enterprise-safe code review workflow. Reviews diffs and code paths for correctness,",
+      "path": "review/SKILL.md.tmpl",
+      "agents": [
+        "swe",
+        "qa-agent"
+      ]
+    },
+    {
+      "name": "rtk-token-optimizer",
+      "version": "0.1.0",
+      "description": "Optional Rust Token Killer integration guidance. Uses RTK to reduce noisy shell output",
+      "path": "rtk-token-optimizer/SKILL.md.tmpl",
+      "agents": [
+        "_infrastructure",
+        "swe",
+        "data"
+      ]
+    },
+    {
+      "name": "security",
+      "version": "0.1.0",
+      "description": "Security engineer agent. Handles security reviews, threat modeling, access",
+      "path": "agents/security/SKILL.md.tmpl",
+      "agents": [
+        "_infrastructure"
+      ]
+    },
+    {
+      "name": "security-review",
+      "version": "0.1.0",
+      "description": "Enterprise security and governance review for application code, data access, agent",
+      "path": "security-review/SKILL.md.tmpl",
+      "agents": [
+        "swe",
+        "qa-agent",
+        "cloud",
+        "security"
+      ]
+    },
+    {
+      "name": "seniorswe-concise",
+      "version": "0.1.0",
+      "description": "Senior SWE concise mode: forces the laziest solution that actually works.",
+      "path": "seniorswe-concise/SKILL.md.tmpl",
+      "agents": [
+        "swe",
+        "data"
+      ]
+    },
+    {
+      "name": "seniorswe-concise-audit",
+      "version": "0.1.0",
+      "description": "Whole-repo audit for over-engineering. Like /seniorswe-concise-review but",
+      "path": "seniorswe-concise-audit/SKILL.md.tmpl",
+      "agents": [
+        "swe"
+      ]
+    },
+    {
+      "name": "seniorswe-concise-debt",
+      "version": "0.1.0",
+      "description": "Harvest every `seniorswe-concise:` comment in the codebase into a debt ledger",
+      "path": "seniorswe-concise-debt/SKILL.md.tmpl",
+      "agents": [
+        "swe"
+      ]
+    },
+    {
+      "name": "seniorswe-concise-gain",
+      "version": "0.1.0",
+      "description": "Show measured impact of concise/lazy-mode coding as a compact scoreboard:",
+      "path": "seniorswe-concise-gain/SKILL.md.tmpl",
+      "agents": [
+        "swe"
+      ]
+    },
+    {
+      "name": "seniorswe-concise-help",
+      "version": "0.1.0",
+      "description": "Quick-reference card for Senior SWE Concise mode: all levels, skills, and",
+      "path": "seniorswe-concise-help/SKILL.md.tmpl",
+      "agents": [
+        "swe",
+        "_infrastructure"
+      ]
+    },
+    {
+      "name": "seniorswe-concise-review",
+      "version": "0.1.0",
+      "description": "Code review focused exclusively on over-engineering. Finds what to delete:",
+      "path": "seniorswe-concise-review/SKILL.md.tmpl",
+      "agents": [
+        "swe",
+        "orchestrate"
+      ]
+    },
+    {
+      "name": "ship",
+      "version": "0.1.0",
+      "description": "Prepares a human-approved PR, merge, or release handoff.",
+      "path": "ship/SKILL.md.tmpl",
+      "agents": [
+        "swe",
+        "cloud",
+        "release-agent"
+      ]
+    },
+    {
+      "name": "skillify",
+      "version": "0.1.0",
+      "description": "Turns a repeated local workflow into a reusable skill folder with template files.",
+      "path": "skillify/SKILL.md.tmpl",
+      "agents": [
+        "_infrastructure",
+        "swe",
+        "orchestrate"
+      ]
+    },
+    {
+      "name": "spec",
+      "version": "0.1.0",
+      "description": "Converts product or engineering intent into a scoped, reviewable specification with",
+      "path": "spec/SKILL.md.tmpl",
+      "agents": [
+        "spec-agent",
+        "pm"
+      ]
+    },
+    {
+      "name": "spec-agent",
+      "version": "0.1.0",
+      "description": "Spec writer and planner agent. Converts vague intent into precise, reviewable",
+      "path": "agents/spec-agent/SKILL.md.tmpl",
+      "agents": [
+        "_infrastructure"
+      ]
+    },
+    {
+      "name": "stack",
+      "version": "0.1.0",
+      "description": "Tech stack meta-loader. Auto-detects project tech stack from repo signals and",
+      "path": "stack/SKILL.md.tmpl",
+      "agents": [
+        "_infrastructure",
+        "swe"
+      ]
+    },
+    {
+      "name": "stack-aws",
+      "version": "0.1.0",
+      "description": "AWS application modernization planning with least-privilege, local-first",
+      "path": "stack-aws/SKILL.md.tmpl",
+      "agents": [
+        "cloud"
+      ]
+    },
+    {
+      "name": "stack-aws-dms",
+      "version": "0.1.0",
+      "description": "AWS DMS/SCT migration planning patterns for governed database migration",
+      "path": "stack-aws-dms/SKILL.md.tmpl",
+      "agents": [
+        "migration",
+        "cloud"
+      ]
+    },
+    {
+      "name": "stack-csharp",
+      "version": "0.1.0",
+      "description": "C# and .NET modernization guidance for projects, packages, services, tests,",
+      "path": "stack-csharp/SKILL.md.tmpl",
+      "agents": [
+        "swe",
+        "migration"
+      ]
+    },
+    {
+      "name": "stack-databricks",
+      "version": "0.1.0",
+      "description": "Databricks engineering workflows for Asset Bundles, jobs, notebooks, SDK",
+      "path": "stack-databricks/SKILL.md.tmpl",
+      "agents": [
+        "data"
+      ]
+    },
+    {
+      "name": "stack-databricks-dbt",
+      "version": "0.1.0",
+      "description": "dbt on Databricks patterns for models, tests, docs, lineage, and governed",
+      "path": "stack-databricks-dbt/SKILL.md.tmpl",
+      "agents": [
+        "data"
+      ]
+    },
+    {
+      "name": "stack-legacy-frontend",
+      "version": "0.1.0",
+      "description": "Modernize legacy frontend stacks such as Knockout, YUI, old jQuery widgets,",
+      "path": "stack-legacy-frontend/SKILL.md.tmpl",
+      "agents": [
+        "migration",
+        "swe"
+      ]
+    },
+    {
+      "name": "stack-postgres",
+      "version": "0.1.0",
+      "description": "Postgres schema, query, migration, performance, and data-governance workflows",
+      "path": "stack-postgres/SKILL.md.tmpl",
+      "agents": [
+        "swe",
+        "migration",
+        "data"
+      ]
+    },
+    {
+      "name": "stack-python",
+      "version": "0.1.0",
+      "description": "Python service, library, and data workflow modernization with minimal",
+      "path": "stack-python/SKILL.md.tmpl",
+      "agents": [
+        "swe",
+        "data"
+      ]
+    },
+    {
+      "name": "stack-react-typescript",
+      "version": "0.1.0",
+      "description": "React and TypeScript application modernization, including codemods, Redux",
+      "path": "stack-react-typescript/SKILL.md.tmpl",
+      "agents": [
+        "swe",
+        "design-agent"
+      ]
+    },
+    {
+      "name": "stack-spring-ai",
+      "version": "0.1.0",
+      "description": "Spring-native AI application patterns using Spring AI and Spring AI examples",
+      "path": "stack-spring-ai/SKILL.md.tmpl",
+      "agents": [
+        "swe"
+      ]
+    },
+    {
+      "name": "stack-spring-boot",
+      "version": "0.1.0",
+      "description": "Spring Boot upgrade and API modernization using OpenRewrite recipes,",
+      "path": "stack-spring-boot/SKILL.md.tmpl",
+      "agents": [
+        "swe"
+      ]
+    },
+    {
+      "name": "stack-sql-server",
+      "version": "0.1.0",
+      "description": "SQL Server schema, T-SQL, stored procedure, job, and application data-access",
+      "path": "stack-sql-server/SKILL.md.tmpl",
+      "agents": [
+        "swe",
+        "migration"
+      ]
+    },
+    {
+      "name": "stack-sqlserver-to-postgres",
+      "version": "0.1.0",
+      "description": "SQL Server to Postgres migration planning with T-SQL compatibility checks,",
+      "path": "stack-sqlserver-to-postgres/SKILL.md.tmpl",
+      "agents": [
+        "migration"
+      ]
+    },
+    {
+      "name": "subagent-orchestrator",
+      "version": "0.1.0",
+      "description": "Plans and materializes local-only subagent manifests for scoped parallel work.",
+      "path": "subagent-orchestrator/SKILL.md.tmpl",
+      "agents": [
+        "orchestrate"
+      ]
+    },
+    {
+      "name": "swe",
+      "version": "0.1.0",
+      "description": "General software engineer agent. Handles implementation, debugging, code",
+      "path": "agents/swe/SKILL.md.tmpl",
+      "agents": [
+        "_infrastructure"
+      ]
+    },
+    {
+      "name": "test",
+      "version": "0.1.0",
+      "description": "Designs and runs approved automated tests, including Playwright or Selenium when enabled by policy.",
+      "path": "test/SKILL.md.tmpl",
+      "agents": [
+        "swe",
+        "qa-agent"
+      ]
+    },
+    {
+      "name": "token-optimizer",
+      "version": "0.1.0",
+      "description": "Token reduction for Python objects, API responses, logs, diffs, and code",
+      "path": "token-optimizer/SKILL.md.tmpl",
+      "agents": [
+        "swe",
+        "qa-agent",
+        "data",
+        "orchestrate"
+      ]
+    }
+  ]
+}

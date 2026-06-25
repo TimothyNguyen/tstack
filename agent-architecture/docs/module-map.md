@@ -125,7 +125,6 @@ This preserves the gstack ergonomics while keeping the new package generic.
 - `adapter-google-adk`
 - `adapter-agentcore`
 - `adapter-strands`
-- `adapter-codegraph`
 - `migration-review`
 - `release-notes`
 - `benchmark`
@@ -177,7 +176,6 @@ Candidate adapters:
 
 - `adapters/ag-ui`
 - `adapters/mcp`
-- `adapters/codegraph`
 - `adapters/browser`
 - `adapters/agentcore`
 - `adapters/strands`

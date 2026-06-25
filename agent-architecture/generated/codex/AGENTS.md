@@ -18,6 +18,8 @@ Codex activates skills by task description, not slash commands.
 - `/orchestrate` — Coordinator agent for large features. Decomposes work into parallel subagents
 - `/pm` — Product manager agent. Handles strategy, prioritization, PRDs, retrospectives,
 - `/qa-agent` — QA engineer agent. Tests, validates, benchmarks, and monitors post-deploy.
+- `/release-agent` — Release engineer agent. Handles release preparation, release notes, retros,
+- `/security` — Security engineer agent. Handles security reviews, threat modeling, access
 - `/spec-agent` — Spec writer and planner agent. Converts vague intent into precise, reviewable
 - `/swe` — General software engineer agent. Handles implementation, debugging, code
 
@@ -55,6 +57,7 @@ Use commit discipline to stage and commit only the authentication fix.
 - New requirement, design, or issue: invoke `spec`.
 - Fully reviewed plan pipeline: invoke `autoplan`.
 - Split a task into scoped local subagents: invoke `subagent-orchestrator`.
+- Route changed files to the right agent roles: invoke `change-router`.
 - Review a plan before implementation: invoke `plan-review`.
 - Director/principal plan review: invoke `plan-director-review`.
 - Product manager plan review: invoke `plan-pm-review`.
@@ -83,6 +86,7 @@ Use commit discipline to stage and commit only the authentication fix.
 - Codebase map, architecture lookup, dependency tracing, or AST graph indexing: invoke `codebase-engine`.
 - Internal Atlassian product docs, requirements, or Jira issue context for coding questions: invoke `atlassian-docs` only when an approved read-only connector is configured.
 - Token/cost reduction for noisy shell output: invoke `rtk-token-optimizer`.
+- Token/cost reduction for Python objects, API responses, logs, diffs, or code before LLM injection: invoke `token-optimizer`.
 - Commit after completing discrete work, Conventional Commits format, atomic-commit guidance: invoke `commit`.
 - Simplest/laziest solution, YAGNI enforcement: invoke `seniorswe-concise`.
 - Over-engineering diff review: invoke `seniorswe-concise-review`.
@@ -102,6 +106,7 @@ Use commit discipline to stage and commit only the authentication fix.
 - dbt on Databricks: invoke `stack-databricks-dbt`.
 - MCP connector design: invoke `adapter-mcp`.
 - GitHub repo/issue/PR connector design: invoke `adapter-github`.
+- Browser automation, UI testing, performance tracing, or network debugging: invoke `chrome-devtools`.
 - AG-UI event integration: invoke `adapter-ag-ui`.
 - OpenAPI generator integration: invoke `adapter-openapi`.
 - LangGraph orchestration boundary: invoke `adapter-langgraph`.
@@ -119,7 +124,8 @@ Use commit discipline to stage and commit only the authentication fix.
 - Google ADK adapter design: invoke `adapter-google-adk`.
 - AgentCore adapter design: invoke `adapter-agentcore`.
 - Strands adapter design: invoke `adapter-strands`.
-- CodeGraph adapter design: invoke `adapter-codegraph`.
+- Docker MCP Registry / Gateway adapter: invoke `adapter-docker-mcp`.
+- Codebase graph, AST index, dependency tracing: invoke `codebase-engine`.
 - Migration plan review: invoke `migration-review`.
 - Privacy-safe release notes: invoke `release-notes`.
 - Local benchmark/regression workflow: invoke `benchmark`.

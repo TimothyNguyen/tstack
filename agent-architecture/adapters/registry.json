@@ -21,15 +21,6 @@
       "state": "local-only"
     },
     {
-      "id": "codegraph",
-      "skill": "adapter-codegraph",
-      "module": "codegraph",
-      "runtime": "code-index-adapter",
-      "egress": "disabled",
-      "writes": "disabled",
-      "state": "local-only"
-    },
-    {
       "id": "databricks",
       "skill": "adapter-databricks",
       "module": "databricks",
@@ -118,6 +109,16 @@
       "egress": "disabled",
       "writes": "approval-required",
       "state": "local-only"
+    },
+    {
+      "id": "docker-mcp",
+      "skill": "adapter-docker-mcp",
+      "module": "dockerMcp",
+      "runtime": "mcp-gateway",
+      "egress": "approval-required",
+      "writes": "approval-required",
+      "state": "local-only",
+      "notes": "Gateway proxies docker/mcp-registry catalog servers. Docker Desktop 4.62+ required."
     }
   ]
 }

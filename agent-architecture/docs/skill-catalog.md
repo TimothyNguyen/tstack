@@ -18,6 +18,7 @@ Each skill is a top-level folder with:
 | `spec` | Convert intent into scoped requirements, invariants, and tasks. | `spec/SKILL.md.tmpl` |
 | `autoplan` | Run a composed plan-review pipeline before implementation. | `autoplan/SKILL.md.tmpl` |
 | `subagent-orchestrator` | Plan and materialize local-only subagent manifests for scoped parallel work. | `subagent-orchestrator/SKILL.md.tmpl` |
+| `change-router` | Map changed files to the correct agent roles using routing rules; output a dispatch plan for parallel agent invocation. | `change-router/SKILL.md.tmpl` |
 | `plan-review` | Review implementation plans before code changes. | `plan-review/SKILL.md.tmpl` |
 | `plan-director-review` | Review plans from a director or senior-principal engineering perspective. | `plan-director-review/SKILL.md.tmpl` |
 | `plan-pm-review` | Review plans from a product manager perspective. | `plan-pm-review/SKILL.md.tmpl` |
@@ -39,6 +40,7 @@ Each skill is a top-level folder with:
 | `ship` | Prepare PR, merge, or release handoff. | `ship/SKILL.md.tmpl` |
 | `codebase-engine` | Enterprise-safe AST knowledge graph — index, query, explain, path, affected, and codebase understanding workflow. No external egress. | `codebase-engine/SKILL.md.tmpl` |
 | `rtk-token-optimizer` | Optional Rust Token Killer guidance for reducing noisy shell output. | `rtk-token-optimizer/SKILL.md.tmpl` |
+| `token-optimizer` | Token reduction for Python objects, API responses, logs, diffs, and code before LLM injection. Bundles ptk with zero required dependencies and a bundled fallback. | `token-optimizer/SKILL.md.tmpl` |
 | `context-save` | Save local working context for future sessions. | `context-save/SKILL.md.tmpl` |
 | `context-restore` | Restore saved local working context. | `context-restore/SKILL.md.tmpl` |
 | `design-html` | Produce implementation-ready HTML guidance from approved design direction. | `design-html/SKILL.md.tmpl` |
@@ -101,7 +103,7 @@ project profile needs them:
 | `adapter-google-adk` | Optional Google ADK host adapter boundary. | `adapter-google-adk/SKILL.md.tmpl` |
 | `adapter-agentcore` | Optional AgentCore adapter boundary. | `adapter-agentcore/SKILL.md.tmpl` |
 | `adapter-strands` | Optional Strands adapter boundary. | `adapter-strands/SKILL.md.tmpl` |
-| `adapter-codegraph` | Optional CodeGraph or semantic code-index adapter boundary. | `adapter-codegraph/SKILL.md.tmpl` |
+| `adapter-docker-mcp` | Docker MCP Registry gateway adapter. Wires 300+ containerized MCP servers (GitHub, Postgres, Playwright, Docker ops, etc.) through one stdio multiplexer. Use for Docker-based deployments or docker/mcp-registry catalog consumption. | `adapter-docker-mcp/SKILL.md.tmpl` |
 | `migration-review` | Review migration plans for sequencing, rollback, privacy, and readiness. | `migration-review/SKILL.md.tmpl` |
 | `release-notes` | Generate privacy-safe release notes from local changes. | `release-notes/SKILL.md.tmpl` |
 | `benchmark` | Local benchmark and regression workflow without public uploads. | `benchmark/SKILL.md.tmpl` |

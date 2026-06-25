@@ -25,7 +25,7 @@ Use `../gstack/` only as reference material. Do not modify it.
 
 ## Role-Based Agents
 
-Ten role-based agents live in `agents/`. Each owns a cluster of skills:
+Twelve role-based agents live in `agents/`. Each owns a cluster of skills:
 
 | Agent | Role | Key Skills |
 |---|---|---|
@@ -39,6 +39,8 @@ Ten role-based agents live in `agents/`. Each owns a cluster of skills:
 | `/data` | Data/MLOps | `stack-databricks`, `domain-mlops-databricks`, `commit` |
 | `/cloud` | Cloud/DevOps | `stack-aws`, `stack-aws-dms`, `canary`, `careful` |
 | `/interviewer` | Tech Interviewer | `codebase-engine`, `atlassian-docs`, `diagram` |
+| `/release-agent` | Release Eng | `release`, `ship`, `release-notes`, `canary`, `retro` |
+| `/security` | Security Eng | `security-review`, `guard`, `investigate`, `health` |
 
 Every skill declares `agents:` in its frontmatter. Orphan check runs in `npm test`.
 

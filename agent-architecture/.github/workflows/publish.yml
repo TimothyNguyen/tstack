@@ -1,0 +1,55 @@
+name: Publish
+
+on:
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Dry run — pack but skip actual publish'
+        type: boolean
+        default: true
+
+jobs:
+  verify-and-publish:
+    name: Verify and publish
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          registry-url: 'https://registry.npmjs.org'
+
+      - run: npm ci
+
+      - name: Check skills are fresh
+        run: npm run check:skills
+
+      - name: Check host artifacts are fresh
+        run: npm run check:hosts
+
+      - name: Run tests
+        run: npm test
+
+      - name: Verify version not already published
+        run: |
+          PKG_VERSION=$(node -p "require('./package.json').version")
+          echo "Package version: $PKG_VERSION"
+          PUBLISHED=$(npm view agent-architecture@"$PKG_VERSION" version 2>/dev/null || echo "unpublished")
+          if [ "$PUBLISHED" != "unpublished" ]; then
+            echo "ERROR: version $PKG_VERSION already on npm. Bump package.json before publishing."
+            exit 1
+          fi
+          echo "Version $PKG_VERSION is available."
+
+      - name: Pack (dry run preview)
+        run: npm pack --dry-run
+
+      - name: Publish
+        if: ${{ !inputs.dry_run }}
+        run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

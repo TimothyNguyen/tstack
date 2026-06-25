@@ -4,7 +4,7 @@ version: 0.2.0
 description: |
   Repo-local quick reference for the skill-pack pattern this repo uses.
   Read once when adding or refactoring a skill folder.
-agents: [_infrastructure]
+agents: [_infrastructure, swe, orchestrate]
 ---
 
 ## Enterprise Preamble

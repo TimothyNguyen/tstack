@@ -10,7 +10,7 @@ allowed-tools:
   - Grep
   - Glob
   - Bash
-agents: [swe, qa-agent, cloud]
+agents: [swe, qa-agent, cloud, security]
 ---
 
 ## Enterprise Preamble

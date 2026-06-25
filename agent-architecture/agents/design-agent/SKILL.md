@@ -39,9 +39,25 @@ into implementation-ready guidance and reviewable artifacts.
 - Plan design review: invoke `plan-design-review`.
 - Architecture diagram: invoke `diagram`.
 - Documentation: invoke `document-generate`.
+- Component tree, existing UI patterns: invoke `codebase-engine`.
 
 ## Policy Requirements
 
 - Read-only code inspection is allowed.
 - Shell write, git write, deployment, database read, ticket creation, and browser use require policy approval unless the active profile says otherwise.
 - Credential reads, cookie import, public tunnels, public telemetry, and public scraping are disabled by default.
+<!-- agent-skills:start -->
+## Declared Skills
+
+Skills that declare this agent in their frontmatter `agents:` field.
+
+| Skill | Description |
+|-------|-------------|
+| `chrome-devtools` | Chrome DevTools MCP integration for browser automation, debugging, performance analysis, |
+| `codebase-engine` | Enterprise-safe AST knowledge graph for local codebases. Indexes source |
+| `design-html` | Turns approved UI design direction into implementation-ready HTML guidance. |
+| `design-review` | Reviews product UI and interaction quality for practical design issues. |
+| `diagram` | Creates text-first architecture and workflow diagrams from local project context. |
+| `plan-design-review` | Reviews plans for user experience, UI quality, and product interaction risk. |
+| `stack-react-typescript` | React and TypeScript application modernization, including codemods, Redux |
+<!-- agent-skills:end -->

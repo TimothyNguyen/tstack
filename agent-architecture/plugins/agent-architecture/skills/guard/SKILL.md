@@ -8,7 +8,7 @@ allowed-tools:
   - Grep
   - Glob
   - Bash
-agents: [swe, migration, cloud, _infrastructure]
+agents: [swe, migration, cloud, _infrastructure, security]
 ---
 
 ## Enterprise Preamble

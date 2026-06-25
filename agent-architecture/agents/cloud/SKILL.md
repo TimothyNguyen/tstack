@@ -51,6 +51,7 @@ post-deploy monitoring. `careful` and `guard` are always active.
 - Ship: invoke `ship`.
 - Canary monitoring: invoke `canary`.
 - Commit: invoke `commit`.
+- Codebase map, service boundary tracing: invoke `codebase-engine`.
 
 ## MCPs
 
@@ -62,3 +63,30 @@ post-deploy monitoring. `careful` and `guard` are always active.
 - Read-only code inspection is allowed.
 - Shell write, git write, deployment, database read, ticket creation, and browser use require policy approval unless the active profile says otherwise.
 - Credential reads, cookie import, public tunnels, public telemetry, and public scraping are disabled by default.
+<!-- agent-skills:start -->
+## Declared Skills
+
+Skills that declare this agent in their frontmatter `agents:` field.
+
+| Skill | Description |
+|-------|-------------|
+| `adapter-ag-ui` | Map skill progress, approvals, tool actions, findings, and artifacts into |
+| `adapter-agentcore` | Optional AgentCore adapter boundary for skills, tools, approvals, audit |
+| `adapter-docker-mcp` | Docker MCP Registry and Toolkit adapter. Wires 300+ pre-built containerized |
+| `adapter-google-adk` | Optional Google ADK host adapter boundary for invoking skills and tools |
+| `adapter-mcp` | Design optional Model Context Protocol adapters with default-deny tools, |
+| `adapter-strands` | Optional Strands adapter boundary for composing skills and tools with |
+| `canary` | Privacy-safe canary planning for post-deploy monitoring, rollback signals, |
+| `careful` | Destructive command guardrails. Warns before rm -rf, DROP TABLE, force-push, |
+| `codebase-engine` | Enterprise-safe AST knowledge graph for local codebases. Indexes source |
+| `commit` | Atomic commit discipline for any code change. Enforces Conventional Commits |
+| `guard` | Applies stricter local safety posture for risky tools and filesystem boundaries. |
+| `health` | Enterprise-safe code health dashboard. Detects and runs approved local quality checks |
+| `migration-review` | Review modernization and migration plans for sequencing, rollback, |
+| `plan-eng-review` | Reviews plans for architecture, data flow, reliability, and testability. |
+| `release` | Policy-gated release preparation workflow. Checks readiness, tests, docs, risk, and rollback |
+| `security-review` | Enterprise security and governance review for application code, data access, agent |
+| `ship` | Prepares a human-approved PR, merge, or release handoff. |
+| `stack-aws` | AWS application modernization planning with least-privilege, local-first |
+| `stack-aws-dms` | AWS DMS/SCT migration planning patterns for governed database migration |
+<!-- agent-skills:end -->

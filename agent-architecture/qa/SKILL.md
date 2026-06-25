@@ -9,7 +9,7 @@ allowed-tools:
   - Grep
   - Glob
   - Bash
-agents: [qa-agent]
+agents: [qa-agent, swe]
 ---
 
 ## Enterprise Preamble
