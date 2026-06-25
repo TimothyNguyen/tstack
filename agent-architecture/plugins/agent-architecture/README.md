@@ -28,7 +28,7 @@ Skills grouped by concern:
 | Safety | `guard`, `careful` |
 | Stacks | `stack-csharp` (vendored .NET skills), `stack-databricks` (vendored Databricks agent skills + bundle examples + SDK docs), `stack-postgres`, `stack-sql-server`, `stack-python`, `stack-aws`, `stack-aws-dms`, `stack-sqlserver-to-postgres`, `stack-react-typescript`, `stack-legacy-frontend`, `stack-spring-boot`, `stack-spring-ai`, `stack-databricks-dbt` |
 | Domain | `domain-mlops-databricks`, `domain-experiment-design`, `domain-data-governance`, `domain-model-interpretation` |
-| Adapters | `adapter-mcp`, `adapter-github`, `adapter-ag-ui`, `adapter-openapi`, `adapter-langgraph`, `adapter-databricks`, `adapter-seniorswe-concise`, `adapter-google-adk`, `adapter-agentcore`, `adapter-strands`, `adapter-codegraph` |
+| Adapters | `adapter-mcp`, `adapter-github`, `adapter-ag-ui`, `adapter-openapi`, `adapter-langgraph`, `adapter-databricks`, `adapter-seniorswe-concise`, `adapter-google-adk`, `adapter-agentcore`, `adapter-strands` |
 | Migrations / references | `migration-dotnet-sqlserver-modernization`, `migration-review`, `reference-gstack-patterns`, `release-notes`, `benchmark`, `canary`, `atlassian-docs`, `architecture-agent-upgrade`, `rtk-token-optimizer` |
 
 ## Policy

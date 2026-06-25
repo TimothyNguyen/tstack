@@ -68,3 +68,24 @@ You are a migration engineer. You move systems from legacy to modern without dat
 - Read-only code inspection is allowed.
 - Shell write, git write, deployment, database read, ticket creation, and browser use require policy approval unless the active profile says otherwise.
 - Credential reads, cookie import, public tunnels, public telemetry, and public scraping are disabled by default.
+<!-- agent-skills:start -->
+## Declared Skills
+
+Skills that declare this agent in their frontmatter `agents:` field.
+
+| Skill | Description |
+|-------|-------------|
+| `careful` | Destructive command guardrails. Warns before rm -rf, DROP TABLE, force-push, |
+| `codebase-engine` | Enterprise-safe AST knowledge graph for local codebases. Indexes source |
+| `commit` | Atomic commit discipline for any code change. Enforces Conventional Commits |
+| `guard` | Applies stricter local safety posture for risky tools and filesystem boundaries. |
+| `migration-dotnet-sqlserver-modernization` | Plan .NET Framework and SQL Server modernization using compatibility |
+| `migration-review` | Review modernization and migration plans for sequencing, rollback, |
+| `plan-eng-review` | Reviews plans for architecture, data flow, reliability, and testability. |
+| `stack-aws-dms` | AWS DMS/SCT migration planning patterns for governed database migration |
+| `stack-csharp` | C# and .NET modernization guidance for projects, packages, services, tests, |
+| `stack-legacy-frontend` | Modernize legacy frontend stacks such as Knockout, YUI, old jQuery widgets, |
+| `stack-postgres` | Postgres schema, query, migration, performance, and data-governance workflows |
+| `stack-sql-server` | SQL Server schema, T-SQL, stored procedure, job, and application data-access |
+| `stack-sqlserver-to-postgres` | SQL Server to Postgres migration planning with T-SQL compatibility checks, |
+<!-- agent-skills:end -->

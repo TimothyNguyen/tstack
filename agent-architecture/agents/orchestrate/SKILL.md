@@ -51,7 +51,7 @@ parallel subagents and review their output before merging.
 - AgentCore adapter: invoke `adapter-agentcore`.
 - Strands adapter: invoke `adapter-strands`.
 - Google ADK adapter: invoke `adapter-google-adk`.
-- CodeGraph adapter: invoke `adapter-codegraph`.
+- Codebase graph queries: invoke `codebase-engine`.
 - Context compression before subagent dispatch: invoke `token-optimizer`.
 
 ## Commit discipline
@@ -63,3 +63,24 @@ Invoke `commit` after each subagent checkpoint. One behavior per commit.
 - Read-only code inspection is allowed.
 - Shell write, git write, deployment, database read, ticket creation, and browser use require policy approval unless the active profile says otherwise.
 - Credential reads, cookie import, public tunnels, public telemetry, and public scraping are disabled by default.
+<!-- agent-skills:start -->
+## Declared Skills
+
+Skills that declare this agent in their frontmatter `agents:` field.
+
+| Skill | Description |
+|-------|-------------|
+| `adapter-ag-ui` | Map skill progress, approvals, tool actions, findings, and artifacts into |
+| `adapter-agentcore` | Optional AgentCore adapter boundary for skills, tools, approvals, audit |
+| `adapter-google-adk` | Optional Google ADK host adapter boundary for invoking skills and tools |
+| `adapter-langgraph` | Optional LangGraph orchestration boundary for durable app-level agents |
+| `adapter-strands` | Optional Strands adapter boundary for composing skills and tools with |
+| `autoplan` | Runs the plan review pipeline before coding begins, then a post-implementation critic gate before surfacing results. |
+| `change-router` | Routes changed files to the appropriate agent roles using agents/routing.json. |
+| `codebase-engine` | Enterprise-safe AST knowledge graph for local codebases. Indexes source |
+| `diagram` | Creates text-first architecture and workflow diagrams from local project context. |
+| `plan-director-review` | Director or senior-principal plan review. Reviews scope, sequencing, architecture risk, |
+| `plan-review` | Enterprise-safe plan review workflow. Reviews a proposed implementation plan for scope, |
+| `subagent-orchestrator` | Plans and materializes local-only subagent manifests for scoped parallel work. |
+| `token-optimizer` | Token reduction for Python objects, API responses, logs, diffs, and code |
+<!-- agent-skills:end -->

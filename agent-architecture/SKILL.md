@@ -32,6 +32,7 @@ workflows.
 - New requirement, design, or issue: invoke `spec`.
 - Fully reviewed plan pipeline: invoke `autoplan`.
 - Split a task into scoped local subagents: invoke `subagent-orchestrator`.
+- Route changed files to the right agent roles: invoke `change-router`.
 - Review a plan before implementation: invoke `plan-review`.
 - Director/principal plan review: invoke `plan-director-review`.
 - Product manager plan review: invoke `plan-pm-review`.
@@ -98,7 +99,7 @@ workflows.
 - Google ADK adapter design: invoke `adapter-google-adk`.
 - AgentCore adapter design: invoke `adapter-agentcore`.
 - Strands adapter design: invoke `adapter-strands`.
-- CodeGraph adapter design: invoke `adapter-codegraph`.
+- Codebase graph, AST index, dependency tracing: invoke `codebase-engine`.
 - Migration plan review: invoke `migration-review`.
 - Privacy-safe release notes: invoke `release-notes`.
 - Local benchmark/regression workflow: invoke `benchmark`.

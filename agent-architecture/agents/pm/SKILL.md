@@ -61,3 +61,24 @@ reviewable specs and track what shipped.
 - Read-only code inspection is allowed.
 - Shell write, git write, deployment, database read, ticket creation, and browser use require policy approval unless the active profile says otherwise.
 - Credential reads, cookie import, public tunnels, public telemetry, and public scraping are disabled by default.
+<!-- agent-skills:start -->
+## Declared Skills
+
+Skills that declare this agent in their frontmatter `agents:` field.
+
+| Skill | Description |
+|-------|-------------|
+| `atlassian-docs` | Atlassian MCP integration for Jira, Confluence, and Bitbucket. Provides read and write |
+| `document-generate` | Generates missing local project documentation from code-backed evidence. |
+| `document-release` | Updates documentation after shipped behavior changes. |
+| `documentation` | Documentation workflow for generating, updating, and reviewing project docs after implementation. |
+| `domain-data-governance` | Data governance review for classification, lineage, permissions, retention, |
+| `domain-experiment-design` | Experiment design review for randomization, power, metrics, guardrails, |
+| `domain-model-interpretation` | Model interpretation review for feature effects, calibration, drift, |
+| `plan-director-review` | Director or senior-principal plan review. Reviews scope, sequencing, architecture risk, |
+| `plan-pm-review` | Product manager plan review. Reviews user value, requirements clarity, acceptance |
+| `release` | Policy-gated release preparation workflow. Checks readiness, tests, docs, risk, and rollback |
+| `release-notes` | Generate privacy-safe release notes from local changes, tests, and docs |
+| `retro` | Produces a local project retrospective from commits, incidents, decisions, and outcomes. |
+| `spec` | Converts product or engineering intent into a scoped, reviewable specification with |
+<!-- agent-skills:end -->

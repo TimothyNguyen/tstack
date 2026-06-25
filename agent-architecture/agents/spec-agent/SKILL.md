@@ -44,6 +44,7 @@ before any code is written.
 - Full plan review: invoke `plan-review`.
 - Architecture diagrams: invoke `diagram`.
 - Document output: invoke `document-generate`.
+- Codebase map, symbol graph, architecture understanding: invoke `codebase-engine`.
 
 ## MCPs
 
@@ -55,3 +56,20 @@ before any code is written.
 - Read-only code inspection is allowed.
 - Shell write, git write, deployment, database read, ticket creation, and browser use require policy approval unless the active profile says otherwise.
 - Credential reads, cookie import, public tunnels, public telemetry, and public scraping are disabled by default.
+<!-- agent-skills:start -->
+## Declared Skills
+
+Skills that declare this agent in their frontmatter `agents:` field.
+
+| Skill | Description |
+|-------|-------------|
+| `atlassian-docs` | Atlassian MCP integration for Jira, Confluence, and Bitbucket. Provides read and write |
+| `autoplan` | Runs the plan review pipeline before coding begins, then a post-implementation critic gate before surfacing results. |
+| `codebase-engine` | Enterprise-safe AST knowledge graph for local codebases. Indexes source |
+| `diagram` | Creates text-first architecture and workflow diagrams from local project context. |
+| `document-generate` | Generates missing local project documentation from code-backed evidence. |
+| `documentation` | Documentation workflow for generating, updating, and reviewing project docs after implementation. |
+| `plan-pm-review` | Product manager plan review. Reviews user value, requirements clarity, acceptance |
+| `plan-review` | Enterprise-safe plan review workflow. Reviews a proposed implementation plan for scope, |
+| `spec` | Converts product or engineering intent into a scoped, reviewable specification with |
+<!-- agent-skills:end -->

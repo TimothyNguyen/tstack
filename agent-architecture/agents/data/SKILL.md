@@ -76,3 +76,25 @@ You are a data / MLOps engineer. You build reliable data pipelines and ML workfl
 - Read-only code inspection is allowed.
 - Shell write, git write, deployment, database read, ticket creation, and browser use require policy approval unless the active profile says otherwise.
 - Credential reads, cookie import, public tunnels, public telemetry, and public scraping are disabled by default.
+<!-- agent-skills:start -->
+## Declared Skills
+
+Skills that declare this agent in their frontmatter `agents:` field.
+
+| Skill | Description |
+|-------|-------------|
+| `adapter-databricks` | Optional Databricks SDK adapter boundary for workspace, job, and bundle |
+| `codebase-engine` | Enterprise-safe AST knowledge graph for local codebases. Indexes source |
+| `commit` | Atomic commit discipline for any code change. Enforces Conventional Commits |
+| `domain-data-governance` | Data governance review for classification, lineage, permissions, retention, |
+| `domain-experiment-design` | Experiment design review for randomization, power, metrics, guardrails, |
+| `domain-mlops-databricks` | Databricks MLOps project structure, model lifecycle, CI/CD, monitoring, and |
+| `domain-model-interpretation` | Model interpretation review for feature effects, calibration, drift, |
+| `plan-eng-review` | Reviews plans for architecture, data flow, reliability, and testability. |
+| `seniorswe-concise` | Senior SWE concise mode: forces the laziest solution that actually works. |
+| `stack-databricks` | Databricks engineering workflows for Asset Bundles, jobs, notebooks, SDK |
+| `stack-databricks-dbt` | dbt on Databricks patterns for models, tests, docs, lineage, and governed |
+| `stack-postgres` | Postgres schema, query, migration, performance, and data-governance workflows |
+| `stack-python` | Python service, library, and data workflow modernization with minimal |
+| `token-optimizer` | Token reduction for Python objects, API responses, logs, diffs, and code |
+<!-- agent-skills:end -->

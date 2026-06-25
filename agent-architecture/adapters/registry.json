@@ -21,15 +21,6 @@
       "state": "local-only"
     },
     {
-      "id": "codegraph",
-      "skill": "adapter-codegraph",
-      "module": "codegraph",
-      "runtime": "code-index-adapter",
-      "egress": "disabled",
-      "writes": "disabled",
-      "state": "local-only"
-    },
-    {
       "id": "databricks",
       "skill": "adapter-databricks",
       "module": "databricks",

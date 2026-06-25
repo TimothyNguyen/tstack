@@ -79,3 +79,45 @@ After any implementation session > 200 lines added:
 - Read-only code inspection is allowed.
 - Shell write, git write, deployment, database read, ticket creation, and browser use require policy approval unless the active profile says otherwise.
 - Credential reads, cookie import, public tunnels, public telemetry, and public scraping are disabled by default.
+<!-- agent-skills:start -->
+## Declared Skills
+
+Skills that declare this agent in their frontmatter `agents:` field.
+
+| Skill | Description |
+|-------|-------------|
+| `adapter-github` | Optional GitHub MCP/CLI adapter guidance for repo, issue, and PR context |
+| `adapter-mcp` | Design optional Model Context Protocol adapters with default-deny tools, |
+| `adapter-openapi` | Use OpenAPI contracts and optional generated clients/servers while keeping |
+| `adapter-seniorswe-concise` | Optional Seniorswe-Concise hook and MCP adapter for YAGNI mode injection across |
+| `atlassian-docs` | Atlassian MCP integration for Jira, Confluence, and Bitbucket. Provides read and write |
+| `autoplan` | Runs the plan review pipeline before coding begins, then a post-implementation critic gate before surfacing results. |
+| `chrome-devtools` | Chrome DevTools MCP integration for browser automation, debugging, performance analysis, |
+| `codebase-engine` | Enterprise-safe AST knowledge graph for local codebases. Indexes source |
+| `commit` | Atomic commit discipline for any code change. Enforces Conventional Commits |
+| `guard` | Applies stricter local safety posture for risky tools and filesystem boundaries. |
+| `health` | Enterprise-safe code health dashboard. Detects and runs approved local quality checks |
+| `investigate` | Root-cause investigation workflow for bugs, failing tests, broken integrations, and unexpected behavior. |
+| `learnings` | Local project learning workflow. Captures reusable project conventions, pitfalls, decisions, |
+| `plan-eng-review` | Reviews plans for architecture, data flow, reliability, and testability. |
+| `plan-review` | Enterprise-safe plan review workflow. Reviews a proposed implementation plan for scope, |
+| `review` | Enterprise-safe code review workflow. Reviews diffs and code paths for correctness, |
+| `security-review` | Enterprise security and governance review for application code, data access, agent |
+| `seniorswe-concise` | Senior SWE concise mode: forces the laziest solution that actually works. |
+| `seniorswe-concise-audit` | Whole-repo audit for over-engineering. Like /seniorswe-concise-review but |
+| `seniorswe-concise-debt` | Harvest every `seniorswe-concise:` comment in the codebase into a debt ledger |
+| `seniorswe-concise-gain` | Show measured impact of concise/lazy-mode coding as a compact scoreboard: |
+| `seniorswe-concise-help` | Quick-reference card for Senior SWE Concise mode: all levels, skills, and |
+| `seniorswe-concise-review` | Code review focused exclusively on over-engineering. Finds what to delete: |
+| `ship` | Prepares a human-approved PR, merge, or release handoff. |
+| `stack-csharp` | C# and .NET modernization guidance for projects, packages, services, tests, |
+| `stack-legacy-frontend` | Modernize legacy frontend stacks such as Knockout, YUI, old jQuery widgets, |
+| `stack-postgres` | Postgres schema, query, migration, performance, and data-governance workflows |
+| `stack-python` | Python service, library, and data workflow modernization with minimal |
+| `stack-react-typescript` | React and TypeScript application modernization, including codemods, Redux |
+| `stack-spring-ai` | Spring-native AI application patterns using Spring AI and Spring AI examples |
+| `stack-spring-boot` | Spring Boot upgrade and API modernization using OpenRewrite recipes, |
+| `stack-sql-server` | SQL Server schema, T-SQL, stored procedure, job, and application data-access |
+| `test` | Designs and runs approved automated tests, including Playwright or Selenium when enabled by policy. |
+| `token-optimizer` | Token reduction for Python objects, API responses, logs, diffs, and code |
+<!-- agent-skills:end -->

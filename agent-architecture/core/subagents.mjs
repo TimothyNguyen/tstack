@@ -207,6 +207,50 @@ function writeSubagentResult(id, result, options = {}) {
   return writeJsonFile(file, redact(result));
 }
 
+function globToRegex(pattern) {
+  const normalized = pattern.replace(/\\/g, '/');
+  // Split on ** to handle it separately from single *
+  const parts = normalized.split('**');
+  const regexParts = parts.map((part) =>
+    part
+      .replace(/[.+^${}()|[\]\\]/g, '\\$&')
+      .replace(/\*/g, '[^/]*')
+      .replace(/\?/g, '[^/]')
+  );
+  return new RegExp(`^${regexParts.join('.*')}$`);
+}
+
+/**
+ * Pre-flight check: verify every file in changedFiles satisfies the manifest's
+ * allowedPaths / disallowedPaths before the coordinator applies a patch.
+ *
+ * Returns { ok: boolean, violations: Array<{ file, reason }> }.
+ * Does not throw — callers decide how to handle violations.
+ */
+function verifySubagentPaths(manifest, changedFiles) {
+  const normalized = validateSubagentManifest(manifest);
+  const violations = [];
+
+  for (const raw of changedFiles) {
+    const file = raw.replace(/\\/g, '/');
+
+    const disallowed = normalized.disallowedPaths.some((p) => globToRegex(p).test(file));
+    if (disallowed) {
+      violations.push({ file, reason: 'matches disallowedPaths' });
+      continue;
+    }
+
+    if (normalized.allowedPaths.length > 0) {
+      const allowed = normalized.allowedPaths.some((p) => globToRegex(p).test(file));
+      if (!allowed) {
+        violations.push({ file, reason: 'outside allowedPaths' });
+      }
+    }
+  }
+
+  return { ok: violations.length === 0, violations };
+}
+
 export {
   ROLE_DEFAULTS,
   validateSubagentManifest,
@@ -214,4 +258,6 @@ export {
   writeJsonFile,
   writeSubagentManifest,
   writeSubagentResult,
+  verifySubagentPaths,
+  globToRegex,
 };

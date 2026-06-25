@@ -54,3 +54,13 @@ and tech stack — no generic LeetCode disconnected from the team's work.
 - Read-only code inspection is allowed.
 - Shell write, git write, deployment, database read, ticket creation, and browser use require policy approval unless the active profile says otherwise.
 - Credential reads, cookie import, public tunnels, public telemetry, and public scraping are disabled by default.
+<!-- agent-skills:start -->
+## Declared Skills
+
+Skills that declare this agent in their frontmatter `agents:` field.
+
+| Skill | Description |
+|-------|-------------|
+| `atlassian-docs` | Atlassian MCP integration for Jira, Confluence, and Bitbucket. Provides read and write |
+| `codebase-engine` | Enterprise-safe AST knowledge graph for local codebases. Indexes source |
+<!-- agent-skills:end -->

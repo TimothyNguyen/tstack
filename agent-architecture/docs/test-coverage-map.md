@@ -28,7 +28,7 @@ support.
 | `audit-writer` | Audit events are local JSONL and redacted. | `tests/audit-writer.test.mjs` | Done |
 | `event-contract` | AG-UI-compatible event envelopes redact sensitive payload fields. | `tests/event-contract.test.mjs` | Done |
 | `host-config` | Hosts are declarative, validated, unique, and safe. | `tests/host-registry.test.mjs` | Done |
-| `template-context-parity`, `parity-suite` | Generated outputs are consistent across targets. | Host parity tests after Claude/Codex/Copilot/ADK generation exists. | Deferred |
+| `template-context-parity`, `parity-suite` | Generated outputs are consistent across targets. | `tests/host-parity.test.mjs` — codex and copilot artifacts, routing parity, safety defaults, forbidden strings, agent roster. | Done |
 
 ## Defer
 

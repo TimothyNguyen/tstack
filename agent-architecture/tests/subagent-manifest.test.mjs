@@ -7,6 +7,8 @@ import {
   createSubagentManifest,
   writeSubagentManifest,
   writeSubagentResult,
+  verifySubagentPaths,
+  globToRegex,
 } from '../core/subagents.mjs';
 
 test('subagent manifest normalizes a scoped implementer with no default egress', () => {
@@ -100,4 +102,107 @@ test('subagent artifacts stay under declared repo-local directory and redact res
   assert.equal(result.password, '[REDACTED]');
 
   fs.rmSync(baseDir, { recursive: true, force: true });
+});
+
+// ── verifySubagentPaths ──────────────────────────────────────────────────────
+
+test('globToRegex matches double-star patterns', () => {
+  const re = globToRegex('src/auth/**');
+  assert.ok(re.test('src/auth/routes.ts'));
+  assert.ok(re.test('src/auth/nested/deep/file.ts'));
+  assert.ok(!re.test('src/other/file.ts'));
+  assert.ok(!re.test('tests/auth/file.ts'));
+});
+
+test('globToRegex matches single-star patterns', () => {
+  const re = globToRegex('src/*/index.ts');
+  assert.ok(re.test('src/auth/index.ts'));
+  assert.ok(!re.test('src/auth/nested/index.ts'));
+  assert.ok(!re.test('tests/auth/index.ts'));
+});
+
+test('globToRegex handles exact file patterns', () => {
+  const re = globToRegex('.env');
+  assert.ok(re.test('.env'));
+  assert.ok(!re.test('src/.env'));
+  assert.ok(!re.test('.env.local'));
+});
+
+test('verifySubagentPaths passes when all files are in allowedPaths', () => {
+  const manifest = {
+    id: 'implementer-auth',
+    role: 'implementer',
+    task: 'Implement auth module',
+    allowedPaths: ['src/auth/**', 'tests/auth/**'],
+    tools: ['shellRead', 'shellWrite'],
+  };
+  const result = verifySubagentPaths(manifest, [
+    'src/auth/routes.ts',
+    'src/auth/middleware.ts',
+    'tests/auth/routes.test.ts',
+  ]);
+  assert.ok(result.ok);
+  assert.deepEqual(result.violations, []);
+});
+
+test('verifySubagentPaths reports files outside allowedPaths', () => {
+  const manifest = {
+    id: 'implementer-auth',
+    role: 'implementer',
+    task: 'Implement auth module',
+    allowedPaths: ['src/auth/**'],
+    tools: ['shellRead', 'shellWrite'],
+  };
+  const result = verifySubagentPaths(manifest, [
+    'src/auth/routes.ts',
+    'src/billing/invoice.ts',
+    'package.json',
+  ]);
+  assert.ok(!result.ok);
+  assert.equal(result.violations.length, 2);
+  assert.ok(result.violations.some((v) => v.file === 'src/billing/invoice.ts'));
+  assert.ok(result.violations.some((v) => v.file === 'package.json'));
+  assert.ok(result.violations.every((v) => v.reason === 'outside allowedPaths'));
+});
+
+test('verifySubagentPaths blocks files matching disallowedPaths', () => {
+  const manifest = {
+    id: 'implementer-full',
+    role: 'implementer',
+    task: 'Implement feature',
+    allowedPaths: ['src/**'],
+    disallowedPaths: ['.env', 'secrets/**'],
+    tools: ['shellRead', 'shellWrite'],
+  };
+  const result = verifySubagentPaths(manifest, [
+    'src/app.ts',
+    '.env',
+    'secrets/api-key.txt',
+  ]);
+  assert.ok(!result.ok);
+  assert.equal(result.violations.length, 2);
+  assert.ok(result.violations.every((v) => v.reason === 'matches disallowedPaths'));
+});
+
+test('verifySubagentPaths normalizes Windows-style backslash paths', () => {
+  const manifest = {
+    id: 'implementer-win',
+    role: 'implementer',
+    task: 'Windows path test',
+    allowedPaths: ['src/auth/**'],
+    tools: ['shellRead', 'shellWrite'],
+  };
+  const result = verifySubagentPaths(manifest, ['src\\auth\\routes.ts']);
+  assert.ok(result.ok, 'should accept backslash paths normalized to forward slash');
+});
+
+test('verifySubagentPaths allows everything when allowedPaths is empty (coordinator)', () => {
+  const manifest = {
+    id: 'coordinator-main',
+    role: 'coordinator',
+    task: 'Coordinate feature',
+    tools: ['shellRead'],
+  };
+  const result = verifySubagentPaths(manifest, ['src/any/file.ts', 'another/file.ts']);
+  assert.ok(result.ok, 'coordinator with no allowedPaths should not block any file');
 });

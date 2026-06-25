@@ -77,7 +77,6 @@
     "databricks": "optional",
     "subagents": "optional",
     "seniorswe-concise": "optional",
-    "codegraph": "optional",
     "aws": "optional",
     "postgres": "optional",
     "sqlServer": "optional",
