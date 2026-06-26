@@ -1,6 +1,6 @@
 ---
 name: autoplan
-version: 0.1.1
+version: 0.1.2
 description: |
   Runs the plan review pipeline before coding begins, then a post-implementation critic gate before surfacing results.
 allowed-tools:

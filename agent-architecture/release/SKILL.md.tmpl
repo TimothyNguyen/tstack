@@ -1,6 +1,6 @@
 ---
 name: release
-version: 0.1.0
+version: 0.1.1
 description: |
   Policy-gated release preparation workflow. Checks readiness, tests, docs, risk, and rollback
   before handoff to human-approved merge or deploy steps.

@@ -1,6 +1,6 @@
 ---
 name: health
-version: 0.1.0
+version: 0.1.1
 description: |
   Enterprise-safe code health dashboard. Detects and runs approved local quality checks
   such as type checks, lint, tests, dependency checks, dead-code checks, and shell lint.

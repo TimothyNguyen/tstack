@@ -1,6 +1,6 @@
 ---
 name: adapter-openapi
-version: 0.1.0
+version: 0.1.1
 description: |
   Use OpenAPI contracts and optional generated clients/servers while keeping
   generated code isolated and reviewed.

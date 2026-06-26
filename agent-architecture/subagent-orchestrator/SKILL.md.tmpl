@@ -1,6 +1,6 @@
 ---
 name: subagent-orchestrator
-version: 0.1.0
+version: 0.1.1
 description: |
   Plans and materializes local-only subagent manifests for scoped parallel work.
 allowed-tools:

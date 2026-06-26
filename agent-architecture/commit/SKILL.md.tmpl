@@ -1,6 +1,6 @@
 ---
 name: commit
-version: 0.1.0
+version: 0.1.1
 description: |
   Atomic commit discipline for any code change. Enforces Conventional Commits
   format, one-behavior-per-commit rule, and safe git operation sequences.

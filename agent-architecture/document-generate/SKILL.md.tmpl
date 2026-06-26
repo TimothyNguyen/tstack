@@ -1,6 +1,6 @@
 ---
 name: document-generate
-version: 0.1.0
+version: 0.1.1
 description: |
   Generates missing local project documentation from code-backed evidence.
 allowed-tools:

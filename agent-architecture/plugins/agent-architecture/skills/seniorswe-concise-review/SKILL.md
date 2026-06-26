@@ -1,6 +1,6 @@
 ---
 name: seniorswe-concise-review
-version: 0.1.0
+version: 0.1.1
 description: |
   Code review focused exclusively on over-engineering. Finds what to delete:
   reinvented standard library, unneeded dependencies, speculative abstractions,

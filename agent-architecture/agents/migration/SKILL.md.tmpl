@@ -1,6 +1,6 @@
 ---
 name: migration
-version: 0.1.0
+version: 0.1.1
 description: |
   Migration engineer agent. Handles .NET/SQL Server modernization, SQL-to-Postgres
   migrations, AWS DMS, and legacy frontend rewrites. Destructive-command guardrails

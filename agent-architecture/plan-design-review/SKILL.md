@@ -1,6 +1,6 @@
 ---
 name: plan-design-review
-version: 0.1.0
+version: 0.1.1
 description: |
   Reviews plans for user experience, UI quality, and product interaction risk.
 allowed-tools:

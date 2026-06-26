@@ -1,6 +1,6 @@
 ---
 name: domain-mlops-databricks
-version: 0.1.0
+version: 0.1.1
 description: |
   Databricks MLOps project structure, model lifecycle, CI/CD, monitoring, and
   governed production ML workflows.

@@ -1,6 +1,6 @@
 ---
 name: change-router
-version: 0.1.1
+version: 0.1.2
 description: |
   Routes changed files to the appropriate agent roles using agents/routing.json.
   Given a git diff, file list, or PR changeset, outputs a dispatch plan mapping

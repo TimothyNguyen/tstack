@@ -1,6 +1,6 @@
 ---
 name: guard
-version: 0.1.0
+version: 0.1.1
 description: |
   Applies stricter local safety posture for risky tools and filesystem boundaries.
 allowed-tools:

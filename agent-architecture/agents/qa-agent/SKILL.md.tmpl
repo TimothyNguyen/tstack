@@ -1,6 +1,6 @@
 ---
 name: qa-agent
-version: 0.1.0
+version: 0.1.1
 description: |
   QA engineer agent. Tests, validates, benchmarks, and monitors post-deploy.
   Invoke via /qa-agent, or when the user says "test this", "write tests",

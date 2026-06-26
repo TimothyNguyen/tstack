@@ -1,6 +1,6 @@
 ---
 name: swe
-version: 0.1.0
+version: 0.1.1
 description: |
   General software engineer agent. Handles implementation, debugging, code
   review, and ship. Auto-detects project tech stack and loads the right

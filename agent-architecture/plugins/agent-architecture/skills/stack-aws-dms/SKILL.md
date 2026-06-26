@@ -1,6 +1,6 @@
 ---
 name: stack-aws-dms
-version: 0.1.0
+version: 0.1.1
 description: |
   AWS DMS/SCT migration planning patterns for governed database migration
   experiments and cutovers.

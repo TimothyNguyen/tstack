@@ -1,6 +1,6 @@
 ---
 name: context-save
-version: 0.1.0
+version: 0.1.1
 description: |
   Captures local working context so a future agent session can resume safely.
 allowed-tools:

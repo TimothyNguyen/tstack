@@ -1,6 +1,6 @@
 ---
 name: stack-sqlserver-to-postgres
-version: 0.1.0
+version: 0.1.1
 description: |
   SQL Server to Postgres migration planning with T-SQL compatibility checks,
   pgloader experiments, and production cutover guardrails.

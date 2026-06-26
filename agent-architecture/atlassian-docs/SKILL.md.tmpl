@@ -1,6 +1,6 @@
 ---
 name: atlassian-docs
-version: 0.2.0
+version: 0.2.1
 description: |
   Atlassian MCP integration for Jira, Confluence, and Bitbucket. Provides read and write
   access to all three services through bundled FastMCP 3 servers. Use for product

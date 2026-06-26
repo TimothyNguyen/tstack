@@ -1,6 +1,6 @@
 ---
 name: plan-devex-review
-version: 0.1.0
+version: 0.1.1
 description: |
   Reviews plans for developer experience, APIs, onboarding, and operability.
 allowed-tools:

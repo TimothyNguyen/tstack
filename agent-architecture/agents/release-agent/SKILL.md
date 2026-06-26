@@ -1,6 +1,6 @@
 ---
 name: release-agent
-version: 0.1.0
+version: 0.1.1
 description: |
   Release engineer agent. Handles release preparation, release notes, retros,
   post-deploy monitoring, and rollback. Careful guardrails always active.

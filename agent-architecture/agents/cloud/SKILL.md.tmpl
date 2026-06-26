@@ -1,6 +1,6 @@
 ---
 name: cloud
-version: 0.1.0
+version: 0.1.1
 description: |
   Cloud and DevOps engineer agent. Handles AWS infrastructure, DMS migrations,
   post-deploy monitoring, release readiness. Destructive-command guardrails always active.

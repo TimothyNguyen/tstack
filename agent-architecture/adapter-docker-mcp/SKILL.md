@@ -1,6 +1,6 @@
 ---
 name: adapter-docker-mcp
-version: 0.1.0
+version: 0.1.1
 description: |
   Docker MCP Registry and Toolkit adapter. Wires 300+ pre-built containerized
   MCP servers (GitHub, Postgres, Playwright, Slack, Stripe, Docker ops, etc.)

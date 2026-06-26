@@ -1,6 +1,6 @@
 ---
 name: stack-databricks
-version: 0.1.0
+version: 0.1.1
 description: |
   Databricks engineering workflows for Asset Bundles, jobs, notebooks, SDK
   usage, and governed data access.

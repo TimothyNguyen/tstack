@@ -1,6 +1,6 @@
 ---
 name: pm
-version: 0.1.0
+version: 0.1.1
 description: |
   Product manager agent. Handles strategy, prioritization, PRDs, retrospectives,
   and release communication. Pulls existing docs as context.

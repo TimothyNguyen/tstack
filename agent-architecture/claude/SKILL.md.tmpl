@@ -1,6 +1,6 @@
 ---
 name: claude
-version: 0.1.0
+version: 0.1.1
 description: |
   Claude Code host adapter. Covers enterprise-safe tool use, knowledge graph
   queries via CodeGraph MCP, and cross-agent review when profile-approved.

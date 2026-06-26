@@ -1,6 +1,6 @@
 ---
 name: design-review
-version: 0.1.0
+version: 0.1.1
 description: |
   Reviews product UI and interaction quality for practical design issues.
 allowed-tools:

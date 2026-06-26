@@ -1,6 +1,6 @@
 ---
 name: stack-postgres
-version: 0.1.0
+version: 0.1.1
 description: |
   Postgres schema, query, migration, performance, and data-governance workflows
   with explicit read/write approvals and privacy-safe summaries.

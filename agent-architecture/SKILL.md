@@ -1,10 +1,11 @@
 ---
 name: agent-architecture
-version: 0.1.0
+version: 0.1.1
 description: |
   Enterprise-safe software engineering skill pack. Routes work to scoped skills for
   spec writing, code review, QA, security review, documentation, learnings, and release
   workflows. Designed for local project installs and no default public egress.
+agents: [_infrastructure]
 allowed-tools:
   - Read
   - Grep
@@ -29,6 +30,7 @@ workflows.
 
 ## Routing
 
+- Skill discovery and invocation: `using-agent-skills` injected at session start (via session-start hook) to teach how to find and use skills
 - New requirement, design, or issue: invoke `spec`.
 - Fully reviewed plan pipeline: invoke `autoplan`.
 - Split a task into scoped local subagents: invoke `subagent-orchestrator`.
@@ -40,6 +42,11 @@ workflows.
 - design plan review: invoke `plan-design-review`.
 - developer-experience plan review: invoke `plan-devex-review`.
 - Debug a bug, failure, or unexpected behavior: invoke `investigate`.
+- Exhaustive root-cause investigation for complex bugs stuck after multiple fix attempts: invoke `systematic-debugging`.
+- Design-space exploration, requirements refinement, or ideation before implementation: invoke `brainstorming`.
+- Handle code review feedback with technical rigor, evaluate external suggestions: invoke `receiving-code-review`.
+- Ship-readiness verification before committing or creating PRs: invoke `verification-before-completion`.
+- Create new skills, edit existing skills, or verify skills before deployment: invoke `writing-skills`.
 - Code or PR review: invoke `review`.
 - Cross-model/code-agent second opinion: invoke `codex`, `claude`, or `copilot` only when the host profile enables it.
 - Manual or automated test planning: invoke `qa`.

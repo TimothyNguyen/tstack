@@ -1,6 +1,6 @@
 ---
 name: seniorswe-concise-gain
-version: 0.1.0
+version: 0.1.1
 description: |
   Show measured impact of concise/lazy-mode coding as a compact scoreboard:
   less code, less cost, more speed, from benchmark medians. One-shot display,

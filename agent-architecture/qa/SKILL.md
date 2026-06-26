@@ -1,6 +1,6 @@
 ---
 name: qa
-version: 0.1.0
+version: 0.1.1
 description: |
   Enterprise-safe QA workflow. Plans and verifies user-facing or service behavior using
   local tests and approved tools. Browser automation is optional and disabled by default.

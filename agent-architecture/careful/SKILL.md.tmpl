@@ -1,6 +1,6 @@
 ---
 name: careful
-version: 0.1.0
+version: 0.1.1
 description: |
   Destructive command guardrails. Warns before rm -rf, DROP TABLE, force-push,
   git reset --hard, kubectl delete, and similar operations. Use when touching

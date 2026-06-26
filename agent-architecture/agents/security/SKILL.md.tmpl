@@ -1,6 +1,6 @@
 ---
 name: security
-version: 0.1.0
+version: 0.1.1
 description: |
   Security engineer agent. Handles security reviews, threat modeling, access
   control audits, and policy enforcement. Guard and careful always active.

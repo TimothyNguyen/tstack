@@ -1,6 +1,6 @@
 ---
 name: spec-agent
-version: 0.1.0
+version: 0.1.1
 description: |
   Spec writer and planner agent. Converts vague intent into precise, reviewable
   specs. Pulls existing docs before writing. Multi-angle review built in.

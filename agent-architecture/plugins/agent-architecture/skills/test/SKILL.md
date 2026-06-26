@@ -1,6 +1,6 @@
 ---
 name: test
-version: 0.1.0
+version: 0.1.1
 description: |
   Designs and runs approved automated tests, including Playwright or Selenium when enabled by policy.
 allowed-tools:

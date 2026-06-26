@@ -1,6 +1,6 @@
 ---
 name: design-html
-version: 0.1.0
+version: 0.1.1
 description: |
   Turns approved UI design direction into implementation-ready HTML guidance.
 allowed-tools:
