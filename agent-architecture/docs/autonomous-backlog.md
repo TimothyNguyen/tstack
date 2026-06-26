@@ -28,7 +28,7 @@ This backlog tracks privacy-first follow-up work for `agent-architecture`.
 |---|---|---|
 | Host config objects for Claude/Codex/Copilot/ADK/Strands/AgentCore | Makes adapter install surfaces concrete. | Add `tests/host-config.test.mjs` for uniqueness, paths, disabled defaults. |
 | Host parity generator | Needed before generated host outputs can be compared. | Add generator output tests for every host registry entry. |
-| Day-to-day install loop | Needed before this can replace gstack for daily use. | Implement installer and verify `install -> doctor -> spec -> review -> test -> ship`. |
+| Day-to-day install loop | Needed before this can replace agent-architecture for daily use. | Implement installer and verify `install -> doctor -> spec -> review -> test -> ship`. |
 | Subagent conflict-resolution UX | Needed after import/reject mechanics. | Add conflict fixture tests and coordinator-readable remediation output. |
 
 ## Deferred Until Runtime Exists

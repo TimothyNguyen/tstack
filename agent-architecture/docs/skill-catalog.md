@@ -1,6 +1,6 @@
 # Skill Catalog
 
-This catalog tracks the reusable gstack-style skills carried into
+This catalog tracks the reusable agent-architecture-style skills carried into
 `agent-architecture/`.
 
 Each skill is a top-level folder with:
@@ -98,7 +98,7 @@ project profile needs them:
 | `adapter-langgraph` | Optional LangGraph orchestration boundary guidance. | `adapter-langgraph/SKILL.md.tmpl` |
 | `adapter-databricks` | Optional Databricks SDK connector boundary guidance. | `adapter-databricks/SKILL.md.tmpl` |
 | `adapter-seniorswe-concise` | Optional Seniorswe-Concise hook and MCP runtime integration. | `adapter-seniorswe-concise/SKILL.md.tmpl` |
-| `reference-gstack-patterns` | Mine gstack role/workflow patterns without unsafe carry-over. | `reference-gstack-patterns/SKILL.md.tmpl` |
+| `reference-gstack-patterns` | Mine agent-architecture role/workflow patterns without unsafe carry-over. | `reference-gstack-patterns/SKILL.md.tmpl` |
 | `stack-aws` | AWS application modernization with least-privilege local validation. | `stack-aws/SKILL.md.tmpl` |
 | `stack-python` | Python service, library, and data workflow modernization. | `stack-python/SKILL.md.tmpl` |
 | `stack-csharp` | C#/.NET projects, services, tests, and framework modernization. Bundles vendored `dotnet/skills` plugins under `stack-csharp/dotnet-skills/plugins/` for ASP.NET Core, Blazor, EF Core, MSBuild, NuGet, MAUI, test, AI, diagnostics, upgrades, templates. | `stack-csharp/SKILL.md.tmpl` |

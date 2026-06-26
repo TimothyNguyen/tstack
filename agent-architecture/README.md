@@ -2,7 +2,7 @@
 
 Reusable enterprise agent architecture for software engineering workflows.
 
-This package is separate from `gstack/`. The upstream gstack checkout is source
+This package is separate from `agent-architecture/`. The upstream agent-architecture checkout is source
 material only. Anything carried forward must be copied, adapted, and reviewed
 inside this package.
 
@@ -12,7 +12,7 @@ This directory is a reusable skill pack for software-engineering agents. It is
 intended to be installed into other repositories as a local architecture-agent
 toolkit.
 
-It follows gstack's useful shape:
+It follows agent-architecture's useful shape:
 
 - Top-level folder per skill.
 - `SKILL.md.tmpl` as source.
@@ -20,7 +20,7 @@ It follows gstack's useful shape:
 - optional `sections/*.md.tmpl` and generated `sections/*.md`.
 - local generator and tests.
 
-It intentionally does not carry over gstack's public telemetry, public update
+It intentionally does not carry over agent-architecture's public telemetry, public update
 checks, ngrok/public tunnels, cookie import, mobile/iOS flows, or public web
 scraping.
 
@@ -140,7 +140,7 @@ different project can enable a different set without forking core.
 
 ## Skill Directory Shape
 
-Skills follow the gstack-style source layout:
+Skills follow the agent-architecture-style source layout:
 
 ```text
 review/
@@ -180,7 +180,7 @@ docs/install-spec.md
 
 ## Carry-Over Rules
 
-Carry over from `gstack/` only when the behavior is useful after enterprise
+Carry over from `agent-architecture/` only when the behavior is useful after enterprise
 hardening:
 
 - Keep: host adapter pattern, skill directory pattern, skill generation concepts,

@@ -70,7 +70,7 @@ Before committing:
 
 - The diff is inside `agent-architecture/` unless the task explicitly says
   otherwise.
-- The commit does not modify upstream `gstack/`.
+- The commit does not modify upstream `agent-architecture/`.
 - The commit has one behavior surface.
 - The commit message names that behavior surface.
 - New privileged behavior has a policy or audit requirement.
@@ -96,7 +96,7 @@ Prefer direct messages:
 ```text
 core: add host config schema
 policies: add default no-egress policy
-docs: inventory gstack migration decisions
+docs: inventory agent-architecture migration decisions
 ```
 
 Avoid vague messages:

@@ -27,7 +27,7 @@ const FORBIDDEN = [
   { pattern: /ngrok\b/i, label: 'public tunnel (ngrok)' },
   { pattern: /supabase\.co\b/i, label: 'public telemetry sink (supabase.co)' },
   { pattern: /\btelemetry\.send\b/i, label: 'telemetry call' },
-  { pattern: /gstack-update-check\b/i, label: 'public update check' },
+  { pattern: /agent-architecture-update-check\b/i, label: 'public update check' },
   { pattern: /cookieImport\b/i, label: 'cookie import' },
   { pattern: /\bpair-agent\b.*ngrok/i, label: 'public tunnel (pair-agent + ngrok)' },
   { pattern: /https?:\/\/api\.supabase\./i, label: 'Supabase API endpoint' },

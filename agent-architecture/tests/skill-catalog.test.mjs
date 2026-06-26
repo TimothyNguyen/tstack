@@ -75,11 +75,11 @@ test('every top-level skill folder is cataloged and routed', () => {
   }
 });
 
-test('catalog excludes gstack-only or disallowed defaults', () => {
+test('catalog excludes agent-architecture-only or disallowed defaults', () => {
   const catalog = read('docs/skill-catalog.md');
 
   assert.doesNotMatch(catalog, /plan-ceo-review/);
-  assert.doesNotMatch(catalog, /gstack-upgrade/);
+  assert.doesNotMatch(catalog, /agent-architecture-upgrade/);
   assert.doesNotMatch(catalog, /ios-/i);
   assert.doesNotMatch(catalog, /hackernews|scrape/i);
 });

@@ -118,8 +118,8 @@ node scripts/install.mjs --private --target ./.agent --hosts claude,codex,copilo
 
 | Removed | Reason |
 |---|---|
-| `gstack-update-check` | phones home to check for updates |
-| `gstack-analytics` | telemetry |
+| `agent-architecture-update-check` | phones home to check for updates |
+| `agent-architecture-analytics` | telemetry |
 | gbrain sync | cloud memory |
 | cavemem MCP | third-party memory storage |
 | `CLAUDE_CODE_DISABLE_AUTO_MEMORY=1` | prevent ambient cloud sync |
@@ -127,7 +127,7 @@ node scripts/install.mjs --private --target ./.agent --hosts claude,codex,copilo
 ### What stays
 
 - All skill SKILL.md files (local instructions only)
-- Local JSONL decision store (`~/.gstack/projects/<slug>/decisions.jsonl`)
+- Local JSONL decision store (`~/.agent-architecture/projects/<slug>/decisions.jsonl`)
 - Explicitly configured MCP servers (from `.agent-config.json`)
 - LLM API calls (Anthropic/Bedrock via provided key)
 
@@ -414,7 +414,7 @@ Claude Code / Codex / Copilot CLI
   ↓ loads skills from .agent/skills/
   ↓ LLM call → Anthropic API / AWS Bedrock (dev's key)
   ↓ MCP call → splunk / confluence / db (dev's creds in .env.agent)
-  ↓ writes memory → ~/.gstack/projects/<slug>/decisions.jsonl (local only)
+  ↓ writes memory → ~/.agent-architecture/projects/<slug>/decisions.jsonl (local only)
   ↓ NO telemetry, NO cloud sync, NO update checks
 ```
 
@@ -424,7 +424,7 @@ Claude Code / Codex / Copilot CLI
 
 | Question | Decision |
 |---|---|
-| gstack vs agent-architecture ownership | agent-architecture owns agents + install; gstack is reference only |
+| agent-architecture vs agent-architecture ownership | agent-architecture owns agents + install; agent-architecture is reference only |
 | Stack variants vs auto-detection | Auto-detect via `/stack` meta-loader; no per-stack agent variants |
 | New skill routing | `agents:` frontmatter field; orphan check in `npm test`; `/skillify` writes it automatically |
 | Install UX | `npx agent-architecture install` — auto-detects repo, hosts, config; one command |

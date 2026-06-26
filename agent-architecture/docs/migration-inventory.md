@@ -1,9 +1,9 @@
 # Migration Inventory
 
-This inventory decides what to carry over from `gstack/` into
+This inventory decides what to carry over from `agent-architecture/` into
 `agent-architecture/`.
 
-`gstack/` remains upstream source material. Nothing is consumed in place by the
+`agent-architecture/` remains upstream source material. Nothing is consumed in place by the
 new package. Every carried item must be copied or reimplemented behind the
 enterprise package boundary.
 
@@ -12,7 +12,7 @@ enterprise package boundary.
 | Source area | Decision | Rationale | Target |
 |---|---|---|---|
 | `hosts/*.ts` | Keep pattern, reimplement | Declarative host configs are the cleanest portability boundary. | `hosts/` |
-| `scripts/host-config.ts` | Keep concept, simplify | Strong typed schema, validation, and uniqueness checks are reusable. Strip gstack-specific fields. | `core/host-config` |
+| `scripts/host-config.ts` | Keep concept, simplify | Strong typed schema, validation, and uniqueness checks are reusable. Strip agent-architecture-specific fields. | `core/host-config` |
 | `scripts/gen-skill-docs.ts` | Change heavily | Template generation is useful, but upstream resolver/preamble behavior includes update checks, telemetry, and Claude-specific assumptions. | `core/skill-compiler` |
 | Skill directory convention | Keep | Top-level directory-per-skill with `SKILL.md.tmpl` source and generated `SKILL.md` is reviewable, versionable, and easy to install locally. | `<skill>/` |
 | Generated host variants | Keep pattern | Claude, Codex, Copilot, Strands, AgentCore, and future hosts should receive generated artifacts from one source. | `hosts/`, `core/skill-compiler` |
@@ -32,7 +32,7 @@ enterprise package boundary.
 | iOS/mobile QA | Drop | User explicitly excluded mobile workflows. | none |
 | Telemetry/Supabase | Drop | Public telemetry is incompatible with default enterprise posture. Internal telemetry can be designed later. | none |
 | Public update checks | Drop | Default install must not call GitHub or upstream update endpoints. Use manual or internal mirror later. | none |
-| `gstack-upgrade` | Drop | Upgrade flow depends on upstream repo/network assumptions. | none |
+| `agent-architecture-upgrade` | Drop | Upgrade flow depends on upstream repo/network assumptions. | none |
 | `setup` installer | Change heavily | Install flow is useful but must be local, reversible, no global mutation by default, offline/mirror-friendly. | `core/install` |
 | Browser prompt-injection defenses | Keep lessons, not code initially | Content boundaries, canaries, and classifiers are relevant, but model/runtime dependencies need separate review. | `docs/security-posture.md`, later optional adapter |
 | `model-overlays/` | Drop initially | Model-specific style overlays are not core architecture. Add later only if host compatibility requires it. | none |

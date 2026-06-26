@@ -11,7 +11,7 @@ services is either monitored or blocked. A skill pack that phones home on first 
 creates a trust problem: security teams cannot audit it, firewall rules may silently
 break it, and legal teams cannot sign off on it.
 
-Prior art (upstream gstack) included public Supabase telemetry, GitHub update checks,
+Prior art (upstream agent-architecture) included public Supabase telemetry, GitHub update checks,
 and ngrok tunnel support. These are incompatible with enterprise deployment.
 
 ## Decision

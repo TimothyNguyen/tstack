@@ -37,7 +37,7 @@ adapters only when a declarative rewrite is insufficient.
 
 ## Skill Modules
 
-Generic skills follow the gstack layout and live as top-level directories. Each
+Generic skills follow the agent-architecture layout and live as top-level directories. Each
 skill or agent workflow owns a directory with a required `SKILL.md.tmpl` source
 and generated `SKILL.md` output:
 
@@ -58,7 +58,7 @@ Optional supporting files live beside that entrypoint:
 <skill-name>/sections/*.md
 ```
 
-This preserves the gstack ergonomics while keeping the new package generic.
+This preserves the agent-architecture ergonomics while keeping the new package generic.
 
 - `spec`
 - `autoplan`

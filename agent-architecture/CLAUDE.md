@@ -18,10 +18,9 @@ codebase-engine extract .
 
 ## What This Is
 
-This directory is a reusable architecture-agent skill pack. It borrows the
-gstack skill structure but is not gstack.
-
-Use `../gstack/` only as reference material. Do not modify it.
+This directory is a reusable enterprise-safe agent skill pack for Claude Code,
+Codex, and Copilot CLI. It provides 102 skills organized by role-based agents
+with no default public egress.
 
 ## Role-Based Agents
 

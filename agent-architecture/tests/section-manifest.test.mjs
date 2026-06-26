@@ -1,5 +1,5 @@
 /**
- * Section manifest contract tests (ported from gstack section-manifest-consistency).
+ * Section manifest contract tests (ported from agent-architecture section-manifest-consistency).
  *
  * Guards:
  * - PASSIVE contract: no applies_when / required_for predicates in sections

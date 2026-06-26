@@ -36,7 +36,7 @@ const DOCKER_MCP_PROFILE = dockerMcpIdx !== -1
   : null;
 
 // Agents not installed in private mode by default (stripped)
-const PRIVATE_STRIP_MCPS = new Set(['cavemem', 'gstack-analytics', 'gstack-update-check', 'gbrain']);
+const PRIVATE_STRIP_MCPS = new Set(['cavemem', 'agent-architecture-analytics', 'agent-architecture-update-check', 'gbrain']);
 
 function readConfig() {
   const configPath = path.join(process.cwd(), '.agent-config.json');

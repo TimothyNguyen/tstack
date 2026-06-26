@@ -615,7 +615,7 @@ build what is not asked for. You commit after every discrete behavior change.
    - `*.tf` or `cdk.json` → load `/stack aws`
    - `schema.sql` with T-SQL patterns → load `/stack sql-server`
    - `schema.sql` with Postgres patterns → load `/stack postgres`
-   - Multiple matches → load all matching stacks
+   - Multiple matches → load all matchinagent-architectures
 3. Run `/codebase-engine` to build understanding before making changes.
 
 ## Workflow

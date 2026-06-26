@@ -1,7 +1,7 @@
 # SPEC
 
 ## G
-G1: Build a reusable enterprise-safe software-engineer agent architecture, separate from upstream `gstack/`, that can be installed locally per project, extended through generic skill directories, and adapted to Claude, Codex, Copilot, Strands/AgentCore, Google ADK, AG-UI, and future hosts.
+G1: Build a reusable enterprise-safe software-engineer agent architecture, separate from upstream `agent-architecture/`, that can be installed locally per project, extended through generic skill directories, and adapted to Claude, Codex, Copilot, Strands/AgentCore, Google ADK, AG-UI, and future hosts.
 
 ## C
 C1: Each commit changes one behavior surface only.
@@ -9,11 +9,11 @@ C2: Default install must work locally inside a work environment without global c
 C3: Default runtime must not call GitHub, Supabase, ngrok, or third-party telemetry/update endpoints.
 C4: Credential, cookie, browser-session, tunnel, deploy, git-write, and shell-write capabilities must be disabled or approval-gated by policy.
 C5: Architecture must keep future extension points for codebase understanding, browser automation, documentation, QA, security review, and release workflows.
-C6: Existing upstream gstack code should be mined for patterns, not adopted wholesale where it conflicts with enterprise policy.
+C6: Existing upstream agent-architecture code should be mined for patterns, not adopted wholesale where it conflicts with enterprise policy.
 C7: Security posture must be auditable and honest: no promise of "no security issues"; promise least privilege, no intentional default egress, policy gates, and logs.
 C8: Target app stack includes AWS, Spring Boot, Databricks, Python, React, C#, Postgres, SQL Server, and likely Strands/AgentCore.
 C9: Future UI/agent integration should remain AG-UI compatible.
-C10: Migration must explicitly exclude mobile/iOS workflows, public internet scraping, consumer browser automation, generic growth-hacking flows, and unrelated gstack personal-productivity features.
+C10: Migration must explicitly exclude mobile/iOS workflows, public internet scraping, consumer browser automation, generic growth-hacking flows, and unrelated agent-architecture personal-productivity features.
 C11: Skill directories must be easy to add, version, review, and install locally for company teams.
 C12: Core folders must be project-agnostic. Project-specific stacks, domains, tools, and policies live in profiles or optional skill packs.
 
@@ -25,7 +25,7 @@ I4: Policy file: local enterprise config for tool allowlists, egress controls, a
 I5: Local installer: repo-local or approved-user-dir install path, offline/mirror-friendly.
 I6: Audit log: local-only structured record of privileged actions and policy decisions.
 I7: Optional tool runtimes: browser daemon, codebase understanding index, test runner, docs generator.
-I8: Migration source: `gstack/` repo contents, especially `hosts/`, `scripts/gen-skill-docs.ts`, `scripts/host-config.ts`, skill directories, and browser docs.
+I8: Migration source: `agent-architecture/` repo contents, especially `hosts/`, `scripts/gen-skill-docs.ts`, `scripts/host-config.ts`, skill directories, and browser docs.
 I9: Business app domains: causal inference, experiment design, uplift modeling, campaign planning, measurement, data quality, governance, and model interpretation.
 I10: Enterprise app stack surfaces: AWS services, Spring Boot APIs, Databricks jobs/notebooks, Python services, React UI, C# services, Postgres, SQL Server.
 I11: Agent framework surfaces: Strands, AgentCore, Google ADK, AG-UI, MCP/tool adapters, skill directories, and host-specific agent prompts.
@@ -54,7 +54,7 @@ V15: Domain skills are first-class. Causal inference, experiment design, uplift 
 V16: Stack skills are first-class. AWS, Spring Boot, Databricks, Python, React, C#, Postgres, and SQL Server workflows get targeted skill directories or modules.
 V17: AG-UI compatibility is preserved. Agent outputs and future UI action events should be structured enough to map into AG-UI concepts without rewriting skills.
 V18: Strands, AgentCore, and Google ADK are integration targets, not hard dependencies in the core. The core skill system must run without them and adapt to them through host/tool adapters.
-V19: No mobile carry-over. iOS QA, device tunnels, Swift templates, mobile debug bridge, and mobile-specific gstack skills are excluded.
+V19: No mobile carry-over. iOS QA, device tunnels, Swift templates, mobile debug bridge, and mobile-specific agent-architecture skills are excluded.
 V20: No public scraping carry-over. Internet scraping/browser harvesting skills are excluded unless later replaced by approved internal data-source connectors.
 V21: Data access is governed. Skills that touch Postgres, SQL Server, Databricks, or campaign data must require policy-defined read/write permissions and audit trails.
 V22: Domain correctness requires review lanes. Causal claims, experiment validity, uplift interpretation, and campaign recommendations require statistics/measurement review checks.
@@ -63,7 +63,7 @@ V24: Stack support is modular. AWS, Spring Boot, Databricks, Python, React, C#, 
 
 ## T
 id|status|task|cites
-T1|x|Inventory gstack carry-over candidates: host configs, generator, skill templates, docs, browser daemon, telemetry, update, pair-agent, cookie import|V1,V4,V14,I8
+T1|x|Inventory agent-architecture carry-over candidates: host configs, generator, skill templates, docs, browser daemon, telemetry, update, pair-agent, cookie import|V1,V4,V14,I8
 T2|x|Create enterprise module map: core, optional-browser, optional-codebase-understanding, optional-release, disabled-public-egress|V1,V6,V11,I7
 T3|x|Define commit discipline doc with examples of allowed and disallowed commit scopes|V2
 T4|x|Extract host config model into enterprise core and add Claude, Codex, Copilot starter configs|V4,I2
@@ -78,7 +78,7 @@ T12|.|Keep browser daemon as optional module with local-only binding, scoped tok
 T13|x|Add codebase-understanding extension spec for CodeGraph or internal indexer integration|V11,I7
 T14|.|Add audit log writer and event taxonomy for privileged action requests and decisions|V12,I6
 T15|x|Generate enterprise skills for Claude, Codex, and Copilot and verify no upstream path, telemetry, update, or tunnel references leak into generated output|V1,V4,V7,V8,V9,V13
-T16|x|Write migration guide from upstream gstack to enterprise architecture, including keep/change/drop table|V14,I8
+T16|x|Write migration guide from upstream agent-architecture to enterprise architecture, including keep/change/drop table|V14,I8
 T17|x|Add security review checklist for new skills and optional modules|V1,V5,V12
 T18|x|Add tests for no-egress defaults, install path containment, host generation, disabled modules, and policy gates|V1,V3,V4,V5,V7,V8,V9,V10
 T19|x|Define keep/change/drop inventory specific to the target app: keep host configs and skill compiler; change review/QA/docs/security skills; drop mobile, scraping, public tunnels, telemetry, cookie import|V14,V19,V20,I8,I12
@@ -89,7 +89,7 @@ T23|x|Define AG-UI-compatible output/event contract for skill results, approval 
 T24|x|Add local skill directory layout for company teams, including versioning, ownership, review, and install rules|C11,V4,I1,I5
 T25|.|Add data-permission policy gates for Databricks, Postgres, SQL Server, campaign datasets, and model outputs|V21,I10
 T26|.|Add measurement-review checklist for causal inference, experiment validity, uplift modeling leakage, treatment/control balance, and campaign recommendation risk|V22,I9
-T27|x|Create top-level `agent-architecture/` package boundary and keep all migrated architecture files outside `gstack/`|C12,I13,I14,V23,V24
+T27|x|Create top-level `agent-architecture/` package boundary and keep all migrated architecture files outside `agent-architecture/`|C12,I13,I14,V23,V24
 T28|x|Port graphify core as enterprise-safe `codebase-engine` Python package: stub egress modules, remove always_on/, complete brand rename across 35 source + 98 test files|V25,V26,C3
 T29|x|Add `codebase-engine/SKILL.md.tmpl` agent skill co-located with Python package; register in catalog and root router|V11,C5
 T30|x|Complete brand rename in 104 skill reference markdown files (13 host dirs × 8 topics)|V25

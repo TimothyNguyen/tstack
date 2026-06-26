@@ -1,17 +1,17 @@
 # Day-To-Day Improvement Plan
 
 This plan tracks what must improve before `agent-architecture/` can replace
-upstream `garrytan/gstack` for daily development.
+upstream `garrytan/agent-architecture` for daily development.
 
 ## Current Assessment
 
-`agent-architecture/` is stronger than upstream gstack for enterprise-safe
+`agent-architecture/` is stronger than upstream agent-architecture for enterprise-safe
 defaults, policy boundaries, local auditability, and optional stack/domain
-packs. It is not yet as useful for daily development because gstack already has
+packs. It is not yet as useful for daily development because agent-architecture already has
 a complete operational loop: install, skill routing, browser QA, review, ship,
 upgrade, memory, and real-world command ergonomics.
 
-Use upstream gstack today when speed and complete workflows matter. Use
+Use upstream agent-architecture today when speed and complete workflows matter. Use
 `agent-architecture/` when privacy, no-default-egress, policy gates, and
 company-safe install boundaries matter more.
 
@@ -22,7 +22,7 @@ company-safe install boundaries matter more.
 | Safety posture | Default policy denies public egress, telemetry, public tunnels, cookie import, credential reads, and browser writes. |
 | Skill coverage | Core workflows exist for spec, planning, review, QA, tests, security, docs, release, retros, codebase understanding, and stack/domain packs. |
 | Test coverage | Local suite passed `258/258` tests and covers skill generation, policy, adapter registry, audit redaction, profiles, MCP manifests, and codebase-engine contracts. |
-| Enterprise fit | Migration inventory explicitly keeps useful gstack patterns while dropping public telemetry, update checks, ngrok, cookie import, public scraping, and iOS/mobile workflows. |
+| Enterprise fit | Migration inventory explicitly keeps useful agent-architecture patterns while dropping public telemetry, update checks, ngrok, cookie import, public scraping, and iOS/mobile workflows. |
 | Extensibility | Host registry, adapter registry, profiles, policies, and skill templates provide clean extension boundaries. |
 
 ## What Is Bad
@@ -30,8 +30,8 @@ company-safe install boundaries matter more.
 | Area | Gap |
 |---|---|
 | Installer | `docs/install-spec.md` still defines a dry-run contract; no write-capable repo-local installer is implemented. |
-| Daily command loop | No concise "think -> plan -> build -> review -> test -> ship" user path equivalent to gstack's sprint flow. |
-| Browser QA | Browser automation is disabled/deferred. No local replacement for gstack `/browse`, `/qa`, screenshots, console/network checks, or handoff. |
+| Daily command loop | No concise "think -> plan -> build -> review -> test -> ship" user path equivalent to agent-architecture's sprint flow. |
+| Browser QA | Browser automation is disabled/deferred. No local replacement for agent-architecture `/browse`, `/qa`, screenshots, console/network checks, or handoff. |
 | Operational runtime | Skills are mostly instructions and templates, not an integrated runtime with install, invoke, verify, and release behavior. |
 | Surface area | Many optional packs exist before the default core experience is tight. This makes first-use harder. |
 | Repository noise | Generated outputs and vendored reference packs increase repo size and can distract from core package work. |
@@ -103,7 +103,7 @@ Acceptance criteria:
 
 ### P1: Add Optional Local Browser QA
 
-Rebuild only the safe subset of gstack browser value:
+Rebuild only the safe subset of agent-architecture browser value:
 
 - Local Chromium/Playwright control.
 - Screenshots.
@@ -164,4 +164,4 @@ spec -> plan-review -> build -> review -> test -> qa -> ship
 ```
 
 The loop must work locally, preserve no-default-egress, and produce auditable
-artifacts without requiring upstream gstack.
+artifacts without requiring upstream agent-architecture.

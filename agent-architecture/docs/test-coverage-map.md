@@ -1,16 +1,16 @@
 # Test Coverage Map
 
-This map translates useful `gstack/test` coverage patterns into
+This map translates useful `agent-architecture/test` coverage patterns into
 `agent-architecture/` tests.
 
-The goal is not to copy every gstack test. The goal is to carry over the test
-classes that protect this package's behavior: gstack-style skill templates,
+The goal is not to copy every agent-architecture test. The goal is to carry over the test
+classes that protect this package's behavior: agent-architecture-style skill templates,
 safe defaults, installability in other repos, host portability, and automation
 support.
 
 ## Coverage Status
 
-| gstack test family | What it protects | Architecture-agent equivalent | Status |
+| agent-architecture test family | What it protects | Architecture-agent equivalent | Status |
 |---|---|---|---|
 | `gen-skill-docs*` | Generated skills are fresh, placeholders resolve, templates produce outputs. | `tests/skill-generation.test.mjs` | Done |
 | `discover-section-templates`, `section-manifest-consistency` | Carved sections are discoverable, PASSIVE contract, orphan detection, id uniqueness. | `tests/section-manifest.test.mjs` | Done |
@@ -32,7 +32,7 @@ support.
 
 ## Defer
 
-| gstack test family | Reason to defer |
+| agent-architecture test family | Reason to defer |
 |---|---|
 | `skill-e2e-*` | Requires agent harness and model calls; add after host adapters exist. |
 | `llm-judge*`, `redact-semantic-pass.eval` | Paid/model-dependent; not part of local default. |

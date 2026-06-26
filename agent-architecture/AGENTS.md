@@ -7,7 +7,7 @@ Instructions for AI coding agents working in `agent-architecture/`.
 `agent-architecture/` is a reusable, enterprise-safe skill pack for software
 engineering agents.
 
-`../gstack/` is reference material only. Do not edit it when working on this
+`../agent-architecture/` is reference material only. Do not edit it when working on this
 package.
 
 ## Commit Discipline
@@ -28,7 +28,7 @@ Use the commit skill to stage and commit only the authentication fix.
 
 ## Architecture Pattern
 
-Follow the gstack-style skill layout:
+Follow the agent-architecture-style skill layout:
 
 ```text
 <skill-name>/
@@ -46,7 +46,7 @@ Rules:
 - Run `npm run build:skills` after changing templates.
 - Run `npm run check:skills` before committing.
 - Commit generated `SKILL.md` files with their templates.
-- Keep skill folders top-level, like gstack. Do not move them under `skills/`.
+- Keep skill folders top-level, like agent-architecture. Do not move them under `skills/`.
 
 ## Safety Defaults
 
@@ -105,7 +105,7 @@ npm run test:free:windows
 - `docs/skill-catalog.md`: current skill list.
 - `policies/enterprise-default.json`: default no-egress policy.
 - `scripts/gen-skill-docs.mjs`: template renderer.
-- `scripts/discover-skills.mjs`: gstack-style template discovery.
+- `scripts/discover-skills.mjs`: agent-architecture-style template discovery.
 - `tests/skill-generation.test.mjs`: generator and policy smoke tests.
 
 ## Host And Adapter Direction
