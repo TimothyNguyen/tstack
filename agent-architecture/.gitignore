@@ -15,3 +15,4 @@ codebase-out/tree.html
 codebase-out/.codebase_analysis.json
 codebase-out/cache/
 *.tgz
+learn-out/

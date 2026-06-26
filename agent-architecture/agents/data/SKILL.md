@@ -91,6 +91,7 @@ Skills that declare this agent in their frontmatter `agents:` field.
 | `domain-experiment-design` | Experiment design review for randomization, power, metrics, guardrails, |
 | `domain-mlops-databricks` | Databricks MLOps project structure, model lifecycle, CI/CD, monitoring, and |
 | `domain-model-interpretation` | Model interpretation review for feature effects, calibration, drift, |
+| `learn` | Knowledge capture workflow. Extracts Q&A flashcards from agent session context. |
 | `plan-eng-review` | Reviews plans for architecture, data flow, reliability, and testability. |
 | `rtk-token-optimizer` | Optional Rust Token Killer integration guidance. Uses RTK to reduce noisy shell output |
 | `seniorswe-concise` | Senior SWE concise mode: forces the laziest solution that actually works. |

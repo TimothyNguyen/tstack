@@ -71,6 +71,7 @@ Skills that declare this agent in their frontmatter `agents:` field.
 | `document-generate` | Generates missing local project documentation from code-backed evidence. |
 | `document-release` | Updates documentation after shipped behavior changes. |
 | `documentation` | Documentation workflow for generating, updating, and reviewing project docs after implementation. |
+| `learn` | Knowledge capture workflow. Extracts Q&A flashcards from agent session context. |
 | `plan-design-review` | Reviews plans for user experience, UI quality, and product interaction risk. |
 | `plan-devex-review` | Reviews plans for developer experience, APIs, onboarding, and operability. |
 | `plan-pm-review` | Product manager plan review. Reviews user value, requirements clarity, acceptance |

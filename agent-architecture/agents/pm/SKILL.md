@@ -76,6 +76,7 @@ Skills that declare this agent in their frontmatter `agents:` field.
 | `domain-data-governance` | Data governance review for classification, lineage, permissions, retention, |
 | `domain-experiment-design` | Experiment design review for randomization, power, metrics, guardrails, |
 | `domain-model-interpretation` | Model interpretation review for feature effects, calibration, drift, |
+| `learn` | Knowledge capture workflow. Extracts Q&A flashcards from agent session context. |
 | `learnings` | Local project learning workflow. Captures reusable project conventions, pitfalls, decisions, |
 | `plan-design-review` | Reviews plans for user experience, UI quality, and product interaction risk. |
 | `plan-director-review` | Director or senior-principal plan review. Reviews scope, sequencing, architecture risk, |

@@ -81,6 +81,7 @@ Skills that declare this agent in their frontmatter `agents:` field.
 | `context-restore` | Restores previously saved local working context without relying on external services. |
 | `context-save` | Captures local working context so a future agent session can resume safely. |
 | `guard` | Applies stricter local safety posture for risky tools and filesystem boundaries. |
+| `learn` | Knowledge capture workflow. Extracts Q&A flashcards from agent session context. |
 | `migration-dotnet-sqlserver-modernization` | Plan .NET Framework and SQL Server modernization using compatibility |
 | `migration-review` | Review modernization and migration plans for sequencing, rollback, |
 | `plan-eng-review` | Reviews plans for architecture, data flow, reliability, and testability. |

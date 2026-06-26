@@ -77,6 +77,10 @@ function parseFrontmatter(content) {
   if (descMatch) {
     result.description = descMatch[1].replace(/^[ \t]{2}/gm, '').trim().split('\n')[0];
   }
+  const agentsMatch = block.match(/^agents:\s*\[([^\]]*)\]/m);
+  if (agentsMatch) {
+    result.agents = agentsMatch[1].split(',').map((a) => a.trim()).filter(Boolean);
+  }
   return result;
 }
 
@@ -209,15 +213,48 @@ function generateCopilotInstructions(config, version) {
   return lines.join('\n');
 }
 
-function generateManifest(config, version) {
+function generateManifest(config, version, utilitySkills) {
   return JSON.stringify({
     name: 'agent-architecture',
     version,
     private: !!(config.private || PRIVATE),
     agents: config.agents || [],
+    skills: (utilitySkills || []).map((s) => s.name),
     hosts: config.hosts || HOSTS,
     generatedAt: new Date().toISOString(),
   }, null, 2);
+}
+
+// Dirs that are not utility skills even if they contain a SKILL.md
+const NON_SKILL_DIRS = new Set([
+  'agents', 'bin', 'scripts', 'node_modules', 'tests', 'test-results',
+  'generated', 'plugins', 'policies', 'profiles', 'hosts', 'adapters', 'docs',
+]);
+
+function discoverUtilitySkills(configuredAgents) {
+  const agentSet = new Set(configuredAgents);
+  const skills = [];
+  for (const entry of fs.readdirSync(ROOT, { withFileTypes: true })) {
+    if (!entry.isDirectory()) continue;
+    if (NON_SKILL_DIRS.has(entry.name)) continue;
+    const skillPath = path.join(ROOT, entry.name, 'SKILL.md');
+    if (!fs.existsSync(skillPath)) continue;
+    const fm = parseFrontmatter(fs.readFileSync(skillPath, 'utf8'));
+    if (!fm.agents || fm.agents.length === 0) continue;
+    if (fm.agents.some((a) => agentSet.has(a))) {
+      skills.push({ name: fm.name || entry.name, dir: entry.name });
+    }
+  }
+  return skills;
+}
+
+function installUtilitySkill(skillDir) {
+  const srcPath = path.join(ROOT, skillDir, 'SKILL.md');
+  if (!fs.existsSync(srcPath)) {
+    console.warn(`WARN: utility skill "${skillDir}" not found`);
+    return;
+  }
+  writeFile(`skills/${skillDir}/SKILL.md`, fs.readFileSync(srcPath, 'utf8'));
 }
 
 function installAgentSkill(agentName) {
@@ -284,7 +321,13 @@ function install() {
     installAgentSkill(agent);
   }
 
-  // Install token-optimizer CLI + bundled lib
+  // Install utility skills auto-discovered from top-level SKILL.md files
+  const utilitySkills = discoverUtilitySkills(agents);
+  for (const skill of utilitySkills) {
+    installUtilitySkill(skill.dir);
+  }
+
+  // Install token-optimizer CLI + bundled lib (Python assets alongside SKILL.md)
   installTokenOptimizer();
 
   // Generate host artifacts
@@ -306,11 +349,12 @@ function install() {
   writeFile('VERSION', version);
 
   // Manifest
-  writeFile('install-manifest.json', generateManifest(config, version));
+  writeFile('install-manifest.json', generateManifest(config, version, utilitySkills));
 
   if (!DRY_RUN) {
     console.log(`agent-architecture v${version} installed to ${TARGET}`);
     console.log(`  agents: ${agents.join(', ')}`);
+    console.log(`  skills: ${utilitySkills.map((s) => s.name).join(', ') || '(none)'}`);
     console.log(`  hosts:  ${(config.hosts || HOSTS).join(', ')}`);
     if (PRIVATE) console.log('  mode:   private (no telemetry, no cloud memory)');
   }
@@ -335,6 +379,12 @@ function doctor() {
       const skillPath = path.join(TARGET, 'skills', agent, 'SKILL.md');
       if (!fs.existsSync(skillPath)) {
         errors.push(`agent "${agent}" declared in manifest but skills/${agent}/SKILL.md missing`);
+      }
+    }
+    for (const skill of (manifest.skills || [])) {
+      const skillPath = path.join(TARGET, 'skills', skill, 'SKILL.md');
+      if (!fs.existsSync(skillPath)) {
+        errors.push(`utility skill "${skill}" declared in manifest but skills/${skill}/SKILL.md missing`);
       }
     }
   }

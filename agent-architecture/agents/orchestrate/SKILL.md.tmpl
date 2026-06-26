@@ -30,6 +30,7 @@ parallel subagents and review their output before merging.
 3. **Decompose** — split into subagent tasks using `subagent-orchestrator`.
 4. **Review** — invoke `plan-review` + `plan-director-review` before dispatch.
 5. **Context** — invoke `context-save` after each milestone.
+6. **Capture** — invoke `learn` after each major milestone to extract product and architecture knowledge.
 
 ## Sub-skill routing
 
@@ -72,6 +73,7 @@ Skills that declare this agent in their frontmatter `agents:` field.
 | `context-restore` | Restores previously saved local working context without relying on external services. |
 | `context-save` | Captures local working context so a future agent session can resume safely. |
 | `diagram` | Creates text-first architecture and workflow diagrams from local project context. |
+| `learn` | Knowledge capture workflow. Extracts Q&A flashcards from agent session context. |
 | `learnings` | Local project learning workflow. Captures reusable project conventions, pitfalls, decisions, |
 | `plan-director-review` | Director or senior-principal plan review. Reviews scope, sequencing, architecture risk, |
 | `plan-review` | Enterprise-safe plan review workflow. Reviews a proposed implementation plan for scope, |

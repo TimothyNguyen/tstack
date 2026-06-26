@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-06-25T22:57:42.618Z",
-  "count": 95,
+  "generatedAt": "2026-06-26T00:38:20.162Z",
+  "count": 96,
   "skills": [
     {
       "name": "adapter-ag-ui",
@@ -474,6 +474,26 @@
         "swe",
         "qa-agent",
         "security"
+      ]
+    },
+    {
+      "name": "learn",
+      "version": "0.1.0",
+      "description": "Knowledge capture workflow. Extracts Q&A flashcards from agent session context.",
+      "path": "learn/SKILL.md.tmpl",
+      "agents": [
+        "swe",
+        "qa-agent",
+        "pm",
+        "spec-agent",
+        "orchestrate",
+        "data",
+        "cloud",
+        "security",
+        "design-agent",
+        "migration",
+        "release-agent",
+        "interviewer"
       ]
     },
     {
