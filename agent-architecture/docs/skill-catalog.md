@@ -27,6 +27,10 @@ Each skill is a top-level folder with:
 | `plan-devex-review` | Review plans for developer experience and operability. | `plan-devex-review/SKILL.md.tmpl` |
 | `investigate` | Debug failures through evidence and root-cause analysis. | `investigate/SKILL.md.tmpl` |
 | `systematic-debugging` | Exhaustive root-cause investigation for complex bugs stuck after multiple fix attempts. Multi-component systems and architecture questioning. | `systematic-debugging/SKILL.md.tmpl` |
+| `brainstorming` | Design-space exploration and requirements refinement before coding through collaborative dialogue. | `brainstorming/SKILL.md.tmpl` |
+| `receiving-code-review` | Handle code review feedback with technical rigor. Verify before implementing external suggestions. | `receiving-code-review/SKILL.md.tmpl` |
+| `verification-before-completion` | Ship-readiness verification. Run verification commands and confirm output before claiming work is complete. | `verification-before-completion/SKILL.md.tmpl` |
+| `writing-skills` | Skill creation and editing using test-driven development. Write test cases, watch them fail, write skill docs, watch tests pass. | `writing-skills/SKILL.md.tmpl` |
 | `review` | Review code, diffs, and PRs before landing. | `review/SKILL.md.tmpl` |
 | `qa` | Verify behavior with tests and approved local tools. | `qa/SKILL.md.tmpl` |
 | `test` | Design and run approved test automation, including Playwright/Selenium when enabled. | `test/SKILL.md.tmpl` |
