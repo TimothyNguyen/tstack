@@ -66,6 +66,7 @@ Use commit discipline to stage and commit only the authentication fix.
 - design plan review: invoke `plan-design-review`.
 - developer-experience plan review: invoke `plan-devex-review`.
 - Debug a bug, failure, or unexpected behavior: invoke `investigate`.
+- Exhaustive root-cause investigation for complex bugs stuck after multiple fix attempts: invoke `systematic-debugging`.
 - Code or PR review: invoke `review`.
 - Cross-model/code-agent second opinion: invoke `codex`, `claude`, or `copilot` only when the host profile enables it.
 - Manual or automated test planning: invoke `qa`.

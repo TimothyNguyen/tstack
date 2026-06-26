@@ -26,6 +26,7 @@ Each skill is a top-level folder with:
 | `plan-design-review` | Review plans for UI and interaction quality. | `plan-design-review/SKILL.md.tmpl` |
 | `plan-devex-review` | Review plans for developer experience and operability. | `plan-devex-review/SKILL.md.tmpl` |
 | `investigate` | Debug failures through evidence and root-cause analysis. | `investigate/SKILL.md.tmpl` |
+| `systematic-debugging` | Exhaustive root-cause investigation for complex bugs stuck after multiple fix attempts. Multi-component systems and architecture questioning. | `systematic-debugging/SKILL.md.tmpl` |
 | `review` | Review code, diffs, and PRs before landing. | `review/SKILL.md.tmpl` |
 | `qa` | Verify behavior with tests and approved local tools. | `qa/SKILL.md.tmpl` |
 | `test` | Design and run approved test automation, including Playwright/Selenium when enabled. | `test/SKILL.md.tmpl` |
