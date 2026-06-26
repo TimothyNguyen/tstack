@@ -13,17 +13,19 @@ Env vars for Confluence:
   CONFLUENCE_API_TOKEN  Atlassian API token
 """
 import argparse
+import base64
 import csv
 import hashlib
+import html
 import json
 import os
 import sys
 import uuid
 from datetime import datetime, timezone
 from pathlib import Path
+from urllib.parse import urlencode
 from urllib.request import Request, urlopen
 from urllib.error import URLError
-import base64
 
 # Ensure UTF-8 output on Windows (avoids cp1252 encode errors for → etc.)
 if hasattr(sys.stdout, "reconfigure"):
@@ -66,7 +68,7 @@ def write_deck(deck: str, cards: list[dict]):
         path.write_text(json.dumps(deck_cards, indent=2, ensure_ascii=False), encoding="utf-8")
 
 
-def ingest(raw: list[dict], deck_override: str | None, source_agent: str) -> int:
+def ingest(raw: list[dict], deck_override: str | None, source_agent: str, verbose: bool = False) -> int:
     ensure_dirs()
     existing = load_cards()
     existing_hashes = {front_hash(c["front"]) for c in existing}
@@ -74,8 +76,12 @@ def ingest(raw: list[dict], deck_override: str | None, source_agent: str) -> int
     added = 0
     affected_decks = set()
     for card in raw:
+        if not card.get("front", "").strip():
+            continue
         h = front_hash(card.get("front", ""))
         if h in existing_hashes:
+            if verbose:
+                print(f"Skipped duplicate: {card.get('front', '')[:60]}")
             continue
         card.setdefault("id", str(uuid.uuid4()))
         card.setdefault("created_at", datetime.now(timezone.utc).isoformat())
@@ -132,8 +138,9 @@ def confluence_push(cards: list[dict], page_title: str, space_key: str):
         return
 
     table_rows = "\n".join(
-        f"<tr><td>{c.get('front','')}</td><td>{c.get('back','')}</td>"
-        f"<td>{', '.join(c.get('tags', []))}</td></tr>"
+        f"<tr><td>{html.escape(c.get('front',''))}</td>"
+        f"<td>{html.escape(c.get('back',''))}</td>"
+        f"<td>{html.escape(', '.join(c.get('tags', [])))}</td></tr>"
         for c in cards
     )
     now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
@@ -151,7 +158,8 @@ def confluence_push(cards: list[dict], page_title: str, space_key: str):
     }
 
     # Search for existing page
-    search_url = f"{base_url}/wiki/rest/api/content?title={page_title}&spaceKey={space_key}&expand=version"
+    params = urlencode({"title": page_title, "spaceKey": space_key, "expand": "version"})
+    search_url = f"{base_url}/wiki/rest/api/content?{params}"
     try:
         req = Request(search_url, headers=headers)
         with urlopen(req, timeout=15) as resp:
@@ -220,7 +228,7 @@ def main():
         if not isinstance(raw, list):
             print("Error: stdin must be a JSON array of card objects.", file=sys.stderr)
             sys.exit(1)
-        ingest(raw, args.deck, args.source_agent)
+        ingest(raw, args.deck, args.source_agent, args.verbose)
         return
 
     ensure_dirs()
