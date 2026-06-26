@@ -54,6 +54,7 @@ Use commit discipline to stage and commit only the authentication fix.
 
 ## Routing
 
+- Skill discovery and invocation: `using-agent-skills` injected at session start (via session-start hook) to teach how to find and use skills
 - New requirement, design, or issue: invoke `spec`.
 - Fully reviewed plan pipeline: invoke `autoplan`.
 - Split a task into scoped local subagents: invoke `subagent-orchestrator`.

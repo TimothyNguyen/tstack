@@ -14,6 +14,7 @@ Each skill is a top-level folder with:
 
 | Skill | Purpose | Source |
 |---|---|---|
+| `using-agent-skills` | Bootstrap skill: teaches agents how to find and invoke skills, skill priority, red flags, and platform-specific tool use. | `using-agent-skills/SKILL.md.tmpl` |
 | `commit` | Atomic commit discipline: Conventional Commits format, one-behavior-per-commit, safe rebase sequence. | `commit/SKILL.md.tmpl` |
 | `spec` | Convert intent into scoped requirements, invariants, and tasks. | `spec/SKILL.md.tmpl` |
 | `autoplan` | Run a composed plan-review pipeline before implementation. | `autoplan/SKILL.md.tmpl` |
