@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-26T20:46:29.764Z",
+  "generatedAt": "2026-06-26T21:06:05.289Z",
   "count": 102,
   "skills": [
     {
@@ -127,7 +127,9 @@
       "version": "0.1.0",
       "description": "Enterprise-safe software engineering skill pack. Routes work to scoped skills for",
       "path": "SKILL.md.tmpl",
-      "agents": []
+      "agents": [
+        "_infrastructure"
+      ]
     },
     {
       "name": "architecture-agent-upgrade",
@@ -368,7 +370,8 @@
       "agents": [
         "spec-agent",
         "design-agent",
-        "orchestrate"
+        "orchestrate",
+        "interviewer"
       ]
     },
     {

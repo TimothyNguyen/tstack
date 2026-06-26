@@ -5,6 +5,7 @@ description: |
   Enterprise-safe software engineering skill pack. Routes work to scoped skills for
   spec writing, code review, QA, security review, documentation, learnings, and release
   workflows. Designed for local project installs and no default public egress.
+agents: [_infrastructure]
 allowed-tools:
   - Read
   - Grep

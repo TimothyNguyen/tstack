@@ -1,8 +1,9 @@
 {
-  "generatedAt": "2026-06-26T20:46:31.331Z",
+  "generatedAt": "2026-06-26T21:06:06.541Z",
   "count": 102,
   "byAgent": {
     "_infrastructure": [
+      "agent-architecture",
       "adapter-ag-ui",
       "adapter-agentcore",
       "adapter-docker-mcp",
@@ -98,6 +99,7 @@
     "interviewer": [
       "atlassian-docs",
       "codebase-engine",
+      "diagram",
       "learn",
       "using-agent-skills"
     ],
@@ -423,7 +425,9 @@
       "name": "agent-architecture",
       "version": "0.1.0",
       "description": "Enterprise-safe software engineering skill pack. Routes work to scoped skills for",
-      "agents": [],
+      "agents": [
+        "_infrastructure"
+      ],
       "allowedTools": [
         "Read",
         "Grep",
@@ -736,7 +740,8 @@
       "agents": [
         "spec-agent",
         "design-agent",
-        "orchestrate"
+        "orchestrate",
+        "interviewer"
       ],
       "allowedTools": [
         "Read",
