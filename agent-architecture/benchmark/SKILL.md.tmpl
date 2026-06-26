@@ -1,6 +1,6 @@
 ---
 name: benchmark
-version: 0.1.0
+version: 0.1.1
 description: |
   Local benchmark and regression-check workflow for performance or quality
   changes with no public telemetry or benchmark uploads by default.

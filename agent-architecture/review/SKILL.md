@@ -1,6 +1,6 @@
 ---
 name: review
-version: 0.1.0
+version: 0.1.1
 description: |
   Enterprise-safe code review workflow. Reviews diffs and code paths for correctness,
   maintainability, data access, policy violations, test gaps, and release risk.

@@ -1,6 +1,6 @@
 ---
 name: adapter-databricks
-version: 0.1.0
+version: 0.1.1
 description: |
   Optional Databricks SDK adapter boundary for workspace, job, and bundle
   operations with explicit policy gates.

@@ -1,6 +1,6 @@
 ---
 name: seniorswe-concise-audit
-version: 0.1.0
+version: 0.1.1
 description: |
   Whole-repo audit for over-engineering. Like /seniorswe-concise-review but
   scans the entire codebase instead of a diff: a ranked list of what to delete,

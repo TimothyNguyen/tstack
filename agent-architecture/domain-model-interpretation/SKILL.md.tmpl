@@ -1,6 +1,6 @@
 ---
 name: domain-model-interpretation
-version: 0.1.0
+version: 0.1.1
 description: |
   Model interpretation review for feature effects, calibration, drift,
   uncertainty, explanation limits, and decision-risk communication.

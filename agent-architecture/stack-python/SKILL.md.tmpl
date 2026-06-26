@@ -1,6 +1,6 @@
 ---
 name: stack-python
-version: 0.1.0
+version: 0.1.1
 description: |
   Python service, library, and data workflow modernization with minimal
   dependencies, local tests, packaging hygiene, and privacy-safe execution.

@@ -1,6 +1,6 @@
 ---
 name: reference-gstack-patterns
-version: 0.2.0
+version: 0.2.1
 description: |
   Repo-local quick reference for the skill-pack pattern this repo uses.
   Read once when adding or refactoring a skill folder.

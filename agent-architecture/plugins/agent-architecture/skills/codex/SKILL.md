@@ -1,6 +1,6 @@
 ---
 name: codex
-version: 0.1.0
+version: 0.1.1
 description: |
   OpenAI Codex host adapter. Covers how to use this skill pack inside a
   Codex-managed repo: AGENTS.md-driven skill invocation, tool availability,

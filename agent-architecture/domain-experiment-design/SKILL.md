@@ -1,6 +1,6 @@
 ---
 name: domain-experiment-design
-version: 0.1.0
+version: 0.1.1
 description: |
   Experiment design review for randomization, power, metrics, guardrails,
   exposure, analysis plans, and rollout risk.

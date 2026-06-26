@@ -1,6 +1,6 @@
 ---
 name: adapter-github
-version: 0.1.0
+version: 0.1.1
 description: |
   Optional GitHub MCP/CLI adapter guidance for repo, issue, and PR context
   with read-only/default-deny safety.

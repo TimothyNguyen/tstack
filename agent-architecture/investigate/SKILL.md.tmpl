@@ -1,6 +1,6 @@
 ---
 name: investigate
-version: 0.1.0
+version: 0.1.1
 description: |
   Root-cause investigation workflow for bugs, failing tests, broken integrations, and unexpected behavior.
   Investigates before proposing fixes and records evidence for each hypothesis.

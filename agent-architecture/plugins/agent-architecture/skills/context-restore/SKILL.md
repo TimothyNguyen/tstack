@@ -1,6 +1,6 @@
 ---
 name: context-restore
-version: 0.1.0
+version: 0.1.1
 description: |
   Restores previously saved local working context without relying on external services.
 allowed-tools:

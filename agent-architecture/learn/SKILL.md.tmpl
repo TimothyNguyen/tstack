@@ -1,6 +1,6 @@
 ---
 name: learn
-version: 0.1.0
+version: 0.1.1
 description: |
   Knowledge capture workflow. Extracts Q&A flashcards from agent session context.
   Writes to local learn-out/ folder as JSON. Exports Quizlet-compatible CSV via

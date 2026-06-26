@@ -1,6 +1,6 @@
 ---
 name: interviewer
-version: 0.1.0
+version: 0.1.1
 description: |
   Technical interviewer agent. Conducts interviews grounded in the actual
   codebase and tech stack. Generates questions from real code, evaluates answers.

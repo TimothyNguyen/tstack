@@ -1,6 +1,6 @@
 ---
 name: spec
-version: 0.1.0
+version: 0.1.1
 description: |
   Converts product or engineering intent into a scoped, reviewable specification with
   goals, constraints, interfaces, invariants, tasks, and bug ledger.

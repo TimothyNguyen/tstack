@@ -1,6 +1,6 @@
 ---
 name: seniorswe-concise
-version: 0.1.0
+version: 0.1.1
 description: |
   Senior SWE concise mode: forces the laziest solution that actually works.
   Channels a senior dev who has seen everything — question whether the task

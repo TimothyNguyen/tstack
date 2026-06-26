@@ -1,6 +1,6 @@
 ---
 name: retro
-version: 0.1.0
+version: 0.1.1
 description: |
   Produces a local project retrospective from commits, incidents, decisions, and outcomes.
 allowed-tools:

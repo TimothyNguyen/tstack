@@ -1,6 +1,6 @@
 ---
 name: adapter-langgraph
-version: 0.1.0
+version: 0.1.1
 description: |
   Optional LangGraph orchestration boundary for durable app-level agents
   without expanding the core runtime dependency surface.

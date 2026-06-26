@@ -1,6 +1,6 @@
 ---
 name: stack-react-typescript
-version: 0.1.0
+version: 0.1.1
 description: |
   React and TypeScript application modernization, including codemods, Redux
   Toolkit patterns, RTK Query, and UI migration checks.

@@ -1,6 +1,6 @@
 ---
 name: receiving-code-review
-version: 0.1.0
+version: 0.1.1
 description: |
   Handle code review feedback with technical rigor. Verify before implementing.
   Requires evaluation, not performative agreement or blind implementation.

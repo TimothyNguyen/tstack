@@ -1,6 +1,6 @@
 ---
 name: stack-spring-boot
-version: 0.1.0
+version: 0.1.1
 description: |
   Spring Boot upgrade and API modernization using OpenRewrite recipes,
   OpenAPI contracts, and local verification.

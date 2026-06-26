@@ -3,7 +3,7 @@
 # allowed-tools restricts which tools this skill may invoke by default;
 # shell write, git write, and deploy remain policy-gated (see POLICY_REQUIREMENTS below).
 name: codebase-engine
-version: 0.1.0
+version: 0.1.1
 description: |
   Enterprise-safe AST knowledge graph for local codebases. Indexes source
   with tree-sitter, builds a NetworkX graph, clusters by community, and

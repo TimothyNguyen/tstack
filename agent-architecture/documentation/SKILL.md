@@ -1,6 +1,6 @@
 ---
 name: documentation
-version: 0.1.0
+version: 0.1.1
 description: |
   Documentation workflow for generating, updating, and reviewing project docs after implementation.
   Focuses on accurate code-backed docs without public browsing or telemetry.

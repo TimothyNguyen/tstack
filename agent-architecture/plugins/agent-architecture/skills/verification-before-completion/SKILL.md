@@ -1,6 +1,6 @@
 ---
 name: verification-before-completion
-version: 0.1.0
+version: 0.1.1
 description: |
   Ship-readiness verification workflow. Run verification commands and confirm output
   before claiming work is complete or passing. Evidence before assertions always.

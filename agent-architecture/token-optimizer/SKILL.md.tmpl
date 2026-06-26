@@ -1,6 +1,6 @@
 ---
 name: token-optimizer
-version: 0.1.0
+version: 0.1.1
 description: |
   Token reduction for Python objects, API responses, logs, diffs, and code
   before LLM injection. Bundles Python Token Killer (ptk) with zero required

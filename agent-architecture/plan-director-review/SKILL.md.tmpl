@@ -1,6 +1,6 @@
 ---
 name: plan-director-review
-version: 0.1.0
+version: 0.1.1
 description: |
   Director or senior-principal plan review. Reviews scope, sequencing, architecture risk,
   team fit, operational maturity, and executive-readiness before implementation.

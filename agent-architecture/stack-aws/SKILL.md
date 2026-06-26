@@ -1,6 +1,6 @@
 ---
 name: stack-aws
-version: 0.1.0
+version: 0.1.1
 description: |
   AWS application modernization planning with least-privilege, local-first
   validation, explicit approvals, and no default cloud mutation.

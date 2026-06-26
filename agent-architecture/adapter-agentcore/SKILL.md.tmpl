@@ -1,6 +1,6 @@
 ---
 name: adapter-agentcore
-version: 0.1.0
+version: 0.1.1
 description: |
   Optional AgentCore adapter boundary for skills, tools, approvals, audit
   events, and local privacy controls.

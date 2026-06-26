@@ -1,6 +1,6 @@
 ---
 name: seniorswe-concise-debt
-version: 0.1.0
+version: 0.1.1
 description: |
   Harvest every `seniorswe-concise:` comment in the codebase into a debt ledger
   so deliberate shortcuts get tracked instead of rotting into "later means never".

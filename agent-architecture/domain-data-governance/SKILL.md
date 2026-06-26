@@ -1,6 +1,6 @@
 ---
 name: domain-data-governance
-version: 0.1.0
+version: 0.1.1
 description: |
   Data governance review for classification, lineage, permissions, retention,
   auditability, quality checks, and privacy-safe agent outputs.

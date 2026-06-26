@@ -1,6 +1,6 @@
 ---
 name: chrome-devtools
-version: 0.1.0
+version: 0.1.1
 description: |
   Chrome DevTools MCP integration for browser automation, debugging, performance analysis,
   and network inspection. Provides 45 tools via the official chrome-devtools-mcp server.

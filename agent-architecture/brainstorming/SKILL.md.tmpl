@@ -1,6 +1,6 @@
 ---
 name: brainstorming
-version: 0.1.0
+version: 0.1.1
 description: |
   Design-space exploration before coding. Explores user intent, requirements and design through collaborative dialogue.
   MUST use before any creative work - creating features, building components, adding functionality, or modifying behavior.

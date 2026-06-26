@@ -1,6 +1,6 @@
 ---
 name: seniorswe-concise-help
-version: 0.1.0
+version: 0.1.1
 description: |
   Quick-reference card for Senior SWE Concise mode: all levels, skills, and
   commands in one view. One-shot display, not a persistent mode. Invoke via

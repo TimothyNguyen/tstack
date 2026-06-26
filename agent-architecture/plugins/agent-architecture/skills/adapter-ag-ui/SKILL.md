@@ -1,6 +1,6 @@
 ---
 name: adapter-ag-ui
-version: 0.1.0
+version: 0.1.1
 description: |
   Map skill progress, approvals, tool actions, findings, and artifacts into
   AG-UI-compatible event concepts.

@@ -1,6 +1,6 @@
 ---
 name: design-agent
-version: 0.1.0
+version: 0.1.1
 description: |
   UI and design agent. Handles design review, implementation-ready HTML
   guidance, plan design review, and design audit.

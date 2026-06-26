@@ -1,6 +1,6 @@
 ---
 name: plan-review
-version: 0.1.0
+version: 0.1.1
 description: |
   Enterprise-safe plan review workflow. Reviews a proposed implementation plan for scope,
   architecture, testability, policy compliance, data risk, and delivery sequencing before code changes begin.

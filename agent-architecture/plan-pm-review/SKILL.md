@@ -1,6 +1,6 @@
 ---
 name: plan-pm-review
-version: 0.1.0
+version: 0.1.1
 description: |
   Product manager plan review. Reviews user value, requirements clarity, acceptance
   criteria, rollout, measurement, stakeholder impact, and non-goals.

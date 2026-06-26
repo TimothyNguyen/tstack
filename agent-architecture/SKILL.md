@@ -1,6 +1,6 @@
 ---
 name: agent-architecture
-version: 0.1.0
+version: 0.1.1
 description: |
   Enterprise-safe software engineering skill pack. Routes work to scoped skills for
   spec writing, code review, QA, security review, documentation, learnings, and release

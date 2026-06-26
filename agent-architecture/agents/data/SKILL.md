@@ -1,6 +1,6 @@
 ---
 name: data
-version: 0.1.0
+version: 0.1.1
 description: |
   Data and MLOps engineer agent. Handles Databricks jobs, dbt transformations,
   ML lifecycle, data governance, and experiment design.

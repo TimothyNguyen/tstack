@@ -1,6 +1,6 @@
 ---
 name: security-review
-version: 0.1.0
+version: 0.1.1
 description: |
   Enterprise security and governance review for application code, data access, agent
   tools, cloud integrations, and release workflows.

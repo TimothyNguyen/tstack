@@ -1,6 +1,6 @@
 ---
 name: canary
-version: 0.1.0
+version: 0.1.1
 description: |
   Privacy-safe canary planning for post-deploy monitoring, rollback signals,
   audit events, and human escalation without public telemetry defaults.

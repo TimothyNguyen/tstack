@@ -1,6 +1,6 @@
 ---
 name: writing-skills
-version: 0.1.0
+version: 0.1.1
 description: |
   Skill creation and editing using test-driven development. Write test cases first,
   watch them fail, write the skill documentation, watch tests pass, and refactor.

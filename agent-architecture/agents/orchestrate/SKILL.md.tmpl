@@ -1,6 +1,6 @@
 ---
 name: orchestrate
-version: 0.1.0
+version: 0.1.1
 description: |
   Coordinator agent for large features. Decomposes work into parallel subagents
   per the subagent-deployment-plan.md roles (Explorer, Planner, Implementer,

@@ -1,6 +1,6 @@
 ---
 name: architecture-agent-upgrade
-version: 0.1.0
+version: 0.1.1
 description: |
   Upgrades an installed architecture-agent skill pack through a policy-approved internal,
   mirrored, or manual flow. Public update checks are disabled by default.

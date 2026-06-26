@@ -1,6 +1,6 @@
 ---
 name: copilot
-version: 0.1.0
+version: 0.1.1
 description: |
   GitHub Copilot host adapter. Covers how to install this skill pack into a
   Copilot-enabled repo: copilot-instructions.md injection, hook configuration,

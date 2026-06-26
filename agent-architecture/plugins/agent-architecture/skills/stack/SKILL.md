@@ -1,6 +1,6 @@
 ---
 name: stack
-version: 0.1.0
+version: 0.1.1
 description: |
   Tech stack meta-loader. Auto-detects project tech stack from repo signals and
   loads the matching stack-* skill. User can override detection explicitly.

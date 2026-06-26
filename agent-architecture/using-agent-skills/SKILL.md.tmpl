@@ -1,6 +1,6 @@
 ---
 name: using-agent-skills
-version: 0.1.0
+version: 0.1.1
 description: |
   Use when starting any conversation - establishes how to find and use agent-architecture skills,
   requiring skill invocation before ANY response including clarifying questions.

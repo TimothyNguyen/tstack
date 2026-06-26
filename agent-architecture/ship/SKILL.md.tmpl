@@ -1,6 +1,6 @@
 ---
 name: ship
-version: 0.1.0
+version: 0.1.1
 description: |
   Prepares a human-approved PR, merge, or release handoff.
 allowed-tools:

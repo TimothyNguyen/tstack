@@ -1,6 +1,6 @@
 ---
 name: systematic-debugging
-version: 0.1.0
+version: 0.1.1
 description: |
   Exhaustive root-cause investigation for complex bugs stuck after multiple fix attempts.
   Use when bugs span multiple system layers (workflow → build → deploy, API → service → database).

@@ -1,6 +1,6 @@
 ---
 name: learnings
-version: 0.1.0
+version: 0.1.1
 description: |
   Local project learning workflow. Captures reusable project conventions, pitfalls, decisions,
   and review lessons without storing secrets or raw sensitive data.

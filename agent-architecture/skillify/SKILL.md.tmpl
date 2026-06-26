@@ -1,6 +1,6 @@
 ---
 name: skillify
-version: 0.1.0
+version: 0.1.1
 description: |
   Turns a repeated local workflow into a reusable skill folder with template files.
 allowed-tools:
