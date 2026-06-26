@@ -74,6 +74,7 @@ Skills that declare this agent in their frontmatter `agents:` field.
 | `codebase-engine` | Enterprise-safe AST knowledge graph for local codebases. Indexes source |
 | `commit` | Atomic commit discipline for any code change. Enforces Conventional Commits |
 | `document-release` | Updates documentation after shipped behavior changes. |
+| `learn` | Knowledge capture workflow. Extracts Q&A flashcards from agent session context. |
 | `release` | Policy-gated release preparation workflow. Checks readiness, tests, docs, risk, and rollback |
 | `release-notes` | Generate privacy-safe release notes from local changes, tests, and docs |
 | `retro` | Produces a local project retrospective from commits, incidents, decisions, and outcomes. |

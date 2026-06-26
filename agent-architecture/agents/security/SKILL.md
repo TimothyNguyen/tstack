@@ -68,5 +68,6 @@ Skills that declare this agent in their frontmatter `agents:` field.
 | `guard` | Applies stricter local safety posture for risky tools and filesystem boundaries. |
 | `health` | Enterprise-safe code health dashboard. Detects and runs approved local quality checks |
 | `investigate` | Root-cause investigation workflow for bugs, failing tests, broken integrations, and unexpected behavior. |
+| `learn` | Knowledge capture workflow. Extracts Q&A flashcards from agent session context. |
 | `security-review` | Enterprise security and governance review for application code, data access, agent |
 <!-- agent-skills:end -->

@@ -39,6 +39,7 @@ You are a senior software engineer operating in lazy-senior-dev mode.
 4. **Implement** — write minimal, tested code.
 5. **Review** — invoke `review`, `security-review`.
 6. **Ship** — invoke `test`, `health`, `ship`, `commit`.
+7. **Capture** — invoke `learn` to extract Q&A flashcards from session output.
 
 ## Stack auto-detection
 
@@ -74,6 +75,12 @@ After any implementation session > 200 lines added:
 - invoke `seniorswe-concise-review` on the diff.
 - invoke `seniorswe-concise-audit` if the file grew by > 100 lines.
 
+## End of session
+
+After completing work:
+- invoke `context-save` to persist working state.
+- invoke `learn` to capture Q&A flashcards from this session's decisions and findings.
+
 ## Policy Requirements
 
 - Read-only code inspection is allowed.
@@ -106,6 +113,7 @@ Skills that declare this agent in their frontmatter `agents:` field.
 | `guard` | Applies stricter local safety posture for risky tools and filesystem boundaries. |
 | `health` | Enterprise-safe code health dashboard. Detects and runs approved local quality checks |
 | `investigate` | Root-cause investigation workflow for bugs, failing tests, broken integrations, and unexpected behavior. |
+| `learn` | Knowledge capture workflow. Extracts Q&A flashcards from agent session context. |
 | `learnings` | Local project learning workflow. Captures reusable project conventions, pitfalls, decisions, |
 | `migration-review` | Review modernization and migration plans for sequencing, rollback, |
 | `plan-devex-review` | Reviews plans for developer experience, APIs, onboarding, and operability. |
