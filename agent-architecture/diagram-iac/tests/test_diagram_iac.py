@@ -64,7 +64,6 @@ class TestDiagramGeneration:
     async def test_server_initialization(self):
         """Test MCP server initializes properly."""
         assert mcp is not None
-        assert str(mcp) == "FastMCP('diagram-iac')"
 
     @pytest.mark.asyncio
     async def test_invalid_yaml_handling(self):

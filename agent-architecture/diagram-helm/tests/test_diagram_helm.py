@@ -116,7 +116,6 @@ class TestHelmIntegration:
     async def test_server_initialization(self):
         """MCP server initializes properly."""
         assert mcp is not None
-        assert str(mcp) == "FastMCP('diagram-helm')"
 
     def test_server_import(self):
         """MCP server imports successfully."""

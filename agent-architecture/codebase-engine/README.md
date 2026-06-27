@@ -1,4 +1,4 @@
-﻿#  codebase engine.Groups[1].Value.ToUpper() odebase engine
+﻿# Codebase Engine
 
 [See SKILL.md for complete documentation.](./SKILL.md)
 
