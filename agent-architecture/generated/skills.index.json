@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-06-27T01:53:17.870Z",
-  "count": 108,
+  "generatedAt": "2026-06-27T03:16:05.310Z",
+  "count": 114,
   "skills": [
     {
       "name": "adapter-ag-ui",
@@ -609,6 +609,15 @@
       ]
     },
     {
+      "name": "migration-engineer",
+      "version": "0.1.0",
+      "description": "Specialist in SQL Server → Postgres migrations.",
+      "path": "agents/migration-engineer/SKILL.md.tmpl",
+      "agents": [
+        "_infrastructure"
+      ]
+    },
+    {
       "name": "migration-review",
       "version": "0.1.1",
       "description": "Review modernization and migration plans for sequencing, rollback,",
@@ -617,6 +626,56 @@
         "migration",
         "swe",
         "cloud"
+      ]
+    },
+    {
+      "name": "migration-sqlserver-assess",
+      "version": "0.1.0",
+      "description": "Assess SQL Server database for Postgres migration readiness.",
+      "path": "migration-sqlserver-assess/SKILL.md.tmpl",
+      "agents": [
+        "migration-engineer",
+        "swe"
+      ]
+    },
+    {
+      "name": "migration-sqlserver-data",
+      "version": "0.1.0",
+      "description": "Execute data migration from SQL Server to Postgres.",
+      "path": "migration-sqlserver-data/SKILL.md.tmpl",
+      "agents": [
+        "migration-engineer",
+        "swe"
+      ]
+    },
+    {
+      "name": "migration-sqlserver-perf",
+      "version": "0.1.0",
+      "description": "Performance tune PostgreSQL after migration.",
+      "path": "migration-sqlserver-perf/SKILL.md.tmpl",
+      "agents": [
+        "migration-engineer",
+        "swe"
+      ]
+    },
+    {
+      "name": "migration-sqlserver-schema",
+      "version": "0.1.0",
+      "description": "Convert SQL Server T-SQL DDL to PostgreSQL schema.",
+      "path": "migration-sqlserver-schema/SKILL.md.tmpl",
+      "agents": [
+        "migration-engineer",
+        "swe"
+      ]
+    },
+    {
+      "name": "migration-sqlserver-test",
+      "version": "0.1.0",
+      "description": "Validate migrated data matches source.",
+      "path": "migration-sqlserver-test/SKILL.md.tmpl",
+      "agents": [
+        "migration-engineer",
+        "qa-agent"
       ]
     },
     {

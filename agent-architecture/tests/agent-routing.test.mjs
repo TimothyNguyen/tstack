@@ -9,7 +9,7 @@ const root = path.resolve(import.meta.dirname, '..');
 const VALID_AGENTS = new Set([
   'orchestrate', 'swe', 'qa-agent', 'pm', 'spec-agent',
   'design-agent', 'migration', 'data', 'cloud', 'interviewer',
-  'release-agent', 'security',
+  'release-agent', 'security', 'diagram-agent', 'migration-engineer',
   '_infrastructure',
 ]);
 

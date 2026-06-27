@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-06-27T01:53:19.306Z",
-  "count": 108,
+  "generatedAt": "2026-06-27T03:16:06.901Z",
+  "count": 114,
   "byAgent": {
     "_infrastructure": [
       "agent-architecture",
@@ -32,6 +32,7 @@
       "diagram-agent",
       "interviewer",
       "migration",
+      "migration-engineer",
       "orchestrate",
       "pm",
       "qa-agent",
@@ -136,6 +137,13 @@
       "systematic-debugging",
       "using-agent-skills"
     ],
+    "migration-engineer": [
+      "migration-sqlserver-assess",
+      "migration-sqlserver-data",
+      "migration-sqlserver-perf",
+      "migration-sqlserver-schema",
+      "migration-sqlserver-test"
+    ],
     "orchestrate": [
       "adapter-ag-ui",
       "adapter-agentcore",
@@ -200,6 +208,7 @@
       "health",
       "investigate",
       "learn",
+      "migration-sqlserver-test",
       "plan-devex-review",
       "plan-review",
       "qa",
@@ -287,6 +296,10 @@
       "learn",
       "learnings",
       "migration-review",
+      "migration-sqlserver-assess",
+      "migration-sqlserver-data",
+      "migration-sqlserver-perf",
+      "migration-sqlserver-schema",
       "plan-devex-review",
       "plan-eng-review",
       "plan-review",
@@ -1062,6 +1075,15 @@
       "allowedTools": []
     },
     {
+      "name": "migration-engineer",
+      "version": "0.1.0",
+      "description": "Specialist in SQL Server → Postgres migrations.",
+      "agents": [
+        "_infrastructure"
+      ],
+      "allowedTools": []
+    },
+    {
       "name": "migration-review",
       "version": "0.1.1",
       "description": "Review modernization and migration plans for sequencing, rollback,",
@@ -1069,6 +1091,56 @@
         "migration",
         "swe",
         "cloud"
+      ],
+      "allowedTools": []
+    },
+    {
+      "name": "migration-sqlserver-assess",
+      "version": "0.1.0",
+      "description": "Assess SQL Server database for Postgres migration readiness.",
+      "agents": [
+        "migration-engineer",
+        "swe"
+      ],
+      "allowedTools": []
+    },
+    {
+      "name": "migration-sqlserver-data",
+      "version": "0.1.0",
+      "description": "Execute data migration from SQL Server to Postgres.",
+      "agents": [
+        "migration-engineer",
+        "swe"
+      ],
+      "allowedTools": []
+    },
+    {
+      "name": "migration-sqlserver-perf",
+      "version": "0.1.0",
+      "description": "Performance tune PostgreSQL after migration.",
+      "agents": [
+        "migration-engineer",
+        "swe"
+      ],
+      "allowedTools": []
+    },
+    {
+      "name": "migration-sqlserver-schema",
+      "version": "0.1.0",
+      "description": "Convert SQL Server T-SQL DDL to PostgreSQL schema.",
+      "agents": [
+        "migration-engineer",
+        "swe"
+      ],
+      "allowedTools": []
+    },
+    {
+      "name": "migration-sqlserver-test",
+      "version": "0.1.0",
+      "description": "Validate migrated data matches source.",
+      "agents": [
+        "migration-engineer",
+        "qa-agent"
       ],
       "allowedTools": []
     },

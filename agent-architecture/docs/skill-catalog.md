@@ -1,6 +1,6 @@
 # Skill Catalog
 
-Agent-architecture provides 94 reusable skills organized by category and specialized role.
+Agent-architecture provides 99 reusable skills organized by category and specialized role.
 
 **[Contributing?](./CONTRIBUTING.md)** See submission process and validation checklist.
 
@@ -59,6 +59,11 @@ Agent-architecture provides 94 reusable skills organized by category and special
 - **[`learnings`](./learnings/SKILL.md)** — | *(swe, orchestrate)*
 - **[`migration-dotnet-sqlserver-modernization`](./migration-dotnet-sqlserver-modernization/SKILL.md)** — | *(migration)*
 - **[`migration-review`](./migration-review/SKILL.md)** — | *(migration, swe)*
+- **[`migration-sqlserver-assess`](./migration-sqlserver-assess/SKILL.md)** — | *(migration-engineer, swe)*
+- **[`migration-sqlserver-data`](./migration-sqlserver-data/SKILL.md)** — | *(migration-engineer, swe)*
+- **[`migration-sqlserver-perf`](./migration-sqlserver-perf/SKILL.md)** — | *(migration-engineer, swe)*
+- **[`migration-sqlserver-schema`](./migration-sqlserver-schema/SKILL.md)** — | *(migration-engineer, swe)*
+- **[`migration-sqlserver-test`](./migration-sqlserver-test/SKILL.md)** — | *(migration-engineer, qa-agent)*
 - **[`plan-design-review`](./plan-design-review/SKILL.md)** — | *(design-agent, spec-agent)*
 - **[`plan-devex-review`](./plan-devex-review/SKILL.md)** — | *(qa-agent, swe)*
 - **[`plan-director-review`](./plan-director-review/SKILL.md)** — | *(orchestrate, pm)*
@@ -111,7 +116,7 @@ Agent-architecture provides 94 reusable skills organized by category and special
 
 ### `/swe`
 
-56 skills
+60 skills
 
 - [`adapter-ag-ui`](./adapter-ag-ui/SKILL.md) — |
 - [`adapter-docker-mcp`](./adapter-docker-mcp/SKILL.md) — |
@@ -137,6 +142,10 @@ Agent-architecture provides 94 reusable skills organized by category and special
 - [`learn`](./learn/SKILL.md) — |
 - [`learnings`](./learnings/SKILL.md) — |
 - [`migration-review`](./migration-review/SKILL.md) — |
+- [`migration-sqlserver-assess`](./migration-sqlserver-assess/SKILL.md) — |
+- [`migration-sqlserver-data`](./migration-sqlserver-data/SKILL.md) — |
+- [`migration-sqlserver-perf`](./migration-sqlserver-perf/SKILL.md) — |
+- [`migration-sqlserver-schema`](./migration-sqlserver-schema/SKILL.md) — |
 - [`plan-devex-review`](./plan-devex-review/SKILL.md) — |
 - [`plan-eng-review`](./plan-eng-review/SKILL.md) — |
 - [`plan-review`](./plan-review/SKILL.md) — |
@@ -172,7 +181,7 @@ Agent-architecture provides 94 reusable skills organized by category and special
 
 ### `/qa-agent`
 
-22 skills
+23 skills
 
 - [`atlassian-docs`](./atlassian-docs/SKILL.md) — |
 - [`benchmark`](./benchmark/SKILL.md) — |
@@ -185,6 +194,7 @@ Agent-architecture provides 94 reusable skills organized by category and special
 - [`health`](./health/SKILL.md) — |
 - [`investigate`](./investigate/SKILL.md) — |
 - [`learn`](./learn/SKILL.md) — |
+- [`migration-sqlserver-test`](./migration-sqlserver-test/SKILL.md) — |
 - [`plan-devex-review`](./plan-devex-review/SKILL.md) — |
 - [`plan-review`](./plan-review/SKILL.md) — |
 - [`qa`](./qa/SKILL.md) — |
@@ -424,7 +434,7 @@ Agent-architecture provides 94 reusable skills organized by category and special
 
 | Category | Count |
 |----------|-------|
-| Core Workflows | 94 |
-| **Total** | **94** |
+| Core Workflows | 99 |
+| **Total** | **99** |
 
 See [METADATA-SCHEMA.md](./METADATA-SCHEMA.md) for skill development and metadata reference.

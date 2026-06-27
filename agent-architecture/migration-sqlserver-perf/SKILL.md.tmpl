@@ -1,0 +1,55 @@
+---
+name: migration-sqlserver-perf
+version: 0.1.0
+description: |
+  Performance tune PostgreSQL after migration.
+  Creates indexes, analyzes queries, establishes baselines.
+agents: [migration-engineer, swe]
+allowed-tools: [Read, Bash, Grep]
+
+metadata:
+  category: "infrastructure"
+  domain: "data-migration"
+  tier: "essential"
+  support:
+    maintenance-status: "active"
+    owner-team: "data-engineering"
+    last-reviewed: "2026-06-26"
+---
+
+{{PREAMBLE}}
+
+# SQL Server Performance Tuning
+
+Performance tune PostgreSQL after migration.
+
+## Workflow
+
+1. Analyze existing indexes
+2. Create indexes on primary and foreign keys
+3. Collect table statistics (ANALYZE)
+4. Benchmark query performance
+5. Tune PostgreSQL settings (buffer pool, cache)
+6. Establish performance baseline
+7. Output baseline metrics and recommendations
+
+## Checklist
+
+- [ ] Verify existing indexes were created
+- [ ] Add indexes on primary/foreign keys
+- [ ] Run ANALYZE on all tables
+- [ ] Identify slow queries
+- [ ] Benchmark key operations
+- [ ] Tune PostgreSQL settings
+- [ ] Establish performance baseline
+- [ ] Output baseline metrics and tuning report
+
+## When to Use
+
+Use after `/migration-sqlserver-test` to optimize performance.
+
+## Related Skills
+
+- `/migration-engineer` — Overall coordination
+- `/migration-sqlserver-test` — Testing phase
+- `/careful` — Deployment safety checks
