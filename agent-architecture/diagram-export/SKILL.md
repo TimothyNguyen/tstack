@@ -16,7 +16,8 @@ metadata:
   dependencies:
     mcps:
       - name: drawio-mcp
-        min-version: "1.0.0"
+        min-version: "2.0.0"
+        source: "./drawio-mcp-python"
     skills: []
     min-agent-arch-version: "0.1.4"
   training:
