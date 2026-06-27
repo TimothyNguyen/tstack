@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "diagram-infrastructure"
+version = "0.1.0"
+description = "Infrastructure diagrams for AWS, GCP, Azure, Kubernetes via FastMCP"
+readme = "README.md"
+requires-python = ">=3.8"
+license = { text = "Apache-2.0" }
+authors = [{ name = "Agent Architecture" }]
+keywords = ["mcp", "diagram", "infrastructure", "aws", "gcp", "azure", "kubernetes"]
+
+dependencies = [
+    "fastmcp>=0.1.0",
+    "pydantic>=2.0.0",
+    "diagrams>=0.23.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0",
+    "pytest-asyncio>=0.21",
+]
+
+[tool.setuptools]
+packages = ["diagram_infrastructure"]
