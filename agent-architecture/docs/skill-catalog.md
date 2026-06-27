@@ -1,153 +1,412 @@
 # Skill Catalog
 
-This catalog tracks the reusable agent-architecture-style skills carried into
-`agent-architecture/`.
+Agent-architecture provides 89 reusable skills organized by category and specialized role.
 
-Each skill is a top-level folder with:
+**[Contributing?](./CONTRIBUTING.md)** See submission process and validation checklist.
 
-```text
-<skill>/SKILL.md.tmpl
-<skill>/SKILL.md
-```
+---
 
-## Core Skills
+## By Category
 
-| Skill | Purpose | Source |
-|---|---|---|
-| `using-agent-skills` | Bootstrap skill: teaches agents how to find and invoke skills, skill priority, red flags, and platform-specific tool use. | `using-agent-skills/SKILL.md.tmpl` |
-| `commit` | Atomic commit discipline: Conventional Commits format, one-behavior-per-commit, safe rebase sequence. | `commit/SKILL.md.tmpl` |
-| `spec` | Convert intent into scoped requirements, invariants, and tasks. | `spec/SKILL.md.tmpl` |
-| `autoplan` | Run a composed plan-review pipeline before implementation. | `autoplan/SKILL.md.tmpl` |
-| `subagent-orchestrator` | Plan and materialize local-only subagent manifests for scoped parallel work. | `subagent-orchestrator/SKILL.md.tmpl` |
-| `change-router` | Map changed files to the correct agent roles using routing rules; output a dispatch plan for parallel agent invocation. | `change-router/SKILL.md.tmpl` |
-| `plan-review` | Review implementation plans before code changes. | `plan-review/SKILL.md.tmpl` |
-| `plan-director-review` | Review plans from a director or senior-principal engineering perspective. | `plan-director-review/SKILL.md.tmpl` |
-| `plan-pm-review` | Review plans from a product manager perspective. | `plan-pm-review/SKILL.md.tmpl` |
-| `plan-eng-review` | Review plans for architecture and testability. | `plan-eng-review/SKILL.md.tmpl` |
-| `plan-design-review` | Review plans for UI and interaction quality. | `plan-design-review/SKILL.md.tmpl` |
-| `plan-devex-review` | Review plans for developer experience and operability. | `plan-devex-review/SKILL.md.tmpl` |
-| `investigate` | Debug failures through evidence and root-cause analysis. | `investigate/SKILL.md.tmpl` |
-| `systematic-debugging` | Exhaustive root-cause investigation for complex bugs stuck after multiple fix attempts. Multi-component systems and architecture questioning. | `systematic-debugging/SKILL.md.tmpl` |
-| `brainstorming` | Design-space exploration and requirements refinement before coding through collaborative dialogue. | `brainstorming/SKILL.md.tmpl` |
-| `receiving-code-review` | Handle code review feedback with technical rigor. Verify before implementing external suggestions. | `receiving-code-review/SKILL.md.tmpl` |
-| `verification-before-completion` | Ship-readiness verification. Run verification commands and confirm output before claiming work is complete. | `verification-before-completion/SKILL.md.tmpl` |
-| `writing-skills` | Skill creation and editing using test-driven development. Write test cases, watch them fail, write skill docs, watch tests pass. | `writing-skills/SKILL.md.tmpl` |
-| `review` | Review code, diffs, and PRs before landing. | `review/SKILL.md.tmpl` |
-| `qa` | Verify behavior with tests and approved local tools. | `qa/SKILL.md.tmpl` |
-| `test` | Design and run approved test automation, including Playwright/Selenium when enabled. | `test/SKILL.md.tmpl` |
-| `health` | Run a read-only local code health dashboard. | `health/SKILL.md.tmpl` |
-| `security-review` | Review security, governance, data access, and agent-tool risk. | `security-review/SKILL.md.tmpl` |
-| `documentation` | Generic documentation workflow. | `documentation/SKILL.md.tmpl` |
-| `atlassian-docs` | Read approved Jira and Confluence product documentation through a read-only connector. | `atlassian-docs/SKILL.md.tmpl` |
-| `document-generate` | Generate missing local project documentation. | `document-generate/SKILL.md.tmpl` |
-| `document-release` | Update docs after shipped behavior changes. | `document-release/SKILL.md.tmpl` |
-| `learnings` | Capture local project conventions and lessons safely. | `learnings/SKILL.md.tmpl` |
-| `learn` | Knowledge capture workflow: extract Q&A flashcards from session context, persist to learn-out/, export Quizlet CSV, optionally push to Confluence. | `learn/SKILL.md.tmpl` |
-| `release` | Prepare human-approved merge/deploy handoff. | `release/SKILL.md.tmpl` |
-| `ship` | Prepare PR, merge, or release handoff. | `ship/SKILL.md.tmpl` |
-| `codebase-engine` | Enterprise-safe AST knowledge graph — index, query, explain, path, affected, and codebase understanding workflow. No external egress. | `codebase-engine/SKILL.md.tmpl` |
-| `rtk-token-optimizer` | Optional Rust Token Killer guidance for reducing noisy shell output. | `rtk-token-optimizer/SKILL.md.tmpl` |
-| `token-optimizer` | Token reduction for Python objects, API responses, logs, diffs, and code before LLM injection. Bundles ptk with zero required dependencies and a bundled fallback. | `token-optimizer/SKILL.md.tmpl` |
-| `context-save` | Save local working context for future sessions. | `context-save/SKILL.md.tmpl` |
-| `context-restore` | Restore saved local working context. | `context-restore/SKILL.md.tmpl` |
-| `design-html` | Produce implementation-ready HTML guidance from approved design direction. | `design-html/SKILL.md.tmpl` |
-| `design-review` | Review UI and interaction quality. | `design-review/SKILL.md.tmpl` |
-| `diagram` | Create architecture and workflow diagrams. | `diagram/SKILL.md.tmpl` |
-| `retro` | Produce local project retrospectives. | `retro/SKILL.md.tmpl` |
-| `skillify` | Convert repeated workflows into reusable skills. | `skillify/SKILL.md.tmpl` |
-| `guard` | Apply stricter local safety posture. | `guard/SKILL.md.tmpl` |
-| `claude` | Optional Claude host bridge. | `claude/SKILL.md.tmpl` |
-| `codex` | Optional Codex host bridge. | `codex/SKILL.md.tmpl` |
-| `copilot` | Optional GitHub Copilot host bridge. | `copilot/SKILL.md.tmpl` |
-| `careful` | Destructive command guardrails for production and shared environments. | `careful/SKILL.md.tmpl` |
-| `architecture-agent-upgrade` | Policy-approved local upgrade workflow. | `architecture-agent-upgrade/SKILL.md.tmpl` |
+### Core Workflows
 
-## Anti-Bloat Skills
+- **[`adapter-ag-ui`](./adapter-ag-ui/SKILL.md)** — | *(orchestrate, swe)*
+- **[`adapter-agentcore`](./adapter-agentcore/SKILL.md)** — | *(orchestrate, cloud)*
+- **[`adapter-databricks`](./adapter-databricks/SKILL.md)** — | *(data)*
+- **[`adapter-docker-mcp`](./adapter-docker-mcp/SKILL.md)** — | *(cloud, release-agent)*
+- **[`adapter-github`](./adapter-github/SKILL.md)** — | *(swe, orchestrate)*
+- **[`adapter-google-adk`](./adapter-google-adk/SKILL.md)** — | *(orchestrate, cloud)*
+- **[`adapter-langgraph`](./adapter-langgraph/SKILL.md)** — | *(orchestrate)*
+- **[`adapter-mcp`](./adapter-mcp/SKILL.md)** — | *(swe, orchestrate)*
+- **[`adapter-openapi`](./adapter-openapi/SKILL.md)** — | *(swe, spec-agent)*
+- **[`adapter-seniorswe-concise`](./adapter-seniorswe-concise/SKILL.md)** — | *(swe)*
+- **[`adapter-strands`](./adapter-strands/SKILL.md)** — | *(orchestrate, cloud)*
+- **[`architecture-agent-upgrade`](./architecture-agent-upgrade/SKILL.md)** — |
+- **[`atlassian-docs`](./atlassian-docs/SKILL.md)** — | *(spec-agent, pm)*
+- **[`autoplan`](./autoplan/SKILL.md)** — | *(swe, orchestrate)*
+- **[`benchmark`](./benchmark/SKILL.md)** — | *(qa-agent, swe)*
+- **[`brainstorming`](./brainstorming/SKILL.md)** — | *(swe, orchestrate)*
+- **[`canary`](./canary/SKILL.md)** — | *(qa-agent, cloud)*
+- **[`careful`](./careful/SKILL.md)** — | *(migration, cloud)*
+- **[`change-router`](./change-router/SKILL.md)** — | *(orchestrate)*
+- **[`chrome-devtools`](./chrome-devtools/SKILL.md)** — | *(qa-agent, design-agent)*
+- **[`claude`](./claude/SKILL.md)** — |
+- **[`codebase-engine`](./codebase-engine/SKILL.md)** — | *(swe, migration)*
+- **[`codex`](./codex/SKILL.md)** — |
+- **[`commit`](./commit/SKILL.md)** — | *(swe, migration)*
+- **[`context-restore`](./context-restore/SKILL.md)** — | *(swe, orchestrate)*
+- **[`context-save`](./context-save/SKILL.md)** — | *(swe, orchestrate)*
+- **[`copilot`](./copilot/SKILL.md)** — |
+- **[`design-html`](./design-html/SKILL.md)** — | *(design-agent, swe)*
+- **[`design-review`](./design-review/SKILL.md)** — | *(design-agent, swe)*
+- **[`diagram`](./diagram/SKILL.md)** — | *(spec-agent, design-agent)*
+- **[`document-generate`](./document-generate/SKILL.md)** — | *(spec-agent, pm)*
+- **[`document-release`](./document-release/SKILL.md)** — | *(pm, swe)*
+- **[`documentation`](./documentation/SKILL.md)** — | *(qa-agent, pm)*
+- **[`domain-data-governance`](./domain-data-governance/SKILL.md)** — | *(data, pm)*
+- **[`domain-experiment-design`](./domain-experiment-design/SKILL.md)** — | *(data, pm)*
+- **[`domain-mlops-databricks`](./domain-mlops-databricks/SKILL.md)** — | *(data)*
+- **[`domain-model-interpretation`](./domain-model-interpretation/SKILL.md)** — | *(data, pm)*
+- **[`guard`](./guard/SKILL.md)** — | *(swe, migration)*
+- **[`health`](./health/SKILL.md)** — | *(swe, qa-agent)*
+- **[`investigate`](./investigate/SKILL.md)** — | *(swe, qa-agent)*
+- **[`learn`](./learn/SKILL.md)** — | *(swe, qa-agent)*
+- **[`learnings`](./learnings/SKILL.md)** — | *(swe, orchestrate)*
+- **[`migration-dotnet-sqlserver-modernization`](./migration-dotnet-sqlserver-modernization/SKILL.md)** — | *(migration)*
+- **[`migration-review`](./migration-review/SKILL.md)** — | *(migration, swe)*
+- **[`plan-design-review`](./plan-design-review/SKILL.md)** — | *(design-agent, spec-agent)*
+- **[`plan-devex-review`](./plan-devex-review/SKILL.md)** — | *(qa-agent, swe)*
+- **[`plan-director-review`](./plan-director-review/SKILL.md)** — | *(orchestrate, pm)*
+- **[`plan-eng-review`](./plan-eng-review/SKILL.md)** — | *(swe, migration)*
+- **[`plan-pm-review`](./plan-pm-review/SKILL.md)** — | *(pm, spec-agent)*
+- **[`plan-review`](./plan-review/SKILL.md)** — | *(swe, qa-agent)*
+- **[`qa`](./qa/SKILL.md)** — | *(qa-agent, swe)*
+- **[`receiving-code-review`](./receiving-code-review/SKILL.md)** — | *(swe, qa-agent)*
+- **[`reference-gstack-patterns`](./reference-gstack-patterns/SKILL.md)** — | *(swe, orchestrate)*
+- **[`release`](./release/SKILL.md)** — | *(pm, cloud)*
+- **[`release-notes`](./release-notes/SKILL.md)** — | *(pm, swe)*
+- **[`retro`](./retro/SKILL.md)** — | *(pm, orchestrate)*
+- **[`review`](./review/SKILL.md)** — | *(swe, qa-agent)*
+- **[`rtk-token-optimizer`](./rtk-token-optimizer/SKILL.md)** — | *(swe, data)*
+- **[`security-review`](./security-review/SKILL.md)** — | *(swe, qa-agent)*
+- **[`seniorswe-concise`](./seniorswe-concise/SKILL.md)** — | *(swe, data)*
+- **[`seniorswe-concise-audit`](./seniorswe-concise-audit/SKILL.md)** — | *(swe)*
+- **[`seniorswe-concise-debt`](./seniorswe-concise-debt/SKILL.md)** — | *(swe)*
+- **[`seniorswe-concise-gain`](./seniorswe-concise-gain/SKILL.md)** — | *(swe)*
+- **[`seniorswe-concise-help`](./seniorswe-concise-help/SKILL.md)** — | *(swe)*
+- **[`seniorswe-concise-review`](./seniorswe-concise-review/SKILL.md)** — | *(swe, orchestrate)*
+- **[`ship`](./ship/SKILL.md)** — | *(swe, cloud)*
+- **[`skillify`](./skillify/SKILL.md)** — | *(swe, orchestrate)*
+- **[`spec`](./spec/SKILL.md)** — | *(spec-agent, pm)*
+- **[`stack`](./stack/SKILL.md)** — | *(swe)*
+- **[`stack-aws`](./stack-aws/SKILL.md)** — | *(cloud)*
+- **[`stack-aws-dms`](./stack-aws-dms/SKILL.md)** — | *(migration, cloud)*
+- **[`stack-csharp`](./stack-csharp/SKILL.md)** — | *(swe, migration)*
+- **[`stack-databricks`](./stack-databricks/SKILL.md)** — | *(data)*
+- **[`stack-databricks-dbt`](./stack-databricks-dbt/SKILL.md)** — | *(data)*
+- **[`stack-legacy-frontend`](./stack-legacy-frontend/SKILL.md)** — | *(migration, swe)*
+- **[`stack-postgres`](./stack-postgres/SKILL.md)** — | *(swe, migration)*
+- **[`stack-python`](./stack-python/SKILL.md)** — | *(swe, data)*
+- **[`stack-react-typescript`](./stack-react-typescript/SKILL.md)** — | *(swe, design-agent)*
+- **[`stack-spring-ai`](./stack-spring-ai/SKILL.md)** — | *(swe)*
+- **[`stack-spring-boot`](./stack-spring-boot/SKILL.md)** — | *(swe)*
+- **[`stack-sql-server`](./stack-sql-server/SKILL.md)** — | *(swe, migration)*
+- **[`stack-sqlserver-to-postgres`](./stack-sqlserver-to-postgres/SKILL.md)** — | *(migration)*
+- **[`subagent-orchestrator`](./subagent-orchestrator/SKILL.md)** — | *(orchestrate)*
+- **[`systematic-debugging`](./systematic-debugging/SKILL.md)** — | *(swe, qa-agent)*
+- **[`test`](./test/SKILL.md)** — | *(swe, qa-agent)*
+- **[`token-optimizer`](./token-optimizer/SKILL.md)** — | *(swe, qa-agent)*
+- **[`using-agent-skills`](./using-agent-skills/SKILL.md)** — | *(swe, orchestrate)*
+- **[`verification-before-completion`](./verification-before-completion/SKILL.md)** — | *(swe, qa-agent)*
+- **[`writing-skills`](./writing-skills/SKILL.md)** — | *(orchestrate)*
 
-| Skill | Purpose | Source |
-|---|---|---|
-| `seniorswe-concise` | Lazy-senior-dev mode — enforce YAGNI ladder, stdlib-first, shortest diff. | `seniorswe-concise/SKILL.md.tmpl` |
-| `seniorswe-concise-review` | Diff review for over-engineering: delete/stdlib/native/yagni/shrink tags. | `seniorswe-concise-review/SKILL.md.tmpl` |
-| `seniorswe-concise-audit` | Whole-repo audit ranked by cut size. | `seniorswe-concise-audit/SKILL.md.tmpl` |
-| `seniorswe-concise-debt` | Harvest `seniorswe-concise:` comments into a debt ledger. | `seniorswe-concise-debt/SKILL.md.tmpl` |
-| `seniorswe-concise-gain` | Scoreboard of measured seniorswe-concise impact (lines, cost, speed). | `seniorswe-concise-gain/SKILL.md.tmpl` |
-| `seniorswe-concise-help` | Quick-reference card for all seniorswe-concise modes and skills. | `seniorswe-concise-help/SKILL.md.tmpl` |
+---
 
-## Modernization Profile And Optional Packs
+## By Agent
 
-These follow the same folder pattern but should be installed only when the
-project profile needs them:
+### `/swe`
 
-| Skill | Purpose | Source |
-|---|---|
-| `migration-dotnet-sqlserver-modernization` | Plan .NET Framework and SQL Server modernization. | `migration-dotnet-sqlserver-modernization/SKILL.md.tmpl` |
-| `stack-legacy-frontend` | Migrate Knockout, YUI, and legacy browser UI toward modern frontend patterns. | `stack-legacy-frontend/SKILL.md.tmpl` |
-| `stack-react-typescript` | React/TypeScript modernization with codemods and Redux Toolkit patterns. | `stack-react-typescript/SKILL.md.tmpl` |
-| `stack-sqlserver-to-postgres` | SQL Server to Postgres migration planning and compatibility checks. | `stack-sqlserver-to-postgres/SKILL.md.tmpl` |
-| `stack-aws-dms` | AWS DMS/SCT migration experiment and cutover planning. | `stack-aws-dms/SKILL.md.tmpl` |
-| `stack-spring-boot` | Spring Boot upgrade and API modernization. | `stack-spring-boot/SKILL.md.tmpl` |
-| `stack-spring-ai` | Spring-native AI app integration patterns. | `stack-spring-ai/SKILL.md.tmpl` |
-| `stack-databricks` | Databricks jobs, notebooks, Asset Bundles, and SDK-aware workflows. Bundles vendored `databricks/databricks-agent-skills` (10 stable + 21 experimental packs), `databricks/databricks-sdk-py` reference subset (examples + docs), and `databricks/bundle-examples` Asset Bundle templates. | `stack-databricks/SKILL.md.tmpl` |
-| `domain-mlops-databricks` | Production ML lifecycle and MLOps structure on Databricks. | `domain-mlops-databricks/SKILL.md.tmpl` |
-| `stack-databricks-dbt` | dbt on Databricks transformations, tests, docs, and lineage. | `stack-databricks-dbt/SKILL.md.tmpl` |
-| `adapter-mcp` | Optional MCP server/client adapter design. | `adapter-mcp/SKILL.md.tmpl` |
-| `adapter-github` | Optional GitHub MCP/CLI adapter guidance. | `adapter-github/SKILL.md.tmpl` |
-| `chrome-devtools` | Browser automation, UI testing, performance tracing, and network debugging via Chrome DevTools MCP. | `chrome-devtools/SKILL.md.tmpl` |
-| `adapter-ag-ui` | AG-UI-compatible event adapter guidance. | `adapter-ag-ui/SKILL.md.tmpl` |
-| `adapter-openapi` | OpenAPI generator adapter and contract boundary guidance. | `adapter-openapi/SKILL.md.tmpl` |
-| `adapter-langgraph` | Optional LangGraph orchestration boundary guidance. | `adapter-langgraph/SKILL.md.tmpl` |
-| `adapter-databricks` | Optional Databricks SDK connector boundary guidance. | `adapter-databricks/SKILL.md.tmpl` |
-| `adapter-seniorswe-concise` | Optional Seniorswe-Concise hook and MCP runtime integration. | `adapter-seniorswe-concise/SKILL.md.tmpl` |
-| `reference-gstack-patterns` | Mine agent-architecture role/workflow patterns without unsafe carry-over. | `reference-gstack-patterns/SKILL.md.tmpl` |
-| `stack-aws` | AWS application modernization with least-privilege local validation. | `stack-aws/SKILL.md.tmpl` |
-| `stack-python` | Python service, library, and data workflow modernization. | `stack-python/SKILL.md.tmpl` |
-| `stack-csharp` | C#/.NET projects, services, tests, and framework modernization. Bundles vendored `dotnet/skills` plugins under `stack-csharp/dotnet-skills/plugins/` for ASP.NET Core, Blazor, EF Core, MSBuild, NuGet, MAUI, test, AI, diagnostics, upgrades, templates. | `stack-csharp/SKILL.md.tmpl` |
-| `stack-postgres` | Postgres schema, query, migration, and data-governance workflows. | `stack-postgres/SKILL.md.tmpl` |
-| `stack-sql-server` | SQL Server schema, T-SQL, jobs, and data-access modernization. | `stack-sql-server/SKILL.md.tmpl` |
-| `domain-experiment-design` | Experiment design, power, metrics, guardrails, and rollout risk. | `domain-experiment-design/SKILL.md.tmpl` |
-| `domain-data-governance` | Data classification, lineage, permissions, retention, and privacy review. | `domain-data-governance/SKILL.md.tmpl` |
-| `domain-model-interpretation` | Model explanation, calibration, drift, and recommendation-risk review. | `domain-model-interpretation/SKILL.md.tmpl` |
-| `adapter-google-adk` | Optional Google ADK host adapter boundary. | `adapter-google-adk/SKILL.md.tmpl` |
-| `adapter-agentcore` | Optional AgentCore adapter boundary. | `adapter-agentcore/SKILL.md.tmpl` |
-| `adapter-strands` | Optional Strands adapter boundary. | `adapter-strands/SKILL.md.tmpl` |
-| `adapter-docker-mcp` | Docker MCP Registry gateway adapter. Wires 300+ containerized MCP servers (GitHub, Postgres, Playwright, Docker ops, etc.) through one stdio multiplexer. Use for Docker-based deployments or docker/mcp-registry catalog consumption. | `adapter-docker-mcp/SKILL.md.tmpl` |
-| `migration-review` | Review migration plans for sequencing, rollback, privacy, and readiness. | `migration-review/SKILL.md.tmpl` |
-| `release-notes` | Generate privacy-safe release notes from local changes. | `release-notes/SKILL.md.tmpl` |
-| `benchmark` | Local benchmark and regression workflow without public uploads. | `benchmark/SKILL.md.tmpl` |
-| `canary` | Privacy-safe canary planning and monitoring handoff. | `canary/SKILL.md.tmpl` |
+56 skills
 
-## Vendored Third-Party Skill Packs
+- [`adapter-ag-ui`](./adapter-ag-ui/SKILL.md) — |
+- [`adapter-docker-mcp`](./adapter-docker-mcp/SKILL.md) — |
+- [`adapter-github`](./adapter-github/SKILL.md) — |
+- [`adapter-mcp`](./adapter-mcp/SKILL.md) — |
+- [`adapter-openapi`](./adapter-openapi/SKILL.md) — |
+- [`adapter-seniorswe-concise`](./adapter-seniorswe-concise/SKILL.md) — |
+- [`atlassian-docs`](./atlassian-docs/SKILL.md) — |
+- [`autoplan`](./autoplan/SKILL.md) — |
+- [`benchmark`](./benchmark/SKILL.md) — |
+- [`brainstorming`](./brainstorming/SKILL.md) — |
+- [`chrome-devtools`](./chrome-devtools/SKILL.md) — |
+- [`codebase-engine`](./codebase-engine/SKILL.md) — |
+- [`commit`](./commit/SKILL.md) — |
+- [`context-restore`](./context-restore/SKILL.md) — |
+- [`context-save`](./context-save/SKILL.md) — |
+- [`design-html`](./design-html/SKILL.md) — |
+- [`design-review`](./design-review/SKILL.md) — |
+- [`document-release`](./document-release/SKILL.md) — |
+- [`guard`](./guard/SKILL.md) — |
+- [`health`](./health/SKILL.md) — |
+- [`investigate`](./investigate/SKILL.md) — |
+- [`learn`](./learn/SKILL.md) — |
+- [`learnings`](./learnings/SKILL.md) — |
+- [`migration-review`](./migration-review/SKILL.md) — |
+- [`plan-devex-review`](./plan-devex-review/SKILL.md) — |
+- [`plan-eng-review`](./plan-eng-review/SKILL.md) — |
+- [`plan-review`](./plan-review/SKILL.md) — |
+- [`qa`](./qa/SKILL.md) — |
+- [`receiving-code-review`](./receiving-code-review/SKILL.md) — |
+- [`reference-gstack-patterns`](./reference-gstack-patterns/SKILL.md) — |
+- [`release-notes`](./release-notes/SKILL.md) — |
+- [`review`](./review/SKILL.md) — |
+- [`rtk-token-optimizer`](./rtk-token-optimizer/SKILL.md) — |
+- [`security-review`](./security-review/SKILL.md) — |
+- [`seniorswe-concise`](./seniorswe-concise/SKILL.md) — |
+- [`seniorswe-concise-audit`](./seniorswe-concise-audit/SKILL.md) — |
+- [`seniorswe-concise-debt`](./seniorswe-concise-debt/SKILL.md) — |
+- [`seniorswe-concise-gain`](./seniorswe-concise-gain/SKILL.md) — |
+- [`seniorswe-concise-help`](./seniorswe-concise-help/SKILL.md) — |
+- [`seniorswe-concise-review`](./seniorswe-concise-review/SKILL.md) — |
+- [`ship`](./ship/SKILL.md) — |
+- [`skillify`](./skillify/SKILL.md) — |
+- [`stack`](./stack/SKILL.md) — |
+- [`stack-csharp`](./stack-csharp/SKILL.md) — |
+- [`stack-legacy-frontend`](./stack-legacy-frontend/SKILL.md) — |
+- [`stack-postgres`](./stack-postgres/SKILL.md) — |
+- [`stack-python`](./stack-python/SKILL.md) — |
+- [`stack-react-typescript`](./stack-react-typescript/SKILL.md) — |
+- [`stack-spring-ai`](./stack-spring-ai/SKILL.md) — |
+- [`stack-spring-boot`](./stack-spring-boot/SKILL.md) — |
+- [`stack-sql-server`](./stack-sql-server/SKILL.md) — |
+- [`systematic-debugging`](./systematic-debugging/SKILL.md) — |
+- [`test`](./test/SKILL.md) — |
+- [`token-optimizer`](./token-optimizer/SKILL.md) — |
+- [`using-agent-skills`](./using-agent-skills/SKILL.md) — |
+- [`verification-before-completion`](./verification-before-completion/SKILL.md) — |
 
-Upstream skills copied into `agent-architecture/<stack>/` and gated by the
-parent stack's Enterprise Preamble. Update by re-pulling from upstream and
-re-vetting any guidance that calls public telemetry or unscoped credential
-reads.
+### `/qa-agent`
 
-| Pack | Source | Vendored Path |
-|---|---|---|
-| `dotnet/skills` (14 plugins / ~99 skills) | <https://github.com/dotnet/skills> | `stack-csharp/dotnet-skills/plugins/` |
-| `databricks/databricks-agent-skills` (10 stable + 21 experimental skill packs) | <https://github.com/databricks/databricks-agent-skills> | `stack-databricks/databricks-agent-skills/` |
-| `databricks/databricks-sdk-py` (reference subset: examples + curated docs; library installed via pip) | <https://github.com/databricks/databricks-sdk-py> | `stack-databricks/databricks-sdk-py/` |
-| `databricks/bundle-examples` (Asset Bundle templates) | <https://github.com/databricks/bundle-examples> | `stack-databricks/bundle-examples/` |
+21 skills
 
-## Deferred Optional Packs
+- [`atlassian-docs`](./atlassian-docs/SKILL.md) — |
+- [`benchmark`](./benchmark/SKILL.md) — |
+- [`canary`](./canary/SKILL.md) — |
+- [`chrome-devtools`](./chrome-devtools/SKILL.md) — |
+- [`codebase-engine`](./codebase-engine/SKILL.md) — |
+- [`design-review`](./design-review/SKILL.md) — |
+- [`documentation`](./documentation/SKILL.md) — |
+- [`health`](./health/SKILL.md) — |
+- [`investigate`](./investigate/SKILL.md) — |
+- [`learn`](./learn/SKILL.md) — |
+- [`plan-devex-review`](./plan-devex-review/SKILL.md) — |
+- [`plan-review`](./plan-review/SKILL.md) — |
+- [`qa`](./qa/SKILL.md) — |
+- [`receiving-code-review`](./receiving-code-review/SKILL.md) — |
+- [`review`](./review/SKILL.md) — |
+- [`security-review`](./security-review/SKILL.md) — |
+- [`systematic-debugging`](./systematic-debugging/SKILL.md) — |
+- [`test`](./test/SKILL.md) — |
+- [`token-optimizer`](./token-optimizer/SKILL.md) — |
+- [`using-agent-skills`](./using-agent-skills/SKILL.md) — |
+- [`verification-before-completion`](./verification-before-completion/SKILL.md) — |
 
-These are still planned but not yet added:
+### `/spec-agent`
 
-| Pack | Candidate skills |
-|---|---|
-| Domain pack | Additional industry-specific measurement and governance skills. |
-| Stack pack | Additional stack packs discovered during project migrations. |
-| Adapter pack | Additional approved internal connectors. |
-| Delivery pack | Additional internal release and operations workflows. |
+16 skills
 
-## Excluded From Default Pack
+- [`adapter-openapi`](./adapter-openapi/SKILL.md) — |
+- [`atlassian-docs`](./atlassian-docs/SKILL.md) — |
+- [`autoplan`](./autoplan/SKILL.md) — |
+- [`brainstorming`](./brainstorming/SKILL.md) — |
+- [`codebase-engine`](./codebase-engine/SKILL.md) — |
+- [`diagram`](./diagram/SKILL.md) — |
+- [`document-generate`](./document-generate/SKILL.md) — |
+- [`document-release`](./document-release/SKILL.md) — |
+- [`documentation`](./documentation/SKILL.md) — |
+- [`learn`](./learn/SKILL.md) — |
+- [`plan-design-review`](./plan-design-review/SKILL.md) — |
+- [`plan-devex-review`](./plan-devex-review/SKILL.md) — |
+- [`plan-pm-review`](./plan-pm-review/SKILL.md) — |
+- [`plan-review`](./plan-review/SKILL.md) — |
+- [`spec`](./spec/SKILL.md) — |
+- [`using-agent-skills`](./using-agent-skills/SKILL.md) — |
 
-- Mobile/iOS QA.
-- Public internet scraping.
-- Public tunnels or ngrok.
-- Cookie/session import.
-- Public telemetry.
-- Public update checks.
-- Social/browser automation.
-- Personal-productivity flows.
+### `/pm`
+
+18 skills
+
+- [`adapter-github`](./adapter-github/SKILL.md) — |
+- [`atlassian-docs`](./atlassian-docs/SKILL.md) — |
+- [`document-generate`](./document-generate/SKILL.md) — |
+- [`document-release`](./document-release/SKILL.md) — |
+- [`documentation`](./documentation/SKILL.md) — |
+- [`domain-data-governance`](./domain-data-governance/SKILL.md) — |
+- [`domain-experiment-design`](./domain-experiment-design/SKILL.md) — |
+- [`domain-model-interpretation`](./domain-model-interpretation/SKILL.md) — |
+- [`learn`](./learn/SKILL.md) — |
+- [`learnings`](./learnings/SKILL.md) — |
+- [`plan-design-review`](./plan-design-review/SKILL.md) — |
+- [`plan-director-review`](./plan-director-review/SKILL.md) — |
+- [`plan-pm-review`](./plan-pm-review/SKILL.md) — |
+- [`release`](./release/SKILL.md) — |
+- [`release-notes`](./release-notes/SKILL.md) — |
+- [`retro`](./retro/SKILL.md) — |
+- [`spec`](./spec/SKILL.md) — |
+- [`using-agent-skills`](./using-agent-skills/SKILL.md) — |
+
+### `/design-agent`
+
+10 skills
+
+- [`brainstorming`](./brainstorming/SKILL.md) — |
+- [`chrome-devtools`](./chrome-devtools/SKILL.md) — |
+- [`codebase-engine`](./codebase-engine/SKILL.md) — |
+- [`design-html`](./design-html/SKILL.md) — |
+- [`design-review`](./design-review/SKILL.md) — |
+- [`diagram`](./diagram/SKILL.md) — |
+- [`learn`](./learn/SKILL.md) — |
+- [`plan-design-review`](./plan-design-review/SKILL.md) — |
+- [`stack-react-typescript`](./stack-react-typescript/SKILL.md) — |
+- [`using-agent-skills`](./using-agent-skills/SKILL.md) — |
+
+### `/orchestrate`
+
+27 skills
+
+- [`adapter-ag-ui`](./adapter-ag-ui/SKILL.md) — |
+- [`adapter-agentcore`](./adapter-agentcore/SKILL.md) — |
+- [`adapter-docker-mcp`](./adapter-docker-mcp/SKILL.md) — |
+- [`adapter-github`](./adapter-github/SKILL.md) — |
+- [`adapter-google-adk`](./adapter-google-adk/SKILL.md) — |
+- [`adapter-langgraph`](./adapter-langgraph/SKILL.md) — |
+- [`adapter-mcp`](./adapter-mcp/SKILL.md) — |
+- [`adapter-strands`](./adapter-strands/SKILL.md) — |
+- [`autoplan`](./autoplan/SKILL.md) — |
+- [`brainstorming`](./brainstorming/SKILL.md) — |
+- [`change-router`](./change-router/SKILL.md) — |
+- [`codebase-engine`](./codebase-engine/SKILL.md) — |
+- [`context-restore`](./context-restore/SKILL.md) — |
+- [`context-save`](./context-save/SKILL.md) — |
+- [`diagram`](./diagram/SKILL.md) — |
+- [`learn`](./learn/SKILL.md) — |
+- [`learnings`](./learnings/SKILL.md) — |
+- [`plan-director-review`](./plan-director-review/SKILL.md) — |
+- [`plan-review`](./plan-review/SKILL.md) — |
+- [`reference-gstack-patterns`](./reference-gstack-patterns/SKILL.md) — |
+- [`retro`](./retro/SKILL.md) — |
+- [`seniorswe-concise-review`](./seniorswe-concise-review/SKILL.md) — |
+- [`skillify`](./skillify/SKILL.md) — |
+- [`subagent-orchestrator`](./subagent-orchestrator/SKILL.md) — |
+- [`token-optimizer`](./token-optimizer/SKILL.md) — |
+- [`using-agent-skills`](./using-agent-skills/SKILL.md) — |
+- [`writing-skills`](./writing-skills/SKILL.md) — |
+
+### `/security`
+
+11 skills
+
+- [`careful`](./careful/SKILL.md) — |
+- [`codebase-engine`](./codebase-engine/SKILL.md) — |
+- [`guard`](./guard/SKILL.md) — |
+- [`health`](./health/SKILL.md) — |
+- [`investigate`](./investigate/SKILL.md) — |
+- [`learn`](./learn/SKILL.md) — |
+- [`receiving-code-review`](./receiving-code-review/SKILL.md) — |
+- [`security-review`](./security-review/SKILL.md) — |
+- [`systematic-debugging`](./systematic-debugging/SKILL.md) — |
+- [`using-agent-skills`](./using-agent-skills/SKILL.md) — |
+- [`verification-before-completion`](./verification-before-completion/SKILL.md) — |
+
+### `/migration`
+
+18 skills
+
+- [`careful`](./careful/SKILL.md) — |
+- [`codebase-engine`](./codebase-engine/SKILL.md) — |
+- [`commit`](./commit/SKILL.md) — |
+- [`context-restore`](./context-restore/SKILL.md) — |
+- [`context-save`](./context-save/SKILL.md) — |
+- [`guard`](./guard/SKILL.md) — |
+- [`learn`](./learn/SKILL.md) — |
+- [`migration-dotnet-sqlserver-modernization`](./migration-dotnet-sqlserver-modernization/SKILL.md) — |
+- [`migration-review`](./migration-review/SKILL.md) — |
+- [`plan-eng-review`](./plan-eng-review/SKILL.md) — |
+- [`stack-aws-dms`](./stack-aws-dms/SKILL.md) — |
+- [`stack-csharp`](./stack-csharp/SKILL.md) — |
+- [`stack-legacy-frontend`](./stack-legacy-frontend/SKILL.md) — |
+- [`stack-postgres`](./stack-postgres/SKILL.md) — |
+- [`stack-sql-server`](./stack-sql-server/SKILL.md) — |
+- [`stack-sqlserver-to-postgres`](./stack-sqlserver-to-postgres/SKILL.md) — |
+- [`systematic-debugging`](./systematic-debugging/SKILL.md) — |
+- [`using-agent-skills`](./using-agent-skills/SKILL.md) — |
+
+### `/data`
+
+19 skills
+
+- [`adapter-databricks`](./adapter-databricks/SKILL.md) — |
+- [`benchmark`](./benchmark/SKILL.md) — |
+- [`codebase-engine`](./codebase-engine/SKILL.md) — |
+- [`commit`](./commit/SKILL.md) — |
+- [`domain-data-governance`](./domain-data-governance/SKILL.md) — |
+- [`domain-experiment-design`](./domain-experiment-design/SKILL.md) — |
+- [`domain-mlops-databricks`](./domain-mlops-databricks/SKILL.md) — |
+- [`domain-model-interpretation`](./domain-model-interpretation/SKILL.md) — |
+- [`learn`](./learn/SKILL.md) — |
+- [`plan-eng-review`](./plan-eng-review/SKILL.md) — |
+- [`rtk-token-optimizer`](./rtk-token-optimizer/SKILL.md) — |
+- [`seniorswe-concise`](./seniorswe-concise/SKILL.md) — |
+- [`stack-databricks`](./stack-databricks/SKILL.md) — |
+- [`stack-databricks-dbt`](./stack-databricks-dbt/SKILL.md) — |
+- [`stack-postgres`](./stack-postgres/SKILL.md) — |
+- [`stack-python`](./stack-python/SKILL.md) — |
+- [`systematic-debugging`](./systematic-debugging/SKILL.md) — |
+- [`token-optimizer`](./token-optimizer/SKILL.md) — |
+- [`using-agent-skills`](./using-agent-skills/SKILL.md) — |
+
+### `/cloud`
+
+22 skills
+
+- [`adapter-ag-ui`](./adapter-ag-ui/SKILL.md) — |
+- [`adapter-agentcore`](./adapter-agentcore/SKILL.md) — |
+- [`adapter-docker-mcp`](./adapter-docker-mcp/SKILL.md) — |
+- [`adapter-google-adk`](./adapter-google-adk/SKILL.md) — |
+- [`adapter-mcp`](./adapter-mcp/SKILL.md) — |
+- [`adapter-strands`](./adapter-strands/SKILL.md) — |
+- [`canary`](./canary/SKILL.md) — |
+- [`careful`](./careful/SKILL.md) — |
+- [`codebase-engine`](./codebase-engine/SKILL.md) — |
+- [`commit`](./commit/SKILL.md) — |
+- [`guard`](./guard/SKILL.md) — |
+- [`health`](./health/SKILL.md) — |
+- [`learn`](./learn/SKILL.md) — |
+- [`migration-review`](./migration-review/SKILL.md) — |
+- [`plan-eng-review`](./plan-eng-review/SKILL.md) — |
+- [`release`](./release/SKILL.md) — |
+- [`security-review`](./security-review/SKILL.md) — |
+- [`ship`](./ship/SKILL.md) — |
+- [`stack-aws`](./stack-aws/SKILL.md) — |
+- [`stack-aws-dms`](./stack-aws-dms/SKILL.md) — |
+- [`systematic-debugging`](./systematic-debugging/SKILL.md) — |
+- [`using-agent-skills`](./using-agent-skills/SKILL.md) — |
+
+### `/release-agent`
+
+13 skills
+
+- [`adapter-docker-mcp`](./adapter-docker-mcp/SKILL.md) — |
+- [`canary`](./canary/SKILL.md) — |
+- [`careful`](./careful/SKILL.md) — |
+- [`codebase-engine`](./codebase-engine/SKILL.md) — |
+- [`commit`](./commit/SKILL.md) — |
+- [`document-release`](./document-release/SKILL.md) — |
+- [`learn`](./learn/SKILL.md) — |
+- [`release`](./release/SKILL.md) — |
+- [`release-notes`](./release-notes/SKILL.md) — |
+- [`retro`](./retro/SKILL.md) — |
+- [`ship`](./ship/SKILL.md) — |
+- [`using-agent-skills`](./using-agent-skills/SKILL.md) — |
+- [`verification-before-completion`](./verification-before-completion/SKILL.md) — |
+
+### `/interviewer`
+
+5 skills
+
+- [`atlassian-docs`](./atlassian-docs/SKILL.md) — |
+- [`codebase-engine`](./codebase-engine/SKILL.md) — |
+- [`diagram`](./diagram/SKILL.md) — |
+- [`learn`](./learn/SKILL.md) — |
+- [`using-agent-skills`](./using-agent-skills/SKILL.md) — |
+
+---
+
+## Statistics
+
+| Category | Count |
+|----------|-------|
+| Core Workflows | 89 |
+| **Total** | **89** |
+
+See [METADATA-SCHEMA.md](./METADATA-SCHEMA.md) for skill development and metadata reference.
