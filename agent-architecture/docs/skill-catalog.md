@@ -276,6 +276,16 @@ Agent-architecture provides 99 reusable skills organized by category and special
 - [`stack-react-typescript`](./stack-react-typescript/SKILL.md) — |
 - [`using-agent-skills`](./using-agent-skills/SKILL.md) — |
 
+### `/diagram-agent`
+
+5 skills
+
+- [`diagram-export`](./diagram-export/SKILL.md) — |
+- [`diagram-generate`](./diagram-generate/SKILL.md) — |
+- [`diagram-search`](./diagram-search/SKILL.md) — |
+- [`diagram-style`](./diagram-style/SKILL.md) — |
+- [`diagram-validate`](./diagram-validate/SKILL.md) — |
+
 ### `/orchestrate`
 
 29 skills
@@ -348,6 +358,16 @@ Agent-architecture provides 99 reusable skills organized by category and special
 - [`stack-sqlserver-to-postgres`](./stack-sqlserver-to-postgres/SKILL.md) — |
 - [`systematic-debugging`](./systematic-debugging/SKILL.md) — |
 - [`using-agent-skills`](./using-agent-skills/SKILL.md) — |
+
+### `/migration-engineer`
+
+5 skills
+
+- [`migration-sqlserver-assess`](./migration-sqlserver-assess/SKILL.md) — |
+- [`migration-sqlserver-data`](./migration-sqlserver-data/SKILL.md) — |
+- [`migration-sqlserver-perf`](./migration-sqlserver-perf/SKILL.md) — |
+- [`migration-sqlserver-schema`](./migration-sqlserver-schema/SKILL.md) — |
+- [`migration-sqlserver-test`](./migration-sqlserver-test/SKILL.md) — |
 
 ### `/data`
 

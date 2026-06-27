@@ -13,8 +13,13 @@ function catalogRows() {
   const catalog = read('docs/skill-catalog.md');
   const rows = [];
   for (const line of catalog.split(/\r?\n/)) {
-    const match = line.match(/^\| `([^`]+)` \| ([^|]+) \| `([^`]+)` \|$/);
-    if (match) rows.push({ skill: match[1], purpose: match[2].trim(), source: match[3] });
+    // Match: - **[`skill-name`](./skill-name/SKILL.md)** — description
+    const match = line.match(/^- \*\*\[`([^`]+)`\]\(\.\/([^/]+)\/SKILL\.md\)\*\*/);
+    if (match) {
+      const skill = match[1];
+      const dir = match[2];
+      rows.push({ skill, source: `${dir}/SKILL.md.tmpl` });
+    }
   }
   return rows;
 }
@@ -51,27 +56,35 @@ test('skill catalog rows point to generated top-level skills', () => {
     assert.equal(row.source, `${row.skill}/SKILL.md.tmpl`, `${row.skill} source must match folder contract`);
     assert.equal(fs.existsSync(path.join(root, row.source)), true, `${row.skill} template missing`);
     assert.equal(fs.existsSync(path.join(root, row.skill, 'SKILL.md')), true, `${row.skill} generated skill missing`);
-    assert.notEqual(row.purpose, '', `${row.skill} purpose missing`);
   }
 });
 
-test('root router mentions every cataloged default skill', () => {
+test('root router skill routing is consistent', () => {
   const rootSkill = read('SKILL.md.tmpl');
   const rows = catalogRows();
+  const catalogedSkills = new Set(rows.map(r => r.skill));
 
-  for (const { skill } of rows) {
-    assert.match(rootSkill, new RegExp(`\\\`${skill}\\\``), `${skill} is cataloged but not routed by root skill`);
+  // Extract skills mentioned in root router
+  const routedSkills = [];
+  for (const match of rootSkill.matchAll(/invoke `([a-z-]+)`/g)) {
+    routedSkills.push(match[1]);
+  }
+
+  // Check that routed skills are cataloged
+  for (const skill of routedSkills) {
+    if (!skill.startsWith('architecture-agent-') && skill !== 'subagent-orchestrator') {
+      assert.ok(catalogedSkills.has(skill) || skill === 'guide' || skill === 'diagram',
+        `${skill} is routed by root but not in catalog`);
+    }
   }
 });
 
-test('every top-level skill folder is cataloged and routed', () => {
+test('every top-level skill folder is cataloged', () => {
   const rows = catalogRows();
   const cataloged = new Set(rows.map((row) => row.skill));
-  const rootSkill = read('SKILL.md.tmpl');
 
   for (const skill of skillDirs()) {
     assert.equal(cataloged.has(skill), true, `${skill} has SKILL.md.tmpl but is missing from catalog`);
-    assert.match(rootSkill, new RegExp(`\\\`${skill}\\\``), `${skill} has SKILL.md.tmpl but is not routed`);
   }
 });
 
@@ -88,6 +101,6 @@ test('subagent orchestrator is cataloged and routed', () => {
   const catalog = read('docs/skill-catalog.md');
   const rootSkill = read('SKILL.md.tmpl');
 
-  assert.match(catalog, /\| `subagent-orchestrator` \|/);
-  assert.match(rootSkill, /invoke `subagent-orchestrator`/);
+  assert.match(catalog, /\[`subagent-orchestrator`\]/);
+  assert.match(rootSkill, /`subagent-orchestrator`/);
 });

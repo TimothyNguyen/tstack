@@ -14,8 +14,10 @@ Copilot activates skills by task description, not slash commands.
 - `/cloud` — Cloud and DevOps engineer agent. Handles AWS infrastructure, DMS migrations,
 - `/data` — Data and MLOps engineer agent. Handles Databricks jobs, dbt transformations,
 - `/design-agent` — UI and design agent. Handles design review, implementation-ready HTML
+- `/diagram-agent` — Diagram generation, editing, export, and visual system management.
 - `/interviewer` — Technical interviewer agent. Conducts interviews grounded in the actual
 - `/migration` — Migration engineer agent. Handles .NET/SQL Server modernization, SQL-to-Postgres
+- `/migration-engineer` — Specialist in SQL Server → Postgres migrations.
 - `/orchestrate` — Coordinator agent for large features. Decomposes work into parallel subagents
 - `/pm` — Product manager agent. Handles strategy, prioritization, PRDs, retrospectives,
 - `/qa-agent` — QA engineer agent. Tests, validates, benchmarks, and monitors post-deploy.
