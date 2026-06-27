@@ -38,6 +38,10 @@ metadata:
 optional-skills:
   - diagram-search
   - diagram-style
+  - diagram-infrastructure
+  - diagram-iac
+  - diagram-cloudformation
+  - diagram-helm
 ---
 
 ## Enterprise Preamble
@@ -72,6 +76,11 @@ This agent coordinates across:
 | `diagram-search` | Find shapes, icons, templates | "Find an AWS Lambda shape", "Search AWS icons" |
 | `diagram-validate` | Check completeness | Before exporting: all labels? connections complete? |
 | `diagram-style` (optional) | Apply design system colors | "Use our brand colors", "Apply dark theme" |
+| **Infrastructure Diagrams** | | |
+| `diagram-infrastructure` | Multi-cloud architecture (Python DSL) | "Draw AWS/GCP/Azure architecture", "Kubernetes cluster diagram" |
+| `diagram-iac` | AWS architecture from YAML | "Create AWS diagram from YAML", "Infrastructure-as-code visualization" |
+| `diagram-cloudformation` | CloudFormation template diagrams | "Visualize this CF template", "Draw my CloudFormation stack" |
+| `diagram-helm` | Kubernetes Helm chart diagrams | "Diagram my Helm chart", "Visualize Kubernetes deployment" |
 
 ## Routing Logic
 
