@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-06-27T01:15:16.944Z",
-  "count": 102,
+  "generatedAt": "2026-06-27T01:20:52.277Z",
+  "count": 108,
   "byAgent": {
     "_infrastructure": [
       "agent-architecture",
@@ -29,6 +29,7 @@
       "cloud",
       "data",
       "design-agent",
+      "diagram-agent",
       "interviewer",
       "migration",
       "orchestrate",
@@ -91,10 +92,22 @@
       "design-html",
       "design-review",
       "diagram",
+      "diagram-export",
+      "diagram-generate",
+      "diagram-search",
+      "diagram-style",
+      "diagram-validate",
       "learn",
       "plan-design-review",
       "stack-react-typescript",
       "using-agent-skills"
+    ],
+    "diagram-agent": [
+      "diagram-export",
+      "diagram-generate",
+      "diagram-search",
+      "diagram-style",
+      "diagram-validate"
     ],
     "interviewer": [
       "atlassian-docs",
@@ -139,6 +152,8 @@
       "context-restore",
       "context-save",
       "diagram",
+      "diagram-generate",
+      "diagram-search",
       "learn",
       "learnings",
       "plan-director-review",
@@ -155,6 +170,7 @@
     "pm": [
       "adapter-github",
       "atlassian-docs",
+      "diagram-export",
       "document-generate",
       "document-release",
       "documentation",
@@ -179,6 +195,7 @@
       "chrome-devtools",
       "codebase-engine",
       "design-review",
+      "diagram-validate",
       "documentation",
       "health",
       "investigate",
@@ -230,6 +247,10 @@
       "brainstorming",
       "codebase-engine",
       "diagram",
+      "diagram-export",
+      "diagram-generate",
+      "diagram-search",
+      "diagram-validate",
       "document-generate",
       "document-release",
       "documentation",
@@ -748,6 +769,94 @@
         "Grep",
         "Glob",
         "Bash"
+      ]
+    },
+    {
+      "name": "diagram-agent",
+      "version": "0.1.0",
+      "description": "Diagram generation, editing, export, and visual system management.",
+      "agents": [
+        "_infrastructure"
+      ],
+      "allowedTools": [
+        "Read",
+        "Bash",
+        "Grep"
+      ]
+    },
+    {
+      "name": "diagram-export",
+      "version": "0.1.0",
+      "description": "Export Draw.io diagrams to PNG, SVG, PDF with styling options.",
+      "agents": [
+        "design-agent",
+        "diagram-agent",
+        "spec-agent",
+        "pm"
+      ],
+      "allowedTools": [
+        "Read",
+        "Bash"
+      ]
+    },
+    {
+      "name": "diagram-generate",
+      "version": "0.1.0",
+      "description": "Generate Draw.io diagrams from text descriptions.",
+      "agents": [
+        "design-agent",
+        "diagram-agent",
+        "spec-agent",
+        "orchestrate"
+      ],
+      "allowedTools": [
+        "Read",
+        "Bash",
+        "Grep"
+      ]
+    },
+    {
+      "name": "diagram-search",
+      "version": "0.1.0",
+      "description": "Search Draw.io shape library for icons, shapes, and templates.",
+      "agents": [
+        "design-agent",
+        "diagram-agent",
+        "spec-agent",
+        "orchestrate"
+      ],
+      "allowedTools": [
+        "Bash",
+        "Grep"
+      ]
+    },
+    {
+      "name": "diagram-style",
+      "version": "0.1.0",
+      "description": "Apply consistent styling to diagrams. Colors, fonts, themes.",
+      "agents": [
+        "design-agent",
+        "diagram-agent"
+      ],
+      "allowedTools": [
+        "Read",
+        "Bash"
+      ]
+    },
+    {
+      "name": "diagram-validate",
+      "version": "0.1.0",
+      "description": "Validate diagram completeness and design patterns.",
+      "agents": [
+        "diagram-agent",
+        "qa-agent",
+        "design-agent",
+        "spec-agent"
+      ],
+      "allowedTools": [
+        "Read",
+        "Bash",
+        "Grep"
       ]
     },
     {

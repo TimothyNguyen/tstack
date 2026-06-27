@@ -45,6 +45,7 @@ const VALID_AGENTS = [
   "spec-agent",
   "pm",
   "design-agent",
+  "diagram-agent",
   "orchestrate",
   "security",
   "migration",

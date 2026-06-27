@@ -1,6 +1,6 @@
 # Skill Catalog
 
-Agent-architecture provides 89 reusable skills organized by category and specialized role.
+Agent-architecture provides 94 reusable skills organized by category and specialized role.
 
 **[Contributing?](./CONTRIBUTING.md)** See submission process and validation checklist.
 
@@ -40,6 +40,11 @@ Agent-architecture provides 89 reusable skills organized by category and special
 - **[`design-html`](./design-html/SKILL.md)** — | *(design-agent, swe)*
 - **[`design-review`](./design-review/SKILL.md)** — | *(design-agent, swe)*
 - **[`diagram`](./diagram/SKILL.md)** — | *(spec-agent, design-agent)*
+- **[`diagram-export`](./diagram-export/SKILL.md)** — | *(design-agent, diagram-agent)*
+- **[`diagram-generate`](./diagram-generate/SKILL.md)** — | *(design-agent, diagram-agent)*
+- **[`diagram-search`](./diagram-search/SKILL.md)** — | *(design-agent, diagram-agent)*
+- **[`diagram-style`](./diagram-style/SKILL.md)** — | *(design-agent, diagram-agent)*
+- **[`diagram-validate`](./diagram-validate/SKILL.md)** — | *(diagram-agent, qa-agent)*
 - **[`document-generate`](./document-generate/SKILL.md)** — | *(spec-agent, pm)*
 - **[`document-release`](./document-release/SKILL.md)** — | *(pm, swe)*
 - **[`documentation`](./documentation/SKILL.md)** — | *(qa-agent, pm)*
@@ -167,7 +172,7 @@ Agent-architecture provides 89 reusable skills organized by category and special
 
 ### `/qa-agent`
 
-21 skills
+22 skills
 
 - [`atlassian-docs`](./atlassian-docs/SKILL.md) — |
 - [`benchmark`](./benchmark/SKILL.md) — |
@@ -175,6 +180,7 @@ Agent-architecture provides 89 reusable skills organized by category and special
 - [`chrome-devtools`](./chrome-devtools/SKILL.md) — |
 - [`codebase-engine`](./codebase-engine/SKILL.md) — |
 - [`design-review`](./design-review/SKILL.md) — |
+- [`diagram-validate`](./diagram-validate/SKILL.md) — |
 - [`documentation`](./documentation/SKILL.md) — |
 - [`health`](./health/SKILL.md) — |
 - [`investigate`](./investigate/SKILL.md) — |
@@ -193,7 +199,7 @@ Agent-architecture provides 89 reusable skills organized by category and special
 
 ### `/spec-agent`
 
-16 skills
+20 skills
 
 - [`adapter-openapi`](./adapter-openapi/SKILL.md) — |
 - [`atlassian-docs`](./atlassian-docs/SKILL.md) — |
@@ -201,6 +207,10 @@ Agent-architecture provides 89 reusable skills organized by category and special
 - [`brainstorming`](./brainstorming/SKILL.md) — |
 - [`codebase-engine`](./codebase-engine/SKILL.md) — |
 - [`diagram`](./diagram/SKILL.md) — |
+- [`diagram-export`](./diagram-export/SKILL.md) — |
+- [`diagram-generate`](./diagram-generate/SKILL.md) — |
+- [`diagram-search`](./diagram-search/SKILL.md) — |
+- [`diagram-validate`](./diagram-validate/SKILL.md) — |
 - [`document-generate`](./document-generate/SKILL.md) — |
 - [`document-release`](./document-release/SKILL.md) — |
 - [`documentation`](./documentation/SKILL.md) — |
@@ -214,10 +224,11 @@ Agent-architecture provides 89 reusable skills organized by category and special
 
 ### `/pm`
 
-18 skills
+19 skills
 
 - [`adapter-github`](./adapter-github/SKILL.md) — |
 - [`atlassian-docs`](./atlassian-docs/SKILL.md) — |
+- [`diagram-export`](./diagram-export/SKILL.md) — |
 - [`document-generate`](./document-generate/SKILL.md) — |
 - [`document-release`](./document-release/SKILL.md) — |
 - [`documentation`](./documentation/SKILL.md) — |
@@ -237,7 +248,7 @@ Agent-architecture provides 89 reusable skills organized by category and special
 
 ### `/design-agent`
 
-10 skills
+15 skills
 
 - [`brainstorming`](./brainstorming/SKILL.md) — |
 - [`chrome-devtools`](./chrome-devtools/SKILL.md) — |
@@ -245,6 +256,11 @@ Agent-architecture provides 89 reusable skills organized by category and special
 - [`design-html`](./design-html/SKILL.md) — |
 - [`design-review`](./design-review/SKILL.md) — |
 - [`diagram`](./diagram/SKILL.md) — |
+- [`diagram-export`](./diagram-export/SKILL.md) — |
+- [`diagram-generate`](./diagram-generate/SKILL.md) — |
+- [`diagram-search`](./diagram-search/SKILL.md) — |
+- [`diagram-style`](./diagram-style/SKILL.md) — |
+- [`diagram-validate`](./diagram-validate/SKILL.md) — |
 - [`learn`](./learn/SKILL.md) — |
 - [`plan-design-review`](./plan-design-review/SKILL.md) — |
 - [`stack-react-typescript`](./stack-react-typescript/SKILL.md) — |
@@ -252,7 +268,7 @@ Agent-architecture provides 89 reusable skills organized by category and special
 
 ### `/orchestrate`
 
-27 skills
+29 skills
 
 - [`adapter-ag-ui`](./adapter-ag-ui/SKILL.md) — |
 - [`adapter-agentcore`](./adapter-agentcore/SKILL.md) — |
@@ -269,6 +285,8 @@ Agent-architecture provides 89 reusable skills organized by category and special
 - [`context-restore`](./context-restore/SKILL.md) — |
 - [`context-save`](./context-save/SKILL.md) — |
 - [`diagram`](./diagram/SKILL.md) — |
+- [`diagram-generate`](./diagram-generate/SKILL.md) — |
+- [`diagram-search`](./diagram-search/SKILL.md) — |
 - [`learn`](./learn/SKILL.md) — |
 - [`learnings`](./learnings/SKILL.md) — |
 - [`plan-director-review`](./plan-director-review/SKILL.md) — |
@@ -406,7 +424,7 @@ Agent-architecture provides 89 reusable skills organized by category and special
 
 | Category | Count |
 |----------|-------|
-| Core Workflows | 89 |
-| **Total** | **89** |
+| Core Workflows | 94 |
+| **Total** | **94** |
 
 See [METADATA-SCHEMA.md](./METADATA-SCHEMA.md) for skill development and metadata reference.

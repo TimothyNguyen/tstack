@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-06-27T01:15:15.573Z",
-  "count": 102,
+  "generatedAt": "2026-06-27T01:20:50.809Z",
+  "count": 108,
   "skills": [
     {
       "name": "adapter-ag-ui",
@@ -372,6 +372,73 @@
         "design-agent",
         "orchestrate",
         "interviewer"
+      ]
+    },
+    {
+      "name": "diagram-agent",
+      "version": "0.1.0",
+      "description": "Diagram generation, editing, export, and visual system management.",
+      "path": "agents/diagram-agent/SKILL.md.tmpl",
+      "agents": [
+        "_infrastructure"
+      ]
+    },
+    {
+      "name": "diagram-export",
+      "version": "0.1.0",
+      "description": "Export Draw.io diagrams to PNG, SVG, PDF with styling options.",
+      "path": "diagram-export/SKILL.md.tmpl",
+      "agents": [
+        "design-agent",
+        "diagram-agent",
+        "spec-agent",
+        "pm"
+      ]
+    },
+    {
+      "name": "diagram-generate",
+      "version": "0.1.0",
+      "description": "Generate Draw.io diagrams from text descriptions.",
+      "path": "diagram-generate/SKILL.md.tmpl",
+      "agents": [
+        "design-agent",
+        "diagram-agent",
+        "spec-agent",
+        "orchestrate"
+      ]
+    },
+    {
+      "name": "diagram-search",
+      "version": "0.1.0",
+      "description": "Search Draw.io shape library for icons, shapes, and templates.",
+      "path": "diagram-search/SKILL.md.tmpl",
+      "agents": [
+        "design-agent",
+        "diagram-agent",
+        "spec-agent",
+        "orchestrate"
+      ]
+    },
+    {
+      "name": "diagram-style",
+      "version": "0.1.0",
+      "description": "Apply consistent styling to diagrams. Colors, fonts, themes.",
+      "path": "diagram-style/SKILL.md.tmpl",
+      "agents": [
+        "design-agent",
+        "diagram-agent"
+      ]
+    },
+    {
+      "name": "diagram-validate",
+      "version": "0.1.0",
+      "description": "Validate diagram completeness and design patterns.",
+      "path": "diagram-validate/SKILL.md.tmpl",
+      "agents": [
+        "diagram-agent",
+        "qa-agent",
+        "design-agent",
+        "spec-agent"
       ]
     },
     {
