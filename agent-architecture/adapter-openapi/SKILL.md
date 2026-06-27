@@ -5,6 +5,10 @@ description: |
   Use OpenAPI contracts and optional generated clients/servers while keeping
   generated code isolated and reviewed.
 agents: [swe, spec-agent]
+
+metadata:
+  support:
+    last-reviewed: "2026-06-27"
 ---
 
 ## Enterprise Preamble

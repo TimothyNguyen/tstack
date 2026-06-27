@@ -5,6 +5,10 @@ description: |
   SQL Server to Postgres migration planning with T-SQL compatibility checks,
   pgloader experiments, and production cutover guardrails.
 agents: [migration]
+
+metadata:
+  support:
+    last-reviewed: "2026-06-27"
 ---
 
 ## Enterprise Preamble

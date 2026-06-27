@@ -13,6 +13,10 @@ allowed-tools:
   - Glob
   - Bash
 agents: [spec-agent, pm, qa-agent, interviewer, swe]
+
+metadata:
+  support:
+    last-reviewed: "2026-06-27"
 ---
 
 ## Enterprise Preamble

@@ -19,7 +19,7 @@ metadata:
   support:
     maintenance-status: "active"
     owner-team: "data-engineering"
-    last-reviewed: "2026-06-26"
+    last-reviewed: "2026-06-27"
 ---
 
 ## Enterprise Preamble

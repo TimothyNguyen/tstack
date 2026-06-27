@@ -5,6 +5,10 @@ description: |
   C# and .NET modernization guidance for projects, packages, services, tests,
   analyzers, and compatibility assessments.
 agents: [swe, migration]
+
+metadata:
+  support:
+    last-reviewed: "2026-06-27"
 ---
 
 ## Enterprise Preamble

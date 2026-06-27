@@ -5,6 +5,10 @@ description: |
   dbt on Databricks patterns for models, tests, docs, lineage, and governed
   transformations.
 agents: [data]
+
+metadata:
+  support:
+    last-reviewed: "2026-06-27"
 ---
 
 ## Enterprise Preamble

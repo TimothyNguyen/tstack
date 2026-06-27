@@ -5,6 +5,10 @@ description: |
   Privacy-safe canary planning for post-deploy monitoring, rollback signals,
   audit events, and human escalation without public telemetry defaults.
 agents: [qa-agent, cloud, release-agent]
+
+metadata:
+  support:
+    last-reviewed: "2026-06-27"
 ---
 
 ## Enterprise Preamble

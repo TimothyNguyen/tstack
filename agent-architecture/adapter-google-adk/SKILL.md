@@ -5,6 +5,10 @@ description: |
   Optional Google ADK host adapter boundary for invoking skills and tools
   without making core architecture depend on ADK runtime packages.
 agents: [orchestrate, _infrastructure, cloud]
+
+metadata:
+  support:
+    last-reviewed: "2026-06-27"
 ---
 
 ## Enterprise Preamble

@@ -5,6 +5,10 @@ description: |
   Map skill progress, approvals, tool actions, findings, and artifacts into
   AG-UI-compatible event concepts.
 agents: [orchestrate, _infrastructure, swe, cloud]
+
+metadata:
+  support:
+    last-reviewed: "2026-06-27"
 ---
 
 ## Enterprise Preamble

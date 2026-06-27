@@ -5,6 +5,10 @@ description: |
   React and TypeScript application modernization, including codemods, Redux
   Toolkit patterns, RTK Query, and UI migration checks.
 agents: [swe, design-agent]
+
+metadata:
+  support:
+    last-reviewed: "2026-06-27"
 ---
 
 ## Enterprise Preamble

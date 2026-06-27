@@ -5,6 +5,10 @@ description: |
   Postgres schema, query, migration, performance, and data-governance workflows
   with explicit read/write approvals and privacy-safe summaries.
 agents: [swe, migration, data]
+
+metadata:
+  support:
+    last-reviewed: "2026-06-27"
 ---
 
 ## Enterprise Preamble

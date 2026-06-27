@@ -9,6 +9,10 @@ description: |
   over-engineering", "what can I delete", "find bloat". One-shot report, does
   not apply fixes.
 agents: [swe]
+
+metadata:
+  support:
+    last-reviewed: "2026-06-27"
 ---
 
 /seniorswe-concise-review, repo-wide. Scan the whole tree instead of a diff.

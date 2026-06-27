@@ -8,6 +8,10 @@ description: |
   the seniorswe-concise markers", "debt ledger", or "what did we mark to do
   later". One-shot report, changes nothing.
 agents: [swe]
+
+metadata:
+  support:
+    last-reviewed: "2026-06-27"
 ---
 
 Every deliberate shortcut made in concise mode is marked with a `seniorswe-concise:`

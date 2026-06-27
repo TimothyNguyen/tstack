@@ -10,6 +10,10 @@ description: |
   /seniorswe-concise-review. Complements correctness-focused review, this one only
   hunts complexity.
 agents: [swe, orchestrate]
+
+metadata:
+  support:
+    last-reviewed: "2026-06-27"
 ---
 
 Review diffs for unnecessary complexity. One line per finding: location, what

@@ -7,6 +7,10 @@ description: |
   not a persistent mode. Invoke via /seniorswe-concise-gain, or "what does
   concise mode save", "show impact", "scoreboard".
 agents: [swe]
+
+metadata:
+  support:
+    last-reviewed: "2026-06-27"
 ---
 
 # Senior SWE Concise: Impact Scoreboard

@@ -5,6 +5,10 @@ description: |
   Repo-local quick reference for the skill-pack pattern this repo uses.
   Read once when adding or refactoring a skill folder.
 agents: [_infrastructure, swe, orchestrate]
+
+metadata:
+  support:
+    last-reviewed: "2026-06-27"
 ---
 
 ## Enterprise Preamble

@@ -9,6 +9,10 @@ allowed-tools:
   - Glob
   - Bash
 agents: [swe, migration, cloud, _infrastructure, security]
+
+metadata:
+  support:
+    last-reviewed: "2026-06-27"
 ---
 
 ## Enterprise Preamble

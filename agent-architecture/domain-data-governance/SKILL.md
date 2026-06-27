@@ -5,6 +5,10 @@ description: |
   Data governance review for classification, lineage, permissions, retention,
   auditability, quality checks, and privacy-safe agent outputs.
 agents: [data, pm]
+
+metadata:
+  support:
+    last-reviewed: "2026-06-27"
 ---
 
 ## Enterprise Preamble

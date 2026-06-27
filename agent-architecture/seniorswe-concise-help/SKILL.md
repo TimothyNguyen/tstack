@@ -7,6 +7,10 @@ description: |
   /seniorswe-concise-help or "what are the seniorswe-concise commands", "how
   do I use seniorswe-concise", "seniorswe-concise help".
 agents: [swe, _infrastructure]
+
+metadata:
+  support:
+    last-reviewed: "2026-06-27"
 ---
 
 # Senior SWE Concise: Quick Reference

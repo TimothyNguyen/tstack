@@ -5,6 +5,10 @@ description: |
   Optional LangGraph orchestration boundary for durable app-level agents
   without expanding the core runtime dependency surface.
 agents: [orchestrate, _infrastructure]
+
+metadata:
+  support:
+    last-reviewed: "2026-06-27"
 ---
 
 ## Enterprise Preamble

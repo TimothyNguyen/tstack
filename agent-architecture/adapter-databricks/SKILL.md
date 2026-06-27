@@ -5,6 +5,10 @@ description: |
   Optional Databricks SDK adapter boundary for workspace, job, and bundle
   operations with explicit policy gates.
 agents: [data]
+
+metadata:
+  support:
+    last-reviewed: "2026-06-27"
 ---
 
 ## Enterprise Preamble

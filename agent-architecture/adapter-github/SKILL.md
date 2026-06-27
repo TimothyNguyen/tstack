@@ -5,6 +5,10 @@ description: |
   Optional GitHub MCP/CLI adapter guidance for repo, issue, and PR context
   with read-only/default-deny safety.
 agents: [swe, orchestrate, pm]
+
+metadata:
+  support:
+    last-reviewed: "2026-06-27"
 ---
 
 ## Enterprise Preamble

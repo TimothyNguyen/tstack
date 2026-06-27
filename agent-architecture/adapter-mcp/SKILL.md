@@ -5,6 +5,10 @@ description: |
   Design optional Model Context Protocol adapters with default-deny tools,
   narrow schemas, and local audit boundaries.
 agents: [swe, _infrastructure, orchestrate, cloud]
+
+metadata:
+  support:
+    last-reviewed: "2026-06-27"
 ---
 
 ## Enterprise Preamble

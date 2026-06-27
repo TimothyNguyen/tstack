@@ -5,6 +5,10 @@ description: |
   AWS application modernization planning with least-privilege, local-first
   validation, explicit approvals, and no default cloud mutation.
 agents: [cloud]
+
+metadata:
+  support:
+    last-reviewed: "2026-06-27"
 ---
 
 ## Enterprise Preamble

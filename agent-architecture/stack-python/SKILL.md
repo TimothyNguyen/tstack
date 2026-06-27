@@ -5,6 +5,10 @@ description: |
   Python service, library, and data workflow modernization with minimal
   dependencies, local tests, packaging hygiene, and privacy-safe execution.
 agents: [swe, data]
+
+metadata:
+  support:
+    last-reviewed: "2026-06-27"
 ---
 
 ## Enterprise Preamble

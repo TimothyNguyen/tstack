@@ -5,6 +5,10 @@ description: |
   Databricks engineering workflows for Asset Bundles, jobs, notebooks, SDK
   usage, and governed data access.
 agents: [data]
+
+metadata:
+  support:
+    last-reviewed: "2026-06-27"
 ---
 
 ## Enterprise Preamble

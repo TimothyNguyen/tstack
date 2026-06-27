@@ -8,6 +8,10 @@ description: |
   Invoke via /learn at end of any session.
 agents: [swe, qa-agent, pm, spec-agent, orchestrate, data, cloud, security, design-agent, migration, release-agent, interviewer]
 optional_skills: [atlassian-docs]
+
+metadata:
+  support:
+    last-reviewed: "2026-06-27"
 ---
 
 ## Enterprise Preamble

@@ -5,6 +5,10 @@ description: |
   SQL Server schema, T-SQL, stored procedure, job, and application data-access
   modernization with governed database access.
 agents: [swe, migration]
+
+metadata:
+  support:
+    last-reviewed: "2026-06-27"
 ---
 
 ## Enterprise Preamble

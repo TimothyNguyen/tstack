@@ -8,6 +8,10 @@ description: |
   "how should I commit", "commit message", or asks about commit conventions,
   atomic commits, or git workflow after making changes.
 agents: [swe, migration, data, cloud, release-agent]
+
+metadata:
+  support:
+    last-reviewed: "2026-06-27"
 ---
 
 ## Enterprise Preamble

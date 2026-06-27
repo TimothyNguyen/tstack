@@ -5,6 +5,10 @@ description: |
   Spring Boot upgrade and API modernization using OpenRewrite recipes,
   OpenAPI contracts, and local verification.
 agents: [swe]
+
+metadata:
+  support:
+    last-reviewed: "2026-06-27"
 ---
 
 ## Enterprise Preamble

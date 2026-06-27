@@ -5,6 +5,10 @@ description: |
   Local benchmark and regression-check workflow for performance or quality
   changes with no public telemetry or benchmark uploads by default.
 agents: [qa-agent, swe, data]
+
+metadata:
+  support:
+    last-reviewed: "2026-06-27"
 ---
 
 ## Enterprise Preamble

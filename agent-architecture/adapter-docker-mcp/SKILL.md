@@ -8,6 +8,10 @@ description: |
   server configs. Use when deploying via Docker or consuming tools from the
   official docker/mcp-registry catalog.
 agents: [cloud, release-agent, orchestrate, swe, _infrastructure]
+
+metadata:
+  support:
+    last-reviewed: "2026-06-27"
 ---
 
 ## Enterprise Preamble

@@ -5,6 +5,10 @@ description: |
   Use when starting any conversation - establishes how to find and use agent-architecture skills,
   requiring skill invocation before ANY response including clarifying questions.
 agents: [swe, orchestrate, qa-agent, spec-agent, design-agent, pm, cloud, data, migration, security, release-agent, interviewer]
+
+metadata:
+  support:
+    last-reviewed: "2026-06-27"
 ---
 
 ## Enterprise Preamble

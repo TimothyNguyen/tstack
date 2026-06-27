@@ -5,6 +5,10 @@ description: |
   Experiment design review for randomization, power, metrics, guardrails,
   exposure, analysis plans, and rollout risk.
 agents: [data, pm]
+
+metadata:
+  support:
+    last-reviewed: "2026-06-27"
 ---
 
 ## Enterprise Preamble

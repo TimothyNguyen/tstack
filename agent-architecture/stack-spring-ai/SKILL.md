@@ -5,6 +5,10 @@ description: |
   Spring-native AI application patterns using Spring AI and Spring AI examples
   as references, without making them core dependencies.
 agents: [swe]
+
+metadata:
+  support:
+    last-reviewed: "2026-06-27"
 ---
 
 ## Enterprise Preamble

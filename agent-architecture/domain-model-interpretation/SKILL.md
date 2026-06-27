@@ -5,6 +5,10 @@ description: |
   Model interpretation review for feature effects, calibration, drift,
   uncertainty, explanation limits, and decision-risk communication.
 agents: [data, pm]
+
+metadata:
+  support:
+    last-reviewed: "2026-06-27"
 ---
 
 ## Enterprise Preamble

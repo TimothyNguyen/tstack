@@ -5,6 +5,10 @@ description: |
   Generate privacy-safe release notes from local changes, tests, and docs
   without sending change data to third-party services.
 agents: [pm, swe, release-agent]
+
+metadata:
+  support:
+    last-reviewed: "2026-06-27"
 ---
 
 ## Enterprise Preamble

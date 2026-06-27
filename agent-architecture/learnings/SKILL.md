@@ -10,6 +10,10 @@ allowed-tools:
   - Glob
   - Bash
 agents: [swe, _infrastructure, orchestrate, pm]
+
+metadata:
+  support:
+    last-reviewed: "2026-06-27"
 ---
 
 ## Enterprise Preamble

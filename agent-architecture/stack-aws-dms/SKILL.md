@@ -5,6 +5,10 @@ description: |
   AWS DMS/SCT migration planning patterns for governed database migration
   experiments and cutovers.
 agents: [migration, cloud]
+
+metadata:
+  support:
+    last-reviewed: "2026-06-27"
 ---
 
 ## Enterprise Preamble

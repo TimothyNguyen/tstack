@@ -5,6 +5,10 @@ description: |
   Databricks MLOps project structure, model lifecycle, CI/CD, monitoring, and
   governed production ML workflows.
 agents: [data]
+
+metadata:
+  support:
+    last-reviewed: "2026-06-27"
 ---
 
 ## Enterprise Preamble

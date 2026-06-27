@@ -9,6 +9,10 @@ allowed-tools:
   - Grep
   - Glob
 agents: [swe, orchestrate, spec-agent, design-agent]
+
+metadata:
+  support:
+    last-reviewed: "2026-06-27"
 ---
 
 ## Enterprise Preamble

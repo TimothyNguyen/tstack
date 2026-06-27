@@ -8,6 +8,10 @@ allowed-tools:
   - Read
   - Grep
 agents: [orchestrate]
+
+metadata:
+  support:
+    last-reviewed: "2026-06-27"
 ---
 
 ## Enterprise Preamble

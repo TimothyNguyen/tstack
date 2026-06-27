@@ -5,6 +5,10 @@ description: |
   Review modernization and migration plans for sequencing, rollback,
   compatibility, data safety, privacy, and production readiness.
 agents: [migration, swe, cloud]
+
+metadata:
+  support:
+    last-reviewed: "2026-06-27"
 ---
 
 ## Enterprise Preamble

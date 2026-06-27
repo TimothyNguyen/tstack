@@ -5,6 +5,10 @@ description: |
   Optional AgentCore adapter boundary for skills, tools, approvals, audit
   events, and local privacy controls.
 agents: [orchestrate, _infrastructure, cloud]
+
+metadata:
+  support:
+    last-reviewed: "2026-06-27"
 ---
 
 ## Enterprise Preamble

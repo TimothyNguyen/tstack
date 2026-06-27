@@ -8,6 +8,10 @@ description: |
   design-agent, spec-agent, orchestrate). Invoke when coordinating multi-agent
   work on a PR or large feature branch.
 agents: [orchestrate]
+
+metadata:
+  support:
+    last-reviewed: "2026-06-27"
 ---
 
 ## Enterprise Preamble

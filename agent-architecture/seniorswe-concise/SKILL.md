@@ -13,6 +13,10 @@ description: |
 argument-hint: "[lite|full|ultra]"
 license: MIT
 agents: [swe, data]
+
+metadata:
+  support:
+    last-reviewed: "2026-06-27"
 ---
 
 # Senior SWE: Concise Mode

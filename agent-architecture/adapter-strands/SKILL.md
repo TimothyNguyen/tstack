@@ -5,6 +5,10 @@ description: |
   Optional Strands adapter boundary for composing skills and tools with
   privacy-first policy gates and no core runtime dependency.
 agents: [orchestrate, _infrastructure, cloud]
+
+metadata:
+  support:
+    last-reviewed: "2026-06-27"
 ---
 
 ## Enterprise Preamble

@@ -8,6 +8,10 @@ description: |
   "set stack to X", or any stack-* skill needs context.
 argument-hint: "[aws|postgres|python|react|spring|csharp|databricks|sql-server|legacy]"
 agents: [_infrastructure, swe]
+
+metadata:
+  support:
+    last-reviewed: "2026-06-27"
 ---
 
 ## Enterprise Preamble
