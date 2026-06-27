@@ -1,0 +1,13 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "adapter-google-adk"
+version = "0.1.0"
+description = "Agent-architecture adapter for Google ADK integration"
+requires-python = ">=3.8"
+license = "Apache-2.0"
+
+[tool.setuptools]
+packages = []
