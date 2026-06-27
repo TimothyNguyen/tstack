@@ -7,10 +7,14 @@ name = "diagram-cloudformation"
 version = "0.1.0"
 description = "AWS CloudFormation visualization via diagram-iac"
 requires-python = ">=3.8"
-license = { text = "Apache-2.0" }
+license = "Apache-2.0"
 
 dependencies = [
     "fastmcp>=0.1.0",
     "pydantic>=2.0.0",
     "PyYAML>=6.0",
 ]
+
+
+[tool.setuptools]
+packages = []

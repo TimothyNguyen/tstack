@@ -7,7 +7,7 @@ name = "diagram-iac"
 version = "0.1.0"
 description = "AWS architecture diagrams from YAML (IaC) via FastMCP"
 requires-python = ">=3.8"
-license = { text = "Apache-2.0" }
+license = "Apache-2.0"
 authors = [{ name = "Agent Architecture" }]
 
 dependencies = [
@@ -20,6 +20,7 @@ dependencies = [
 dev = [
     "pytest>=7.0",
 ]
+
 
 [tool.setuptools]
 packages = []

@@ -8,7 +8,7 @@ version = "0.1.0"
 description = "Infrastructure diagrams for AWS, GCP, Azure, Kubernetes via FastMCP"
 readme = "README.md"
 requires-python = ">=3.8"
-license = { text = "Apache-2.0" }
+license = "Apache-2.0"
 authors = [{ name = "Agent Architecture" }]
 keywords = ["mcp", "diagram", "infrastructure", "aws", "gcp", "azure", "kubernetes"]
 
@@ -24,5 +24,6 @@ dev = [
     "pytest-asyncio>=0.21",
 ]
 
+
 [tool.setuptools]
-packages = ["diagram_infrastructure"]
+packages = []
