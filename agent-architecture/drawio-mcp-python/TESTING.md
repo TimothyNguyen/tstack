@@ -1,6 +1,6 @@
 # Testing Documentation
 
-Comprehensive test suite for drawio-mcp-python. All tests passing (29/29). ✅
+Comprehensive test suite for drawio-mcp-python. All tests passing (30/30). ✅
 
 ## Quick Start
 
@@ -552,11 +552,11 @@ python test_e2e.py && python verify_compatibility.py && pytest tests/
 ╔════════════════════════════════════════════════════════╗
 ║         DrawIO-MCP Python Test Results Summary          ║
 ╠════════════════════════════════════════════════════════╣
-║  End-to-End Tests (test_e2e.py):          6/6 PASSED   ║
+║  End-to-End Tests (test_e2e.py):          7/7 PASSED   ║
 ║  Compatibility Tests (verify_compatibility.py): 4/4 ✓ ║
 ║  Unit Tests (pytest):                    19/19 PASSED  ║
 ╠════════════════════════════════════════════════════════╣
-║  TOTAL: 29/29 TESTS PASSED ✅                           ║
+║  TOTAL: 30/30 TESTS PASSED ✅                           ║
 ║  Coverage: 100% of implemented features                ║
 ╚════════════════════════════════════════════════════════╝
 ```

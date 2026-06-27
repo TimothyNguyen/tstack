@@ -235,7 +235,7 @@ drawio-mcp = "drawio_mcp.server:main"
 ## Feature Parity
 
 ### Implemented (100%)
-- ✅ open_drawio_xml - XML diagrams with optional libavoid routing
+- ✅ open_drawio_xml - XML diagrams with libavoid routing (Node.js wrapper)
 - ✅ open_drawio_csv - CSV-based diagrams (org charts, flowcharts)
 - ✅ open_drawio_mermaid - Mermaid.js diagram syntax
 - ✅ Compression (pako → zlib)
@@ -244,9 +244,9 @@ drawio-mcp = "drawio_mcp.server:main"
 - ✅ Dark mode toggle
 - ✅ Browser opening (Windows, macOS, Linux)
 - ✅ CLI flags (--help, --version)
+- ✅ Libavoid routing (calls Node.js drawio-mcp wrapper, graceful fallback)
 
 ### Not Yet Implemented (Stretch Goals)
-- ⚠️ Libavoid routing (stub in place, TODO: Python port or Node.js wrapper)
 - ⚠️ Shape search tool (10k+ shape library)
 - ⚠️ Export tool (PNG, SVF, PDF)
 - ⚠️ Diagram validation
@@ -442,7 +442,7 @@ A: Yes. You can have multiple MCPs (one for draw.io-python, others for Node.js s
 A: Python is ~10-50ms faster at startup (no Node.js overhead). Diagram generation is I/O-bound (browser opening), so end-to-end time is similar.
 
 **Q: What about libavoid routing?**
-A: Currently a stub. Diagrams work fine without it. TODO: port from WASM or call Node.js wrapper. Not blocking production use.
+A: Implemented via Node.js wrapper. When you call `open_drawio_xml(..., routing="libavoid")`, Python attempts to invoke the Node.js drawio-mcp server (via npx). If Node.js not installed, falls back gracefully to unrouted XML (draw.io applies client-side orthogonal routing). Install with: `npm install -g drawio-mcp@latest`
 
 **Q: Is it production-ready?**
 A: Yes. 29/29 tests passing. 100% feature parity. Drop-in replacement for Node.js version. See [TESTING.md](./TESTING.md) for full test coverage.

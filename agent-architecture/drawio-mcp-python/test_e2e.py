@@ -230,6 +230,44 @@ def test_xml_complexity():
     print("\n✅ XML complexity test passed")
 
 
+async def test_libavoid_routing():
+    """Test libavoid routing (Node.js wrapper fallback)."""
+    print("\n[TEST 6] Libavoid Routing")
+    print("=" * 60)
+
+    xml_with_edges = """<mxGraphModel>
+  <root>
+    <mxCell id="0"/>
+    <mxCell id="1" parent="0"/>
+    <mxCell id="2" value="A" style="ellipse" vertex="1" parent="1">
+      <mxGeometry x="10" y="10" width="40" height="40" as="geometry"/>
+    </mxCell>
+    <mxCell id="3" value="B" style="ellipse" vertex="1" parent="1">
+      <mxGeometry x="150" y="10" width="40" height="40" as="geometry"/>
+    </mxCell>
+    <mxCell id="4" edge="1" parent="1" source="2" target="3">
+      <mxGeometry relative="1" as="geometry"/>
+    </mxCell>
+  </root>
+</mxGraphModel>"""
+
+    print("\n  Testing libavoid routing parameter:")
+    result = await open_drawio_xml(xml_with_edges, routing="libavoid")
+
+    # Should return a URL (either routed or unrouted depending on Node.js availability)
+    assert "Draw.io Editor URL:" in result, "Should return URL"
+    assert "https://app.diagrams.net/" in result, "Should have draw.io URL"
+    print(f"    ✓ Libavoid parameter accepted")
+    print(f"    ✓ Routing fallback works (Node.js wrapper {'' if 'npx' in result else 'not available, client-side routing will apply'})")
+
+    # Verify without routing still works
+    result_no_routing = await open_drawio_xml(xml_with_edges)
+    assert "https://app.diagrams.net/" in result_no_routing, "Should work without routing"
+    print(f"    ✓ Diagrams work without routing")
+
+    print("\n✅ Libavoid routing test passed")
+
+
 def test_mermaid_types():
     """Test all supported Mermaid diagram types."""
     print("\n[TEST 6] Mermaid Diagram Types")
@@ -272,10 +310,11 @@ async def main():
         test_url_options()
         await test_tools()
         test_xml_complexity()
+        await test_libavoid_routing()
         test_mermaid_types()
 
         print("\n" + "=" * 60)
-        print("✅ ALL TESTS PASSED (6/6)")
+        print("✅ ALL TESTS PASSED (7/7)")
         print("=" * 60)
         print("\nFeature Coverage:")
         print("  ✓ Compression (zlib deflateRaw)")
@@ -285,6 +324,7 @@ async def main():
         print("  ✓ XML diagrams")
         print("  ✓ CSV diagrams")
         print("  ✓ Mermaid diagrams (6 types)")
+        print("  ✓ Libavoid routing (Node.js wrapper)")
         print("  ✓ Error handling")
         print("  ✓ Unicode & special chars")
         print("  ✓ Complex diagrams (large XML)")

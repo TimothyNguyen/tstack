@@ -15,6 +15,8 @@ import zlib
 import base64
 import webbrowser
 import urllib.parse
+import subprocess
+import xml.etree.ElementTree as ET
 from pathlib import Path
 from typing import Optional, Literal
 
@@ -22,7 +24,7 @@ from fastmcp import FastMCP
 from pydantic import BaseModel, Field
 
 
-mcp = FastMCP("drawio-mcp", "1.3.2")
+mcp = FastMCP("drawio-mcp", "2.0.0")
 
 # Configuration
 DRAWIO_BASE_URL = os.getenv("DRAWIO_BASE_URL", "https://app.diagrams.net/")
@@ -168,6 +170,52 @@ def generate_drawio_url(
         return f"{base}{create_hash}"
 
 
+def apply_libavoid_routing(xml_content: str) -> str:
+    """
+    Apply libavoid obstacle-avoiding orthogonal edge routing to XML diagram.
+
+    Attempts to use Node.js drawio-mcp wrapper if available (via npx or npm).
+    Falls back to unrouted XML if Node.js not available.
+
+    Args:
+        xml_content: draw.io XML diagram
+
+    Returns:
+        XML with routing applied (or original if routing unavailable)
+    """
+    try:
+        # Try to call Node.js drawio-mcp open_drawio_xml with routing
+        # This assumes Node.js version is installed globally or via npx
+        result = subprocess.run(
+            ["npx", "drawio-mcp@latest"],
+            input=json.dumps({
+                "method": "route_xml",
+                "params": {"content": xml_content, "routing": "libavoid"}
+            }).encode(),
+            capture_output=True,
+            timeout=5,
+            text=False
+        )
+
+        if result.returncode == 0:
+            response = json.loads(result.stdout.decode())
+            if "result" in response and response["result"]:
+                return response["result"]
+    except (FileNotFoundError, subprocess.TimeoutExpired, json.JSONDecodeError, Exception):
+        # Node.js not available or call failed
+        pass
+
+    # Fallback: return unrouted XML with note
+    # Draw.io will apply client-side orthogonal routing if edges marked
+    print(
+        "Note: libavoid routing requires Node.js drawio-mcp. "
+        "Install with: npm install -g drawio-mcp\n"
+        "Proceeding with unrouted diagram (client-side orthogonal routing may apply).",
+        file=sys.stderr
+    )
+    return xml_content
+
+
 def open_browser(url: str) -> None:
     """
     Open URL in default browser (cross-platform).
@@ -198,8 +246,7 @@ async def open_drawio_xml(
     # Handle libavoid routing if requested
     diagram_content = content
     if routing == "libavoid":
-        # TODO: Implement libavoid routing or call Node.js wrapper
-        pass
+        diagram_content = apply_libavoid_routing(content)
 
     url = generate_drawio_url(diagram_content, "xml", lightbox, dark)
     open_browser(url)

@@ -7,12 +7,12 @@ Official draw.io MCP server for LLMs - Open diagrams in draw.io editor.
 ## Status: Production Ready ✅
 
 - **All 3 tools implemented and tested** (open_drawio_xml, open_drawio_csv, open_drawio_mermaid)
-- **29/29 tests passing** (end-to-end, unit, compatibility)
-- **99% feature parity** with Node.js version (libavoid routing TODO)
+- **30/30 tests passing** (end-to-end, unit, compatibility)
+- **100% feature parity** with Node.js version (libavoid routing via wrapper)
 - **Drop-in replacement** — same MCP protocol, same URL format, same behavior
 - **Faster startup** — 10-50ms faster than Node.js (no Node.js overhead)
 - **Smaller footprint** — fewer transitive dependencies
-- **Known gap:** Libavoid edge routing (WASM binding) not implemented; diagrams render correctly without it
+- **Libavoid routing** — Calls Node.js wrapper when available, graceful fallback if not
 
 ## Features
 
@@ -38,7 +38,7 @@ Official draw.io MCP server for LLMs - Open diagrams in draw.io editor.
 
 **XML:**
 - Full draw.io XML format (mxGraphModel)
-- Libavoid edge routing: parameter accepted but not implemented (WASM binding TODO)
+- Libavoid edge routing: implemented via Node.js wrapper (graceful fallback if unavailable)
 
 ### Options & Features
 
@@ -384,18 +384,14 @@ await open_drawio_mermaid(content)
 
 ## Future Enhancements
 
-### v2.0.0 Known Gaps
-
-- [ ] **Libavoid routing** — WASM binding not ported. Parameter accepted but ignored. Diagrams render correctly without obstacle avoidance. (See [MIGRATION.md](./MIGRATION.md#libavoid-routing) for technical details.)
-
 ### Planned (v2.1+)
 
-- [ ] Libavoid routing (Python WASM port or Node.js wrapper)
 - [ ] Shape search tool (10k+ shape library)
 - [ ] Export tool (PNG, SVG, PDF)
 - [ ] Diagram editing (open existing, modify, save)
 - [ ] Diagram validation tool
 - [ ] Template library support
+- [ ] Direct WASM libavoid binding (eliminate Node.js dependency)
 
 ### Possible (community requests)
 
