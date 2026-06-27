@@ -134,6 +134,92 @@ Visualizes:
 - CRDs (custom resources) shown as generic boxes
 - Complex Helm hooks simplified
 
+## Prerequisites
+
+**REQUIRED: Install system dependencies FIRST**
+
+### Graphviz (Required for diagram rendering)
+
+Graphviz is needed to render Helm chart diagrams.
+
+```bash
+# macOS (Homebrew)
+brew install graphviz
+
+# Ubuntu/Debian (apt)
+sudo apt-get install graphviz graphviz-dev
+
+# RHEL/CentOS (yum)
+sudo yum install graphviz graphviz-devel
+
+# Windows (Chocolatey - requires admin)
+choco install graphviz
+
+# Windows (Direct download)
+# Download from https://graphviz.org/download/ and add to PATH
+```
+
+Verify installation:
+```bash
+dot -V  # Should print Graphviz version
+```
+
+### Helm (Required for parsing Helm charts)
+
+Helm is required to parse and render Helm chart templates.
+
+```bash
+# macOS (Homebrew)
+brew install helm
+
+# Ubuntu/Debian (apt)
+sudo apt-get install helm
+
+# RHEL/CentOS (yum)
+sudo yum install helm
+
+# Windows (Chocolatey)
+choco install kubernetes-helm
+
+# Windows (Direct download)
+# Download from https://github.com/helm/helm/releases and add to PATH
+```
+
+Verify installation:
+```bash
+helm version  # Should print version information
+```
+
+## Installation
+
+### Python Package
+
+```bash
+# 1. Ensure graphviz and helm are installed (see Prerequisites above)
+
+# 2. Install Python package
+pip install -e .
+
+# 3. Verify imports work
+python -c "from diagram_helm.server import mcp; print('OK')"
+```
+
+## MCP Configuration
+
+Add to Claude Desktop or other MCP client:
+
+```json
+{
+  "mcpServers": {
+    "diagram-helm": {
+      "command": "python",
+      "args": ["-m", "diagram_helm.server"],
+      "env": {"LOG_LEVEL": "INFO"}
+    }
+  }
+}
+```
+
 ## Workflow
 
 ```

@@ -11,18 +11,46 @@ Generate professional infrastructure diagrams for AWS, GCP, Azure, Kubernetes, a
 ✅ **FastMCP**: Lightweight MCP framework with Pydantic validation
 ✅ **Integration**: Works with diagram-export and diagram-generate skills
 
+## Prerequisites
+
+**REQUIRED: Install Graphviz system package FIRST**
+
+Graphviz is a system-level dependency required for diagram rendering.
+
+```bash
+# macOS (Homebrew)
+brew install graphviz
+
+# Ubuntu/Debian (apt)
+sudo apt-get install graphviz graphviz-dev
+
+# RHEL/CentOS (yum)
+sudo yum install graphviz graphviz-devel
+
+# Windows (Chocolatey - requires admin)
+choco install graphviz
+
+# Windows (Direct download)
+# Download from https://graphviz.org/download/ and add to PATH
+```
+
+Verify installation:
+```bash
+dot -V  # Should print Graphviz version
+```
+
 ## Quick Start
 
 ### Installation
 
 ```bash
-# Install Python package
+# 1. Ensure graphviz is installed (see Prerequisites above)
+
+# 2. Install Python package
 pip install -e .
 
-# Install system graphviz dependency
-brew install graphviz        # macOS
-sudo apt-get install graphviz graphviz-dev  # Linux
-choco install graphviz       # Windows
+# 3. Verify imports work
+python -c "from diagrams import Diagram; print('OK')"
 ```
 
 ### Usage

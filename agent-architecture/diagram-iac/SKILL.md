@@ -258,23 +258,86 @@ User approves?
     └─ Yes → Export (diagram-export skill)
 ```
 
-## Installation
+## Prerequisites
 
-### macOS (Homebrew)
+**REQUIRED: Install system dependencies FIRST**
+
+### Graphviz (Required for diagram rendering)
+
+Graphviz is needed to render diagrams.
 
 ```bash
-brew install awsdac
+# macOS (Homebrew)
+brew install graphviz
+
+# Ubuntu/Debian (apt)
+sudo apt-get install graphviz graphviz-dev
+
+# RHEL/CentOS (yum)
+sudo yum install graphviz graphviz-devel
+
+# Windows (Chocolatey - requires admin)
+choco install graphviz
+
+# Windows (Direct download)
+# Download from https://graphviz.org/download/ and add to PATH
 ```
 
-### Linux/Other
+Verify installation:
+```bash
+dot -V  # Should print Graphviz version
+```
+
+### AWS Diagram-as-Code CLI (awsdac) - Required for diagram generation
+
+awsdac is the CLI tool that parses YAML and generates diagrams.
 
 ```bash
+# macOS (Homebrew)
+brew install awsdac
+
+# Linux/macOS (go install)
 go install github.com/awslabs/diagram-as-code/cmd/awsdac@latest
+
+# Windows - Install from GitHub releases
+# https://github.com/awslabs/diagram-as-code/releases
+# Download .exe and add to PATH
+```
+
+Verify installation:
+```bash
+awsdac --version  # Should print version number
+```
+
+## Installation
+
+### Python Package
+
+```bash
+# 1. Ensure graphviz and awsdac are installed (see Prerequisites above)
+
+# 2. Install Python package
+pip install -e .
+
+# 3. Verify imports work
+python -c "from diagram_iac.server import mcp; print('OK')"
 ```
 
 ## MCP Configuration
 
-No special MCP configuration needed - this skill calls awsdac CLI directly.
+Add to Claude Desktop or other MCP client:
+
+```json
+{
+  "mcpServers": {
+    "diagram-iac": {
+      "command": "python",
+      "args": ["-m", "diagram_iac.server"],
+      "env": {"AWSDAC_PATH": "awsdac"}
+    }
+  }
+}
+```
 
 ## Testing
 

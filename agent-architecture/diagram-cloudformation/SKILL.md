@@ -123,9 +123,68 @@ Outputs:
 
 **Output Diagram:** Visual architecture showing web server, security group, and database with connections.
 
+## Prerequisites
+
+**REQUIRED: Install Graphviz system package FIRST**
+
+Graphviz is needed to render CloudFormation diagrams.
+
+```bash
+# macOS (Homebrew)
+brew install graphviz
+
+# Ubuntu/Debian (apt)
+sudo apt-get install graphviz graphviz-dev
+
+# RHEL/CentOS (yum)
+sudo yum install graphviz graphviz-devel
+
+# Windows (Chocolatey - requires admin)
+choco install graphviz
+
+# Windows (Direct download)
+# Download from https://graphviz.org/download/ and add to PATH
+```
+
+Verify installation:
+```bash
+dot -V  # Should print Graphviz version
+```
+
+## Installation
+
+### Python Package
+
+```bash
+# 1. Ensure graphviz is installed (see Prerequisites above)
+
+# 2. Install Python package
+pip install -e .
+
+# 3. Verify imports work
+python -c "from diagram_cloudformation.server import mcp; print('OK')"
+```
+
+## MCP Configuration
+
+Add to Claude Desktop or other MCP client:
+
+```json
+{
+  "mcpServers": {
+    "diagram-cloudformation": {
+      "command": "python",
+      "args": ["-m", "diagram_cloudformation.server"],
+      "env": {"LOG_LEVEL": "INFO"}
+    }
+  }
+}
+```
+
 ## Limitations
 
 - Requires valid CloudFormation syntax
+- Requires graphviz system package for rendering
 - Complex templates with many resources may generate large diagrams
 - Custom resources (non-AWS) shown as generic boxes
 - Does not execute template (no actual resource creation)
