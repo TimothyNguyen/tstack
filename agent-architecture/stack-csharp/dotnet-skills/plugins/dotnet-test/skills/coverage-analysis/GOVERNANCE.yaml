@@ -1,0 +1,32 @@
+name: coverage-analysis
+type: skill
+status: beta
+version: 1.0.0
+owner: orchestrator
+description: >
+  Project-wide code coverage and CRAP (Change Risk Anti-Patterns) score analysis for .NET projects. Calculates CRAP
+  scores per method and surfaces risk hotspots — complex code with low coverage that is dangerous to modify. Use to
+  diagnose why coverage is stuck or plateaued, identify what methods block improvement, or get project-wide coverage
+  analysis with risk ranking. USE FOR: coverage stuck, coverage plateau, can't increase coverage, what's blocking
+  coverage, coverage gap, CRAP scores, risk hotspots, where to add tests, coverage analysis, coverage report. DO NOT USE
+  FOR: targeted single-method CRAP analysis (use crap-score), auditing test code for the "coverage-touching"
+  anti-pattern (tests that execute / call code but assert nothing, inflating coverage without verifying behavior) — that
+  is a test-code quality audit, use test-anti-patterns; writing tests; running tests without coverage, or
+  troubleshooting test execution (use run-tests). This skill requires or produces coverage (Cobertura) and CRAP metrics.
+dependencies:
+  skills: []
+  adapters: []
+  tools: []
+  mcps: []
+testing:
+  coverage_target: 80
+  types:
+    - unit
+    - integration
+documentation:
+  readme: true
+  spec: true
+  examples_min: 2
+used_by: []
+governance_version: '1.0'
+last_reviewed: '2026-06-28'

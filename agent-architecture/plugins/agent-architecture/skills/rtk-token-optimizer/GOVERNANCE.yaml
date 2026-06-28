@@ -1,0 +1,25 @@
+name: rtk-token-optimizer
+type: skill
+status: beta
+version: 0.1.1
+owner: orchestrator
+description: |
+  Optional Rust Token Killer integration guidance. Uses RTK to reduce noisy shell output
+  when installed and approved by policy. Does not install global hooks or enable telemetry by default.
+dependencies:
+  skills: []
+  adapters: []
+  tools: []
+  mcps: []
+testing:
+  coverage_target: 80
+  types:
+    - unit
+    - integration
+documentation:
+  readme: true
+  spec: true
+  examples_min: 2
+used_by: []
+governance_version: '1.0'
+last_reviewed: '2026-06-28'

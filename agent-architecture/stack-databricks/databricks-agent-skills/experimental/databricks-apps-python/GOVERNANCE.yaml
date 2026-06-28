@@ -1,0 +1,28 @@
+name: databricks-apps-python
+type: skill
+status: beta
+version: 1.0.0
+owner: orchestrator
+description: >-
+  Builds Databricks applications. Prefers AppKit (TypeScript + React SDK) for new apps; falls back to Python frameworks
+  (Dash, Streamlit, Gradio, Flask, FastAPI, Reflex) when Python is required. Handles OAuth authorization, app resources,
+  SQL warehouse and Lakebase connectivity, model serving, foundation model APIs, and deployment. Use when building web
+  apps, dashboards, ML demos, or REST APIs for Databricks, or when the user mentions AppKit, Streamlit, Dash, Gradio,
+  Flask, FastAPI, Reflex, or Databricks app.
+dependencies:
+  skills: []
+  adapters: []
+  tools: []
+  mcps: []
+testing:
+  coverage_target: 80
+  types:
+    - unit
+    - integration
+documentation:
+  readme: true
+  spec: true
+  examples_min: 2
+used_by: []
+governance_version: '1.0'
+last_reviewed: '2026-06-28'

@@ -1,0 +1,29 @@
+name: mcp-csharp-debug
+type: skill
+status: beta
+version: 1.0.0
+owner: orchestrator
+description: >
+  Run and debug C# MCP servers locally. Covers IDE configuration, MCP Inspector testing, GitHub Copilot Agent Mode
+  integration, logging setup, and troubleshooting. USE FOR: running MCP servers locally with dotnet run, configuring VS
+  Code or Visual Studio for MCP debugging, testing tools with MCP Inspector, testing with GitHub Copilot Agent Mode,
+  diagnosing tool registration issues, setting up mcp.json configuration, debugging MCP protocol messages, configuring
+  logging for stdio and HTTP servers. DO NOT USE FOR: creating new MCP servers (use mcp-csharp-create), writing
+  automated tests (use mcp-csharp-test), publishing or deploying to production (use mcp-csharp-publish).
+dependencies:
+  skills: []
+  adapters: []
+  tools: []
+  mcps: []
+testing:
+  coverage_target: 80
+  types:
+    - unit
+    - integration
+documentation:
+  readme: true
+  spec: true
+  examples_min: 2
+used_by: []
+governance_version: '1.0'
+last_reviewed: '2026-06-28'

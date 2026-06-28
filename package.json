@@ -1,0 +1,16 @@
+{
+  "name": "tstack-governance",
+  "version": "1.0.0",
+  "description": "Governance Engine for repository standards enforcement",
+  "scripts": {
+    "governance:check": "node bin/governance.js check",
+    "governance:check:hard": "node bin/governance.js check:hard",
+    "governance:check:soft": "node bin/governance.js check:soft",
+    "governance:health": "node bin/governance.js health",
+    "governance:validate": "node bin/governance.js validate",
+    "governance:report": "node bin/governance.js report"
+  },
+  "devDependencies": {
+    "js-yaml": "^4.1.0"
+  }
+}

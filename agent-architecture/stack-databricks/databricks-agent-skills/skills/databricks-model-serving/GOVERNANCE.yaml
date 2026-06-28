@@ -1,0 +1,26 @@
+name: databricks-model-serving
+type: skill
+status: beta
+version: 1.0.0
+owner: orchestrator
+description: >-
+  Databricks Model Serving (ops) plus MLflow model development (dev): manage serving endpoints, train and register
+  models to Unity Catalog with @prod aliases, batch-score via spark_udf, build custom PyFunc / ResponsesAgent models,
+  and discover Foundation Model API endpoints.
+dependencies:
+  skills: []
+  adapters: []
+  tools: []
+  mcps: []
+testing:
+  coverage_target: 80
+  types:
+    - unit
+    - integration
+documentation:
+  readme: true
+  spec: true
+  examples_min: 2
+used_by: []
+governance_version: '1.0'
+last_reviewed: '2026-06-28'

@@ -1,0 +1,28 @@
+name: commit
+type: skill
+status: stable
+version: 0.1.1
+owner: orchestrator
+description: |
+  Atomic commit discipline for any code change. Enforces Conventional Commits
+  format, one-behavior-per-commit rule, and safe git operation sequences.
+  Invoke via /commit, or when the user says "commit this", "make a commit",
+  "how should I commit", "commit message", or asks about commit conventions,
+  atomic commits, or git workflow after making changes.
+dependencies:
+  skills: []
+  adapters: []
+  tools: []
+  mcps: []
+testing:
+  coverage_target: 90
+  types:
+    - unit
+    - integration
+documentation:
+  readme: true
+  spec: true
+  examples_min: 2
+used_by: []
+governance_version: '1.0'
+last_reviewed: '2026-06-28'

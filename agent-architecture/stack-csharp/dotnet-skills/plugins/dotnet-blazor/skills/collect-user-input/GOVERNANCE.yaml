@@ -1,0 +1,29 @@
+name: collect-user-input
+type: skill
+status: beta
+version: 1.0.0
+owner: orchestrator
+description: >-
+  Build forms, validate data, and react to user input in Blazor. USE FOR adding forms, search boxes, filter panels,
+  inline editing, data-entry UI, file uploads, validation (annotations or custom), handling form submissions, and
+  binding input controls. Covers EditForm, built-in input components, DataAnnotationsValidator, custom validation, SSR
+  form patterns (SupplyParameterFromForm, FormName, AntiforgeryToken, Enhance), and @bind for simple interactive
+  controls. DO NOT USE for project scaffolding (see create-blazor-project) or prerendering issues (see
+  support-prerendering).
+dependencies:
+  skills: []
+  adapters: []
+  tools: []
+  mcps: []
+testing:
+  coverage_target: 80
+  types:
+    - unit
+    - integration
+documentation:
+  readme: true
+  spec: true
+  examples_min: 2
+used_by: []
+governance_version: '1.0'
+last_reviewed: '2026-06-28'

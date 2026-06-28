@@ -1,0 +1,28 @@
+name: dotnet-aot-compat
+type: skill
+status: beta
+version: 1.0.0
+owner: orchestrator
+description: >
+  Make .NET projects compatible with Native AOT and trimming by systematically resolving IL trim/AOT analyzer warnings.
+  USE FOR: making projects AOT-compatible, fixing trimming warnings, resolving IL warnings (IL2026, IL2070, IL2067,
+  IL2072, IL3050), adding DynamicallyAccessedMembers annotations, enabling IsAotCompatible. DO NOT USE FOR: publishing
+  native AOT binaries, optimizing binary size, replacing reflection-heavy libraries with alternatives. INVOKES: no tools
+  — pure knowledge skill.
+dependencies:
+  skills: []
+  adapters: []
+  tools: []
+  mcps: []
+testing:
+  coverage_target: 80
+  types:
+    - unit
+    - integration
+documentation:
+  readme: true
+  spec: true
+  examples_min: 2
+used_by: []
+governance_version: '1.0'
+last_reviewed: '2026-06-28'

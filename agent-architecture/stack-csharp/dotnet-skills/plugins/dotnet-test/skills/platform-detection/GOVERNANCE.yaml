@@ -1,0 +1,26 @@
+name: platform-detection
+type: skill
+status: beta
+version: 1.0.0
+owner: orchestrator
+description: >-
+  Reference data for detecting the test platform (VSTest vs Microsoft.Testing.Platform) and test framework (MSTest,
+  xUnit, NUnit, TUnit) from project files. DO NOT USE directly — loaded by run-tests, mtp-hot-reload, and
+  migrate-vstest-to-mtp when they need detection logic.
+dependencies:
+  skills: []
+  adapters: []
+  tools: []
+  mcps: []
+testing:
+  coverage_target: 80
+  types:
+    - unit
+    - integration
+documentation:
+  readme: true
+  spec: true
+  examples_min: 2
+used_by: []
+governance_version: '1.0'
+last_reviewed: '2026-06-28'

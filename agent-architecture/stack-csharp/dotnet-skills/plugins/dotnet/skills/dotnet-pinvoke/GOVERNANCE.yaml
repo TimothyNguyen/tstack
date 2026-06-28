@@ -1,0 +1,28 @@
+name: dotnet-pinvoke
+type: skill
+status: beta
+version: 1.0.0
+owner: orchestrator
+description: >
+  Correctly call native (C/C++) libraries from .NET using P/Invoke and LibraryImport. Covers function signatures, string
+  marshalling, memory lifetime, SafeHandle, and cross-platform patterns. USE FOR: writing new P/Invoke or LibraryImport
+  declarations, reviewing or debugging existing native interop code, wrapping a C or C++ library for use in .NET,
+  diagnosing crashes, memory leaks, or corruption at the managed/native boundary. DO NOT USE FOR: COM interop, C++/CLI
+  mixed-mode assemblies, or pure managed code with no native dependencies.
+dependencies:
+  skills: []
+  adapters: []
+  tools: []
+  mcps: []
+testing:
+  coverage_target: 80
+  types:
+    - unit
+    - integration
+documentation:
+  readme: true
+  spec: true
+  examples_min: 2
+used_by: []
+governance_version: '1.0'
+last_reviewed: '2026-06-28'

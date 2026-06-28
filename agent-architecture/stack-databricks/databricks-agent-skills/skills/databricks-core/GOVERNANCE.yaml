@@ -1,0 +1,27 @@
+name: databricks-core
+type: skill
+status: stable
+version: 1.0.0
+owner: orchestrator
+description: >-
+  Databricks CLI operations and the parent/entry-point skill for all Databricks work: authentication, profile selection,
+  data exploration, bundles, and Genie natural-language data Q&A. Load this first for any Databricks task (CLI, auth,
+  profiles, exploring catalogs/tables), then load the matching product skill. Contains up-to-date guidelines for
+  Databricks-related CLI tasks.
+dependencies:
+  skills: []
+  adapters: []
+  tools: []
+  mcps: []
+testing:
+  coverage_target: 90
+  types:
+    - unit
+    - integration
+documentation:
+  readme: true
+  spec: true
+  examples_min: 2
+used_by: []
+governance_version: '1.0'
+last_reviewed: '2026-06-28'

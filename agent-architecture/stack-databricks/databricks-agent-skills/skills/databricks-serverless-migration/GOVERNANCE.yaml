@@ -1,0 +1,28 @@
+name: databricks-serverless-migration
+type: skill
+status: beta
+version: 1.0.0
+owner: orchestrator
+description: >-
+  Migrate Databricks workloads from classic compute to serverless compute. Use when migrating notebooks, jobs,
+  pipelines, or Scala JARs (`spark_jar_task`) from classic clusters to serverless, checking if existing code is
+  serverless-compatible, or writing new serverless-compatible code. Provides concrete fixes for the serverless Spark
+  Connect architecture and guides the full migration. Not for classic DBR version upgrades or cluster configuration
+  changes within classic compute.
+dependencies:
+  skills: []
+  adapters: []
+  tools: []
+  mcps: []
+testing:
+  coverage_target: 80
+  types:
+    - unit
+    - integration
+documentation:
+  readme: true
+  spec: true
+  examples_min: 2
+used_by: []
+governance_version: '1.0'
+last_reviewed: '2026-06-28'

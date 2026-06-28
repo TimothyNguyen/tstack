@@ -1,0 +1,25 @@
+name: diagram-iac
+type: skill
+status: beta
+version: 0.1.0
+owner: diagram-agent
+description: |
+  AWS architecture diagrams from YAML code (infrastructure-as-code).
+  Generate architecture diagrams using diagram-as-code YAML format.
+dependencies:
+  skills: []
+  adapters: []
+  tools: []
+  mcps: []
+testing:
+  coverage_target: 80
+  types:
+    - unit
+    - integration
+documentation:
+  readme: true
+  spec: true
+  examples_min: 2
+used_by: []
+governance_version: '1.0'
+last_reviewed: '2026-06-28'

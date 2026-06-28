@@ -1,0 +1,28 @@
+name: resolve-project-references
+type: skill
+status: beta
+version: 1.0.0
+owner: orchestrator
+description: >-
+  Guide for interpreting ResolveProjectReferences time in MSBuild performance summaries. Only activate in MSBuild/.NET
+  build context. Activate when ResolveProjectReferences appears as the most expensive target and developers are trying
+  to optimize it directly. Explains that the reported time includes wait time for dependent project builds and is
+  misleading. Guides users to focus on task self-time instead. Do not activate for general build performance -- use
+  build-perf-diagnostics instead.
+dependencies:
+  skills: []
+  adapters: []
+  tools: []
+  mcps: []
+testing:
+  coverage_target: 80
+  types:
+    - unit
+    - integration
+documentation:
+  readme: true
+  spec: true
+  examples_min: 2
+used_by: []
+governance_version: '1.0'
+last_reviewed: '2026-06-28'

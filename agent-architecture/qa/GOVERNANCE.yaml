@@ -1,0 +1,25 @@
+name: qa
+type: skill
+status: beta
+version: 0.1.1
+owner: orchestrator
+description: |
+  Enterprise-safe QA workflow. Plans and verifies user-facing or service behavior using
+  local tests and approved tools. Browser automation is optional and disabled by default.
+dependencies:
+  skills: []
+  adapters: []
+  tools: []
+  mcps: []
+testing:
+  coverage_target: 80
+  types:
+    - unit
+    - integration
+documentation:
+  readme: true
+  spec: true
+  examples_min: 2
+used_by: []
+governance_version: '1.0'
+last_reviewed: '2026-06-28'

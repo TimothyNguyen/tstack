@@ -1,0 +1,28 @@
+name: change-router
+type: skill
+status: beta
+version: 0.1.2
+owner: orchestrator
+description: |
+  Routes changed files to the appropriate agent roles using agents/routing.json.
+  Given a git diff, file list, or PR changeset, outputs a dispatch plan mapping
+  each changed area to the correct agent (swe, qa-agent, migration, data, cloud,
+  design-agent, spec-agent, orchestrate). Invoke when coordinating multi-agent
+  work on a PR or large feature branch.
+dependencies:
+  skills: []
+  adapters: []
+  tools: []
+  mcps: []
+testing:
+  coverage_target: 80
+  types:
+    - unit
+    - integration
+documentation:
+  readme: true
+  spec: true
+  examples_min: 2
+used_by: []
+governance_version: '1.0'
+last_reviewed: '2026-06-28'
