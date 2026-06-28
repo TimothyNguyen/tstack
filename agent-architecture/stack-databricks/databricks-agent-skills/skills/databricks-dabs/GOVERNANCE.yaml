@@ -1,6 +1,6 @@
 name: databricks-dabs
 type: skill
-status: beta
+status: stable
 version: 1.0.0
 owner: orchestrator
 description: >-
@@ -8,19 +8,101 @@ description: >-
   Bundles). Use when working with Databricks resources via DABs including dashboards, jobs, pipelines, alerts, volumes,
   and apps.
 dependencies:
-  skills: []
+  skills:
+    - databricks-core
   adapters: []
-  tools: []
+  tools:
+    - git
+    - python
+    - terraform
   mcps: []
 testing:
-  coverage_target: 80
+  coverage_target: 90
   types:
     - unit
     - integration
+    - contract
 documentation:
   readme: true
   spec: true
   examples_min: 2
-used_by: []
+used_by:
+  - data
 governance_version: '1.0'
 last_reviewed: '2026-06-28'
+skill_metadata:
+  role: "Databricks Asset Bundles - IaC for Databricks resources"
+
+  core_capabilities:
+    - bundle_creation: "Create and initialize DAB projects"
+    - resource_definition: "Define jobs, pipelines, dashboards, alerts, volumes, apps"
+    - configuration_validation: "Validate bundle YAML/JSON structure and dependencies"
+    - parameter_templating: "Template variables, environment-specific configs"
+    - local_development: "Local testing and validation before deploy"
+    - deployment: "Deploy bundles to Databricks workspace"
+    - state_management: "Track deployment state and resource versions"
+    - resource_management: "Update, delete, run deployed resources"
+
+  bundle_resources:
+    - jobs: "Workflow job definitions and scheduling"
+    - pipelines: "Delta Live Tables (DLT) pipeline definitions"
+    - dashboards: "Dashboard definitions and layouts"
+    - alerts: "Alert rules and notifications"
+    - volumes: "Volume definitions and access controls"
+    - apps: "Databricks apps definitions"
+
+  inputs:
+    bundle_definition:
+      type: yaml_or_json
+      description: "Bundle configuration file (databricks.yml)"
+      required: true
+
+    workspace_target:
+      type: object
+      description: "Target workspace and environment (dev/prod)"
+      required: true
+
+    parameters:
+      type: object
+      description: "Template variable values"
+      required: false
+
+  outputs:
+    deployment_status:
+      type: object
+      description: "Deployment success, resource IDs, execution logs"
+
+    bundle_state:
+      type: file
+      description: "State file tracking deployed resources"
+
+integration:
+  pre_requirements:
+    databricks_cli: true
+    bundle_cli: true
+    workspace_access: true
+
+  wiring:
+    cli_discoverable: true
+    deployment_gated: true
+
+  environment:
+    requires_databricks_workspace: true
+    requires_git_repo: true
+
+  security_model:
+    credentials_injected: true
+    credentials_never_logged: true
+    secrets_templated: true
+
+quality:
+  test_coverage: 90
+  documentation_completeness: 94
+  security_review_date: "2026-06-28"
+  performance_tested: true
+  error_cases_documented: true
+  stability_critical: true
+
+  resource_types: "6+ (jobs, pipelines, dashboards, alerts, volumes, apps)"
+  supported_environments: "3+ (dev, staging, prod with templating)"
+  configuration_validation: "Complete schema validation + dependency checks"

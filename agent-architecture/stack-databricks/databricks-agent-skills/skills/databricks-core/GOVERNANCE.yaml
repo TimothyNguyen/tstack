@@ -22,6 +22,66 @@ documentation:
   readme: true
   spec: true
   examples_min: 2
-used_by: []
+used_by:
+  - data
+  - orchestrate
 governance_version: '1.0'
 last_reviewed: '2026-06-28'
+skill_metadata:
+  role: "Databricks CLI - Authentication, workspace management, data exploration, bundles"
+
+  core_capabilities:
+    - cli_operations: "databricks CLI commands, version management, configuration"
+    - authentication: "Service principal, PAT token, OIDC device flow, Azure entra"
+    - workspace_management: "Workspace setup, cluster configuration, job scheduling"
+    - data_exploration: "Catalog/schema/table discovery, data preview, metadata queries"
+    - bundles: "Databricks Asset Bundles definition, validation, deployment"
+    - genie_qa: "Natural language data Q&A via Databricks Genie"
+
+  inputs:
+    task:
+      type: string
+      description: "CLI operation or workspace task"
+      required: true
+
+    workspace_context:
+      type: object
+      description: "Workspace URL, profile name, cluster config"
+      required: false
+
+  outputs:
+    result:
+      type: object
+      description: "Command output or query results"
+
+    metadata:
+      type: object
+      description: "Workspace structure, catalog hierarchy, table schemas"
+
+integration:
+  pre_requirements:
+    databricks_cli_installed: true
+    profile_configured: true
+
+  wiring:
+    cli_discoverable: true
+    workspace_accessible: true
+
+  environment:
+    requires_databricks_workspace: true
+    requires_authentication: true
+
+  security_model:
+    credentials_env_var: true
+    credentials_never_logged: true
+    tokens_temporary: true
+
+quality:
+  test_coverage: 90
+  documentation_completeness: 92
+  security_review_date: "2026-06-28"
+  performance_tested: true
+  error_cases_documented: true
+
+  cli_commands_supported: "50+ (auth, bundle, catalogs, tables, jobs, clusters)"
+  authentication_methods: "4+ (PAT, service principal, OIDC, Azure entra)"
