@@ -1,0 +1,117 @@
+# Example Component Governance Manifest
+# Place as GOVERNANCE.yaml in each component directory
+
+name: commit
+type: skill
+status: stable
+version: "2.1.0"
+owner: swe-agent
+
+description: |
+  Skill for committing code changes with conventional commits format,
+  git hooks integration, and pre-commit validation. Supports interactive
+  commit message editing and automated changelog generation.
+
+dependencies:
+  skills:
+    - pre-commit-review
+  adapters:
+    - git-adapter
+  tools:
+    - git
+    - conventional-commits
+  mcps:
+    - github-mcp
+
+testing:
+  coverage_target: 90
+  types:
+    - unit
+    - integration
+    - contract
+
+documentation:
+  readme: true
+  spec: true
+  examples_min: 3
+
+used_by:
+  - swe-agent
+  - orchestrate
+  - release-agent
+
+governance_version: "1.0"
+last_reviewed: "2026-06-27"
+
+# Component-specific metadata
+skill_metadata:
+  agents: [swe, orchestrate, release-agent]
+  tools_provided:
+    - commit_staged_files
+    - commit_with_message
+    - amend_commit
+    - push_commits
+
+  inputs:
+    message:
+      type: string
+      description: Commit message (conventional commits format)
+      required: false
+      example: "fix: resolve token expiry check in auth middleware"
+
+    amend:
+      type: boolean
+      description: Amend previous commit instead of creating new one
+      default: false
+
+  outputs:
+    success:
+      type: boolean
+      description: Whether commit succeeded
+
+    commit_hash:
+      type: string
+      description: Git commit SHA hash
+
+    message:
+      type: string
+      description: Actual commit message used
+
+# Integration requirements
+integration:
+  pre_requirements:
+    - git_repo_initialized: true
+    - git_user_configured: true
+    - pre_commit_installed: true
+
+  registration:
+    agent_registry: true
+    in_orchestrator: true
+    exported_correctly: true
+
+  wiring:
+    skill_discoverable: true
+    in_agent_skills: true
+    examples_working: true
+
+# Quality metrics
+quality:
+  test_coverage: 92
+  documentation_completeness: 100
+  security_review_date: "2026-06-20"
+  performance_tested: true
+  error_cases_documented: true
+
+# Escape hatches (if any)
+exceptions:
+  - gate: soft_documentation
+    reason: "Examples show real commit workflow which requires actual git repo"
+    linked_issue: "GOVERNANCE-42"
+    approved_by: "staff-swe"
+    expires: "2026-08-27"
+
+# Deprecation (if applicable)
+# deprecation:
+#   reason: "Use commit-v3 which has better message editing"
+#   migration_path: "Replace imports of commit with commit-v3"
+#   removal_date: "2026-12-31"

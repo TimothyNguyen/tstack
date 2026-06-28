@@ -10,9 +10,14 @@ description: |
   design-agent, spec-agent, orchestrate). Invoke when coordinating multi-agent
   work on a PR or large feature branch.
 dependencies:
-  skills: []
+  skills:
+    - subagent-orchestrator
   adapters: []
-  tools: []
+  tools:
+    - docker
+    - git
+    - npm
+    - python
   mcps: []
 testing:
   coverage_target: 80

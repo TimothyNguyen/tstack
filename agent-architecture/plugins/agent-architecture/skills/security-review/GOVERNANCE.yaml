@@ -20,6 +20,17 @@ documentation:
   readme: true
   spec: true
   examples_min: 2
-used_by: []
+used_by:
+  - careful
+  - codebase-engine
+  - guard
+  - health
+  - investigate
+  - learn
+  - receiving-code-review
+  - security-review
+  - systematic-debugging
+  - using-agent-skills
+  - verification-before-completion
 governance_version: '1.0'
 last_reviewed: '2026-06-28'

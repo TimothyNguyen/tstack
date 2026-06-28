@@ -10,10 +10,21 @@ description: |
   server configs. Use when deploying via Docker or consuming tools from the
   official docker/mcp-registry catalog.
 dependencies:
-  skills: []
-  adapters: []
-  tools: []
-  mcps: []
+  skills:
+    - release
+    - seniorswe-concise
+    - stack-aws
+    - subagent-orchestrator
+  adapters:
+    - adapter-docker-mcp
+  tools:
+    - docker
+    - git
+    - github
+    - python
+    - terraform
+  mcps:
+    - docker-mcp
 testing:
   coverage_target: 80
   types:
@@ -23,6 +34,7 @@ documentation:
   readme: true
   spec: true
   examples_min: 2
-used_by: []
+used_by:
+  - adapter-docker-mcp
 governance_version: '1.0'
 last_reviewed: '2026-06-28'

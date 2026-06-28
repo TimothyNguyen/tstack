@@ -1,0 +1,42 @@
+# Sample pre-commit configuration for the pre-commit-review skill
+# This demonstrates common checks to catch style issues before code review
+
+repos:
+  # Built-in pre-commit hooks
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.4.0
+    hooks:
+      # Whitespace and formatting
+      - id: trailing-whitespace
+        description: Remove trailing whitespace
+      - id: end-of-file-fixer
+        description: Ensure files end with newline
+      - id: check-case-conflict
+        description: Check for files that conflict in case only
+
+      # File format validation
+      - id: check-json
+        description: Validate JSON files
+      - id: check-yaml
+        description: Validate YAML files
+      - id: check-toml
+        description: Validate TOML files
+      - id: check-xml
+        description: Validate XML files
+
+      # Code quality
+      - id: check-ast
+        description: Check Python syntax validity
+      - id: debug-statements
+        description: Detect debug statements (pdb, ipdb, breakpoint)
+      - id: check-merge-conflict
+        description: Detect merge conflict markers
+      - id: check-docstring-first
+        description: Check docstring is first in module/class
+      - id: detect-private-key
+        description: Detect private keys
+
+      # File management
+      - id: check-added-large-files
+        args: ['--maxkb=5000']
+        description: Prevent large files from being committed

@@ -7,10 +7,16 @@ description: |
   SQL Server schema, T-SQL, stored procedure, job, and application data-access
   modernization with governed database access.
 dependencies:
-  skills: []
+  skills:
+    - migration-review
+    - seniorswe-concise
   adapters: []
-  tools: []
-  mcps: []
+  tools:
+    - docker
+    - git
+    - python
+  mcps:
+    - sql-mcp
 testing:
   coverage_target: 80
   types:

@@ -7,9 +7,13 @@ description: |
   SQL Server to Postgres migration planning with T-SQL compatibility checks,
   pgloader experiments, and production cutover guardrails.
 dependencies:
-  skills: []
+  skills:
+    - migration-review
   adapters: []
-  tools: []
+  tools:
+    - docker
+    - git
+    - python
   mcps: []
 testing:
   coverage_target: 80

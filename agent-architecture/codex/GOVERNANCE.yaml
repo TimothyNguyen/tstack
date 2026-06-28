@@ -10,7 +10,12 @@ description: |
 dependencies:
   skills: []
   adapters: []
-  tools: []
+  tools:
+    - docker
+    - git
+    - npm
+    - python
+    - terraform
   mcps: []
 testing:
   coverage_target: 80

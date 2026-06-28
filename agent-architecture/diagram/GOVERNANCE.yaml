@@ -6,9 +6,14 @@ owner: orchestrator
 description: |
   Creates text-first architecture and workflow diagrams from local project context.
 dependencies:
-  skills: []
+  skills:
+    - design-review
+    - spec
+    - subagent-orchestrator
   adapters: []
-  tools: []
+  tools:
+    - git
+    - python
   mcps: []
 testing:
   coverage_target: 80

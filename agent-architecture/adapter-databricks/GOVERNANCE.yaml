@@ -7,9 +7,14 @@ description: |
   Optional Databricks SDK adapter boundary for workspace, job, and bundle
   operations with explicit policy gates.
 dependencies:
-  skills: []
-  adapters: []
-  tools: []
+  skills:
+    - stack-databricks
+  adapters:
+    - adapter-databricks
+  tools:
+    - docker
+    - git
+    - python
   mcps: []
 testing:
   coverage_target: 80
@@ -20,6 +25,7 @@ documentation:
   readme: true
   spec: true
   examples_min: 2
-used_by: []
+used_by:
+  - adapter-databricks
 governance_version: '1.0'
 last_reviewed: '2026-06-28'

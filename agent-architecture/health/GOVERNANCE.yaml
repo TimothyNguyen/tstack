@@ -8,9 +8,18 @@ description: |
   such as type checks, lint, tests, dependency checks, dead-code checks, and shell lint.
   Produces a read-only scorecard and recommendations.
 dependencies:
-  skills: []
+  skills:
+    - qa
+    - security-review
+    - seniorswe-concise
+    - stack-aws
   adapters: []
-  tools: []
+  tools:
+    - docker
+    - git
+    - github
+    - npm
+    - python
   mcps: []
 testing:
   coverage_target: 80

@@ -6,9 +6,14 @@ owner: planner
 description: |
   Reviews plans for developer experience, APIs, onboarding, and operability.
 dependencies:
-  skills: []
+  skills:
+    - qa
+    - seniorswe-concise
+    - spec
   adapters: []
-  tools: []
+  tools:
+    - git
+    - python
   mcps: []
 testing:
   coverage_target: 80

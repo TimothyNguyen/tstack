@@ -7,9 +7,15 @@ description: |
   Root-cause investigation workflow for bugs, failing tests, broken integrations, and unexpected behavior.
   Investigates before proposing fixes and records evidence for each hypothesis.
 dependencies:
-  skills: []
+  skills:
+    - qa
+    - security-review
+    - seniorswe-concise
   adapters: []
-  tools: []
+  tools:
+    - docker
+    - git
+    - python
   mcps: []
 testing:
   coverage_target: 80

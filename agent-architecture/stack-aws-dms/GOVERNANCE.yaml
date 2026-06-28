@@ -7,9 +7,13 @@ description: |
   AWS DMS/SCT migration planning patterns for governed database migration
   experiments and cutovers.
 dependencies:
-  skills: []
+  skills:
+    - migration-review
+    - stack-aws
   adapters: []
-  tools: []
+  tools:
+    - git
+    - python
   mcps: []
 testing:
   coverage_target: 80

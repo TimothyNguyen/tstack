@@ -7,10 +7,20 @@ description: |
   Generate Draw.io diagrams from text descriptions.
   Supports flowchart, architecture, ER, sequence, class, state, mind-map.
 dependencies:
-  skills: []
+  skills:
+    - design-review
+    - spec
+    - subagent-orchestrator
   adapters: []
-  tools: []
-  mcps: []
+  tools:
+    - docker
+    - git
+    - github
+    - npm
+    - python
+  mcps:
+    - DRAWIO-mcp
+    - drawio-mcp
 testing:
   coverage_target: 80
   types:

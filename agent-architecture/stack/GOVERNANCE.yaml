@@ -9,10 +9,17 @@ description: |
   Invoke via /stack, or when the user says "load stack", "detect stack",
   "set stack to X", or any stack-* skill needs context.
 dependencies:
-  skills: []
+  skills:
+    - seniorswe-concise
   adapters: []
-  tools: []
-  mcps: []
+  tools:
+    - docker
+    - git
+    - npm
+    - python
+    - terraform
+  mcps:
+    - sql-mcp
 testing:
   coverage_target: 80
   types:

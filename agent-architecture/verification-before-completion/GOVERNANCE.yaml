@@ -7,9 +7,16 @@ description: |
   Ship-readiness verification workflow. Run verification commands and confirm output
   before claiming work is complete or passing. Evidence before assertions always.
 dependencies:
-  skills: []
+  skills:
+    - qa
+    - release
+    - security-review
+    - seniorswe-concise
   adapters: []
-  tools: []
+  tools:
+    - docker
+    - git
+    - python
   mcps: []
 testing:
   coverage_target: 80

@@ -7,9 +7,16 @@ description: |
   Validate diagram completeness and design patterns.
   Checks: all labels present, connections complete, swimlanes correct.
 dependencies:
-  skills: []
+  skills:
+    - design-review
+    - qa
+    - spec
   adapters: []
-  tools: []
+  tools:
+    - docker
+    - git
+    - github
+    - npm
   mcps: []
 testing:
   coverage_target: 80

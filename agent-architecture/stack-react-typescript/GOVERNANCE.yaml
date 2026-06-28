@@ -7,9 +7,14 @@ description: |
   React and TypeScript application modernization, including codemods, Redux
   Toolkit patterns, RTK Query, and UI migration checks.
 dependencies:
-  skills: []
+  skills:
+    - design-review
+    - seniorswe-concise
   adapters: []
-  tools: []
+  tools:
+    - docker
+    - git
+    - python
   mcps: []
 testing:
   coverage_target: 80

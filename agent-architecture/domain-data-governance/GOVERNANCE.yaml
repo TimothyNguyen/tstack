@@ -7,9 +7,12 @@ description: |
   Data governance review for classification, lineage, permissions, retention,
   auditability, quality checks, and privacy-safe agent outputs.
 dependencies:
-  skills: []
+  skills:
+    - stack-databricks
   adapters: []
-  tools: []
+  tools:
+    - git
+    - python
   mcps: []
 testing:
   coverage_target: 70

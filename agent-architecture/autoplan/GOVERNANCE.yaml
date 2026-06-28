@@ -6,9 +6,17 @@ owner: orchestrator
 description: |
   Runs the plan review pipeline before coding begins, then a post-implementation critic gate before surfacing results.
 dependencies:
-  skills: []
+  skills:
+    - seniorswe-concise
+    - spec
+    - subagent-orchestrator
   adapters: []
-  tools: []
+  tools:
+    - docker
+    - git
+    - github
+    - npm
+    - python
   mcps: []
 testing:
   coverage_target: 80

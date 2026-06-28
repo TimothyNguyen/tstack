@@ -11,7 +11,8 @@ description: |
   over-engineering", "what can I delete", "find bloat". One-shot report, does
   not apply fixes.
 dependencies:
-  skills: []
+  skills:
+    - seniorswe-concise
   adapters: []
   tools: []
   mcps: []

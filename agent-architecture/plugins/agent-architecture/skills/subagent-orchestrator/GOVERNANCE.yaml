@@ -19,6 +19,36 @@ documentation:
   readme: true
   spec: true
   examples_min: 2
-used_by: []
+used_by:
+  - adapter-ag-ui
+  - adapter-agentcore
+  - adapter-docker-mcp
+  - adapter-github
+  - adapter-google-adk
+  - adapter-langgraph
+  - adapter-mcp
+  - adapter-strands
+  - autoplan
+  - brainstorming
+  - change-router
+  - codebase-engine
+  - context-restore
+  - context-save
+  - diagram
+  - diagram-generate
+  - diagram-search
+  - learn
+  - learnings
+  - plan-director-review
+  - plan-review
+  - pre-commit-review
+  - reference-gstack-patterns
+  - retro
+  - seniorswe-concise-review
+  - skillify
+  - subagent-orchestrator
+  - token-optimizer
+  - using-agent-skills
+  - writing-skills
 governance_version: '1.0'
 last_reviewed: '2026-06-28'

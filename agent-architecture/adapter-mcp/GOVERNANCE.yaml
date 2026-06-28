@@ -7,10 +7,19 @@ description: |
   Design optional Model Context Protocol adapters with default-deny tools,
   narrow schemas, and local audit boundaries.
 dependencies:
-  skills: []
-  adapters: []
-  tools: []
-  mcps: []
+  skills:
+    - seniorswe-concise
+    - stack-aws
+    - subagent-orchestrator
+  adapters:
+    - adapter-mcp
+  tools:
+    - docker
+    - git
+    - python
+    - terraform
+  mcps:
+    - adapter-mcp
 testing:
   coverage_target: 80
   types:
@@ -20,6 +29,7 @@ documentation:
   readme: true
   spec: true
   examples_min: 2
-used_by: []
+used_by:
+  - adapter-mcp
 governance_version: '1.0'
 last_reviewed: '2026-06-28'

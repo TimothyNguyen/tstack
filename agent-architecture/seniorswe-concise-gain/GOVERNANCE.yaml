@@ -9,7 +9,8 @@ description: |
   not a persistent mode. Invoke via /seniorswe-concise-gain, or "what does
   concise mode save", "show impact", "scoreboard".
 dependencies:
-  skills: []
+  skills:
+    - seniorswe-concise
   adapters: []
   tools: []
   mcps: []

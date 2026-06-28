@@ -7,9 +7,12 @@ description: |
   Validate migrated data matches source.
   Tests correctness, constraints, and triggers.
 dependencies:
-  skills: []
+  skills:
+    - qa
   adapters: []
-  tools: []
+  tools:
+    - git
+    - terraform
   mcps: []
 testing:
   coverage_target: 90

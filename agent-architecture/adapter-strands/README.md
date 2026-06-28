@@ -1,10 +1,10 @@
-﻿#  adapter strands.Groups[1].Value.ToUpper() dapter strands
+# Strands Adapter
 
 [See SKILL.md for complete documentation.](./SKILL.md)
 
 ## Overview
 
-This skill provides guidance and integration for agent-architecture workflows.
+Adapter for adapter-strands integration with agent-architecture workflows.
 
 ## Quick Start
 

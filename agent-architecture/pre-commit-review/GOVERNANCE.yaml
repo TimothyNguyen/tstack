@@ -9,9 +9,17 @@ description: |
   Allows reviewers to focus on architecture instead of trivial nitpicks.
   Works across Claude, Codex, and Copilot.
 dependencies:
-  skills: []
+  skills:
+    - qa
+    - release
+    - seniorswe-concise
+    - subagent-orchestrator
   adapters: []
-  tools: []
+  tools:
+    - docker
+    - git
+    - github
+    - python
   mcps: []
 testing:
   coverage_target: 90

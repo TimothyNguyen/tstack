@@ -7,10 +7,16 @@ description: |
   C# and .NET modernization guidance for projects, packages, services, tests,
   analyzers, and compatibility assessments.
 dependencies:
-  skills: []
+  skills:
+    - migration-review
+    - seniorswe-concise
   adapters: []
-  tools: []
-  mcps: []
+  tools:
+    - docker
+    - git
+    - python
+  mcps:
+    - sql-mcp
 testing:
   coverage_target: 80
   types:

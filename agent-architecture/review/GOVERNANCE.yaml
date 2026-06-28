@@ -7,9 +7,15 @@ description: |
   Enterprise-safe code review workflow. Reviews diffs and code paths for correctness,
   maintainability, data access, policy violations, test gaps, and release risk.
 dependencies:
-  skills: []
+  skills:
+    - qa
+    - seniorswe-concise
   adapters: []
-  tools: []
+  tools:
+    - docker
+    - git
+    - github
+    - python
   mcps: []
 testing:
   coverage_target: 80

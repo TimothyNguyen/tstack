@@ -9,10 +9,18 @@ description: |
   Use for UI testing, Playwright-style interactions, screenshot capture, console/network
   debugging, performance traces, and heap memory analysis. External npm package — not bundled.
 dependencies:
-  skills: []
+  skills:
+    - design-review
+    - qa
+    - seniorswe-concise
   adapters: []
-  tools: []
-  mcps: []
+  tools:
+    - docker
+    - git
+    - npm
+    - python
+  mcps:
+    - devtools-mcp
 testing:
   coverage_target: 80
   types:

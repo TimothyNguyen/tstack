@@ -7,9 +7,13 @@ description: |
   Product manager plan review. Reviews user value, requirements clarity, acceptance
   criteria, rollout, measurement, stakeholder impact, and non-goals.
 dependencies:
-  skills: []
+  skills:
+    - spec
   adapters: []
-  tools: []
+  tools:
+    - git
+    - npm
+    - python
   mcps: []
 testing:
   coverage_target: 80

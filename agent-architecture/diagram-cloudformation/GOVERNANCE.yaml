@@ -9,7 +9,10 @@ description: |
 dependencies:
   skills: []
   adapters: []
-  tools: []
+  tools:
+    - npm
+    - python
+    - terraform
   mcps: []
 testing:
   coverage_target: 80

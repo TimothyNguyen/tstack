@@ -10,9 +10,17 @@ description: |
   "how should I commit", "commit message", or asks about commit conventions,
   atomic commits, or git workflow after making changes.
 dependencies:
-  skills: []
+  skills:
+    - migration-review
+    - release
+    - seniorswe-concise
+    - stack-aws
+    - stack-databricks
   adapters: []
-  tools: []
+  tools:
+    - docker
+    - git
+    - python
   mcps: []
 testing:
   coverage_target: 90

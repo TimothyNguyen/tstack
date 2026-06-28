@@ -13,9 +13,14 @@ description: |
   less", "shortest path", or complains about over-engineering, bloat, or
   boilerplate.
 dependencies:
-  skills: []
+  skills:
+    - seniorswe-concise
+    - stack-databricks
   adapters: []
-  tools: []
+  tools:
+    - docker
+    - git
+    - npm
   mcps: []
 testing:
   coverage_target: 80
@@ -26,6 +31,67 @@ documentation:
   readme: true
   spec: true
   examples_min: 2
-used_by: []
+used_by:
+  - adapter-ag-ui
+  - adapter-docker-mcp
+  - adapter-github
+  - adapter-mcp
+  - adapter-openapi
+  - adapter-seniorswe-concise
+  - atlassian-docs
+  - autoplan
+  - benchmark
+  - brainstorming
+  - chrome-devtools
+  - codebase-engine
+  - commit
+  - context-restore
+  - context-save
+  - design-html
+  - design-review
+  - document-release
+  - guard
+  - health
+  - investigate
+  - learn
+  - learnings
+  - migration-review
+  - migration-sqlserver-assess
+  - migration-sqlserver-data
+  - migration-sqlserver-perf
+  - migration-sqlserver-schema
+  - plan-devex-review
+  - plan-eng-review
+  - plan-review
+  - pre-commit-review
+  - qa
+  - receiving-code-review
+  - reference-gstack-patterns
+  - release-notes
+  - review
+  - rtk-token-optimizer
+  - security-review
+  - seniorswe-concise
+  - seniorswe-concise-audit
+  - seniorswe-concise-debt
+  - seniorswe-concise-gain
+  - seniorswe-concise-help
+  - seniorswe-concise-review
+  - ship
+  - skillify
+  - stack
+  - stack-csharp
+  - stack-legacy-frontend
+  - stack-postgres
+  - stack-python
+  - stack-react-typescript
+  - stack-spring-ai
+  - stack-spring-boot
+  - stack-sql-server
+  - systematic-debugging
+  - test
+  - token-optimizer
+  - using-agent-skills
+  - verification-before-completion
 governance_version: '1.0'
 last_reviewed: '2026-06-28'

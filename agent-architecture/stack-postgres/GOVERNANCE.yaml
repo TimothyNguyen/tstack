@@ -7,9 +7,14 @@ description: |
   Postgres schema, query, migration, performance, and data-governance workflows
   with explicit read/write approvals and privacy-safe summaries.
 dependencies:
-  skills: []
+  skills:
+    - migration-review
+    - seniorswe-concise
+    - stack-databricks
   adapters: []
-  tools: []
+  tools:
+    - git
+    - python
   mcps: []
 testing:
   coverage_target: 80

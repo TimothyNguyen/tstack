@@ -6,10 +6,15 @@ owner: diagram-agent
 description: |
   Export Draw.io diagrams to PNG, SVG, PDF with styling options.
 dependencies:
-  skills: []
+  skills:
+    - design-review
+    - spec
   adapters: []
-  tools: []
-  mcps: []
+  tools:
+    - git
+    - npm
+  mcps:
+    - drawio-mcp
 testing:
   coverage_target: 80
   types:

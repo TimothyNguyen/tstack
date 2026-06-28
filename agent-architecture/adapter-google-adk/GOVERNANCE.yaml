@@ -7,9 +7,16 @@ description: |
   Optional Google ADK host adapter boundary for invoking skills and tools
   without making core architecture depend on ADK runtime packages.
 dependencies:
-  skills: []
-  adapters: []
-  tools: []
+  skills:
+    - stack-aws
+    - subagent-orchestrator
+  adapters:
+    - adapter-google-adk
+  tools:
+    - docker
+    - git
+    - python
+    - terraform
   mcps: []
 testing:
   coverage_target: 80
@@ -20,6 +27,7 @@ documentation:
   readme: true
   spec: true
   examples_min: 2
-used_by: []
+used_by:
+  - adapter-google-adk
 governance_version: '1.0'
 last_reviewed: '2026-06-28'

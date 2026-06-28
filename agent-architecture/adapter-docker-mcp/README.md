@@ -1,10 +1,10 @@
-﻿#  adapter docker mcp.Groups[1].Value.ToUpper() dapter docker mcp
+# Docker Mcp Adapter
 
 [See SKILL.md for complete documentation.](./SKILL.md)
 
 ## Overview
 
-This skill provides guidance and integration for agent-architecture workflows.
+Adapter for adapter-docker-mcp integration with agent-architecture workflows.
 
 ## Quick Start
 

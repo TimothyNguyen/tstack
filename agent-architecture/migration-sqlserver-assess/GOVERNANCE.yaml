@@ -7,9 +7,14 @@ description: |
   Assess SQL Server database for Postgres migration readiness.
   Analyzes schema, special features, data volume, and incompatibilities.
 dependencies:
-  skills: []
+  skills:
+    - seniorswe-concise
   adapters: []
-  tools: []
+  tools:
+    - git
+    - github
+    - npm
+    - terraform
   mcps: []
 testing:
   coverage_target: 70

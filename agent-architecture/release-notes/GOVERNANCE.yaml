@@ -7,9 +7,14 @@ description: |
   Generate privacy-safe release notes from local changes, tests, and docs
   without sending change data to third-party services.
 dependencies:
-  skills: []
+  skills:
+    - release
+    - seniorswe-concise
   adapters: []
-  tools: []
+  tools:
+    - git
+    - github
+    - python
   mcps: []
 testing:
   coverage_target: 90

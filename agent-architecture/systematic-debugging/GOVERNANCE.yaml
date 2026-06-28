@@ -8,9 +8,20 @@ description: |
   Use when bugs span multiple system layers (workflow → build → deploy, API → service → database).
   Emphasizes evidence gathering, architecture questioning, and preventing self-deception.
 dependencies:
-  skills: []
+  skills:
+    - migration-review
+    - qa
+    - security-review
+    - seniorswe-concise
+    - stack-aws
+    - stack-databricks
   adapters: []
-  tools: []
+  tools:
+    - docker
+    - git
+    - github
+    - npm
+    - python
   mcps: []
 testing:
   coverage_target: 80

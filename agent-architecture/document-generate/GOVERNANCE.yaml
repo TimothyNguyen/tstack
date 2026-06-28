@@ -6,9 +6,12 @@ owner: orchestrator
 description: |
   Generates missing local project documentation from code-backed evidence.
 dependencies:
-  skills: []
+  skills:
+    - spec
   adapters: []
-  tools: []
+  tools:
+    - git
+    - python
   mcps: []
 testing:
   coverage_target: 80

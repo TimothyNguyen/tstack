@@ -7,9 +7,16 @@ description: |
   Optional AgentCore adapter boundary for skills, tools, approvals, audit
   events, and local privacy controls.
 dependencies:
-  skills: []
-  adapters: []
-  tools: []
+  skills:
+    - stack-aws
+    - subagent-orchestrator
+  adapters:
+    - adapter-agentcore
+  tools:
+    - docker
+    - git
+    - python
+    - terraform
   mcps: []
 testing:
   coverage_target: 90
@@ -20,6 +27,7 @@ documentation:
   readme: true
   spec: true
   examples_min: 2
-used_by: []
+used_by:
+  - adapter-agentcore
 governance_version: '1.0'
 last_reviewed: '2026-06-28'

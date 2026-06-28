@@ -6,9 +6,14 @@ owner: orchestrator
 description: |
   Turns a repeated local workflow into a reusable skill folder with template files.
 dependencies:
-  skills: []
+  skills:
+    - seniorswe-concise
+    - subagent-orchestrator
   adapters: []
-  tools: []
+  tools:
+    - git
+    - python
+    - terraform
   mcps: []
 testing:
   coverage_target: 80

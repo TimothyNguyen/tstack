@@ -7,9 +7,15 @@ description: |
   Skill creation and editing using test-driven development. Write test cases first,
   watch them fail, write the skill documentation, watch tests pass, and refactor.
 dependencies:
-  skills: []
+  skills:
+    - subagent-orchestrator
   adapters: []
-  tools: []
+  tools:
+    - docker
+    - git
+    - github
+    - npm
+    - python
   mcps: []
 testing:
   coverage_target: 80

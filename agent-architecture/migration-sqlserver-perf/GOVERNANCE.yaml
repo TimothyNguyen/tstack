@@ -7,9 +7,13 @@ description: |
   Performance tune PostgreSQL after migration.
   Creates indexes, analyzes queries, establishes baselines.
 dependencies:
-  skills: []
+  skills:
+    - seniorswe-concise
   adapters: []
-  tools: []
+  tools:
+    - docker
+    - git
+    - terraform
   mcps: []
 testing:
   coverage_target: 70

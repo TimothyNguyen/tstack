@@ -7,9 +7,16 @@ description: |
   Handle code review feedback with technical rigor. Verify before implementing.
   Requires evaluation, not performative agreement or blind implementation.
 dependencies:
-  skills: []
+  skills:
+    - qa
+    - security-review
+    - seniorswe-concise
   adapters: []
-  tools: []
+  tools:
+    - docker
+    - git
+    - github
+    - python
   mcps: []
 testing:
   coverage_target: 80

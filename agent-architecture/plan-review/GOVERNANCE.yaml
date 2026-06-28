@@ -7,9 +7,16 @@ description: |
   Enterprise-safe plan review workflow. Reviews a proposed implementation plan for scope,
   architecture, testability, policy compliance, data risk, and delivery sequencing before code changes begin.
 dependencies:
-  skills: []
+  skills:
+    - qa
+    - seniorswe-concise
+    - spec
+    - subagent-orchestrator
   adapters: []
-  tools: []
+  tools:
+    - git
+    - npm
+    - python
   mcps: []
 testing:
   coverage_target: 80

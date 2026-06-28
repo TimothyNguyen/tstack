@@ -7,9 +7,12 @@ description: |
   Convert SQL Server T-SQL DDL to PostgreSQL schema.
   Handles incompatibilities: CLR → functions, XML → JSONB, spatial types.
 dependencies:
-  skills: []
+  skills:
+    - seniorswe-concise
   adapters: []
-  tools: []
+  tools:
+    - git
+    - terraform
   mcps: []
 testing:
   coverage_target: 70

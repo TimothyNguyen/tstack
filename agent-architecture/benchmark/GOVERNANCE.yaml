@@ -7,9 +7,16 @@ description: |
   Local benchmark and regression-check workflow for performance or quality
   changes with no public telemetry or benchmark uploads by default.
 dependencies:
-  skills: []
+  skills:
+    - qa
+    - seniorswe-concise
+    - stack-databricks
   adapters: []
-  tools: []
+  tools:
+    - docker
+    - git
+    - python
+    - terraform
   mcps: []
 testing:
   coverage_target: 80

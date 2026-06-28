@@ -7,10 +7,17 @@ description: |
   Search Draw.io shape library for icons, shapes, and templates.
   Supports 10,000+ shapes: AWS, Azure, Cisco, P&ID, flowchart elements, etc.
 dependencies:
-  skills: []
+  skills:
+    - design-review
+    - spec
+    - subagent-orchestrator
   adapters: []
-  tools: []
-  mcps: []
+  tools:
+    - git
+    - kubernetes
+    - npm
+  mcps:
+    - drawio-mcp
 testing:
   coverage_target: 80
   types:

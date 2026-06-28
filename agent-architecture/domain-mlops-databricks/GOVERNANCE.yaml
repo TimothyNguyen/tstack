@@ -7,9 +7,12 @@ description: |
   Databricks MLOps project structure, model lifecycle, CI/CD, monitoring, and
   governed production ML workflows.
 dependencies:
-  skills: []
+  skills:
+    - stack-databricks
   adapters: []
-  tools: []
+  tools:
+    - git
+    - python
   mcps: []
 testing:
   coverage_target: 70

@@ -7,9 +7,13 @@ description: |
   Plan .NET Framework and SQL Server modernization using compatibility
   assessment, code translation references, and governed data migration lanes.
 dependencies:
-  skills: []
+  skills:
+    - migration-review
   adapters: []
-  tools: []
+  tools:
+    - docker
+    - git
+    - python
   mcps: []
 testing:
   coverage_target: 70

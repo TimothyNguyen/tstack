@@ -7,9 +7,12 @@ description: |
   Experiment design review for randomization, power, metrics, guardrails,
   exposure, analysis plans, and rollout risk.
 dependencies:
-  skills: []
+  skills:
+    - stack-databricks
   adapters: []
-  tools: []
+  tools:
+    - git
+    - python
   mcps: []
 testing:
   coverage_target: 70

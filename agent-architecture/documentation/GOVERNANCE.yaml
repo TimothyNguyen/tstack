@@ -7,9 +7,13 @@ description: |
   Documentation workflow for generating, updating, and reviewing project docs after implementation.
   Focuses on accurate code-backed docs without public browsing or telemetry.
 dependencies:
-  skills: []
+  skills:
+    - qa
+    - spec
   adapters: []
-  tools: []
+  tools:
+    - git
+    - python
   mcps: []
 testing:
   coverage_target: 80

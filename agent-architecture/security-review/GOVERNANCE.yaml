@@ -7,9 +7,16 @@ description: |
   Enterprise security and governance review for application code, data access, agent
   tools, cloud integrations, and release workflows.
 dependencies:
-  skills: []
+  skills:
+    - qa
+    - security-review
+    - seniorswe-concise
+    - stack-aws
   adapters: []
-  tools: []
+  tools:
+    - docker
+    - git
+    - python
   mcps: []
 testing:
   coverage_target: 80
@@ -20,6 +27,17 @@ documentation:
   readme: true
   spec: true
   examples_min: 2
-used_by: []
+used_by:
+  - careful
+  - codebase-engine
+  - guard
+  - health
+  - investigate
+  - learn
+  - receiving-code-review
+  - security-review
+  - systematic-debugging
+  - using-agent-skills
+  - verification-before-completion
 governance_version: '1.0'
 last_reviewed: '2026-06-28'

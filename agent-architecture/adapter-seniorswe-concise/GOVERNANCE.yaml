@@ -7,9 +7,16 @@ description: |
   Optional Seniorswe-Concise hook and MCP adapter for YAGNI mode injection across
   Claude, Codex, Copilot, and MCP hosts.
 dependencies:
-  skills: []
-  adapters: []
-  tools: []
+  skills:
+    - seniorswe-concise
+  adapters:
+    - adapter-seniorswe-concise
+  tools:
+    - docker
+    - git
+    - npm
+    - python
+    - terraform
   mcps: []
 testing:
   coverage_target: 80
@@ -20,6 +27,7 @@ documentation:
   readme: true
   spec: true
   examples_min: 2
-used_by: []
+used_by:
+  - adapter-seniorswe-concise
 governance_version: '1.0'
 last_reviewed: '2026-06-28'

@@ -1,0 +1,302 @@
+# Governance Specification - Machine-Readable Source of Truth
+# Version: 1.0
+# All tooling validates against this spec
+
+version: "1.0"
+last_updated: "2026-06-27"
+
+# Hard gates: Must pass, no exceptions (fail build)
+hard_gates:
+  build:
+    - succeeds_cleanly: true
+      description: "Repository builds without errors"
+
+  tests:
+    - min_coverage: 80
+      description: "Minimum 80% code coverage"
+    - pass_all: true
+      description: "All tests must pass"
+
+  dependencies:
+    - no_cycles: true
+      description: "Zero circular dependencies allowed"
+    - no_orphans: true
+      description: "No orphaned components (every component used)"
+
+  documentation:
+    - spec_exists: true
+      description: "SPEC.md must exist"
+    - readme_exists: true
+      description: "README.md must exist"
+    - spec_complete: true
+      description: "SPEC.md must have all required sections"
+    - no_template_artifacts: true
+      description: "No .Groups[1].Value or template substitution artifacts"
+
+# Soft gates: Should pass, exceptions allowed with justification (warn)
+soft_gates:
+  documentation:
+    - readme_length_min: 200
+      description: "README.md should be >200 words"
+    - readme_substantive: true
+      description: "README.md content must be substantive, not placeholder"
+    - spec_sections_complete: true
+      description: "All SPEC.md sections should have concrete content"
+
+  testing:
+    - coverage_stable: 90
+      description: "Stable components should have 90%+ coverage"
+    - integration_tests: true
+      description: "Components should have integration tests"
+
+  examples:
+    - has_examples: true
+      description: "Should have working examples"
+    - examples_executable: true
+      description: "Examples should execute without modification"
+
+  changelog:
+    - exists: true
+      description: "CHANGELOG.md should exist"
+    - entries_current: true
+      description: "Changelog should document all changes"
+
+# Component structure requirements
+components:
+  required_files:
+    - README.md
+    - SPEC.md
+    - SKILL.md
+    - TMPL.md
+    - tests/
+    - examples/
+    - CHANGELOG.md
+
+  file_requirements:
+    README.md:
+      min_length: 200
+      must_include: ["Quick Start", "Examples", "SPEC.md"]
+      must_not_include: ["placeholder", "TODO", "FIXME", ".Groups[1].Value"]
+      type: "documentation"
+
+    SPEC.md:
+      required_sections:
+        - Purpose
+        - Inputs
+        - Outputs
+        - Dependencies
+        - Failure Modes
+        - Performance Expectations
+        - Security Considerations
+        - Extension Points
+        - Examples
+      min_content_per_section: 50
+      type: "specification"
+
+    SKILL.md:
+      must_include: ["name:", "description:", "agents:"]
+      must_include_sections: ["Overview", "Examples"]
+      type: "skill_definition"
+
+    TMPL.md:
+      purpose: "Template or configuration for component"
+      optional_if: "TMPL/ directory exists"
+      type: "template"
+
+    tests/:
+      min_test_count: 5
+      coverage_threshold: 80
+      must_include: ["unit", "integration"]
+      type: "test_directory"
+
+    examples/:
+      min_examples: 2
+      must_be_executable: true
+      type: "examples"
+
+    CHANGELOG.md:
+      purpose: "Version history and changes"
+      min_entries: 1
+      type: "changelog"
+
+# Maturity levels and their governance requirements
+maturity_levels:
+  Draft:
+    symbol: "⚠"
+    governance_level: "relaxed"
+    requirements:
+      - file_presence
+    test_coverage_min: 0
+    status_required: true
+    expires_days: 60
+
+  Experimental:
+    symbol: "🧪"
+    governance_level: "relaxed"
+    requirements:
+      - file_presence
+      - spec_basic
+    test_coverage_min: 50
+    status_required: true
+    expires_days: 90
+
+  Beta:
+    symbol: "🚀"
+    governance_level: "normal"
+    requirements:
+      - file_presence
+      - spec_complete
+      - soft_gates
+    test_coverage_min: 80
+    status_required: true
+
+  Stable:
+    symbol: "✓"
+    governance_level: "strict"
+    requirements:
+      - hard_gates
+      - soft_gates
+      - security_review
+      - performance_validation
+    test_coverage_min: 90
+    status_required: true
+    breaking_changes: "only in major version"
+
+  Deprecated:
+    symbol: "⛔"
+    governance_level: "maintenance"
+    requirements:
+      - maintenance_only
+      - no_new_features
+      - migration_path_documented
+    removal_deadline_required: true
+
+  Archived:
+    symbol: "📦"
+    governance_level: "read_only"
+    requirements:
+      - read_only
+      - no_updates
+    location: "archive/"
+
+# Commits
+commits:
+  max_files: 10
+  max_loc: 300
+  max_diff_size_mb: 1
+  must_be: "single logical change"
+  must_maintain: "buildable state"
+  must_pass: "tests"
+
+# Code quality metrics
+metrics:
+  duplication:
+    code_max_similarity: 80
+    prompts_max_similarity: 80
+    workflows_max_similarity: 75
+    action: "consolidate or justify"
+
+  dependencies:
+    max_cycles: 0
+    max_orphans: 0
+    max_isolated_subgraphs: 0
+
+  coverage:
+    min_all: 80
+    min_stable: 90
+
+  documentation:
+    min_completeness: 95
+    max_broken_links: 0
+    max_stale_examples: 0
+
+# Repository scorecard dimensions
+scorecard:
+  dimensions:
+    - name: "Architecture"
+      weight: 10
+      min_score: 8
+      checks: ["no cycles", "no orphans", "appropriate abstractions"]
+
+    - name: "Documentation"
+      weight: 10
+      min_score: 8
+      checks: ["README complete", "SPEC complete", "examples work"]
+
+    - name: "Testing"
+      weight: 10
+      min_score: 8
+      checks: ["80%+ coverage", "error cases", "integration tests"]
+
+    - name: "Maintainability"
+      weight: 8
+      min_score: 8
+      checks: ["consistent naming", "module size", "clarity"]
+
+    - name: "Determinism"
+      weight: 8
+      min_score: 8
+      checks: ["explicit behavior", "no randomness", "documented side effects"]
+
+    - name: "Reusability"
+      weight: 7
+      min_score: 8
+      checks: ["clear interfaces", "no hacks", "composable"]
+
+    - name: "CI/CD Readiness"
+      weight: 7
+      min_score: 8
+      checks: ["all gates pass", "deployable", "automated validation"]
+
+  passing_score: 8.0
+  overall_threshold: "green"
+
+# Escape hatches: documented exceptions
+escape_hatches:
+  soft_gate_override:
+    allowed: true
+    requires: "written justification + tracking issue"
+    documentation: "GOVERNANCE_EXCEPTIONS.md"
+
+  hard_gate_override:
+    allowed: false
+    note: "Hard gates cannot be overridden; they must be fixed"
+
+# Governance versions
+versions:
+  "1.0":
+    released: "2026-06-27"
+    breaking_changes: []
+    features:
+      - "Machine-readable specification"
+      - "Component maturity levels"
+      - "Hard and soft gates"
+      - "Repository scorecard"
+  "1.1":
+    planned: true
+    expected: "2026-07-31"
+    features:
+      - "Governance agent automation"
+      - "Real-time health dashboard"
+      - "Component ownership tracking"
+
+# Installation and tooling
+tooling:
+  cli:
+    command: "governance"
+    location: "bin/governance.js"
+    requires: "Node.js 18+"
+
+  agent:
+    name: "governance-agent"
+    location: "agents/governance"
+    triggers:
+      - "pre-commit"
+      - "pre-pr"
+      - "post-merge"
+
+  scripts:
+    check: "npm run governance:check"
+    health: "npm run governance:health"
+    validate: "npm run governance:validate"
+    report: "npm run governance:report"

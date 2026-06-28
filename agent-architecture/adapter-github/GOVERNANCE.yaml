@@ -7,10 +7,17 @@ description: |
   Optional GitHub MCP/CLI adapter guidance for repo, issue, and PR context
   with read-only/default-deny safety.
 dependencies:
-  skills: []
-  adapters: []
-  tools: []
-  mcps: []
+  skills:
+    - seniorswe-concise
+    - subagent-orchestrator
+  adapters:
+    - adapter-github
+  tools:
+    - git
+    - github
+    - python
+  mcps:
+    - github-mcp
 testing:
   coverage_target: 90
   types:
@@ -20,6 +27,7 @@ documentation:
   readme: true
   spec: true
   examples_min: 2
-used_by: []
+used_by:
+  - adapter-github
 governance_version: '1.0'
 last_reviewed: '2026-06-28'

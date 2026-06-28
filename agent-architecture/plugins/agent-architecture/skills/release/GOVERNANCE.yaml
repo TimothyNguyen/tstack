@@ -20,6 +20,20 @@ documentation:
   readme: true
   spec: true
   examples_min: 2
-used_by: []
+used_by:
+  - adapter-docker-mcp
+  - canary
+  - careful
+  - codebase-engine
+  - commit
+  - document-release
+  - learn
+  - pre-commit-review
+  - release
+  - release-notes
+  - retro
+  - ship
+  - using-agent-skills
+  - verification-before-completion
 governance_version: '1.0'
 last_reviewed: '2026-06-28'

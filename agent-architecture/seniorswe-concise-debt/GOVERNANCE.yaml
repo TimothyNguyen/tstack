@@ -10,9 +10,12 @@ description: |
   the seniorswe-concise markers", "debt ledger", or "what did we mark to do
   later". One-shot report, changes nothing.
 dependencies:
-  skills: []
+  skills:
+    - seniorswe-concise
   adapters: []
-  tools: []
+  tools:
+    - docker
+    - git
   mcps: []
 testing:
   coverage_target: 80

@@ -7,9 +7,15 @@ description: |
   Python service, library, and data workflow modernization with minimal
   dependencies, local tests, packaging hygiene, and privacy-safe execution.
 dependencies:
-  skills: []
+  skills:
+    - seniorswe-concise
+    - stack-databricks
   adapters: []
-  tools: []
+  tools:
+    - docker
+    - git
+    - npm
+    - python
   mcps: []
 testing:
   coverage_target: 80

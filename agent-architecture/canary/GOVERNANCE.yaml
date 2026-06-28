@@ -7,9 +7,14 @@ description: |
   Privacy-safe canary planning for post-deploy monitoring, rollback signals,
   audit events, and human escalation without public telemetry defaults.
 dependencies:
-  skills: []
+  skills:
+    - qa
+    - release
+    - stack-aws
   adapters: []
-  tools: []
+  tools:
+    - git
+    - python
   mcps: []
 testing:
   coverage_target: 80

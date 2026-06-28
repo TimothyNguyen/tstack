@@ -9,9 +9,18 @@ description: >
   MUST use before any creative work - creating features, building components, adding functionality, or modifying
   behavior.
 dependencies:
-  skills: []
+  skills:
+    - design-review
+    - seniorswe-concise
+    - spec
+    - subagent-orchestrator
   adapters: []
-  tools: []
+  tools:
+    - docker
+    - git
+    - github
+    - kubernetes
+    - python
   mcps: []
 testing:
   coverage_target: 80

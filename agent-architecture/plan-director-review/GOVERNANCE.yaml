@@ -7,9 +7,13 @@ description: |
   Director or senior-principal plan review. Reviews scope, sequencing, architecture risk,
   team fit, operational maturity, and executive-readiness before implementation.
 dependencies:
-  skills: []
+  skills:
+    - subagent-orchestrator
   adapters: []
-  tools: []
+  tools:
+    - git
+    - npm
+    - python
   mcps: []
 testing:
   coverage_target: 80

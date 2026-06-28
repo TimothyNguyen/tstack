@@ -6,9 +6,14 @@ owner: orchestrator
 description: |
   Designs and runs approved automated tests, including Playwright or Selenium when enabled by policy.
 dependencies:
-  skills: []
+  skills:
+    - qa
+    - seniorswe-concise
   adapters: []
-  tools: []
+  tools:
+    - docker
+    - git
+    - python
   mcps: []
 testing:
   coverage_target: 90

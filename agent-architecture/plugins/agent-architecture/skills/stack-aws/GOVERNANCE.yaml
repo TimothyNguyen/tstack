@@ -20,6 +20,28 @@ documentation:
   readme: true
   spec: true
   examples_min: 2
-used_by: []
+used_by:
+  - adapter-ag-ui
+  - adapter-agentcore
+  - adapter-docker-mcp
+  - adapter-google-adk
+  - adapter-mcp
+  - adapter-strands
+  - canary
+  - careful
+  - codebase-engine
+  - commit
+  - guard
+  - health
+  - learn
+  - migration-review
+  - plan-eng-review
+  - release
+  - security-review
+  - ship
+  - stack-aws
+  - stack-aws-dms
+  - systematic-debugging
+  - using-agent-skills
 governance_version: '1.0'
 last_reviewed: '2026-06-28'

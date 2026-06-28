@@ -7,9 +7,13 @@ description: |
   Spring-native AI application patterns using Spring AI and Spring AI examples
   as references, without making them core dependencies.
 dependencies:
-  skills: []
+  skills:
+    - seniorswe-concise
   adapters: []
-  tools: []
+  tools:
+    - git
+    - npm
+    - python
   mcps: []
 testing:
   coverage_target: 80

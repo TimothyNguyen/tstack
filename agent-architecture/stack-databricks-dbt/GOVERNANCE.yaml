@@ -7,9 +7,12 @@ description: |
   dbt on Databricks patterns for models, tests, docs, lineage, and governed
   transformations.
 dependencies:
-  skills: []
+  skills:
+    - stack-databricks
   adapters: []
-  tools: []
+  tools:
+    - git
+    - python
   mcps: []
 testing:
   coverage_target: 80

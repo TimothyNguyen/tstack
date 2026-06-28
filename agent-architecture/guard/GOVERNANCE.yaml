@@ -6,9 +6,16 @@ owner: orchestrator
 description: |
   Applies stricter local safety posture for risky tools and filesystem boundaries.
 dependencies:
-  skills: []
+  skills:
+    - migration-review
+    - security-review
+    - seniorswe-concise
+    - stack-aws
   adapters: []
-  tools: []
+  tools:
+    - git
+    - python
+    - terraform
   mcps: []
 testing:
   coverage_target: 80

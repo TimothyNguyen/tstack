@@ -20,6 +20,7 @@ documentation:
   readme: true
   spec: true
   examples_min: 2
-used_by: []
+used_by:
+  - adapter-databricks
 governance_version: '1.0'
 last_reviewed: '2026-06-28'

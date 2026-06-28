@@ -7,9 +7,13 @@ description: |
   Spring Boot upgrade and API modernization using OpenRewrite recipes,
   OpenAPI contracts, and local verification.
 dependencies:
-  skills: []
+  skills:
+    - seniorswe-concise
   adapters: []
-  tools: []
+  tools:
+    - docker
+    - git
+    - python
   mcps: []
 testing:
   coverage_target: 80

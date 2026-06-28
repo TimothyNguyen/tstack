@@ -6,9 +6,13 @@ owner: planner
 description: |
   Reviews plans for user experience, UI quality, and product interaction risk.
 dependencies:
-  skills: []
+  skills:
+    - design-review
+    - spec
   adapters: []
-  tools: []
+  tools:
+    - git
+    - python
   mcps: []
 testing:
   coverage_target: 80

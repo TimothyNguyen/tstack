@@ -10,9 +10,16 @@ description: |
   operations, and PR workflows. Do not use for credential setup, OAuth setup, or
   public web browsing outside approved Atlassian hosts.
 dependencies:
-  skills: []
+  skills:
+    - qa
+    - seniorswe-concise
+    - spec
   adapters: []
-  tools: []
+  tools:
+    - docker
+    - git
+    - github
+    - python
   mcps: []
 testing:
   coverage_target: 80

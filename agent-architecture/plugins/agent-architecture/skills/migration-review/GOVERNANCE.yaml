@@ -20,6 +20,24 @@ documentation:
   readme: true
   spec: true
   examples_min: 2
-used_by: []
+used_by:
+  - careful
+  - codebase-engine
+  - commit
+  - context-restore
+  - context-save
+  - guard
+  - learn
+  - migration-dotnet-sqlserver-modernization
+  - migration-review
+  - plan-eng-review
+  - stack-aws-dms
+  - stack-csharp
+  - stack-legacy-frontend
+  - stack-postgres
+  - stack-sql-server
+  - stack-sqlserver-to-postgres
+  - systematic-debugging
+  - using-agent-skills
 governance_version: '1.0'
 last_reviewed: '2026-06-28'

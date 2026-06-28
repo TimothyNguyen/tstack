@@ -7,9 +7,17 @@ description: |
   Optional Strands adapter boundary for composing skills and tools with
   privacy-first policy gates and no core runtime dependency.
 dependencies:
-  skills: []
-  adapters: []
-  tools: []
+  skills:
+    - stack-aws
+    - subagent-orchestrator
+  adapters:
+    - adapter-owned
+    - adapter-strands
+  tools:
+    - docker
+    - git
+    - python
+    - terraform
   mcps: []
 testing:
   coverage_target: 80
@@ -20,6 +28,7 @@ documentation:
   readme: true
   spec: true
   examples_min: 2
-used_by: []
+used_by:
+  - adapter-strands
 governance_version: '1.0'
 last_reviewed: '2026-06-28'

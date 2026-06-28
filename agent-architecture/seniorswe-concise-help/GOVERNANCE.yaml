@@ -9,9 +9,13 @@ description: |
   /seniorswe-concise-help or "what are the seniorswe-concise commands", "how
   do I use seniorswe-concise", "seniorswe-concise help".
 dependencies:
-  skills: []
+  skills:
+    - seniorswe-concise
   adapters: []
-  tools: []
+  tools:
+    - docker
+    - python
+    - terraform
   mcps: []
 testing:
   coverage_target: 80

@@ -7,9 +7,14 @@ description: |
   Use OpenAPI contracts and optional generated clients/servers while keeping
   generated code isolated and reviewed.
 dependencies:
-  skills: []
-  adapters: []
-  tools: []
+  skills:
+    - seniorswe-concise
+    - spec
+  adapters:
+    - adapter-openapi
+  tools:
+    - git
+    - python
   mcps: []
 testing:
   coverage_target: 80
@@ -20,6 +25,7 @@ documentation:
   readme: true
   spec: true
   examples_min: 2
-used_by: []
+used_by:
+  - adapter-openapi
 governance_version: '1.0'
 last_reviewed: '2026-06-28'

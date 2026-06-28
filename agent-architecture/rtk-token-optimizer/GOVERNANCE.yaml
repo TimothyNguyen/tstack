@@ -7,9 +7,15 @@ description: |
   Optional Rust Token Killer integration guidance. Uses RTK to reduce noisy shell output
   when installed and approved by policy. Does not install global hooks or enable telemetry by default.
 dependencies:
-  skills: []
+  skills:
+    - seniorswe-concise
+    - stack-databricks
   adapters: []
-  tools: []
+  tools:
+    - docker
+    - git
+    - python
+    - terraform
   mcps: []
 testing:
   coverage_target: 80

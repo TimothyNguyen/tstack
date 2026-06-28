@@ -7,9 +7,16 @@ description: |
   Map skill progress, approvals, tool actions, findings, and artifacts into
   AG-UI-compatible event concepts.
 dependencies:
-  skills: []
-  adapters: []
-  tools: []
+  skills:
+    - seniorswe-concise
+    - stack-aws
+    - subagent-orchestrator
+  adapters:
+    - adapter-ag-ui
+  tools:
+    - git
+    - python
+    - terraform
   mcps: []
 testing:
   coverage_target: 80
@@ -20,6 +27,7 @@ documentation:
   readme: true
   spec: true
   examples_min: 2
-used_by: []
+used_by:
+  - adapter-ag-ui
 governance_version: '1.0'
 last_reviewed: '2026-06-28'

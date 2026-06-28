@@ -7,9 +7,12 @@ description: |
   Model interpretation review for feature effects, calibration, drift,
   uncertainty, explanation limits, and decision-risk communication.
 dependencies:
-  skills: []
+  skills:
+    - stack-databricks
   adapters: []
-  tools: []
+  tools:
+    - git
+    - python
   mcps: []
 testing:
   coverage_target: 70

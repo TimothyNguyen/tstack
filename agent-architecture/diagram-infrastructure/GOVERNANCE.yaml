@@ -9,8 +9,15 @@ description: |
 dependencies:
   skills: []
   adapters: []
-  tools: []
-  mcps: []
+  tools:
+    - docker
+    - git
+    - kubernetes
+    - npm
+    - python
+    - terraform
+  mcps:
+    - diagram-mcp
 testing:
   coverage_target: 80
   types:

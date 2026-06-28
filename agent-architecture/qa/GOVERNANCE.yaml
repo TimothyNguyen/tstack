@@ -7,9 +7,13 @@ description: |
   Enterprise-safe QA workflow. Plans and verifies user-facing or service behavior using
   local tests and approved tools. Browser automation is optional and disabled by default.
 dependencies:
-  skills: []
+  skills:
+    - qa
+    - seniorswe-concise
   adapters: []
-  tools: []
+  tools:
+    - git
+    - python
   mcps: []
 testing:
   coverage_target: 80
@@ -20,6 +24,30 @@ documentation:
   readme: true
   spec: true
   examples_min: 2
-used_by: []
+used_by:
+  - atlassian-docs
+  - benchmark
+  - canary
+  - chrome-devtools
+  - codebase-engine
+  - design-review
+  - diagram-validate
+  - documentation
+  - health
+  - investigate
+  - learn
+  - migration-sqlserver-test
+  - plan-devex-review
+  - plan-review
+  - pre-commit-review
+  - qa
+  - receiving-code-review
+  - review
+  - security-review
+  - systematic-debugging
+  - test
+  - token-optimizer
+  - using-agent-skills
+  - verification-before-completion
 governance_version: '1.0'
 last_reviewed: '2026-06-28'

@@ -1,10 +1,10 @@
-﻿#  adapter google adk.Groups[1].Value.ToUpper() dapter google adk
+# Google Adk Adapter
 
 [See SKILL.md for complete documentation.](./SKILL.md)
 
 ## Overview
 
-This skill provides guidance and integration for agent-architecture workflows.
+Adapter for adapter-google-adk integration with agent-architecture workflows.
 
 ## Quick Start
 

@@ -7,9 +7,14 @@ description: |
   Local project learning workflow. Captures reusable project conventions, pitfalls, decisions,
   and review lessons without storing secrets or raw sensitive data.
 dependencies:
-  skills: []
+  skills:
+    - seniorswe-concise
+    - subagent-orchestrator
   adapters: []
-  tools: []
+  tools:
+    - git
+    - python
+    - terraform
   mcps: []
 testing:
   coverage_target: 80

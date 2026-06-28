@@ -7,9 +7,14 @@ description: |
   Modernize legacy frontend stacks such as Knockout, YUI, old jQuery widgets,
   and ad hoc browser code toward React/TypeScript.
 dependencies:
-  skills: []
+  skills:
+    - migration-review
+    - seniorswe-concise
   adapters: []
-  tools: []
+  tools:
+    - git
+    - npm
+    - python
   mcps: []
 testing:
   coverage_target: 80

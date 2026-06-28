@@ -6,10 +6,17 @@ owner: designer
 description: |
   Turns approved UI design direction into implementation-ready HTML guidance.
 dependencies:
-  skills: []
+  skills:
+    - design-review
+    - seniorswe-concise
   adapters: []
-  tools: []
-  mcps: []
+  tools:
+    - docker
+    - git
+    - npm
+    - python
+  mcps:
+    - openpencil-mcp
 testing:
   coverage_target: 80
   types:

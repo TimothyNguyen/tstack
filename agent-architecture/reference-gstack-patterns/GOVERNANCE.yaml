@@ -7,9 +7,16 @@ description: |
   Repo-local quick reference for the skill-pack pattern this repo uses.
   Read once when adding or refactoring a skill folder.
 dependencies:
-  skills: []
+  skills:
+    - seniorswe-concise
+    - subagent-orchestrator
   adapters: []
-  tools: []
+  tools:
+    - docker
+    - git
+    - npm
+    - python
+    - terraform
   mcps: []
 testing:
   coverage_target: 80

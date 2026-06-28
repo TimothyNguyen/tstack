@@ -8,9 +8,24 @@ description: |
   with tree-sitter, builds a NetworkX graph, clusters by community, and
   answers symbol, path, and dependency queries. No external egress.
 dependencies:
-  skills: []
+  skills:
+    - design-review
+    - migration-review
+    - qa
+    - release
+    - security-review
+    - seniorswe-concise
+    - spec
+    - stack-aws
+    - stack-databricks
+    - subagent-orchestrator
   adapters: []
-  tools: []
+  tools:
+    - docker
+    - git
+    - github
+    - npm
+    - python
   mcps: []
 testing:
   coverage_target: 80

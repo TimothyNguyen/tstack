@@ -6,9 +6,14 @@ owner: orchestrator
 description: |
   Prepares a human-approved PR, merge, or release handoff.
 dependencies:
-  skills: []
+  skills:
+    - release
+    - seniorswe-concise
+    - stack-aws
   adapters: []
-  tools: []
+  tools:
+    - git
+    - python
   mcps: []
 testing:
   coverage_target: 80
