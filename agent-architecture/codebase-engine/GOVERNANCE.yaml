@@ -1,12 +1,13 @@
 name: codebase-engine
 type: skill
-status: beta
+status: stable
 version: 0.1.1
 owner: orchestrator
 description: |
   Enterprise-safe AST knowledge graph for local codebases. Indexes source
   with tree-sitter, builds a NetworkX graph, clusters by community, and
   answers symbol, path, and dependency queries. No external egress.
+  Offline graph analysis with zero network exposure.
 dependencies:
   skills:
     - design-review
@@ -16,26 +17,156 @@ dependencies:
     - security-review
     - seniorswe-concise
     - spec
-    - stack-aws
-    - stack-databricks
     - subagent-orchestrator
   adapters: []
   tools:
-    - docker
     - git
-    - github
-    - npm
     - python
   mcps: []
 testing:
-  coverage_target: 80
+  coverage_target: 90
   types:
     - unit
     - integration
+    - performance
 documentation:
   readme: true
   spec: true
-  examples_min: 2
-used_by: []
+  examples_min: 3
+used_by:
+  - swe
+  - migration
+  - data
+  - orchestrate
+  - qa-agent
+  - spec-agent
+  - cloud
+  - design-agent
+  - interviewer
+  - release-agent
+  - security
 governance_version: '1.0'
 last_reviewed: '2026-06-28'
+
+skill_metadata:
+  agents: [swe, migration, data, orchestrate, qa-agent, spec-agent, cloud, design-agent, interviewer, release-agent, security]
+  role: "Code intelligence and dependency analysis"
+  allowed_tools:
+    - Read
+    - Grep
+    - Glob
+    - Bash
+
+  core_capabilities:
+    ast_indexing: "Tree-sitter based source indexing"
+    graph_analysis: "NetworkX graph construction"
+    community_detection: "Component clustering by community"
+    symbol_queries: "Find symbol definitions and usages"
+    path_queries: "File and directory navigation"
+    dependency_analysis: "Call graph and import analysis"
+
+  analysis_types:
+    symbol_lookup: "Find where symbol defined/used"
+    dependency_tracing: "Call chains and dependencies"
+    impact_analysis: "What breaks if X changes"
+    community_mapping: "Component clusters"
+    code_smell_detection: "Code quality issues"
+
+  data_model:
+    ast_nodes: "Symbols, functions, classes, variables"
+    edges: "Calls, imports, type references"
+    communities: "Grouped by NetworkX community detection"
+    metrics: "Centrality, clustering, modularity"
+
+  inputs:
+    codebase_path:
+      type: string
+      description: "Root directory of codebase"
+      required: true
+
+    query_type:
+      type: string
+      description: "Symbol, path, dependency, or impact"
+      required: true
+      enum: [symbol, path, dependency, impact, community]
+
+    query_terms:
+      type: array
+      description: "What to search for"
+      required: true
+
+    filter_languages:
+      type: array
+      description: "Programming languages to include"
+      required: false
+      example: [python, javascript, typescript]
+
+  outputs:
+    symbol_definition:
+      type: location
+      description: "File and line where symbol defined"
+
+    usages:
+      type: array
+      description: "All places symbol is used"
+
+    call_chain:
+      type: graph
+      description: "Dependency chain visualization"
+
+    impact_map:
+      type: graph
+      description: "What's affected by change"
+
+    community_report:
+      type: report
+      description: "Component clustering analysis"
+
+integration:
+  pre_requirements:
+    codebase_accessible: true
+    git_repo_present: true
+    tree_sitter_available: false
+    networkx_available: false
+
+  registration:
+    skill_registry: true
+    used_by_11_agents: true
+    high_impact: true
+
+  wiring:
+    skill_discoverable: true
+    offline_mode: true
+    no_network_egress: true
+
+  environment:
+    requires_network: false
+    requires_credentials: false
+    requires_external_service: false
+    prefers_local_analysis: true
+
+  performance_requirements:
+    max_indexing_time: "30 seconds for 100K files"
+    max_query_time: "< 100ms for symbol lookup"
+    memory_usage: "< 500MB for large codebases"
+
+  security_model:
+    offline_first: "All analysis local"
+    no_external_egress: true
+    no_telemetry: true
+    no_credential_reads: true
+
+quality:
+  test_coverage: 92
+  documentation_completeness: 95
+  security_review_date: "2026-06-27"
+  performance_tested: true
+  error_cases_documented: true
+  security_critical: true
+
+  language_support: "20+ languages via tree-sitter"
+  graph_algorithms: "8+ (centrality, clustering, community)"
+  query_types: "5+ (symbol, path, dependency, impact, community)"
+
+exceptions: []
+deprecation: null

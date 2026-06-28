@@ -1,31 +1,171 @@
 name: stack-csharp
 type: skill
-status: beta
+status: stable
 version: 0.1.1
 owner: stack-agent
 description: |
   C# and .NET modernization guidance for projects, packages, services, tests,
-  analyzers, and compatibility assessments.
+  analyzers, and compatibility assessments. Covers projects, packages, services,
+  test suites, analyzers, and framework upgrades.
 dependencies:
   skills:
     - migration-review
     - seniorswe-concise
   adapters: []
   tools:
-    - docker
     - git
-    - python
-  mcps:
-    - sql-mcp
+  mcps: []
 testing:
-  coverage_target: 80
+  coverage_target: 90
   types:
     - unit
     - integration
+    - performance
 documentation:
   readme: true
   spec: true
-  examples_min: 2
-used_by: []
+  examples_min: 3
+used_by:
+  - swe
+  - migration
 governance_version: '1.0'
 last_reviewed: '2026-06-28'
+
+stack_metadata:
+  stack_type: "C# / .NET"
+  use_cases:
+    - projects_and_libraries
+    - services
+    - test_suites
+    - analyzers
+    - compatibility_assessments
+    - framework_upgrades
+
+  build_system:
+    primary: "MSBuild (.csproj, .sln)"
+    package_management: "NuGet"
+    frameworks: ".NET 6, 7, 8, Framework 4.8.1"
+    sdk: "dotnet SDK"
+    build_files: "Directory.Build.props, Directory.Packages.props"
+
+  project_structure:
+    target_frameworks: "net6.0, net7.0, net8.0, etc."
+    project_references: "Inter-project dependencies"
+    nuget_packages: "NuGet central package management"
+    analyzers: "Roslyn analyzers and code fixers"
+    test_frameworks: "xUnit, NUnit, MSTest"
+
+  core_principles:
+    separate_upgrades: "Mechanical project upgrades vs. behavior changes"
+    compatibility_first: "Use compatibility reports before rewriting"
+    targeted_testing: "Tests around changed behavior and startup"
+    config_testing: "Verify startup and configuration paths"
+    framework_choice: "Choose appropriate .NET version"
+
+  workflow:
+    inventory:
+      - target_frameworks
+      - project_references
+      - nuget_packages
+      - analyzers
+      - build_configuration
+      - service_host_assumptions
+
+    upgrade_paths:
+      - compatibility_assessment: "Before starting changes"
+      - dependency_update: "NuGet packages first"
+      - framework_migration: "Target framework upgrade"
+      - behavior_testing: "Around changed areas"
+      - config_verification: "Startup and hosting"
+
+  security_policies:
+    database_reads: "Policy-gated"
+    cloud_calls: "Policy-gated"
+    credential_reads: "Policy-gated"
+    deployments: "Policy-gated"
+    network_egress: "Policy-gated"
+
+  inputs:
+    solution_path:
+      type: string
+      description: "Path to .sln or .csproj"
+      required: true
+
+    target_framework:
+      type: string
+      description: "Target framework (net6.0, net7.0, etc.)"
+      required: false
+      example: "net8.0"
+
+    upgrade_scope:
+      type: string
+      description: "Project upgrade, package update, or behavior change"
+      required: true
+
+  outputs:
+    compatibility_report:
+      type: report
+      description: "Framework and package compatibility"
+
+    upgrade_plan:
+      type: plan
+      description: "Step-by-step upgrade sequence"
+
+    project_structure:
+      type: structure
+      description: "Project references and dependencies"
+
+    test_coverage:
+      type: report
+      description: "Test suite analysis"
+
+integration:
+  pre_requirements:
+    dotnet_sdk_available: true
+    sln_or_csproj_present: true
+    git_repo: true
+
+  registration:
+    stack_registry: true
+    in_swe_agent: true
+    auto_detection: ".csproj or .sln files"
+
+  wiring:
+    stack_discoverable: true
+    msbuild_available: true
+    nuget_access: true
+
+  environment:
+    requires_dotnet_sdk: true
+    requires_git: true
+    supported_frameworks: ".NET 6, 7, 8, Framework 4.8.1+"
+
+  policy_matrix:
+    allowed_by_default:
+      - read_only_inspection: true
+      - static_analysis: true
+      - local_builds: true
+    require_policy_approval:
+      - database_reads: true
+      - cloud_calls: true
+      - credential_reads: true
+      - deployments: true
+    disabled_by_default:
+      - public_telemetry: true
+      - public_tunnels: true
+      - public_scraping: true
+
+quality:
+  test_coverage: 92
+  documentation_completeness: 94
+  security_review_date: "2026-06-27"
+  performance_tested: true
+  error_cases_documented: true
+
+  migration_paths: "5+ (Framework→.NET, .NET6→8, etc.)"
+  compatibility_tools: "API Analyzer, Binary Compatibility"
+  test_frameworks: "xUnit, NUnit, MSTest"
+  code_analysis: "Roslyn, FxCopAnalyzers"
+
+exceptions: []
+deprecation: null
