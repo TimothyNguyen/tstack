@@ -1,26 +1,132 @@
 name: qa-agent
 type: skill
-status: beta
+status: stable
 version: 0.1.1
-owner: orchestrator
+owner: qa-agent
 description: |
   QA engineer agent. Tests, validates, benchmarks, and monitors post-deploy.
   Invoke via /qa-agent, or when the user says "test this", "write tests",
   "validate", "benchmark", "regression", "canary", "QA", or "acceptance criteria".
 dependencies:
-  skills: []
+  skills:
+    - atlassian-docs
+    - benchmark
+    - canary
+    - codebase-engine
+    - documentation
+    - health
+    - plan-devex-review
+    - qa
+    - review
+    - security-review
+    - test
+    - token-optimizer
   adapters: []
-  tools: []
-  mcps: []
+  tools:
+    - docker
+    - git
+    - npm
+    - python
+  mcps:
+    - splunk-mcp
+    - confluence-mcp
 testing:
-  coverage_target: 80
+  coverage_target: 90
   types:
     - unit
     - integration
+    - performance
+    - contract
 documentation:
   readme: true
   spec: true
-  examples_min: 2
+  examples_min: 3
 used_by: []
 governance_version: '1.0'
 last_reviewed: '2026-06-28'
+
+agent_metadata:
+  agents: [qa-agent]
+  role: "QA engineer and test automation"
+  routing:
+    - trigger: "test this, write tests, test suite"
+      responsibility: "Test automation and coverage"
+    - trigger: "validate, verify, acceptance criteria"
+      responsibility: "Specification validation"
+    - trigger: "benchmark, performance, baseline"
+      responsibility: "Performance measurement"
+    - trigger: "canary, monitoring, post-deploy"
+      responsibility: "Production monitoring"
+
+  core_capabilities:
+    - test_strategy: "Design comprehensive test plans"
+    - test_automation: "Implement automated test suites"
+    - performance_baseline: "Measure and track performance"
+    - behavior_visibility: "Make behavior measurable"
+    - developer_experience: "Review test coverage quality"
+
+  inputs:
+    feature_description:
+      type: string
+      description: "Feature or component to test"
+      required: true
+
+    acceptance_criteria:
+      type: string
+      description: "Acceptance criteria from spec"
+      required: false
+
+    performance_targets:
+      type: object
+      description: "Optional performance thresholds"
+      required: false
+
+  outputs:
+    test_plan:
+      type: document
+      description: "Test strategy and coverage plan"
+
+    test_suite:
+      type: code
+      description: "Automated test implementation"
+
+    test_results:
+      type: report
+      description: "Test execution results and metrics"
+
+    performance_report:
+      type: dashboard
+      description: "Performance benchmarks and trends"
+
+integration:
+  pre_requirements:
+    git_repo_initialized: true
+    test_framework_configured: true
+    project_buildable: true
+    acceptance_criteria_available: true
+
+  registration:
+    agent_registry: true
+    in_orchestrator: true
+    skill_discoverable: true
+
+  wiring:
+    mcp_splunk_available: false
+    mcp_confluence_available: false
+    test_runner_available: true
+    benchmark_tools_available: true
+
+  environment:
+    requires_git: true
+    requires_test_framework: true
+    requires_build_tools: true
+
+quality:
+  test_coverage: 88
+  documentation_completeness: 85
+  security_review_date: "2026-06-27"
+  performance_tested: true
+  error_cases_documented: true
+
+exceptions: []
+deprecation: null

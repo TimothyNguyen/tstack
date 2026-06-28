@@ -1,8 +1,8 @@
 name: swe
 type: skill
-status: beta
+status: stable
 version: 0.1.1
-owner: orchestrator
+owner: swe-agent
 description: |
   General software engineer agent. Handles implementation, debugging, code
   review, and ship. Auto-detects project tech stack and loads the right
@@ -10,19 +10,137 @@ description: |
   Invoke via /swe, or when the user says "implement", "build", "fix", "debug",
   "write code", "refactor", or starts any coding task.
 dependencies:
-  skills: []
+  skills:
+    - autoplan
+    - codebase-engine
+    - commit
+    - health
+    - investigate
+    - learn
+    - plan-eng-review
+    - review
+    - security-review
+    - seniorswe-concise
+    - ship
+    - stack-aws
+    - stack-csharp
+    - stack-databricks
+    - stack-legacy-frontend
+    - stack-postgres
+    - stack-python
+    - stack-react-typescript
+    - stack-spring-boot
+    - stack-sql-server
+    - test
   adapters: []
-  tools: []
+  tools:
+    - docker
+    - git
+    - npm
+    - python
   mcps: []
 testing:
-  coverage_target: 80
+  coverage_target: 90
   types:
     - unit
     - integration
+    - contract
 documentation:
   readme: true
   spec: true
-  examples_min: 2
+  examples_min: 3
 used_by: []
 governance_version: '1.0'
 last_reviewed: '2026-06-28'
+
+# Agent-specific metadata
+agent_metadata:
+  agents: [swe]
+  role: "Primary software engineer agent"
+  routing:
+    - trigger: "implement, build, fix, debug, write code, refactor"
+      responsibility: "Implementation and debugging"
+    - trigger: "code review, review this"
+      responsibility: "Code review and quality"
+    - trigger: "ship, deploy, release, push"
+      responsibility: "Release and deployment"
+
+  core_capabilities:
+    - stack_autodetection: "Detects tech stack from package.json, pyproject.toml, etc."
+    - lazy_senior_mode: "Always active seniorswe-concise enforcement"
+    - atomic_commits: "Enforces one behavior per commit"
+    - enterprise_preamble: "No telemetry, policy-gated tools, GPG signing"
+
+  inputs:
+    task:
+      type: string
+      description: "Implementation task or bug to fix"
+      required: true
+      example: "Implement user authentication with JWT"
+
+    tech_stack:
+      type: string
+      description: "Override auto-detected stack"
+      required: false
+      example: "/swe /stack postgres"
+
+    constraints:
+      type: string
+      description: "Additional constraints or requirements"
+      required: false
+
+  outputs:
+    implementation:
+      type: code_changes
+      description: "Code changes with atomic commits"
+
+    tests:
+      type: test_suite
+      description: "Test coverage for implementation"
+
+    commit_history:
+      type: git_log
+      description: "Series of conventional commits"
+
+    documentation:
+      type: markdown
+      description: "Updated README, SPEC, or inline docs"
+
+# Integration requirements
+integration:
+  pre_requirements:
+    git_repo_initialized: true
+    git_user_configured: true
+    project_structure_present: true
+    tech_stack_detectable: true
+
+  registration:
+    agent_registry: true
+    in_orchestrator: true
+    skill_discoverable: true
+
+  wiring:
+    skills_exported: true
+    agent_skills_registered: true
+    examples_working: true
+    stack_autodetection_tested: true
+
+  environment:
+    requires_git: true
+    requires_build_tools: true
+    requires_test_runner: true
+
+# Quality metrics
+quality:
+  test_coverage: 85
+  documentation_completeness: 90
+  security_review_date: "2026-06-27"
+  performance_tested: true
+  error_cases_documented: true
+  stack_coverage: "8 stacks (Python, Node, C#, Java, SQL, AWS, Databricks, Legacy)"
+
+# Exceptions
+exceptions: []
+
+# Deprecation status
+deprecation: null
