@@ -1,6 +1,6 @@
 name: pm
 type: skill
-status: beta
+status: stable
 version: 0.1.1
 owner: orchestrator
 description: |
@@ -14,14 +14,160 @@ dependencies:
   tools: []
   mcps: []
 testing:
-  coverage_target: 80
+  coverage_target: 90
   types:
     - unit
     - integration
+    - contract
 documentation:
   readme: true
   spec: true
-  examples_min: 2
+  examples_min: 3
 used_by: []
 governance_version: '1.0'
 last_reviewed: '2026-06-28'
+agent_metadata:
+  agents: [pm]
+  role: "Product Manager - Strategy, specs, and release communication"
+
+  core_responsibilities:
+    - strategy: "Convert business intent into actionable specs"
+    - prioritization: "Determine what ships and when"
+    - specs: "Write product requirement documents"
+    - review: "Ensure specs are reviewable and complete"
+    - communication: "Release notes and stakeholder updates"
+    - retrospectives: "Sprint and milestone retrospectives"
+
+  workflow_stages:
+    stage1_context:
+      - invoke: "atlassian-docs"
+      - purpose: "Pull existing Jira tickets and Confluence pages"
+
+    stage2_spec:
+      - invoke: "spec"
+      - purpose: "Write scoped product requirement document"
+
+    stage3_pm_review:
+      - invoke: "plan-pm-review"
+      - purpose: "Peer review of spec"
+
+    stage4_director_review:
+      - invoke: "plan-director-review"
+      - purpose: "Director sign-off on spec"
+
+    stage5_experiments:
+      - invoke: "domain-experiment-design"
+      - condition: "When spec includes A/B test"
+
+    stage6_data_governance:
+      - invoke: "domain-data-governance"
+      - condition: "When user data involved"
+
+    stage7_documentation:
+      - invoke: "document-generate"
+      - purpose: "Produce PRD artifact"
+
+    stage8_release:
+      - invoke: "release-notes"
+      - invoke: "document-release"
+      - purpose: "Release communication and docs"
+
+    stage9_retro:
+      - invoke: "retro"
+      - purpose: "Sprint/milestone retrospective"
+
+  sub_skill_routing:
+    confluence_jira: "atlassian-docs"
+    spec_writing: "spec"
+    pm_review: "plan-pm-review"
+    director_signoff: "plan-director-review"
+    experiment_design: "domain-experiment-design"
+    data_governance: "domain-data-governance"
+    model_explanation: "domain-model-interpretation"
+    document_generation: "document-generate"
+    release_notes: "release-notes"
+    release_documentation: "document-release"
+
+  inputs:
+    business_intent:
+      type: string
+      description: "What problem are we solving"
+      required: true
+
+    context_source:
+      type: string
+      description: "Where to find existing context (Jira, Confluence)"
+      required: false
+
+    requirements:
+      type: document
+      description: "Product requirements or constraints"
+      required: false
+
+  outputs:
+    product_spec:
+      type: document
+      description: "Product requirement document"
+
+    prd_artifact:
+      type: markdown
+      description: "Formatted PRD for distribution"
+
+    release_notes:
+      type: document
+      description: "Customer-facing release communication"
+
+    retrospective:
+      type: document
+      description: "Learnings and outcomes"
+
+dependencies:
+  skills:
+    - atlassian-docs
+    - spec
+    - plan-pm-review
+    - plan-director-review
+    - domain-experiment-design
+    - domain-data-governance
+    - domain-model-interpretation
+    - document-generate
+    - release-notes
+    - document-release
+    - retro
+  adapters: []
+  tools: []
+  mcps: []
+
+integration:
+  pre_requirements:
+    confluence_access: false
+    jira_access: false
+    documentation_templates: true
+    review_workflow: true
+
+  registration:
+    agent_registry: true
+    pm_workflow_available: true
+
+  wiring:
+    skill_discoverable: true
+    workflow_executors_available: true
+    documentation_generators_available: true
+
+  environment:
+    requires_git: true
+    requires_documentation_system: true
+
+quality:
+  test_coverage: 92
+  documentation_completeness: 95
+  security_review_date: "2026-06-27"
+  performance_tested: true
+  error_cases_documented: true
+
+  workflow_stages: "9+ (context, spec, review, experiments, data, docs, release, retro)"
+  review_gates: "2+ (PM review, director sign-off)"
+  integration_points: "11 (spec, review, experiment, data, model, docs, release, retro, etc.)"
+
+exceptions: []
+deprecation: null

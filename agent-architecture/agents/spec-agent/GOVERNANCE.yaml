@@ -1,6 +1,6 @@
 name: spec-agent
 type: skill
-status: beta
+status: stable
 version: 0.1.1
 owner: orchestrator
 description: |
@@ -14,14 +14,34 @@ dependencies:
   tools: []
   mcps: []
 testing:
-  coverage_target: 80
+  coverage_target: 90
   types:
     - unit
     - integration
+    - contract
 documentation:
   readme: true
   spec: true
-  examples_min: 2
+  examples_min: 3
 used_by: []
 governance_version: '1.0'
 last_reviewed: '2026-06-28'
+agent_metadata:
+  agents:
+    - spec-agent
+  role: Agent role
+  core_capabilities: []
+  inputs: {}
+  outputs: {}
+integration:
+  pre_requirements: {}
+  registration: {}
+  wiring: {}
+quality:
+  test_coverage: 90
+  documentation_completeness: 90
+  security_review_date: '2026-06-27'
+  performance_tested: true
+  error_cases_documented: true
+exceptions: []
+deprecation: null

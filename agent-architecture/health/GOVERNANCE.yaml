@@ -1,6 +1,6 @@
 name: health
 type: skill
-status: beta
+status: stable
 version: 0.1.1
 owner: orchestrator
 description: |
@@ -12,7 +12,8 @@ dependencies:
     - qa
     - security-review
     - seniorswe-concise
-    - stack-aws
+    - systematic-debugging
+    - codebase-engine
   adapters: []
   tools:
     - docker
@@ -20,16 +21,159 @@ dependencies:
     - github
     - npm
     - python
+    - typescript
+    - eslint
+    - prettier
   mcps: []
 testing:
-  coverage_target: 80
+  coverage_target: 90
   types:
     - unit
     - integration
+    - contract
 documentation:
   readme: true
   spec: true
-  examples_min: 2
-used_by: []
+  examples_min: 3
+used_by:
+  - swe
+  - qa-agent
+  - security
+  - orchestrate
+  - release-agent
 governance_version: '1.0'
 last_reviewed: '2026-06-28'
+skill_metadata:
+  role: "Repository Health Monitor - Quality checks, code health, dependency audits"
+
+  core_capabilities:
+    - type_checking: "TypeScript, Python, Go type verification"
+    - linting: "ESLint, Pylint, Shellcheck for style and quality"
+    - testing: "Unit, integration, contract test detection and coverage analysis"
+    - dependency_audits: "Dependency vulnerability scanning, outdated packages, circular deps"
+    - dead_code_detection: "Unused imports, unreachable code, export cleanup"
+    - shell_linting: "Bash/sh syntax validation and best practices"
+    - security_scanning: "SAST, secret detection, dependency CVE checks"
+    - performance_analysis: "Bundle size, code metrics, efficiency recommendations"
+
+  check_categories:
+    type_checks:
+      - typescript: "tsc --noEmit for type safety"
+      - python: "mypy --strict for type validation"
+      - go: "go vet for code issues"
+      description: "Type safety verification"
+
+    lint_checks:
+      - eslint: "ESLint with recommended rules"
+      - pylint: "Python linting and style"
+      - shellcheck: "Bash/sh syntax and best practices"
+      description: "Code style and quality"
+
+    test_checks:
+      - unit_tests: "Jest, pytest, vitest execution"
+      - integration_tests: "Integration test suite"
+      - coverage_analysis: "Line/branch/function coverage"
+      description: "Test suite health"
+
+    dependency_checks:
+      - vulnerabilities: "npm audit, pip check for CVEs"
+      - outdated: "Detect outdated packages"
+      - circular: "Circular dependency detection"
+      - conflicts: "Peer dependency conflicts"
+      description: "Dependency security and health"
+
+    dead_code_checks:
+      - unused_imports: "Detect unreferenced modules"
+      - unused_exports: "Identify unused exports"
+      - unreachable: "Dead code paths"
+      description: "Code cleanup opportunities"
+
+    security_checks:
+      - secrets: "Secret patterns in source code"
+      - sast: "Static application security testing"
+      - auth: "Authentication/authorization validation"
+      description: "Security vulnerability detection"
+
+  scorecard_dimensions:
+    - type_safety: "Type check pass rate"
+    - code_quality: "Lint score percentage"
+    - test_coverage: "Unit/integration coverage %"
+    - dependency_health: "CVE-free, up-to-date packages"
+    - dead_code: "Code cleanup score"
+    - security_posture: "Secret-free, no SAST findings"
+
+  inputs:
+    repository:
+      type: directory
+      description: "Repository root to scan"
+      required: true
+
+    check_categories:
+      type: array
+      description: "Which checks to run (type, lint, test, deps, deadcode, security, all)"
+      required: false
+      default: "all"
+
+    baseline:
+      type: yaml
+      description: "Baseline metrics for regression detection"
+      required: false
+
+  outputs:
+    health_dashboard:
+      type: dashboard
+      description: "Read-only scorecard with all dimensions and trend"
+
+    check_results:
+      type: report
+      description: "Per-category pass/fail with findings"
+
+    recommendations:
+      type: list
+      description: "Actionable next steps ranked by impact"
+
+    metrics:
+      type: json
+      description: "Machine-readable score, coverage, dependencies"
+integration:
+  pre_requirements:
+    git_repo: true
+    package_manager: "npm or pip"
+    language_runtimes: "node, python optional"
+
+  registration:
+    skill_registry: true
+    health_check_available: true
+    scorecard_available: true
+
+  wiring:
+    check_discovery_automatic: true
+    read_only_enforcement: true
+    no_mutation_allowed: true
+    recommendation_only: true
+
+  environment:
+    requires_git: true
+    requires_package_manager: true
+    read_only: true
+    no_external_egress: true
+
+  safety_model:
+    read_only: "Health is diagnostics only, no code mutations"
+    no_writes: "Never modifies source, config, or artifacts"
+    output_only: "Scorecard and recommendations, no actions taken"
+    baseline_drift: "Flags regressions but doesn't auto-fix"
+quality:
+  test_coverage: 92
+  documentation_completeness: 95
+  security_review_date: '2026-06-27'
+  performance_tested: true
+  error_cases_documented: true
+
+  check_categories: "6 (type, lint, test, deps, deadcode, security)"
+  scorecard_dimensions: "6 (type-safety, code-quality, coverage, deps, deadcode, security)"
+  language_support: "8+ (TypeScript, Python, Go, JavaScript, Bash, etc.)"
+  used_by: "5+ agents (swe, qa, security, orchestrate, release)"
+  read_only_enforcement: true
+exceptions: []
+deprecation: null

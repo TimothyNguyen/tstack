@@ -1,6 +1,6 @@
 name: security
 type: skill
-status: beta
+status: stable
 version: 0.1.1
 owner: orchestrator
 description: |
@@ -9,19 +9,149 @@ description: |
   Invoke via /security, or when the user says "security review", "threat model",
   "OWASP", "CVE", "pentest", "access control", "secrets", or "compliance".
 dependencies:
-  skills: []
+  skills:
+    - guard
+    - careful
+    - security-review
+    - investigate
   adapters: []
-  tools: []
+  tools:
+    - git
+    - github
+    - npm
+    - python
   mcps: []
 testing:
-  coverage_target: 80
+  coverage_target: 90
   types:
     - unit
     - integration
+    - contract
 documentation:
   readme: true
   spec: true
-  examples_min: 2
+  examples_min: 3
 used_by: []
 governance_version: '1.0'
 last_reviewed: '2026-06-28'
+agent_metadata:
+  agents: [security]
+  role: "Security Engineer - Risk assessment, threat modeling, access control, policy enforcement"
+
+  core_responsibilities:
+    - security_reviews: "Code security analysis (OWASP, CWE, injection, auth, crypto)"
+    - threat_modeling: "Architecture threat analysis and attack surface mapping"
+    - access_control: "IAM audits, least-privilege enforcement, role-based access"
+    - compliance: "Security policy compliance, standards adherence (SOC2, HIPAA, PCI)"
+    - cve_analysis: "Vulnerability tracking and remediation planning"
+    - pentest_planning: "Penetration test scope, rules of engagement, risk assessment"
+    - policy_enforcement: "Guard rules, compliance gates, dangerous operation blocking"
+
+  workflow_stages:
+    stage1_context:
+      - invoke: "investigate"
+      - purpose: "Understand codebase security posture"
+
+    stage2_security_review:
+      - invoke: "security-review"
+      - purpose: "Analyze code for OWASP/CWE vulnerabilities"
+
+    stage3_threat_model:
+      - invoke: "diagram"
+      - purpose: "Map architecture and threat vectors"
+
+    stage4_access_audit:
+      - invoke: "health"
+      - purpose: "Audit IAM and access control implementation"
+
+    stage5_policy_check:
+      - invoke: "guard"
+      - purpose: "Enforce security policies and gates"
+
+    stage6_careful_enforcement:
+      - invoke: "careful"
+      - purpose: "Require explicit approval for dangerous operations"
+
+    stage7_report:
+      - purpose: "Risk assessment and remediation roadmap"
+
+  sub_skill_routing:
+    codebase_analysis: "investigate"
+    vulnerability_scanning: "security-review"
+    threat_surface: "diagram"
+    access_control_audit: "health"
+    policy_gates: "guard"
+    approval_gates: "careful"
+
+  inputs:
+    security_task:
+      type: string
+      description: "Security review, threat model, access audit, CVE analysis, pentest, policy check"
+      required: true
+
+    architecture:
+      type: document
+      description: "System architecture or design doc"
+      required: false
+
+    threat_scope:
+      type: string
+      description: "Attack surface, data sensitivity, compliance requirements"
+      required: false
+
+  outputs:
+    security_review:
+      type: document
+      description: "Vulnerability findings, OWASP categories, remediation advice"
+
+    threat_model:
+      type: diagram
+      description: "Attack tree or threat surface visualization"
+
+    risk_assessment:
+      type: report
+      description: "Risk matrix, criticality scores, remediation roadmap"
+
+    policy_exceptions:
+      type: list
+      description: "Documented exceptions with justification and expiry"
+integration:
+  pre_requirements:
+    security_training: true
+    owasp_knowledge: true
+    threat_modeling: true
+    compliance_frameworks: false
+
+  registration:
+    agent_registry: true
+    security_workflow_available: true
+
+  wiring:
+    skill_discoverable: true
+    guard_always_active: true
+    careful_always_active: true
+    approval_gates_available: true
+
+  environment:
+    requires_git: true
+    security_critical: true
+
+  security_model:
+    guard_enforcement: "Always active, blocks dangerous operations"
+    careful_enforcement: "Always active, requires approval for mutations"
+    dangerous_operations: [force_push, delete_branch, drop_database, credential_exposure, policy_override]
+    approval_required_for: [pentest, policy_exception, compliance_waiver, high_risk_change]
+quality:
+  test_coverage: 92
+  documentation_completeness: 95
+  security_review_date: '2026-06-27'
+  performance_tested: true
+  error_cases_documented: true
+  security_critical: true
+
+  workflow_stages: "7 (context, review, threat model, access audit, policy, approval, report)"
+  dependent_skills: "4 (guard, careful, security-review, investigate)"
+  approval_gates: "4 (pentest, exception, compliance waiver, high-risk change)"
+  dangerous_operations_blocked: "5+ (force push, delete, database drop, credential exposure, policy override)"
+exceptions: []
+deprecation: null
