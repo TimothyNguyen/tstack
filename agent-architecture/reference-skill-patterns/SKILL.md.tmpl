@@ -1,9 +1,14 @@
 ---
-name: reference-gstack-patterns
+name: reference-skill-patterns
 version: 0.2.1
 description: |
   Repo-local quick reference for the skill-pack pattern this repo uses.
   Read once when adding or refactoring a skill folder.
+allowed-tools:
+  - Read
+  - Grep
+  - Glob
+  - Bash
 agents: [_infrastructure, swe, orchestrate]
 ---
 

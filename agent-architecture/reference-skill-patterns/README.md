@@ -1,4 +1,4 @@
-﻿#  reference gstack patterns.Groups[1].Value.ToUpper() eference gstack patterns
+﻿# Reference Skill Patterns
 
 [See SKILL.md for complete documentation.](./SKILL.md)
 
