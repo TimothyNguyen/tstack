@@ -34,14 +34,14 @@ test('enterprise policy gates design MCP tools and modules', () => {
 });
 
 test('adapter registry includes optional design MCP adapters', () => {
-  const registry = JSON.parse(read('adapters/registry.json'));
+  const registry = JSON.parse(read('packages/adapters/adapters/registry.json'));
   const byId = new Map(registry.adapters.map((adapter) => [adapter.id, adapter]));
 
   assert.equal(byId.get('figma-mcp')?.module, 'figmaMcp');
-  assert.equal(byId.get('figma-mcp')?.skill, 'design-review');
+  assert.match(byId.get('figma-mcp')?.skill ?? '', /design-review/);
   assert.equal(byId.get('figma-mcp')?.egress, 'approval-required');
 
   assert.equal(byId.get('open-pencil-mcp')?.module, 'openPencilMcp');
-  assert.equal(byId.get('open-pencil-mcp')?.skill, 'design-review');
+  assert.match(byId.get('open-pencil-mcp')?.skill ?? '', /design-review/);
   assert.equal(byId.get('open-pencil-mcp')?.egress, 'approval-required');
 });

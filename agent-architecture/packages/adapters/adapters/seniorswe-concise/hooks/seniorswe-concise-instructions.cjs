@@ -4,7 +4,7 @@ const path = require('node:path');
 const { DEFAULT_MODE, normalizeMode, normalizePersistedMode } = require('./seniorswe-concise-config.cjs');
 
 const INDEPENDENT_MODES = new Set(['review']);
-const SKILL_PATH = path.resolve(__dirname, '..', '..', '..', 'seniorswe-concise', 'SKILL.md');
+const SKILL_PATH = path.resolve(__dirname, '..', '..', '..', '..', '..', 'seniorswe-concise', 'SKILL.md');
 
 function filterSkillBodyForMode(body, mode) {
   const effectiveMode = normalizeMode(mode) || DEFAULT_MODE;

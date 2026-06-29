@@ -4,7 +4,8 @@ import path from 'node:path';
 import test from 'node:test';
 
 const root = path.resolve(import.meta.dirname, '..');
-const registry = JSON.parse(fs.readFileSync(path.join(root, 'adapters', 'registry.json'), 'utf8'));
+const adaptersRoot = path.join(root, 'packages', 'adapters');
+const registry = JSON.parse(fs.readFileSync(path.join(adaptersRoot, 'adapters', 'registry.json'), 'utf8'));
 const policy = JSON.parse(fs.readFileSync(path.join(root, 'policies', 'enterprise-default.json'), 'utf8'));
 
 test('adapter registry is default-deny and references existing skills/modules', () => {
@@ -16,7 +17,7 @@ test('adapter registry is default-deny and references existing skills/modules', 
     assert.equal(ids.has(adapter.id), false, `duplicate adapter id ${adapter.id}`);
     ids.add(adapter.id);
 
-    assert.equal(fs.existsSync(path.join(root, adapter.skill, 'SKILL.md.tmpl')), true, `${adapter.id} skill missing`);
+    assert.equal(fs.existsSync(path.join(adaptersRoot, adapter.skill, 'SKILL.md.tmpl')), true, `${adapter.id} skill missing`);
     assert.equal(Object.hasOwn(policy.modules, adapter.module), true, `${adapter.id} policy module missing`);
     assert.match(policy.modules[adapter.module], /^(optional|disabled)$/, `${adapter.id} module must not be enabled`);
   }
@@ -32,7 +33,7 @@ test('adapter registry forbids default public egress and ungated writes', () => 
 
 test('adapter registry and adapter skills stay in sync', () => {
   const registeredSkills = new Set(registry.adapters.map((adapter) => adapter.skill));
-  const adapterSkills = fs.readdirSync(root, { withFileTypes: true })
+  const adapterSkills = fs.readdirSync(adaptersRoot, { withFileTypes: true })
     .filter((entry) => entry.isDirectory() && entry.name.startsWith('adapter-'))
     .map((entry) => entry.name);
 

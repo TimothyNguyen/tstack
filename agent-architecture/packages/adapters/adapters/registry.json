@@ -40,7 +40,7 @@
     },
     {
       "id": "figma-mcp",
-      "skill": "design-review",
+      "skill": "../../design-review",
       "module": "figmaMcp",
       "runtime": "design-mcp-adapter",
       "egress": "approval-required",
@@ -49,7 +49,7 @@
     },
     {
       "id": "open-pencil-mcp",
-      "skill": "design-review",
+      "skill": "../../design-review",
       "module": "openPencilMcp",
       "runtime": "design-mcp-adapter",
       "egress": "approval-required",

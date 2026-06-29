@@ -5,7 +5,7 @@ const path = require('node:path');
 const DEFAULT_MODE = 'full';
 const VALID_MODES = ['off', 'lite', 'full', 'ultra', 'review'];
 const RUNTIME_MODES = ['off', 'lite', 'full', 'ultra'];
-const ROOT = path.resolve(__dirname, '..', '..', '..');
+const ROOT = path.resolve(__dirname, '..', '..', '..', '..', '..');
 
 function normalizeMode(mode) {
   if (typeof mode !== 'string') return null;

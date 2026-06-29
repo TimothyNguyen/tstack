@@ -1,6 +1,6 @@
 # Skill Catalog
 
-Agent-architecture provides 100 reusable skills organized by category and specialized role.
+Agent-architecture provides 88 reusable skills organized by category and specialized role.
 
 **[Contributing?](./CONTRIBUTING.md)** See submission process and validation checklist.
 
@@ -10,17 +10,6 @@ Agent-architecture provides 100 reusable skills organized by category and specia
 
 ### Core Workflows
 
-- **[`adapter-ag-ui`](./adapter-ag-ui/SKILL.md)** — | *(orchestrate, swe)*
-- **[`adapter-agentcore`](./adapter-agentcore/SKILL.md)** — | *(orchestrate, cloud)*
-- **[`adapter-databricks`](./adapter-databricks/SKILL.md)** — | *(data)*
-- **[`adapter-docker-mcp`](./adapter-docker-mcp/SKILL.md)** — | *(cloud, release-agent)*
-- **[`adapter-github`](./adapter-github/SKILL.md)** — | *(swe, orchestrate)*
-- **[`adapter-google-adk`](./adapter-google-adk/SKILL.md)** — | *(orchestrate, cloud)*
-- **[`adapter-langgraph`](./adapter-langgraph/SKILL.md)** — | *(orchestrate)*
-- **[`adapter-mcp`](./adapter-mcp/SKILL.md)** — | *(swe, orchestrate)*
-- **[`adapter-openapi`](./adapter-openapi/SKILL.md)** — | *(swe, spec-agent)*
-- **[`adapter-seniorswe-concise`](./adapter-seniorswe-concise/SKILL.md)** — | *(swe)*
-- **[`adapter-strands`](./adapter-strands/SKILL.md)** — | *(orchestrate, cloud)*
 - **[`architecture-agent-upgrade`](./architecture-agent-upgrade/SKILL.md)** — |
 - **[`atlassian-docs`](./atlassian-docs/SKILL.md)** — | *(spec-agent, pm)*
 - **[`autoplan`](./autoplan/SKILL.md)** — | *(swe, orchestrate)*
@@ -89,7 +78,6 @@ Agent-architecture provides 100 reusable skills organized by category and specia
 - **[`ship`](./ship/SKILL.md)** — | *(swe, cloud)*
 - **[`skillify`](./skillify/SKILL.md)** — | *(swe, orchestrate)*
 - **[`spec`](./spec/SKILL.md)** — | *(spec-agent, pm)*
-- **[`stack`](./stack/SKILL.md)** — | *(swe)*
 - **[`stack-aws`](./stack-aws/SKILL.md)** — | *(cloud)*
 - **[`stack-aws-dms`](./stack-aws-dms/SKILL.md)** — | *(migration, cloud)*
 - **[`stack-csharp`](./stack-csharp/SKILL.md)** — | *(swe, migration)*
@@ -117,14 +105,8 @@ Agent-architecture provides 100 reusable skills organized by category and specia
 
 ### `/swe`
 
-61 skills
+54 skills
 
-- [`adapter-ag-ui`](./adapter-ag-ui/SKILL.md) — |
-- [`adapter-docker-mcp`](./adapter-docker-mcp/SKILL.md) — |
-- [`adapter-github`](./adapter-github/SKILL.md) — |
-- [`adapter-mcp`](./adapter-mcp/SKILL.md) — |
-- [`adapter-openapi`](./adapter-openapi/SKILL.md) — |
-- [`adapter-seniorswe-concise`](./adapter-seniorswe-concise/SKILL.md) — |
 - [`atlassian-docs`](./atlassian-docs/SKILL.md) — |
 - [`autoplan`](./autoplan/SKILL.md) — |
 - [`benchmark`](./benchmark/SKILL.md) — |
@@ -166,7 +148,6 @@ Agent-architecture provides 100 reusable skills organized by category and specia
 - [`seniorswe-concise-review`](./seniorswe-concise-review/SKILL.md) — |
 - [`ship`](./ship/SKILL.md) — |
 - [`skillify`](./skillify/SKILL.md) — |
-- [`stack`](./stack/SKILL.md) — |
 - [`stack-csharp`](./stack-csharp/SKILL.md) — |
 - [`stack-legacy-frontend`](./stack-legacy-frontend/SKILL.md) — |
 - [`stack-postgres`](./stack-postgres/SKILL.md) — |
@@ -212,9 +193,8 @@ Agent-architecture provides 100 reusable skills organized by category and specia
 
 ### `/spec-agent`
 
-20 skills
+19 skills
 
-- [`adapter-openapi`](./adapter-openapi/SKILL.md) — |
 - [`atlassian-docs`](./atlassian-docs/SKILL.md) — |
 - [`autoplan`](./autoplan/SKILL.md) — |
 - [`brainstorming`](./brainstorming/SKILL.md) — |
@@ -237,9 +217,8 @@ Agent-architecture provides 100 reusable skills organized by category and specia
 
 ### `/pm`
 
-19 skills
+18 skills
 
-- [`adapter-github`](./adapter-github/SKILL.md) — |
 - [`atlassian-docs`](./atlassian-docs/SKILL.md) — |
 - [`diagram-export`](./diagram-export/SKILL.md) — |
 - [`document-generate`](./document-generate/SKILL.md) — |
@@ -291,16 +270,8 @@ Agent-architecture provides 100 reusable skills organized by category and specia
 
 ### `/orchestrate`
 
-30 skills
+22 skills
 
-- [`adapter-ag-ui`](./adapter-ag-ui/SKILL.md) — |
-- [`adapter-agentcore`](./adapter-agentcore/SKILL.md) — |
-- [`adapter-docker-mcp`](./adapter-docker-mcp/SKILL.md) — |
-- [`adapter-github`](./adapter-github/SKILL.md) — |
-- [`adapter-google-adk`](./adapter-google-adk/SKILL.md) — |
-- [`adapter-langgraph`](./adapter-langgraph/SKILL.md) — |
-- [`adapter-mcp`](./adapter-mcp/SKILL.md) — |
-- [`adapter-strands`](./adapter-strands/SKILL.md) — |
 - [`autoplan`](./autoplan/SKILL.md) — |
 - [`brainstorming`](./brainstorming/SKILL.md) — |
 - [`change-router`](./change-router/SKILL.md) — |
@@ -375,9 +346,8 @@ Agent-architecture provides 100 reusable skills organized by category and specia
 
 ### `/data`
 
-19 skills
+18 skills
 
-- [`adapter-databricks`](./adapter-databricks/SKILL.md) — |
 - [`benchmark`](./benchmark/SKILL.md) — |
 - [`codebase-engine`](./codebase-engine/SKILL.md) — |
 - [`commit`](./commit/SKILL.md) — |
@@ -399,14 +369,8 @@ Agent-architecture provides 100 reusable skills organized by category and specia
 
 ### `/cloud`
 
-22 skills
+16 skills
 
-- [`adapter-ag-ui`](./adapter-ag-ui/SKILL.md) — |
-- [`adapter-agentcore`](./adapter-agentcore/SKILL.md) — |
-- [`adapter-docker-mcp`](./adapter-docker-mcp/SKILL.md) — |
-- [`adapter-google-adk`](./adapter-google-adk/SKILL.md) — |
-- [`adapter-mcp`](./adapter-mcp/SKILL.md) — |
-- [`adapter-strands`](./adapter-strands/SKILL.md) — |
 - [`canary`](./canary/SKILL.md) — |
 - [`careful`](./careful/SKILL.md) — |
 - [`codebase-engine`](./codebase-engine/SKILL.md) — |
@@ -426,9 +390,8 @@ Agent-architecture provides 100 reusable skills organized by category and specia
 
 ### `/release-agent`
 
-14 skills
+13 skills
 
-- [`adapter-docker-mcp`](./adapter-docker-mcp/SKILL.md) — |
 - [`canary`](./canary/SKILL.md) — |
 - [`careful`](./careful/SKILL.md) — |
 - [`codebase-engine`](./codebase-engine/SKILL.md) — |
@@ -459,7 +422,7 @@ Agent-architecture provides 100 reusable skills organized by category and specia
 
 | Category | Count |
 |----------|-------|
-| Core Workflows | 100 |
-| **Total** | **100** |
+| Core Workflows | 88 |
+| **Total** | **88** |
 
 See [METADATA-SCHEMA.md](./METADATA-SCHEMA.md) for skill development and metadata reference.

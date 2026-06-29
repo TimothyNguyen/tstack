@@ -4,6 +4,7 @@ import path from 'node:path';
 import test from 'node:test';
 
 const root = path.resolve(import.meta.dirname, '..');
+const adaptersRoot = path.join(root, 'packages', 'adapters');
 const profilesDir = path.join(root, 'profiles');
 const policy = JSON.parse(fs.readFileSync(path.join(root, 'policies', 'enterprise-default.json'), 'utf8'));
 
@@ -12,10 +13,15 @@ function readJson(file) {
 }
 
 function skillDirs() {
-  return new Set(fs.readdirSync(root, { withFileTypes: true })
+  const fromRoot = fs.readdirSync(root, { withFileTypes: true })
     .filter((entry) => entry.isDirectory())
     .filter((entry) => fs.existsSync(path.join(root, entry.name, 'SKILL.md.tmpl')))
-    .map((entry) => entry.name));
+    .map((entry) => entry.name);
+  const fromAdapters = fs.readdirSync(adaptersRoot, { withFileTypes: true })
+    .filter((entry) => entry.isDirectory())
+    .filter((entry) => fs.existsSync(path.join(adaptersRoot, entry.name, 'SKILL.md.tmpl')))
+    .map((entry) => entry.name);
+  return new Set([...fromRoot, ...fromAdapters]);
 }
 
 function profileFiles() {
