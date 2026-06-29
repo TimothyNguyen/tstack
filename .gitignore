@@ -20,3 +20,4 @@ agent-architecture/generated/
 agent-architecture/codebase-out/
 agent-architecture/coverage/
 agent-architecture/test-results/
+agent-architecture/.agent/
