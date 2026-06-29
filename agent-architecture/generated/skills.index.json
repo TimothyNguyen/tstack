@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-06-29T20:45:51.035Z",
-  "count": 103,
+  "generatedAt": "2026-06-29T21:06:12.948Z",
+  "count": 86,
   "skills": [
     {
       "name": "agent-architecture",
@@ -352,45 +352,6 @@
         "qa-agent",
         "pm",
         "spec-agent"
-      ]
-    },
-    {
-      "name": "domain-data-governance",
-      "version": "0.1.1",
-      "description": "Data governance review for classification, lineage, permissions, retention,",
-      "path": "domain-data-governance/SKILL.md.tmpl",
-      "agents": [
-        "data",
-        "pm"
-      ]
-    },
-    {
-      "name": "domain-experiment-design",
-      "version": "0.1.1",
-      "description": "Experiment design review for randomization, power, metrics, guardrails,",
-      "path": "domain-experiment-design/SKILL.md.tmpl",
-      "agents": [
-        "data",
-        "pm"
-      ]
-    },
-    {
-      "name": "domain-mlops-databricks",
-      "version": "0.1.1",
-      "description": "Databricks MLOps project structure, model lifecycle, CI/CD, monitoring, and",
-      "path": "domain-mlops-databricks/SKILL.md.tmpl",
-      "agents": [
-        "data"
-      ]
-    },
-    {
-      "name": "domain-model-interpretation",
-      "version": "0.1.1",
-      "description": "Model interpretation review for feature effects, calibration, drift,",
-      "path": "domain-model-interpretation/SKILL.md.tmpl",
-      "agents": [
-        "data",
-        "pm"
       ]
     },
     {
@@ -876,131 +837,6 @@
       "path": "agents/spec-agent/SKILL.md.tmpl",
       "agents": [
         "_infrastructure"
-      ]
-    },
-    {
-      "name": "stack-aws",
-      "version": "0.1.1",
-      "description": "AWS application modernization planning with least-privilege, local-first",
-      "path": "stack-aws/SKILL.md.tmpl",
-      "agents": [
-        "cloud"
-      ]
-    },
-    {
-      "name": "stack-aws-dms",
-      "version": "0.1.1",
-      "description": "AWS DMS/SCT migration planning patterns for governed database migration",
-      "path": "stack-aws-dms/SKILL.md.tmpl",
-      "agents": [
-        "migration",
-        "cloud"
-      ]
-    },
-    {
-      "name": "stack-csharp",
-      "version": "0.1.1",
-      "description": "C# and .NET modernization guidance for projects, packages, services, tests,",
-      "path": "stack-csharp/SKILL.md.tmpl",
-      "agents": [
-        "swe",
-        "migration"
-      ]
-    },
-    {
-      "name": "stack-databricks",
-      "version": "0.1.1",
-      "description": "Databricks engineering workflows for Asset Bundles, jobs, notebooks, SDK",
-      "path": "stack-databricks/SKILL.md.tmpl",
-      "agents": [
-        "data"
-      ]
-    },
-    {
-      "name": "stack-databricks-dbt",
-      "version": "0.1.1",
-      "description": "dbt on Databricks patterns for models, tests, docs, lineage, and governed",
-      "path": "stack-databricks-dbt/SKILL.md.tmpl",
-      "agents": [
-        "data"
-      ]
-    },
-    {
-      "name": "stack-legacy-frontend",
-      "version": "0.1.1",
-      "description": "Modernize legacy frontend stacks such as Knockout, YUI, old jQuery widgets,",
-      "path": "stack-legacy-frontend/SKILL.md.tmpl",
-      "agents": [
-        "migration",
-        "swe"
-      ]
-    },
-    {
-      "name": "stack-postgres",
-      "version": "0.1.1",
-      "description": "Postgres schema, query, migration, performance, and data-governance workflows",
-      "path": "stack-postgres/SKILL.md.tmpl",
-      "agents": [
-        "swe",
-        "migration",
-        "data"
-      ]
-    },
-    {
-      "name": "stack-python",
-      "version": "0.1.1",
-      "description": "Python service, library, and data workflow modernization with minimal",
-      "path": "stack-python/SKILL.md.tmpl",
-      "agents": [
-        "swe",
-        "data"
-      ]
-    },
-    {
-      "name": "stack-react-typescript",
-      "version": "0.1.1",
-      "description": "React and TypeScript application modernization, including codemods, Redux",
-      "path": "stack-react-typescript/SKILL.md.tmpl",
-      "agents": [
-        "swe",
-        "design-agent"
-      ]
-    },
-    {
-      "name": "stack-spring-ai",
-      "version": "0.1.1",
-      "description": "Spring-native AI application patterns using Spring AI and Spring AI examples",
-      "path": "stack-spring-ai/SKILL.md.tmpl",
-      "agents": [
-        "swe"
-      ]
-    },
-    {
-      "name": "stack-spring-boot",
-      "version": "0.1.1",
-      "description": "Spring Boot upgrade and API modernization using OpenRewrite recipes,",
-      "path": "stack-spring-boot/SKILL.md.tmpl",
-      "agents": [
-        "swe"
-      ]
-    },
-    {
-      "name": "stack-sql-server",
-      "version": "0.1.1",
-      "description": "SQL Server schema, T-SQL, stored procedure, job, and application data-access",
-      "path": "stack-sql-server/SKILL.md.tmpl",
-      "agents": [
-        "swe",
-        "migration"
-      ]
-    },
-    {
-      "name": "stack-sqlserver-to-postgres",
-      "version": "0.1.1",
-      "description": "SQL Server to Postgres migration planning with T-SQL compatibility checks,",
-      "path": "stack-sqlserver-to-postgres/SKILL.md.tmpl",
-      "agents": [
-        "migration"
       ]
     },
     {

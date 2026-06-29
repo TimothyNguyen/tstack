@@ -1,6 +1,6 @@
 # Skill Catalog
 
-Agent-architecture provides 88 reusable skills organized by category and specialized role.
+Agent-architecture provides 71 reusable skills organized by category and specialized role.
 
 **[Contributing?](./CONTRIBUTING.md)** See submission process and validation checklist.
 
@@ -37,10 +37,6 @@ Agent-architecture provides 88 reusable skills organized by category and special
 - **[`document-generate`](./document-generate/SKILL.md)** — | *(spec-agent, pm)*
 - **[`document-release`](./document-release/SKILL.md)** — | *(pm, swe)*
 - **[`documentation`](./documentation/SKILL.md)** — | *(qa-agent, pm)*
-- **[`domain-data-governance`](./domain-data-governance/SKILL.md)** — | *(data, pm)*
-- **[`domain-experiment-design`](./domain-experiment-design/SKILL.md)** — | *(data, pm)*
-- **[`domain-mlops-databricks`](./domain-mlops-databricks/SKILL.md)** — | *(data)*
-- **[`domain-model-interpretation`](./domain-model-interpretation/SKILL.md)** — | *(data, pm)*
 - **[`guard`](./guard/SKILL.md)** — | *(swe, migration)*
 - **[`health`](./health/SKILL.md)** — | *(swe, qa-agent)*
 - **[`investigate`](./investigate/SKILL.md)** — | *(swe, qa-agent)*
@@ -78,19 +74,6 @@ Agent-architecture provides 88 reusable skills organized by category and special
 - **[`ship`](./ship/SKILL.md)** — | *(swe, cloud)*
 - **[`skillify`](./skillify/SKILL.md)** — | *(swe, orchestrate)*
 - **[`spec`](./spec/SKILL.md)** — | *(spec-agent, pm)*
-- **[`stack-aws`](./stack-aws/SKILL.md)** — | *(cloud)*
-- **[`stack-aws-dms`](./stack-aws-dms/SKILL.md)** — | *(migration, cloud)*
-- **[`stack-csharp`](./stack-csharp/SKILL.md)** — | *(swe, migration)*
-- **[`stack-databricks`](./stack-databricks/SKILL.md)** — | *(data)*
-- **[`stack-databricks-dbt`](./stack-databricks-dbt/SKILL.md)** — | *(data)*
-- **[`stack-legacy-frontend`](./stack-legacy-frontend/SKILL.md)** — | *(migration, swe)*
-- **[`stack-postgres`](./stack-postgres/SKILL.md)** — | *(swe, migration)*
-- **[`stack-python`](./stack-python/SKILL.md)** — | *(swe, data)*
-- **[`stack-react-typescript`](./stack-react-typescript/SKILL.md)** — | *(swe, design-agent)*
-- **[`stack-spring-ai`](./stack-spring-ai/SKILL.md)** — | *(swe)*
-- **[`stack-spring-boot`](./stack-spring-boot/SKILL.md)** — | *(swe)*
-- **[`stack-sql-server`](./stack-sql-server/SKILL.md)** — | *(swe, migration)*
-- **[`stack-sqlserver-to-postgres`](./stack-sqlserver-to-postgres/SKILL.md)** — | *(migration)*
 - **[`subagent-orchestrator`](./subagent-orchestrator/SKILL.md)** — | *(orchestrate)*
 - **[`systematic-debugging`](./systematic-debugging/SKILL.md)** — | *(swe, qa-agent)*
 - **[`test`](./test/SKILL.md)** — | *(swe, qa-agent)*
@@ -105,7 +88,7 @@ Agent-architecture provides 88 reusable skills organized by category and special
 
 ### `/swe`
 
-54 skills
+46 skills
 
 - [`atlassian-docs`](./atlassian-docs/SKILL.md) — |
 - [`autoplan`](./autoplan/SKILL.md) — |
@@ -148,14 +131,6 @@ Agent-architecture provides 88 reusable skills organized by category and special
 - [`seniorswe-concise-review`](./seniorswe-concise-review/SKILL.md) — |
 - [`ship`](./ship/SKILL.md) — |
 - [`skillify`](./skillify/SKILL.md) — |
-- [`stack-csharp`](./stack-csharp/SKILL.md) — |
-- [`stack-legacy-frontend`](./stack-legacy-frontend/SKILL.md) — |
-- [`stack-postgres`](./stack-postgres/SKILL.md) — |
-- [`stack-python`](./stack-python/SKILL.md) — |
-- [`stack-react-typescript`](./stack-react-typescript/SKILL.md) — |
-- [`stack-spring-ai`](./stack-spring-ai/SKILL.md) — |
-- [`stack-spring-boot`](./stack-spring-boot/SKILL.md) — |
-- [`stack-sql-server`](./stack-sql-server/SKILL.md) — |
 - [`systematic-debugging`](./systematic-debugging/SKILL.md) — |
 - [`test`](./test/SKILL.md) — |
 - [`token-optimizer`](./token-optimizer/SKILL.md) — |
@@ -217,16 +192,13 @@ Agent-architecture provides 88 reusable skills organized by category and special
 
 ### `/pm`
 
-18 skills
+15 skills
 
 - [`atlassian-docs`](./atlassian-docs/SKILL.md) — |
 - [`diagram-export`](./diagram-export/SKILL.md) — |
 - [`document-generate`](./document-generate/SKILL.md) — |
 - [`document-release`](./document-release/SKILL.md) — |
 - [`documentation`](./documentation/SKILL.md) — |
-- [`domain-data-governance`](./domain-data-governance/SKILL.md) — |
-- [`domain-experiment-design`](./domain-experiment-design/SKILL.md) — |
-- [`domain-model-interpretation`](./domain-model-interpretation/SKILL.md) — |
 - [`learn`](./learn/SKILL.md) — |
 - [`learnings`](./learnings/SKILL.md) — |
 - [`plan-design-review`](./plan-design-review/SKILL.md) — |
@@ -240,7 +212,7 @@ Agent-architecture provides 88 reusable skills organized by category and special
 
 ### `/design-agent`
 
-15 skills
+14 skills
 
 - [`brainstorming`](./brainstorming/SKILL.md) — |
 - [`chrome-devtools`](./chrome-devtools/SKILL.md) — |
@@ -255,7 +227,6 @@ Agent-architecture provides 88 reusable skills organized by category and special
 - [`diagram-validate`](./diagram-validate/SKILL.md) — |
 - [`learn`](./learn/SKILL.md) — |
 - [`plan-design-review`](./plan-design-review/SKILL.md) — |
-- [`stack-react-typescript`](./stack-react-typescript/SKILL.md) — |
 - [`using-agent-skills`](./using-agent-skills/SKILL.md) — |
 
 ### `/diagram-agent`
@@ -313,7 +284,7 @@ Agent-architecture provides 88 reusable skills organized by category and special
 
 ### `/migration`
 
-18 skills
+12 skills
 
 - [`careful`](./careful/SKILL.md) — |
 - [`codebase-engine`](./codebase-engine/SKILL.md) — |
@@ -325,12 +296,6 @@ Agent-architecture provides 88 reusable skills organized by category and special
 - [`migration-dotnet-sqlserver-modernization`](./migration-dotnet-sqlserver-modernization/SKILL.md) — |
 - [`migration-review`](./migration-review/SKILL.md) — |
 - [`plan-eng-review`](./plan-eng-review/SKILL.md) — |
-- [`stack-aws-dms`](./stack-aws-dms/SKILL.md) — |
-- [`stack-csharp`](./stack-csharp/SKILL.md) — |
-- [`stack-legacy-frontend`](./stack-legacy-frontend/SKILL.md) — |
-- [`stack-postgres`](./stack-postgres/SKILL.md) — |
-- [`stack-sql-server`](./stack-sql-server/SKILL.md) — |
-- [`stack-sqlserver-to-postgres`](./stack-sqlserver-to-postgres/SKILL.md) — |
 - [`systematic-debugging`](./systematic-debugging/SKILL.md) — |
 - [`using-agent-skills`](./using-agent-skills/SKILL.md) — |
 
@@ -346,30 +311,22 @@ Agent-architecture provides 88 reusable skills organized by category and special
 
 ### `/data`
 
-18 skills
+10 skills
 
 - [`benchmark`](./benchmark/SKILL.md) — |
 - [`codebase-engine`](./codebase-engine/SKILL.md) — |
 - [`commit`](./commit/SKILL.md) — |
-- [`domain-data-governance`](./domain-data-governance/SKILL.md) — |
-- [`domain-experiment-design`](./domain-experiment-design/SKILL.md) — |
-- [`domain-mlops-databricks`](./domain-mlops-databricks/SKILL.md) — |
-- [`domain-model-interpretation`](./domain-model-interpretation/SKILL.md) — |
 - [`learn`](./learn/SKILL.md) — |
 - [`plan-eng-review`](./plan-eng-review/SKILL.md) — |
 - [`rtk-token-optimizer`](./rtk-token-optimizer/SKILL.md) — |
 - [`seniorswe-concise`](./seniorswe-concise/SKILL.md) — |
-- [`stack-databricks`](./stack-databricks/SKILL.md) — |
-- [`stack-databricks-dbt`](./stack-databricks-dbt/SKILL.md) — |
-- [`stack-postgres`](./stack-postgres/SKILL.md) — |
-- [`stack-python`](./stack-python/SKILL.md) — |
 - [`systematic-debugging`](./systematic-debugging/SKILL.md) — |
 - [`token-optimizer`](./token-optimizer/SKILL.md) — |
 - [`using-agent-skills`](./using-agent-skills/SKILL.md) — |
 
 ### `/cloud`
 
-16 skills
+14 skills
 
 - [`canary`](./canary/SKILL.md) — |
 - [`careful`](./careful/SKILL.md) — |
@@ -383,8 +340,6 @@ Agent-architecture provides 88 reusable skills organized by category and special
 - [`release`](./release/SKILL.md) — |
 - [`security-review`](./security-review/SKILL.md) — |
 - [`ship`](./ship/SKILL.md) — |
-- [`stack-aws`](./stack-aws/SKILL.md) — |
-- [`stack-aws-dms`](./stack-aws-dms/SKILL.md) — |
 - [`systematic-debugging`](./systematic-debugging/SKILL.md) — |
 - [`using-agent-skills`](./using-agent-skills/SKILL.md) — |
 
@@ -422,7 +377,7 @@ Agent-architecture provides 88 reusable skills organized by category and special
 
 | Category | Count |
 |----------|-------|
-| Core Workflows | 88 |
-| **Total** | **88** |
+| Core Workflows | 71 |
+| **Total** | **71** |
 
 See [METADATA-SCHEMA.md](./METADATA-SCHEMA.md) for skill development and metadata reference.

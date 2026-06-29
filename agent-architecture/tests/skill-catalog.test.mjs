@@ -72,8 +72,11 @@ test('root router skill routing is consistent', () => {
 
   // Check that routed skills are cataloged
   // adapter- skills are now in packages/adapters/ and are excluded from the top-level catalog
+  // stack- and domain- skills are now in packages/stacks/ and are excluded from the top-level catalog
   for (const skill of routedSkills) {
-    if (!skill.startsWith('architecture-agent-') && !skill.startsWith('adapter-') && skill !== 'subagent-orchestrator') {
+    if (!skill.startsWith('architecture-agent-') && !skill.startsWith('adapter-') &&
+        !skill.startsWith('stack-') && !skill.startsWith('domain-') &&
+        skill !== 'subagent-orchestrator') {
       assert.ok(catalogedSkills.has(skill),
         `${skill} is routed by root but not in catalog`);
     }

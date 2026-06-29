@@ -19,19 +19,26 @@ const skipDirs = new Set([
   'tests',
 ]);
 
-function skillDirs() {
+function skillDirs(scanRoot) {
   const dirs = [];
-  if (fs.existsSync(path.join(root, 'SKILL.md.tmpl'))) dirs.push('.');
-  for (const entry of fs.readdirSync(root, { withFileTypes: true })) {
+  if (fs.existsSync(path.join(scanRoot, 'SKILL.md.tmpl'))) dirs.push('.');
+  for (const entry of fs.readdirSync(scanRoot, { withFileTypes: true })) {
     if (!entry.isDirectory()) continue;
     if (entry.name.startsWith('.') || skipDirs.has(entry.name)) continue;
-    if (fs.existsSync(path.join(root, entry.name, 'SKILL.md.tmpl'))) dirs.push(entry.name);
+    if (fs.existsSync(path.join(scanRoot, entry.name, 'SKILL.md.tmpl'))) dirs.push(entry.name);
   }
   return dirs.sort();
 }
 
-function readSkill(skill) {
-  const file = skill === '.' ? path.join(root, 'SKILL.md') : path.join(root, skill, 'SKILL.md');
+const packageRoots = [
+  root,
+  path.join(root, 'packages', 'adapters'),
+  path.join(root, 'packages', 'stacks'),
+  path.join(root, 'packages', 'skills'),
+].filter(fs.existsSync);
+
+function readSkill(scanRoot, skill) {
+  const file = skill === '.' ? path.join(scanRoot, 'SKILL.md') : path.join(scanRoot, skill, 'SKILL.md');
   return fs.readFileSync(file, 'utf8');
 }
 
@@ -62,31 +69,33 @@ function extractDescriptionText(fm) {
 const MAX_DESC_CHARS = 1024;
 const MIN_BODY_BYTES = 200;
 
-for (const skill of skillDirs()) {
-  const label = skill === '.' ? '(root)' : skill;
+for (const scanRoot of packageRoots) {
+  for (const skill of skillDirs(scanRoot)) {
+    const label = skill === '.' ? '(root)' : skill;
 
-  test(`${label}: generated SKILL.md body is non-trivial (>= ${MIN_BODY_BYTES} bytes)`, () => {
-    const content = readSkill(skill);
-    const parsed = parseFrontmatter(content);
-    assert.ok(parsed !== null, `${label} SKILL.md has no frontmatter`);
-    const body = content.slice(parsed.bodyStart + 4).trim();
-    assert.ok(
-      body.length >= MIN_BODY_BYTES,
-      `${label} body is ${body.length} bytes — need >= ${MIN_BODY_BYTES}`,
-    );
-  });
+    test(`${label}: generated SKILL.md body is non-trivial (>= ${MIN_BODY_BYTES} bytes)`, () => {
+      const content = readSkill(scanRoot, skill);
+      const parsed = parseFrontmatter(content);
+      assert.ok(parsed !== null, `${label} SKILL.md has no frontmatter`);
+      const body = content.slice(parsed.bodyStart + 4).trim();
+      assert.ok(
+        body.length >= MIN_BODY_BYTES,
+        `${label} body is ${body.length} bytes — need >= ${MIN_BODY_BYTES}`,
+      );
+    });
 
-  test(`${label}: description stays within ${MAX_DESC_CHARS} chars`, () => {
-    const content = readSkill(skill);
-    const parsed = parseFrontmatter(content);
-    assert.ok(parsed !== null, `${label} SKILL.md has no frontmatter`);
-    const desc = extractDescriptionText(parsed.fm);
-    assert.ok(desc.length > 0, `${label} description is empty`);
-    assert.ok(
-      desc.length <= MAX_DESC_CHARS,
-      `${label} description is ${desc.length} chars — need <= ${MAX_DESC_CHARS}`,
-    );
-  });
+    test(`${label}: description stays within ${MAX_DESC_CHARS} chars`, () => {
+      const content = readSkill(scanRoot, skill);
+      const parsed = parseFrontmatter(content);
+      assert.ok(parsed !== null, `${label} SKILL.md has no frontmatter`);
+      const desc = extractDescriptionText(parsed.fm);
+      assert.ok(desc.length > 0, `${label} description is empty`);
+      assert.ok(
+        desc.length <= MAX_DESC_CHARS,
+        `${label} description is ${desc.length} chars — need <= ${MAX_DESC_CHARS}`,
+      );
+    });
+  }
 }
 
 test('extractDescriptionText returns empty string when no description key present', () => {
