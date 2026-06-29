@@ -9,6 +9,8 @@ import {
   allocateSubagentWorktree,
   cleanupSubagentWorktree,
   collectSubagentWorktreeResult,
+  parseChangedFiles,
+  readAllocation,
 } from '../core/subagent-worktrees.mjs';
 
 function git(repo, args) {
@@ -86,4 +88,75 @@ test('allocateSubagentWorktree rejects read-only roles', () => {
 
   assert.throws(() => allocateSubagentWorktree(manifest, { baseDir: repo }), /does not allow worktree writes/);
   fs.rmSync(repo, { recursive: true, force: true });
+});
+
+test('readAllocation throws when allocation file is missing', () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'arch-no-alloc-'));
+  try {
+    assert.throws(
+      () => readAllocation('nonexistent-agent', { baseDir: dir }),
+      /Missing subagent allocation/,
+    );
+  } finally {
+    fs.rmSync(dir, { recursive: true, force: true });
+  }
+});
+
+test('readAllocation uses default baseDir when option not provided', () => {
+  assert.throws(() => readAllocation('nonexistent-default-xq'), /Missing subagent allocation/);
+});
+
+test('allocateSubagentWorktree skips git-worktree-add when worktree already exists', () => {
+  const repo = makeRepo();
+  const manifest = createSubagentManifest({
+    id: 'implementer-realloc',
+    role: 'implementer',
+    task: 'Re-allocate test',
+    allowedPaths: ['src/**'],
+    tools: ['shellRead', 'shellWrite'],
+  });
+
+  const first = allocateSubagentWorktree(manifest, { baseDir: repo });
+  assert.equal(fs.existsSync(first.worktreePath), true);
+
+  const second = allocateSubagentWorktree(manifest, { baseDir: repo });
+  assert.equal(second.id, 'implementer-realloc');
+  assert.equal(second.worktreePath, first.worktreePath);
+
+  git(repo, ['worktree', 'remove', '--force', first.worktreePath]);
+  fs.rmSync(repo, { recursive: true, force: true });
+});
+
+test('cleanupSubagentWorktree skips git-remove when worktree path does not exist', () => {
+  const repo = makeRepo();
+  const allocationDir = path.join(repo, '.architecture-agent', 'subagents', 'implementer-phantom');
+  fs.mkdirSync(allocationDir, { recursive: true });
+  const phantomWorktree = path.join(repo, '.architecture-agent', 'subagents', 'implementer-phantom', 'worktree');
+  fs.writeFileSync(path.join(allocationDir, 'allocation.json'), JSON.stringify({
+    id: 'implementer-phantom',
+    role: 'implementer',
+    branch: 'architecture-agent/implementer-phantom',
+    baseRef: 'HEAD',
+    worktreePath: phantomWorktree,
+    status: 'allocated',
+  }), 'utf8');
+
+  const result = cleanupSubagentWorktree('implementer-phantom', { baseDir: repo });
+  assert.equal(result.status, 'cleaned');
+  fs.rmSync(repo, { recursive: true, force: true });
+});
+
+test('parseChangedFiles returns empty array for empty or null status output', () => {
+  assert.deepEqual(parseChangedFiles(''), []);
+  assert.deepEqual(parseChangedFiles(null), []);
+});
+
+test('parseChangedFiles handles rename arrow notation', () => {
+  const result = parseChangedFiles('R  src/old-auth.ts -> src/auth.ts');
+  assert.deepEqual(result, ['src/auth.ts']);
+});
+
+test('parseChangedFiles sorts and deduplicates output', () => {
+  const result = parseChangedFiles('?? zebra.ts\n?? alpha.ts');
+  assert.deepEqual(result, ['alpha.ts', 'zebra.ts']);
 });

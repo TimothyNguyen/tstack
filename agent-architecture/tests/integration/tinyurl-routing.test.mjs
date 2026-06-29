@@ -20,7 +20,7 @@ test('setup: install agent-architecture into tinyurl fixture', () => {
 });
 
 test('only agents declared in .agent-config.json are installed', () => {
-  if (!TMP) return;
+  assert.ok(TMP, 'setup must have succeeded');
   const configAgents = ['swe', 'qa-agent', 'spec-agent', 'pm'];
   const notInstalled = ['orchestrate', 'migration', 'data', 'cloud', 'interviewer', 'design-agent'];
 
@@ -39,7 +39,7 @@ test('only agents declared in .agent-config.json are installed', () => {
 });
 
 test('/swe SKILL.md references commit and seniorswe-concise', () => {
-  if (!TMP) return;
+  assert.ok(TMP, 'setup must have succeeded');
   const skill = fs.readFileSync(path.join(TMP, 'skills', 'swe', 'SKILL.md'), 'utf8');
   assert.ok(skill.includes('commit'), '/swe must mention commit');
   assert.ok(skill.includes('seniorswe-concise'), '/swe must mention seniorswe-concise');
@@ -48,7 +48,7 @@ test('/swe SKILL.md references commit and seniorswe-concise', () => {
 });
 
 test('/spec-agent SKILL.md references atlassian-docs and spec', () => {
-  if (!TMP) return;
+  assert.ok(TMP, 'setup must have succeeded');
   const skill = fs.readFileSync(path.join(TMP, 'skills', 'spec-agent', 'SKILL.md'), 'utf8');
   assert.ok(skill.includes('atlassian-docs'), '/spec-agent must mention atlassian-docs');
   assert.ok(skill.includes('spec'), '/spec-agent must mention spec');
@@ -56,7 +56,7 @@ test('/spec-agent SKILL.md references atlassian-docs and spec', () => {
 });
 
 test('/qa-agent SKILL.md references qa and benchmark', () => {
-  if (!TMP) return;
+  assert.ok(TMP, 'setup must have succeeded');
   const skill = fs.readFileSync(path.join(TMP, 'skills', 'qa-agent', 'SKILL.md'), 'utf8');
   assert.ok(skill.includes('qa'), '/qa-agent must mention qa');
   assert.ok(skill.includes('benchmark'), '/qa-agent must mention benchmark');
@@ -64,7 +64,7 @@ test('/qa-agent SKILL.md references qa and benchmark', () => {
 });
 
 test('CLAUDE.md lists all configured agents', () => {
-  if (!TMP) return;
+  assert.ok(TMP, 'setup must have succeeded');
   const claude = fs.readFileSync(path.join(TMP, 'CLAUDE.md'), 'utf8');
   for (const agent of ['swe', 'qa-agent', 'spec-agent', 'pm']) {
     assert.ok(claude.includes(`/${agent}`), `CLAUDE.md must list /${agent}`);
@@ -72,7 +72,7 @@ test('CLAUDE.md lists all configured agents', () => {
 });
 
 test('AGENTS.md mentions all configured agents', () => {
-  if (!TMP) return;
+  assert.ok(TMP, 'setup must have succeeded');
   const agents = fs.readFileSync(path.join(TMP, 'AGENTS.md'), 'utf8');
   for (const agent of ['swe', 'qa-agent', 'spec-agent', 'pm']) {
     assert.ok(agents.includes(agent), `AGENTS.md must mention ${agent}`);

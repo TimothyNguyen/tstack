@@ -25,10 +25,10 @@ test('every skill has name, version, description, path, agents', () => {
   for (const skill of index.skills) {
     assert.ok(typeof skill.name === 'string' && skill.name.length > 0,
       `skill missing name: ${JSON.stringify(skill)}`);
-    assert.ok(typeof skill.version === 'string' || skill.version === null,
-      `skill.version must be string or null: ${skill.name}`);
-    assert.ok(typeof skill.description === 'string' || skill.description === null,
-      `skill.description must be string or null: ${skill.name}`);
+    assert.ok(typeof skill.version === 'string',
+      `skill.version must be a string: ${skill.name}`);
+    assert.ok(typeof skill.description === 'string',
+      `skill.description must be a string: ${skill.name}`);
     assert.ok(typeof skill.path === 'string' && skill.path.endsWith('SKILL.md.tmpl'),
       `skill.path must end with SKILL.md.tmpl: ${skill.name}`);
     assert.ok(Array.isArray(skill.agents),

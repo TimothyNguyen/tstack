@@ -88,3 +88,24 @@ for (const skill of skillDirs()) {
     );
   });
 }
+
+test('extractDescriptionText returns empty string when no description key present', () => {
+  const result = extractDescriptionText('name: foo\nversion: 1.0.0\n');
+  assert.equal(result, '');
+});
+
+test('extractDescriptionText reaches block-parsing path when description: ends line with no trailing text', () => {
+  const fm = 'description:\n';
+  const result = extractDescriptionText(fm);
+  assert.equal(typeof result, 'string');
+});
+
+test('parseFrontmatter returns null when content does not start with ---', () => {
+  const result = parseFrontmatter('no frontmatter here\n');
+  assert.equal(result, null);
+});
+
+test('parseFrontmatter returns null when frontmatter is not closed', () => {
+  const result = parseFrontmatter('---\nname: test\n');
+  assert.equal(result, null);
+});

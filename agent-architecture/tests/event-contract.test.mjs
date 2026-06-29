@@ -42,3 +42,22 @@ test('event helper creates redacted local event envelopes', () => {
 test('event helper rejects unknown event types', () => {
   assert.throws(() => createEvent('telemetry.sent'), /Unknown event type/);
 });
+
+test('createEvent uses all defaults when options are omitted', () => {
+  const event = createEvent('run.started', {});
+  assert.equal(event.source.host, 'local');
+  assert.equal(event.source.skill, 'agent-architecture');
+  assert.equal(event.source.profile, 'privacy-default');
+  assert.ok(typeof event.id === 'string' && event.id.length > 0);
+  assert.ok(typeof event.correlationId === 'string' && event.correlationId.length > 0);
+  assert.ok(typeof event.timestamp === 'string' && event.timestamp.length > 0);
+});
+
+test('createEvent uses provided id and timestamp', () => {
+  const event = createEvent('run.completed', {}, {
+    id: 'fixed-id-123',
+    timestamp: '2024-06-01T00:00:00.000Z',
+  });
+  assert.equal(event.id, 'fixed-id-123');
+  assert.equal(event.timestamp, '2024-06-01T00:00:00.000Z');
+});

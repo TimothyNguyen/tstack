@@ -5,6 +5,7 @@ import path from 'node:path';
 import test from 'node:test';
 import {
   createSubagentManifest,
+  validateSubagentManifest,
   writeSubagentManifest,
   writeSubagentResult,
   verifySubagentPaths,
@@ -205,4 +206,113 @@ test('verifySubagentPaths allows everything when allowedPaths is empty (coordina
   };
   const result = verifySubagentPaths(manifest, ['src/any/file.ts', 'another/file.ts']);
   assert.ok(result.ok, 'coordinator with no allowedPaths should not block any file');
+});
+
+// ── validation error paths ────────────────────────────────────────────────────
+
+test('validateSubagentManifest rejects non-object input', () => {
+  assert.throws(() => validateSubagentManifest('not-an-object'), /must be an object/);
+  assert.throws(() => validateSubagentManifest(null), /must be an object/);
+});
+
+test('subagent manifest rejects invalid id format', () => {
+  assert.throws(() => createSubagentManifest({
+    id: 'INVALID_ID',
+    role: 'planner',
+    task: 'Plan work',
+    allowedPaths: ['docs/**'],
+    tools: ['shellRead'],
+  }), /Invalid subagent id/);
+});
+
+test('subagent manifest rejects id that is too short', () => {
+  assert.throws(() => createSubagentManifest({
+    id: 'x',
+    role: 'planner',
+    task: 'Plan work',
+    allowedPaths: ['docs/**'],
+    tools: ['shellRead'],
+  }), /Invalid subagent id/);
+});
+
+test('subagent manifest rejects empty task string', () => {
+  assert.throws(() => createSubagentManifest({
+    id: 'planner-work',
+    role: 'planner',
+    task: '   ',
+    allowedPaths: ['docs/**'],
+    tools: ['shellRead'],
+  }), /requires a task/);
+});
+
+test('subagent manifest rejects non-string task', () => {
+  assert.throws(() => createSubagentManifest({
+    id: 'planner-work',
+    role: 'planner',
+    task: 42,
+    allowedPaths: ['docs/**'],
+    tools: ['shellRead'],
+  }), /requires a task/);
+});
+
+test('subagent manifest rejects non-array allowedPaths', () => {
+  assert.throws(() => createSubagentManifest({
+    id: 'planner-work',
+    role: 'planner',
+    task: 'Plan work',
+    allowedPaths: 'src/**',
+    tools: ['shellRead'],
+  }), /must be an array/);
+});
+
+test('subagent manifest rejects allowedPaths with empty string element', () => {
+  assert.throws(() => createSubagentManifest({
+    id: 'planner-work',
+    role: 'planner',
+    task: 'Plan work',
+    allowedPaths: ['src/**', ''],
+    tools: ['shellRead'],
+  }), /must be an array of non-empty strings/);
+});
+
+test('subagent manifest rejects unknown tool', () => {
+  assert.throws(() => createSubagentManifest({
+    id: 'planner-work',
+    role: 'planner',
+    task: 'Plan work',
+    allowedPaths: ['docs/**'],
+    tools: ['shellRead', 'teleportation'],
+  }), /Unknown subagent tool/);
+});
+
+test('subagent manifest rejects non-disabled egress', () => {
+  assert.throws(() => createSubagentManifest({
+    id: 'planner-work',
+    role: 'planner',
+    task: 'Plan work',
+    allowedPaths: ['docs/**'],
+    tools: ['shellRead'],
+    egress: 'enabled',
+  }), /egress must be disabled/);
+});
+
+test('subagent manifest rejects unknown role', () => {
+  assert.throws(() => createSubagentManifest({
+    id: 'planner-work',
+    role: 'hacker',
+    task: 'Do hacking',
+    tools: ['shellRead'],
+  }), /Unknown subagent role/);
+});
+
+test('writeSubagentResult rejects non-object result', () => {
+  const baseDir = fs.mkdtempSync(path.join(os.tmpdir(), 'arch-subagents-result-'));
+  try {
+    assert.throws(
+      () => writeSubagentResult('planner-ab', 'not-an-object', { baseDir }),
+      /result must be an object/,
+    );
+  } finally {
+    fs.rmSync(baseDir, { recursive: true, force: true });
+  }
 });

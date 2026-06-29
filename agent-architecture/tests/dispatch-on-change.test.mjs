@@ -170,3 +170,10 @@ test('unmatched files fall back to default agents', () => {
   assert.deepEqual(agents, ROUTING.default);
   assert.equal(reason, 'default fallback');
 });
+
+test('globToRegex handles ? as single-char wildcard', () => {
+  const re = globToRegex('src/?.ts');
+  assert.ok(re.test('src/a.ts'), '? matches one character');
+  assert.ok(!re.test('src/ab.ts'), '? does not match two characters');
+  assert.ok(!re.test('src//ts'), '? does not match separator');
+});

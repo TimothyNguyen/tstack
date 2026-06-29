@@ -44,9 +44,8 @@ test("diagram-generate: declares agent dependencies", (t) => {
 
   // Should be available to design-agent, diagram-agent, spec-agent, orchestrate
   assert(
-    content.includes("design-agent") ||
     content.includes("diagram-agent"),
-    "Should declare diagram-agent or design-agent"
+    "Should declare diagram-agent"
   );
 });
 
@@ -106,7 +105,7 @@ test("diagram-generate: includes process flow diagram", (t) => {
   const content = fs.readFileSync(skillPath, "utf8");
 
   assert(
-    content.includes("digraph") || content.includes("flowchart"),
+    content.includes("digraph"),
     "Should include process flow visualization"
   );
 });
@@ -116,7 +115,7 @@ test("diagram-generate: anti-patterns section present", (t) => {
   const content = fs.readFileSync(skillPath, "utf8");
 
   assert(
-    content.includes("Anti-Patterns") || content.includes("anti-pattern"),
+    content.includes("Anti-Patterns"),
     "Should document anti-patterns to avoid"
   );
 });
@@ -126,7 +125,7 @@ test("diagram-generate: policy requirements documented", (t) => {
   const content = fs.readFileSync(skillPath, "utf8");
 
   assert(
-    content.includes("Policy") || content.includes("policy"),
+    content.includes("Policy"),
     "Should document policy requirements"
   );
 });
@@ -151,7 +150,7 @@ test("diagram-generate: has working examples", (t) => {
 
   // Should have at least one worked example section
   assert(
-    content.includes("Example") || content.includes("example"),
+    content.includes("Example"),
     "Should include worked examples"
   );
 });
@@ -166,7 +165,7 @@ test("diagram-generate: proper Markdown formatting", (t) => {
     "Should have Markdown headings"
   );
   assert(
-    content.includes("- ") || content.includes("* "),
+    content.includes("- "),
     "Should have Markdown lists"
   );
   assert(

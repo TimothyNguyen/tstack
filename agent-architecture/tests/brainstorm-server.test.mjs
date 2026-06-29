@@ -63,14 +63,14 @@ test('brainstorm-server has event handling', () => {
 test('start-server.sh exists and is valid bash', () => {
   assert(fs.existsSync(START_SCRIPT), 'start-server.sh should exist');
   const content = fs.readFileSync(START_SCRIPT, 'utf8');
-  assert(content.includes('#!/bin/bash') || content.includes('#!/usr/bin/env bash'), 'should have shebang');
+  assert(content.includes('#!/usr/bin/env bash'), 'should have shebang');
   assert(content.length > 100, 'should have substantive content');
 });
 
 test('stop-server.sh exists and is valid bash', () => {
   assert(fs.existsSync(STOP_SCRIPT), 'stop-server.sh should exist');
   const content = fs.readFileSync(STOP_SCRIPT, 'utf8');
-  assert(content.includes('#!/bin/bash') || content.includes('#!/usr/bin/env bash'), 'should have shebang');
+  assert(content.includes('#!/usr/bin/env bash'), 'should have shebang');
   assert(content.length > 50, 'should have substantive content');
 });
 
@@ -85,14 +85,14 @@ test('frame-template.html exists for brainstorming UI', () => {
   const templatePath = path.join(REPO_ROOT, 'brainstorming', 'scripts', 'frame-template.html');
   assert(fs.existsSync(templatePath), 'frame-template.html should exist');
   const content = fs.readFileSync(templatePath, 'utf8');
-  assert(content.includes('<html') || content.includes('<!DOCTYPE'), 'should be valid HTML');
+  assert(content.includes('<html'), 'should be valid HTML');
 });
 
 test('brainstorming SKILL.md has server lifecycle documentation', () => {
   const skillPath = path.join(REPO_ROOT, 'brainstorming', 'SKILL.md');
   assert(fs.existsSync(skillPath), 'SKILL.md should exist');
   const content = fs.readFileSync(skillPath, 'utf8');
-  assert(content.includes('WebSocket') || content.includes('server'), 'should document server');
+  assert(content.includes('server'), 'should document server');
 });
 
 test('brainstorming skill declares agents availability', () => {

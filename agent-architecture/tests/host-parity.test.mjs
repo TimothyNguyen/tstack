@@ -5,9 +5,18 @@
 import { test, describe } from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
+import os from 'node:os';
 import path from 'node:path';
 import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
+import {
+  buildAgentsMd,
+  buildCopilotInstructions,
+  logOutputs,
+  routingSection as scriptRoutingSection,
+  stripFrontmatter,
+  write,
+} from '../scripts/gen-host-artifacts.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 
@@ -133,4 +142,109 @@ describe('host-parity', () => {
       'copilot artifact should reference install path'
     );
   });
+});
+
+test('write() in non-check mode creates file via mkdirSync+writeFileSync', () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'arch-host-write-'));
+  try {
+    write('generated/codex/AGENTS.md', 'test content', { check: false, root: dir });
+    const written = fs.readFileSync(path.join(dir, 'generated/codex/AGENTS.md'), 'utf8');
+    assert.equal(written, 'test content');
+  } finally {
+    fs.rmSync(dir, { recursive: true, force: true });
+  }
+});
+
+test('write() in check mode detects stale file', () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'arch-host-check-'));
+  try {
+    fs.mkdirSync(path.join(dir, 'generated/codex'), { recursive: true });
+    fs.writeFileSync(path.join(dir, 'generated/codex/AGENTS.md'), 'old content');
+
+    const prevExitCode = process.exitCode;
+    write('generated/codex/AGENTS.md', 'new content', { check: true, root: dir });
+    assert.equal(process.exitCode, 1);
+    process.exitCode = prevExitCode;
+  } finally {
+    fs.rmSync(dir, { recursive: true, force: true });
+  }
+});
+
+test('write() in check mode passes for fresh file', () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'arch-host-fresh-'));
+  try {
+    fs.mkdirSync(path.join(dir, 'generated/codex'), { recursive: true });
+    fs.writeFileSync(path.join(dir, 'generated/codex/AGENTS.md'), 'same content');
+
+    const prevExitCode = process.exitCode;
+    write('generated/codex/AGENTS.md', 'same content', { check: true, root: dir });
+    assert.equal(process.exitCode, prevExitCode);
+  } finally {
+    fs.rmSync(dir, { recursive: true, force: true });
+  }
+});
+
+test('buildAgentsMd returns a non-empty string with required sections', () => {
+  const content = buildAgentsMd();
+  assert.ok(content.length > 0);
+  assert.match(content, /AGENTS\.md/);
+  assert.match(content, /Commit Discipline/);
+});
+
+test('buildCopilotInstructions returns a non-empty string with required sections', () => {
+  const content = buildCopilotInstructions();
+  assert.ok(content.length > 0);
+  assert.match(content, /Copilot/);
+  assert.match(content, /Commit Discipline/);
+});
+
+test('write() in check mode treats missing file as stale', () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'arch-host-missing-'));
+  try {
+    const prevExitCode = process.exitCode;
+    write('generated/codex/AGENTS.md', 'some content', { check: true, root: dir });
+    assert.equal(process.exitCode, 1);
+    process.exitCode = prevExitCode;
+  } finally {
+    fs.rmSync(dir, { recursive: true, force: true });
+  }
+});
+
+test('logOutputs logs when check=false and suppresses when check=true', () => {
+  assert.doesNotThrow(() => logOutputs(false));
+  assert.doesNotThrow(() => logOutputs(true));
+});
+
+test('stripFrontmatter returns content unchanged when no frontmatter marker', () => {
+  const plain = 'no frontmatter here\n';
+  assert.equal(stripFrontmatter(plain), plain);
+});
+
+test('stripFrontmatter returns content unchanged when frontmatter has no closing marker', () => {
+  const unclosed = '---\nname: test\n';
+  assert.equal(stripFrontmatter(unclosed), unclosed);
+});
+
+test('stripFrontmatter strips frontmatter block', () => {
+  const content = '---\nname: test\n---\nbody here\n';
+  assert.equal(stripFrontmatter(content), 'body here\n');
+});
+
+test('scriptRoutingSection returns full content when no ## Routing heading', () => {
+  const content = 'Some content\n\n## Other Section\n';
+  assert.equal(scriptRoutingSection(content), content);
+});
+
+test('scriptRoutingSection returns from ## Routing to end when no following ## section', () => {
+  const content = 'Preamble\n\n## Routing\n\n- Route A\n- Route B\n';
+  const result = scriptRoutingSection(content);
+  assert.match(result, /## Routing/);
+  assert.match(result, /Route A/);
+});
+
+test('scriptRoutingSection returns only the routing section when followed by another ##', () => {
+  const content = 'Preamble\n\n## Routing\n\n- Route A\n\n## Policy\n\nSome policy.\n';
+  const result = scriptRoutingSection(content);
+  assert.match(result, /## Routing/);
+  assert.ok(!result.includes('## Policy'), 'should not include sections after routing');
 });
