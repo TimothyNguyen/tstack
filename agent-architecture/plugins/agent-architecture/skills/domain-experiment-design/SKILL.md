@@ -4,6 +4,11 @@ version: 0.1.1
 description: |
   Experiment design review for randomization, power, metrics, guardrails,
   exposure, analysis plans, and rollout risk.
+allowed-tools:
+  - Read
+  - Grep
+  - Glob
+  - Bash
 agents: [data, pm]
 ---
 

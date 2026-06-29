@@ -4,6 +4,11 @@ version: 0.1.1
 description: |
   dbt on Databricks patterns for models, tests, docs, lineage, and governed
   transformations.
+allowed-tools:
+  - Read
+  - Grep
+  - Glob
+  - Bash
 agents: [data]
 ---
 

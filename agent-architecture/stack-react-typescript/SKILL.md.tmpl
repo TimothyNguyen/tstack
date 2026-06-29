@@ -4,6 +4,11 @@ version: 0.1.1
 description: |
   React and TypeScript application modernization, including codemods, Redux
   Toolkit patterns, RTK Query, and UI migration checks.
+allowed-tools:
+  - Read
+  - Grep
+  - Glob
+  - Bash
 agents: [swe, design-agent]
 ---
 

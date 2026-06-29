@@ -12,6 +12,11 @@ description: |
   boilerplate.
 argument-hint: "[lite|full|ultra]"
 license: MIT
+allowed-tools:
+  - Read
+  - Grep
+  - Glob
+  - Bash
 agents: [swe, data]
 ---
 

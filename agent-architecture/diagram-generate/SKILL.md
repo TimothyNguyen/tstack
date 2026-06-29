@@ -18,8 +18,7 @@ metadata:
   dependencies:
     mcps:
       - name: drawio-mcp
-        min-version: "2.0.0"
-        source: "./drawio-mcp-python"
+        min-version: "1.0.0"
     skills:
       - diagram-validate
     min-agent-arch-version: "0.1.4"
@@ -32,7 +31,7 @@ metadata:
   support:
     maintenance-status: "active"
     owner-team: "design-systems"
-    last-reviewed: "2026-06-27"
+    last-reviewed: "2026-06-26"
 
 optional-skills:
   - diagram-search

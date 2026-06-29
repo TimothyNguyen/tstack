@@ -120,7 +120,7 @@ Skills that declare this agent in their frontmatter `agents:` field.
 | `plan-eng-review` | Reviews plans for architecture, data flow, reliability, and testability. |
 | `plan-review` | Enterprise-safe plan review workflow. Reviews a proposed implementation plan for scope, |
 | `qa` | Enterprise-safe QA workflow. Plans and verifies user-facing or service behavior using |
-| `reference-gstack-patterns` | Repo-local quick reference for the skill-pack pattern this repo uses. |
+| `reference-skill-patterns` | Repo-local quick reference for the skill-pack pattern this repo uses. |
 | `release-notes` | Generate privacy-safe release notes from local changes, tests, and docs |
 | `review` | Enterprise-safe code review workflow. Reviews diffs and code paths for correctness, |
 | `rtk-token-optimizer` | Optional Rust Token Killer integration guidance. Uses RTK to reduce noisy shell output |

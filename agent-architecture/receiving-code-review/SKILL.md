@@ -9,10 +9,6 @@ allowed-tools:
   - Grep
   - Glob
 agents: [swe, qa-agent, security]
-
-metadata:
-  support:
-    last-reviewed: "2026-06-27"
 ---
 
 ## Enterprise Preamble

@@ -12,10 +12,6 @@ allowed-tools:
   - Glob
   - Bash
 agents: [swe, qa-agent, data, orchestrate]
-
-metadata:
-  support:
-    last-reviewed: "2026-06-27"
 ---
 
 ## Enterprise Preamble

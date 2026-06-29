@@ -4,11 +4,12 @@ version: 0.1.1
 description: |
   Spring Boot upgrade and API modernization using OpenRewrite recipes,
   OpenAPI contracts, and local verification.
+allowed-tools:
+  - Read
+  - Grep
+  - Glob
+  - Bash
 agents: [swe]
-
-metadata:
-  support:
-    last-reviewed: "2026-06-27"
 ---
 
 ## Enterprise Preamble

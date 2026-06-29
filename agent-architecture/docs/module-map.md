@@ -113,7 +113,7 @@ This preserves the agent-architecture ergonomics while keeping the new package g
 - `adapter-langgraph`
 - `adapter-databricks`
 - `adapter-seniorswe-concise`
-- `reference-gstack-patterns`
+- `reference-skill-patterns`
 - `stack-aws`
 - `stack-python`
 - `stack-csharp`

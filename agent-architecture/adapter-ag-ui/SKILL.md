@@ -4,11 +4,12 @@ version: 0.1.1
 description: |
   Map skill progress, approvals, tool actions, findings, and artifacts into
   AG-UI-compatible event concepts.
+allowed-tools:
+  - Read
+  - Grep
+  - Glob
+  - Bash
 agents: [orchestrate, _infrastructure, swe, cloud]
-
-metadata:
-  support:
-    last-reviewed: "2026-06-27"
 ---
 
 ## Enterprise Preamble

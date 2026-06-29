@@ -4,11 +4,12 @@ version: 0.1.1
 description: |
   Postgres schema, query, migration, performance, and data-governance workflows
   with explicit read/write approvals and privacy-safe summaries.
+allowed-tools:
+  - Read
+  - Grep
+  - Glob
+  - Bash
 agents: [swe, migration, data]
-
-metadata:
-  support:
-    last-reviewed: "2026-06-27"
 ---
 
 ## Enterprise Preamble

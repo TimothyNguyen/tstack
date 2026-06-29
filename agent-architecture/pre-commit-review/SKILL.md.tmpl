@@ -6,6 +6,11 @@ description: |
   (trailing whitespace, debug statements, invalid syntax) before code review.
   Allows reviewers to focus on architecture instead of trivial nitpicks.
   Works across Claude, Codex, and Copilot.
+allowed-tools:
+  - Read
+  - Grep
+  - Glob
+  - Bash
 agents: [swe, qa-agent, orchestrate, release-agent, _linter]
 metadata:
   support:

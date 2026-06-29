@@ -6,6 +6,11 @@ description: |
   Writes to local learn-out/ folder as JSON. Exports Quizlet-compatible CSV via
   learn/export.py. Optionally pushes cards to Confluence via atlassian-docs.
   Invoke via /learn at end of any session.
+allowed-tools:
+  - Read
+  - Grep
+  - Glob
+  - Bash
 agents: [swe, qa-agent, pm, spec-agent, orchestrate, data, cloud, security, design-agent, migration, release-agent, interviewer]
 optional_skills: [atlassian-docs]
 ---

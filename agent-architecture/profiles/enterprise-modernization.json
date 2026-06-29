@@ -5,7 +5,7 @@
   "policy": "policies/enterprise-default.json",
   "extends": "privacy-default",
   "skills": [
-    "reference-gstack-patterns",
+    "reference-skill-patterns",
     "migration-dotnet-sqlserver-modernization",
     "migration-review",
     "stack-legacy-frontend",

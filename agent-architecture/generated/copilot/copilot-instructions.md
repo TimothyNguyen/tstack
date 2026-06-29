@@ -122,7 +122,7 @@ Use commit discipline to stage and commit only the authentication fix.
 - LangGraph orchestration boundary: invoke `adapter-langgraph`.
 - Databricks SDK connector design: invoke `adapter-databricks`.
 - Seniorswe-Concise hook or MCP runtime integration: invoke `adapter-seniorswe-concise`.
-- GStack migration pattern reference: invoke `reference-gstack-patterns`.
+- Skill-pack pattern reference: invoke `reference-skill-patterns`.
 - AWS application modernization: invoke `stack-aws`.
 - Python service/data workflow modernization: invoke `stack-python`.
 - C#/.NET stack work: invoke `stack-csharp`.

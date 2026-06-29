@@ -4,6 +4,11 @@ version: 0.1.1
 description: |
   C# and .NET modernization guidance for projects, packages, services, tests,
   analyzers, and compatibility assessments.
+allowed-tools:
+  - Read
+  - Grep
+  - Glob
+  - Bash
 agents: [swe, migration]
 ---
 

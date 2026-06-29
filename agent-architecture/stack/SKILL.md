@@ -7,11 +7,12 @@ description: |
   Invoke via /stack, or when the user says "load stack", "detect stack",
   "set stack to X", or any stack-* skill needs context.
 argument-hint: "[aws|postgres|python|react|spring|csharp|databricks|sql-server|legacy]"
+allowed-tools:
+  - Read
+  - Grep
+  - Glob
+  - Bash
 agents: [_infrastructure, swe]
-
-metadata:
-  support:
-    last-reviewed: "2026-06-27"
 ---
 
 ## Enterprise Preamble

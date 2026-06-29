@@ -7,11 +7,12 @@ description: |
   Invoke via /commit, or when the user says "commit this", "make a commit",
   "how should I commit", "commit message", or asks about commit conventions,
   atomic commits, or git workflow after making changes.
+allowed-tools:
+  - Read
+  - Grep
+  - Glob
+  - Bash
 agents: [swe, migration, data, cloud, release-agent]
-
-metadata:
-  support:
-    last-reviewed: "2026-06-27"
 ---
 
 ## Enterprise Preamble

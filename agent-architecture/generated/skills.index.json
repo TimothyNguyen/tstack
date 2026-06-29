@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-06-27T03:16:05.310Z",
-  "count": 114,
+  "generatedAt": "2026-06-28T18:38:40.796Z",
+  "count": 115,
   "skills": [
     {
       "name": "adapter-ag-ui",
@@ -763,6 +763,19 @@
       ]
     },
     {
+      "name": "pre-commit-review",
+      "version": "0.1.0",
+      "description": "Executable skill that runs pre-commit hooks on code to catch style issues",
+      "path": "pre-commit-review/SKILL.md.tmpl",
+      "agents": [
+        "swe",
+        "qa-agent",
+        "orchestrate",
+        "release-agent",
+        "_linter"
+      ]
+    },
+    {
       "name": "qa",
       "version": "0.1.1",
       "description": "Enterprise-safe QA workflow. Plans and verifies user-facing or service behavior using",
@@ -793,10 +806,10 @@
       ]
     },
     {
-      "name": "reference-gstack-patterns",
+      "name": "reference-skill-patterns",
       "version": "0.2.1",
       "description": "Repo-local quick reference for the skill-pack pattern this repo uses.",
-      "path": "reference-gstack-patterns/SKILL.md.tmpl",
+      "path": "reference-skill-patterns/SKILL.md.tmpl",
       "agents": [
         "_infrastructure",
         "swe",

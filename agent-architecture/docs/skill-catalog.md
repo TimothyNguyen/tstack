@@ -1,6 +1,6 @@
 # Skill Catalog
 
-Agent-architecture provides 99 reusable skills organized by category and specialized role.
+Agent-architecture provides 100 reusable skills organized by category and specialized role.
 
 **[Contributing?](./CONTRIBUTING.md)** See submission process and validation checklist.
 
@@ -70,9 +70,10 @@ Agent-architecture provides 99 reusable skills organized by category and special
 - **[`plan-eng-review`](./plan-eng-review/SKILL.md)** — | *(swe, migration)*
 - **[`plan-pm-review`](./plan-pm-review/SKILL.md)** — | *(pm, spec-agent)*
 - **[`plan-review`](./plan-review/SKILL.md)** — | *(swe, qa-agent)*
+- **[`pre-commit-review`](./pre-commit-review/SKILL.md)** — | *(swe, qa-agent)*
 - **[`qa`](./qa/SKILL.md)** — | *(qa-agent, swe)*
 - **[`receiving-code-review`](./receiving-code-review/SKILL.md)** — | *(swe, qa-agent)*
-- **[`reference-gstack-patterns`](./reference-gstack-patterns/SKILL.md)** — | *(swe, orchestrate)*
+- **[`reference-skill-patterns`](./reference-skill-patterns/SKILL.md)** — | *(swe, orchestrate)*
 - **[`release`](./release/SKILL.md)** — | *(pm, cloud)*
 - **[`release-notes`](./release-notes/SKILL.md)** — | *(pm, swe)*
 - **[`retro`](./retro/SKILL.md)** — | *(pm, orchestrate)*
@@ -116,7 +117,7 @@ Agent-architecture provides 99 reusable skills organized by category and special
 
 ### `/swe`
 
-60 skills
+61 skills
 
 - [`adapter-ag-ui`](./adapter-ag-ui/SKILL.md) — |
 - [`adapter-docker-mcp`](./adapter-docker-mcp/SKILL.md) — |
@@ -149,9 +150,10 @@ Agent-architecture provides 99 reusable skills organized by category and special
 - [`plan-devex-review`](./plan-devex-review/SKILL.md) — |
 - [`plan-eng-review`](./plan-eng-review/SKILL.md) — |
 - [`plan-review`](./plan-review/SKILL.md) — |
+- [`pre-commit-review`](./pre-commit-review/SKILL.md) — |
 - [`qa`](./qa/SKILL.md) — |
 - [`receiving-code-review`](./receiving-code-review/SKILL.md) — |
-- [`reference-gstack-patterns`](./reference-gstack-patterns/SKILL.md) — |
+- [`reference-skill-patterns`](./reference-skill-patterns/SKILL.md) — |
 - [`release-notes`](./release-notes/SKILL.md) — |
 - [`review`](./review/SKILL.md) — |
 - [`rtk-token-optimizer`](./rtk-token-optimizer/SKILL.md) — |
@@ -181,7 +183,7 @@ Agent-architecture provides 99 reusable skills organized by category and special
 
 ### `/qa-agent`
 
-23 skills
+24 skills
 
 - [`atlassian-docs`](./atlassian-docs/SKILL.md) — |
 - [`benchmark`](./benchmark/SKILL.md) — |
@@ -197,6 +199,7 @@ Agent-architecture provides 99 reusable skills organized by category and special
 - [`migration-sqlserver-test`](./migration-sqlserver-test/SKILL.md) — |
 - [`plan-devex-review`](./plan-devex-review/SKILL.md) — |
 - [`plan-review`](./plan-review/SKILL.md) — |
+- [`pre-commit-review`](./pre-commit-review/SKILL.md) — |
 - [`qa`](./qa/SKILL.md) — |
 - [`receiving-code-review`](./receiving-code-review/SKILL.md) — |
 - [`review`](./review/SKILL.md) — |
@@ -288,7 +291,7 @@ Agent-architecture provides 99 reusable skills organized by category and special
 
 ### `/orchestrate`
 
-29 skills
+30 skills
 
 - [`adapter-ag-ui`](./adapter-ag-ui/SKILL.md) — |
 - [`adapter-agentcore`](./adapter-agentcore/SKILL.md) — |
@@ -311,7 +314,8 @@ Agent-architecture provides 99 reusable skills organized by category and special
 - [`learnings`](./learnings/SKILL.md) — |
 - [`plan-director-review`](./plan-director-review/SKILL.md) — |
 - [`plan-review`](./plan-review/SKILL.md) — |
-- [`reference-gstack-patterns`](./reference-gstack-patterns/SKILL.md) — |
+- [`pre-commit-review`](./pre-commit-review/SKILL.md) — |
+- [`reference-skill-patterns`](./reference-skill-patterns/SKILL.md) — |
 - [`retro`](./retro/SKILL.md) — |
 - [`seniorswe-concise-review`](./seniorswe-concise-review/SKILL.md) — |
 - [`skillify`](./skillify/SKILL.md) — |
@@ -422,7 +426,7 @@ Agent-architecture provides 99 reusable skills organized by category and special
 
 ### `/release-agent`
 
-13 skills
+14 skills
 
 - [`adapter-docker-mcp`](./adapter-docker-mcp/SKILL.md) — |
 - [`canary`](./canary/SKILL.md) — |
@@ -431,6 +435,7 @@ Agent-architecture provides 99 reusable skills organized by category and special
 - [`commit`](./commit/SKILL.md) — |
 - [`document-release`](./document-release/SKILL.md) — |
 - [`learn`](./learn/SKILL.md) — |
+- [`pre-commit-review`](./pre-commit-review/SKILL.md) — |
 - [`release`](./release/SKILL.md) — |
 - [`release-notes`](./release-notes/SKILL.md) — |
 - [`retro`](./retro/SKILL.md) — |
@@ -454,7 +459,7 @@ Agent-architecture provides 99 reusable skills organized by category and special
 
 | Category | Count |
 |----------|-------|
-| Core Workflows | 99 |
-| **Total** | **99** |
+| Core Workflows | 100 |
+| **Total** | **100** |
 
 See [METADATA-SCHEMA.md](./METADATA-SCHEMA.md) for skill development and metadata reference.

@@ -4,11 +4,12 @@ version: 0.1.1
 description: |
   SQL Server schema, T-SQL, stored procedure, job, and application data-access
   modernization with governed database access.
+allowed-tools:
+  - Read
+  - Grep
+  - Glob
+  - Bash
 agents: [swe, migration]
-
-metadata:
-  support:
-    last-reviewed: "2026-06-27"
 ---
 
 ## Enterprise Preamble

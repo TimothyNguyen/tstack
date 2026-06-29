@@ -6,6 +6,11 @@ description: |
   commands in one view. One-shot display, not a persistent mode. Invoke via
   /seniorswe-concise-help or "what are the seniorswe-concise commands", "how
   do I use seniorswe-concise", "seniorswe-concise help".
+allowed-tools:
+  - Read
+  - Grep
+  - Glob
+  - Bash
 agents: [swe, _infrastructure]
 ---
 

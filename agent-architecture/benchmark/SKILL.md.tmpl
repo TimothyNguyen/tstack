@@ -4,6 +4,11 @@ version: 0.1.1
 description: |
   Local benchmark and regression-check workflow for performance or quality
   changes with no public telemetry or benchmark uploads by default.
+allowed-tools:
+  - Read
+  - Grep
+  - Glob
+  - Bash
 agents: [qa-agent, swe, data]
 ---
 

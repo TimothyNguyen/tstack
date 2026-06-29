@@ -4,6 +4,11 @@ version: 0.1.1
 description: |
   Databricks engineering workflows for Asset Bundles, jobs, notebooks, SDK
   usage, and governed data access.
+allowed-tools:
+  - Read
+  - Grep
+  - Glob
+  - Bash
 agents: [data]
 ---
 
