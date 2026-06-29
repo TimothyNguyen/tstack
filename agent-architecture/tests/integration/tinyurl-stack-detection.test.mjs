@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
+import os from 'node:os';
 import path from 'node:path';
 import test from 'node:test';
 
@@ -96,4 +97,64 @@ test('tinyurl schema.sql file exists and contains SERIAL', () => {
   const content = fs.readFileSync(schemaPath, 'utf8');
   assert.ok(content.includes('SERIAL'), 'schema.sql must contain SERIAL for Postgres detection');
   assert.ok(content.includes('urls'), 'schema.sql must define the urls table');
+});
+
+test('detectStacks detects stack-python from pyproject.toml', () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'arch-stack-python-'));
+  try {
+    fs.writeFileSync(path.join(dir, 'pyproject.toml'), '[tool.poetry]\nname = "app"\n', 'utf8');
+    const stacks = detectStacks(dir);
+    assert.ok(stacks.includes('stack-python'), `expected stack-python, got: ${stacks.join(', ')}`);
+  } finally {
+    fs.rmSync(dir, { recursive: true, force: true });
+  }
+});
+
+test('detectStacks detects stack-csharp from .csproj file', () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'arch-stack-csharp-'));
+  try {
+    fs.writeFileSync(path.join(dir, 'MyApp.csproj'), '<Project Sdk="Microsoft.NET.Sdk"/>\n', 'utf8');
+    const stacks = detectStacks(dir);
+    assert.ok(stacks.includes('stack-csharp'), `expected stack-csharp, got: ${stacks.join(', ')}`);
+  } finally {
+    fs.rmSync(dir, { recursive: true, force: true });
+  }
+});
+
+test('detectStacks detects stack-databricks from databricks.yml', () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'arch-stack-databricks-'));
+  try {
+    fs.writeFileSync(path.join(dir, 'databricks.yml'), 'bundle:\n  name: my-bundle\n', 'utf8');
+    const stacks = detectStacks(dir);
+    assert.ok(stacks.includes('stack-databricks'), `expected stack-databricks, got: ${stacks.join(', ')}`);
+  } finally {
+    fs.rmSync(dir, { recursive: true, force: true });
+  }
+});
+
+test('detectStacks detects stack-sql-server from T-SQL GO statement', () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'arch-stack-sqlserver-'));
+  try {
+    fs.writeFileSync(path.join(dir, 'schema.sql'), 'CREATE TABLE Foo (Id INT);\nGO\n', 'utf8');
+    const stacks = detectStacks(dir);
+    assert.ok(stacks.includes('stack-sql-server'), `expected stack-sql-server, got: ${stacks.join(', ')}`);
+  } finally {
+    fs.rmSync(dir, { recursive: true, force: true });
+  }
+});
+
+test('detectStacks returns empty array for non-existent directory (covers readdir catch)', () => {
+  const stacks = detectStacks('/nonexistent-path-xyz-abc');
+  assert.deepEqual(stacks, []);
+});
+
+test('detectStacks detects stack-postgres from $$ block syntax (covers || right side)', () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'arch-stack-dollar-'));
+  try {
+    fs.writeFileSync(path.join(dir, 'migration.sql'), 'CREATE FUNCTION f() RETURNS void AS $$ BEGIN END; $$ LANGUAGE plpgsql;\n', 'utf8');
+    const stacks = detectStacks(dir);
+    assert.ok(stacks.includes('stack-postgres'), `expected stack-postgres, got: ${stacks.join(', ')}`);
+  } finally {
+    fs.rmSync(dir, { recursive: true, force: true });
+  }
 });

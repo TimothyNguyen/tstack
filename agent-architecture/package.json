@@ -1,6 +1,6 @@
 {
   "name": "agent-architecture",
-  "version": "0.1.4-alpha.1",
+  "version": "0.1.4-alpha.2",
   "private": false,
   "type": "module",
   "description": "Reusable enterprise-safe agent skill architecture.",
@@ -69,7 +69,8 @@
     "plan-pm-review/",
     "plan-review/",
     "qa/",
-    "reference-gstack-patterns/",
+    "reference-skill-patterns/",
+    "pre-commit-review/",
     "release/",
     "release-notes/",
     "retro/",

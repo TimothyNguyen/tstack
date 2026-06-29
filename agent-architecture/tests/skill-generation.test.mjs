@@ -1,8 +1,11 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
+import os from 'node:os';
 import path from 'node:path';
 import test from 'node:test';
 import { spawnSync } from 'node:child_process';
+import { render, writeRendered } from '../scripts/gen-skill-docs.mjs';
+import { discoverTemplates, discoverSectionTemplates, parseFrontmatterAgents } from '../scripts/discover-skills.mjs';
 
 const root = path.resolve(import.meta.dirname, '..');
 const skipDirs = new Set([
@@ -211,4 +214,190 @@ test('free test discovery lists this local test suite', () => {
   assert.equal(result.status, 0, result.stderr || result.stdout);
   const parsed = JSON.parse(result.stdout);
   assert.equal(parsed.files.includes('tests/skill-generation.test.mjs'), true);
+});
+
+test('parseFrontmatterAgents handles UTF-8 BOM at start of content', () => {
+  const bom = '﻿';
+  const content = `${bom}---\nagents: [swe, qa-agent]\n---\n`;
+  assert.deepEqual(parseFrontmatterAgents(content), ['swe', 'qa-agent']);
+});
+
+test('parseFrontmatterAgents returns empty array when no frontmatter marker', () => {
+  assert.deepEqual(parseFrontmatterAgents('no frontmatter here'), []);
+});
+
+test('parseFrontmatterAgents returns empty array when frontmatter is not closed', () => {
+  assert.deepEqual(parseFrontmatterAgents('---\nagents: [swe]\n'), []);
+});
+
+test('parseFrontmatterAgents returns empty array when no agents field', () => {
+  assert.deepEqual(parseFrontmatterAgents('---\nname: test\n---\n'), []);
+});
+
+test('discoverTemplates works with a root that has no agents directory', () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'arch-discover-no-agents-'));
+  try {
+    fs.writeFileSync(path.join(dir, 'SKILL.md.tmpl'), '---\nname: root-skill\n---\n');
+    const templates = discoverTemplates(dir);
+    assert.ok(templates.some((t) => t.tmpl === 'SKILL.md.tmpl'));
+  } finally {
+    fs.rmSync(dir, { recursive: true, force: true });
+  }
+});
+
+test('render throws for unknown placeholder', () => {
+  assert.throws(
+    () => render('{{UNKNOWN_PLACEHOLDER}}', 'test.tmpl'),
+    /Unknown placeholder \{\{UNKNOWN_PLACEHOLDER\}\} in test\.tmpl/,
+  );
+});
+
+test('render expands known PREAMBLE placeholder', () => {
+  const result = render('{{PREAMBLE}}', 'test.tmpl');
+  assert.match(result, /Enterprise Preamble/);
+});
+
+test('writeRendered write mode creates output and mirror files', () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'arch-genskill-write-'));
+  try {
+    const skillDir = path.join(dir, 'my-skill');
+    const pluginDir = path.join(dir, 'plugins', 'agent-architecture', 'skills', 'my-skill');
+    fs.mkdirSync(skillDir, { recursive: true });
+    fs.mkdirSync(pluginDir, { recursive: true });
+
+    const tmplContent = '---\nname: my-skill\nversion: 0.1.0\ndescription: |\n  Test.\nagents: [swe]\n---\n\n# My Skill\n';
+    fs.writeFileSync(path.join(skillDir, 'SKILL.md.tmpl'), tmplContent);
+
+    writeRendered('my-skill/SKILL.md.tmpl', 'my-skill/SKILL.md', { check: false, root: dir });
+
+    assert.equal(fs.existsSync(path.join(skillDir, 'SKILL.md')), true);
+    assert.equal(fs.existsSync(path.join(pluginDir, 'SKILL.md')), true);
+    assert.equal(fs.readFileSync(path.join(skillDir, 'SKILL.md'), 'utf8'), tmplContent);
+  } finally {
+    fs.rmSync(dir, { recursive: true, force: true });
+  }
+});
+
+test('writeRendered check mode detects stale output file', () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'arch-genskill-check-'));
+  try {
+    const skillDir = path.join(dir, 'my-skill');
+    fs.mkdirSync(skillDir, { recursive: true });
+
+    const tmplContent = '---\nname: my-skill\nversion: 0.1.0\ndescription: |\n  Test.\nagents: [swe]\n---\n\n# My Skill\n';
+    fs.writeFileSync(path.join(skillDir, 'SKILL.md.tmpl'), tmplContent);
+    fs.writeFileSync(path.join(skillDir, 'SKILL.md'), 'stale content\n');
+
+    const prevExitCode = process.exitCode;
+    writeRendered('my-skill/SKILL.md.tmpl', 'my-skill/SKILL.md', { check: true, root: dir });
+    assert.equal(process.exitCode, 1);
+    process.exitCode = prevExitCode;
+  } finally {
+    fs.rmSync(dir, { recursive: true, force: true });
+  }
+});
+
+test('writeRendered check mode detects stale mirror file', () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'arch-genskill-mirror-'));
+  try {
+    const skillDir = path.join(dir, 'my-skill');
+    const pluginDir = path.join(dir, 'plugins', 'agent-architecture', 'skills', 'my-skill');
+    fs.mkdirSync(skillDir, { recursive: true });
+    fs.mkdirSync(pluginDir, { recursive: true });
+
+    const tmplContent = '---\nname: my-skill\nversion: 0.1.0\ndescription: |\n  Test.\nagents: [swe]\n---\n\n# My Skill\n';
+    fs.writeFileSync(path.join(skillDir, 'SKILL.md.tmpl'), tmplContent);
+    fs.writeFileSync(path.join(skillDir, 'SKILL.md'), tmplContent); // output is fresh
+    fs.writeFileSync(path.join(pluginDir, 'SKILL.md'), 'stale mirror content\n'); // mirror is stale
+
+    const prevExitCode = process.exitCode;
+    writeRendered('my-skill/SKILL.md.tmpl', 'my-skill/SKILL.md', { check: true, root: dir });
+    assert.equal(process.exitCode, 1);
+    process.exitCode = prevExitCode;
+  } finally {
+    fs.rmSync(dir, { recursive: true, force: true });
+  }
+});
+
+test('writeRendered handles root SKILL.md outputRel (null mirror path, non-check mode)', () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'arch-genskill-root-write-'));
+  try {
+    const tmplContent = '---\nname: root\nversion: 0.1.0\ndescription: |\n  Test.\nagents: [swe]\n---\n\n# Root\n';
+    fs.writeFileSync(path.join(dir, 'SKILL.md.tmpl'), tmplContent);
+    writeRendered('SKILL.md.tmpl', 'SKILL.md', { check: false, root: dir });
+    assert.equal(fs.existsSync(path.join(dir, 'SKILL.md')), true);
+    // 'SKILL.md' has parts.length=1 → pluginMirrorFor returns null → no mirror file
+    assert.equal(
+      fs.existsSync(path.join(dir, 'plugins', 'agent-architecture', 'skills', 'SKILL.md')),
+      false,
+    );
+  } finally {
+    fs.rmSync(dir, { recursive: true, force: true });
+  }
+});
+
+test('writeRendered handles root SKILL.md outputRel (null mirror path, check mode)', () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'arch-genskill-root-check-'));
+  try {
+    const tmplContent = '---\nname: root\nversion: 0.1.0\ndescription: |\n  Test.\nagents: [swe]\n---\n\n# Root\n';
+    fs.writeFileSync(path.join(dir, 'SKILL.md.tmpl'), tmplContent);
+    fs.writeFileSync(path.join(dir, 'SKILL.md'), tmplContent);
+    const prevExitCode = process.exitCode;
+    writeRendered('SKILL.md.tmpl', 'SKILL.md', { check: true, root: dir });
+    assert.equal(process.exitCode, prevExitCode, 'check mode must not set exitCode when content is fresh');
+    process.exitCode = prevExitCode;
+  } finally {
+    fs.rmSync(dir, { recursive: true, force: true });
+  }
+});
+
+test('writeRendered check mode with missing output file treats it as stale (covers ternary false at line 64)', () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'arch-genskill-missing-output-'));
+  try {
+    fs.mkdirSync(path.join(dir, 'my-skill'), { recursive: true });
+    const tmplContent = '---\nname: my-skill\nversion: 0.1.0\ndescription: |\n  Test.\nagents: [swe]\n---\n\n# My Skill\n';
+    fs.writeFileSync(path.join(dir, 'my-skill', 'SKILL.md.tmpl'), tmplContent);
+    // No SKILL.md output file — check mode should detect it as missing (empty string != rendered)
+    const prevExitCode = process.exitCode;
+    writeRendered('my-skill/SKILL.md.tmpl', 'my-skill/SKILL.md', { check: true, root: dir });
+    assert.equal(process.exitCode, 1, 'check mode must set exitCode=1 when output file is missing');
+    process.exitCode = prevExitCode;
+  } finally {
+    fs.rmSync(dir, { recursive: true, force: true });
+  }
+});
+
+test('writeRendered with 2-part non-SKILL.md outputRel skips mirror (covers parts[1]!==SKILL.md branch)', () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'arch-genskill-readme-'));
+  try {
+    fs.mkdirSync(path.join(dir, 'my-skill'), { recursive: true });
+    fs.writeFileSync(path.join(dir, 'my-skill', 'README.md.tmpl'), '# README\n');
+    writeRendered('my-skill/README.md.tmpl', 'my-skill/README.md', { check: false, root: dir });
+    assert.equal(fs.existsSync(path.join(dir, 'my-skill', 'README.md')), true);
+    assert.equal(
+      fs.existsSync(path.join(dir, 'plugins', 'agent-architecture', 'skills', 'my-skill', 'README.md')),
+      false,
+    );
+  } finally {
+    fs.rmSync(dir, { recursive: true, force: true });
+  }
+});
+
+test('discoverSectionTemplates skips non-.md.tmpl files and directories in sections/', () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'arch-discover-sections-skip-'));
+  try {
+    const mySkillDir = path.join(dir, 'my-skill');
+    const sectionsDir = path.join(mySkillDir, 'sections');
+    fs.mkdirSync(sectionsDir, { recursive: true });
+    fs.mkdirSync(path.join(sectionsDir, 'subdir'), { recursive: true });
+    fs.writeFileSync(path.join(mySkillDir, 'SKILL.md.tmpl'), '---\nname: my-skill\n---\n');
+    fs.writeFileSync(path.join(sectionsDir, 'part.md.tmpl'), '# Part\n');
+    fs.writeFileSync(path.join(sectionsDir, 'notes.txt'), 'not a template\n');
+    const templates = discoverSectionTemplates(dir);
+    assert.ok(templates.some((t) => t.tmpl.includes('part.md.tmpl')), 'should find .md.tmpl file');
+    assert.ok(!templates.some((t) => t.tmpl.includes('notes.txt')), 'should skip .txt file');
+    assert.ok(!templates.some((t) => t.tmpl.includes('subdir')), 'should skip subdirectory');
+  } finally {
+    fs.rmSync(dir, { recursive: true, force: true });
+  }
 });

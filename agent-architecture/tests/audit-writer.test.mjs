@@ -49,3 +49,43 @@ test('audit writer appends redacted local JSONL records', () => {
 
   fs.rmSync(baseDir, { recursive: true, force: true });
 });
+
+test('redact returns null for null input', () => {
+  assert.equal(redact(null), null);
+  assert.equal(redact(0), 0);
+  assert.equal(redact('plain-string'), 'plain-string');
+});
+
+test('redact handles array containing objects with forbidden fields', () => {
+  const result = redact([{ token: 'abc' }, { safe: 'ok' }]);
+  assert.equal(result[0].token, '[REDACTED]');
+  assert.equal(result[1].safe, 'ok');
+});
+
+test('writeAuditEvent returns null when audit is disabled', () => {
+  const baseDir = fs.mkdtempSync(path.join(os.tmpdir(), 'arch-audit-disabled-'));
+  try {
+    const disabledPolicy = { audit: { enabled: false, path: '.architecture-agent/audit/events.jsonl', forbiddenFields: [] } };
+    const result = writeAuditEvent({ type: 'test' }, { baseDir, policy: disabledPolicy });
+    assert.equal(result, null);
+  } finally {
+    fs.rmSync(baseDir, { recursive: true, force: true });
+  }
+});
+
+test('resolveAuditPath passes when auditPath equals the allowed root directory', () => {
+  const baseDir = fs.mkdtempSync(path.join(os.tmpdir(), 'arch-audit-eq-'));
+  try {
+    const policy = { audit: { path: '.architecture-agent' } };
+    const auditPath = resolveAuditPath(baseDir, policy);
+    assert.ok(auditPath.endsWith('.architecture-agent'));
+  } finally {
+    fs.rmSync(baseDir, { recursive: true, force: true });
+  }
+});
+
+test('writeAuditEvent uses root as baseDir when options.baseDir is absent (covers ternary false at line 35)', () => {
+  const disabledPolicy = { audit: { enabled: false, path: '.architecture-agent/audit/events.jsonl', forbiddenFields: [] } };
+  const result = writeAuditEvent({ type: 'test' }, { policy: disabledPolicy });
+  assert.equal(result, null, 'should return null while covering baseDir ternary false branch');
+});
