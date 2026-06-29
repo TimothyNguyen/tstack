@@ -1,0 +1,16 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "@agent-arch/skills",
+  "owner": { "name": "agent-architecture" },
+  "plugins": [
+    {
+      "name": "agent-arch-skills",
+      "description": "Specialty packs: diagrams, migration, plan-reviews, seniorswe-concise, security, design, benchmarks, docs.",
+      "version": "0.1.0",
+      "author": { "name": "agent-architecture" },
+      "source": ".",
+      "category": "development",
+      "homepage": "https://github.com/TimothyNguyen/tstack/tree/master/agent-architecture/packages/skills"
+    }
+  ]
+}
