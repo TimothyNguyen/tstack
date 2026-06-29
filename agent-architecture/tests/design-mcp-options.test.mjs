@@ -11,7 +11,7 @@ function read(rel) {
 
 test('design skills document Figma MCP and OpenPencil MCP options', () => {
   for (const skill of ['design-review', 'design-html']) {
-    const body = read(`${skill}/SKILL.md.tmpl`);
+    const body = read(`packages/skills/${skill}/SKILL.md.tmpl`);
     for (const phrase of [
       'Figma MCP',
       'https://github.com/mcp/com.figma.mcp/mcp',

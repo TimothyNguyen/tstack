@@ -43,17 +43,27 @@ function stripFrontmatter(content) {
 }
 
 function buildAgentsSection() {
-  const agentsDir = path.join(ROOT, 'agents');
-  if (!fs.existsSync(agentsDir)) return '';
+  const agentDirs = [
+    path.join(ROOT, 'agents'),
+    path.join(ROOT, 'packages', 'skills', 'agents'),
+  ];
   const lines = ['## Role-Based Agents', ''];
-  for (const name of fs.readdirSync(agentsDir).sort()) {
-    const tmplPath = path.join(agentsDir, name, 'SKILL.md.tmpl');
-    if (!fs.existsSync(tmplPath)) continue;
-    const content = fs.readFileSync(tmplPath, 'utf8');
-    const descMatch = content.match(/^description:\s*\|?\s*\n((?:[ \t]+.+\n?)*)/m);
-    const desc = descMatch
-      ? descMatch[1].replace(/^[ \t]{2}/gm, '').trim().split('\n')[0]
-      : '';
+  const entries = [];
+  for (const agentsDir of agentDirs) {
+    if (!fs.existsSync(agentsDir)) continue;
+    for (const name of fs.readdirSync(agentsDir).sort()) {
+      const tmplPath = path.join(agentsDir, name, 'SKILL.md.tmpl');
+      if (!fs.existsSync(tmplPath)) continue;
+      const content = fs.readFileSync(tmplPath, 'utf8');
+      const descMatch = content.match(/^description:\s*\|?\s*\n((?:[ \t]+.+\n?)*)/m);
+      const desc = descMatch
+        ? descMatch[1].replace(/^[ \t]{2}/gm, '').trim().split('\n')[0]
+        : '';
+      entries.push({ name, desc });
+    }
+  }
+  entries.sort((a, b) => a.name.localeCompare(b.name));
+  for (const { name, desc } of entries) {
     lines.push(`- \`/${name}\` — ${desc}`);
   }
   lines.push('');

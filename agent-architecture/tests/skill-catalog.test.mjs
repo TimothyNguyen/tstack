@@ -73,10 +73,17 @@ test('root router skill routing is consistent', () => {
   // Check that routed skills are cataloged
   // adapter- skills are now in packages/adapters/ and are excluded from the top-level catalog
   // stack- and domain- skills are now in packages/stacks/ and are excluded from the top-level catalog
+  // specialty skills are now in packages/skills/ and are excluded from the top-level catalog
+  const specialtySkillsRoot = path.join(root, 'packages', 'skills');
+  const specialtySkillNames = fs.existsSync(specialtySkillsRoot)
+    ? new Set(fs.readdirSync(specialtySkillsRoot, { withFileTypes: true })
+        .filter((e) => e.isDirectory() && fs.existsSync(path.join(specialtySkillsRoot, e.name, 'SKILL.md.tmpl')))
+        .map((e) => e.name))
+    : new Set();
   for (const skill of routedSkills) {
     if (!skill.startsWith('architecture-agent-') && !skill.startsWith('adapter-') &&
         !skill.startsWith('stack-') && !skill.startsWith('domain-') &&
-        skill !== 'subagent-orchestrator') {
+        skill !== 'subagent-orchestrator' && !specialtySkillNames.has(skill)) {
       assert.ok(catalogedSkills.has(skill),
         `${skill} is routed by root but not in catalog`);
     }

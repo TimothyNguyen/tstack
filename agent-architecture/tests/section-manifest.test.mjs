@@ -16,23 +16,35 @@ import test from 'node:test';
 
 const root = path.resolve(import.meta.dirname, '..');
 
+const packageRoots = [
+  root,
+  path.join(root, 'packages', 'adapters'),
+  path.join(root, 'packages', 'stacks'),
+  path.join(root, 'packages', 'skills'),
+].filter(fs.existsSync);
+
 function discoverCarvedSkills() {
-  return fs
-    .readdirSync(root, { withFileTypes: true })
-    .filter((d) => d.isDirectory())
-    .map((d) => d.name)
-    .filter((name) => fs.existsSync(path.join(root, name, 'sections', 'manifest.json')))
-    .sort();
+  const found = [];
+  for (const scanRoot of packageRoots) {
+    const prefix = scanRoot === root ? '' : path.relative(root, scanRoot).split(path.sep).join('/') + '/';
+    fs.readdirSync(scanRoot, { withFileTypes: true })
+      .filter((d) => d.isDirectory())
+      .map((d) => d.name)
+      .filter((name) => fs.existsSync(path.join(scanRoot, name, 'sections', 'manifest.json')))
+      .forEach((name) => found.push({ key: prefix + name, scanRoot, name }));
+  }
+  return found.sort((a, b) => a.key.localeCompare(b.key));
 }
 
-const carvedSkills = discoverCarvedSkills();
+const carvedSkillEntries = discoverCarvedSkills();
+const carvedSkills = carvedSkillEntries.map((e) => e.key);
 
 test('at least one skill with sections/manifest.json is discovered', () => {
   assert.ok(carvedSkills.length >= 1, 'expected >=1 carved skill, found 0');
 });
 
 test('known carved skills exist', () => {
-  for (const expected of ['test', 'security-review']) {
+  for (const expected of ['test', 'packages/skills/security-review']) {
     assert.ok(
       carvedSkills.includes(expected),
       `${expected}/sections/manifest.json missing`,
@@ -40,14 +52,14 @@ test('known carved skills exist', () => {
   }
 });
 
-for (const skill of carvedSkills) {
-  const sectionsDir = path.join(root, skill, 'sections');
+for (const { key: skill, scanRoot, name } of carvedSkillEntries) {
+  const sectionsDir = path.join(scanRoot, name, 'sections');
 
   test(`${skill}: manifest.json parses with required top-level shape`, () => {
     const manifest = JSON.parse(
       fs.readFileSync(path.join(sectionsDir, 'manifest.json'), 'utf8'),
     );
-    assert.equal(manifest.skill, skill, 'manifest.skill must match directory name');
+    assert.equal(manifest.skill, name, 'manifest.skill must match directory name');
     assert.ok(Array.isArray(manifest.sections), 'manifest.sections must be an array');
     assert.ok(manifest.sections.length > 0, 'manifest.sections must be non-empty');
   });

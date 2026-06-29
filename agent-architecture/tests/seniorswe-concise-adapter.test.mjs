@@ -310,7 +310,7 @@ test('seniorswe-concise instructions filterSkillBodyForMode with null body (cove
 
 test('seniorswe-concise instructions falls back when SKILL.md is unreadable (covers catch block at lines 53-54)', async () => {
   const mod = await import('../packages/adapters/adapters/seniorswe-concise/hooks/seniorswe-concise-instructions.cjs');
-  const skillPath = path.join(root, 'seniorswe-concise', 'SKILL.md');
+  const skillPath = path.join(root, 'packages', 'skills', 'seniorswe-concise', 'SKILL.md');
   const backupPath = skillPath + '.bak';
   fs.renameSync(skillPath, backupPath);
   try {

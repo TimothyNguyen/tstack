@@ -31,15 +31,26 @@ test('no skill is missing agents: field', () => {
   assert.deepEqual(missing, [], `orphan skills (missing agents: field): ${missing.join(', ')}`);
 });
 
-test('all 12 role agents exist in agents/ directory', () => {
+test('core agents exist in agents/ directory', () => {
   const agentsDir = path.join(root, 'agents');
   assert.ok(fs.existsSync(agentsDir), 'agents/ directory missing');
-  const EXPECTED = ['orchestrate', 'swe', 'qa-agent', 'pm', 'spec-agent',
-    'design-agent', 'migration', 'data', 'cloud', 'interviewer',
-    'release-agent', 'security'];
-  for (const agent of EXPECTED) {
+  const CORE_AGENTS = ['swe', 'qa-agent', 'pm', 'spec-agent'];
+  for (const agent of CORE_AGENTS) {
     const skillPath = path.join(agentsDir, agent, 'SKILL.md.tmpl');
     assert.ok(fs.existsSync(skillPath), `agents/${agent}/SKILL.md.tmpl missing`);
+  }
+});
+
+test('specialty agents exist in packages/skills/agents/ directory', () => {
+  const specialtyDir = path.join(root, 'packages', 'skills', 'agents');
+  assert.ok(fs.existsSync(specialtyDir), 'packages/skills/agents/ directory missing');
+  const SPECIALTY_AGENTS = [
+    'orchestrate', 'design-agent', 'migration', 'data', 'cloud',
+    'interviewer', 'release-agent', 'security', 'diagram-agent', 'migration-engineer',
+  ];
+  for (const agent of SPECIALTY_AGENTS) {
+    const skillPath = path.join(specialtyDir, agent, 'SKILL.md.tmpl');
+    assert.ok(fs.existsSync(skillPath), `packages/skills/agents/${agent}/SKILL.md.tmpl missing`);
   }
 });
 

@@ -45,6 +45,27 @@ export function discoverTemplates(root) {
     }
   }
 
+  // Also discover skills in packages/skills/ (specialty skills package)
+  const skillsPackageDir = path.join(root, 'packages', 'skills');
+  if (fs.existsSync(skillsPackageDir)) {
+    for (const name of subdirs(skillsPackageDir)) {
+      const rel = `packages/skills/${name}/SKILL.md.tmpl`;
+      if (fs.existsSync(path.join(root, rel))) {
+        templates.push({ tmpl: rel, output: rel.replace(/\.tmpl$/, '') });
+      }
+    }
+    // Also discover specialty agents in packages/skills/agents/
+    const skillsAgentsDir = path.join(skillsPackageDir, 'agents');
+    if (fs.existsSync(skillsAgentsDir)) {
+      for (const name of fs.readdirSync(skillsAgentsDir).sort()) {
+        const rel = `packages/skills/agents/${name}/SKILL.md.tmpl`;
+        if (fs.existsSync(path.join(root, rel))) {
+          templates.push({ tmpl: rel, output: rel.replace(/\.tmpl$/, '') });
+        }
+      }
+    }
+  }
+
   return templates;
 }
 
@@ -78,6 +99,30 @@ export function discoverSkillAgents(root) {
     const tmpl = fs.readFileSync(path.join(agentsDir, dir, 'SKILL.md.tmpl'), 'utf8');
     map.set(`agents/${dir}`, parseFrontmatterAgents(tmpl));
   }
+
+  // Also discover skills in packages/skills/ (specialty skills package)
+  const skillsPackageDir = path.join(root, 'packages', 'skills');
+  if (fs.existsSync(skillsPackageDir)) {
+    for (const dir of subdirs(skillsPackageDir)) {
+      const tmplPath = path.join(skillsPackageDir, dir, 'SKILL.md.tmpl');
+      if (fs.existsSync(tmplPath)) {
+        const tmpl = fs.readFileSync(tmplPath, 'utf8');
+        map.set(`packages/skills/${dir}`, parseFrontmatterAgents(tmpl));
+      }
+    }
+    // Also discover specialty agents in packages/skills/agents/
+    const skillsAgentsDir = path.join(skillsPackageDir, 'agents');
+    if (fs.existsSync(skillsAgentsDir)) {
+      for (const dir of fs.readdirSync(skillsAgentsDir).sort()) {
+        const tmplPath = path.join(skillsAgentsDir, dir, 'SKILL.md.tmpl');
+        if (fs.existsSync(tmplPath)) {
+          const tmpl = fs.readFileSync(tmplPath, 'utf8');
+          map.set(`packages/skills/agents/${dir}`, parseFrontmatterAgents(tmpl));
+        }
+      }
+    }
+  }
+
   return map;
 }
 
@@ -96,6 +141,25 @@ export function discoverSectionTemplates(root) {
         output: rel.replace(/\.tmpl$/, ''),
         skillDir: dir,
       });
+    }
+  }
+
+  // Also scan packages/skills/ for section templates
+  const skillsPackageDir = path.join(root, 'packages', 'skills');
+  if (fs.existsSync(skillsPackageDir)) {
+    for (const dir of subdirs(skillsPackageDir)) {
+      const sectionsDir = path.join(skillsPackageDir, dir, 'sections');
+      if (!fs.existsSync(sectionsDir)) continue;
+
+      for (const entry of fs.readdirSync(sectionsDir, { withFileTypes: true })) {
+        if (!entry.isFile() || !entry.name.endsWith('.md.tmpl')) continue;
+        const rel = `packages/skills/${dir}/sections/${entry.name}`;
+        templates.push({
+          tmpl: rel,
+          output: rel.replace(/\.tmpl$/, ''),
+          skillDir: `packages/skills/${dir}`,
+        });
+      }
     }
   }
 

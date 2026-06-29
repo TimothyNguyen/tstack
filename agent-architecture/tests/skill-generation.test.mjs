@@ -60,17 +60,17 @@ test('generated skills are fresh', () => {
 });
 
 test('core skills have template and generated output', () => {
-  const skills = [
-    'health',
-    'test',
-    'review',
-    'security-review',
-    'rtk-token-optimizer',
+  const coreSkills = [
+    { dir: root, name: 'health' },
+    { dir: root, name: 'test' },
+    { dir: root, name: 'review' },
+    { dir: path.join(root, 'packages', 'skills'), name: 'security-review' },
+    { dir: path.join(root, 'packages', 'skills'), name: 'rtk-token-optimizer' },
   ];
 
-  for (const skill of skills) {
-    assert.equal(fs.existsSync(path.join(root, skill, 'SKILL.md.tmpl')), true, `${skill} template missing`);
-    assert.equal(fs.existsSync(path.join(root, skill, 'SKILL.md')), true, `${skill} generated output missing`);
+  for (const { dir, name: skill } of coreSkills) {
+    assert.equal(fs.existsSync(path.join(dir, skill, 'SKILL.md.tmpl')), true, `${skill} template missing`);
+    assert.equal(fs.existsSync(path.join(dir, skill, 'SKILL.md')), true, `${skill} generated output missing`);
   }
 });
 
@@ -138,8 +138,9 @@ test('section templates have generated outputs', () => {
 });
 
 test('upgrade skill uses architecture-agent name', () => {
-  assert.equal(fs.existsSync(path.join(root, 'architecture-agent-upgrade', 'SKILL.md.tmpl')), true);
-  assert.equal(fs.existsSync(path.join(root, 'architecture-agent-upgrade', 'SKILL.md')), true);
+  const skillsRoot = path.join(root, 'packages', 'skills');
+  assert.equal(fs.existsSync(path.join(skillsRoot, 'architecture-agent-upgrade', 'SKILL.md.tmpl')), true);
+  assert.equal(fs.existsSync(path.join(skillsRoot, 'architecture-agent-upgrade', 'SKILL.md')), true);
   assert.equal(fs.existsSync(path.join(root, 'tstack-upgrade')), false);
 });
 
@@ -175,7 +176,7 @@ test('default policy denies public egress and sensitive capabilities', () => {
 test('rtk token optimizer is optional and safe by default', () => {
   const policy = JSON.parse(fs.readFileSync(path.join(root, 'policies', 'enterprise-default.json'), 'utf8'));
   const doc = fs.readFileSync(path.join(root, 'docs', 'rtk-token-optimizer.md'), 'utf8');
-  const skill = fs.readFileSync(path.join(root, 'rtk-token-optimizer', 'SKILL.md.tmpl'), 'utf8');
+  const skill = fs.readFileSync(path.join(root, 'packages', 'skills', 'rtk-token-optimizer', 'SKILL.md.tmpl'), 'utf8');
 
   assert.equal(policy.modules.rtkTokenOptimizer, 'optional');
   assert.match(doc, /Do not run `curl \| sh`/);
