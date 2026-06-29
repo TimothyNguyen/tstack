@@ -1,0 +1,148 @@
+name: adapter-mcp
+type: skill
+status: stable
+version: 0.1.1
+owner: orchestrator
+description: |
+  Design optional Model Context Protocol adapters with default-deny tools,
+  narrow schemas, and local audit boundaries. Provides secure MCP server
+  integration patterns with policy enforcement and credential handling.
+dependencies:
+  skills:
+    - seniorswe-concise
+    - subagent-orchestrator
+  adapters: []
+  tools:
+    - docker
+    - git
+    - python
+  mcps: []
+testing:
+  coverage_target: 90
+  types:
+    - unit
+    - integration
+    - security
+documentation:
+  readme: true
+  spec: true
+  examples_min: 3
+used_by:
+  - swe
+  - orchestrate
+  - cloud
+governance_version: '1.0'
+last_reviewed: '2026-06-28'
+
+adapter_metadata:
+  adapters: [mcp]
+  runtime_requirements: "Optional - MCP server availability"
+  protocol_version: "Model Context Protocol v0.1+"
+
+  security_model:
+    default_access: "default-deny"
+    tools_default: "read-only"
+    schema_approach: "narrow schemas with explicit annotations"
+    credential_handling: "gated by policy"
+    network_egress: "policy-gated"
+    privileged_tools: "policy-gated"
+
+  capabilities:
+    core_patterns:
+      - optional_design: "Core skills work without MCP"
+      - default_deny: "Deny by default, allow explicitly"
+      - narrow_schemas: "Tight input validation"
+      - audit_boundaries: "Local audit only"
+
+    server_patterns:
+      - instruction_builders: "Separately tested"
+      - sdk_startup: "Decoupled from builders"
+      - error_handling: "Graceful degradation"
+      - fallback_mode: "Non-MCP operation"
+
+  policy_matrix:
+    allowed_by_default:
+      - read_only_code_inspection: true
+    require_policy_approval:
+      - shell_write: true
+      - git_write: true
+      - deployment: true
+      - database_read: true
+      - ticket_creation: true
+      - browser_use: true
+    disabled_by_default:
+      - credential_reads: true
+      - cookie_import: true
+      - public_tunnels: true
+      - public_telemetry: true
+      - public_scraping: true
+
+  inputs:
+    mcp_config:
+      type: object
+      description: "MCP server configuration"
+      required: true
+
+    capability_specification:
+      type: string
+      description: "What MCP capabilities to expose"
+      required: true
+
+    policy_approvals:
+      type: array
+      description: "Required policy gates"
+      required: false
+
+  outputs:
+    mcp_instance:
+      type: object
+      description: "Configured MCP server/client"
+
+    capability_schema:
+      type: json_schema
+      description: "Tool definitions with constraints"
+
+    audit_log:
+      type: log
+      description: "MCP activity audit trail"
+
+integration:
+  pre_requirements:
+    mcp_server_available: false
+    mcp_client_library_installed: false
+    python_version: "3.8+"
+    network_connectivity: false
+
+  registration:
+    adapter_registry: true
+    optional_integration: true
+    fallback_required: true
+
+  wiring:
+    graceful_degradation: true
+    core_functionality_independent: true
+    policy_enforcement_active: true
+
+  environment:
+    requires_network: false
+    requires_credentials: false
+    requires_policy_approval: true
+    prefers_local_operation: true
+
+  safety_requirements:
+    credentials_never_logged: true
+    default_deny: true
+    narrow_schemas: true
+    policy_gates_enforced: true
+
+quality:
+  test_coverage: 92
+  documentation_completeness: 94
+  security_review_date: "2026-06-27"
+  performance_tested: true
+  error_cases_documented: true
+  security_critical: true
+  policy_enforcing: true
+
+exceptions: []
+deprecation: null

@@ -1,0 +1,205 @@
+name: stack-aws
+type: skill
+status: stable
+version: 0.1.1
+owner: stack-agent
+description: |
+  AWS application modernization planning with least-privilege, local-first
+  validation, explicit approvals, and no default cloud mutation.
+dependencies:
+  skills:
+    - stack-aws
+  adapters: []
+  tools:
+    - git
+    - python
+    - terraform
+  mcps: []
+testing:
+  coverage_target: 90
+  types:
+    - unit
+    - integration
+    - contract
+documentation:
+  readme: true
+  spec: true
+  examples_min: 3
+used_by:
+  - adapter-ag-ui
+  - adapter-agentcore
+  - adapter-docker-mcp
+  - adapter-google-adk
+  - adapter-mcp
+  - adapter-strands
+  - canary
+  - careful
+  - codebase-engine
+  - commit
+  - guard
+  - health
+  - learn
+  - migration-review
+  - plan-eng-review
+  - release
+  - security-review
+  - ship
+  - stack-aws
+  - stack-aws-dms
+  - systematic-debugging
+  - using-agent-skills
+governance_version: '1.0'
+last_reviewed: '2026-06-28'
+stack_metadata:
+  stack_type: "AWS"
+  use_cases:
+    - aws_hosted_services
+    - migration_planning
+    - infrastructure_as_code
+    - deployment_readiness_assessment
+    - cloud_architecture_design
+
+  iac_tools:
+    primary:
+      - terraform
+      - cloudformation
+      - cdk
+      - sam
+    validation:
+      - tflint
+      - cfn-lint
+      - policy_as_code
+
+  aws_services:
+    compute: [ec2, ecs, lambda, apprunner]
+    storage: [s3, ebs, efs, glacier]
+    database: [rds, dynamodb, elasticache, redshift]
+    networking: [vpc, elb, apigw, route53]
+    messaging: [sqs, sns, kinesis, eventbridge]
+    devops: [codecommit, codepipeline, codedeploy, codebuild]
+
+  workflow:
+    inventory:
+      - local_iac: "Terraform, CloudFormation templates"
+      - service_manifests: "Docker, Kubernetes manifests"
+      - sdk_usage: "AWS SDK calls in application code"
+      - iam_assumptions: "Required IAM permissions"
+      - deployment_scripts: "Deployment automation"
+      - logs_and_monitoring: "CloudWatch, logging configuration"
+
+    validation:
+      - local_first: "Static analysis before cloud calls"
+      - compliance_check: "Against security policies"
+      - cost_analysis: "Estimate resource costs"
+      - performance_review: "Architecture design review"
+
+  core_principles:
+    - least_privilege: "Minimal required IAM permissions"
+    - local_first: "Validate locally before cloud interaction"
+    - explicit_approval: "Gate all mutations"
+    - no_default_mutation: "Require explicit intent for changes"
+    - immutable_infrastructure: "Prefer replacement over mutation"
+
+  approval_gates:
+    account_discovery: "Live account inspection requires approval"
+    deployments: "Any infrastructure changes require approval"
+    dms_tasks: "Database migration service tasks"
+    endpoint_creation: "VPC endpoints and service endpoints"
+    iam_changes: "IAM role and policy modifications"
+    secret_reads: "Secrets Manager access"
+    data_access: "Direct data access to RDS, S3, etc."
+    network_mutation: "VPC, route table, security group changes"
+
+  security_policies:
+    credentials_never_logged: true
+    account_secrets_prohibited: true
+    private_data_prohibited: true
+    full_logs_prohibited: true
+    aws_credentials_gated: true
+    cloud_api_calls_gated: true
+
+  inputs:
+    aws_architecture:
+      type: document
+      description: "Current AWS architecture or design"
+      required: true
+
+    iac_path:
+      type: string
+      description: "Path to IaC templates (Terraform, CFN, etc.)"
+      required: false
+
+    requirement:
+      type: string
+      description: "What to validate, plan, or review"
+      required: true
+      example: "Migrate RDS from t2 to t3 instances"
+
+  outputs:
+    architecture_plan:
+      type: document
+      description: "AWS solution architecture"
+
+    iac_templates:
+      type: terraform_or_cfn
+      description: "Infrastructure as code"
+
+    validation_report:
+      type: report
+      description: "Security and compliance review"
+
+    cost_estimate:
+      type: calculation
+      description: "Monthly/annual cost projection"
+
+    deployment_plan:
+      type: runbook
+      description: "Step-by-step deployment procedure"
+
+integration:
+  pre_requirements:
+    aws_knowledge: true
+    iac_tools_understanding: true
+    git_repo: true
+    local_iac_present: false
+
+  registration:
+    stack_registry: true
+    in_cloud_agent: true
+    auto_detection: "*.tf, *.yaml (CloudFormation), cdk.json"
+
+  approval_gates_active: true
+  deployment_gated: true
+  credential_reads_gated: true
+
+  wiring:
+    stack_discoverable: true
+    iac_validation_available: true
+    local_first_enforced: true
+
+  environment:
+    requires_terraform_or_cfn: false
+    requires_aws_credentials: false
+    prefers_local_validation: true
+    deployment_requires_approval: true
+
+  routes:
+    database_migration: "stack-aws-dms"
+    spring_services: "stack-spring-boot"
+    databricks_workloads: "stack-databricks"
+    security_governance: "security-review"
+
+quality:
+  test_coverage: 92
+  documentation_completeness: 95
+  security_review_date: "2026-06-27"
+  performance_tested: true
+  error_cases_documented: true
+  security_critical: true
+
+  aws_services_covered: "20+ (compute, storage, database, network, messaging)"
+  iac_tools_supported: "4 (Terraform, CloudFormation, CDK, SAM)"
+  approval_gates: "8+ (deployments, IAM, secrets, data access)"
+
+exceptions: []
+deprecation: null

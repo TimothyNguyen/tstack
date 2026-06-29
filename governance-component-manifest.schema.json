@@ -1,0 +1,186 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Component Governance Manifest",
+  "description": "Machine-readable component metadata for governance validation",
+  "type": "object",
+  "required": [
+    "name",
+    "type",
+    "status",
+    "owner"
+  ],
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Component name",
+      "pattern": "^[a-z][a-z0-9-]*[a-z0-9]$"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "skill",
+        "adapter",
+        "agent",
+        "mcp",
+        "utility",
+        "workflow"
+      ],
+      "description": "Component type"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "draft",
+        "experimental",
+        "beta",
+        "stable",
+        "deprecated",
+        "archived"
+      ],
+      "description": "Component maturity level"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$",
+      "description": "Semantic version"
+    },
+    "owner": {
+      "type": "string",
+      "description": "Owning agent or team",
+      "examples": [
+        "swe-agent",
+        "qa-agent",
+        "orchestrate"
+      ]
+    },
+    "description": {
+      "type": "string",
+      "minLength": 50,
+      "maxLength": 500,
+      "description": "Component description"
+    },
+    "dependencies": {
+      "type": "object",
+      "properties": {
+        "skills": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Skill dependencies"
+        },
+        "adapters": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Adapter dependencies"
+        },
+        "mcps": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "MCP server dependencies"
+        },
+        "tools": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Tool dependencies"
+        }
+      }
+    },
+    "testing": {
+      "type": "object",
+      "properties": {
+        "coverage_target": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100,
+          "description": "Minimum test coverage percentage"
+        },
+        "types": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "unit",
+              "integration",
+              "contract",
+              "performance",
+              "security"
+            ]
+          },
+          "description": "Types of tests required"
+        }
+      }
+    },
+    "documentation": {
+      "type": "object",
+      "properties": {
+        "readme": {
+          "type": "boolean",
+          "default": true,
+          "description": "README.md required"
+        },
+        "spec": {
+          "type": "boolean",
+          "default": true,
+          "description": "SPEC.md required"
+        },
+        "examples_min": {
+          "type": "number",
+          "minimum": 1,
+          "default": 2,
+          "description": "Minimum number of examples"
+        }
+      }
+    },
+    "used_by": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Components or agents that use this",
+      "examples": [
+        "swe-agent",
+        "orchestrate-skill"
+      ]
+    },
+    "deprecation": {
+      "type": "object",
+      "properties": {
+        "reason": {
+          "type": "string",
+          "description": "Why component is deprecated"
+        },
+        "migration_path": {
+          "type": "string",
+          "description": "How to migrate away from this"
+        },
+        "removal_date": {
+          "type": "string",
+          "format": "date",
+          "description": "When component will be removed"
+        }
+      },
+      "required": [
+        "reason",
+        "migration_path",
+        "removal_date"
+      ]
+    },
+    "governance_version": {
+      "type": "string",
+      "default": "1.0",
+      "description": "Governance specification version this component conforms to"
+    },
+    "last_reviewed": {
+      "type": "string",
+      "format": "date",
+      "description": "Last governance review date"
+    }
+  }
+}

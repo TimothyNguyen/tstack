@@ -1,0 +1,26 @@
+name: databricks-metric-views
+type: skill
+status: beta
+version: 1.0.0
+owner: orchestrator
+description: >-
+  Unity Catalog metric views: define, create, query, and manage governed business metrics in YAML. Use when building
+  standardized KPIs, revenue metrics, order analytics, or any reusable business metrics that need consistent definitions
+  across teams and tools.
+dependencies:
+  skills: []
+  adapters: []
+  tools: []
+  mcps: []
+testing:
+  coverage_target: 80
+  types:
+    - unit
+    - integration
+documentation:
+  readme: true
+  spec: true
+  examples_min: 2
+used_by: []
+governance_version: '1.0'
+last_reviewed: '2026-06-28'

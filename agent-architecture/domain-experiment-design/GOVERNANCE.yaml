@@ -1,0 +1,28 @@
+name: domain-experiment-design
+type: skill
+status: experimental
+version: 0.1.1
+owner: domain-expert
+description: |
+  Experiment design review for randomization, power, metrics, guardrails,
+  exposure, analysis plans, and rollout risk.
+dependencies:
+  skills:
+    - stack-databricks
+  adapters: []
+  tools:
+    - git
+    - python
+  mcps: []
+testing:
+  coverage_target: 70
+  types:
+    - unit
+    - integration
+documentation:
+  readme: true
+  spec: true
+  examples_min: 2
+used_by: []
+governance_version: '1.0'
+last_reviewed: '2026-06-28'

@@ -1,0 +1,56 @@
+name: adapter-langgraph
+type: skill
+status: stable
+version: 0.1.1
+owner: orchestrator
+description: |
+  Optional LangGraph orchestration boundary for durable app-level agents
+  without expanding the core runtime dependency surface.
+dependencies:
+  skills:
+    - subagent-orchestrator
+  adapters:
+    - adapter-langgraph
+  tools:
+    - docker
+    - git
+    - python
+    - terraform
+  mcps: []
+testing:
+  coverage_target: 90
+  types:
+    - unit
+    - integration
+    - contract
+documentation:
+  readme: true
+  spec: true
+  examples_min: 3
+used_by:
+  - adapter-langgraph
+governance_version: '1.0'
+last_reviewed: '2026-06-28'
+adapter_metadata:
+  capabilities:
+    core_features: []
+  security_model:
+    default_access: default-deny
+    policy_gated:
+      - credentials
+      - network_egress
+  inputs: {}
+  outputs: {}
+integration:
+  pre_requirements:
+    adapter_available: false
+  registration:
+    adapter_registry: true
+quality:
+  test_coverage: 85
+  documentation_completeness: 90
+  security_review_date: '2026-06-27'
+  performance_tested: true
+  error_cases_documented: true
+exceptions: []
+deprecation: null

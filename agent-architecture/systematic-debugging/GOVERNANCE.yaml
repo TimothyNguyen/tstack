@@ -1,0 +1,55 @@
+name: systematic-debugging
+type: skill
+status: stable
+version: 0.1.1
+owner: orchestrator
+description: |
+  Exhaustive root-cause investigation for complex bugs stuck after multiple fix attempts.
+  Use when bugs span multiple system layers (workflow → build → deploy, API → service → database).
+  Emphasizes evidence gathering, architecture questioning, and preventing self-deception.
+dependencies:
+  skills:
+    - migration-review
+    - qa
+    - security-review
+    - seniorswe-concise
+    - stack-aws
+    - stack-databricks
+  adapters: []
+  tools:
+    - docker
+    - git
+    - github
+    - npm
+    - python
+  mcps: []
+testing:
+  coverage_target: 90
+  types:
+    - unit
+    - integration
+    - contract
+documentation:
+  readme: true
+  spec: true
+  examples_min: 3
+used_by: []
+governance_version: '1.0'
+last_reviewed: '2026-06-28'
+skill_metadata:
+  role: Skill role
+  core_capabilities: []
+  inputs: {}
+  outputs: {}
+integration:
+  pre_requirements: {}
+  registration: {}
+  wiring: {}
+quality:
+  test_coverage: 90
+  documentation_completeness: 90
+  security_review_date: '2026-06-27'
+  performance_tested: true
+  error_cases_documented: true
+exceptions: []
+deprecation: null

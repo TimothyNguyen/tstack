@@ -1,0 +1,28 @@
+name: databricks-iceberg
+type: skill
+status: beta
+version: 1.0.0
+owner: orchestrator
+description: >-
+  Apache Iceberg tables on Databricks — Managed Iceberg tables, External Iceberg Reads (fka Uniform), Compatibility
+  Mode, Iceberg REST Catalog (IRC), Iceberg v3, Snowflake interop, PyIceberg, OSS Spark, external engine access and
+  credential vending. Use when creating Iceberg tables, enabling External Iceberg Reads (uniform) on Delta tables
+  (including Streaming Tables and Materialized Views via compatibility mode), configuring external engines to read
+  Databricks tables via Unity Catalog IRC, integrating with Snowflake catalog to read Foreign Iceberg tables
+dependencies:
+  skills: []
+  adapters: []
+  tools: []
+  mcps: []
+testing:
+  coverage_target: 80
+  types:
+    - unit
+    - integration
+documentation:
+  readme: true
+  spec: true
+  examples_min: 2
+used_by: []
+governance_version: '1.0'
+last_reviewed: '2026-06-28'

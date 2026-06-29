@@ -1,10 +1,10 @@
-﻿#  adapter openapi.Groups[1].Value.ToUpper() dapter openapi
+# Openapi Adapter
 
 [See SKILL.md for complete documentation.](./SKILL.md)
 
 ## Overview
 
-This skill provides guidance and integration for agent-architecture workflows.
+Adapter for adapter-openapi integration with agent-architecture workflows.
 
 ## Quick Start
 

@@ -1,0 +1,29 @@
+name: diagram-export
+type: skill
+status: beta
+version: 0.1.0
+owner: diagram-agent
+description: |
+  Export Draw.io diagrams to PNG, SVG, PDF with styling options.
+dependencies:
+  skills:
+    - design-review
+    - spec
+  adapters: []
+  tools:
+    - git
+    - npm
+  mcps:
+    - drawio-mcp
+testing:
+  coverage_target: 80
+  types:
+    - unit
+    - integration
+documentation:
+  readme: true
+  spec: true
+  examples_min: 2
+used_by: []
+governance_version: '1.0'
+last_reviewed: '2026-06-28'

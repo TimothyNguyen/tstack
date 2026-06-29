@@ -69,7 +69,7 @@ test("metadata: all skills have required frontmatter fields", () => {
       missing.push(`${skill.name}: Missing 'version' field`);
     if (!fm.description)
       missing.push(`${skill.name}: Missing 'description' field`);
-    if (!fm["allowed-tools"])
+    if (!("allowed-tools" in fm))
       missing.push(`${skill.name}: Missing 'allowed-tools' field`);
     if (!fm.agents)
       missing.push(`${skill.name}: Missing 'agents' field`);
@@ -135,14 +135,17 @@ test("metadata: all agent references are valid", () => {
   const skills = getAllSkillFiles();
   const validAgents = [
     "_infrastructure",
+    "_linter",
     "swe",
     "qa-agent",
     "spec-agent",
     "pm",
     "design-agent",
+    "diagram-agent",
     "orchestrate",
     "security",
     "migration",
+    "migration-engineer",
     "data",
     "cloud",
     "release-agent",

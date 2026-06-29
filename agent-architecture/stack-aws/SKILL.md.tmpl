@@ -4,6 +4,11 @@ version: 0.1.1
 description: |
   AWS application modernization planning with least-privilege, local-first
   validation, explicit approvals, and no default cloud mutation.
+allowed-tools:
+  - Read
+  - Grep
+  - Glob
+  - Bash
 agents: [cloud]
 ---
 

@@ -1,0 +1,29 @@
+name: template-instantiation
+type: skill
+status: beta
+version: 1.0.0
+owner: orchestrator
+description: >
+  Creates .NET projects from templates with validated parameters, smart defaults, Central Package Management adaptation,
+  and latest NuGet version resolution. USE FOR: creating new dotnet projects, scaffolding solutions with multiple
+  projects, installing or uninstalling template packages, creating projects that respect Directory.Packages.props (CPM),
+  composing multi-project solutions (API + tests + library), getting latest NuGet package versions in newly created
+  projects. DO NOT USE FOR: finding or comparing templates (use template-discovery), authoring custom templates (use
+  template-authoring), modifying existing projects or adding NuGet packages to existing projects.
+dependencies:
+  skills: []
+  adapters: []
+  tools: []
+  mcps: []
+testing:
+  coverage_target: 80
+  types:
+    - unit
+    - integration
+documentation:
+  readme: true
+  spec: true
+  examples_min: 2
+used_by: []
+governance_version: '1.0'
+last_reviewed: '2026-06-28'

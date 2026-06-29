@@ -1,0 +1,34 @@
+name: stack
+type: skill
+status: beta
+version: 0.1.1
+owner: orchestrator
+description: |
+  Tech stack meta-loader. Auto-detects project tech stack from repo signals and
+  loads the matching stack-* skill. User can override detection explicitly.
+  Invoke via /stack, or when the user says "load stack", "detect stack",
+  "set stack to X", or any stack-* skill needs context.
+dependencies:
+  skills:
+    - seniorswe-concise
+  adapters: []
+  tools:
+    - docker
+    - git
+    - npm
+    - python
+    - terraform
+  mcps:
+    - sql-mcp
+testing:
+  coverage_target: 80
+  types:
+    - unit
+    - integration
+documentation:
+  readme: true
+  spec: true
+  examples_min: 2
+used_by: []
+governance_version: '1.0'
+last_reviewed: '2026-06-28'

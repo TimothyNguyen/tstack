@@ -1,0 +1,27 @@
+name: find-untested-sources
+type: skill
+status: stable
+version: 1.0.0
+owner: orchestrator
+description: >
+  Parse-only C# analysis that pairs source files with referencing tests and emits JSON: `source_to_tests`, `untested`
+  ordered by declaration count, and `suggested_test_path` from `ProjectReference` edges. USE FOR: where to write tests
+  next, find untested files, list sources without tests, build a test-pairing map. DO NOT USE FOR: coverage (use
+  `coverage-analysis`), CRAP risk ranking, assertion gaps.
+dependencies:
+  skills: []
+  adapters: []
+  tools: []
+  mcps: []
+testing:
+  coverage_target: 90
+  types:
+    - unit
+    - integration
+documentation:
+  readme: true
+  spec: true
+  examples_min: 2
+used_by: []
+governance_version: '1.0'
+last_reviewed: '2026-06-28'

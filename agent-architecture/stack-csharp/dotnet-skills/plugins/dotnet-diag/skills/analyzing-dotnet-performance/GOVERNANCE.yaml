@@ -1,0 +1,26 @@
+name: analyzing-dotnet-performance
+type: skill
+status: beta
+version: 1.0.0
+owner: orchestrator
+description: >-
+  Scans .NET code for ~50 performance anti-patterns across async, memory, strings, collections, LINQ, regex,
+  serialization, and I/O with tiered severity classification. Use when analyzing .NET code for optimization
+  opportunities, reviewing hot paths, or auditing allocation-heavy patterns.
+dependencies:
+  skills: []
+  adapters: []
+  tools: []
+  mcps: []
+testing:
+  coverage_target: 80
+  types:
+    - unit
+    - integration
+documentation:
+  readme: true
+  spec: true
+  examples_min: 2
+used_by: []
+governance_version: '1.0'
+last_reviewed: '2026-06-28'

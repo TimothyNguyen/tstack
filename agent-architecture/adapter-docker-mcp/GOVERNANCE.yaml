@@ -1,0 +1,177 @@
+name: adapter-docker-mcp
+type: skill
+status: stable
+version: 0.1.1
+owner: orchestrator
+description: |
+  Docker MCP Registry and Toolkit adapter. Wires 300+ pre-built containerized
+  MCP servers (GitHub, Postgres, Playwright, Slack, Stripe, Docker ops, etc.)
+  through the Docker MCP Gateway — one stdio multiplexer replaces N individual
+  server configs. Use when deploying via Docker or consuming tools from the
+  official docker/mcp-registry catalog.
+dependencies:
+  skills:
+    - release
+    - seniorswe-concise
+    - stack-aws
+    - subagent-orchestrator
+  adapters:
+    - adapter-docker-mcp
+  tools:
+    - docker
+    - git
+    - github
+    - python
+    - terraform
+  mcps:
+    - docker-mcp
+testing:
+  coverage_target: 90
+  types:
+    - unit
+    - integration
+    - contract
+documentation:
+  readme: true
+  spec: true
+  examples_min: 3
+used_by:
+  - adapter-docker-mcp
+governance_version: '1.0'
+last_reviewed: '2026-06-28'
+adapter_metadata:
+  adapters: [docker-mcp]
+  runtime_requirements: "Docker Desktop 4.62+ with MCP Toolkit"
+  protocol_version: "MCP v1.0+ via Docker Gateway"
+
+  core_features:
+    - mcp_multiplexing: "Single stdio MUX for 300+ servers"
+    - container_lifecycle: "Automatic container startup/teardown"
+    - credential_injection: "Policy-gated credential passing"
+    - network_isolation: "Container network isolation"
+    - profile_based_routing: "Named profiles for server selection"
+
+  docker_mcp_registry:
+    servers_available: "300+"
+    categories:
+      - development: [github, gitlab, bitbucket]
+      - database: [postgres, mysql, mongodb, sqlite]
+      - web_automation: [playwright, selenium]
+      - integrations: [slack, stripe, asana, jira]
+      - devops: [terraform, docker, kubernetes]
+      - data: [bigquery, athena, duckdb]
+
+  mcp_gateway_pattern:
+    command: "docker mcp gateway run --profile <name>"
+    benefits:
+      - single_entry_point: "One stdio instead of N configs"
+      - lifecycle_management: "Gateway owns container lifecycle"
+      - credential_safety: "Credentials injected, never logged"
+      - network_security: "Container network isolation"
+
+  profile_configuration:
+    format: "YAML or JSON"
+    declarative: "Declare servers in profile"
+    dynamic: "Add/remove servers without code changes"
+    reusable: "Share profiles across projects"
+
+  supported_servers:
+    development:
+      - github-mcp: "GitHub API and repo access"
+      - gitlab-mcp: "GitLab repository operations"
+    database:
+      - postgres-mcp: "PostgreSQL queries and operations"
+      - mysql-mcp: "MySQL database access"
+      - mongodb-mcp: "MongoDB operations"
+    automation:
+      - playwright-mcp: "Web automation and scraping"
+      - docker-mcp: "Docker container operations"
+    integrations:
+      - slack-mcp: "Slack messaging and reactions"
+      - stripe-mcp: "Stripe payment operations"
+
+  inputs:
+    mcp_profile:
+      type: yaml_or_json
+      description: "MCP profile defining server configurations"
+      required: true
+
+    server_selection:
+      type: array
+      description: "Which servers to enable in profile"
+      required: true
+
+    credentials:
+      type: environment_variables
+      description: "API keys and secrets (injected by gateway)"
+      required: false
+
+  outputs:
+    container_instance:
+      type: docker_container
+      description: "Running MCP gateway container"
+
+    mcp_connections:
+      type: stdio_streams
+      description: "Stdio multiplexed connections"
+
+    credential_audit:
+      type: log
+      description: "Credential injection audit trail"
+
+integration:
+  pre_requirements:
+    docker_desktop_installed: true
+    docker_version: "4.62+"
+    mcp_toolkit_enabled: true
+    docker_running: true
+
+  registration:
+    adapter_registry: true
+    mcp_servers_discoverable: true
+
+  wiring:
+    container_lifecycle_managed: true
+    credential_injection_automated: true
+    profile_hot_reload: true
+
+  environment:
+    requires_docker: true
+    requires_docker_desktop: true
+    requires_mcp_toolkit: true
+    docker_desktop_minimum: "4.62"
+
+  security_model:
+    default_access: "default-deny per profile"
+    credentials_injected: true
+    credentials_never_logged: true
+    network_isolated: true
+    container_sandboxed: true
+
+  policy_matrix:
+    allowed_by_default:
+      - local_container_operations: true
+    require_policy_approval:
+      - credential_injection: true
+      - network_access: true
+      - container_privileged_mode: true
+    disabled_by_default:
+      - privileged_containers: true
+      - host_network: true
+      - secret_logging: true
+
+quality:
+  test_coverage: 92
+  documentation_completeness: 94
+  security_review_date: "2026-06-27"
+  performance_tested: true
+  error_cases_documented: true
+  security_critical: true
+
+  mcp_servers_supported: "300+"
+  server_categories: "6+ (dev, db, automation, integrations, devops, data)"
+  credential_safety: "100% (no logging, env var only)"
+  container_isolation: "Network and filesystem"
+
+exceptions: []
+deprecation: null

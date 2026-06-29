@@ -4,7 +4,7 @@
 {"name":"adapter-ag-ui","version":"0.1.1","description":"## Enterprise Preamble","agents":["orchestrate","swe","cloud"],"keywords":[],"examples":[]}
 {"name":"adapter-agentcore","version":"0.1.1","description":"## Enterprise Preamble","agents":["orchestrate","cloud"],"keywords":[],"examples":[]}
 {"name":"adapter-databricks","version":"0.1.1","description":"## Enterprise Preamble","agents":["data"],"keywords":[],"examples":[]}
-{"name":"adapter-docker-mcp","version":"0.1.1","description":"## Enterprise Preamble","agents":["cloud","release-agent","orchestrate","swe"],"keywords":[],"examples":[],"useCases":["official docker/mcp-registry catalog.","agents: [cloud, release-agent, orchestrate, swe, _infrastructure]","--"]}
+{"name":"adapter-docker-mcp","version":"0.1.1","description":"## Enterprise Preamble","agents":["cloud","release-agent","orchestrate","swe"],"keywords":[],"examples":[],"useCases":["official docker/mcp-registry catalog.","allowed-tools:","- Read","- Grep","- Glob"]}
 {"name":"adapter-github","version":"0.1.1","description":"## Enterprise Preamble","agents":["swe","orchestrate","pm"],"keywords":[],"examples":[]}
 {"name":"adapter-google-adk","version":"0.1.1","description":"## Enterprise Preamble","agents":["orchestrate","cloud"],"keywords":[],"examples":[]}
 {"name":"adapter-langgraph","version":"0.1.1","description":"## Enterprise Preamble","agents":["orchestrate"],"keywords":[],"examples":[]}
@@ -61,9 +61,10 @@
 {"name":"plan-eng-review","version":"0.1.1","description":"## Enterprise Preamble","agents":["swe","migration","data","cloud"],"keywords":[],"examples":[]}
 {"name":"plan-pm-review","version":"0.1.1","description":"## Enterprise Preamble","agents":["pm","spec-agent"],"keywords":[],"examples":[]}
 {"name":"plan-review","version":"0.1.1","description":"## Enterprise Preamble","agents":["swe","qa-agent","spec-agent","orchestrate"],"keywords":[],"examples":[]}
+{"name":"pre-commit-review","version":"0.1.0","description":"## Enterprise Preamble","agents":["swe","qa-agent","orchestrate","release-agent","_linter"],"keywords":[],"examples":[]}
 {"name":"qa","version":"0.1.1","description":"## Enterprise Preamble","agents":["qa-agent","swe"],"keywords":[],"examples":[]}
 {"name":"receiving-code-review","version":"0.1.1","description":"## Enterprise Preamble","agents":["swe","qa-agent","security"],"keywords":[],"examples":[]}
-{"name":"reference-gstack-patterns","version":"0.2.1","description":"## Enterprise Preamble","agents":["swe","orchestrate"],"keywords":[],"examples":[]}
+{"name":"reference-skill-patterns","version":"0.2.1","description":"## Enterprise Preamble","agents":["swe","orchestrate"],"keywords":[],"examples":[]}
 {"name":"release","version":"0.1.1","description":"## Enterprise Preamble","agents":["pm","cloud","release-agent"],"keywords":[],"examples":[]}
 {"name":"release-notes","version":"0.1.1","description":"## Enterprise Preamble","agents":["pm","swe","release-agent"],"keywords":[],"examples":[]}
 {"name":"retro","version":"0.1.1","description":"## Enterprise Preamble","agents":["pm","orchestrate","release-agent"],"keywords":[],"examples":[]}
@@ -75,7 +76,7 @@
 {"name":"seniorswe-concise-debt","version":"0.1.1","description":"Every deliberate shortcut made in concise mode is marked with a `seniorswe-concise:`","agents":["swe"],"keywords":[],"examples":[]}
 {"name":"seniorswe-concise-gain","version":"0.1.1","description":"# Senior SWE Concise: Impact Scoreboard","agents":["swe"],"keywords":[],"examples":[]}
 {"name":"seniorswe-concise-help","version":"0.1.1","description":"# Senior SWE Concise: Quick Reference","agents":["swe"],"keywords":[],"examples":[]}
-{"name":"seniorswe-concise-review","version":"0.1.1","description":"Review diffs for unnecessary complexity. One line per finding: location, what","agents":["swe","orchestrate"],"keywords":[],"examples":[],"useCases":["delete\", \"is this over-engineered\", \"simplify review\", or invokes","/seniorswe-concise-review. Complements correctness-focused review, this one only","--"]}
+{"name":"seniorswe-concise-review","version":"0.1.1","description":"Review diffs for unnecessary complexity. One line per finding: location, what","agents":["swe","orchestrate"],"keywords":[],"examples":[],"useCases":["delete\", \"is this over-engineered\", \"simplify review\", or invokes","/seniorswe-concise-review. Complements correctness-focused review, this one only","allowed-tools:","- Read","- Grep"]}
 {"name":"ship","version":"0.1.1","description":"## Enterprise Preamble","agents":["swe","cloud","release-agent"],"keywords":[],"examples":[]}
 {"name":"skillify","version":"0.1.1","description":"## Enterprise Preamble","agents":["swe","orchestrate"],"keywords":[],"examples":[]}
 {"name":"spec","version":"0.1.1","description":"## Enterprise Preamble","agents":["spec-agent","pm"],"keywords":[],"examples":[]}
@@ -97,6 +98,6 @@
 {"name":"systematic-debugging","version":"0.1.1","description":"## Enterprise Preamble","agents":["swe","qa-agent","security","data","cloud","migration"],"keywords":[],"examples":["/investigate","/test-driven-development"],"useCases":["Emphasizes evidence gathering, architecture questioning, and preventing self-deception.","allowed-tools:","- Read","- Grep","- Glob"]}
 {"name":"test","version":"0.1.1","description":"## Enterprise Preamble","agents":["swe","qa-agent"],"keywords":[],"examples":[]}
 {"name":"token-optimizer","version":"0.1.1","description":"## Enterprise Preamble","agents":["swe","qa-agent","data","orchestrate"],"keywords":[],"examples":[],"useCases":["API responses with null fields, empty arrays, empty dicts","Log output from pytest, cargo test, go test, Docker, CI","Git diffs with large unchanged context blocks","Code files when only signatures matter (use `--aggressive`)","Large JSON datasets (list-of-dicts → tabular, saves 50–80%)"]}
-{"name":"using-agent-skills","version":"0.1.1","description":"## Enterprise Preamble","agents":["swe","orchestrate","qa-agent","spec-agent","design-agent","pm","cloud","data","migration","security","release-agent","interviewer"],"keywords":[],"examples":[],"useCases":["agents: [swe, orchestrate, qa-agent, spec-agent, design-agent, pm, cloud, data, migration, security, release-agent, interviewer]","--"]}
+{"name":"using-agent-skills","version":"0.1.1","description":"## Enterprise Preamble","agents":["swe","orchestrate","qa-agent","spec-agent","design-agent","pm","cloud","data","migration","security","release-agent","interviewer"],"keywords":[],"examples":[],"useCases":["allowed-tools:","- Read","- Grep","- Glob","- Bash"]}
 {"name":"verification-before-completion","version":"0.1.1","description":"## Enterprise Preamble","agents":["swe","qa-agent","security","release-agent"],"keywords":[],"examples":[]}
 {"name":"writing-skills","version":"0.1.1","description":"## Enterprise Preamble","agents":["orchestrate"],"keywords":[],"examples":[],"useCases":["Technique wasn't intuitively obvious to you","You'd reference this again across projects","Pattern applies broadly (not project-specific)","Others would benefit","One-off solutions"]}

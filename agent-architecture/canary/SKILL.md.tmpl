@@ -4,6 +4,11 @@ version: 0.1.1
 description: |
   Privacy-safe canary planning for post-deploy monitoring, rollback signals,
   audit events, and human escalation without public telemetry defaults.
+allowed-tools:
+  - Read
+  - Grep
+  - Glob
+  - Bash
 agents: [qa-agent, cloud, release-agent]
 ---
 

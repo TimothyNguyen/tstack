@@ -1,0 +1,140 @@
+name: orchestrate
+type: skill
+status: stable
+version: 0.1.1
+owner: orchestrate
+description: |
+  Coordinator agent for large features. Decomposes work into parallel subagents
+  per the subagent-deployment-plan.md roles (Explorer, Planner, Implementer,
+  Test Engineer, Reviewer, QA Agent, Devtools Agent, Docs Agent, Release Agent).
+  Invoke via /orchestrate, or when the user says "coordinate", "multi-agent",
+  "orchestrate", "break this into subagents", or asks to parallelize a large task.
+dependencies:
+  skills:
+    - adapter-ag-ui
+    - autoplan
+    - codebase-engine
+    - context-restore
+    - context-save
+    - diagram
+    - learn
+    - plan-director-review
+    - plan-review
+    - qa-agent
+    - release-agent
+    - spec
+    - subagent-orchestrator
+    - swe
+  adapters:
+    - adapter-ag-ui
+  tools:
+    - docker
+    - git
+    - npm
+    - python
+  mcps: []
+testing:
+  coverage_target: 90
+  types:
+    - unit
+    - integration
+    - contract
+documentation:
+  readme: true
+  spec: true
+  examples_min: 3
+used_by: []
+governance_version: '1.0'
+last_reviewed: '2026-06-28'
+
+agent_metadata:
+  agents: [orchestrate]
+  role: "Coordinator/tech lead for large features"
+  routing:
+    - trigger: "orchestrate, coordinate, break into subagents"
+      responsibility: "Work decomposition and parallelization"
+    - trigger: "multi-agent, parallel work"
+      responsibility: "Subagent coordination"
+
+  core_capabilities:
+    - work_decomposition: "Splits large features into parallel streams"
+    - codebase_mapping: "Maps dependencies and impact"
+    - plan_review: "Tech-lead-level plan validation"
+    - context_continuity: "Saves/restores session state between phases"
+    - knowledge_capture: "Extracts product and architecture insights"
+
+  decomposition_rules:
+    minimum_trigger: "4+ files or 3+ components"
+    parallelizable_streams: "frontend/backend, schema/api/tests, etc."
+    role_mapping:
+      explorer: "codebase-engine, autoplan"
+      planner: "spec, autoplan"
+      implementer: "swe agent"
+      test_engineer: "qa-agent"
+      reviewer: "review, plan-review"
+      release: "release-agent"
+
+  inputs:
+    feature_scope:
+      type: string
+      description: "Large feature or refactor to decompose"
+      required: true
+
+    tech_stack:
+      type: string
+      description: "Technology stack (auto-detected)"
+      required: false
+
+    parallelization_strategy:
+      type: string
+      description: "How to split work (frontend/backend, etc.)"
+      required: false
+
+  outputs:
+    decomposition_plan:
+      type: document
+      description: "Work breakdown structure"
+
+    subagent_assignments:
+      type: task_list
+      description: "Scoped tasks for each subagent"
+
+    dependency_graph:
+      type: diagram
+      description: "Component relationships"
+
+    review_plan:
+      type: document
+      description: "Merge strategy and order"
+
+integration:
+  pre_requirements:
+    git_repo_initialized: true
+    codebase_explorable: true
+    multiple_components: true
+    feature_scope_defined: true
+
+  registration:
+    agent_registry: true
+    in_orchestrator: true
+    skill_discoverable: true
+
+  wiring:
+    subagent_support_available: true
+    context_save_available: true
+    plan_review_available: true
+
+  environment:
+    requires_git: true
+    requires_codebase_analysis: true
+    requires_planning_tools: true
+
+quality:
+  test_coverage: 85
+  documentation_completeness: 90
+  security_review_date: "2026-06-27"
+  performance_tested: false
+  error_cases_documented: true
+
+exceptions: []
+deprecation: null

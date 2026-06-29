@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-06-27T03:16:06.901Z",
-  "count": 114,
+  "generatedAt": "2026-06-28T18:38:41.492Z",
+  "count": 115,
   "byAgent": {
     "_infrastructure": [
       "agent-architecture",
@@ -21,7 +21,7 @@
       "copilot",
       "guard",
       "learnings",
-      "reference-gstack-patterns",
+      "reference-skill-patterns",
       "rtk-token-optimizer",
       "seniorswe-concise-help",
       "skillify",
@@ -40,6 +40,9 @@
       "security",
       "spec-agent",
       "swe"
+    ],
+    "_linter": [
+      "pre-commit-review"
     ],
     "cloud": [
       "adapter-ag-ui",
@@ -166,7 +169,8 @@
       "learnings",
       "plan-director-review",
       "plan-review",
-      "reference-gstack-patterns",
+      "pre-commit-review",
+      "reference-skill-patterns",
       "retro",
       "seniorswe-concise-review",
       "skillify",
@@ -211,6 +215,7 @@
       "migration-sqlserver-test",
       "plan-devex-review",
       "plan-review",
+      "pre-commit-review",
       "qa",
       "receiving-code-review",
       "review",
@@ -229,6 +234,7 @@
       "commit",
       "document-release",
       "learn",
+      "pre-commit-review",
       "release",
       "release-notes",
       "retro",
@@ -303,9 +309,10 @@
       "plan-devex-review",
       "plan-eng-review",
       "plan-review",
+      "pre-commit-review",
       "qa",
       "receiving-code-review",
-      "reference-gstack-patterns",
+      "reference-skill-patterns",
       "release-notes",
       "review",
       "rtk-token-optimizer",
@@ -345,7 +352,12 @@
         "swe",
         "cloud"
       ],
-      "allowedTools": []
+      "allowedTools": [
+        "Read",
+        "Grep",
+        "Glob",
+        "Bash"
+      ]
     },
     {
       "name": "adapter-agentcore",
@@ -356,7 +368,12 @@
         "_infrastructure",
         "cloud"
       ],
-      "allowedTools": []
+      "allowedTools": [
+        "Read",
+        "Grep",
+        "Glob",
+        "Bash"
+      ]
     },
     {
       "name": "adapter-databricks",
@@ -365,7 +382,12 @@
       "agents": [
         "data"
       ],
-      "allowedTools": []
+      "allowedTools": [
+        "Read",
+        "Grep",
+        "Glob",
+        "Bash"
+      ]
     },
     {
       "name": "adapter-docker-mcp",
@@ -378,7 +400,12 @@
         "swe",
         "_infrastructure"
       ],
-      "allowedTools": []
+      "allowedTools": [
+        "Read",
+        "Grep",
+        "Glob",
+        "Bash"
+      ]
     },
     {
       "name": "adapter-github",
@@ -389,7 +416,12 @@
         "orchestrate",
         "pm"
       ],
-      "allowedTools": []
+      "allowedTools": [
+        "Read",
+        "Grep",
+        "Glob",
+        "Bash"
+      ]
     },
     {
       "name": "adapter-google-adk",
@@ -400,7 +432,12 @@
         "_infrastructure",
         "cloud"
       ],
-      "allowedTools": []
+      "allowedTools": [
+        "Read",
+        "Grep",
+        "Glob",
+        "Bash"
+      ]
     },
     {
       "name": "adapter-langgraph",
@@ -410,7 +447,12 @@
         "orchestrate",
         "_infrastructure"
       ],
-      "allowedTools": []
+      "allowedTools": [
+        "Read",
+        "Grep",
+        "Glob",
+        "Bash"
+      ]
     },
     {
       "name": "adapter-mcp",
@@ -422,7 +464,12 @@
         "orchestrate",
         "cloud"
       ],
-      "allowedTools": []
+      "allowedTools": [
+        "Read",
+        "Grep",
+        "Glob",
+        "Bash"
+      ]
     },
     {
       "name": "adapter-openapi",
@@ -432,7 +479,12 @@
         "swe",
         "spec-agent"
       ],
-      "allowedTools": []
+      "allowedTools": [
+        "Read",
+        "Grep",
+        "Glob",
+        "Bash"
+      ]
     },
     {
       "name": "adapter-seniorswe-concise",
@@ -442,7 +494,12 @@
         "swe",
         "_infrastructure"
       ],
-      "allowedTools": []
+      "allowedTools": [
+        "Read",
+        "Grep",
+        "Glob",
+        "Bash"
+      ]
     },
     {
       "name": "adapter-strands",
@@ -453,7 +510,12 @@
         "_infrastructure",
         "cloud"
       ],
-      "allowedTools": []
+      "allowedTools": [
+        "Read",
+        "Grep",
+        "Glob",
+        "Bash"
+      ]
     },
     {
       "name": "agent-architecture",
@@ -526,7 +588,12 @@
         "swe",
         "data"
       ],
-      "allowedTools": []
+      "allowedTools": [
+        "Read",
+        "Grep",
+        "Glob",
+        "Bash"
+      ]
     },
     {
       "name": "brainstorming",
@@ -553,7 +620,12 @@
         "cloud",
         "release-agent"
       ],
-      "allowedTools": []
+      "allowedTools": [
+        "Read",
+        "Grep",
+        "Glob",
+        "Bash"
+      ]
     },
     {
       "name": "careful",
@@ -578,7 +650,12 @@
       "agents": [
         "orchestrate"
       ],
-      "allowedTools": []
+      "allowedTools": [
+        "Read",
+        "Grep",
+        "Glob",
+        "Bash"
+      ]
     },
     {
       "name": "chrome-devtools",
@@ -668,7 +745,12 @@
         "cloud",
         "release-agent"
       ],
-      "allowedTools": []
+      "allowedTools": [
+        "Read",
+        "Grep",
+        "Glob",
+        "Bash"
+      ]
     },
     {
       "name": "context-restore",
@@ -928,7 +1010,12 @@
         "data",
         "pm"
       ],
-      "allowedTools": []
+      "allowedTools": [
+        "Read",
+        "Grep",
+        "Glob",
+        "Bash"
+      ]
     },
     {
       "name": "domain-experiment-design",
@@ -938,7 +1025,12 @@
         "data",
         "pm"
       ],
-      "allowedTools": []
+      "allowedTools": [
+        "Read",
+        "Grep",
+        "Glob",
+        "Bash"
+      ]
     },
     {
       "name": "domain-mlops-databricks",
@@ -947,7 +1039,12 @@
       "agents": [
         "data"
       ],
-      "allowedTools": []
+      "allowedTools": [
+        "Read",
+        "Grep",
+        "Glob",
+        "Bash"
+      ]
     },
     {
       "name": "domain-model-interpretation",
@@ -957,7 +1054,12 @@
         "data",
         "pm"
       ],
-      "allowedTools": []
+      "allowedTools": [
+        "Read",
+        "Grep",
+        "Glob",
+        "Bash"
+      ]
     },
     {
       "name": "guard",
@@ -1037,7 +1139,12 @@
         "release-agent",
         "interviewer"
       ],
-      "allowedTools": []
+      "allowedTools": [
+        "Read",
+        "Grep",
+        "Glob",
+        "Bash"
+      ]
     },
     {
       "name": "learnings",
@@ -1072,7 +1179,12 @@
       "agents": [
         "migration"
       ],
-      "allowedTools": []
+      "allowedTools": [
+        "Read",
+        "Grep",
+        "Glob",
+        "Bash"
+      ]
     },
     {
       "name": "migration-engineer",
@@ -1092,7 +1204,12 @@
         "swe",
         "cloud"
       ],
-      "allowedTools": []
+      "allowedTools": [
+        "Read",
+        "Grep",
+        "Glob",
+        "Bash"
+      ]
     },
     {
       "name": "migration-sqlserver-assess",
@@ -1259,6 +1376,24 @@
       "allowedTools": []
     },
     {
+      "name": "pre-commit-review",
+      "version": "0.1.0",
+      "description": "Executable skill that runs pre-commit hooks on code to catch style issues",
+      "agents": [
+        "swe",
+        "qa-agent",
+        "orchestrate",
+        "release-agent",
+        "_linter"
+      ],
+      "allowedTools": [
+        "Read",
+        "Grep",
+        "Glob",
+        "Bash"
+      ]
+    },
+    {
       "name": "qa",
       "version": "0.1.1",
       "description": "Enterprise-safe QA workflow. Plans and verifies user-facing or service behavior using",
@@ -1298,7 +1433,7 @@
       ]
     },
     {
-      "name": "reference-gstack-patterns",
+      "name": "reference-skill-patterns",
       "version": "0.2.1",
       "description": "Repo-local quick reference for the skill-pack pattern this repo uses.",
       "agents": [
@@ -1306,7 +1441,12 @@
         "swe",
         "orchestrate"
       ],
-      "allowedTools": []
+      "allowedTools": [
+        "Read",
+        "Grep",
+        "Glob",
+        "Bash"
+      ]
     },
     {
       "name": "release",
@@ -1342,7 +1482,12 @@
         "swe",
         "release-agent"
       ],
-      "allowedTools": []
+      "allowedTools": [
+        "Read",
+        "Grep",
+        "Glob",
+        "Bash"
+      ]
     },
     {
       "name": "retro",
@@ -1425,7 +1570,12 @@
         "swe",
         "data"
       ],
-      "allowedTools": []
+      "allowedTools": [
+        "Read",
+        "Grep",
+        "Glob",
+        "Bash"
+      ]
     },
     {
       "name": "seniorswe-concise-audit",
@@ -1434,7 +1584,12 @@
       "agents": [
         "swe"
       ],
-      "allowedTools": []
+      "allowedTools": [
+        "Read",
+        "Grep",
+        "Glob",
+        "Bash"
+      ]
     },
     {
       "name": "seniorswe-concise-debt",
@@ -1443,7 +1598,12 @@
       "agents": [
         "swe"
       ],
-      "allowedTools": []
+      "allowedTools": [
+        "Read",
+        "Grep",
+        "Glob",
+        "Bash"
+      ]
     },
     {
       "name": "seniorswe-concise-gain",
@@ -1452,7 +1612,12 @@
       "agents": [
         "swe"
       ],
-      "allowedTools": []
+      "allowedTools": [
+        "Read",
+        "Grep",
+        "Glob",
+        "Bash"
+      ]
     },
     {
       "name": "seniorswe-concise-help",
@@ -1462,7 +1627,12 @@
         "swe",
         "_infrastructure"
       ],
-      "allowedTools": []
+      "allowedTools": [
+        "Read",
+        "Grep",
+        "Glob",
+        "Bash"
+      ]
     },
     {
       "name": "seniorswe-concise-review",
@@ -1472,7 +1642,12 @@
         "swe",
         "orchestrate"
       ],
-      "allowedTools": []
+      "allowedTools": [
+        "Read",
+        "Grep",
+        "Glob",
+        "Bash"
+      ]
     },
     {
       "name": "ship",
@@ -1538,7 +1713,12 @@
         "_infrastructure",
         "swe"
       ],
-      "allowedTools": []
+      "allowedTools": [
+        "Read",
+        "Grep",
+        "Glob",
+        "Bash"
+      ]
     },
     {
       "name": "stack-aws",
@@ -1547,7 +1727,12 @@
       "agents": [
         "cloud"
       ],
-      "allowedTools": []
+      "allowedTools": [
+        "Read",
+        "Grep",
+        "Glob",
+        "Bash"
+      ]
     },
     {
       "name": "stack-aws-dms",
@@ -1557,7 +1742,12 @@
         "migration",
         "cloud"
       ],
-      "allowedTools": []
+      "allowedTools": [
+        "Read",
+        "Grep",
+        "Glob",
+        "Bash"
+      ]
     },
     {
       "name": "stack-csharp",
@@ -1567,7 +1757,12 @@
         "swe",
         "migration"
       ],
-      "allowedTools": []
+      "allowedTools": [
+        "Read",
+        "Grep",
+        "Glob",
+        "Bash"
+      ]
     },
     {
       "name": "stack-databricks",
@@ -1576,7 +1771,12 @@
       "agents": [
         "data"
       ],
-      "allowedTools": []
+      "allowedTools": [
+        "Read",
+        "Grep",
+        "Glob",
+        "Bash"
+      ]
     },
     {
       "name": "stack-databricks-dbt",
@@ -1585,7 +1785,12 @@
       "agents": [
         "data"
       ],
-      "allowedTools": []
+      "allowedTools": [
+        "Read",
+        "Grep",
+        "Glob",
+        "Bash"
+      ]
     },
     {
       "name": "stack-legacy-frontend",
@@ -1595,7 +1800,12 @@
         "migration",
         "swe"
       ],
-      "allowedTools": []
+      "allowedTools": [
+        "Read",
+        "Grep",
+        "Glob",
+        "Bash"
+      ]
     },
     {
       "name": "stack-postgres",
@@ -1606,7 +1816,12 @@
         "migration",
         "data"
       ],
-      "allowedTools": []
+      "allowedTools": [
+        "Read",
+        "Grep",
+        "Glob",
+        "Bash"
+      ]
     },
     {
       "name": "stack-python",
@@ -1616,7 +1831,12 @@
         "swe",
         "data"
       ],
-      "allowedTools": []
+      "allowedTools": [
+        "Read",
+        "Grep",
+        "Glob",
+        "Bash"
+      ]
     },
     {
       "name": "stack-react-typescript",
@@ -1626,7 +1846,12 @@
         "swe",
         "design-agent"
       ],
-      "allowedTools": []
+      "allowedTools": [
+        "Read",
+        "Grep",
+        "Glob",
+        "Bash"
+      ]
     },
     {
       "name": "stack-spring-ai",
@@ -1635,7 +1860,12 @@
       "agents": [
         "swe"
       ],
-      "allowedTools": []
+      "allowedTools": [
+        "Read",
+        "Grep",
+        "Glob",
+        "Bash"
+      ]
     },
     {
       "name": "stack-spring-boot",
@@ -1644,7 +1874,12 @@
       "agents": [
         "swe"
       ],
-      "allowedTools": []
+      "allowedTools": [
+        "Read",
+        "Grep",
+        "Glob",
+        "Bash"
+      ]
     },
     {
       "name": "stack-sql-server",
@@ -1654,7 +1889,12 @@
         "swe",
         "migration"
       ],
-      "allowedTools": []
+      "allowedTools": [
+        "Read",
+        "Grep",
+        "Glob",
+        "Bash"
+      ]
     },
     {
       "name": "stack-sqlserver-to-postgres",
@@ -1663,7 +1903,12 @@
       "agents": [
         "migration"
       ],
-      "allowedTools": []
+      "allowedTools": [
+        "Read",
+        "Grep",
+        "Glob",
+        "Bash"
+      ]
     },
     {
       "name": "subagent-orchestrator",
@@ -1757,7 +2002,12 @@
         "release-agent",
         "interviewer"
       ],
-      "allowedTools": []
+      "allowedTools": [
+        "Read",
+        "Grep",
+        "Glob",
+        "Bash"
+      ]
     },
     {
       "name": "verification-before-completion",

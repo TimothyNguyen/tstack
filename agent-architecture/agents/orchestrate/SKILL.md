@@ -89,7 +89,7 @@ Skills that declare this agent in their frontmatter `agents:` field.
 | `learnings` | Local project learning workflow. Captures reusable project conventions, pitfalls, decisions, |
 | `plan-director-review` | Director or senior-principal plan review. Reviews scope, sequencing, architecture risk, |
 | `plan-review` | Enterprise-safe plan review workflow. Reviews a proposed implementation plan for scope, |
-| `reference-gstack-patterns` | Repo-local quick reference for the skill-pack pattern this repo uses. |
+| `reference-skill-patterns` | Repo-local quick reference for the skill-pack pattern this repo uses. |
 | `retro` | Produces a local project retrospective from commits, incidents, decisions, and outcomes. |
 | `seniorswe-concise-review` | Code review focused exclusively on over-engineering. Finds what to delete: |
 | `skillify` | Turns a repeated local workflow into a reusable skill folder with template files. |

@@ -4,6 +4,11 @@ version: 0.1.1
 description: |
   Optional Strands adapter boundary for composing skills and tools with
   privacy-first policy gates and no core runtime dependency.
+allowed-tools:
+  - Read
+  - Grep
+  - Glob
+  - Bash
 agents: [orchestrate, _infrastructure, cloud]
 ---
 

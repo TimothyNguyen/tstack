@@ -4,11 +4,12 @@ version: 0.1.1
 description: |
   Use OpenAPI contracts and optional generated clients/servers while keeping
   generated code isolated and reviewed.
+allowed-tools:
+  - Read
+  - Grep
+  - Glob
+  - Bash
 agents: [swe, spec-agent]
-
-metadata:
-  support:
-    last-reviewed: "2026-06-27"
 ---
 
 ## Enterprise Preamble

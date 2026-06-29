@@ -7,11 +7,12 @@ description: |
   each changed area to the correct agent (swe, qa-agent, migration, data, cloud,
   design-agent, spec-agent, orchestrate). Invoke when coordinating multi-agent
   work on a PR or large feature branch.
+allowed-tools:
+  - Read
+  - Grep
+  - Glob
+  - Bash
 agents: [orchestrate]
-
-metadata:
-  support:
-    last-reviewed: "2026-06-27"
 ---
 
 ## Enterprise Preamble

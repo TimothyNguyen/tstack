@@ -7,6 +7,7 @@ import test from 'node:test';
 import {
   collectTests,
   detectWindowsFragility,
+  main,
   parseArgs,
   shard,
   stableHash,
@@ -68,4 +69,52 @@ test('parseArgs validates shard runner options', () => {
   });
 
   assert.throws(() => parseArgs(['--unknown']), /Unknown argument: --unknown/);
+});
+
+test('main() --windows-only filters fragile tests', () => {
+  withFixture((dir) => {
+    const result = main(['--windows-only', '--list'], dir);
+    assert.equal(result, 0);
+  });
+});
+
+test('main() --list outputs JSON with files and excluded', () => {
+  withFixture((dir) => {
+    const result = main(['--list'], dir);
+    assert.equal(result, 0);
+  });
+});
+
+test('main() returns 0 when selected shard is empty', () => {
+  withFixture((dir) => {
+    // With 100 shards and ~4 test files, shard index 50 is almost certainly empty
+    const result = main(['--shards', '100', '--shard', '50'], dir);
+    assert.equal(result, 0);
+  });
+});
+
+test('main() with no command outputs selected JSON and returns 0', () => {
+  withFixture((dir) => {
+    const result = main(['--shards', '1', '--shard', '1'], dir);
+    assert.equal(result, 0);
+  });
+});
+
+test('main() with command runs it and returns exit status', () => {
+  withFixture((dir) => {
+    const result = main(['--command', 'node --version'], dir);
+    assert.equal(result, 0);
+  });
+});
+
+test('collectTests handles root where some test root directories do not exist', () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'agent-architecture-shards-partial-'));
+  try {
+    fs.mkdirSync(path.join(dir, 'tests'), { recursive: true });
+    fs.writeFileSync(path.join(dir, 'tests', 'alpha.test.mjs'), 'test("a", () => {});\n');
+    const result = collectTests(dir);
+    assert.deepEqual(result, ['tests/alpha.test.mjs']);
+  } finally {
+    fs.rmSync(dir, { recursive: true, force: true });
+  }
 });

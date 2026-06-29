@@ -1,0 +1,30 @@
+name: architecture-agent-upgrade
+type: skill
+status: beta
+version: 0.1.1
+owner: orchestrator
+description: |
+  Upgrades an installed architecture-agent skill pack through a policy-approved internal,
+  mirrored, or manual flow. Public update checks are disabled by default.
+dependencies:
+  skills: []
+  adapters: []
+  tools:
+    - docker
+    - git
+    - npm
+    - python
+    - terraform
+  mcps: []
+testing:
+  coverage_target: 80
+  types:
+    - unit
+    - integration
+documentation:
+  readme: true
+  spec: true
+  examples_min: 2
+used_by: []
+governance_version: '1.0'
+last_reviewed: '2026-06-28'

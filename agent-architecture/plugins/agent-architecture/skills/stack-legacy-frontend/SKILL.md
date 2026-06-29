@@ -4,6 +4,11 @@ version: 0.1.1
 description: |
   Modernize legacy frontend stacks such as Knockout, YUI, old jQuery widgets,
   and ad hoc browser code toward React/TypeScript.
+allowed-tools:
+  - Read
+  - Grep
+  - Glob
+  - Bash
 agents: [migration, swe]
 ---
 

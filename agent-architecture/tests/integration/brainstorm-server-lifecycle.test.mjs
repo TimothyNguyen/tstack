@@ -38,7 +38,7 @@ test('brainstorm-server.cjs has WebSocket security headers', () => {
   const content = fs.readFileSync(serverPath, 'utf8');
 
   assert(content.includes('securityHeaders'), 'should have security headers function');
-  assert(content.includes('Content-Security-Policy') || content.includes('X-'), 'should set security headers');
+  assert(content.includes('Content-Security-Policy'), 'should set security headers');
 });
 
 test('brainstorm-server.cjs enforces loopback-only by default', () => {
@@ -62,7 +62,7 @@ test('start-server.sh creates owner-only session files', () => {
   const content = fs.readFileSync(scriptPath, 'utf8');
 
   assert(content.includes('umask 077'), 'should set strict umask');
-  assert(content.includes('mode 0o600') || content.includes('chmod 600'), 'should create owner-only files');
+  assert(content.includes('chmod 600'), 'should create owner-only files');
 });
 
 test('start-server.sh validates idle timeout argument', () => {
@@ -93,7 +93,7 @@ test('stop-server.sh kills process by PID', () => {
   const scriptPath = path.join(REPO_ROOT, 'brainstorming', 'scripts', 'stop-server.sh');
   const content = fs.readFileSync(scriptPath, 'utf8');
 
-  assert(content.includes('kill') || content.includes('PID'), 'should kill server process');
+  assert(content.includes('kill'), 'should kill server process');
   assert(content.includes('PID_FILE'), 'should read PID from file');
 });
 

@@ -9,10 +9,6 @@ allowed-tools:
   - Read
   - Bash
 agents: [migration, cloud, _infrastructure, security, release-agent]
-
-metadata:
-  support:
-    last-reviewed: "2026-06-27"
 ---
 
 ## Enterprise Preamble

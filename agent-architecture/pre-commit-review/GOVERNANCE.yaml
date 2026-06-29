@@ -1,0 +1,138 @@
+name: pre-commit-review
+type: skill
+status: stable
+version: 0.1.0
+owner: qa-agent
+description: |
+  Executable skill that runs pre-commit hooks on code to catch style issues
+  (trailing whitespace, debug statements, invalid syntax) before code review.
+  Allows reviewers to focus on architecture instead of trivial nitpicks.
+  Works across Claude, Codex, and Copilot CLI.
+dependencies:
+  skills:
+    - qa
+    - release
+    - seniorswe-concise
+    - subagent-orchestrator
+  adapters: []
+  tools:
+    - docker
+    - git
+    - python
+  mcps: []
+testing:
+  coverage_target: 90
+  types:
+    - unit
+    - integration
+    - e2e
+documentation:
+  readme: true
+  spec: true
+  examples_min: 3
+used_by:
+  - swe
+  - qa-agent
+  - orchestrate
+  - release-agent
+governance_version: '1.0'
+last_reviewed: '2026-06-28'
+
+skill_metadata:
+  agents: [swe, qa-agent, orchestrate, release-agent]
+  platforms: [claude, codex, copilot]
+  role: "Code quality automation before review"
+
+  capabilities:
+    checks_provided:
+      - trailing_whitespace
+      - missing_final_newline
+      - debug_statements: [pdb, ipdb, breakpoint]
+      - syntax_validation: [json, yaml, toml, xml]
+      - python_errors
+      - merge_conflict_markers
+      - large_file_detection
+      - and_40_plus_other_checks
+
+  inputs:
+    code_path:
+      type: string
+      description: "Code directory or file to check"
+      required: true
+
+    hook_config:
+      type: string
+      description: ".pre-commit-config.yaml location"
+      required: false
+
+    auto_fix:
+      type: boolean
+      description: "Auto-fix fixable issues"
+      default: false
+
+  outputs:
+    violations:
+      type: report
+      description: "Style violations found"
+
+    fixes_applied:
+      type: diff
+      description: "Auto-fixed changes"
+
+    pre_commit_ready:
+      type: boolean
+      description: "Code passes all hooks"
+
+integration:
+  pre_requirements:
+    git_repo_initialized: true
+    precommit_framework_installed: false
+    hooks_configured: false
+
+  registration:
+    skill_registry: true
+    in_qa_agent: true
+    in_swe_agent: true
+
+  wiring:
+    skill_discoverable: true
+    hook_runner_available: true
+    auto_fix_available: true
+
+  environment:
+    requires_git: true
+    requires_python: true
+    requires_precommit_framework: false
+
+  pre_hook_requirements:
+    stages:
+      - detect_language
+      - select_hooks
+      - configure_hooks
+      - run_checks
+      - report_violations
+      - optionally_fix
+
+quality:
+  test_coverage: 88
+  documentation_completeness: 92
+  security_review_date: "2026-06-27"
+  performance_tested: true
+  error_cases_documented: true
+  framework_coverage: "40+ pre-commit hooks"
+
+  hook_categories:
+    basic_checks: "whitespace, newlines, merge markers"
+    syntax_validation: "json, yaml, xml, toml"
+    language_checks: "python, javascript, yaml"
+    security_checks: "credentials, secrets patterns"
+    formatting: "trailing-whitespace, end-of-file"
+
+exceptions:
+  - gate: soft_documentation
+    reason: "Framework-specific behavior requires live pre-commit repo"
+    linked_issue: "GOVERNANCE-42"
+    approved_by: "staff-swe"
+    expires: "2026-08-27"
+
+deprecation: null

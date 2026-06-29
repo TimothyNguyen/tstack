@@ -4,11 +4,12 @@ version: 0.1.1
 description: |
   Spring-native AI application patterns using Spring AI and Spring AI examples
   as references, without making them core dependencies.
+allowed-tools:
+  - Read
+  - Grep
+  - Glob
+  - Bash
 agents: [swe]
-
-metadata:
-  support:
-    last-reviewed: "2026-06-27"
 ---
 
 ## Enterprise Preamble

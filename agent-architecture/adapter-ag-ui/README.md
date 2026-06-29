@@ -1,10 +1,10 @@
-﻿#  adapter ag ui.Groups[1].Value.ToUpper() dapter ag ui
+# Ag Ui Adapter
 
 [See SKILL.md for complete documentation.](./SKILL.md)
 
 ## Overview
 
-This skill provides guidance and integration for agent-architecture workflows.
+Adapter for adapter-ag-ui integration with agent-architecture workflows.
 
 ## Quick Start
 

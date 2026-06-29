@@ -4,6 +4,11 @@ version: 0.1.1
 description: |
   AWS DMS/SCT migration planning patterns for governed database migration
   experiments and cutovers.
+allowed-tools:
+  - Read
+  - Grep
+  - Glob
+  - Bash
 agents: [migration, cloud]
 ---
 

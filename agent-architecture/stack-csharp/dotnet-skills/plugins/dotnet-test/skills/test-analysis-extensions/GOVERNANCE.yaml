@@ -1,0 +1,29 @@
+name: test-analysis-extensions
+type: skill
+status: stable
+version: 1.0.0
+owner: orchestrator
+description: >-
+  Provides file paths to language-specific reference files for the test ANALYSIS skills (assertion-quality,
+  test-anti-patterns, test-gap-analysis, test-smell-detection, test-tagging). Call this skill to discover available
+  extension files (e.g., dotnet.md for .NET/MSTest/xUnit/NUnit/TUnit, python.md for pytest/unittest, typescript.md for
+  Jest/Vitest/Mocha, java.md for JUnit/TestNG, etc.). Do not use directly — invoked by the test-quality-auditor agent
+  and polyglot analysis skills that need framework-specific lookup tables (test markers, assertion APIs, skip
+  annotations, sleep patterns, mystery guest indicators, integration markers, setup/teardown, tag-support capability).
+dependencies:
+  skills: []
+  adapters: []
+  tools: []
+  mcps: []
+testing:
+  coverage_target: 90
+  types:
+    - unit
+    - integration
+documentation:
+  readme: true
+  spec: true
+  examples_min: 2
+used_by: []
+governance_version: '1.0'
+last_reviewed: '2026-06-28'

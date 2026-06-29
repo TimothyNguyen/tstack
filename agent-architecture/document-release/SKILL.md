@@ -9,10 +9,6 @@ allowed-tools:
   - Glob
   - Bash
 agents: [pm, swe, spec-agent, release-agent]
-
-metadata:
-  support:
-    last-reviewed: "2026-06-27"
 ---
 
 ## Enterprise Preamble

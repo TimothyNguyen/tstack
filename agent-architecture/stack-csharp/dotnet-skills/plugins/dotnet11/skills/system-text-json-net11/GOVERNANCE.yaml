@@ -1,0 +1,27 @@
+name: system-text-json-net11
+type: skill
+status: beta
+version: 1.0.0
+owner: orchestrator
+description: >
+  Provides guidance on new System.Text.Json APIs introduced in .NET 11. It covers typed JsonTypeInfo access via
+  GetTypeInfo<T> and TryGetTypeInfo<T> on JsonSerializerOptions, and the new JsonNamingPolicy.PascalCase static
+  property. Use when serializing or deserializing JSON in .NET 11 applications and needing typed metadata access or
+  PascalCase property naming.
+dependencies:
+  skills: []
+  adapters: []
+  tools: []
+  mcps: []
+testing:
+  coverage_target: 80
+  types:
+    - unit
+    - integration
+documentation:
+  readme: true
+  spec: true
+  examples_min: 2
+used_by: []
+governance_version: '1.0'
+last_reviewed: '2026-06-28'

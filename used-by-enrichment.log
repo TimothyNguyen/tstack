@@ -1,0 +1,66 @@
+Loading governance files...
+Found 347 components
+
+Building used_by map...
+
+Enriching governance files...
+
+✓ adapter-ag-ui (used by 1)
+✓ adapter-agentcore (used by 1)
+✓ adapter-databricks (used by 1)
+✓ adapter-docker-mcp (used by 1)
+✓ adapter-github (used by 1)
+✓ adapter-google-adk (used by 1)
+✓ adapter-langgraph (used by 1)
+✓ adapter-mcp (used by 1)
+✓ adapter-openapi (used by 1)
+✓ adapter-seniorswe-concise (used by 1)
+✓ adapter-strands (used by 1)
+✓ design-review (used by 15)
+✓ migration-review (used by 18)
+✓ adapter-ag-ui (used by 1)
+✓ adapter-agentcore (used by 1)
+✓ adapter-databricks (used by 1)
+✓ adapter-docker-mcp (used by 1)
+✓ adapter-github (used by 1)
+✓ adapter-google-adk (used by 1)
+✓ adapter-langgraph (used by 1)
+✓ adapter-mcp (used by 1)
+✓ adapter-openapi (used by 1)
+✓ adapter-seniorswe-concise (used by 1)
+✓ adapter-strands (used by 1)
+✓ design-review (used by 15)
+✓ migration-review (used by 18)
+✓ qa (used by 24)
+✓ release (used by 14)
+✓ security-review (used by 11)
+✓ seniorswe-concise (used by 61)
+✓ spec (used by 20)
+✓ stack-aws (used by 22)
+✓ stack-databricks (used by 19)
+✓ subagent-orchestrator (used by 30)
+✓ qa (used by 24)
+✓ release (used by 14)
+✓ security-review (used by 11)
+✓ seniorswe-concise (used by 61)
+✓ spec (used by 20)
+✓ stack-aws (used by 22)
+✓ stack-databricks (used by 19)
+✓ subagent-orchestrator (used by 30)
+
+=== USED_BY ENRICHMENT SUMMARY ===
+Updated: 42
+Skipped (no users): 305
+Total: 347
+
+Most Used Components:
+  seniorswe-concise: used by 61 (adapter-ag-ui, adapter-docker-mcp, adapter-github, adapter-mcp, adapter-openapi, adapter-seniorswe-concise, atlassian-docs, autoplan, benchmark, brainstorming, chrome-devtools, codebase-engine, commit, context-restore, context-save, design-html, design-review, document-release, guard, health, investigate, learn, learnings, migration-review, migration-sqlserver-assess, migration-sqlserver-data, migration-sqlserver-perf, migration-sqlserver-schema, plan-devex-review, plan-eng-review, plan-review, pre-commit-review, qa, receiving-code-review, reference-gstack-patterns, release-notes, review, rtk-token-optimizer, security-review, seniorswe-concise, seniorswe-concise-audit, seniorswe-concise-debt, seniorswe-concise-gain, seniorswe-concise-help, seniorswe-concise-review, ship, skillify, stack, stack-csharp, stack-legacy-frontend, stack-postgres, stack-python, stack-react-typescript, stack-spring-ai, stack-spring-boot, stack-sql-server, systematic-debugging, test, token-optimizer, using-agent-skills, verification-before-completion)
+  subagent-orchestrator: used by 30 (adapter-ag-ui, adapter-agentcore, adapter-docker-mcp, adapter-github, adapter-google-adk, adapter-langgraph, adapter-mcp, adapter-strands, autoplan, brainstorming, change-router, codebase-engine, context-restore, context-save, diagram, diagram-generate, diagram-search, learn, learnings, plan-director-review, plan-review, pre-commit-review, reference-gstack-patterns, retro, seniorswe-concise-review, skillify, subagent-orchestrator, token-optimizer, using-agent-skills, writing-skills)
+  qa: used by 24 (atlassian-docs, benchmark, canary, chrome-devtools, codebase-engine, design-review, diagram-validate, documentation, health, investigate, learn, migration-sqlserver-test, plan-devex-review, plan-review, pre-commit-review, qa, receiving-code-review, review, security-review, systematic-debugging, test, token-optimizer, using-agent-skills, verification-before-completion)
+  stack-aws: used by 22 (adapter-ag-ui, adapter-agentcore, adapter-docker-mcp, adapter-google-adk, adapter-mcp, adapter-strands, canary, careful, codebase-engine, commit, guard, health, learn, migration-review, plan-eng-review, release, security-review, ship, stack-aws, stack-aws-dms, systematic-debugging, using-agent-skills)
+  spec: used by 20 (adapter-openapi, atlassian-docs, autoplan, brainstorming, codebase-engine, diagram, diagram-export, diagram-generate, diagram-search, diagram-validate, document-generate, document-release, documentation, learn, plan-design-review, plan-devex-review, plan-pm-review, plan-review, spec, using-agent-skills)
+  stack-databricks: used by 19 (adapter-databricks, benchmark, codebase-engine, commit, domain-data-governance, domain-experiment-design, domain-mlops-databricks, domain-model-interpretation, learn, plan-eng-review, rtk-token-optimizer, seniorswe-concise, stack-databricks, stack-databricks-dbt, stack-postgres, stack-python, systematic-debugging, token-optimizer, using-agent-skills)
+  migration-review: used by 18 (careful, codebase-engine, commit, context-restore, context-save, guard, learn, migration-dotnet-sqlserver-modernization, migration-review, plan-eng-review, stack-aws-dms, stack-csharp, stack-legacy-frontend, stack-postgres, stack-sql-server, stack-sqlserver-to-postgres, systematic-debugging, using-agent-skills)
+  design-review: used by 15 (brainstorming, chrome-devtools, codebase-engine, design-html, design-review, diagram, diagram-export, diagram-generate, diagram-search, diagram-style, diagram-validate, learn, plan-design-review, stack-react-typescript, using-agent-skills)
+  release: used by 14 (adapter-docker-mcp, canary, careful, codebase-engine, commit, document-release, learn, pre-commit-review, release, release-notes, retro, ship, using-agent-skills, verification-before-completion)
+  security-review: used by 11 (careful, codebase-engine, guard, health, investigate, learn, receiving-code-review, security-review, systematic-debugging, using-agent-skills, verification-before-completion)

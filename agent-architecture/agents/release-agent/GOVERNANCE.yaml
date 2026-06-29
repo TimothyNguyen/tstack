@@ -1,0 +1,134 @@
+name: release-agent
+type: skill
+status: stable
+version: 0.1.1
+owner: release-agent
+description: |
+  Release engineer agent. Handles release preparation, release notes, retros,
+  post-deploy monitoring, and rollback. Careful guardrails always active.
+  Invoke via /release-agent, or when the user says "release", "cut a release",
+  "release notes", "ship this", "retro", "post-mortem", or "rollback".
+dependencies:
+  skills:
+    - canary
+    - careful
+    - commit
+    - document-release
+    - release
+    - release-notes
+    - retro
+    - ship
+  adapters: []
+  tools:
+    - docker
+    - git
+    - npm
+    - python
+  mcps: []
+testing:
+  coverage_target: 90
+  types:
+    - unit
+    - integration
+    - contract
+documentation:
+  readme: true
+  spec: true
+  examples_min: 3
+used_by: []
+governance_version: '1.0'
+last_reviewed: '2026-06-28'
+
+agent_metadata:
+  agents: [release-agent]
+  role: "Release engineer and incident response"
+  routing:
+    - trigger: "release, cut a release, version bump"
+      responsibility: "Release preparation and gating"
+    - trigger: "release notes, changelog, ship this"
+      responsibility: "Release communication"
+    - trigger: "post-deploy, canary, monitor"
+      responsibility: "Production monitoring"
+    - trigger: "retro, post-mortem, retrospective"
+      responsibility: "Incident analysis"
+
+  core_capabilities:
+    - release_gating: "Gate on tests, docs, rollback plan"
+    - release_notes: "Generate privacy-safe release comms"
+    - destructive_command_safety: "Guardrails via careful skill"
+    - post_deploy_monitoring: "Canary signal monitoring"
+    - retrospectives: "Capture outcomes and learnings"
+
+  inputs:
+    release_scope:
+      type: string
+      description: "Components or services to release"
+      required: true
+
+    version:
+      type: string
+      description: "Semantic version (e.g., 1.2.3)"
+      required: false
+
+    rollback_plan:
+      type: string
+      description: "Rollback procedure if needed"
+      required: true
+
+  outputs:
+    release_checklist:
+      type: document
+      description: "Pre-release validation results"
+
+    release_notes:
+      type: markdown
+      description: "User-facing release notes"
+
+    release_tag:
+      type: git_tag
+      description: "Git tag and release metadata"
+
+    monitoring_config:
+      type: config
+      description: "Canary monitoring setup"
+
+integration:
+  pre_requirements:
+    git_repo_initialized: true
+    git_user_configured: true
+    version_tags_configured: true
+    rollback_plan_documented: true
+    post_deploy_monitoring_configured: false
+
+  registration:
+    agent_registry: true
+    in_orchestrator: true
+    skill_discoverable: true
+
+  wiring:
+    skills_exported: true
+    agent_skills_registered: true
+    examples_working: true
+
+  environment:
+    requires_git: true
+    requires_build_tools: true
+    requires_deployment_credentials: false
+    requires_monitoring_access: false
+
+  safety_requirements:
+    careful_skill_always_active: true
+    no_force_push_allowed: true
+    gpg_signing_required: false
+    rollback_plan_required: true
+
+quality:
+  test_coverage: 92
+  documentation_completeness: 95
+  security_review_date: "2026-06-27"
+  performance_tested: true
+  error_cases_documented: true
+  safety_critical: true
+
+exceptions: []
+deprecation: null

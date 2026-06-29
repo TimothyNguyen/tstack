@@ -1,0 +1,45 @@
+name: migration-engineer
+type: skill
+status: experimental
+version: 0.1.0
+owner: migration-agent
+description: |
+  Specialist in SQL Server → Postgres migrations.
+  Assesses, plans, migrates, tests, and optimizes large-scale databases.
+dependencies:
+  skills: []
+  adapters: []
+  tools: []
+  mcps: []
+testing:
+  coverage_target: 90
+  types:
+    - unit
+    - integration
+    - contract
+documentation:
+  readme: true
+  spec: true
+  examples_min: 3
+used_by: []
+governance_version: '1.0'
+last_reviewed: '2026-06-28'
+agent_metadata:
+  agents:
+    - migration-engineer
+  role: Agent role
+  core_capabilities: []
+  inputs: {}
+  outputs: {}
+integration:
+  pre_requirements: {}
+  registration: {}
+  wiring: {}
+quality:
+  test_coverage: 90
+  documentation_completeness: 90
+  security_review_date: '2026-06-27'
+  performance_tested: true
+  error_cases_documented: true
+exceptions: []
+deprecation: null

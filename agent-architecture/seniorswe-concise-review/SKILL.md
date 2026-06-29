@@ -9,11 +9,12 @@ description: |
   delete", "is this over-engineered", "simplify review", or invokes
   /seniorswe-concise-review. Complements correctness-focused review, this one only
   hunts complexity.
+allowed-tools:
+  - Read
+  - Grep
+  - Glob
+  - Bash
 agents: [swe, orchestrate]
-
-metadata:
-  support:
-    last-reviewed: "2026-06-27"
 ---
 
 Review diffs for unnecessary complexity. One line per finding: location, what

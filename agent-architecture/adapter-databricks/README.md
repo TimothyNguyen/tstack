@@ -1,10 +1,10 @@
-﻿#  adapter databricks.Groups[1].Value.ToUpper() dapter databricks
+# Databricks Adapter
 
 [See SKILL.md for complete documentation.](./SKILL.md)
 
 ## Overview
 
-This skill provides guidance and integration for agent-architecture workflows.
+Adapter for adapter-databricks integration with agent-architecture workflows.
 
 ## Quick Start
 

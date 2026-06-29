@@ -24,7 +24,7 @@ test('MCP manifests are privacy-safe by default', () => {
     assert.match(manifest.egress, /^(disabled|approval-required)$/, `${file} has unsafe egress`);
     assert.match(manifest.state, /^(local-only|declared-local-paths)$/, `${file} has unsafe state`);
 
-    for (const tool of manifest.tools || []) {
+    for (const tool of manifest.tools) {
       assert.equal(tool.readOnly, true, `${manifest.name}.${tool.name} must be read-only by default`);
       assert.equal(tool.openWorld, false, `${manifest.name}.${tool.name} must be closed-world by default`);
       assert.match(tool.writes, /^(disabled|approval-required)$/, `${manifest.name}.${tool.name} has unsafe writes`);

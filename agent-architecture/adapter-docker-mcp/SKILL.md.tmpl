@@ -7,6 +7,11 @@ description: |
   through the Docker MCP Gateway — one stdio multiplexer replaces N individual
   server configs. Use when deploying via Docker or consuming tools from the
   official docker/mcp-registry catalog.
+allowed-tools:
+  - Read
+  - Grep
+  - Glob
+  - Bash
 agents: [cloud, release-agent, orchestrate, swe, _infrastructure]
 ---
 

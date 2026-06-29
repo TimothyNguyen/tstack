@@ -1,0 +1,30 @@
+name: databricks-metric-view-advisor
+type: skill
+status: beta
+version: 1.0.0
+owner: orchestrator
+description: >-
+  Use this skill when the user wants to create Unity Catalog metric views — whether starting from gold/fact tables,
+  existing AI/BI dashboards, SQL query files, Genie spaces, or KPI spreadsheets. Triggers on intent like "formalize our
+  KPIs," "build a metric/semantic layer," "define measures and dimensions from our tables," "standardize aggregations so
+  other teams can reuse them," or "turn our ad-hoc queries into reusable metrics." Guides an interactive workflow —
+  analyzing source assets, generating YAML definitions, checking for overlap with existing views, and deploying. Do NOT
+  use for querying or altering an already-existing metric view, comparing metric view frameworks, creating regular Unity
+  Catalog tables/schemas, or MLflow/model tracking.
+dependencies:
+  skills: []
+  adapters: []
+  tools: []
+  mcps: []
+testing:
+  coverage_target: 80
+  types:
+    - unit
+    - integration
+documentation:
+  readme: true
+  spec: true
+  examples_min: 2
+used_by: []
+governance_version: '1.0'
+last_reviewed: '2026-06-28'

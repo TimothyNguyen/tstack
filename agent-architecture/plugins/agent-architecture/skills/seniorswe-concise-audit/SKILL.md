@@ -8,6 +8,11 @@ description: |
   /seniorswe-concise-audit, or "audit this codebase", "audit for
   over-engineering", "what can I delete", "find bloat". One-shot report, does
   not apply fixes.
+allowed-tools:
+  - Read
+  - Grep
+  - Glob
+  - Bash
 agents: [swe]
 ---
 

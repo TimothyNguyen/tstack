@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 import fs from 'node:fs';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { discoverSectionTemplates, discoverTemplates } from './discover-skills.mjs';
 
 const ROOT = path.resolve(import.meta.dirname, '..');
@@ -44,23 +45,22 @@ function render(content, tmplPath) {
   });
 }
 
-const PLUGIN_SKILLS_DIR = path.join(ROOT, 'plugins', 'agent-architecture', 'skills');
-
-function pluginMirrorFor(outputRel) {
+function pluginMirrorFor(outputRel, pluginSkillsDir) {
   // outputRel is "<skill>/SKILL.md" — mirror only top-level SKILL.md (skip
   // sections/* and the repo-root SKILL.md which has no skill folder).
   const parts = outputRel.split('/');
   if (parts.length !== 2 || parts[1] !== 'SKILL.md') return null;
-  return path.join(PLUGIN_SKILLS_DIR, parts[0], 'SKILL.md');
+  return path.join(pluginSkillsDir, parts[0], 'SKILL.md');
 }
 
-function writeRendered(tmplRel, outputRel) {
-  const tmplPath = path.join(ROOT, tmplRel);
-  const outputPath = path.join(ROOT, outputRel);
+function writeRendered(tmplRel, outputRel, { check = CHECK, root = ROOT } = {}) {
+  const pluginSkillsDir = path.join(root, 'plugins', 'agent-architecture', 'skills');
+  const tmplPath = path.join(root, tmplRel);
+  const outputPath = path.join(root, outputRel);
   const rendered = render(fs.readFileSync(tmplPath, 'utf8').replace(/\r\n/g, '\n'), tmplRel);
-  const mirrorPath = pluginMirrorFor(outputRel);
+  const mirrorPath = pluginMirrorFor(outputRel, pluginSkillsDir);
 
-  if (CHECK) {
+  if (check) {
     const current = fs.existsSync(outputPath) ? fs.readFileSync(outputPath, 'utf8').replace(/\r\n/g, '\n') : '';
     if (current !== rendered) {
       console.error(`${outputRel} is stale; run npm run build:skills from agent-architecture/`);
@@ -69,7 +69,7 @@ function writeRendered(tmplRel, outputRel) {
     if (mirrorPath) {
       const mirrorCurrent = fs.existsSync(mirrorPath) ? fs.readFileSync(mirrorPath, 'utf8') : '';
       if (mirrorCurrent !== rendered) {
-        const rel = path.relative(ROOT, mirrorPath).split(path.sep).join('/');
+        const rel = path.relative(root, mirrorPath).split(path.sep).join('/');
         console.error(`${rel} is stale; run npm run build:skills from agent-architecture/`);
         process.exitCode = 1;
       }
@@ -84,10 +84,14 @@ function writeRendered(tmplRel, outputRel) {
   }
 }
 
-for (const item of discoverTemplates(ROOT)) {
-  writeRendered(item.tmpl, item.output);
+if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+  for (const item of discoverTemplates(ROOT)) {
+    writeRendered(item.tmpl, item.output);
+  }
+
+  for (const item of discoverSectionTemplates(ROOT)) {
+    writeRendered(item.tmpl, item.output);
+  }
 }
 
-for (const item of discoverSectionTemplates(ROOT)) {
-  writeRendered(item.tmpl, item.output);
-}
+export { render, writeRendered };

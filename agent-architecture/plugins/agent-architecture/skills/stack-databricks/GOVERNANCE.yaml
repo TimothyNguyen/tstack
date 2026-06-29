@@ -1,0 +1,44 @@
+name: stack-databricks
+type: skill
+status: beta
+version: 0.1.1
+owner: stack-agent
+description: |
+  Databricks engineering workflows for Asset Bundles, jobs, notebooks, SDK
+  usage, and governed data access.
+dependencies:
+  skills: []
+  adapters: []
+  tools: []
+  mcps: []
+testing:
+  coverage_target: 80
+  types:
+    - unit
+    - integration
+documentation:
+  readme: true
+  spec: true
+  examples_min: 2
+used_by:
+  - adapter-databricks
+  - benchmark
+  - codebase-engine
+  - commit
+  - domain-data-governance
+  - domain-experiment-design
+  - domain-mlops-databricks
+  - domain-model-interpretation
+  - learn
+  - plan-eng-review
+  - rtk-token-optimizer
+  - seniorswe-concise
+  - stack-databricks
+  - stack-databricks-dbt
+  - stack-postgres
+  - stack-python
+  - systematic-debugging
+  - token-optimizer
+  - using-agent-skills
+governance_version: '1.0'
+last_reviewed: '2026-06-28'

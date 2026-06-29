@@ -1,0 +1,169 @@
+name: plan-review
+type: skill
+status: stable
+version: 0.1.1
+owner: planner
+description: |
+  Enterprise-safe plan review workflow. Reviews a proposed implementation plan for scope,
+  architecture, testability, policy compliance, data risk, and delivery sequencing before code changes begin.
+  Read-only code inspection with structured risk analysis.
+dependencies:
+  skills:
+    - qa
+    - seniorswe-concise
+    - spec
+    - subagent-orchestrator
+  adapters: []
+  tools:
+    - git
+  mcps: []
+testing:
+  coverage_target: 90
+  types:
+    - unit
+    - integration
+    - contract
+documentation:
+  readme: true
+  spec: true
+  examples_min: 3
+used_by:
+  - swe
+  - qa-agent
+  - spec-agent
+  - orchestrate
+governance_version: '1.0'
+last_reviewed: '2026-06-28'
+
+skill_metadata:
+  agents: [swe, qa-agent, spec-agent, orchestrate]
+  role: "Pre-implementation design validation"
+  allowed_tools:
+    - Read
+    - Grep
+    - Glob
+    - Bash
+
+  review_lanes:
+    product_fit:
+      - goal_clarity: "Plan goal and intended change"
+      - scope_verification: "One deliverable vs. multi-phase"
+      - behavioral_change: "What user sees change"
+
+    architecture:
+      - boundaries: "Component and module boundaries"
+      - data_flow: "Data movement and transformation"
+      - policy_gates: "Governance and policy compliance"
+      - dependency_impact: "Affected systems and components"
+
+    data_and_governance:
+      - data_risk: "Privacy, compliance, residency"
+      - policy_compliance: "Enterprise governance adherence"
+      - hidden_state: "Implicit dependencies"
+      - ownership: "Clear ownership and accountability"
+
+    testability:
+      - test_strategy: "How to verify behavior"
+      - coverage_plan: "What test coverage needed"
+      - rollback_path: "How to safely rollback"
+      - verification: "Acceptance criteria"
+
+    developer_experience:
+      - clarity: "Instructions are unambiguous"
+      - sequencing: "Commit sequence makes sense"
+      - dependencies: "All dependencies listed"
+      - examples: "Examples provided"
+
+    release_and_rollout:
+      - rollout_risk: "Blast radius if wrong"
+      - rollback_risk: "Cost if rollback needed"
+      - release_sequencing: "Proper release order"
+      - monitoring: "Post-deploy signals"
+
+  inputs:
+    plan:
+      type: string | document
+      description: "Design, spec, task list, or architecture plan"
+      required: true
+
+    context:
+      type: string
+      description: "Background and constraints"
+      required: false
+
+    focus_areas:
+      type: array
+      description: "Specific lanes to emphasize"
+      required: false
+      example: ["architecture", "data_risk", "testability"]
+
+  outputs:
+    review_findings:
+      type: document
+      description: "Structured findings per review lane"
+
+    risk_assessment:
+      type: risk_matrix
+      description: "Identified risks and mitigation"
+
+    commit_sequence:
+      type: list
+      description: "Recommended commit/phase sequence"
+
+    blockers:
+      type: list
+      description: "Must-fix issues before proceeding"
+
+    recommendations:
+      type: list
+      description: "Suggested improvements"
+
+integration:
+  pre_requirements:
+    read_only_access: true
+    git_repo_accessible: true
+    code_structure_understandable: true
+
+  registration:
+    skill_registry: true
+    in_swe_agent: true
+    in_orchestrator: true
+
+  wiring:
+    skill_discoverable: true
+    read_only_mode_enforced: true
+
+  allowed_operations:
+    read_only_inspection: true
+    code_analysis: true
+    file_path_matching: true
+
+  policy_matrix:
+    allowed_by_default:
+      - read_only_code_inspection: true
+    require_policy_approval:
+      - shell_write: true
+      - git_write: true
+      - deployment: true
+      - database_read: true
+      - ticket_creation: true
+      - browser_use: true
+    disabled_by_default:
+      - credential_reads: true
+      - cookie_import: true
+      - public_tunnels: true
+      - public_telemetry: true
+      - public_scraping: true
+
+quality:
+  test_coverage: 88
+  documentation_completeness: 92
+  security_review_date: "2026-06-27"
+  performance_tested: true
+  error_cases_documented: true
+
+  review_lane_coverage: "All 6 lanes tested"
+  risk_categories: "9+ risk categories identified"
+
+exceptions: []
+deprecation: null

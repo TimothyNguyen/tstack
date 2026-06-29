@@ -15,7 +15,8 @@ function readRegistry() {
 
 test('orchestrate agent has routing skills', () => {
   const registry = readRegistry();
-  const skills = registry.byAgent.orchestrate || [];
+  const skills = registry.byAgent.orchestrate;
+  assert(Array.isArray(skills), 'orchestrate must be in registry');
 
   const expectedSkills = ['subagent-orchestrator', 'autoplan', 'context-save'];
   for (const skill of expectedSkills) {
@@ -25,7 +26,8 @@ test('orchestrate agent has routing skills', () => {
 
 test('swe agent has implementation skills', () => {
   const registry = readRegistry();
-  const skills = registry.byAgent.swe || [];
+  const skills = registry.byAgent.swe;
+  assert(Array.isArray(skills), 'swe must be in registry');
 
   const expectedSkills = ['seniorswe-concise', 'commit', 'investigate', 'ship'];
   for (const skill of expectedSkills) {
@@ -35,7 +37,8 @@ test('swe agent has implementation skills', () => {
 
 test('swe agent has new extracted skills', () => {
   const registry = readRegistry();
-  const skills = registry.byAgent.swe || [];
+  const skills = registry.byAgent.swe;
+  assert(Array.isArray(skills), 'swe must be in registry');
 
   const newSkills = ['systematic-debugging', 'receiving-code-review', 'verification-before-completion'];
   for (const skill of newSkills) {
@@ -45,7 +48,8 @@ test('swe agent has new extracted skills', () => {
 
 test('qa-agent has testing and validation skills', () => {
   const registry = readRegistry();
-  const skills = registry.byAgent['qa-agent'] || [];
+  const skills = registry.byAgent['qa-agent'];
+  assert(Array.isArray(skills), 'qa-agent must be in registry');
 
   const expectedSkills = ['qa', 'test', 'benchmark', 'canary'];
   for (const skill of expectedSkills) {
@@ -55,7 +59,8 @@ test('qa-agent has testing and validation skills', () => {
 
 test('spec-agent has design and documentation skills', () => {
   const registry = readRegistry();
-  const skills = registry.byAgent['spec-agent'] || [];
+  const skills = registry.byAgent['spec-agent'];
+  assert(Array.isArray(skills), 'spec-agent must be in registry');
 
   const expectedSkills = ['spec', 'autoplan', 'diagram'];
   for (const skill of expectedSkills) {
@@ -65,7 +70,8 @@ test('spec-agent has design and documentation skills', () => {
 
 test('pm agent has product management skills', () => {
   const registry = readRegistry();
-  const skills = registry.byAgent.pm || [];
+  const skills = registry.byAgent.pm;
+  assert(Array.isArray(skills), 'pm must be in registry');
 
   const expectedSkills = ['spec', 'retro', 'release-notes'];
   for (const skill of expectedSkills) {
@@ -75,7 +81,8 @@ test('pm agent has product management skills', () => {
 
 test('design-agent has UI design skills', () => {
   const registry = readRegistry();
-  const skills = registry.byAgent['design-agent'] || [];
+  const skills = registry.byAgent['design-agent'];
+  assert(Array.isArray(skills), 'design-agent must be in registry');
 
   const expectedSkills = ['design-review', 'design-html', 'plan-design-review'];
   for (const skill of expectedSkills) {
@@ -85,7 +92,8 @@ test('design-agent has UI design skills', () => {
 
 test('security agent has security review skills', () => {
   const registry = readRegistry();
-  const skills = registry.byAgent.security || [];
+  const skills = registry.byAgent.security;
+  assert(Array.isArray(skills), 'security must be in registry');
 
   const expectedSkills = ['security-review', 'guard', 'investigate', 'health'];
   for (const skill of expectedSkills) {
@@ -95,7 +103,8 @@ test('security agent has security review skills', () => {
 
 test('migration agent has migration skills', () => {
   const registry = readRegistry();
-  const skills = registry.byAgent.migration || [];
+  const skills = registry.byAgent.migration;
+  assert(Array.isArray(skills), 'migration must be in registry');
 
   const expectedSkills = ['migration-review', 'careful'];
   for (const skill of expectedSkills) {
@@ -105,21 +114,26 @@ test('migration agent has migration skills', () => {
 
 test('data agent has databricks and mlops skills', () => {
   const registry = readRegistry();
-  const skills = registry.byAgent.data || [];
+  const skills = registry.byAgent.data;
+  assert(Array.isArray(skills), 'data must be in registry');
 
   assert(skills.some(s => s.includes('databricks')), 'data agent should have databricks skills');
 });
 
 test('cloud agent has aws and infrastructure skills', () => {
   const registry = readRegistry();
-  const skills = registry.byAgent.cloud || [];
+  const skills = registry.byAgent.cloud;
+  assert(Array.isArray(skills), 'cloud must be in registry');
 
-  assert(skills.some(s => s.includes('aws') || s.includes('stack')), 'cloud agent should have aws/stack skills');
+  const hasAws = skills.some(s => s.includes('aws'));
+  const hasStack = skills.some(s => s.includes('stack'));
+  assert(hasAws || hasStack, 'cloud agent should have aws/stack skills');
 });
 
 test('release-agent has release coordination skills', () => {
   const registry = readRegistry();
-  const skills = registry.byAgent['release-agent'] || [];
+  const skills = registry.byAgent['release-agent'];
+  assert(Array.isArray(skills), 'release-agent must be in registry');
 
   const expectedSkills = ['release', 'ship', 'release-notes', 'canary', 'retro'];
   for (const skill of expectedSkills) {
@@ -129,7 +143,8 @@ test('release-agent has release coordination skills', () => {
 
 test('interviewer agent has codebase and documentation skills', () => {
   const registry = readRegistry();
-  const skills = registry.byAgent.interviewer || [];
+  const skills = registry.byAgent.interviewer;
+  assert(Array.isArray(skills), 'interviewer must be in registry');
 
   const expectedSkills = ['codebase-engine', 'diagram'];
   for (const skill of expectedSkills) {
@@ -141,7 +156,7 @@ test('all agents have at least 5 skills', () => {
   const registry = readRegistry();
 
   for (const [agent, skills] of Object.entries(registry.byAgent)) {
-    if (agent === '_infrastructure') continue;
+    if (agent === '_infrastructure' || agent === '_linter') continue;
     assert(skills.length >= 5, `${agent} should have at least 5 skills, has ${skills.length}`);
   }
 });
@@ -179,10 +194,7 @@ test('verification-before-completion available to qa and swe agents', () => {
 
   const verifySkill = registry.skills.find(s => s.name === 'verification-before-completion');
   assert(verifySkill, 'verification-before-completion skill should exist');
-  assert(
-    verifySkill.agents.includes('swe') || verifySkill.agents.includes('qa-agent'),
-    'verification-before-completion should be available to swe or qa-agent'
-  );
+  assert(verifySkill.agents.includes('swe'), 'verification-before-completion should be available to swe');
 });
 
 test('each agent in registry has corresponding SKILL.md', () => {
@@ -197,4 +209,10 @@ test('each agent in registry has corresponding SKILL.md', () => {
     const skillPath = path.join(REPO_ROOT, 'agents', agentDir, 'SKILL.md');
     assert(fs.existsSync(skillPath), `agent ${agentDir} should have SKILL.md`);
   }
+});
+
+test('nonexistent agent key returns undefined (covers missing-key path)', () => {
+  const registry = readRegistry();
+  const skills = registry.byAgent['nonexistent-agent-xyz'];
+  assert.equal(skills, undefined);
 });

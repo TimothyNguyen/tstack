@@ -61,7 +61,7 @@ test('optional adapter skills mention policy or disabled defaults', () => {
 
 test('adapter runtime code does not include known public telemetry or tunnel endpoints', () => {
   const adaptersDir = path.join(root, 'adapters');
-  const files = fs.existsSync(adaptersDir) ? walk(adaptersDir) : [];
+  const files = walk(adaptersDir);
   const text = files
     .filter((file) => /\.(cjs|js|json|md)$/.test(file))
     .map((file) => fs.readFileSync(file, 'utf8'))

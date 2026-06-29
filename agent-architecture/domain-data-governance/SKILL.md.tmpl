@@ -4,6 +4,11 @@ version: 0.1.1
 description: |
   Data governance review for classification, lineage, permissions, retention,
   auditability, quality checks, and privacy-safe agent outputs.
+allowed-tools:
+  - Read
+  - Grep
+  - Glob
+  - Bash
 agents: [data, pm]
 ---
 

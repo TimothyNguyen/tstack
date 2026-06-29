@@ -8,11 +8,12 @@ description: |
   /seniorswe-concise-audit, or "audit this codebase", "audit for
   over-engineering", "what can I delete", "find bloat". One-shot report, does
   not apply fixes.
+allowed-tools:
+  - Read
+  - Grep
+  - Glob
+  - Bash
 agents: [swe]
-
-metadata:
-  support:
-    last-reviewed: "2026-06-27"
 ---
 
 /seniorswe-concise-review, repo-wide. Scan the whole tree instead of a diff.

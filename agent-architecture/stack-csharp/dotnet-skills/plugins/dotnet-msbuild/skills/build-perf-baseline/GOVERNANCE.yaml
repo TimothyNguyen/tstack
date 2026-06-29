@@ -1,0 +1,28 @@
+name: build-perf-baseline
+type: skill
+status: beta
+version: 1.0.0
+owner: orchestrator
+description: >-
+  Establish build performance baselines and apply systematic optimization techniques. Only activate in MSBuild/.NET
+  build context. USE FOR: diagnosing slow builds, establishing before/after measurements (cold, warm, no-op scenarios),
+  applying optimization strategies like MSBuild Server, static graph builds, artifacts output, and dependency graph
+  trimming. Start here before diving into build-perf-diagnostics, incremental-build, or build-parallelism. DO NOT USE
+  FOR: non-MSBuild build systems, detailed bottleneck analysis (use build-perf-diagnostics after baselining).
+dependencies:
+  skills: []
+  adapters: []
+  tools: []
+  mcps: []
+testing:
+  coverage_target: 80
+  types:
+    - unit
+    - integration
+documentation:
+  readme: true
+  spec: true
+  examples_min: 2
+used_by: []
+governance_version: '1.0'
+last_reviewed: '2026-06-28'

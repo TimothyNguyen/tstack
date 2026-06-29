@@ -1,0 +1,121 @@
+Found 122 components
+
+✓ adapter-ag-ui
+✓ adapter-agentcore
+✓ adapter-databricks
+✓ adapter-docker-mcp
+✓ adapter-github
+✓ adapter-google-adk
+✓ adapter-langgraph
+✓ adapter-mcp
+✓ adapter-openapi
+✓ adapter-seniorswe-concise
+✓ adapter-strands
+✓ architecture-agent-upgrade
+✓ atlassian-docs
+✓ autoplan
+✓ benchmark
+✓ brainstorming
+✓ canary
+✓ careful
+✓ change-router
+✓ chrome-devtools
+✓ claude
+✓ codebase-engine
+✓ codex
+✓ commit
+✓ context-restore
+✓ context-save
+✓ copilot
+✓ design-html
+✓ design-review
+✓ diagram
+✓ diagram-cloudformation
+✓ diagram-export
+✓ diagram-generate
+✓ diagram-helm
+✓ diagram-iac
+✓ diagram-infrastructure
+✓ diagram-search
+✓ diagram-style
+✓ diagram-validate
+✓ document-generate
+✓ document-release
+✓ documentation
+✓ domain-data-governance
+✓ domain-experiment-design
+✓ domain-mlops-databricks
+✓ domain-model-interpretation
+✓ guard
+✓ health
+✓ investigate
+✓ learn
+✓ learnings
+✓ migration-dotnet-sqlserver-modernization
+✓ migration-review
+✓ migration-sqlserver-assess
+✓ migration-sqlserver-data
+✓ migration-sqlserver-perf
+✓ migration-sqlserver-schema
+✓ migration-sqlserver-test
+✓ plan-design-review
+✓ plan-devex-review
+✓ plan-director-review
+✓ plan-eng-review
+✓ plan-pm-review
+✓ plan-review
+✓ pre-commit-review
+✓ qa
+✓ receiving-code-review
+✓ reference-gstack-patterns
+✓ release
+✓ release-notes
+✓ retro
+✓ review
+✓ rtk-token-optimizer
+✓ security-review
+✓ seniorswe-concise
+✓ seniorswe-concise-audit
+✓ seniorswe-concise-debt
+✓ seniorswe-concise-gain
+✓ seniorswe-concise-help
+✓ seniorswe-concise-review
+✓ ship
+✓ skillify
+✓ spec
+✓ stack
+✓ stack-aws
+✓ stack-aws-dms
+✓ stack-csharp
+✓ stack-databricks
+✓ stack-databricks-dbt
+✓ stack-legacy-frontend
+✓ stack-postgres
+✓ stack-python
+✓ stack-react-typescript
+✓ stack-spring-ai
+✓ stack-spring-boot
+✓ stack-sql-server
+✓ stack-sqlserver-to-postgres
+✓ subagent-orchestrator
+✓ systematic-debugging
+✓ test
+✓ token-optimizer
+✓ using-agent-skills
+✓ verification-before-completion
+✓ writing-skills
+
+=== ENRICHMENT SUMMARY ===
+Enriched: 104
+Errors: 0
+
+Dependencies Discovered:
+  Skills: 10
+  Adapters: 12
+  Tools: 7
+  MCPs: 11
+
+Top Dependencies:
+  Skills: seniorswe-concise, stack-aws, subagent-orchestrator, stack-databricks, release, spec, qa, design-review, migration-review, security-review
+  Adapters: adapter-ag-ui, adapter-agentcore, adapter-databricks, adapter-docker-mcp, adapter-github, adapter-google-adk, adapter-langgraph, adapter-mcp, adapter-openapi, adapter-seniorswe-concise
+  Tools: git, python, terraform, docker, github, npm, kubernetes

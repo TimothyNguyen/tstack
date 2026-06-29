@@ -1,0 +1,26 @@
+name: filter-syntax
+type: skill
+status: beta
+version: 1.0.0
+owner: orchestrator
+description: >-
+  Reference data for test filter syntax across all platform and framework combinations: VSTest --filter expressions, MTP
+  filters for MSTest/NUnit/xUnit v3/TUnit, and VSTest-to-MTP filter translation. DO NOT USE directly — loaded by
+  run-tests, mtp-hot-reload, and migrate-vstest-to-mtp when they need filter syntax.
+dependencies:
+  skills: []
+  adapters: []
+  tools: []
+  mcps: []
+testing:
+  coverage_target: 80
+  types:
+    - unit
+    - integration
+documentation:
+  readme: true
+  spec: true
+  examples_min: 2
+used_by: []
+governance_version: '1.0'
+last_reviewed: '2026-06-28'

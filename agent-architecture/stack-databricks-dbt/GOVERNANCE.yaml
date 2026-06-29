@@ -1,0 +1,55 @@
+name: stack-databricks-dbt
+type: skill
+status: stable
+version: 0.1.1
+owner: stack-agent
+description: |
+  dbt on Databricks patterns for models, tests, docs, lineage, and governed
+  transformations.
+dependencies:
+  skills:
+    - stack-databricks
+  adapters: []
+  tools:
+    - git
+    - python
+  mcps: []
+testing:
+  coverage_target: 90
+  types:
+    - unit
+    - integration
+    - contract
+documentation:
+  readme: true
+  spec: true
+  examples_min: 3
+used_by: []
+governance_version: '1.0'
+last_reviewed: '2026-06-28'
+stack_metadata:
+  stack_type: ''
+  use_cases: []
+  build_system:
+    primary: ''
+  core_principles: []
+  inputs: {}
+  outputs: {}
+integration:
+  pre_requirements: {}
+  registration:
+    stack_registry: true
+  environment:
+    requires_git: true
+  policy_matrix:
+    allowed_by_default:
+      read_only_inspection: true
+    require_policy_approval: {}
+quality:
+  test_coverage: 85
+  documentation_completeness: 90
+  security_review_date: '2026-06-27'
+  performance_tested: true
+  error_cases_documented: true
+exceptions: []
+deprecation: null

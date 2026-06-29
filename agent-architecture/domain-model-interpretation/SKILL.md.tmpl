@@ -4,6 +4,11 @@ version: 0.1.1
 description: |
   Model interpretation review for feature effects, calibration, drift,
   uncertainty, explanation limits, and decision-risk communication.
+allowed-tools:
+  - Read
+  - Grep
+  - Glob
+  - Bash
 agents: [data, pm]
 ---
 

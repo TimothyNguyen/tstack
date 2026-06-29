@@ -1,0 +1,26 @@
+name: databricks-apps
+type: skill
+status: beta
+version: 1.0.0
+owner: orchestrator
+description: >-
+  Build apps on Databricks Apps platform. Use when asked to create dashboards, data apps, analytics tools, or
+  visualizations. Evaluates data access patterns (analytics vs Lakebase synced tables) before scaffolding. Invoke BEFORE
+  starting implementation.
+dependencies:
+  skills: []
+  adapters: []
+  tools: []
+  mcps: []
+testing:
+  coverage_target: 80
+  types:
+    - unit
+    - integration
+documentation:
+  readme: true
+  spec: true
+  examples_min: 2
+used_by: []
+governance_version: '1.0'
+last_reviewed: '2026-06-28'

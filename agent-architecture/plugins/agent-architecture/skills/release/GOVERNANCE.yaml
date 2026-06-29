@@ -1,0 +1,39 @@
+name: release
+type: skill
+status: stable
+version: 0.1.1
+owner: orchestrator
+description: |
+  Policy-gated release preparation workflow. Checks readiness, tests, docs, risk, and rollback
+  before handoff to human-approved merge or deploy steps.
+dependencies:
+  skills: []
+  adapters: []
+  tools: []
+  mcps: []
+testing:
+  coverage_target: 90
+  types:
+    - unit
+    - integration
+documentation:
+  readme: true
+  spec: true
+  examples_min: 2
+used_by:
+  - adapter-docker-mcp
+  - canary
+  - careful
+  - codebase-engine
+  - commit
+  - document-release
+  - learn
+  - pre-commit-review
+  - release
+  - release-notes
+  - retro
+  - ship
+  - using-agent-skills
+  - verification-before-completion
+governance_version: '1.0'
+last_reviewed: '2026-06-28'

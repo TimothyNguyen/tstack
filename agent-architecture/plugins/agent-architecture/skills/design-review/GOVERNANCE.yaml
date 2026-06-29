@@ -1,0 +1,39 @@
+name: design-review
+type: skill
+status: beta
+version: 0.1.1
+owner: designer
+description: |
+  Reviews product UI and interaction quality for practical design issues.
+dependencies:
+  skills: []
+  adapters: []
+  tools: []
+  mcps: []
+testing:
+  coverage_target: 80
+  types:
+    - unit
+    - integration
+documentation:
+  readme: true
+  spec: true
+  examples_min: 2
+used_by:
+  - brainstorming
+  - chrome-devtools
+  - codebase-engine
+  - design-html
+  - design-review
+  - diagram
+  - diagram-export
+  - diagram-generate
+  - diagram-search
+  - diagram-style
+  - diagram-validate
+  - learn
+  - plan-design-review
+  - stack-react-typescript
+  - using-agent-skills
+governance_version: '1.0'
+last_reviewed: '2026-06-28'

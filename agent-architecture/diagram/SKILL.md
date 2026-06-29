@@ -9,10 +9,6 @@ allowed-tools:
   - Glob
   - Bash
 agents: [spec-agent, design-agent, orchestrate, interviewer]
-
-metadata:
-  support:
-    last-reviewed: "2026-06-27"
 ---
 
 ## Enterprise Preamble

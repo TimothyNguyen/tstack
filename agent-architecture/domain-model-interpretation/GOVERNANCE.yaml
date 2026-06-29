@@ -1,0 +1,28 @@
+name: domain-model-interpretation
+type: skill
+status: experimental
+version: 0.1.1
+owner: domain-expert
+description: |
+  Model interpretation review for feature effects, calibration, drift,
+  uncertainty, explanation limits, and decision-risk communication.
+dependencies:
+  skills:
+    - stack-databricks
+  adapters: []
+  tools:
+    - git
+    - python
+  mcps: []
+testing:
+  coverage_target: 70
+  types:
+    - unit
+    - integration
+documentation:
+  readme: true
+  spec: true
+  examples_min: 2
+used_by: []
+governance_version: '1.0'
+last_reviewed: '2026-06-28'

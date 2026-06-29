@@ -1,0 +1,140 @@
+name: adapter-ag-ui
+type: skill
+status: stable
+version: 0.1.1
+owner: orchestrator
+description: |
+  Map skill progress, approvals, tool actions, findings, and artifacts into
+  AG-UI-compatible event concepts.
+dependencies:
+  skills:
+    - seniorswe-concise
+    - stack-aws
+    - subagent-orchestrator
+  adapters:
+    - adapter-ag-ui
+  tools:
+    - git
+    - python
+    - terraform
+  mcps: []
+testing:
+  coverage_target: 90
+  types:
+    - unit
+    - integration
+    - contract
+documentation:
+  readme: true
+  spec: true
+  examples_min: 3
+used_by:
+  - adapter-ag-ui
+governance_version: '1.0'
+last_reviewed: '2026-06-28'
+adapter_metadata:
+  adapters: [ag-ui]
+  runtime_requirements: "Optional - AG-UI frontend availability"
+  protocol_version: "AG-UI event protocol v1.0"
+
+  core_features:
+    - event_mapping: "Map internal events to AG-UI format"
+    - progress_tracking: "Skill execution progress events"
+    - approval_handling: "User approval event routing"
+    - tool_actions: "Tool invocation and results"
+    - findings_reporting: "Code review and analysis findings"
+    - artifact_tracking: "Generated artifact events"
+
+  event_types:
+    progress: "Skill phase transitions"
+    approval: "User approval gates"
+    tool_call: "Tool invocation events"
+    tool_result: "Tool execution results"
+    finding: "Analysis findings (review, security)"
+    artifact: "Generated outputs (code, docs, diagrams)"
+    error: "Exception and error events"
+
+  security_model:
+    default_access: "optional (disabled unless policy enables)"
+    ui_transport_gated: true
+    event_sanitization: true
+    secrets_prohibited: true
+    raw_data_prohibited: true
+
+  data_safety:
+    secrets_never_logged: true
+    raw_datasets_prohibited: true
+    full_prompts_prohibited: true
+    full_file_contents_prohibited: true
+    correlation_ids_preserved: true
+
+  inputs:
+    internal_event:
+      type: object
+      description: "Internal agent event"
+      required: true
+
+    ui_enabled:
+      type: boolean
+      description: "Whether to emit UI events"
+      default: false
+
+    correlation_id:
+      type: string
+      description: "Unique event correlation ID"
+      required: true
+
+  outputs:
+    ag_ui_event:
+      type: structured_json
+      description: "AG-UI compatible event"
+
+    audit_record:
+      type: log
+      description: "Audit log entry with correlation"
+
+integration:
+  pre_requirements:
+    ag_ui_available: false
+    event_contract_defined: true
+    correlation_id_system: true
+
+  registration:
+    adapter_registry: true
+    optional_integration: true
+    disabled_by_default: true
+
+  wiring:
+    event_emission: "Boundary transformation only"
+    local_events_first: true
+    ui_transport_optional: true
+
+  policy_matrix:
+    allowed_by_default:
+      - local_event_emission: true
+    require_policy_approval:
+      - ui_transport: true
+      - network_egress: true
+    disabled_by_default:
+      - ui_events: true
+      - secret_logging: true
+
+  environment:
+    requires_network: false
+    requires_credentials: false
+    requires_ui_framework: false
+
+quality:
+  test_coverage: 92
+  documentation_completeness: 94
+  security_review_date: "2026-06-27"
+  performance_tested: true
+  error_cases_documented: true
+  security_critical: true
+
+  event_types_supported: "7+ (progress, approval, tool, finding, artifact, error)"
+  sanitization_rules: "6+ (no secrets, datasets, prompts, files)"
+  protocol_coverage: "100%"
+
+exceptions: []
+deprecation: null

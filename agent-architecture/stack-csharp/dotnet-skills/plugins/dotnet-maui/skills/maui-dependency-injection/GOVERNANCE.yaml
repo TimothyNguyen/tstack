@@ -1,0 +1,29 @@
+name: maui-dependency-injection
+type: skill
+status: beta
+version: 1.0.0
+owner: orchestrator
+description: >
+  Guidance for configuring dependency injection in .NET MAUI apps — service registration in MauiProgram.cs, lifetime
+  selection (Singleton / Transient / Scoped), constructor injection, Shell navigation auto-resolution, platform-specific
+  registrations, and testability patterns. USE FOR: "dependency injection", "DI setup", "AddSingleton", "AddTransient",
+  "AddScoped", "service registration", "constructor injection", "IServiceProvider", "MauiProgram DI", "register
+  services", "BindingContext injection". DO NOT USE FOR: data binding (use maui-data-binding), Shell route configuration
+  (use maui-shell-navigation), unit-test mocking frameworks (use standard xUnit and NSubstitute patterns).
+dependencies:
+  skills: []
+  adapters: []
+  tools: []
+  mcps: []
+testing:
+  coverage_target: 80
+  types:
+    - unit
+    - integration
+documentation:
+  readme: true
+  spec: true
+  examples_min: 2
+used_by: []
+governance_version: '1.0'
+last_reviewed: '2026-06-28'

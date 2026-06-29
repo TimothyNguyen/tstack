@@ -1,0 +1,29 @@
+name: adapter-docker-mcp
+type: skill
+status: beta
+version: 0.1.1
+owner: orchestrator
+description: |
+  Docker MCP Registry and Toolkit adapter. Wires 300+ pre-built containerized
+  MCP servers (GitHub, Postgres, Playwright, Slack, Stripe, Docker ops, etc.)
+  through the Docker MCP Gateway — one stdio multiplexer replaces N individual
+  server configs. Use when deploying via Docker or consuming tools from the
+  official docker/mcp-registry catalog.
+dependencies:
+  skills: []
+  adapters: []
+  tools: []
+  mcps: []
+testing:
+  coverage_target: 80
+  types:
+    - unit
+    - integration
+documentation:
+  readme: true
+  spec: true
+  examples_min: 2
+used_by:
+  - adapter-docker-mcp
+governance_version: '1.0'
+last_reviewed: '2026-06-28'

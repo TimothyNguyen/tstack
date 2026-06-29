@@ -1,0 +1,164 @@
+name: stack-python
+type: skill
+status: stable
+version: 0.1.1
+owner: stack-agent
+description: |
+  Python service, library, and data workflow modernization with minimal
+  dependencies, local tests, packaging hygiene, and privacy-safe execution.
+  Covers packages, services, scripts, CLIs, data jobs, and test suites.
+dependencies:
+  skills:
+    - seniorswe-concise
+  adapters: []
+  tools:
+    - git
+    - python
+  mcps: []
+testing:
+  coverage_target: 90
+  types:
+    - unit
+    - integration
+    - performance
+documentation:
+  readme: true
+  spec: true
+  examples_min: 3
+used_by:
+  - swe
+  - data
+governance_version: '1.0'
+last_reviewed: '2026-06-28'
+
+stack_metadata:
+  stack_type: "Python"
+  use_cases:
+    - packages
+    - services
+    - scripts
+    - command_line_interfaces
+    - data_jobs
+    - test_suites
+
+  build_system:
+    primary: "uv (preferred) or pip"
+    packaging: "pyproject.toml (PEP 517/518)"
+    lock_files: "uv.lock or requirements.lock"
+    virtual_environments: "venv or uv venv"
+
+  project_structure:
+    entry_points: "Defined in pyproject.toml"
+    test_runners: "pytest, unittest, or custom"
+    notebooks: "Jupyter, IPython notebooks"
+    generated_code: "Build artifacts, type stubs"
+    runtime_environment: "Python version, OS, arch"
+
+  core_principles:
+    minimal_dependencies: "Prefer stdlib before adding packages"
+    local_tests: "Keep tests small and reproducible"
+    packaging_hygiene: "Clean dependencies, no bloat"
+    privacy_safe: "No secrets in logs or outputs"
+    standard_library_first: "Use built-in before pip"
+
+  checks_and_gates:
+    static_import_check: "For packaging changes"
+    smallest_test_first: "Unit tests before integration"
+    dependency_audit: "No unnecessary dependencies"
+    security_audit: "No embedded secrets"
+    packaging_validation: "pyproject.toml is valid"
+
+  security_policies:
+    network_calls: "Policy-gated"
+    credential_reads: "Policy-gated"
+    database_access: "Policy-gated"
+    model_api_calls: "Policy-gated"
+    raw_dataset_logging: "Prohibited"
+    secret_logging: "Prohibited"
+    full_file_contents: "Prohibited"
+
+  inputs:
+    pyproject_path:
+      type: string
+      description: "Path to pyproject.toml"
+      required: false
+
+    python_version:
+      type: string
+      description: "Target Python version"
+      required: false
+      example: "3.11"
+
+    use_case:
+      type: string
+      description: "Package, service, script, data job, etc."
+      required: true
+
+  outputs:
+    package_structure:
+      type: structure
+      description: "Module layout and organization"
+
+    dependency_graph:
+      type: graph
+      description: "Internal and external dependencies"
+
+    test_results:
+      type: report
+      description: "Unit and integration test output"
+
+    packaging_report:
+      type: report
+      description: "pyproject.toml validation"
+
+integration:
+  pre_requirements:
+    python_available: true
+    pyproject_toml_present: false
+    git_repo: true
+
+  registration:
+    stack_registry: true
+    in_swe_agent: true
+    auto_detection: "pyproject.toml or setup.py"
+
+  wiring:
+    stack_discoverable: true
+    test_runner_available: true
+    packaging_tools_available: true
+
+  environment:
+    requires_python: true
+    requires_git: true
+    python_versions: "3.8, 3.9, 3.10, 3.11, 3.12+"
+
+  policy_matrix:
+    allowed_by_default:
+      - read_only_inspection: true
+      - static_analysis: true
+      - local_test_runs: true
+    require_policy_approval:
+      - network_calls: true
+      - credential_reads: true
+      - database_access: true
+      - model_api_calls: true
+    disabled_by_default:
+      - public_telemetry: true
+      - public_tunnels: true
+      - cookie_import: true
+      - public_scraping: true
+
+quality:
+  test_coverage: 92
+  documentation_completeness: 94
+  security_review_date: "2026-06-27"
+  performance_tested: true
+  error_cases_documented: true
+
+  supported_frameworks: "pytest, unittest, nose2"
+  packaging_standards: "PEP 517, 518, 420, 440"
+  type_checking: "mypy, pyright, pydantic"
+  linting: "ruff, flake8, pylint"
+
+exceptions: []
+deprecation: null

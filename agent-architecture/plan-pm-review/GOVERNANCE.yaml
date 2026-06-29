@@ -1,0 +1,29 @@
+name: plan-pm-review
+type: skill
+status: beta
+version: 0.1.1
+owner: planner
+description: |
+  Product manager plan review. Reviews user value, requirements clarity, acceptance
+  criteria, rollout, measurement, stakeholder impact, and non-goals.
+dependencies:
+  skills:
+    - spec
+  adapters: []
+  tools:
+    - git
+    - npm
+    - python
+  mcps: []
+testing:
+  coverage_target: 80
+  types:
+    - unit
+    - integration
+documentation:
+  readme: true
+  spec: true
+  examples_min: 2
+used_by: []
+governance_version: '1.0'
+last_reviewed: '2026-06-28'

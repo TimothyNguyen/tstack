@@ -7,6 +7,8 @@ import test from 'node:test';
 import { allocateSubagentWorktree } from '../core/subagent-worktrees.mjs';
 import {
   applySubagentPatch,
+  assertAllowedFiles,
+  changedFilesFromStatus,
   exportSubagentPatch,
   rejectSubagentPatch,
 } from '../core/subagent-import.mjs';
@@ -73,6 +75,62 @@ test('applySubagentPatch rejects changes outside allowed paths', () => {
   fs.rmSync(repo, { recursive: true, force: true });
 });
 
+test('applySubagentPatch throws when worktree has no changes', () => {
+  const repo = makeRepo();
+  allocateSubagentWorktree({
+    id: 'implementer-nochange',
+    role: 'implementer',
+    task: 'No change task',
+    allowedPaths: ['src/**'],
+    tools: ['shellRead', 'shellWrite'],
+  }, { baseDir: repo });
+
+  assert.throws(
+    () => applySubagentPatch('implementer-nochange', { baseDir: repo }),
+    /has no changes to apply/,
+  );
+
+  fs.rmSync(repo, { recursive: true, force: true });
+});
+
+test('exportSubagentPatch uses default baseDir when option is not provided', () => {
+  assert.throws(() => exportSubagentPatch('nonexistent-default-dir-xq'), /Missing subagent allocation/);
+});
+
+test('applySubagentPatch uses default baseDir when option is not provided', () => {
+  assert.throws(() => applySubagentPatch('nonexistent-default-dir-xq'), /Missing subagent/);
+});
+
+test('assertAllowedFiles passes when all files match allowed paths', () => {
+  assert.doesNotThrow(() => assertAllowedFiles(['src/auth.js', 'src/utils.js'], ['src/**']));
+});
+
+test('assertAllowedFiles throws when a file is outside allowed paths', () => {
+  assert.throws(
+    () => assertAllowedFiles(['src/auth.js', 'README.md'], ['src/**']),
+    /outside allowed paths/,
+  );
+});
+
+test('changedFilesFromStatus includes renamed files by their new name', () => {
+  const repo = makeRepo();
+  const allocation = allocateSubagentWorktree({
+    id: 'implementer-auth',
+    role: 'implementer',
+    task: 'Rename auth file',
+    allowedPaths: ['src/**'],
+    tools: ['shellRead', 'shellWrite'],
+  }, { baseDir: repo });
+
+  execFileSync('git', ['mv', 'src/auth.js', 'src/auth2.js'], { cwd: allocation.worktreePath });
+
+  const files = changedFilesFromStatus(allocation.worktreePath);
+  assert.deepEqual(files, ['src/auth2.js']);
+
+  git(repo, ['worktree', 'remove', '--force', allocation.worktreePath]);
+  fs.rmSync(repo, { recursive: true, force: true });
+});
+
 test('rejectSubagentPatch records rejection and leaves coordinator repo unchanged', () => {
   const repo = makeRepo();
   const allocation = allocateSubagentWorktree({
@@ -92,4 +150,8 @@ test('rejectSubagentPatch records rejection and leaves coordinator repo unchange
 
   git(repo, ['worktree', 'remove', '--force', allocation.worktreePath]);
   fs.rmSync(repo, { recursive: true, force: true });
+});
+
+test('rejectSubagentPatch uses fallback baseDir when options.baseDir is absent (covers || right side at line 109)', () => {
+  assert.throws(() => rejectSubagentPatch('nonexistent-id', 'reason'), /Missing subagent allocation/);
 });

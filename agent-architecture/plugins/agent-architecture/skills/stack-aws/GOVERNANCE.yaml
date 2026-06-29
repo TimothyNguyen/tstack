@@ -1,0 +1,47 @@
+name: stack-aws
+type: skill
+status: beta
+version: 0.1.1
+owner: stack-agent
+description: |
+  AWS application modernization planning with least-privilege, local-first
+  validation, explicit approvals, and no default cloud mutation.
+dependencies:
+  skills: []
+  adapters: []
+  tools: []
+  mcps: []
+testing:
+  coverage_target: 80
+  types:
+    - unit
+    - integration
+documentation:
+  readme: true
+  spec: true
+  examples_min: 2
+used_by:
+  - adapter-ag-ui
+  - adapter-agentcore
+  - adapter-docker-mcp
+  - adapter-google-adk
+  - adapter-mcp
+  - adapter-strands
+  - canary
+  - careful
+  - codebase-engine
+  - commit
+  - guard
+  - health
+  - learn
+  - migration-review
+  - plan-eng-review
+  - release
+  - security-review
+  - ship
+  - stack-aws
+  - stack-aws-dms
+  - systematic-debugging
+  - using-agent-skills
+governance_version: '1.0'
+last_reviewed: '2026-06-28'

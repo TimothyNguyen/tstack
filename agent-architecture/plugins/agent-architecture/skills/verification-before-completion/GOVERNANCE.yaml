@@ -1,0 +1,25 @@
+name: verification-before-completion
+type: skill
+status: beta
+version: 0.1.1
+owner: orchestrator
+description: |
+  Ship-readiness verification workflow. Run verification commands and confirm output
+  before claiming work is complete or passing. Evidence before assertions always.
+dependencies:
+  skills: []
+  adapters: []
+  tools: []
+  mcps: []
+testing:
+  coverage_target: 80
+  types:
+    - unit
+    - integration
+documentation:
+  readme: true
+  spec: true
+  examples_min: 2
+used_by: []
+governance_version: '1.0'
+last_reviewed: '2026-06-28'

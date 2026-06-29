@@ -1,0 +1,31 @@
+name: generate-testability-wrappers
+type: skill
+status: stable
+version: 1.0.0
+owner: orchestrator
+description: >
+  Generate wrapper interfaces and DI registration for hard-to-test static dependencies in C#. Produces IFileSystem,
+  IEnvironmentProvider, IConsole, IProcessRunner wrappers, or guides adoption of TimeProvider and IHttpClientFactory.
+  USE FOR: generate wrapper for static, create IFileSystem wrapper, wrap DateTime.Now, make static testable, make class
+  testable, create abstraction for File.*, generate DI registration, TimeProvider adoption, IHttpClientFactory setup,
+  testability wrapper, mock-friendly interface, mock time in tests, create the right abstraction to mock, how to mock
+  DateTime, test code using File.ReadAllText, what abstraction for Environment, how to make statics injectable, adopt
+  System.IO.Abstractions, make file calls testable. DO NOT USE FOR: detecting statics (use detect-static-dependencies),
+  migrating call sites (use migrate-static-to-wrapper), general interface design not about testability.
+dependencies:
+  skills: []
+  adapters: []
+  tools: []
+  mcps: []
+testing:
+  coverage_target: 90
+  types:
+    - unit
+    - integration
+documentation:
+  readme: true
+  spec: true
+  examples_min: 2
+used_by: []
+governance_version: '1.0'
+last_reviewed: '2026-06-28'

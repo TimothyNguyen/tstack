@@ -446,7 +446,7 @@ npm run build:skills
 ```yaml
 # Pre-commit hook checks:
 - Metadata validation
-- Test coverage (80%+)
+- Test coverage (95%+ branch)
 - Type checking (mypy)
 - Code formatting (black)
 - No hardcoded secrets (trufflehog)
@@ -783,7 +783,7 @@ npm install agent-architecture
 # .githooks/pre-commit
 - Metadata validation (YAML syntax, required fields)
 - Test passing (pytest)
-- Code coverage (>80%)
+- Code coverage (>95% branch)
 - Type checking (mypy)
 - Code formatting (black)
 - No secrets (trufflehog)

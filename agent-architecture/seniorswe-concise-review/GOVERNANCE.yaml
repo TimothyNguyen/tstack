@@ -1,0 +1,35 @@
+name: seniorswe-concise-review
+type: skill
+status: beta
+version: 0.1.1
+owner: swe-agent
+description: |
+  Code review focused exclusively on over-engineering. Finds what to delete:
+  reinvented standard library, unneeded dependencies, speculative abstractions,
+  dead flexibility. One line per finding: location, what to cut, what replaces
+  it. Use when the user says "review for over-engineering", "what can we
+  delete", "is this over-engineered", "simplify review", or invokes
+  /seniorswe-concise-review. Complements correctness-focused review, this one only
+  hunts complexity.
+dependencies:
+  skills:
+    - seniorswe-concise
+    - subagent-orchestrator
+  adapters: []
+  tools:
+    - docker
+    - github
+    - npm
+  mcps: []
+testing:
+  coverage_target: 80
+  types:
+    - unit
+    - integration
+documentation:
+  readme: true
+  spec: true
+  examples_min: 2
+used_by: []
+governance_version: '1.0'
+last_reviewed: '2026-06-28'

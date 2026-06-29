@@ -12,6 +12,7 @@
  */
 import fs from 'node:fs';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 const ROOT = path.resolve(import.meta.dirname, '..');
 const CHECK = process.argv.includes('--check');
@@ -20,9 +21,9 @@ function read(rel) {
   return fs.readFileSync(path.join(ROOT, rel), 'utf8');
 }
 
-function write(rel, content) {
-  const full = path.join(ROOT, rel);
-  if (CHECK) {
+function write(rel, content, { check = CHECK, root = ROOT } = {}) {
+  const full = path.join(root, rel);
+  if (check) {
     const current = fs.existsSync(full) ? fs.readFileSync(full, 'utf8') : '';
     if (current !== content) {
       console.error(`${rel} is stale; run npm run gen:hosts from agent-architecture/`);
@@ -210,10 +211,17 @@ function buildCopilotInstructions() {
   ].join('\n');
 }
 
-write('generated/codex/AGENTS.md', buildAgentsMd());
-write('generated/copilot/copilot-instructions.md', buildCopilotInstructions());
-
-if (!CHECK) {
-  console.log('generated/codex/AGENTS.md');
-  console.log('generated/copilot/copilot-instructions.md');
+function logOutputs(check = CHECK) {
+  if (!check) {
+    console.log('generated/codex/AGENTS.md');
+    console.log('generated/copilot/copilot-instructions.md');
+  }
 }
+
+if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+  write('generated/codex/AGENTS.md', buildAgentsMd());
+  write('generated/copilot/copilot-instructions.md', buildCopilotInstructions());
+  logOutputs(CHECK);
+}
+
+export { buildAgentsMd, buildCopilotInstructions, logOutputs, routingSection, stripFrontmatter, write };

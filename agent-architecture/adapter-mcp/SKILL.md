@@ -4,11 +4,12 @@ version: 0.1.1
 description: |
   Design optional Model Context Protocol adapters with default-deny tools,
   narrow schemas, and local audit boundaries.
+allowed-tools:
+  - Read
+  - Grep
+  - Glob
+  - Bash
 agents: [swe, _infrastructure, orchestrate, cloud]
-
-metadata:
-  support:
-    last-reviewed: "2026-06-27"
 ---
 
 ## Enterprise Preamble

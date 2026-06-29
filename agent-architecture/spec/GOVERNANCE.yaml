@@ -1,0 +1,48 @@
+name: spec
+type: skill
+status: beta
+version: 0.1.1
+owner: orchestrator
+description: |
+  Converts product or engineering intent into a scoped, reviewable specification with
+  goals, constraints, interfaces, invariants, tasks, and bug ledger.
+dependencies:
+  skills:
+    - spec
+  adapters: []
+  tools:
+    - git
+    - python
+  mcps: []
+testing:
+  coverage_target: 80
+  types:
+    - unit
+    - integration
+documentation:
+  readme: true
+  spec: true
+  examples_min: 2
+used_by:
+  - adapter-openapi
+  - atlassian-docs
+  - autoplan
+  - brainstorming
+  - codebase-engine
+  - diagram
+  - diagram-export
+  - diagram-generate
+  - diagram-search
+  - diagram-validate
+  - document-generate
+  - document-release
+  - documentation
+  - learn
+  - plan-design-review
+  - plan-devex-review
+  - plan-pm-review
+  - plan-review
+  - spec
+  - using-agent-skills
+governance_version: '1.0'
+last_reviewed: '2026-06-28'

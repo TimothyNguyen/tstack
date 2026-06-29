@@ -4,11 +4,12 @@ version: 0.1.1
 description: |
   Review modernization and migration plans for sequencing, rollback,
   compatibility, data safety, privacy, and production readiness.
+allowed-tools:
+  - Read
+  - Grep
+  - Glob
+  - Bash
 agents: [migration, swe, cloud]
-
-metadata:
-  support:
-    last-reviewed: "2026-06-27"
 ---
 
 ## Enterprise Preamble

@@ -1,0 +1,29 @@
+name: plan-director-review
+type: skill
+status: beta
+version: 0.1.1
+owner: planner
+description: |
+  Director or senior-principal plan review. Reviews scope, sequencing, architecture risk,
+  team fit, operational maturity, and executive-readiness before implementation.
+dependencies:
+  skills:
+    - subagent-orchestrator
+  adapters: []
+  tools:
+    - git
+    - npm
+    - python
+  mcps: []
+testing:
+  coverage_target: 80
+  types:
+    - unit
+    - integration
+documentation:
+  readme: true
+  spec: true
+  examples_min: 2
+used_by: []
+governance_version: '1.0'
+last_reviewed: '2026-06-28'

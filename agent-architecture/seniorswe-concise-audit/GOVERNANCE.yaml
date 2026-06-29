@@ -1,0 +1,30 @@
+name: seniorswe-concise-audit
+type: skill
+status: beta
+version: 0.1.1
+owner: swe-agent
+description: |
+  Whole-repo audit for over-engineering. Like /seniorswe-concise-review but
+  scans the entire codebase instead of a diff: a ranked list of what to delete,
+  simplify, or replace with stdlib/native equivalents. Invoke via
+  /seniorswe-concise-audit, or "audit this codebase", "audit for
+  over-engineering", "what can I delete", "find bloat". One-shot report, does
+  not apply fixes.
+dependencies:
+  skills:
+    - seniorswe-concise
+  adapters: []
+  tools: []
+  mcps: []
+testing:
+  coverage_target: 80
+  types:
+    - unit
+    - integration
+documentation:
+  readme: true
+  spec: true
+  examples_min: 2
+used_by: []
+governance_version: '1.0'
+last_reviewed: '2026-06-28'

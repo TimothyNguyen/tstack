@@ -1,0 +1,32 @@
+name: grade-tests
+type: skill
+status: stable
+version: 1.0.0
+owner: orchestrator
+description: >
+  Grades a specified set of test methods individually and produces a concise table mapping each test (fully-qualified
+  name) to a letter grade (A–F), a score band, and a one-line note — designed to be posted as a PR comment. Use when the
+  caller wants per-test feedback on a curated list of methods (for example, the new or modified tests in a pull
+  request), not a suite-wide audit. Polyglot: .NET (MSTest/xUnit/NUnit/TUnit), Python (pytest/unittest), TS/JS
+  (Jest/Vitest/Mocha/node:test), Java (JUnit/TestNG), Go, Ruby (RSpec/Minitest), Rust, Swift (XCTest/Swift Testing),
+  Kotlin (JUnit/Kotest), PowerShell (Pester), C++ (GoogleTest/Catch2/doctest). Input is a list of test methods (or
+  method bodies / file+line spans); output is a compact markdown table plus a short summary. DO NOT USE FOR: full suite
+  audits (use test-quality-auditor agent or test-anti-patterns), writing new tests (use code-testing-generator agent or
+  writing-mstest-tests), fixing failures, or measuring code coverage.
+dependencies:
+  skills: []
+  adapters: []
+  tools: []
+  mcps: []
+testing:
+  coverage_target: 90
+  types:
+    - unit
+    - integration
+documentation:
+  readme: true
+  spec: true
+  examples_min: 2
+used_by: []
+governance_version: '1.0'
+last_reviewed: '2026-06-28'

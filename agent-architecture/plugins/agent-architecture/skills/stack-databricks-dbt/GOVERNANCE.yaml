@@ -1,0 +1,25 @@
+name: stack-databricks-dbt
+type: skill
+status: beta
+version: 0.1.1
+owner: stack-agent
+description: |
+  dbt on Databricks patterns for models, tests, docs, lineage, and governed
+  transformations.
+dependencies:
+  skills: []
+  adapters: []
+  tools: []
+  mcps: []
+testing:
+  coverage_target: 80
+  types:
+    - unit
+    - integration
+documentation:
+  readme: true
+  spec: true
+  examples_min: 2
+used_by: []
+governance_version: '1.0'
+last_reviewed: '2026-06-28'

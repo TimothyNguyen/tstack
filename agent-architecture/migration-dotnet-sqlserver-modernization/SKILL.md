@@ -4,11 +4,12 @@ version: 0.1.1
 description: |
   Plan .NET Framework and SQL Server modernization using compatibility
   assessment, code translation references, and governed data migration lanes.
+allowed-tools:
+  - Read
+  - Grep
+  - Glob
+  - Bash
 agents: [migration]
-
-metadata:
-  support:
-    last-reviewed: "2026-06-27"
 ---
 
 ## Enterprise Preamble

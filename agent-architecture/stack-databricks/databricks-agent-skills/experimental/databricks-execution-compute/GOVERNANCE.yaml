@@ -1,0 +1,25 @@
+name: databricks-execution-compute
+type: skill
+status: beta
+version: 1.0.0
+owner: orchestrator
+description: >-
+  Execute code and manage compute on Databricks: run Python/Scala/SQL/R via serverless, classic, or interactive
+  clusters, and create/resize/delete clusters and SQL warehouses.
+dependencies:
+  skills: []
+  adapters: []
+  tools: []
+  mcps: []
+testing:
+  coverage_target: 80
+  types:
+    - unit
+    - integration
+documentation:
+  readme: true
+  spec: true
+  examples_min: 2
+used_by: []
+governance_version: '1.0'
+last_reviewed: '2026-06-28'
