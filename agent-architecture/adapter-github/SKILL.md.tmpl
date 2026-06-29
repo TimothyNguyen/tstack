@@ -4,6 +4,11 @@ version: 0.1.1
 description: |
   Optional GitHub MCP/CLI adapter guidance for repo, issue, and PR context
   with read-only/default-deny safety.
+allowed-tools:
+  - Read
+  - Grep
+  - Glob
+  - Bash
 agents: [swe, orchestrate, pm]
 ---
 
