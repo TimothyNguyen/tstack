@@ -8,13 +8,12 @@ const mode = getDefaultMode();
 if (mode === 'off') {
   clearMode();
   writeHookOutput('SessionStart', 'off', 'OK');
-  process.exit(0);
+} else {
+  try {
+    setMode(mode);
+  } catch {}
+
+  try {
+    writeHookOutput('SessionStart', mode, getSeniorsweConciseInstructions(mode));
+  } catch {}
 }
-
-try {
-  setMode(mode);
-} catch {}
-
-try {
-  writeHookOutput('SessionStart', mode, getSeniorsweConciseInstructions(mode));
-} catch {}
