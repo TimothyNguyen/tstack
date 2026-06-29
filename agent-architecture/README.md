@@ -6,6 +6,46 @@ Enterprise-safe skill pack for Claude Code, Codex, and Copilot CLI.
 
 **Extensibility-first:** Principal engineers can add 150+ skill families systematically with metadata-driven architecture, validation framework, and auto-generated documentation.
 
+## Installation
+
+### Minimal install (core only)
+
+```bash
+npm install agent-architecture
+npx agent-architecture install --hosts claude
+```
+
+Installs core runtime, core agents (`swe`, `qa-agent`, `spec-agent`, `pm`), and ~25 universal skills.
+
+### With add-on packages
+
+```bash
+npm install agent-architecture @agent-arch/stacks @agent-arch/adapters @agent-arch/skills
+npx agent-architecture install --hosts claude,codex
+```
+
+Add-on packages are auto-discovered from `node_modules/@agent-arch/*` at install time. Install only what you need.
+
+### Available packages
+
+| Package | Contents |
+|---|---|
+| `agent-architecture` | Core runtime, agents (swe/qa-agent/spec-agent/pm), universal skills |
+| `@agent-arch/adapters` | Framework adapters: MCP, LangGraph, AG-UI, AgentCore, Strands, GitHub, Databricks, OpenAPI, Google ADK, Docker MCP |
+| `@agent-arch/stacks` | Tech stacks: AWS, Python, React/TS, Spring Boot, Databricks, C#, Postgres, SQL Server + domain skills |
+| `@agent-arch/skills` | Specialty packs: diagrams, migration, plan-reviews, seniorswe-concise, security, design, benchmarks, docs |
+
+### Install options
+
+```bash
+npx agent-architecture install --hosts claude,codex   # generate for specific hosts
+npx agent-architecture install --private              # no telemetry, no cloud memory
+npx agent-architecture install --docker-mcp backend   # wire Docker MCP Gateway
+npx agent-architecture install --dry-run              # preview without writing files
+npx agent-architecture upgrade                        # upgrade existing install
+npx agent-architecture doctor                         # check install health
+```
+
 ## Install
 
 ```bash
