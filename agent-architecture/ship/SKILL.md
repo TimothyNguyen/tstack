@@ -1,8 +1,9 @@
 ---
 name: ship
-version: 0.1.1
+version: 0.1.2
 description: |
-  Prepares a human-approved PR, merge, or release handoff.
+  Prepares a human-approved PR, merge, or release handoff. Runs parallel specialist
+  review (QA, security, PM, DevEx) before producing the handoff artifact.
 allowed-tools:
   - Read
   - Grep
@@ -25,12 +26,48 @@ agents: [swe, cloud, release-agent]
 
 Prepares a human-approved PR, merge, or release handoff.
 
-## Steps
+## Phase 1: Confirm Scope
 
-1. Confirm the user goal and scope.
-2. Read the relevant local project files.
+1. Confirm the user goal: what is being shipped, to where, and who approves.
+2. Read relevant local project files: changelogs, migrations, config diffs.
 3. Check policy requirements before any privileged action.
-4. Produce a concise result with evidence, risks, and next actions.
+
+## Phase 2: Parallel Specialist Review
+
+Before handoff, apply four specialist lenses. Treat each as an independent review — collect all findings before proceeding to Phase 3.
+
+### QA Lens
+- Are all acceptance criteria covered by tests?
+- Is test coverage adequate for the changed paths?
+- Are there regression risks in adjacent unchanged code?
+- See `references/test-quality.md` for test quality signals.
+
+### Security Lens
+- Does the diff touch auth, credentials, data access, or agent tools?
+- Are OWASP LLM Top 10 risks addressed for any LLM/agent code?
+- Any new public egress, public endpoint, or privilege escalation?
+- See `references/security-checklist.md` for the full checklist.
+
+### PM / Stakeholder Lens
+- Does the change match the spec? No undocumented behavior changes?
+- Are breaking changes called out in the changelog?
+- Is there anything a non-technical stakeholder needs to act on?
+
+### DevEx Lens
+- Does the diff introduce friction for the next engineer? (Dead code, magic numbers, missing types)
+- Are error messages actionable?
+- Is the commit history clean and atomic?
+
+## Phase 3: Consolidate and Ship
+
+1. Collect findings from all four lenses.
+2. For any **Critical** finding: block ship, fix it first.
+3. For any **Important** finding: document in PR description, assign follow-up.
+4. For **Minor** findings: note in PR description.
+5. Produce the handoff artifact with:
+   - Summary of what changed and why
+   - Findings from specialist review with severity
+   - Explicit approval request from the human
 
 ## Policy Requirements
 
