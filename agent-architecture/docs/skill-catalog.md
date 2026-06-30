@@ -1,6 +1,6 @@
 # Skill Catalog
 
-Agent-architecture provides 33 reusable skills organized by category and specialized role.
+Agent-architecture provides 34 reusable skills organized by category and specialized role.
 
 **[Contributing?](./CONTRIBUTING.md)** See submission process and validation checklist.
 
@@ -21,6 +21,7 @@ Agent-architecture provides 33 reusable skills organized by category and special
 - **[`context-restore`](./context-restore/SKILL.md)** — | *(swe, orchestrate)*
 - **[`context-save`](./context-save/SKILL.md)** — | *(swe, orchestrate)*
 - **[`copilot`](./copilot/SKILL.md)** — |
+- **[`doubt-driven-development`](./doubt-driven-development/SKILL.md)** — | *(swe, qa-agent)*
 - **[`guard`](./guard/SKILL.md)** — | *(swe, migration)*
 - **[`health`](./health/SKILL.md)** — | *(swe, qa-agent)*
 - **[`investigate`](./investigate/SKILL.md)** — | *(swe, qa-agent)*
@@ -50,13 +51,14 @@ Agent-architecture provides 33 reusable skills organized by category and special
 
 ### `/swe`
 
-22 skills
+23 skills
 
 - [`autoplan`](./autoplan/SKILL.md) — |
 - [`brainstorming`](./brainstorming/SKILL.md) — |
 - [`commit`](./commit/SKILL.md) — |
 - [`context-restore`](./context-restore/SKILL.md) — |
 - [`context-save`](./context-save/SKILL.md) — |
+- [`doubt-driven-development`](./doubt-driven-development/SKILL.md) — |
 - [`guard`](./guard/SKILL.md) — |
 - [`health`](./health/SKILL.md) — |
 - [`investigate`](./investigate/SKILL.md) — |
@@ -77,9 +79,10 @@ Agent-architecture provides 33 reusable skills organized by category and special
 
 ### `/qa-agent`
 
-12 skills
+13 skills
 
 - [`canary`](./canary/SKILL.md) — |
+- [`doubt-driven-development`](./doubt-driven-development/SKILL.md) — |
 - [`health`](./health/SKILL.md) — |
 - [`investigate`](./investigate/SKILL.md) — |
 - [`learn`](./learn/SKILL.md) — |
@@ -94,10 +97,11 @@ Agent-architecture provides 33 reusable skills organized by category and special
 
 ### `/spec-agent`
 
-5 skills
+6 skills
 
 - [`autoplan`](./autoplan/SKILL.md) — |
 - [`brainstorming`](./brainstorming/SKILL.md) — |
+- [`doubt-driven-development`](./doubt-driven-development/SKILL.md) — |
 - [`learn`](./learn/SKILL.md) — |
 - [`spec`](./spec/SKILL.md) — |
 - [`using-agent-skills`](./using-agent-skills/SKILL.md) — |
@@ -221,7 +225,7 @@ Agent-architecture provides 33 reusable skills organized by category and special
 
 | Category | Count |
 |----------|-------|
-| Core Workflows | 33 |
-| **Total** | **33** |
+| Core Workflows | 34 |
+| **Total** | **34** |
 
 See [METADATA-SCHEMA.md](./METADATA-SCHEMA.md) for skill development and metadata reference.

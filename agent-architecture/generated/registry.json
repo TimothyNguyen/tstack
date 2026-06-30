@@ -1,18 +1,9 @@
 {
-  "generatedAt": "2026-06-28T18:38:41.492Z",
-  "count": 115,
+  "generatedAt": "2026-06-30T01:14:58.065Z",
+  "count": 88,
   "byAgent": {
     "_infrastructure": [
       "agent-architecture",
-      "adapter-ag-ui",
-      "adapter-agentcore",
-      "adapter-docker-mcp",
-      "adapter-google-adk",
-      "adapter-langgraph",
-      "adapter-mcp",
-      "adapter-seniorswe-concise",
-      "adapter-strands",
-      "architecture-agent-upgrade",
       "careful",
       "claude",
       "codex",
@@ -22,10 +13,14 @@
       "guard",
       "learnings",
       "reference-skill-patterns",
+      "skillify",
+      "pm",
+      "qa-agent",
+      "spec-agent",
+      "swe",
+      "architecture-agent-upgrade",
       "rtk-token-optimizer",
       "seniorswe-concise-help",
-      "skillify",
-      "stack",
       "cloud",
       "data",
       "design-agent",
@@ -34,63 +29,45 @@
       "migration",
       "migration-engineer",
       "orchestrate",
-      "pm",
-      "qa-agent",
       "release-agent",
-      "security",
-      "spec-agent",
-      "swe"
+      "security"
     ],
     "_linter": [
       "pre-commit-review"
     ],
     "cloud": [
-      "adapter-ag-ui",
-      "adapter-agentcore",
-      "adapter-docker-mcp",
-      "adapter-google-adk",
-      "adapter-mcp",
-      "adapter-strands",
       "canary",
       "careful",
-      "codebase-engine",
       "commit",
       "guard",
       "health",
       "learn",
-      "migration-review",
-      "plan-eng-review",
       "release",
-      "security-review",
       "ship",
-      "stack-aws",
-      "stack-aws-dms",
       "systematic-debugging",
-      "using-agent-skills"
+      "using-agent-skills",
+      "codebase-engine",
+      "migration-review",
+      "observability-and-instrumentation",
+      "plan-eng-review",
+      "security-review"
     ],
     "data": [
-      "adapter-databricks",
+      "commit",
+      "learn",
+      "systematic-debugging",
+      "using-agent-skills",
       "benchmark",
       "codebase-engine",
-      "commit",
-      "domain-data-governance",
-      "domain-experiment-design",
-      "domain-mlops-databricks",
-      "domain-model-interpretation",
-      "learn",
       "plan-eng-review",
       "rtk-token-optimizer",
       "seniorswe-concise",
-      "stack-databricks",
-      "stack-databricks-dbt",
-      "stack-postgres",
-      "stack-python",
-      "systematic-debugging",
-      "token-optimizer",
-      "using-agent-skills"
+      "token-optimizer"
     ],
     "design-agent": [
       "brainstorming",
+      "learn",
+      "using-agent-skills",
       "chrome-devtools",
       "codebase-engine",
       "design-html",
@@ -101,10 +78,7 @@
       "diagram-search",
       "diagram-style",
       "diagram-validate",
-      "learn",
-      "plan-design-review",
-      "stack-react-typescript",
-      "using-agent-skills"
+      "plan-design-review"
     ],
     "diagram-agent": [
       "diagram-export",
@@ -114,31 +88,25 @@
       "diagram-validate"
     ],
     "interviewer": [
+      "learn",
+      "using-agent-skills",
       "atlassian-docs",
       "codebase-engine",
-      "diagram",
-      "learn",
-      "using-agent-skills"
+      "diagram"
     ],
     "migration": [
       "careful",
-      "codebase-engine",
       "commit",
       "context-restore",
       "context-save",
       "guard",
       "learn",
+      "systematic-debugging",
+      "using-agent-skills",
+      "codebase-engine",
       "migration-dotnet-sqlserver-modernization",
       "migration-review",
-      "plan-eng-review",
-      "stack-aws-dms",
-      "stack-csharp",
-      "stack-legacy-frontend",
-      "stack-postgres",
-      "stack-sql-server",
-      "stack-sqlserver-to-postgres",
-      "systematic-debugging",
-      "using-agent-skills"
+      "plan-eng-review"
     ],
     "migration-engineer": [
       "migration-sqlserver-assess",
@@ -148,91 +116,78 @@
       "migration-sqlserver-test"
     ],
     "orchestrate": [
-      "adapter-ag-ui",
-      "adapter-agentcore",
-      "adapter-docker-mcp",
-      "adapter-github",
-      "adapter-google-adk",
-      "adapter-langgraph",
-      "adapter-mcp",
-      "adapter-strands",
       "autoplan",
       "brainstorming",
       "change-router",
-      "codebase-engine",
       "context-restore",
       "context-save",
-      "diagram",
-      "diagram-generate",
-      "diagram-search",
       "learn",
       "learnings",
-      "plan-director-review",
-      "plan-review",
       "pre-commit-review",
       "reference-skill-patterns",
       "retro",
-      "seniorswe-concise-review",
       "skillify",
       "subagent-orchestrator",
-      "token-optimizer",
       "using-agent-skills",
-      "writing-skills"
+      "writing-skills",
+      "codebase-engine",
+      "diagram",
+      "diagram-generate",
+      "diagram-search",
+      "plan-director-review",
+      "plan-review",
+      "seniorswe-concise-review",
+      "token-optimizer"
     ],
     "pm": [
-      "adapter-github",
+      "learn",
+      "learnings",
+      "release",
+      "release-notes",
+      "retro",
+      "spec",
+      "using-agent-skills",
       "atlassian-docs",
       "diagram-export",
       "document-generate",
       "document-release",
       "documentation",
-      "domain-data-governance",
-      "domain-experiment-design",
-      "domain-model-interpretation",
-      "learn",
-      "learnings",
       "plan-design-review",
       "plan-director-review",
-      "plan-pm-review",
-      "release",
-      "release-notes",
-      "retro",
-      "spec",
-      "using-agent-skills"
+      "plan-pm-review"
     ],
     "qa-agent": [
+      "canary",
+      "doubt-driven-development",
+      "health",
+      "investigate",
+      "learn",
+      "pre-commit-review",
+      "qa",
+      "receiving-code-review",
+      "review",
+      "systematic-debugging",
+      "test",
+      "using-agent-skills",
+      "verification-before-completion",
       "atlassian-docs",
       "benchmark",
-      "canary",
       "chrome-devtools",
       "codebase-engine",
       "design-review",
       "diagram-validate",
       "documentation",
-      "health",
-      "investigate",
-      "learn",
       "migration-sqlserver-test",
+      "observability-and-instrumentation",
       "plan-devex-review",
       "plan-review",
-      "pre-commit-review",
-      "qa",
-      "receiving-code-review",
-      "review",
       "security-review",
-      "systematic-debugging",
-      "test",
-      "token-optimizer",
-      "using-agent-skills",
-      "verification-before-completion"
+      "token-optimizer"
     ],
     "release-agent": [
-      "adapter-docker-mcp",
       "canary",
       "careful",
-      "codebase-engine",
       "commit",
-      "document-release",
       "learn",
       "pre-commit-review",
       "release",
@@ -240,26 +195,31 @@
       "retro",
       "ship",
       "using-agent-skills",
-      "verification-before-completion"
+      "verification-before-completion",
+      "codebase-engine",
+      "document-release"
     ],
     "security": [
       "careful",
-      "codebase-engine",
       "guard",
       "health",
       "investigate",
       "learn",
       "receiving-code-review",
-      "security-review",
       "systematic-debugging",
       "using-agent-skills",
-      "verification-before-completion"
+      "verification-before-completion",
+      "codebase-engine",
+      "security-review"
     ],
     "spec-agent": [
-      "adapter-openapi",
-      "atlassian-docs",
       "autoplan",
       "brainstorming",
+      "doubt-driven-development",
+      "learn",
+      "spec",
+      "using-agent-skills",
+      "atlassian-docs",
       "codebase-engine",
       "diagram",
       "diagram-export",
@@ -269,52 +229,51 @@
       "document-generate",
       "document-release",
       "documentation",
-      "learn",
       "plan-design-review",
       "plan-devex-review",
       "plan-pm-review",
-      "plan-review",
-      "spec",
-      "using-agent-skills"
+      "plan-review"
     ],
     "swe": [
-      "adapter-ag-ui",
-      "adapter-docker-mcp",
-      "adapter-github",
-      "adapter-mcp",
-      "adapter-openapi",
-      "adapter-seniorswe-concise",
-      "atlassian-docs",
       "autoplan",
-      "benchmark",
       "brainstorming",
-      "chrome-devtools",
-      "codebase-engine",
       "commit",
       "context-restore",
       "context-save",
-      "design-html",
-      "design-review",
-      "document-release",
+      "doubt-driven-development",
       "guard",
       "health",
       "investigate",
       "learn",
       "learnings",
-      "migration-review",
-      "migration-sqlserver-assess",
-      "migration-sqlserver-data",
-      "migration-sqlserver-perf",
-      "migration-sqlserver-schema",
-      "plan-devex-review",
-      "plan-eng-review",
-      "plan-review",
       "pre-commit-review",
       "qa",
       "receiving-code-review",
       "reference-skill-patterns",
       "release-notes",
       "review",
+      "ship",
+      "skillify",
+      "systematic-debugging",
+      "test",
+      "using-agent-skills",
+      "verification-before-completion",
+      "atlassian-docs",
+      "benchmark",
+      "chrome-devtools",
+      "codebase-engine",
+      "design-html",
+      "design-review",
+      "document-release",
+      "migration-review",
+      "migration-sqlserver-assess",
+      "migration-sqlserver-data",
+      "migration-sqlserver-perf",
+      "migration-sqlserver-schema",
+      "observability-and-instrumentation",
+      "plan-devex-review",
+      "plan-eng-review",
+      "plan-review",
       "rtk-token-optimizer",
       "security-review",
       "seniorswe-concise",
@@ -323,200 +282,10 @@
       "seniorswe-concise-gain",
       "seniorswe-concise-help",
       "seniorswe-concise-review",
-      "ship",
-      "skillify",
-      "stack",
-      "stack-csharp",
-      "stack-legacy-frontend",
-      "stack-postgres",
-      "stack-python",
-      "stack-react-typescript",
-      "stack-spring-ai",
-      "stack-spring-boot",
-      "stack-sql-server",
-      "systematic-debugging",
-      "test",
-      "token-optimizer",
-      "using-agent-skills",
-      "verification-before-completion"
+      "token-optimizer"
     ]
   },
   "skills": [
-    {
-      "name": "adapter-ag-ui",
-      "version": "0.1.1",
-      "description": "Map skill progress, approvals, tool actions, findings, and artifacts into",
-      "agents": [
-        "orchestrate",
-        "_infrastructure",
-        "swe",
-        "cloud"
-      ],
-      "allowedTools": [
-        "Read",
-        "Grep",
-        "Glob",
-        "Bash"
-      ]
-    },
-    {
-      "name": "adapter-agentcore",
-      "version": "0.1.1",
-      "description": "Optional AgentCore adapter boundary for skills, tools, approvals, audit",
-      "agents": [
-        "orchestrate",
-        "_infrastructure",
-        "cloud"
-      ],
-      "allowedTools": [
-        "Read",
-        "Grep",
-        "Glob",
-        "Bash"
-      ]
-    },
-    {
-      "name": "adapter-databricks",
-      "version": "0.1.1",
-      "description": "Optional Databricks SDK adapter boundary for workspace, job, and bundle",
-      "agents": [
-        "data"
-      ],
-      "allowedTools": [
-        "Read",
-        "Grep",
-        "Glob",
-        "Bash"
-      ]
-    },
-    {
-      "name": "adapter-docker-mcp",
-      "version": "0.1.1",
-      "description": "Docker MCP Registry and Toolkit adapter. Wires 300+ pre-built containerized",
-      "agents": [
-        "cloud",
-        "release-agent",
-        "orchestrate",
-        "swe",
-        "_infrastructure"
-      ],
-      "allowedTools": [
-        "Read",
-        "Grep",
-        "Glob",
-        "Bash"
-      ]
-    },
-    {
-      "name": "adapter-github",
-      "version": "0.1.1",
-      "description": "Optional GitHub MCP/CLI adapter guidance for repo, issue, and PR context",
-      "agents": [
-        "swe",
-        "orchestrate",
-        "pm"
-      ],
-      "allowedTools": [
-        "Read",
-        "Grep",
-        "Glob",
-        "Bash"
-      ]
-    },
-    {
-      "name": "adapter-google-adk",
-      "version": "0.1.1",
-      "description": "Optional Google ADK host adapter boundary for invoking skills and tools",
-      "agents": [
-        "orchestrate",
-        "_infrastructure",
-        "cloud"
-      ],
-      "allowedTools": [
-        "Read",
-        "Grep",
-        "Glob",
-        "Bash"
-      ]
-    },
-    {
-      "name": "adapter-langgraph",
-      "version": "0.1.1",
-      "description": "Optional LangGraph orchestration boundary for durable app-level agents",
-      "agents": [
-        "orchestrate",
-        "_infrastructure"
-      ],
-      "allowedTools": [
-        "Read",
-        "Grep",
-        "Glob",
-        "Bash"
-      ]
-    },
-    {
-      "name": "adapter-mcp",
-      "version": "0.1.1",
-      "description": "Design optional Model Context Protocol adapters with default-deny tools,",
-      "agents": [
-        "swe",
-        "_infrastructure",
-        "orchestrate",
-        "cloud"
-      ],
-      "allowedTools": [
-        "Read",
-        "Grep",
-        "Glob",
-        "Bash"
-      ]
-    },
-    {
-      "name": "adapter-openapi",
-      "version": "0.1.1",
-      "description": "Use OpenAPI contracts and optional generated clients/servers while keeping",
-      "agents": [
-        "swe",
-        "spec-agent"
-      ],
-      "allowedTools": [
-        "Read",
-        "Grep",
-        "Glob",
-        "Bash"
-      ]
-    },
-    {
-      "name": "adapter-seniorswe-concise",
-      "version": "0.1.1",
-      "description": "Optional Seniorswe-Concise hook and MCP adapter for YAGNI mode injection across",
-      "agents": [
-        "swe",
-        "_infrastructure"
-      ],
-      "allowedTools": [
-        "Read",
-        "Grep",
-        "Glob",
-        "Bash"
-      ]
-    },
-    {
-      "name": "adapter-strands",
-      "version": "0.1.1",
-      "description": "Optional Strands adapter boundary for composing skills and tools with",
-      "agents": [
-        "orchestrate",
-        "_infrastructure",
-        "cloud"
-      ],
-      "allowedTools": [
-        "Read",
-        "Grep",
-        "Glob",
-        "Bash"
-      ]
-    },
     {
       "name": "agent-architecture",
       "version": "0.1.1",
@@ -1003,56 +772,13 @@
       ]
     },
     {
-      "name": "domain-data-governance",
-      "version": "0.1.1",
-      "description": "Data governance review for classification, lineage, permissions, retention,",
+      "name": "doubt-driven-development",
+      "version": "0.1.0",
+      "description": "Challenge assumptions before and during implementation. Surface load-bearing doubts",
       "agents": [
-        "data",
-        "pm"
-      ],
-      "allowedTools": [
-        "Read",
-        "Grep",
-        "Glob",
-        "Bash"
-      ]
-    },
-    {
-      "name": "domain-experiment-design",
-      "version": "0.1.1",
-      "description": "Experiment design review for randomization, power, metrics, guardrails,",
-      "agents": [
-        "data",
-        "pm"
-      ],
-      "allowedTools": [
-        "Read",
-        "Grep",
-        "Glob",
-        "Bash"
-      ]
-    },
-    {
-      "name": "domain-mlops-databricks",
-      "version": "0.1.1",
-      "description": "Databricks MLOps project structure, model lifecycle, CI/CD, monitoring, and",
-      "agents": [
-        "data"
-      ],
-      "allowedTools": [
-        "Read",
-        "Grep",
-        "Glob",
-        "Bash"
-      ]
-    },
-    {
-      "name": "domain-model-interpretation",
-      "version": "0.1.1",
-      "description": "Model interpretation review for feature effects, calibration, drift,",
-      "agents": [
-        "data",
-        "pm"
+        "swe",
+        "qa-agent",
+        "spec-agent"
       ],
       "allowedTools": [
         "Read",
@@ -1260,6 +986,22 @@
         "qa-agent"
       ],
       "allowedTools": []
+    },
+    {
+      "name": "observability-and-instrumentation",
+      "version": "0.1.0",
+      "description": "Add structured observability to code and agent outputs: tracing, structured logging,",
+      "agents": [
+        "swe",
+        "cloud",
+        "qa-agent"
+      ],
+      "allowedTools": [
+        "Read",
+        "Grep",
+        "Glob",
+        "Bash"
+      ]
     },
     {
       "name": "orchestrate",
@@ -1651,8 +1393,8 @@
     },
     {
       "name": "ship",
-      "version": "0.1.1",
-      "description": "Prepares a human-approved PR, merge, or release handoff.",
+      "version": "0.1.2",
+      "description": "Prepares a human-approved PR, merge, or release handoff. Runs parallel specialist",
       "agents": [
         "swe",
         "cloud",
@@ -1704,211 +1446,6 @@
         "_infrastructure"
       ],
       "allowedTools": []
-    },
-    {
-      "name": "stack",
-      "version": "0.1.1",
-      "description": "Tech stack meta-loader. Auto-detects project tech stack from repo signals and",
-      "agents": [
-        "_infrastructure",
-        "swe"
-      ],
-      "allowedTools": [
-        "Read",
-        "Grep",
-        "Glob",
-        "Bash"
-      ]
-    },
-    {
-      "name": "stack-aws",
-      "version": "0.1.1",
-      "description": "AWS application modernization planning with least-privilege, local-first",
-      "agents": [
-        "cloud"
-      ],
-      "allowedTools": [
-        "Read",
-        "Grep",
-        "Glob",
-        "Bash"
-      ]
-    },
-    {
-      "name": "stack-aws-dms",
-      "version": "0.1.1",
-      "description": "AWS DMS/SCT migration planning patterns for governed database migration",
-      "agents": [
-        "migration",
-        "cloud"
-      ],
-      "allowedTools": [
-        "Read",
-        "Grep",
-        "Glob",
-        "Bash"
-      ]
-    },
-    {
-      "name": "stack-csharp",
-      "version": "0.1.1",
-      "description": "C# and .NET modernization guidance for projects, packages, services, tests,",
-      "agents": [
-        "swe",
-        "migration"
-      ],
-      "allowedTools": [
-        "Read",
-        "Grep",
-        "Glob",
-        "Bash"
-      ]
-    },
-    {
-      "name": "stack-databricks",
-      "version": "0.1.1",
-      "description": "Databricks engineering workflows for Asset Bundles, jobs, notebooks, SDK",
-      "agents": [
-        "data"
-      ],
-      "allowedTools": [
-        "Read",
-        "Grep",
-        "Glob",
-        "Bash"
-      ]
-    },
-    {
-      "name": "stack-databricks-dbt",
-      "version": "0.1.1",
-      "description": "dbt on Databricks patterns for models, tests, docs, lineage, and governed",
-      "agents": [
-        "data"
-      ],
-      "allowedTools": [
-        "Read",
-        "Grep",
-        "Glob",
-        "Bash"
-      ]
-    },
-    {
-      "name": "stack-legacy-frontend",
-      "version": "0.1.1",
-      "description": "Modernize legacy frontend stacks such as Knockout, YUI, old jQuery widgets,",
-      "agents": [
-        "migration",
-        "swe"
-      ],
-      "allowedTools": [
-        "Read",
-        "Grep",
-        "Glob",
-        "Bash"
-      ]
-    },
-    {
-      "name": "stack-postgres",
-      "version": "0.1.1",
-      "description": "Postgres schema, query, migration, performance, and data-governance workflows",
-      "agents": [
-        "swe",
-        "migration",
-        "data"
-      ],
-      "allowedTools": [
-        "Read",
-        "Grep",
-        "Glob",
-        "Bash"
-      ]
-    },
-    {
-      "name": "stack-python",
-      "version": "0.1.1",
-      "description": "Python service, library, and data workflow modernization with minimal",
-      "agents": [
-        "swe",
-        "data"
-      ],
-      "allowedTools": [
-        "Read",
-        "Grep",
-        "Glob",
-        "Bash"
-      ]
-    },
-    {
-      "name": "stack-react-typescript",
-      "version": "0.1.1",
-      "description": "React and TypeScript application modernization, including codemods, Redux",
-      "agents": [
-        "swe",
-        "design-agent"
-      ],
-      "allowedTools": [
-        "Read",
-        "Grep",
-        "Glob",
-        "Bash"
-      ]
-    },
-    {
-      "name": "stack-spring-ai",
-      "version": "0.1.1",
-      "description": "Spring-native AI application patterns using Spring AI and Spring AI examples",
-      "agents": [
-        "swe"
-      ],
-      "allowedTools": [
-        "Read",
-        "Grep",
-        "Glob",
-        "Bash"
-      ]
-    },
-    {
-      "name": "stack-spring-boot",
-      "version": "0.1.1",
-      "description": "Spring Boot upgrade and API modernization using OpenRewrite recipes,",
-      "agents": [
-        "swe"
-      ],
-      "allowedTools": [
-        "Read",
-        "Grep",
-        "Glob",
-        "Bash"
-      ]
-    },
-    {
-      "name": "stack-sql-server",
-      "version": "0.1.1",
-      "description": "SQL Server schema, T-SQL, stored procedure, job, and application data-access",
-      "agents": [
-        "swe",
-        "migration"
-      ],
-      "allowedTools": [
-        "Read",
-        "Grep",
-        "Glob",
-        "Bash"
-      ]
-    },
-    {
-      "name": "stack-sqlserver-to-postgres",
-      "version": "0.1.1",
-      "description": "SQL Server to Postgres migration planning with T-SQL compatibility checks,",
-      "agents": [
-        "migration"
-      ],
-      "allowedTools": [
-        "Read",
-        "Grep",
-        "Glob",
-        "Bash"
-      ]
     },
     {
       "name": "subagent-orchestrator",

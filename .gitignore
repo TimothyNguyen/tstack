@@ -2,6 +2,7 @@ superpowers/
 gstack/
 /graphify/
 graphify-out/
+**/graphify-out/
 /mcp-atlassian/
 node_modules/
 /ponytail/
