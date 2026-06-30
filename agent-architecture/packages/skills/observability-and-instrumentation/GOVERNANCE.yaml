@@ -1,0 +1,29 @@
+name: observability-and-instrumentation
+type: skill
+status: stable
+version: 0.1.0
+owner: cloud-agent
+description: |
+  Add structured observability to code and agent outputs: tracing, structured logging,
+  metrics, and AG-UI-compatible event emission. Prevents silent failures in production.
+dependencies:
+  skills:
+    - security-review
+    - health
+  adapters: []
+  tools: []
+  mcps: []
+testing:
+  coverage_target: 80
+  types:
+    - unit
+documentation:
+  readme: true
+  spec: false
+  examples_min: 2
+used_by:
+  - swe
+  - cloud
+  - qa-agent
+governance_version: '1.0'
+last_reviewed: '2026-06-29'
