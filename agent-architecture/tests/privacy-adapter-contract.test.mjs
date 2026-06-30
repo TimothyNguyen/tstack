@@ -4,6 +4,7 @@ import path from 'node:path';
 import test from 'node:test';
 
 const root = path.resolve(import.meta.dirname, '..');
+const adaptersRoot = path.join(root, 'packages', 'adapters');
 
 function read(rel) {
   return fs.readFileSync(path.join(root, rel), 'utf8');
@@ -47,20 +48,20 @@ test('enterprise policy keeps privacy-sensitive behavior disabled by default', (
 });
 
 test('optional adapter skills mention policy or disabled defaults', () => {
-  const adapterSkills = fs.readdirSync(root, { withFileTypes: true })
+  const adapterSkills = fs.readdirSync(adaptersRoot, { withFileTypes: true })
     .filter((entry) => entry.isDirectory() && entry.name.startsWith('adapter-'))
     .map((entry) => entry.name);
 
   assert.ok(adapterSkills.length >= 10, `expected adapter coverage, got ${adapterSkills.length}`);
 
   for (const skill of adapterSkills) {
-    const body = read(`${skill}/SKILL.md.tmpl`);
+    const body = fs.readFileSync(path.join(adaptersRoot, skill, 'SKILL.md.tmpl'), 'utf8');
     assert.match(body, /policy|disabled|optional|approval/i, `${skill} must name policy/optional defaults`);
   }
 });
 
 test('adapter runtime code does not include known public telemetry or tunnel endpoints', () => {
-  const adaptersDir = path.join(root, 'adapters');
+  const adaptersDir = path.join(adaptersRoot, 'adapters');
   const files = walk(adaptersDir);
   const text = files
     .filter((file) => /\.(cjs|js|json|md)$/.test(file))

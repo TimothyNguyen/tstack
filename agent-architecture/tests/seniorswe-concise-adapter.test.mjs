@@ -6,7 +6,8 @@ import { spawnSync } from 'node:child_process';
 import test from 'node:test';
 
 const root = path.resolve(import.meta.dirname, '..');
-const hooks = path.join(root, 'adapters', 'seniorswe-concise', 'hooks');
+const adaptersRoot = path.join(root, 'packages', 'adapters');
+const hooks = path.join(adaptersRoot, 'adapters', 'seniorswe-concise', 'hooks');
 
 function run(script, env, input = '') {
   return spawnSync(process.execPath, [path.join(hooks, script)], {
@@ -52,12 +53,12 @@ test('seniorswe-concise mode tracker changes and clears active state', () => {
 });
 
 test('seniorswe-concise config rejects undeclared external state by default', async () => {
-  const { getStateDir } = await import('../adapters/seniorswe-concise/hooks/seniorswe-concise-config.cjs');
+  const { getStateDir } = await import('../packages/adapters/adapters/seniorswe-concise/hooks/seniorswe-concise-config.cjs');
   assert.equal(path.relative(root, getStateDir()).startsWith('..'), false);
 });
 
 test('seniorswe-concise MCP instruction helper serves only runtime modes', async () => {
-  const mod = await import('../adapters/seniorswe-concise/mcp/instructions.js');
+  const mod = await import('../packages/adapters/adapters/seniorswe-concise/mcp/instructions.js');
   assert.deepEqual(mod.MODES, ['lite', 'full', 'ultra']);
   assert.equal(mod.resolveMode('ultra'), 'ultra');
   assert.equal(mod.MODES.includes(mod.resolveMode('off')), true);
@@ -71,7 +72,7 @@ test('seniorswe-concise config writeDefaultMode writes config and rejects invali
   process.env.SENIORSWE_CONCISE_CONFIG_DIR = temp;
   process.env.SENIORSWE_CONCISE_ALLOW_EXTERNAL_STATE = '1';
   try {
-    const { writeDefaultMode } = await import('../adapters/seniorswe-concise/hooks/seniorswe-concise-config.cjs');
+    const { writeDefaultMode } = await import('../packages/adapters/adapters/seniorswe-concise/hooks/seniorswe-concise-config.cjs');
     assert.equal(writeDefaultMode('not-a-mode'), null);
     const written = writeDefaultMode('lite');
     assert.equal(written, 'lite');
@@ -90,7 +91,7 @@ test('seniorswe-concise config resolveDeclaredDir rejects external path without 
   process.env.SENIORSWE_CONCISE_CONFIG_DIR = path.join(os.tmpdir(), 'external-seniorswe');
   delete process.env.SENIORSWE_CONCISE_ALLOW_EXTERNAL_STATE;
   try {
-    const { getConfigDir } = await import('../adapters/seniorswe-concise/hooks/seniorswe-concise-config.cjs');
+    const { getConfigDir } = await import('../packages/adapters/adapters/seniorswe-concise/hooks/seniorswe-concise-config.cjs');
     const dir = getConfigDir();
     assert.ok(!dir.startsWith(os.tmpdir()), 'external dir should be rejected and fallback used');
   } finally {
@@ -100,7 +101,7 @@ test('seniorswe-concise config resolveDeclaredDir rejects external path without 
 });
 
 test('seniorswe-concise instructions getFallbackInstructions and review mode', async () => {
-  const mod = await import('../adapters/seniorswe-concise/hooks/seniorswe-concise-instructions.cjs');
+  const mod = await import('../packages/adapters/adapters/seniorswe-concise/hooks/seniorswe-concise-instructions.cjs');
   const fallback = mod.getFallbackInstructions('ultra');
   assert.match(fallback, /SENIORSWE-CONCISE MODE ACTIVE/);
   assert.match(fallback, /lazy senior developer/);
@@ -111,7 +112,7 @@ test('seniorswe-concise instructions getFallbackInstructions and review mode', a
 });
 
 test('seniorswe-concise instructions covers non-review mode try block', async () => {
-  const mod = await import('../adapters/seniorswe-concise/hooks/seniorswe-concise-instructions.cjs');
+  const mod = await import('../packages/adapters/adapters/seniorswe-concise/hooks/seniorswe-concise-instructions.cjs');
   const liteInstructions = mod.getSeniorsweConciseInstructions('lite');
   assert.match(liteInstructions, /SENIORSWE-CONCISE MODE ACTIVE/);
 
@@ -124,7 +125,7 @@ test('seniorswe-concise instructions covers non-review mode try block', async ()
 
 test('seniorswe-concise config isDeactivationCommand recognizes stop commands', async () => {
   const { isDeactivationCommand, normalizeMode, normalizeConfigMode, normalizePersistedMode } =
-    await import('../adapters/seniorswe-concise/hooks/seniorswe-concise-config.cjs');
+    await import('../packages/adapters/adapters/seniorswe-concise/hooks/seniorswe-concise-config.cjs');
 
   assert.equal(isDeactivationCommand('normal mode'), true);
   assert.equal(isDeactivationCommand('stop seniorswe-concise'), true);
@@ -145,7 +146,7 @@ test('seniorswe-concise config isDeactivationCommand recognizes stop commands', 
 });
 
 test('seniorswe-concise MCP resolveMode returns full for unrecognized mode', async () => {
-  const mod = await import('../adapters/seniorswe-concise/mcp/instructions.js');
+  const mod = await import('../packages/adapters/adapters/seniorswe-concise/mcp/instructions.js');
   const result = mod.resolveMode('unrecognized-mode-xyz');
   assert.ok(['lite', 'full', 'ultra'].includes(result), `Expected a valid mode, got: ${result}`);
 });
@@ -153,7 +154,7 @@ test('seniorswe-concise MCP resolveMode returns full for unrecognized mode', asy
 test('seniorswe-concise MCP resolveMode returns full when default is off', async () => {
   process.env.SENIORSWE_CONCISE_DEFAULT_MODE = 'off';
   try {
-    const mod = await import('../adapters/seniorswe-concise/mcp/instructions.js');
+    const mod = await import('../packages/adapters/adapters/seniorswe-concise/mcp/instructions.js');
     const result = mod.resolveMode('unknown-xyz');
     assert.equal(result, 'full');
   } finally {
@@ -293,7 +294,7 @@ test('seniorswe-concise config contained() covers rel=="" branch when state dir 
   delete process.env.PLUGIN_DATA;
   process.env.SENIORSWE_CONCISE_STATE_DIR = root;
   try {
-    const { getStateDir } = await import('../adapters/seniorswe-concise/hooks/seniorswe-concise-config.cjs');
+    const { getStateDir } = await import('../packages/adapters/adapters/seniorswe-concise/hooks/seniorswe-concise-config.cjs');
     const dir = getStateDir();
     assert.equal(dir, root, 'contained(ROOT, ROOT) must return dir when rel is empty string');
   } finally {
@@ -302,14 +303,14 @@ test('seniorswe-concise config contained() covers rel=="" branch when state dir 
 });
 
 test('seniorswe-concise instructions filterSkillBodyForMode with null body (covers body||"" false branch)', async () => {
-  const mod = await import('../adapters/seniorswe-concise/hooks/seniorswe-concise-instructions.cjs');
+  const mod = await import('../packages/adapters/adapters/seniorswe-concise/hooks/seniorswe-concise-instructions.cjs');
   const result = mod.filterSkillBodyForMode(null, 'full');
   assert.equal(typeof result, 'string');
 });
 
 test('seniorswe-concise instructions falls back when SKILL.md is unreadable (covers catch block at lines 53-54)', async () => {
-  const mod = await import('../adapters/seniorswe-concise/hooks/seniorswe-concise-instructions.cjs');
-  const skillPath = path.join(root, 'seniorswe-concise', 'SKILL.md');
+  const mod = await import('../packages/adapters/adapters/seniorswe-concise/hooks/seniorswe-concise-instructions.cjs');
+  const skillPath = path.join(root, 'packages', 'skills', 'seniorswe-concise', 'SKILL.md');
   const backupPath = skillPath + '.bak';
   fs.renameSync(skillPath, backupPath);
   try {
@@ -342,7 +343,7 @@ test('seniorswe-concise config getDefaultMode falls back to DEFAULT_MODE when co
   delete process.env.SENIORSWE_CONCISE_DEFAULT_MODE;
   try {
     fs.writeFileSync(path.join(temp, 'config.json'), JSON.stringify({ defaultMode: 'invalid-mode' }), 'utf8');
-    const { getDefaultMode, DEFAULT_MODE } = await import('../adapters/seniorswe-concise/hooks/seniorswe-concise-config.cjs');
+    const { getDefaultMode, DEFAULT_MODE } = await import('../packages/adapters/adapters/seniorswe-concise/hooks/seniorswe-concise-config.cjs');
     const result = getDefaultMode();
     assert.equal(result, DEFAULT_MODE, 'should return DEFAULT_MODE when config has invalid mode value');
   } finally {

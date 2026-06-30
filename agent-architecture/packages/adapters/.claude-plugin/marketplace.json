@@ -1,0 +1,16 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "@agent-arch/adapters",
+  "owner": { "name": "agent-architecture" },
+  "plugins": [
+    {
+      "name": "agent-arch-adapters",
+      "description": "Framework adapters: MCP, LangGraph, AG-UI, AgentCore, Strands, GitHub, Databricks, OpenAPI, Google ADK, Docker MCP.",
+      "version": "0.1.0",
+      "author": { "name": "agent-architecture" },
+      "source": ".",
+      "category": "development",
+      "homepage": "https://github.com/TimothyNguyen/tstack/tree/master/agent-architecture/packages/adapters"
+    }
+  ]
+}

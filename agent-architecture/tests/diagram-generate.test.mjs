@@ -5,7 +5,7 @@ import path from "path";
 import { fileURLToPath } from "node:url";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const rootDir = path.join(__dirname, "..");
+const rootDir = path.join(__dirname, "..", "packages", "skills");
 
 test("diagram-generate: skill file exists", (t) => {
   const skillPath = path.join(rootDir, "diagram-generate", "SKILL.md.tmpl");

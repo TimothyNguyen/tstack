@@ -6,8 +6,9 @@ import test from 'node:test';
 import { spawnSync } from 'node:child_process';
 
 const root = path.resolve(import.meta.dirname, '..');
-const validator = path.join(root, 'atlassian-docs', 'scripts', 'validate_mcp_atlassian_profile.py');
-const safeProfile = path.join(root, 'atlassian-docs', 'references', 'safe-profile.env.example');
+const skillsRoot = path.join(root, 'packages', 'skills');
+const validator = path.join(skillsRoot, 'atlassian-docs', 'scripts', 'validate_mcp_atlassian_profile.py');
+const safeProfile = path.join(skillsRoot, 'atlassian-docs', 'references', 'safe-profile.env.example');
 
 function runValidator(envFile) {
   return spawnSync('python', [validator, '--env-file', envFile, '--print-summary'], {
@@ -49,8 +50,8 @@ test('atlassian-docs validator rejects unsafe mcp-atlassian profile', () => {
 });
 
 test('atlassian-docs skill documents no codebase-engine vendoring and attachment denial', () => {
-  const skill = fs.readFileSync(path.join(root, 'atlassian-docs', 'SKILL.md.tmpl'), 'utf8');
-  const safety = fs.readFileSync(path.join(root, 'atlassian-docs', 'references', 'mcp-atlassian-safety.md'), 'utf8');
+  const skill = fs.readFileSync(path.join(skillsRoot, 'atlassian-docs', 'SKILL.md.tmpl'), 'utf8');
+  const safety = fs.readFileSync(path.join(skillsRoot, 'atlassian-docs', 'references', 'mcp-atlassian-safety.md'), 'utf8');
 
   assert.match(skill, /Do not vendor or import `mcp-atlassian` into `codebase-engine`/);
   assert.match(skill, /Do not upload, download, or read attachment file paths/);

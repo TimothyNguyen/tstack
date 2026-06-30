@@ -1,0 +1,30 @@
+{
+  "name": "@agent-arch/stacks",
+  "version": "0.1.0",
+  "private": false,
+  "type": "module",
+  "description": "Tech stack and domain skills for agent-architecture: AWS, Python, React/TS, Spring Boot, Databricks, C#, Postgres, SQL Server, and domain packs.",
+  "files": [
+    "stack-aws/",
+    "stack-aws-dms/",
+    "stack-csharp/",
+    "stack-databricks/",
+    "stack-databricks-dbt/",
+    "stack-legacy-frontend/",
+    "stack-postgres/",
+    "stack-python/",
+    "stack-react-typescript/",
+    "stack-spring-ai/",
+    "stack-spring-boot/",
+    "stack-sql-server/",
+    "stack-sqlserver-to-postgres/",
+    "domain-data-governance/",
+    "domain-experiment-design/",
+    "domain-mlops-databricks/",
+    "domain-model-interpretation/",
+    ".claude-plugin/"
+  ],
+  "peerDependencies": {
+    "agent-architecture": ">=0.1.0"
+  }
+}

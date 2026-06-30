@@ -1,0 +1,16 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "@agent-arch/stacks",
+  "owner": { "name": "agent-architecture" },
+  "plugins": [
+    {
+      "name": "agent-arch-stacks",
+      "description": "Tech stack skills: AWS, Python, React/TS, Spring Boot, Databricks, C#, Postgres, SQL Server, and domain packs.",
+      "version": "0.1.0",
+      "author": { "name": "agent-architecture" },
+      "source": ".",
+      "category": "development",
+      "homepage": "https://github.com/TimothyNguyen/tstack/tree/master/agent-architecture/packages/stacks"
+    }
+  ]
+}

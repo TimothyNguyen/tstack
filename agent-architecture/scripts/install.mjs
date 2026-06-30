@@ -14,6 +14,15 @@ import { execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+
+function discoverAddonPackages() {
+  const scope = path.join(ROOT, '..', '@agent-arch');
+  if (!fs.existsSync(scope)) return [];
+  return fs.readdirSync(scope, { withFileTypes: true })
+    .filter(e => e.isDirectory())
+    .map(e => path.join(scope, e.name));
+}
+
 const args = process.argv.slice(2);
 
 const PRIVATE = args.includes('--private');
@@ -234,22 +243,25 @@ const NON_SKILL_DIRS = new Set([
 function discoverUtilitySkills(configuredAgents) {
   const agentSet = new Set(configuredAgents);
   const skills = [];
-  for (const entry of fs.readdirSync(ROOT, { withFileTypes: true })) {
-    if (!entry.isDirectory()) continue;
-    if (NON_SKILL_DIRS.has(entry.name)) continue;
-    const skillPath = path.join(ROOT, entry.name, 'SKILL.md');
-    if (!fs.existsSync(skillPath)) continue;
-    const fm = parseFrontmatter(fs.readFileSync(skillPath, 'utf8'));
-    if (!fm.agents || fm.agents.length === 0) continue;
-    if (fm.agents.some((a) => agentSet.has(a))) {
-      skills.push({ name: fm.name || entry.name, dir: entry.name });
+  const roots = [ROOT, ...discoverAddonPackages()];
+  for (const scanRoot of roots) {
+    for (const entry of fs.readdirSync(scanRoot, { withFileTypes: true })) {
+      if (!entry.isDirectory()) continue;
+      if (NON_SKILL_DIRS.has(entry.name)) continue;
+      const skillPath = path.join(scanRoot, entry.name, 'SKILL.md');
+      if (!fs.existsSync(skillPath)) continue;
+      const fm = parseFrontmatter(fs.readFileSync(skillPath, 'utf8'));
+      if (!fm.agents || fm.agents.length === 0) continue;
+      if (fm.agents.some((a) => agentSet.has(a))) {
+        skills.push({ name: fm.name || entry.name, dir: entry.name, root: scanRoot });
+      }
     }
   }
   return skills;
 }
 
-function installUtilitySkill(skillDir) {
-  const srcPath = path.join(ROOT, skillDir, 'SKILL.md');
+function installUtilitySkill(skillDir, skillRoot) {
+  const srcPath = path.join(skillRoot || ROOT, skillDir, 'SKILL.md');
   if (!fs.existsSync(srcPath)) {
     console.warn(`WARN: utility skill "${skillDir}" not found`);
     return;
@@ -324,7 +336,7 @@ function install() {
   // Install utility skills auto-discovered from top-level SKILL.md files
   const utilitySkills = discoverUtilitySkills(agents);
   for (const skill of utilitySkills) {
-    installUtilitySkill(skill.dir);
+    installUtilitySkill(skill.dir, skill.root);
   }
 
   // Install token-optimizer CLI + bundled lib (Python assets alongside SKILL.md)

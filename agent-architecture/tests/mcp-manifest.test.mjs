@@ -4,6 +4,7 @@ import path from 'node:path';
 import test from 'node:test';
 
 const root = path.resolve(import.meta.dirname, '..');
+const adaptersRoot = path.join(root, 'packages', 'adapters');
 
 function walk(dir, out = []) {
   for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
@@ -15,7 +16,7 @@ function walk(dir, out = []) {
 }
 
 test('MCP manifests are privacy-safe by default', () => {
-  const manifests = walk(path.join(root, 'adapters'));
+  const manifests = walk(path.join(adaptersRoot, 'adapters'));
   assert.ok(manifests.length >= 1, 'expected at least one MCP manifest');
 
   for (const file of manifests) {
