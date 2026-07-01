@@ -1,1 +1,0 @@
-{"nodes": [{"id": "pkg_child_a", "label": "child-a", "file_type": "code", "type": "package", "ecosystem": "maven", "source_file": "C:\\Users\\quynh\\.graphify\\repos\\rtk-ai\\rtk\\tests\\fixtures\\multi-module-skeleton\\child-a\\pom.xml", "source_location": "L1"}], "edges": []}

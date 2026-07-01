@@ -3,9 +3,13 @@ gstack/
 /graphify/
 graphify-out/
 **/graphify-out/
+**/graphify-out/**
 /mcp-atlassian/
 node_modules/
+**/node_modules/
+**/node_modules/**
 /ponytail/
+/pre-commit/
 __pycache__/
 *.py[cod]
 codebase-out/
@@ -22,3 +26,8 @@ agent-architecture/codebase-out/
 agent-architecture/coverage/
 agent-architecture/test-results/
 agent-architecture/.agent/
+
+# Repo-level generated/runtime artifacts
+/.agent/
+/generated/
+/claude-code-best-practice/

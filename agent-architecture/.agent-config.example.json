@@ -1,0 +1,21 @@
+{
+  "private": true,
+  "hosts": ["claude", "codex", "copilot"],
+  "agents": [
+    "swe",
+    "qa-agent",
+    "spec-agent",
+    "pm",
+    "orchestrate",
+    "security"
+  ],
+  "mcpProfiles": ["github", "postgres"],
+  "mcps": [
+    {
+      "name": "slack-local",
+      "command": "npx",
+      "args": ["@modelcontextprotocol/server-slack"],
+      "credentialEnvVars": ["SLACK_BOT_TOKEN"]
+    }
+  ]
+}
