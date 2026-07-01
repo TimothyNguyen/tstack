@@ -40,6 +40,7 @@ const VALID_POLICIES = [
 // Valid agent names (from agents/ directory)
 const VALID_AGENTS = [
   "_infrastructure",
+  "_linter",
   "swe",
   "qa-agent",
   "spec-agent",
@@ -49,6 +50,7 @@ const VALID_AGENTS = [
   "orchestrate",
   "security",
   "migration",
+  "migration-engineer",
   "data",
   "cloud",
   "release-agent",

@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Host parity tests — verifies generated/codex and generated/copilot artifacts
  * are fresh, consistent, and contain required enterprise safety content.
  */
@@ -11,6 +11,7 @@ import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import {
   buildAgentsMd,
+  buildClaudeMd,
   buildCopilotInstructions,
   logOutputs,
   routingSection as scriptRoutingSection,
@@ -20,6 +21,7 @@ import {
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 
+const CLAUDE_PATH = 'generated/claude/CLAUDE.md';
 const CODEX_PATH = 'generated/codex/AGENTS.md';
 const COPILOT_PATH = 'generated/copilot/copilot-instructions.md';
 
@@ -37,12 +39,16 @@ function routingSection(text) {
 describe('host-parity', () => {
   test('generated host artifacts exist', () => {
     assert.ok(
+      fs.existsSync(path.join(ROOT, CLAUDE_PATH)),
+      `${CLAUDE_PATH} missing - run npm run gen:hosts`
+    );
+    assert.ok(
       fs.existsSync(path.join(ROOT, CODEX_PATH)),
-      `${CODEX_PATH} missing — run npm run gen:hosts`
+      `${CODEX_PATH} missing - run npm run gen:hosts`
     );
     assert.ok(
       fs.existsSync(path.join(ROOT, COPILOT_PATH)),
-      `${COPILOT_PATH} missing — run npm run gen:hosts`
+      `${COPILOT_PATH} missing - run npm run gen:hosts`
     );
   });
 
@@ -105,7 +111,7 @@ describe('host-parity', () => {
     const required = [
       'Conventional Commits',
       'no-verify',
-      'stage → commit → fetch → rebase → push',
+      'stage -> commit -> fetch -> rebase -> push',
     ];
     const artifacts = [[CODEX_PATH, read(CODEX_PATH)], [COPILOT_PATH, read(COPILOT_PATH)]];
     for (const [name, content] of artifacts) {
@@ -141,6 +147,12 @@ describe('host-parity', () => {
       copilot.includes('copilot-instructions.md'),
       'copilot artifact should reference install path'
     );
+  });
+
+  test('claude artifact references CLAUDE.md format and Claude host', () => {
+    const claude = read(CLAUDE_PATH);
+    assert.ok(claude.includes('CLAUDE.md'), 'claude artifact should reference CLAUDE.md');
+    assert.ok(claude.includes('Claude Code'), 'claude artifact should mention Claude Code');
   });
 });
 
@@ -188,6 +200,13 @@ test('buildAgentsMd returns a non-empty string with required sections', () => {
   const content = buildAgentsMd();
   assert.ok(content.length > 0);
   assert.match(content, /AGENTS\.md/);
+  assert.match(content, /Commit Discipline/);
+});
+
+test('buildClaudeMd returns a non-empty string with required sections', () => {
+  const content = buildClaudeMd();
+  assert.ok(content.length > 0);
+  assert.match(content, /CLAUDE\.md/);
   assert.match(content, /Commit Discipline/);
 });
 
@@ -248,3 +267,4 @@ test('scriptRoutingSection returns only the routing section when followed by ano
   assert.match(result, /## Routing/);
   assert.ok(!result.includes('## Policy'), 'should not include sections after routing');
 });
+

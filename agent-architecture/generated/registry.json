@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-30T01:14:58.065Z",
+  "generatedAt": "2026-07-01T20:50:43.501Z",
   "count": 88,
   "byAgent": {
     "_infrastructure": [
@@ -915,7 +915,7 @@
     {
       "name": "migration-engineer",
       "version": "0.1.0",
-      "description": "Specialist in SQL Server → Postgres migrations.",
+      "description": "Specialist in SQL Server -> Postgres migrations.",
       "agents": [
         "_infrastructure"
       ],

@@ -173,6 +173,25 @@ Set policy gates in `.agent-config.json`:
 
 ---
 
+## Host Rollout Pattern
+
+Adopt host complexity in layers:
+
+- start with one host and one workflow family
+- add tracked plan artifacts before adding more automation
+- add cross-model review only for medium or high-risk work
+- add hooks and subagent orchestration after baseline flow is stable
+
+Recommended references:
+
+- [cross-model-workflows.md](./cross-model-workflows.md)
+- [rpi-workflow.md](./rpi-workflow.md)
+
+Typical split:
+
+- Claude-first for planning and orchestration
+- Codex-second for repo-grounded review and verification
+
 ## FAQ
 
 **Q: How many skills should we build?**
@@ -186,6 +205,9 @@ A: Run `/architecture-agent-upgrade` to update agent-architecture. Skills auto-f
 
 **Q: What about cross-team coordination?**
 A: Use `/orchestrate` agent to coordinate (brainstorm + parallel skill execution). See [WORKFLOWS.md](./WORKFLOWS.md).
+
+**Q: When should we use two hosts instead of one?**
+A: When repo complexity or failure cost justifies second-pass review. Start with [cross-model-workflows.md](./cross-model-workflows.md).
 
 **Q: How do we measure impact?**
 A: Track: time to implement features, cycle time, test coverage, bugs found (pre/post agent use).

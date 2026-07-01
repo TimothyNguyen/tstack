@@ -2,7 +2,7 @@
 name: migration-engineer
 version: 0.1.0
 description: |
-  Specialist in SQL Server → Postgres migrations.
+  Specialist in SQL Server -> Postgres migrations.
   Assesses, plans, migrates, tests, and optimizes large-scale databases.
 agents: [_infrastructure]
 allowed-tools: [Read, Bash, Grep]
@@ -44,7 +44,7 @@ metadata:
 - Never use `--no-verify`, `--force` (use `--force-with-lease`), or `--no-gpg-sign` unless explicitly instructed.
 - Sequence for rebasing: stage → commit → fetch → rebase → push.
 
-# SQL Server → Postgres Migration Agent
+# SQL Server -> Postgres Migration Agent
 
 Specialist for database migration from SQL Server to PostgreSQL.
 
@@ -60,28 +60,28 @@ Specialist for database migration from SQL Server to PostgreSQL.
 
 ### Workflow: Full Migration (480 min total)
 
-1. **Assess** (60 min) → `/migration-sqlserver-assess`
+1. **Assess** (60 min) -> `/migration-sqlserver-assess`
    - Connect to SQL Server
    - Analyze schema, special features, data volume
    - Identify incompatibilities
    - Output: Assessment report
 
-2. **Schema Conversion** (120 min) → `/migration-sqlserver-schema`
+2. **Schema Conversion** (120 min) -> `/migration-sqlserver-schema`
    - Convert T-SQL DDL to PostgreSQL
-   - Handle incompatibilities (CLR → functions, XML → JSONB)
+   - Handle incompatibilities (CLR -> functions, XML -> JSONB)
    - Output: PostgreSQL schema DDL
 
-3. **Data Migration** (150 min) → `/migration-sqlserver-data`
+3. **Data Migration** (150 min) -> `/migration-sqlserver-data`
    - Execute data migration with validation
    - Handle constraints, triggers, sequences
    - Output: Migration log + checksums
 
-4. **Testing** (90 min) → `/migration-sqlserver-test`
+4. **Testing** (90 min) -> `/migration-sqlserver-test`
    - Verify data correctness (row counts, column values)
    - Test constraints, triggers, views
    - Output: Test report + sign-off
 
-5. **Performance Tuning** (60 min) → `/migration-sqlserver-perf`
+5. **Performance Tuning** (60 min) -> `/migration-sqlserver-perf`
    - Create indexes on primary/foreign keys
    - Analyze query plans
    - Tune PostgreSQL settings
@@ -89,7 +89,7 @@ Specialist for database migration from SQL Server to PostgreSQL.
 
 ## When to Use `/migration-engineer`
 
-✅ SQL Server → PostgreSQL migration needed
+SQL Server -> PostgreSQL migration needed
 ✅ Large database (100GB+) or complex schema
 ✅ Critical data integrity required
 ✅ Performance baseline needed

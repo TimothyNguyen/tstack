@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-30T01:14:56.117Z",
+  "generatedAt": "2026-07-01T20:50:41.801Z",
   "count": 88,
   "skills": [
     {
@@ -463,7 +463,7 @@
     {
       "name": "migration-engineer",
       "version": "0.1.0",
-      "description": "Specialist in SQL Server → Postgres migrations.",
+      "description": "Specialist in SQL Server -> Postgres migrations.",
       "path": "packages/skills/agents/migration-engineer/SKILL.md.tmpl",
       "agents": [
         "_infrastructure"
