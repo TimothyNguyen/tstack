@@ -33,6 +33,7 @@
     "migration-sqlserver-perf/",
     "migration-sqlserver-schema/",
     "migration-sqlserver-test/",
+    "observability-and-instrumentation/",
     "plan-design-review/",
     "plan-devex-review/",
     "plan-director-review/",

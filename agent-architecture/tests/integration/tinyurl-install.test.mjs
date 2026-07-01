@@ -8,6 +8,22 @@ import test from 'node:test';
 const ROOT = path.resolve(import.meta.dirname, '../..');
 const FIXTURE = path.resolve(import.meta.dirname, 'tinyurl-fixture');
 const INSTALL_SCRIPT = path.join(ROOT, 'scripts', 'install.mjs');
+const DEFAULT_AGENTS = [
+  'cloud',
+  'data',
+  'design-agent',
+  'diagram-agent',
+  'interviewer',
+  'migration',
+  'migration-engineer',
+  'orchestrate',
+  'pm',
+  'qa-agent',
+  'release-agent',
+  'security',
+  'spec-agent',
+  'swe',
+];
 
 function runInstall(targetDir, extraArgs = []) {
   execFileSync(process.execPath, [
@@ -99,7 +115,7 @@ test('install from directory without .agent-config.json uses default agents', ()
     assert.ok(fs.existsSync(path.join(tmp, 'VERSION')), 'VERSION must be written');
     assert.ok(fs.existsSync(path.join(tmp, 'CLAUDE.md')), 'CLAUDE.md must be written');
     const manifest = JSON.parse(fs.readFileSync(path.join(tmp, 'install-manifest.json'), 'utf8'));
-    assert.deepEqual(manifest.agents, ['swe', 'qa-agent', 'spec-agent', 'pm'],
+    assert.deepEqual(manifest.agents, DEFAULT_AGENTS,
       'default agents must be used when no .agent-config.json exists');
   } finally {
     fs.rmSync(tmp, { recursive: true, force: true });
@@ -140,7 +156,7 @@ test('doctor reports missing agent skill file (covers manifest-present/skill-mis
   }
 });
 
-test('install with unknown agent name logs warning and continues (covers installAgentSkill warn path)', () => {
+test('install with unknown agent name fails fast with error', () => {
   const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'tinyurl-fake-agent-'));
   const cwd = fs.mkdtempSync(path.join(os.tmpdir(), 'tinyurl-fake-cwd-'));
   try {
@@ -150,14 +166,11 @@ test('install with unknown agent name logs warning and continues (covers install
       agents: ['swe', 'nonexistent-agent-xyz'],
       mcps: [],
     }), 'utf8');
-    execFileSync(process.execPath, [INSTALL_SCRIPT, '--private', '--target', tmp], {
-      cwd, stdio: 'pipe',
-    });
-    // Install should succeed (warning only, not error)
-    assert.ok(fs.existsSync(path.join(tmp, 'VERSION')), 'VERSION must be written');
-    // Real agent was installed; fake agent has no SKILL.md
-    assert.ok(fs.existsSync(path.join(tmp, 'skills', 'swe', 'SKILL.md')), 'swe skill must be installed');
-    assert.ok(!fs.existsSync(path.join(tmp, 'skills', 'nonexistent-agent-xyz', 'SKILL.md')), 'fake agent must not create a skill file');
+    assert.throws(() => {
+      execFileSync(process.execPath, [INSTALL_SCRIPT, '--private', '--target', tmp], {
+        cwd, stdio: 'pipe',
+      });
+    }, /Unknown agents:/);
   } finally {
     fs.rmSync(tmp, { recursive: true, force: true });
     fs.rmSync(cwd, { recursive: true, force: true });
@@ -284,7 +297,7 @@ test('install dry-run without --target uses default .agent path (covers targetId
   }
 });
 
-test('install with minimal config (no agents/mcps/hosts fields) covers || [] and || HOSTS branches', () => {
+test('install with minimal config defaults missing agents and hosts, leaves mcps empty', () => {
   const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'tinyurl-minimal-config-'));
   const cwd = fs.mkdtempSync(path.join(os.tmpdir(), 'tinyurl-minimal-config-cwd-'));
   try {
@@ -300,7 +313,32 @@ test('install with minimal config (no agents/mcps/hosts fields) covers || [] and
     const settings = JSON.parse(fs.readFileSync(path.join(tmp, 'settings.json'), 'utf8'));
     assert.deepEqual(settings.mcpServers, {}, 'no MCPs when config.mcps absent');
     const manifest = JSON.parse(fs.readFileSync(path.join(tmp, 'install-manifest.json'), 'utf8'));
-    assert.deepEqual(manifest.agents, [], 'no agents when config.agents absent');
+    assert.deepEqual(manifest.agents, DEFAULT_AGENTS, 'default agents must be installed when config.agents absent');
+  } finally {
+    fs.rmSync(tmp, { recursive: true, force: true });
+    fs.rmSync(cwd, { recursive: true, force: true });
+  }
+});
+
+test('install can enable a specialty agent and built-in MCP profile from config', () => {
+  const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'tinyurl-specialty-agent-'));
+  const cwd = fs.mkdtempSync(path.join(os.tmpdir(), 'tinyurl-specialty-agent-cwd-'));
+  try {
+    fs.writeFileSync(path.join(cwd, '.agent-config.json'), JSON.stringify({
+      private: true,
+      hosts: ['claude'],
+      agents: ['orchestrate', 'security'],
+      mcpProfiles: ['github'],
+    }), 'utf8');
+    execFileSync(process.execPath, [INSTALL_SCRIPT, '--private', '--target', tmp], {
+      cwd, stdio: 'pipe',
+    });
+
+    assert.ok(fs.existsSync(path.join(tmp, 'skills', 'orchestrate', 'SKILL.md')), 'orchestrate agent must be installed');
+    assert.ok(fs.existsSync(path.join(tmp, 'skills', 'security', 'SKILL.md')), 'security agent must be installed');
+
+    const settings = JSON.parse(fs.readFileSync(path.join(tmp, 'settings.json'), 'utf8'));
+    assert.ok('github' in settings.mcpServers, 'built-in github MCP profile must be wired');
   } finally {
     fs.rmSync(tmp, { recursive: true, force: true });
     fs.rmSync(cwd, { recursive: true, force: true });

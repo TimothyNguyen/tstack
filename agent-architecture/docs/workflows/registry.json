@@ -284,6 +284,109 @@
       "total_time_minutes": 35,
       "best_for": ["api-design", "microservices", "integration-patterns"],
       "dependencies": ["diagram-generate", "diagram-validate", "diagram-export"]
+    },
+    {
+      "id": "rpi-feature-delivery",
+      "name": "Research -> Plan -> Implement",
+      "category": "full-feature",
+      "description": "Repo-grounded feature delivery with explicit decision gates and tracked artifacts.",
+      "phases": [
+        {
+          "phase": 1,
+          "name": "Research",
+          "agent": "orchestrate",
+          "skill": "investigate",
+          "duration_minutes": 30,
+          "description": "Gather constraints, current-state facts, risks, and feasibility.",
+          "output": "REQUEST.md + RESEARCH.md with go/no-go recommendation"
+        },
+        {
+          "phase": 2,
+          "name": "Plan",
+          "agent": "spec-agent",
+          "skill": "spec",
+          "duration_minutes": 45,
+          "description": "Turn research into phases, acceptance criteria, and rollout order.",
+          "output": "PLAN.md + product/eng notes"
+        },
+        {
+          "phase": 3,
+          "name": "Pressure Test",
+          "agent": "qa-agent",
+          "skill": "review",
+          "duration_minutes": 20,
+          "description": "Challenge assumptions, missing tests, migrations, and sequencing before implementation.",
+          "output": "Annotated plan with findings"
+        },
+        {
+          "phase": 4,
+          "name": "Implement",
+          "agent": "swe",
+          "skill": "seniorswe-concise",
+          "duration_minutes": 120,
+          "description": "Execute phase by phase with tests and plan updates.",
+          "output": "Code + tests + IMPLEMENT.md"
+        },
+        {
+          "phase": 5,
+          "name": "Verify",
+          "agent": "qa-agent",
+          "skill": "qa",
+          "duration_minutes": 25,
+          "description": "Check delivered behavior against plan and residual risks.",
+          "output": "Verification notes + remaining risk list"
+        }
+      ],
+      "total_time_minutes": 240,
+      "best_for": ["messy-repos", "ambiguous-features", "higher-risk-changes"],
+      "dependencies": ["investigate", "spec", "review", "seniorswe-concise", "qa"]
+    },
+    {
+      "id": "cross-model-plan-review",
+      "name": "Cross-Model Plan -> Review -> Verify",
+      "category": "review",
+      "description": "Use one host to plan and another to challenge and verify against repo reality.",
+      "phases": [
+        {
+          "phase": 1,
+          "name": "Primary Plan",
+          "agent": "spec-agent",
+          "skill": "spec",
+          "duration_minutes": 40,
+          "description": "Create tracked plan with phases, tests, and rollback notes.",
+          "output": "plans/{feature-name}.md"
+        },
+        {
+          "phase": 2,
+          "name": "Second-Host Review",
+          "agent": "qa-agent",
+          "skill": "review",
+          "duration_minutes": 20,
+          "description": "Append findings based on actual code structure and blast radius.",
+          "output": "Annotated plan with explicit findings"
+        },
+        {
+          "phase": 3,
+          "name": "Implementation",
+          "agent": "swe",
+          "skill": "seniorswe-concise",
+          "duration_minutes": 90,
+          "description": "Implement approved phases without losing tracked review context.",
+          "output": "Code + tests"
+        },
+        {
+          "phase": 4,
+          "name": "Second-Host Verification",
+          "agent": "qa-agent",
+          "skill": "qa",
+          "duration_minutes": 20,
+          "description": "Verify acceptance criteria, docs, and test coverage against repo state.",
+          "output": "Verification summary"
+        }
+      ],
+      "total_time_minutes": 170,
+      "best_for": ["multi-host-teams", "high-cost-failures", "repo-grounded-plan-review"],
+      "dependencies": ["spec", "review", "seniorswe-concise", "qa"]
     }
   ]
 }

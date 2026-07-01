@@ -14,10 +14,14 @@ Commands:
   install    Install agent skills into current repo (creates .agent/)
   upgrade    Upgrade an existing install
   doctor     Check install health
+  list-agents
+  list-mcp-profiles
+  list-hosts
 
 Options:
   --target <dir>        Install to a custom directory (default: .agent/)
   --hosts <list>        Comma-separated host list: claude,codex,copilot
+  --mcp-profile <list>  Built-in MCP profiles: github,postgres,slack
   --docker-mcp [prof]   Wire Docker MCP Gateway (profile name, default: "default")
   --dry-run             Print what would be installed without writing files
   --help                Show this message
@@ -25,9 +29,13 @@ Options:
 Examples:
   npx agent-architecture install
   npx agent-architecture install --target ./.agent --hosts claude,codex
+  npx agent-architecture install --mcp-profile github,postgres
   npx agent-architecture install --docker-mcp backend
   npx agent-architecture upgrade
   npx agent-architecture doctor
+  npx agent-architecture list-agents
+  npx agent-architecture list-mcp-profiles
+  npx agent-architecture list-hosts
 `.trim();
 
 if (!cmd || cmd === '--help' || cmd === 'help') {
@@ -39,6 +47,9 @@ const FLAG_MAP = {
   install: ['--private', ...rest],
   upgrade: ['--private', '--upgrade', ...rest],
   doctor: ['--doctor', ...rest],
+  'list-agents': ['--list-agents'],
+  'list-mcp-profiles': ['--list-mcp-profiles'],
+  'list-hosts': ['--list-hosts'],
 };
 
 const flags = FLAG_MAP[cmd];

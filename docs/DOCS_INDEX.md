@@ -1,0 +1,24 @@
+# Docs Index
+
+This is canonical navigation map for repo docs.
+
+## Primary
+
+- [Start Here](START_HERE.md)
+- [Installation](INSTALLATION.md)
+- [Workflows](WORKFLOWS.md)
+- [MCP Integration](MCP_INTEGRATION.md)
+- [Skill Invocation](SKILL_INVOCATION.md)
+- [Verification](VERIFICATION.md)
+- [Governance Automation](../GOVERNANCE_AUTOMATION.md)
+
+## Secondary
+
+- [Superpowers Notes](superpowers/)
+
+## Archived / Contextual
+
+- [Opus 4.7 Handoff](OPUS47_HANDOFF.md)
+- Root `GOVERNANCE_ENGINE_INSTALL.md`
+- Root `GOVERNANCE_QUICK_REF.md`
+- Root `REPO_CHANGE_GOVERNANCE_WORKFLOW.md`

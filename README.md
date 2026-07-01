@@ -1,71 +1,58 @@
-# TStack - Repository Governance Engine
+# TStack
 
-TStack is a comprehensive repository governance system that enforces standards across skills, adapters, agents, and MCPs through machine-readable specifications and automated validation.
+This repo is currently two things in one:
 
-## Overview
+- governance tooling for this repository
+- an embedded `agent-architecture` package with its own large doc surface
 
-This repository implements a three-layer governance system:
+That makes first contact confusing. Use this file as entrypoint, not as full reference.
 
-1. **REPO_CHANGE_GOVERNANCE_WORKFLOW.md** — Policy document with governance phases
-2. **governance-spec.yaml** — Machine-readable specification with gates and requirements
-3. **bin/governance.js** — CLI tool for validation and reporting
+## Start
 
-## Core Concepts
+- New here: [docs/START_HERE.md](docs/START_HERE.md)
+- Need full doc map: [docs/DOCS_INDEX.md](docs/DOCS_INDEX.md)
+- Need governance flow: [GOVERNANCE_AUTOMATION.md](GOVERNANCE_AUTOMATION.md)
+- Need install flow: [docs/INSTALLATION.md](docs/INSTALLATION.md)
+- Need workflow examples: [docs/WORKFLOWS.md](docs/WORKFLOWS.md)
 
-### Hard Gates (Must Pass)
-- Build succeeds
-- All tests pass
-- No circular dependencies
-- No orphaned components
-- Required files exist
-- SPEC.md complete
-- No template artifacts
+## Governance Commands
 
-### Soft Gates (Should Pass)
-- Code coverage ≥80%
-- README.md ≥200 words
-- Complete documentation
-- Changelog exists
-
-### Maturity Levels
-- Draft: 0 days, relaxed governance
-- Experimental: 90 days, relaxed governance
-- Beta: Normal governance
-- Stable: Strict (90%+ coverage)
-- Deprecated: Maintenance mode
-- Archived: Read-only
-
-## Installation
-
-See [GOVERNANCE_ENGINE_INSTALL.md](GOVERNANCE_ENGINE_INSTALL.md) for complete installation instructions.
-
-Quick start:
 ```bash
 npm install
+npm run governance:build
 npm run governance:check
 ```
 
-## Commands
+Useful commands:
 
-- `npm run governance:check` — Run all checks (hard + soft gates)
-- `npm run governance:check:hard` — Hard gates only (required)
-- `npm run governance:check:soft` — Soft gates only (warnings)
-- `npm run governance:health` — Generate health report
-- `npm run governance:validate` — Validate repository structure
-- `npm run governance:report` — Generate quality scorecard
+- `npm run governance:build` rebuilds component inventory
+- `npm run governance:check` validates repo and generated governance artifacts
+- `npm run governance:health` prints current inventory counts
+- `npm run governance:report` prints grouped component report
 
-## Documentation
+## Repo Shape
 
-- [GOVERNANCE_ENGINE_INSTALL.md](GOVERNANCE_ENGINE_INSTALL.md) — Installation & configuration
-- [REPO_CHANGE_GOVERNANCE_WORKFLOW.md](REPO_CHANGE_GOVERNANCE_WORKFLOW.md) — Policy document
-- [governance-spec.yaml](governance-spec.yaml) — Machine-readable specification
-- [agents/governance/SKILL.md](agents/governance/SKILL.md) — Governance Agent documentation
-- [GOVERNANCE_EXCEPTIONS.md](GOVERNANCE_EXCEPTIONS.md) — Documented exceptions & overrides
+- `bin/` CLI entrypoints
+- `scripts/` maintained governance scripts
+- `generated/` generated governance inventory
+- `docs/` human navigation docs
+- `agents/` top-level governance agent
+- `agent-architecture/` embedded package, examples, and package-specific docs
 
-## Next Steps
+## Canonical Docs
 
-1. Read GOVERNANCE_ENGINE_INSTALL.md for full setup
-2. Create GOVERNANCE.yaml for each component
-3. Run governance:check to validate
-4. Fix hard gate failures (no override)
-5. Document soft gate exceptions if needed
+- [GOVERNANCE_AUTOMATION.md](GOVERNANCE_AUTOMATION.md): source of truth for governance automation
+- [docs/INSTALLATION.md](docs/INSTALLATION.md): install and first run
+- [docs/WORKFLOWS.md](docs/WORKFLOWS.md): common user flows
+- [docs/MCP_INTEGRATION.md](docs/MCP_INTEGRATION.md): MCP-only setup
+- [docs/SKILL_INVOCATION.md](docs/SKILL_INVOCATION.md): skill routing and invocation
+- [docs/VERIFICATION.md](docs/VERIFICATION.md): post-install verification
+
+## Legacy Docs
+
+These still exist for compatibility, but they are no longer best starting points:
+
+- `GOVERNANCE_ENGINE_INSTALL.md`
+- `GOVERNANCE_QUICK_REF.md`
+- `REPO_CHANGE_GOVERNANCE_WORKFLOW.md`
+- `docs/OPUS47_HANDOFF.md`

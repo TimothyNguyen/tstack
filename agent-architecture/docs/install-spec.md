@@ -92,6 +92,12 @@ Host sidecar install:
 Host paths may differ by adapter, but generated artifacts must remain derived
 from source templates.
 
+Host installs should preserve access to:
+
+- `docs/rpi-workflow.md`
+- `docs/cross-model-workflows.md`
+- `docs/runbooks/claude-hooks.md` when Claude host enabled
+
 ## Install Steps
 
 1. Resolve target repo root.
@@ -102,6 +108,7 @@ from source templates.
 6. Run `npm run check:skills`.
 7. Write a local install manifest.
 8. Report installed hosts, profiles, policies, and skipped optional adapters.
+9. Report host workflow docs included with install.
 
 ## Install Manifest
 

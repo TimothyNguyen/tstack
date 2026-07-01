@@ -1,0 +1,32 @@
+{
+  "version": 1,
+  "inventoryPath": "generated/governance-inventory.json",
+  "summaryPath": "generated/governance-summary.md",
+  "agentDocPath": "GOVERNANCE_AUTOMATION.md",
+  "ignorePathPrefixes": [
+    "docs/archive/",
+    "graphify/worked/",
+    "agent-architecture/packages/stacks/stack-databricks/bundle-examples/"
+  ],
+  "alwaysIncludeDirectories": [
+    ".claude-plugin",
+    ".cursor-plugin"
+  ],
+  "ignoreDirectories": [
+    ".git",
+    ".hg",
+    ".svn",
+    ".codegraph",
+    "node_modules",
+    "graphify-out",
+    "codebase-out",
+    "coverage",
+    "test-results",
+    "generated",
+    "__pycache__",
+    ".agent",
+    ".agents",
+    "dist",
+    "build"
+  ]
+}

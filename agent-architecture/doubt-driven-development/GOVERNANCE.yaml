@@ -1,0 +1,29 @@
+name: doubt-driven-development
+type: skill
+status: stable
+version: 0.1.0
+owner: swe-agent
+description: |
+  Challenge assumptions before and during implementation. Surface load-bearing doubts
+  early so they can be resolved with evidence rather than discovered as bugs.
+dependencies:
+  skills:
+    - spec
+    - verification-before-completion
+  adapters: []
+  tools: []
+  mcps: []
+testing:
+  coverage_target: 80
+  types:
+    - unit
+documentation:
+  readme: true
+  spec: false
+  examples_min: 2
+used_by:
+  - swe
+  - qa-agent
+  - spec-agent
+governance_version: '1.0'
+last_reviewed: '2026-06-29'

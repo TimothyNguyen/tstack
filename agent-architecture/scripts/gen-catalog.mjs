@@ -1,279 +1,248 @@
 #!/usr/bin/env node
 
 /**
- * Generate docs/skill-catalog.md from skill metadata.
+ * Generate docs/skill-catalog.md from top-level skill metadata.
  *
  * Usage:
- *   npm run gen:catalog          # Generate catalog
- *   npm run gen:catalog -- --check  # Verify catalog is fresh
- *
- * Reads all SKILL.md.tmpl files, extracts metadata, generates
- * human-readable catalog with groupings, descriptions, and links.
+ *   npm run gen:catalog
+ *   npm run check:catalog
  */
 
-import fs from "fs";
-import path from "path";
-import { fileURLToPath } from "node:url";
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const rootDir = path.join(__dirname, "..");
-const catalogPath = path.join(rootDir, "docs", "skill-catalog.md");
+const rootDir = path.join(__dirname, '..');
+const catalogPath = path.join(rootDir, 'docs', 'skill-catalog.md');
+const CHECK_MODE = process.argv.includes('--check');
 
-const CHECK_MODE = process.argv.includes("--check");
-
-/**
- * Parse frontmatter from SKILL.md.tmpl
- */
 function parseFrontmatter(content) {
   const match = content.match(/^---\n([\s\S]*?)\n---\n/);
   if (!match) return null;
 
-  const fm = { raw: match[1] };
-  const lines = match[1].split("\n");
+  const raw = match[1];
+  const fm = { raw };
+  const lines = raw.split('\n');
 
-  for (const line of lines) {
-    if (!line.trim() || line[0] === " ") continue;
+  for (let i = 0; i < lines.length; i += 1) {
+    const line = lines[i];
+    if (!line.trim()) continue;
+    if (line[0] === ' ') continue;
+    if (!line.includes(':')) continue;
 
-    if (line.includes(":")) {
-      const [key, ...valueParts] = line.split(":");
-      const value = valueParts.join(":").trim();
+    const [key, ...valueParts] = line.split(':');
+    const value = valueParts.join(':').trim();
+    const trimmedKey = key.trim();
 
-      // Parse simple values
-      if (value.startsWith("[") && value.endsWith("]")) {
-        fm[key.trim()] = value
-          .slice(1, -1)
-          .split(",")
-          .map((v) => v.trim());
-      } else if (value) {
-        fm[key.trim()] = value;
+    if (value === '|') {
+      const block = [];
+      for (let j = i + 1; j < lines.length; j += 1) {
+        const next = lines[j];
+        if (!next.startsWith('  ')) break;
+        block.push(next.slice(2));
+        i = j;
       }
+      fm[trimmedKey] = block.join('\n').trim();
+      continue;
+    }
+
+    if (value.startsWith('[') && value.endsWith(']')) {
+      fm[trimmedKey] = value
+        .slice(1, -1)
+        .split(',')
+        .map((part) => part.trim())
+        .filter(Boolean);
+      continue;
+    }
+
+    if (value) {
+      fm[trimmedKey] = value;
     }
   }
 
   return fm;
 }
 
-/**
- * Get skill description (first line of description field)
- */
 function getDescription(fm) {
-  if (!fm.description) return "";
-
-  // Handle multi-line description (after |)
-  const lines = fm.description.split("\n");
-  return lines[0].trim();
+  if (!fm?.description) return '';
+  return String(fm.description).split('\n')[0].trim();
 }
 
-/**
- * Collect all skills with metadata
- */
 function collectSkills() {
   const skills = [];
-  const entries = fs.readdirSync(rootDir);
+  const entries = fs.readdirSync(rootDir, { withFileTypes: true });
 
   for (const entry of entries) {
-    const fullPath = path.join(rootDir, entry);
-    if (!fs.statSync(fullPath).isDirectory()) continue;
-    if (entry.startsWith(".")) continue;
+    if (!entry.isDirectory()) continue;
+    if (entry.name.startsWith('.')) continue;
 
-    const skillPath = path.join(fullPath, "SKILL.md.tmpl");
+    const skillPath = path.join(rootDir, entry.name, 'SKILL.md.tmpl');
     if (!fs.existsSync(skillPath)) continue;
 
     try {
-      const content = fs.readFileSync(skillPath, "utf8");
+      const content = fs.readFileSync(skillPath, 'utf8');
       const fm = parseFrontmatter(content);
+      if (!fm?.name) continue;
 
-      if (fm && fm.name) {
-        skills.push({
-          name: fm.name,
-          version: fm.version || "0.1.0",
-          description: getDescription(fm),
-          agents: fm.agents || [],
-          category: fm.category || "core",
-          directory: entry,
-          frontmatter: fm,
-        });
-      }
-    } catch (e) {
-      console.error(`Error parsing ${skillPath}:`, e.message);
+      skills.push({
+        name: fm.name,
+        version: fm.version || '0.1.0',
+        description: getDescription(fm),
+        agents: Array.isArray(fm.agents) ? fm.agents : [],
+        category: fm.category || 'core',
+        directory: entry.name,
+      });
+    } catch (error) {
+      console.error(`Error parsing ${skillPath}: ${error.message}`);
     }
   }
 
-  return skills;
+  return skills.sort((a, b) => a.name.localeCompare(b.name));
 }
 
-/**
- * Group skills by category
- */
 function groupByCategory(skills) {
-  const grouped = {};
-
   const categories = [
-    "core",
-    "visual-system",
-    "design",
-    "code",
-    "data",
-    "release",
-    "infrastructure",
+    'core',
+    'visual-system',
+    'design',
+    'code',
+    'data',
+    'release',
+    'infrastructure',
   ];
 
-  for (const cat of categories) {
-    grouped[cat] = skills.filter(
-      (s) => s.category === cat || (!s.category && cat === "core")
-    );
+  const grouped = {};
+  for (const category of categories) {
+    grouped[category] = skills.filter((skill) => skill.category === category);
   }
-
   return grouped;
 }
 
-/**
- * Generate markdown catalog
- */
+function formatSkillLine(skill, { bold = false, includeAgents = false } = {}) {
+  const link = `[\`${skill.name}\`](./${skill.directory}/SKILL.md)`;
+  const prefix = bold ? `**${link}**` : link;
+  const agents = includeAgents
+    ? skill.agents.filter((agent) => agent !== '_infrastructure').slice(0, 2).join(', ')
+    : '';
+  const agentSuffix = agents ? ` *(${agents})*` : '';
+  return `- ${prefix} - ${skill.description}${agentSuffix}`;
+}
+
 function generateCatalog(skills) {
   const grouped = groupByCategory(skills);
-
-  let md = `# Skill Catalog
-
-Agent-architecture provides ${skills.length} reusable skills organized by category and specialized role.
-
-**[Contributing?](./CONTRIBUTING.md)** See submission process and validation checklist.
-
----
-
-## By Category
-
-`;
-
   const categoryNames = {
-    core: "Core Workflows",
-    "visual-system": "Visual System (Diagrams & Design)",
-    design: "Design & Review",
-    code: "Code & Implementation",
-    data: "Data & MLOps",
-    release: "Release & Deployment",
-    infrastructure: "Infrastructure & Coordination",
+    core: 'Core Workflows',
+    'visual-system': 'Visual System (Diagrams & Design)',
+    design: 'Design & Review',
+    code: 'Code & Implementation',
+    data: 'Data & MLOps',
+    release: 'Release & Deployment',
+    infrastructure: 'Infrastructure & Coordination',
   };
 
-  for (const [cat, skills] of Object.entries(grouped)) {
-    if (!skills.length) continue;
+  const lines = [
+    '# Skill Catalog',
+    '',
+    `Agent-architecture provides ${skills.length} reusable skills organized by category and specialized role.`,
+    '',
+    '**[Contributing?](./CONTRIBUTING.md)** See submission process and validation checklist.',
+    '',
+    '---',
+    '',
+    '## By Category',
+    '',
+  ];
 
-    md += `### ${categoryNames[cat]}\n\n`;
-
-    for (const skill of skills.sort((a, b) => a.name.localeCompare(b.name))) {
-      const agentList = Array.isArray(skill.agents)
-        ? skill.agents
-            .filter((a) => a !== "_infrastructure")
-            .slice(0, 2)
-            .join(", ")
-        : "";
-      const agentSuffix = agentList ? ` *(${agentList})*` : "";
-
-      md += `- **[\`${skill.name}\`](./${skill.directory}/SKILL.md)** — ${skill.description}${agentSuffix}\n`;
+  for (const [category, categorySkills] of Object.entries(grouped)) {
+    if (categorySkills.length === 0) continue;
+    lines.push(`### ${categoryNames[category]}`);
+    lines.push('');
+    for (const skill of categorySkills) {
+      lines.push(formatSkillLine(skill, { bold: true, includeAgents: true }));
     }
-
-    md += "\n";
+    lines.push('');
   }
 
-  // Add by-agent index
-  md += `---
-
-## By Agent
-
-`;
+  lines.push('---');
+  lines.push('');
+  lines.push('## By Agent');
+  lines.push('');
 
   const agents = [
-    "swe",
-    "qa-agent",
-    "spec-agent",
-    "pm",
-    "design-agent",
-    "diagram-agent",
-    "orchestrate",
-    "security",
-    "migration",
-    "migration-engineer",
-    "data",
-    "cloud",
-    "release-agent",
-    "interviewer",
+    'swe',
+    'qa-agent',
+    'spec-agent',
+    'pm',
+    'design-agent',
+    'diagram-agent',
+    'orchestrate',
+    'security',
+    'migration',
+    'migration-engineer',
+    'data',
+    'cloud',
+    'release-agent',
+    'interviewer',
   ];
 
   for (const agent of agents) {
-    const agentSkills = skills.filter((s) => {
-      const agents = Array.isArray(s.agents) ? s.agents : [];
-      return agents.includes(agent);
-    });
-
+    const agentSkills = skills.filter((skill) => skill.agents.includes(agent));
     if (agentSkills.length === 0) continue;
 
-    md += `### \`/${agent}\`\n\n`;
-    md += `${agentSkills.length} skills\n\n`;
-
-    for (const skill of agentSkills.sort((a, b) =>
-      a.name.localeCompare(b.name)
-    )) {
-      md += `- [\`${skill.name}\`](./${skill.directory}/SKILL.md) — ${skill.description}\n`;
+    lines.push(`### \`/${agent}\``);
+    lines.push('');
+    lines.push(`${agentSkills.length} skills`);
+    lines.push('');
+    for (const skill of agentSkills) {
+      lines.push(formatSkillLine(skill));
     }
-
-    md += "\n";
+    lines.push('');
   }
 
-  // Add stats
-  md += `---
-
-## Statistics
-
-| Category | Count |
-|----------|-------|
-`;
-
-  for (const [cat, skills] of Object.entries(grouped)) {
-    if (skills.length > 0) {
-      md += `| ${categoryNames[cat]} | ${skills.length} |\n`;
+  lines.push('---');
+  lines.push('');
+  lines.push('## Statistics');
+  lines.push('');
+  lines.push('| Category | Count |');
+  lines.push('|----------|-------|');
+  for (const [category, categorySkills] of Object.entries(grouped)) {
+    if (categorySkills.length > 0) {
+      lines.push(`| ${categoryNames[category]} | ${categorySkills.length} |`);
     }
   }
+  lines.push(`| **Total** | **${skills.length}** |`);
+  lines.push('');
+  lines.push('See [METADATA-SCHEMA.md](./METADATA-SCHEMA.md) for skill development and metadata reference.');
+  lines.push('');
 
-  md += `| **Total** | **${skills.length}** |\n\n`;
-
-  md += `See [METADATA-SCHEMA.md](./METADATA-SCHEMA.md) for skill development and metadata reference.\n`;
-
-  return md;
+  return lines.join('\n');
 }
 
-/**
- * Main
- */
-async function main() {
-  console.log("Generating skill catalog...");
+function main() {
+  console.log('Generating skill catalog...');
 
   const skills = collectSkills();
   const catalog = generateCatalog(skills);
 
   if (CHECK_MODE) {
-    // Verify catalog is current
     if (!fs.existsSync(catalogPath)) {
-      console.error("❌ Catalog file missing. Run: npm run gen:catalog");
+      console.error('Catalog file missing. Run: npm run gen:catalog');
       process.exit(1);
     }
 
-    const existing = fs.readFileSync(catalogPath, "utf8");
+    const existing = fs.readFileSync(catalogPath, 'utf8');
     if (existing !== catalog) {
-      console.error("❌ Catalog is stale. Run: npm run gen:catalog");
+      console.error('Catalog is stale. Run: npm run gen:catalog');
       process.exit(1);
     }
 
-    console.log(`✅ Catalog is current (${skills.length} skills)`);
-  } else {
-    // Write catalog
-    fs.writeFileSync(catalogPath, catalog, "utf8");
-    console.log(
-      `✅ Generated ${catalogPath} (${skills.length} skills, ${skills.length} agents covered)`
-    );
+    console.log(`Catalog is current (${skills.length} skills)`);
+    return;
   }
+
+  fs.writeFileSync(catalogPath, catalog, 'utf8');
+  console.log(`Generated ${catalogPath} (${skills.length} skills)`);
 }
 
-main().catch((err) => {
-  console.error("Error:", err);
-  process.exit(1);
-});
+main();

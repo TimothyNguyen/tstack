@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-06-29T22:09:34.198Z",
-  "count": 86,
+  "generatedAt": "2026-07-01T20:50:41.801Z",
+  "count": 88,
   "skills": [
     {
       "name": "agent-architecture",
@@ -355,6 +355,17 @@
       ]
     },
     {
+      "name": "doubt-driven-development",
+      "version": "0.1.0",
+      "description": "Challenge assumptions before and during implementation. Surface load-bearing doubts",
+      "path": "doubt-driven-development/SKILL.md.tmpl",
+      "agents": [
+        "swe",
+        "qa-agent",
+        "spec-agent"
+      ]
+    },
+    {
       "name": "guard",
       "version": "0.1.1",
       "description": "Applies stricter local safety posture for risky tools and filesystem boundaries.",
@@ -452,7 +463,7 @@
     {
       "name": "migration-engineer",
       "version": "0.1.0",
-      "description": "Specialist in SQL Server → Postgres migrations.",
+      "description": "Specialist in SQL Server -> Postgres migrations.",
       "path": "packages/skills/agents/migration-engineer/SKILL.md.tmpl",
       "agents": [
         "_infrastructure"
@@ -516,6 +527,17 @@
       "path": "packages/skills/migration-sqlserver-test/SKILL.md.tmpl",
       "agents": [
         "migration-engineer",
+        "qa-agent"
+      ]
+    },
+    {
+      "name": "observability-and-instrumentation",
+      "version": "0.1.0",
+      "description": "Add structured observability to code and agent outputs: tracing, structured logging,",
+      "path": "packages/skills/observability-and-instrumentation/SKILL.md.tmpl",
+      "agents": [
+        "swe",
+        "cloud",
         "qa-agent"
       ]
     },
@@ -800,8 +822,8 @@
     },
     {
       "name": "ship",
-      "version": "0.1.1",
-      "description": "Prepares a human-approved PR, merge, or release handoff.",
+      "version": "0.1.2",
+      "description": "Prepares a human-approved PR, merge, or release handoff. Runs parallel specialist",
       "path": "ship/SKILL.md.tmpl",
       "agents": [
         "swe",

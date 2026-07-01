@@ -4,7 +4,7 @@ status: experimental
 version: 0.1.0
 owner: migration-agent
 description: |
-  Specialist in SQL Server → Postgres migrations.
+  Specialist in SQL Server -> Postgres migrations.
   Assesses, plans, migrates, tests, and optimizes large-scale databases.
 dependencies:
   skills: []
