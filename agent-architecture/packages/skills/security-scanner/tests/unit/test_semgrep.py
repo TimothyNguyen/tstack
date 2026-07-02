@@ -113,3 +113,8 @@ class TestRunDirectorySemgrepScan:
         mock_run.return_value = MagicMock(stdout=SEMGREP_OUTPUT, returncode=1)
         result = run_directory_semgrep_scan(str(tmp_path), "python")
         assert result["summary"]["total"] == 1
+
+    def test_invalid_directory_returns_error(self):
+        result = run_directory_semgrep_scan("/nonexistent/path/that/does/not/exist")
+        assert result["success"] is False
+        assert "Not a valid directory" in result["error"]

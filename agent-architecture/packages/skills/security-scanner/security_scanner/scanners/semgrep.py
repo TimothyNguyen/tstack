@@ -50,6 +50,10 @@ def run_semgrep_scan(code: str, language: str) -> Dict:
 
 def run_directory_semgrep_scan(directory_path: str, language: str = "") -> Dict:
     """Scan a directory with Semgrep; write results to .security-reports/semgrep/<ts>.json."""
+    p = Path(directory_path).resolve()
+    if not p.is_dir():
+        return {"success": False, "error": f"Not a valid directory: {directory_path}"}
+    directory_path = str(p)
     out_dir = Path(directory_path) / ".security-reports" / "semgrep"
     out_dir.mkdir(parents=True, exist_ok=True)
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")

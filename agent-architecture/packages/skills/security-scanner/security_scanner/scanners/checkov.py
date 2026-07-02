@@ -1,5 +1,6 @@
 import json
 import os
+import shutil
 import subprocess
 import tempfile
 from datetime import datetime
@@ -28,27 +29,41 @@ def run_checkov_scan(code: str, format_type: str) -> Dict:
 
     ext = SUPPORTED_FORMATS[fmt]
     if ext == "Dockerfile":
-        fd, tmp_path = tempfile.mkstemp(prefix="Dockerfile")
-        os.close(fd)
+        tmp_dir = tempfile.mkdtemp(prefix="checkov_dockerfile_")
+        tmp_path = os.path.join(tmp_dir, "Dockerfile")
+        try:
+            with open(tmp_path, "w", encoding="utf-8") as f:
+                f.write(code)
+            result = subprocess.run(
+                ["checkov", "-f", tmp_path, "--output", "json", "--quiet", "--compact"],
+                capture_output=True,
+                text=True,
+            )
+            return _parse_checkov_output(result.stdout, format_type)
+        finally:
+            shutil.rmtree(tmp_dir, ignore_errors=True)
     else:
         fd, tmp_path = tempfile.mkstemp(suffix=ext, prefix="checkov_scan_")
         os.close(fd)
-
-    try:
-        with open(tmp_path, "w", encoding="utf-8") as f:
-            f.write(code)
-        result = subprocess.run(
-            ["checkov", "-f", tmp_path, "--output", "json", "--quiet", "--compact"],
-            capture_output=True,
-            text=True,
-        )
-        return _parse_checkov_output(result.stdout, format_type)
-    finally:
-        os.unlink(tmp_path)
+        try:
+            with open(tmp_path, "w", encoding="utf-8") as f:
+                f.write(code)
+            result = subprocess.run(
+                ["checkov", "-f", tmp_path, "--output", "json", "--quiet", "--compact"],
+                capture_output=True,
+                text=True,
+            )
+            return _parse_checkov_output(result.stdout, format_type)
+        finally:
+            os.unlink(tmp_path)
 
 
 def run_directory_checkov_scan(directory_path: str) -> Dict:
     """Scan a directory with Checkov; write results to .security-reports/checkov/<ts>.json."""
+    p = Path(directory_path).resolve()
+    if not p.is_dir():
+        return {"success": False, "error": f"Not a valid directory: {directory_path}"}
+    directory_path = str(p)
     out_dir = Path(directory_path) / ".security-reports" / "checkov"
     out_dir.mkdir(parents=True, exist_ok=True)
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
@@ -116,8 +131,8 @@ def _parse_checkov_output(stdout: str, format_type: str) -> Dict:
         for fc in failed_checks:
             findings.append({
                 "check_id": fc.get("check_id"),
-                "check_name": fc.get("check_id"),
-                "description": fc.get("check_id"),
+                "check_name": fc.get("check_name") or fc.get("check_id"),
+                "description": fc.get("check_name") or fc.get("check_id"),
                 "severity": (fc.get("severity") or "MEDIUM").upper(),
                 "resource": fc.get("resource"),
                 "file_path": fc.get("file_path"),

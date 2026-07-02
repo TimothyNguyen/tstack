@@ -29,6 +29,11 @@ def run_ash_scan(
             ),
         }
 
+    p = Path(directory_path).resolve()
+    if not p.is_dir():
+        return {"success": False, "error": f"Not a valid directory: {directory_path}"}
+    directory_path = str(p)
+
     out_dir = Path(output_dir) if output_dir else Path(directory_path) / ".security-reports" / "ash"
     out_dir.mkdir(parents=True, exist_ok=True)
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")

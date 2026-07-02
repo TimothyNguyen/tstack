@@ -104,3 +104,8 @@ class TestRunDirectoryBanditScan:
         result = run_directory_bandit_scan(str(tmp_path))
         assert result["summary"]["high"] == 1
         assert result["summary"]["total"] == 1
+
+    def test_invalid_directory_returns_error(self):
+        result = run_directory_bandit_scan("/nonexistent/path/that/does/not/exist")
+        assert result["success"] is False
+        assert "Not a valid directory" in result["error"]

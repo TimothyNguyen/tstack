@@ -121,3 +121,17 @@ class TestRunDirectoryCheckovScan:
         mock_run.return_value = MagicMock(stdout="", returncode=0)
         result = run_directory_checkov_scan(str(tmp_path))
         assert Path(result["output_file"]).exists()
+
+    def test_invalid_directory_returns_error(self):
+        result = run_directory_checkov_scan("/nonexistent/path/that/does/not/exist")
+        assert result["success"] is False
+        assert "Not a valid directory" in result["error"]
+
+
+class TestDockerfileTempdir:
+    @patch("security_scanner.scanners.checkov.subprocess.run")
+    @patch("security_scanner.scanners.checkov.shutil.rmtree")
+    def test_dockerfile_tempdir_cleaned_up(self, mock_rmtree, mock_run):
+        mock_run.return_value = MagicMock(stdout="", returncode=0)
+        run_checkov_scan("FROM ubuntu:22.04", "dockerfile")
+        assert mock_rmtree.called

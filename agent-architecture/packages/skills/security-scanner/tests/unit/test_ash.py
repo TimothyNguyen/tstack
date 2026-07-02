@@ -74,3 +74,9 @@ class TestRunAshScan:
         result = run_ash_scan(str(tmp_path))
         assert result["success"] is False
         assert result["return_code"] == 1
+
+    @patch("security_scanner.scanners.ash.check_ash_available", return_value=(True, "/usr/local/bin/ash"))
+    def test_invalid_directory_returns_error(self, mock_check):
+        result = run_ash_scan("/nonexistent/path/that/does/not/exist")
+        assert result["success"] is False
+        assert "Not a valid directory" in result["error"]
