@@ -33,3 +33,6 @@ agent-architecture/.agent/
 /.agent/
 /generated/
 /claude-code-best-practice/
+
+# External repos cloned for reference
+/sample-mcp-security-scanner/
