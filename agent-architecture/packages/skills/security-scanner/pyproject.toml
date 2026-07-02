@@ -1,0 +1,47 @@
+[project]
+name = "security-scanner"
+version = "0.1.0"
+description = "MCP server for security scanning — Checkov, Semgrep, Bandit, ASH"
+requires-python = ">=3.10"
+dependencies = [
+    "checkov>=3.0.0",
+    "semgrep>=1.45.0",
+    "bandit>=1.7.5",
+    "loguru>=0.6.0",
+    "mcp[cli]>=1.11.0",
+    "pydantic>=2.0.0",
+]
+
+[project.optional-dependencies]
+ash = [
+    "automated-security-helper @ git+https://github.com/awslabs/automated-security-helper.git@v3.2.7",
+]
+dev = [
+    "pytest>=8.0.0",
+    "pytest-cov>=5.0.0",
+    "pytest-asyncio>=0.23.0",
+]
+
+[project.scripts]
+security-scanner = "security_scanner.server:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.metadata]
+allow-direct-references = true
+
+[tool.hatch.build.targets.wheel]
+packages = ["security_scanner"]
+
+[tool.pytest.ini_options]
+addopts = "--cov=security_scanner --cov-report=term-missing --cov-fail-under=95"
+asyncio_mode = "auto"
+markers = [
+    "integration: marks tests as requiring real tool installations (deselect with '-m not integration')",
+]
+
+[tool.coverage.run]
+source = ["security_scanner"]
+omit = ["tests/*"]
