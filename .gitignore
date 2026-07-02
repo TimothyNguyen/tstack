@@ -1,5 +1,7 @@
-superpowers/
+/superpowers/
 gstack/
+# docs/superpowers/specs/ — intentional source, not ignored
+!docs/superpowers/
 /graphify/
 graphify-out/
 **/graphify-out/
