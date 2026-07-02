@@ -1,0 +1,26 @@
+services:
+  security-scanner:
+    build:
+      context: .
+      target: base
+    ports:
+      - "8765:8765"
+    environment:
+      - MCP_TRANSPORT=sse
+    volumes:
+      - ${SCAN_TARGET:-./}:/workspace:ro
+      - ./.security-reports:/reports
+
+  security-scanner-full:
+    profiles:
+      - full
+    build:
+      context: .
+      target: full
+    ports:
+      - "8765:8765"
+    environment:
+      - MCP_TRANSPORT=sse
+    volumes:
+      - ${SCAN_TARGET:-./}:/workspace:ro
+      - ./.security-reports:/reports
