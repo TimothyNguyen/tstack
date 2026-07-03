@@ -1,0 +1,37 @@
+name: security-scanner
+type: skill
+status: stable
+version: 0.1.0
+owner: orchestrator
+description: |
+  MCP server providing Checkov (IaC), Semgrep (source), Bandit (Python), and
+  ASH (multi-tool) security scanning. Produces SECURITY.md reports. Requires
+  Docker or local tool install. No external API keys required.
+dependencies:
+  skills:
+    - qa-verify
+  adapters:
+    - adapter-mcp
+  tools:
+    - python
+    - docker
+    - bandit
+    - semgrep
+    - checkov
+  mcps:
+    - security-scanner
+testing:
+  coverage_target: 95
+  types:
+    - unit
+    - integration
+documentation:
+  readme: false
+  spec: false
+  examples_min: 2
+used_by:
+  - security
+  - qa-agent
+  - swe
+governance_version: '1.0'
+last_reviewed: '2026-07-03'
