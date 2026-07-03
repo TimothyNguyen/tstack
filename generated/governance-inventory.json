@@ -45,7 +45,7 @@
       "path": "agent-architecture/packages/adapters/adapter-docker-mcp/SKILL.md",
       "namespace": "agent-architecture/packages/adapters",
       "source": "SKILL.md",
-      "description": "Docker MCP Registry and Toolkit adapter. Wires 300+ pre-built containerized\nMCP servers (GitHub, Postgres, Playwright, Slack, Stripe, Docker ops, etc.)\nthrough the Docker MCP Gateway — one stdio multiplexer replaces N individual\nserver configs. Use when deploying via Docker or consuming tools from the\nofficial docker/mcp-registry catalog.\n"
+      "description": "Docker MCP Registry and Toolkit adapter. Wires 300+ pre-built containerized\nMCP servers (GitHub, Postgres, Playwright, Slack, Docker ops, etc.)\nthrough the Docker MCP Gateway — one stdio multiplexer replaces N individual\nserver configs. Use when deploying via Docker or consuming tools from the\nofficial docker/mcp-registry catalog.\n"
     },
     {
       "id": "adapter:agent-architecture/packages/adapters/adapter-github/SKILL.md",
@@ -1125,7 +1125,7 @@
       "path": "agent-architecture/plugins/agent-architecture/skills/adapter-docker-mcp/SKILL.md",
       "namespace": "agent-architecture/plugins",
       "source": "SKILL.md",
-      "description": "Docker MCP Registry and Toolkit adapter. Wires 300+ pre-built containerized\nMCP servers (GitHub, Postgres, Playwright, Slack, Stripe, Docker ops, etc.)\nthrough the Docker MCP Gateway — one stdio multiplexer replaces N individual\nserver configs. Use when deploying via Docker or consuming tools from the\nofficial docker/mcp-registry catalog.\n"
+      "description": "Docker MCP Registry and Toolkit adapter. Wires 300+ pre-built containerized\nMCP servers (GitHub, Postgres, Playwright, Slack, Docker ops, etc.)\nthrough the Docker MCP Gateway — one stdio multiplexer replaces N individual\nserver configs. Use when deploying via Docker or consuming tools from the\nofficial docker/mcp-registry catalog.\n"
     },
     {
       "id": "skill:agent-architecture/plugins/agent-architecture/skills/adapter-github/SKILL.md",
@@ -4107,5 +4107,5 @@
       "description": "SQL Server to Postgres migration planning with T-SQL compatibility checks,\npgloader experiments, and production cutover guardrails.\n"
     }
   ],
-  "digest": "ce4583aa0f3077041560f447e711798c26b6d010f84de61774e1cd898ac71a6c"
+  "digest": "012d48070e2698282c0770da8b41f4bf85fd37a2126cc6bcad7296832499daff"
 }

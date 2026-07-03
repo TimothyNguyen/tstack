@@ -5,7 +5,7 @@ version: 0.1.1
 owner: orchestrator
 description: |
   Docker MCP Registry and Toolkit adapter. Wires 300+ pre-built containerized
-  MCP servers (GitHub, Postgres, Playwright, Slack, Stripe, Docker ops, etc.)
+  MCP servers (GitHub, Postgres, Playwright, Slack, Docker ops, etc.)
   through the Docker MCP Gateway — one stdio multiplexer replaces N individual
   server configs. Use when deploying via Docker or consuming tools from the
   official docker/mcp-registry catalog.
@@ -57,7 +57,7 @@ adapter_metadata:
       - development: [github, gitlab, bitbucket]
       - database: [postgres, mysql, mongodb, sqlite]
       - web_automation: [playwright, selenium]
-      - integrations: [slack, stripe, asana, jira]
+      - integrations: [slack, asana, jira]
       - devops: [terraform, docker, kubernetes]
       - data: [bigquery, athena, duckdb]
 
@@ -88,7 +88,6 @@ adapter_metadata:
       - docker-mcp: "Docker container operations"
     integrations:
       - slack-mcp: "Slack messaging and reactions"
-      - stripe-mcp: "Stripe payment operations"
 
   inputs:
     mcp_profile:

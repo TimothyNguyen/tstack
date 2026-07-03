@@ -26,7 +26,7 @@ events, and local privacy controls.
 operations with explicit policy gates.
 
 - `adapter-docker-mcp` :: `agent-architecture/packages/adapters/adapter-docker-mcp/SKILL.md` - Docker MCP Registry and Toolkit adapter. Wires 300+ pre-built containerized
-MCP servers (GitHub, Postgres, Playwright, Slack, Stripe, Docker ops, etc.)
+MCP servers (GitHub, Postgres, Playwright, Slack, Docker ops, etc.)
 through the Docker MCP Gateway — one stdio multiplexer replaces N individual
 server configs. Use when deploying via Docker or consuming tools from the
 official docker/mcp-registry catalog.
@@ -399,7 +399,7 @@ events, and local privacy controls.
 operations with explicit policy gates.
 
 - `adapter-docker-mcp` :: `agent-architecture/plugins/agent-architecture/skills/adapter-docker-mcp/SKILL.md` - Docker MCP Registry and Toolkit adapter. Wires 300+ pre-built containerized
-MCP servers (GitHub, Postgres, Playwright, Slack, Stripe, Docker ops, etc.)
+MCP servers (GitHub, Postgres, Playwright, Slack, Docker ops, etc.)
 through the Docker MCP Gateway — one stdio multiplexer replaces N individual
 server configs. Use when deploying via Docker or consuming tools from the
 official docker/mcp-registry catalog.
