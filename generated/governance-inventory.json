@@ -2,12 +2,12 @@
   "generatedBy": "scripts/build-governance.js",
   "configVersion": 1,
   "counts": {
-    "total": 455,
+    "total": 454,
     "adapter": 12,
     "agent": 31,
     "mcp": 1,
     "plugin": 15,
-    "skill": 250,
+    "skill": 249,
     "stack": 146
   },
   "components": [
@@ -1468,15 +1468,6 @@
       "namespace": "agent-architecture/plugins",
       "source": "SKILL.md",
       "description": "Model interpretation review for feature effects, calibration, drift,\nuncertainty, explanation limits, and decision-risk communication.\n"
-    },
-    {
-      "id": "skill:agent-architecture/plugins/agent-architecture/skills/donecheck/SKILL.md",
-      "type": "skill",
-      "name": "donecheck",
-      "path": "agent-architecture/plugins/agent-architecture/skills/donecheck/SKILL.md",
-      "namespace": "agent-architecture/plugins",
-      "source": "SKILL.md",
-      "description": "Proof-of-done gate for AI coding agents. Scans changed files for AI\nanti-patterns (TODOs, placeholders, swallowed exceptions, eval/exec,\nhardcoded credentials) and generates a timestamped DONECHECK.md receipt.\nInvoke before any completion claim, PR creation, or task handoff.\n"
     },
     {
       "id": "skill:agent-architecture/plugins/agent-architecture/skills/doubt-driven-development/SKILL.md",
@@ -4107,5 +4098,5 @@
       "description": "SQL Server to Postgres migration planning with T-SQL compatibility checks,\npgloader experiments, and production cutover guardrails.\n"
     }
   ],
-  "digest": "158fd9d2dd5b33f71e217181d393a605dae68b1f7b95bd43d95a608ceaa9e2fe"
+  "digest": "4b89f0c6a8cb4098f07e117e63c5ab3b3177482e3b21d3188a2f33eddfe15768"
 }
