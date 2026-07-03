@@ -4,6 +4,11 @@ version: 0.1.1
 description: |
   Optional Databricks SDK adapter boundary for workspace, job, and bundle
   operations with explicit policy gates.
+allowed-tools:
+  - Read
+  - Grep
+  - Glob
+  - Bash
 agents: [data]
 ---
 

@@ -4,6 +4,11 @@ version: 0.1.1
 description: |
   Optional AgentCore adapter boundary for skills, tools, approvals, audit
   events, and local privacy controls.
+allowed-tools:
+  - Read
+  - Grep
+  - Glob
+  - Bash
 agents: [orchestrate, _infrastructure, cloud]
 ---
 

@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-07-03T21:46:58.202Z",
-  "count": 91,
+  "generatedAt": "2026-07-03T22:18:15.399Z",
+  "count": 103,
   "byAgent": {
     "_infrastructure": [
       "agent-architecture",
@@ -31,7 +31,16 @@
       "migration-engineer",
       "orchestrate",
       "release-agent",
-      "security"
+      "security",
+      "adapter-ag-ui",
+      "adapter-agentcore",
+      "adapter-docker-mcp",
+      "adapter-google-adk",
+      "adapter-langgraph",
+      "adapter-mcp",
+      "adapter-seniorswe-concise",
+      "adapter-strands",
+      "stack"
     ],
     "_linter": [
       "pre-commit-review"
@@ -51,7 +60,13 @@
       "migration-review",
       "observability-and-instrumentation",
       "plan-eng-review",
-      "security-review"
+      "security-review",
+      "adapter-ag-ui",
+      "adapter-agentcore",
+      "adapter-docker-mcp",
+      "adapter-google-adk",
+      "adapter-mcp",
+      "adapter-strands"
     ],
     "data": [
       "commit",
@@ -63,7 +78,8 @@
       "plan-eng-review",
       "rtk-token-optimizer",
       "seniorswe-concise",
-      "token-optimizer"
+      "token-optimizer",
+      "adapter-databricks"
     ],
     "design-agent": [
       "brainstorming",
@@ -139,7 +155,15 @@
       "plan-director-review",
       "plan-review",
       "seniorswe-concise-review",
-      "token-optimizer"
+      "token-optimizer",
+      "adapter-ag-ui",
+      "adapter-agentcore",
+      "adapter-docker-mcp",
+      "adapter-github",
+      "adapter-google-adk",
+      "adapter-langgraph",
+      "adapter-mcp",
+      "adapter-strands"
     ],
     "pm": [
       "learn",
@@ -156,7 +180,8 @@
       "documentation",
       "plan-design-review",
       "plan-director-review",
-      "plan-pm-review"
+      "plan-pm-review",
+      "adapter-github"
     ],
     "qa-agent": [
       "canary",
@@ -203,7 +228,8 @@
       "using-agent-skills",
       "verification-before-completion",
       "codebase-engine",
-      "document-release"
+      "document-release",
+      "adapter-docker-mcp"
     ],
     "security": [
       "careful",
@@ -240,7 +266,8 @@
       "plan-design-review",
       "plan-devex-review",
       "plan-pm-review",
-      "plan-review"
+      "plan-review",
+      "adapter-openapi"
     ],
     "swe": [
       "autoplan",
@@ -293,10 +320,192 @@
       "seniorswe-concise-gain",
       "seniorswe-concise-help",
       "seniorswe-concise-review",
-      "token-optimizer"
+      "token-optimizer",
+      "adapter-ag-ui",
+      "adapter-docker-mcp",
+      "adapter-github",
+      "adapter-mcp",
+      "adapter-openapi",
+      "adapter-seniorswe-concise",
+      "stack"
     ]
   },
   "skills": [
+    {
+      "name": "adapter-ag-ui",
+      "version": "0.1.1",
+      "description": "Map skill progress, approvals, tool actions, findings, and artifacts into",
+      "agents": [
+        "orchestrate",
+        "_infrastructure",
+        "swe",
+        "cloud"
+      ],
+      "allowedTools": [
+        "Read",
+        "Grep",
+        "Glob",
+        "Bash"
+      ]
+    },
+    {
+      "name": "adapter-agentcore",
+      "version": "0.1.1",
+      "description": "Optional AgentCore adapter boundary for skills, tools, approvals, audit",
+      "agents": [
+        "orchestrate",
+        "_infrastructure",
+        "cloud"
+      ],
+      "allowedTools": [
+        "Read",
+        "Grep",
+        "Glob",
+        "Bash"
+      ]
+    },
+    {
+      "name": "adapter-databricks",
+      "version": "0.1.1",
+      "description": "Optional Databricks SDK adapter boundary for workspace, job, and bundle",
+      "agents": [
+        "data"
+      ],
+      "allowedTools": [
+        "Read",
+        "Grep",
+        "Glob",
+        "Bash"
+      ]
+    },
+    {
+      "name": "adapter-docker-mcp",
+      "version": "0.1.1",
+      "description": "Docker MCP Registry and Toolkit adapter. Wires 300+ pre-built containerized",
+      "agents": [
+        "cloud",
+        "release-agent",
+        "orchestrate",
+        "swe",
+        "_infrastructure"
+      ],
+      "allowedTools": [
+        "Read",
+        "Grep",
+        "Glob",
+        "Bash"
+      ]
+    },
+    {
+      "name": "adapter-github",
+      "version": "0.1.1",
+      "description": "Optional GitHub MCP/CLI adapter guidance for repo, issue, and PR context",
+      "agents": [
+        "swe",
+        "orchestrate",
+        "pm"
+      ],
+      "allowedTools": [
+        "Read",
+        "Grep",
+        "Glob",
+        "Bash"
+      ]
+    },
+    {
+      "name": "adapter-google-adk",
+      "version": "0.1.1",
+      "description": "Optional Google ADK host adapter boundary for invoking skills and tools",
+      "agents": [
+        "orchestrate",
+        "_infrastructure",
+        "cloud"
+      ],
+      "allowedTools": [
+        "Read",
+        "Grep",
+        "Glob",
+        "Bash"
+      ]
+    },
+    {
+      "name": "adapter-langgraph",
+      "version": "0.1.1",
+      "description": "Optional LangGraph orchestration boundary for durable app-level agents",
+      "agents": [
+        "orchestrate",
+        "_infrastructure"
+      ],
+      "allowedTools": [
+        "Read",
+        "Grep",
+        "Glob",
+        "Bash"
+      ]
+    },
+    {
+      "name": "adapter-mcp",
+      "version": "0.1.1",
+      "description": "Design optional Model Context Protocol adapters with default-deny tools,",
+      "agents": [
+        "swe",
+        "_infrastructure",
+        "orchestrate",
+        "cloud"
+      ],
+      "allowedTools": [
+        "Read",
+        "Grep",
+        "Glob",
+        "Bash"
+      ]
+    },
+    {
+      "name": "adapter-openapi",
+      "version": "0.1.1",
+      "description": "Use OpenAPI contracts and optional generated clients/servers while keeping",
+      "agents": [
+        "swe",
+        "spec-agent"
+      ],
+      "allowedTools": [
+        "Read",
+        "Grep",
+        "Glob",
+        "Bash"
+      ]
+    },
+    {
+      "name": "adapter-seniorswe-concise",
+      "version": "0.1.1",
+      "description": "Optional Seniorswe-Concise hook and MCP adapter for YAGNI mode injection across",
+      "agents": [
+        "swe",
+        "_infrastructure"
+      ],
+      "allowedTools": [
+        "Read",
+        "Grep",
+        "Glob",
+        "Bash"
+      ]
+    },
+    {
+      "name": "adapter-strands",
+      "version": "0.1.1",
+      "description": "Optional Strands adapter boundary for composing skills and tools with",
+      "agents": [
+        "orchestrate",
+        "_infrastructure",
+        "cloud"
+      ],
+      "allowedTools": [
+        "Read",
+        "Grep",
+        "Glob",
+        "Bash"
+      ]
+    },
     {
       "name": "agent-architecture",
       "version": "0.1.1",
@@ -1505,6 +1714,21 @@
         "_infrastructure"
       ],
       "allowedTools": []
+    },
+    {
+      "name": "stack",
+      "version": "0.1.1",
+      "description": "Tech stack meta-loader. Auto-detects project tech stack from repo signals and",
+      "agents": [
+        "_infrastructure",
+        "swe"
+      ],
+      "allowedTools": [
+        "Read",
+        "Grep",
+        "Glob",
+        "Bash"
+      ]
     },
     {
       "name": "subagent-orchestrator",

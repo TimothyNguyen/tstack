@@ -66,6 +66,17 @@ export function discoverTemplates(root) {
     }
   }
 
+  // Also discover adapters in packages/adapters/ (each gets a plugin mirror)
+  const adaptersPackageDir = path.join(root, 'packages', 'adapters');
+  if (fs.existsSync(adaptersPackageDir)) {
+    for (const name of subdirs(adaptersPackageDir)) {
+      const rel = `packages/adapters/${name}/SKILL.md.tmpl`;
+      if (fs.existsSync(path.join(root, rel))) {
+        templates.push({ tmpl: rel, output: rel.replace(/\.tmpl$/, '') });
+      }
+    }
+  }
+
   return templates;
 }
 
