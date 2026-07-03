@@ -149,6 +149,20 @@ From debugging sessions:
 - Implications of success
 - ANY communication suggesting completion/correctness
 
+## DoneCheck: Machine-Readable Proof
+
+Use `donecheck` to generate a timestamped `DONECHECK.md` receipt before any completion claim.
+It scans changed files for AI anti-patterns and runs your verification command:
+
+```bash
+donecheck --cmd "<project test command>"
+cat DONECHECK.md
+```
+
+Receipt shows `FAIL` → fix findings → re-run. Receipt shows `PASS` → attach to PR as evidence.
+
+Install: `pipx install git+https://github.com/AtharvaMaik/donecheck`
+
 ## The Bottom Line
 
 **No shortcuts for verification.**

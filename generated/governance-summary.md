@@ -8,9 +8,9 @@ Generated from `governance.config.json`.
 - agent: 31
 - mcp: 1
 - plugin: 15
-- skill: 247
+- skill: 249
 - stack: 146
-- total: 452
+- total: 454
 
 ## Components
 
@@ -215,6 +215,11 @@ atomic commits, or git workflow after making changes.
 - `copilot` :: `agent-architecture/copilot/SKILL.md` - GitHub Copilot host adapter. Covers how to install this skill pack into a
 Copilot-enabled repo: copilot-instructions.md injection, hook configuration,
 tool availability, environment variables, and enterprise-safe defaults.
+
+- `donecheck` :: `agent-architecture/donecheck/SKILL.md` - Proof-of-done gate for AI coding agents. Scans changed files for AI
+anti-patterns (TODOs, placeholders, swallowed exceptions, eval/exec,
+hardcoded credentials) and generates a timestamped DONECHECK.md receipt.
+Invoke before any completion claim, PR creation, or task handoff.
 
 - `doubt-driven-development` :: `agent-architecture/doubt-driven-development/SKILL.md` - Challenge assumptions before and during implementation. Surface load-bearing doubts
 early so they can be resolved with evidence rather than discovered as bugs.
@@ -522,6 +527,11 @@ governed production ML workflows.
 
 - `domain-model-interpretation` :: `agent-architecture/plugins/agent-architecture/skills/domain-model-interpretation/SKILL.md` - Model interpretation review for feature effects, calibration, drift,
 uncertainty, explanation limits, and decision-risk communication.
+
+- `donecheck` :: `agent-architecture/plugins/agent-architecture/skills/donecheck/SKILL.md` - Proof-of-done gate for AI coding agents. Scans changed files for AI
+anti-patterns (TODOs, placeholders, swallowed exceptions, eval/exec,
+hardcoded credentials) and generates a timestamped DONECHECK.md receipt.
+Invoke before any completion claim, PR creation, or task handoff.
 
 - `doubt-driven-development` :: `agent-architecture/plugins/agent-architecture/skills/doubt-driven-development/SKILL.md` - Challenge assumptions before and during implementation. Surface load-bearing doubts
 early so they can be resolved with evidence rather than discovered as bugs.

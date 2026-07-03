@@ -1,6 +1,6 @@
 # Skill Catalog
 
-Agent-architecture provides 34 reusable skills organized by category and specialized role.
+Agent-architecture provides 35 reusable skills organized by category and specialized role.
 
 **[Contributing?](./CONTRIBUTING.md)** See submission process and validation checklist.
 
@@ -21,6 +21,7 @@ Agent-architecture provides 34 reusable skills organized by category and special
 - **[`context-restore`](./context-restore/SKILL.md)** - Restores previously saved local working context without relying on external services. *(swe, orchestrate)*
 - **[`context-save`](./context-save/SKILL.md)** - Captures local working context so a future agent session can resume safely. *(swe, orchestrate)*
 - **[`copilot`](./copilot/SKILL.md)** - GitHub Copilot host adapter. Covers how to install this skill pack into a
+- **[`donecheck`](./donecheck/SKILL.md)** - Proof-of-done gate for AI coding agents. Scans changed files for AI *(qa-agent, swe)*
 - **[`doubt-driven-development`](./doubt-driven-development/SKILL.md)** - Challenge assumptions before and during implementation. Surface load-bearing doubts *(swe, qa-agent)*
 - **[`guard`](./guard/SKILL.md)** - Applies stricter local safety posture for risky tools and filesystem boundaries. *(swe, migration)*
 - **[`health`](./health/SKILL.md)** - Enterprise-safe code health dashboard. Detects and runs approved local quality checks *(swe, qa-agent)*
@@ -51,13 +52,14 @@ Agent-architecture provides 34 reusable skills organized by category and special
 
 ### `/swe`
 
-23 skills
+24 skills
 
 - [`autoplan`](./autoplan/SKILL.md) - Runs the plan review pipeline before coding begins, then a post-implementation critic gate before surfacing results.
 - [`brainstorming`](./brainstorming/SKILL.md) - Design-space exploration before coding. Explores user intent, requirements and design through collaborative dialogue.
 - [`commit`](./commit/SKILL.md) - Atomic commit discipline for any code change. Enforces Conventional Commits
 - [`context-restore`](./context-restore/SKILL.md) - Restores previously saved local working context without relying on external services.
 - [`context-save`](./context-save/SKILL.md) - Captures local working context so a future agent session can resume safely.
+- [`donecheck`](./donecheck/SKILL.md) - Proof-of-done gate for AI coding agents. Scans changed files for AI
 - [`doubt-driven-development`](./doubt-driven-development/SKILL.md) - Challenge assumptions before and during implementation. Surface load-bearing doubts
 - [`guard`](./guard/SKILL.md) - Applies stricter local safety posture for risky tools and filesystem boundaries.
 - [`health`](./health/SKILL.md) - Enterprise-safe code health dashboard. Detects and runs approved local quality checks
@@ -79,9 +81,10 @@ Agent-architecture provides 34 reusable skills organized by category and special
 
 ### `/qa-agent`
 
-13 skills
+14 skills
 
 - [`canary`](./canary/SKILL.md) - Privacy-safe canary planning for post-deploy monitoring, rollback signals,
+- [`donecheck`](./donecheck/SKILL.md) - Proof-of-done gate for AI coding agents. Scans changed files for AI
 - [`doubt-driven-development`](./doubt-driven-development/SKILL.md) - Challenge assumptions before and during implementation. Surface load-bearing doubts
 - [`health`](./health/SKILL.md) - Enterprise-safe code health dashboard. Detects and runs approved local quality checks
 - [`investigate`](./investigate/SKILL.md) - Root-cause investigation workflow for bugs, failing tests, broken integrations, and unexpected behavior.
@@ -147,9 +150,10 @@ Agent-architecture provides 34 reusable skills organized by category and special
 
 ### `/security`
 
-9 skills
+10 skills
 
 - [`careful`](./careful/SKILL.md) - Destructive command guardrails. Warns before rm -rf, DROP TABLE, force-push,
+- [`donecheck`](./donecheck/SKILL.md) - Proof-of-done gate for AI coding agents. Scans changed files for AI
 - [`guard`](./guard/SKILL.md) - Applies stricter local safety posture for risky tools and filesystem boundaries.
 - [`health`](./health/SKILL.md) - Enterprise-safe code health dashboard. Detects and runs approved local quality checks
 - [`investigate`](./investigate/SKILL.md) - Root-cause investigation workflow for bugs, failing tests, broken integrations, and unexpected behavior.
@@ -198,11 +202,12 @@ Agent-architecture provides 34 reusable skills organized by category and special
 
 ### `/release-agent`
 
-11 skills
+12 skills
 
 - [`canary`](./canary/SKILL.md) - Privacy-safe canary planning for post-deploy monitoring, rollback signals,
 - [`careful`](./careful/SKILL.md) - Destructive command guardrails. Warns before rm -rf, DROP TABLE, force-push,
 - [`commit`](./commit/SKILL.md) - Atomic commit discipline for any code change. Enforces Conventional Commits
+- [`donecheck`](./donecheck/SKILL.md) - Proof-of-done gate for AI coding agents. Scans changed files for AI
 - [`learn`](./learn/SKILL.md) - Knowledge capture workflow. Extracts Q&A flashcards from agent session context.
 - [`pre-commit-review`](./pre-commit-review/SKILL.md) - Executable skill that runs pre-commit hooks on code to catch style issues
 - [`release`](./release/SKILL.md) - Policy-gated release preparation workflow. Checks readiness, tests, docs, risk, and rollback
@@ -225,7 +230,7 @@ Agent-architecture provides 34 reusable skills organized by category and special
 
 | Category | Count |
 |----------|-------|
-| Core Workflows | 34 |
-| **Total** | **34** |
+| Core Workflows | 35 |
+| **Total** | **35** |
 
 See [METADATA-SCHEMA.md](./METADATA-SCHEMA.md) for skill development and metadata reference.

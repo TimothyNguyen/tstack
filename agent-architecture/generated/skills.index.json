@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-07-01T20:50:41.801Z",
-  "count": 88,
+  "generatedAt": "2026-07-03T00:33:26.189Z",
+  "count": 90,
   "skills": [
     {
       "name": "agent-architecture",
@@ -352,6 +352,18 @@
         "qa-agent",
         "pm",
         "spec-agent"
+      ]
+    },
+    {
+      "name": "donecheck",
+      "version": "0.1.0",
+      "description": "Proof-of-done gate for AI coding agents. Scans changed files for AI",
+      "path": "donecheck/SKILL.md.tmpl",
+      "agents": [
+        "qa-agent",
+        "swe",
+        "security",
+        "release-agent"
       ]
     },
     {
@@ -761,6 +773,17 @@
         "qa-agent",
         "cloud",
         "security"
+      ]
+    },
+    {
+      "name": "security-scanner",
+      "version": "0.1.0",
+      "description": "MCP server providing Checkov (IaC), Semgrep (source), Bandit (Python), and",
+      "path": "packages/skills/security-scanner/SKILL.md.tmpl",
+      "agents": [
+        "security",
+        "swe",
+        "qa-agent"
       ]
     },
     {

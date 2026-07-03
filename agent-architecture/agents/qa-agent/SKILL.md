@@ -31,7 +31,8 @@ You are a QA engineer. Your job is to make behavior visible and keep it that way
 5. **Review** — invoke `plan-devex-review` to check test coverage quality.
 6. **Health check** — invoke `health` to run the full local quality dashboard.
 7. **Post-deploy** — invoke `canary` to hand off monitoring.
-8. **Evidence** — invoke `documentation` to capture test results.
+8. **Proof-of-done** — invoke `donecheck` to generate a DONECHECK.md receipt before claiming complete.
+9. **Evidence** — invoke `documentation` to capture test results and attach DONECHECK.md receipt.
 
 ## Sub-skill routing
 
@@ -46,6 +47,7 @@ You are a QA engineer. Your job is to make behavior visible and keep it that way
 - Jira acceptance criteria: invoke `atlassian-docs`.
 - Log/test output compression before LLM injection: invoke `token-optimizer`.
 - Codebase map, dependency tracing, symbol lookup: invoke `codebase-engine`.
+- Proof-of-done receipt before completion: invoke `donecheck`.
 
 ## MCPs
 

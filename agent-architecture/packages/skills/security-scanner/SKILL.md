@@ -15,6 +15,16 @@ mcp: security-scanner
 trigger: scan|checkov|semgrep|bandit|vulnerability|IaC|security report
 ---
 
+## Enterprise Preamble
+
+- Stay inside the current project unless the user explicitly names another path.
+- Do not call public telemetry, public update checks, public tunnels, cookie import, or public scraping flows.
+- Use policy-gated tools only when the active profile allows them.
+- Commit after each discrete behavior change — do not accumulate unrelated edits across multiple files before committing.
+- Each commit message must follow Conventional Commits: `<type>[scope]: <description>` (types: feat, fix, docs, refactor, test, chore, perf, ci).
+- Never use `--no-verify`, `--force` (use `--force-with-lease`), or `--no-gpg-sign` unless explicitly instructed.
+- Sequence for rebasing: stage → commit → fetch → rebase → push.
+
 # Security Scanner MCP
 
 Security scanning via MCP tools. Start with Docker, then invoke tools directly.
@@ -22,26 +32,19 @@ Security scanning via MCP tools. Start with Docker, then invoke tools directly.
 ## Quick Start
 
 ```bash
-# Start scanner (base: Checkov + Semgrep + Bandit)
 docker compose up security-scanner
-
-# Start scanner with ASH (Ruby/Node, ~2GB image)
-docker compose --profile full up security-scanner-full
 ```
 
 ## MCP Tools
 
-| Tool | Input | Output |
-|------|-------|--------|
-| `scan_with_checkov` | `code: str`, `format_type: str` | findings + summary |
-| `scan_with_semgrep` | `code: str`, `language: str` | findings + summary |
-| `scan_with_bandit` | `code: str` | findings + summary |
-| `scan_directory_with_checkov` | `directory_path: str` | summary + output file |
-| `scan_directory_with_semgrep` | `directory_path: str`, `language: str` | summary + output file |
-| `scan_directory_with_bandit` | `directory_path: str` | summary + output file |
-| `scan_directory_with_ash` | `directory_path: str` | summary + output file |
-| `generate_security_report` | `project_name: str`, `scan_results: str` | SECURITY.md content |
-
-Supported `format_type` values: `terraform`, `cloudformation`, `kubernetes`, `dockerfile`, `arm`, `bicep`, `helm`, `kustomize`
-
-Supported `language` values: `python`, `javascript`, `typescript`, `java`, `go`, `ruby`, `php`, `c`, `cpp`, `csharp`, `rust`, `kotlin`, `scala`
+| Tool | Input |
+|------|-------|
+| `scan_with_checkov` | `code: str`, `format_type: str` |
+| `scan_with_semgrep` | `code: str`, `language: str` |
+| `scan_with_bandit` | `code: str` |
+| `scan_directory_with_checkov` | `directory_path: str` |
+| `scan_directory_with_semgrep` | `directory_path: str`, `language: str` |
+| `scan_directory_with_bandit` | `directory_path: str` |
+| `scan_directory_with_ash` | `directory_path: str` |
+| `generate_security_report` | `project_name: str`, `scan_results: str` |
+```

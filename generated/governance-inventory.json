@@ -2,12 +2,12 @@
   "generatedBy": "scripts/build-governance.js",
   "configVersion": 1,
   "counts": {
-    "total": 452,
+    "total": 454,
     "adapter": 12,
     "agent": 31,
     "mcp": 1,
     "plugin": 15,
-    "skill": 247,
+    "skill": 249,
     "stack": 146
   },
   "components": [
@@ -640,6 +640,15 @@
       "namespace": "repo",
       "source": "SKILL.md",
       "description": "GitHub Copilot host adapter. Covers how to install this skill pack into a\nCopilot-enabled repo: copilot-instructions.md injection, hook configuration,\ntool availability, environment variables, and enterprise-safe defaults.\n"
+    },
+    {
+      "id": "skill:agent-architecture/donecheck/SKILL.md",
+      "type": "skill",
+      "name": "donecheck",
+      "path": "agent-architecture/donecheck/SKILL.md",
+      "namespace": "repo",
+      "source": "SKILL.md",
+      "description": "Proof-of-done gate for AI coding agents. Scans changed files for AI\nanti-patterns (TODOs, placeholders, swallowed exceptions, eval/exec,\nhardcoded credentials) and generates a timestamped DONECHECK.md receipt.\nInvoke before any completion claim, PR creation, or task handoff.\n"
     },
     {
       "id": "skill:agent-architecture/doubt-driven-development/SKILL.md",
@@ -1468,6 +1477,15 @@
       "namespace": "agent-architecture/plugins",
       "source": "SKILL.md",
       "description": "Model interpretation review for feature effects, calibration, drift,\nuncertainty, explanation limits, and decision-risk communication.\n"
+    },
+    {
+      "id": "skill:agent-architecture/plugins/agent-architecture/skills/donecheck/SKILL.md",
+      "type": "skill",
+      "name": "donecheck",
+      "path": "agent-architecture/plugins/agent-architecture/skills/donecheck/SKILL.md",
+      "namespace": "agent-architecture/plugins",
+      "source": "SKILL.md",
+      "description": "Proof-of-done gate for AI coding agents. Scans changed files for AI\nanti-patterns (TODOs, placeholders, swallowed exceptions, eval/exec,\nhardcoded credentials) and generates a timestamped DONECHECK.md receipt.\nInvoke before any completion claim, PR creation, or task handoff.\n"
     },
     {
       "id": "skill:agent-architecture/plugins/agent-architecture/skills/doubt-driven-development/SKILL.md",
@@ -4080,5 +4098,5 @@
       "description": "SQL Server to Postgres migration planning with T-SQL compatibility checks,\npgloader experiments, and production cutover guardrails.\n"
     }
   ],
-  "digest": "78abe7b4a03223fb8f67e319e32572105647667842e00eb35c392a7ef5a08a30"
+  "digest": "8d5fb63783bbe0bc35950c33f8ded4ccfe93724838d9ca4bbb6aa8c1212ef1d2"
 }
