@@ -1,5 +1,7 @@
-superpowers/
+/superpowers/
 gstack/
+# docs/superpowers/specs/ — intentional source, not ignored
+!docs/superpowers/
 /graphify/
 graphify-out/
 **/graphify-out/
@@ -31,3 +33,6 @@ agent-architecture/.agent/
 /.agent/
 /generated/
 /claude-code-best-practice/
+
+# External repos cloned for reference
+/sample-mcp-security-scanner/

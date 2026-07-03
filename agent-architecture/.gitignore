@@ -5,6 +5,9 @@ playwright-report/
 *.pyc
 *.egg-info/
 codebase-engine/tests/fixtures/obj/
+packages/skills/codebase-engine/tests/fixtures/obj/
+**/.coverage
+pytest-output.txt
 codebase-out/graph.json
 codebase-out/graph.html
 codebase-out/graph.svg

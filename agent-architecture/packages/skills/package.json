@@ -42,6 +42,7 @@
     "plan-review/",
     "rtk-token-optimizer/",
     "security-review/",
+    "security-scanner/",
     "seniorswe-concise/",
     "seniorswe-concise-audit/",
     "seniorswe-concise-debt/",

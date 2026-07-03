@@ -141,6 +141,18 @@ From debugging sessions:
 - Implications of success
 - ANY communication suggesting completion/correctness
 
+## QA Verify: Machine-Readable Proof
+
+Use `qa-verify` to generate a timestamped `QA-RECEIPT.md` before any completion claim.
+It scans changed files for AI anti-patterns and runs your verification command:
+
+```bash
+python .agent/skills/qa-verify/qa_verify.py --cmd "<project test command>"
+cat QA-RECEIPT.md
+```
+
+Receipt shows `FAIL` → fix findings → re-run. Receipt shows `PASS` → attach to PR as evidence.
+
 ## The Bottom Line
 
 **No shortcuts for verification.**

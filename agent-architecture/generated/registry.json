@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-07-01T20:50:43.501Z",
-  "count": 88,
+  "generatedAt": "2026-07-03T02:41:32.917Z",
+  "count": 90,
   "byAgent": {
     "_infrastructure": [
       "agent-architecture",
@@ -164,6 +164,7 @@
       "learn",
       "pre-commit-review",
       "qa",
+      "qa-verify",
       "receiving-code-review",
       "review",
       "systematic-debugging",
@@ -182,6 +183,7 @@
       "plan-devex-review",
       "plan-review",
       "security-review",
+      "security-scanner",
       "token-optimizer"
     ],
     "release-agent": [
@@ -190,6 +192,7 @@
       "commit",
       "learn",
       "pre-commit-review",
+      "qa-verify",
       "release",
       "release-notes",
       "retro",
@@ -205,12 +208,14 @@
       "health",
       "investigate",
       "learn",
+      "qa-verify",
       "receiving-code-review",
       "systematic-debugging",
       "using-agent-skills",
       "verification-before-completion",
       "codebase-engine",
-      "security-review"
+      "security-review",
+      "security-scanner"
     ],
     "spec-agent": [
       "autoplan",
@@ -248,6 +253,7 @@
       "learnings",
       "pre-commit-review",
       "qa",
+      "qa-verify",
       "receiving-code-review",
       "reference-skill-patterns",
       "release-notes",
@@ -276,6 +282,7 @@
       "plan-review",
       "rtk-token-optimizer",
       "security-review",
+      "security-scanner",
       "seniorswe-concise",
       "seniorswe-concise-audit",
       "seniorswe-concise-debt",
@@ -1160,6 +1167,21 @@
       "allowedTools": []
     },
     {
+      "name": "qa-verify",
+      "version": "1.0.0",
+      "description": "Proof-of-done verification gate for AI coding agents. Scans changed files",
+      "agents": [
+        "qa-agent",
+        "swe",
+        "security",
+        "release-agent"
+      ],
+      "allowedTools": [
+        "Read",
+        "Bash"
+      ]
+    },
+    {
       "name": "receiving-code-review",
       "version": "0.1.1",
       "description": "Handle code review feedback with technical rigor. Verify before implementing.",
@@ -1296,6 +1318,22 @@
         "qa-agent",
         "cloud",
         "security"
+      ],
+      "allowedTools": [
+        "Read",
+        "Grep",
+        "Glob",
+        "Bash"
+      ]
+    },
+    {
+      "name": "security-scanner",
+      "version": "0.1.0",
+      "description": "MCP server providing Checkov (IaC), Semgrep (source), Bandit (Python), and",
+      "agents": [
+        "security",
+        "swe",
+        "qa-agent"
       ],
       "allowedTools": [
         "Read",

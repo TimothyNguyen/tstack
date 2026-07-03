@@ -1,6 +1,6 @@
 # Skill Catalog
 
-Agent-architecture provides 34 reusable skills organized by category and specialized role.
+Agent-architecture provides 35 reusable skills organized by category and specialized role.
 
 **[Contributing?](./CONTRIBUTING.md)** See submission process and validation checklist.
 
@@ -29,6 +29,7 @@ Agent-architecture provides 34 reusable skills organized by category and special
 - **[`learnings`](./learnings/SKILL.md)** - Local project learning workflow. Captures reusable project conventions, pitfalls, decisions, *(swe, orchestrate)*
 - **[`pre-commit-review`](./pre-commit-review/SKILL.md)** - Executable skill that runs pre-commit hooks on code to catch style issues *(swe, qa-agent)*
 - **[`qa`](./qa/SKILL.md)** - Enterprise-safe QA workflow. Plans and verifies user-facing or service behavior using *(qa-agent, swe)*
+- **[`qa-verify`](./qa-verify/SKILL.md)** - Proof-of-done verification gate for AI coding agents. Scans changed files *(qa-agent, swe)*
 - **[`receiving-code-review`](./receiving-code-review/SKILL.md)** - Handle code review feedback with technical rigor. Verify before implementing. *(swe, qa-agent)*
 - **[`reference-skill-patterns`](./reference-skill-patterns/SKILL.md)** - Repo-local quick reference for the skill-pack pattern this repo uses. *(swe, orchestrate)*
 - **[`release`](./release/SKILL.md)** - Policy-gated release preparation workflow. Checks readiness, tests, docs, risk, and rollback *(pm, cloud)*
@@ -51,7 +52,7 @@ Agent-architecture provides 34 reusable skills organized by category and special
 
 ### `/swe`
 
-23 skills
+24 skills
 
 - [`autoplan`](./autoplan/SKILL.md) - Runs the plan review pipeline before coding begins, then a post-implementation critic gate before surfacing results.
 - [`brainstorming`](./brainstorming/SKILL.md) - Design-space exploration before coding. Explores user intent, requirements and design through collaborative dialogue.
@@ -66,6 +67,7 @@ Agent-architecture provides 34 reusable skills organized by category and special
 - [`learnings`](./learnings/SKILL.md) - Local project learning workflow. Captures reusable project conventions, pitfalls, decisions,
 - [`pre-commit-review`](./pre-commit-review/SKILL.md) - Executable skill that runs pre-commit hooks on code to catch style issues
 - [`qa`](./qa/SKILL.md) - Enterprise-safe QA workflow. Plans and verifies user-facing or service behavior using
+- [`qa-verify`](./qa-verify/SKILL.md) - Proof-of-done verification gate for AI coding agents. Scans changed files
 - [`receiving-code-review`](./receiving-code-review/SKILL.md) - Handle code review feedback with technical rigor. Verify before implementing.
 - [`reference-skill-patterns`](./reference-skill-patterns/SKILL.md) - Repo-local quick reference for the skill-pack pattern this repo uses.
 - [`release-notes`](./release-notes/SKILL.md) - Generate privacy-safe release notes from local changes, tests, and docs
@@ -79,7 +81,7 @@ Agent-architecture provides 34 reusable skills organized by category and special
 
 ### `/qa-agent`
 
-13 skills
+14 skills
 
 - [`canary`](./canary/SKILL.md) - Privacy-safe canary planning for post-deploy monitoring, rollback signals,
 - [`doubt-driven-development`](./doubt-driven-development/SKILL.md) - Challenge assumptions before and during implementation. Surface load-bearing doubts
@@ -88,6 +90,7 @@ Agent-architecture provides 34 reusable skills organized by category and special
 - [`learn`](./learn/SKILL.md) - Knowledge capture workflow. Extracts Q&A flashcards from agent session context.
 - [`pre-commit-review`](./pre-commit-review/SKILL.md) - Executable skill that runs pre-commit hooks on code to catch style issues
 - [`qa`](./qa/SKILL.md) - Enterprise-safe QA workflow. Plans and verifies user-facing or service behavior using
+- [`qa-verify`](./qa-verify/SKILL.md) - Proof-of-done verification gate for AI coding agents. Scans changed files
 - [`receiving-code-review`](./receiving-code-review/SKILL.md) - Handle code review feedback with technical rigor. Verify before implementing.
 - [`review`](./review/SKILL.md) - Enterprise-safe code review workflow. Reviews diffs and code paths for correctness,
 - [`systematic-debugging`](./systematic-debugging/SKILL.md) - Exhaustive root-cause investigation for complex bugs stuck after multiple fix attempts.
@@ -147,13 +150,14 @@ Agent-architecture provides 34 reusable skills organized by category and special
 
 ### `/security`
 
-9 skills
+10 skills
 
 - [`careful`](./careful/SKILL.md) - Destructive command guardrails. Warns before rm -rf, DROP TABLE, force-push,
 - [`guard`](./guard/SKILL.md) - Applies stricter local safety posture for risky tools and filesystem boundaries.
 - [`health`](./health/SKILL.md) - Enterprise-safe code health dashboard. Detects and runs approved local quality checks
 - [`investigate`](./investigate/SKILL.md) - Root-cause investigation workflow for bugs, failing tests, broken integrations, and unexpected behavior.
 - [`learn`](./learn/SKILL.md) - Knowledge capture workflow. Extracts Q&A flashcards from agent session context.
+- [`qa-verify`](./qa-verify/SKILL.md) - Proof-of-done verification gate for AI coding agents. Scans changed files
 - [`receiving-code-review`](./receiving-code-review/SKILL.md) - Handle code review feedback with technical rigor. Verify before implementing.
 - [`systematic-debugging`](./systematic-debugging/SKILL.md) - Exhaustive root-cause investigation for complex bugs stuck after multiple fix attempts.
 - [`using-agent-skills`](./using-agent-skills/SKILL.md) - Use when starting any conversation - establishes how to find and use agent-architecture skills,
@@ -198,13 +202,14 @@ Agent-architecture provides 34 reusable skills organized by category and special
 
 ### `/release-agent`
 
-11 skills
+12 skills
 
 - [`canary`](./canary/SKILL.md) - Privacy-safe canary planning for post-deploy monitoring, rollback signals,
 - [`careful`](./careful/SKILL.md) - Destructive command guardrails. Warns before rm -rf, DROP TABLE, force-push,
 - [`commit`](./commit/SKILL.md) - Atomic commit discipline for any code change. Enforces Conventional Commits
 - [`learn`](./learn/SKILL.md) - Knowledge capture workflow. Extracts Q&A flashcards from agent session context.
 - [`pre-commit-review`](./pre-commit-review/SKILL.md) - Executable skill that runs pre-commit hooks on code to catch style issues
+- [`qa-verify`](./qa-verify/SKILL.md) - Proof-of-done verification gate for AI coding agents. Scans changed files
 - [`release`](./release/SKILL.md) - Policy-gated release preparation workflow. Checks readiness, tests, docs, risk, and rollback
 - [`release-notes`](./release-notes/SKILL.md) - Generate privacy-safe release notes from local changes, tests, and docs
 - [`retro`](./retro/SKILL.md) - Produces a local project retrospective from commits, incidents, decisions, and outcomes.
@@ -225,7 +230,7 @@ Agent-architecture provides 34 reusable skills organized by category and special
 
 | Category | Count |
 |----------|-------|
-| Core Workflows | 34 |
-| **Total** | **34** |
+| Core Workflows | 35 |
+| **Total** | **35** |
 
 See [METADATA-SCHEMA.md](./METADATA-SCHEMA.md) for skill development and metadata reference.

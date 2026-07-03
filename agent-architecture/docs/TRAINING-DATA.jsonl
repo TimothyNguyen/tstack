@@ -20,6 +20,7 @@
 {"name":"learnings","version":"0.1.1","description":"## Enterprise Preamble","agents":["swe","orchestrate","pm"],"keywords":[],"examples":[]}
 {"name":"pre-commit-review","version":"0.1.0","description":"## Enterprise Preamble","agents":["swe","qa-agent","orchestrate","release-agent","_linter"],"keywords":[],"examples":[]}
 {"name":"qa","version":"0.1.1","description":"## Enterprise Preamble","agents":["qa-agent","swe"],"keywords":[],"examples":[]}
+{"name":"qa-verify","version":"1.0.0","description":"## Enterprise Preamble","agents":["qa-agent","swe","security","release-agent"],"keywords":[],"examples":[]}
 {"name":"receiving-code-review","version":"0.1.1","description":"## Enterprise Preamble","agents":["swe","qa-agent","security"],"keywords":[],"examples":[]}
 {"name":"reference-skill-patterns","version":"0.2.1","description":"## Enterprise Preamble","agents":["swe","orchestrate"],"keywords":[],"examples":[]}
 {"name":"release","version":"0.1.1","description":"## Enterprise Preamble","agents":["pm","cloud","release-agent"],"keywords":[],"examples":[]}

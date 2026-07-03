@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-07-01T20:50:41.801Z",
-  "count": 88,
+  "generatedAt": "2026-07-03T02:41:31.340Z",
+  "count": 90,
   "skills": [
     {
       "name": "agent-architecture",
@@ -658,6 +658,18 @@
       ]
     },
     {
+      "name": "qa-verify",
+      "version": "1.0.0",
+      "description": "Proof-of-done verification gate for AI coding agents. Scans changed files",
+      "path": "qa-verify/SKILL.md.tmpl",
+      "agents": [
+        "qa-agent",
+        "swe",
+        "security",
+        "release-agent"
+      ]
+    },
+    {
       "name": "receiving-code-review",
       "version": "0.1.1",
       "description": "Handle code review feedback with technical rigor. Verify before implementing.",
@@ -761,6 +773,17 @@
         "qa-agent",
         "cloud",
         "security"
+      ]
+    },
+    {
+      "name": "security-scanner",
+      "version": "0.1.0",
+      "description": "MCP server providing Checkov (IaC), Semgrep (source), Bandit (Python), and",
+      "path": "packages/skills/security-scanner/SKILL.md.tmpl",
+      "agents": [
+        "security",
+        "swe",
+        "qa-agent"
       ]
     },
     {
