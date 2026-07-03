@@ -33,7 +33,7 @@ Use this workflow to verify a feature, bug fix, or release candidate.
 3. Prefer local tests and deterministic fixtures.
 4. Use browser automation only when the active policy enables it.
 5. Record bugs with reproduction steps and expected behavior.
-6. Run `donecheck --cmd "<test command>"` and confirm DONECHECK.md shows PASS before reporting complete.
+6. Run `python .agent/skills/qa-verify/qa_verify.py --cmd "<test command>"` and confirm QA-RECEIPT.md shows PASS before reporting complete.
 
 ## Policy Requirements
 

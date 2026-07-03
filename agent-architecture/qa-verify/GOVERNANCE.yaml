@@ -1,0 +1,31 @@
+name: qa-verify
+type: skill
+status: stable
+version: 1.0.0
+owner: orchestrator
+description: |
+  Proof-of-done verification gate for AI coding agents. Scans changed files
+  for unfinished markers, silent failures, unsafe patterns, and hardcoded
+  credentials. Generates a timestamped QA-RECEIPT.md receipt.
+dependencies:
+  skills:
+    - verification-before-completion
+    - qa
+  adapters: []
+  tools:
+    - python
+  mcps: []
+testing:
+  coverage_target: 80
+  types:
+    - unit
+    - integration
+documentation:
+  readme: true
+  spec: false
+  examples_min: 2
+used_by:
+  - qa-agent
+  - verification-before-completion
+governance_version: '1.0'
+last_reviewed: '2026-07-02'

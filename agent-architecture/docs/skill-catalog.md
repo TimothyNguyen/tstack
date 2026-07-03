@@ -21,7 +21,6 @@ Agent-architecture provides 35 reusable skills organized by category and special
 - **[`context-restore`](./context-restore/SKILL.md)** - Restores previously saved local working context without relying on external services. *(swe, orchestrate)*
 - **[`context-save`](./context-save/SKILL.md)** - Captures local working context so a future agent session can resume safely. *(swe, orchestrate)*
 - **[`copilot`](./copilot/SKILL.md)** - GitHub Copilot host adapter. Covers how to install this skill pack into a
-- **[`donecheck`](./donecheck/SKILL.md)** - Proof-of-done gate for AI coding agents. Scans changed files for AI *(qa-agent, swe)*
 - **[`doubt-driven-development`](./doubt-driven-development/SKILL.md)** - Challenge assumptions before and during implementation. Surface load-bearing doubts *(swe, qa-agent)*
 - **[`guard`](./guard/SKILL.md)** - Applies stricter local safety posture for risky tools and filesystem boundaries. *(swe, migration)*
 - **[`health`](./health/SKILL.md)** - Enterprise-safe code health dashboard. Detects and runs approved local quality checks *(swe, qa-agent)*
@@ -30,6 +29,7 @@ Agent-architecture provides 35 reusable skills organized by category and special
 - **[`learnings`](./learnings/SKILL.md)** - Local project learning workflow. Captures reusable project conventions, pitfalls, decisions, *(swe, orchestrate)*
 - **[`pre-commit-review`](./pre-commit-review/SKILL.md)** - Executable skill that runs pre-commit hooks on code to catch style issues *(swe, qa-agent)*
 - **[`qa`](./qa/SKILL.md)** - Enterprise-safe QA workflow. Plans and verifies user-facing or service behavior using *(qa-agent, swe)*
+- **[`qa-verify`](./qa-verify/SKILL.md)** - Proof-of-done verification gate for AI coding agents. Scans changed files *(qa-agent, swe)*
 - **[`receiving-code-review`](./receiving-code-review/SKILL.md)** - Handle code review feedback with technical rigor. Verify before implementing. *(swe, qa-agent)*
 - **[`reference-skill-patterns`](./reference-skill-patterns/SKILL.md)** - Repo-local quick reference for the skill-pack pattern this repo uses. *(swe, orchestrate)*
 - **[`release`](./release/SKILL.md)** - Policy-gated release preparation workflow. Checks readiness, tests, docs, risk, and rollback *(pm, cloud)*
@@ -59,7 +59,6 @@ Agent-architecture provides 35 reusable skills organized by category and special
 - [`commit`](./commit/SKILL.md) - Atomic commit discipline for any code change. Enforces Conventional Commits
 - [`context-restore`](./context-restore/SKILL.md) - Restores previously saved local working context without relying on external services.
 - [`context-save`](./context-save/SKILL.md) - Captures local working context so a future agent session can resume safely.
-- [`donecheck`](./donecheck/SKILL.md) - Proof-of-done gate for AI coding agents. Scans changed files for AI
 - [`doubt-driven-development`](./doubt-driven-development/SKILL.md) - Challenge assumptions before and during implementation. Surface load-bearing doubts
 - [`guard`](./guard/SKILL.md) - Applies stricter local safety posture for risky tools and filesystem boundaries.
 - [`health`](./health/SKILL.md) - Enterprise-safe code health dashboard. Detects and runs approved local quality checks
@@ -68,6 +67,7 @@ Agent-architecture provides 35 reusable skills organized by category and special
 - [`learnings`](./learnings/SKILL.md) - Local project learning workflow. Captures reusable project conventions, pitfalls, decisions,
 - [`pre-commit-review`](./pre-commit-review/SKILL.md) - Executable skill that runs pre-commit hooks on code to catch style issues
 - [`qa`](./qa/SKILL.md) - Enterprise-safe QA workflow. Plans and verifies user-facing or service behavior using
+- [`qa-verify`](./qa-verify/SKILL.md) - Proof-of-done verification gate for AI coding agents. Scans changed files
 - [`receiving-code-review`](./receiving-code-review/SKILL.md) - Handle code review feedback with technical rigor. Verify before implementing.
 - [`reference-skill-patterns`](./reference-skill-patterns/SKILL.md) - Repo-local quick reference for the skill-pack pattern this repo uses.
 - [`release-notes`](./release-notes/SKILL.md) - Generate privacy-safe release notes from local changes, tests, and docs
@@ -84,13 +84,13 @@ Agent-architecture provides 35 reusable skills organized by category and special
 14 skills
 
 - [`canary`](./canary/SKILL.md) - Privacy-safe canary planning for post-deploy monitoring, rollback signals,
-- [`donecheck`](./donecheck/SKILL.md) - Proof-of-done gate for AI coding agents. Scans changed files for AI
 - [`doubt-driven-development`](./doubt-driven-development/SKILL.md) - Challenge assumptions before and during implementation. Surface load-bearing doubts
 - [`health`](./health/SKILL.md) - Enterprise-safe code health dashboard. Detects and runs approved local quality checks
 - [`investigate`](./investigate/SKILL.md) - Root-cause investigation workflow for bugs, failing tests, broken integrations, and unexpected behavior.
 - [`learn`](./learn/SKILL.md) - Knowledge capture workflow. Extracts Q&A flashcards from agent session context.
 - [`pre-commit-review`](./pre-commit-review/SKILL.md) - Executable skill that runs pre-commit hooks on code to catch style issues
 - [`qa`](./qa/SKILL.md) - Enterprise-safe QA workflow. Plans and verifies user-facing or service behavior using
+- [`qa-verify`](./qa-verify/SKILL.md) - Proof-of-done verification gate for AI coding agents. Scans changed files
 - [`receiving-code-review`](./receiving-code-review/SKILL.md) - Handle code review feedback with technical rigor. Verify before implementing.
 - [`review`](./review/SKILL.md) - Enterprise-safe code review workflow. Reviews diffs and code paths for correctness,
 - [`systematic-debugging`](./systematic-debugging/SKILL.md) - Exhaustive root-cause investigation for complex bugs stuck after multiple fix attempts.
@@ -153,11 +153,11 @@ Agent-architecture provides 35 reusable skills organized by category and special
 10 skills
 
 - [`careful`](./careful/SKILL.md) - Destructive command guardrails. Warns before rm -rf, DROP TABLE, force-push,
-- [`donecheck`](./donecheck/SKILL.md) - Proof-of-done gate for AI coding agents. Scans changed files for AI
 - [`guard`](./guard/SKILL.md) - Applies stricter local safety posture for risky tools and filesystem boundaries.
 - [`health`](./health/SKILL.md) - Enterprise-safe code health dashboard. Detects and runs approved local quality checks
 - [`investigate`](./investigate/SKILL.md) - Root-cause investigation workflow for bugs, failing tests, broken integrations, and unexpected behavior.
 - [`learn`](./learn/SKILL.md) - Knowledge capture workflow. Extracts Q&A flashcards from agent session context.
+- [`qa-verify`](./qa-verify/SKILL.md) - Proof-of-done verification gate for AI coding agents. Scans changed files
 - [`receiving-code-review`](./receiving-code-review/SKILL.md) - Handle code review feedback with technical rigor. Verify before implementing.
 - [`systematic-debugging`](./systematic-debugging/SKILL.md) - Exhaustive root-cause investigation for complex bugs stuck after multiple fix attempts.
 - [`using-agent-skills`](./using-agent-skills/SKILL.md) - Use when starting any conversation - establishes how to find and use agent-architecture skills,
@@ -207,9 +207,9 @@ Agent-architecture provides 35 reusable skills organized by category and special
 - [`canary`](./canary/SKILL.md) - Privacy-safe canary planning for post-deploy monitoring, rollback signals,
 - [`careful`](./careful/SKILL.md) - Destructive command guardrails. Warns before rm -rf, DROP TABLE, force-push,
 - [`commit`](./commit/SKILL.md) - Atomic commit discipline for any code change. Enforces Conventional Commits
-- [`donecheck`](./donecheck/SKILL.md) - Proof-of-done gate for AI coding agents. Scans changed files for AI
 - [`learn`](./learn/SKILL.md) - Knowledge capture workflow. Extracts Q&A flashcards from agent session context.
 - [`pre-commit-review`](./pre-commit-review/SKILL.md) - Executable skill that runs pre-commit hooks on code to catch style issues
+- [`qa-verify`](./qa-verify/SKILL.md) - Proof-of-done verification gate for AI coding agents. Scans changed files
 - [`release`](./release/SKILL.md) - Policy-gated release preparation workflow. Checks readiness, tests, docs, risk, and rollback
 - [`release-notes`](./release-notes/SKILL.md) - Generate privacy-safe release notes from local changes, tests, and docs
 - [`retro`](./retro/SKILL.md) - Produces a local project retrospective from commits, incidents, decisions, and outcomes.

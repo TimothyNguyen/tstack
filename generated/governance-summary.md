@@ -8,9 +8,9 @@ Generated from `governance.config.json`.
 - agent: 31
 - mcp: 1
 - plugin: 15
-- skill: 249
+- skill: 250
 - stack: 146
-- total: 454
+- total: 455
 
 ## Components
 
@@ -215,11 +215,6 @@ atomic commits, or git workflow after making changes.
 - `copilot` :: `agent-architecture/copilot/SKILL.md` - GitHub Copilot host adapter. Covers how to install this skill pack into a
 Copilot-enabled repo: copilot-instructions.md injection, hook configuration,
 tool availability, environment variables, and enterprise-safe defaults.
-
-- `donecheck` :: `agent-architecture/donecheck/SKILL.md` - Proof-of-done gate for AI coding agents. Scans changed files for AI
-anti-patterns (TODOs, placeholders, swallowed exceptions, eval/exec,
-hardcoded credentials) and generates a timestamped DONECHECK.md receipt.
-Invoke before any completion claim, PR creation, or task handoff.
 
 - `doubt-driven-development` :: `agent-architecture/doubt-driven-development/SKILL.md` - Challenge assumptions before and during implementation. Surface load-bearing doubts
 early so they can be resolved with evidence rather than discovered as bugs.
@@ -594,6 +589,12 @@ architecture, testability, policy compliance, data risk, and delivery sequencing
 Allows reviewers to focus on architecture instead of trivial nitpicks.
 Works across Claude, Codex, and Copilot.
 
+- `qa-verify` :: `agent-architecture/plugins/agent-architecture/skills/qa-verify/SKILL.md` - Proof-of-done verification gate for AI coding agents. Scans changed files
+for unfinished markers, silent failures, unsafe patterns, and hardcoded
+credentials. Runs your verification command and writes a timestamped
+QA-RECEIPT.md with machine-readable evidence. Invoke before any completion
+claim, commit, or PR.
+
 - `qa` :: `agent-architecture/plugins/agent-architecture/skills/qa/SKILL.md` - Enterprise-safe QA workflow. Plans and verifies user-facing or service behavior using
 local tests and approved tools. Browser automation is optional and disabled by default.
 
@@ -741,6 +742,12 @@ watch them fail, write the skill documentation, watch tests pass, and refactor.
 (trailing whitespace, debug statements, invalid syntax) before code review.
 Allows reviewers to focus on architecture instead of trivial nitpicks.
 Works across Claude, Codex, and Copilot.
+
+- `qa-verify` :: `agent-architecture/qa-verify/SKILL.md` - Proof-of-done verification gate for AI coding agents. Scans changed files
+for unfinished markers, silent failures, unsafe patterns, and hardcoded
+credentials. Runs your verification command and writes a timestamped
+QA-RECEIPT.md with machine-readable evidence. Invoke before any completion
+claim, commit, or PR.
 
 - `qa` :: `agent-architecture/qa/SKILL.md` - Enterprise-safe QA workflow. Plans and verifies user-facing or service behavior using
 local tests and approved tools. Browser automation is optional and disabled by default.

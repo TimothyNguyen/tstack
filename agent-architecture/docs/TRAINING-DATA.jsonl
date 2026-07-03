@@ -12,7 +12,6 @@
 {"name":"context-restore","version":"0.1.1","description":"## Enterprise Preamble","agents":["swe","orchestrate","migration"],"keywords":[],"examples":[]}
 {"name":"context-save","version":"0.1.1","description":"## Enterprise Preamble","agents":["swe","orchestrate","migration"],"keywords":[],"examples":[]}
 {"name":"copilot","version":"0.1.1","description":"## Enterprise Preamble","agents":[],"keywords":[],"examples":[]}
-{"name":"donecheck","version":"0.1.0","description":"## Enterprise Preamble","agents":["qa-agent","swe","security","release-agent"],"keywords":[],"examples":[]}
 {"name":"doubt-driven-development","version":"0.1.0","description":"## Enterprise Preamble","agents":["swe","qa-agent","spec-agent"],"keywords":[],"examples":[],"useCases":["Starting a task with unclear requirements","The implementation path has multiple plausible interpretations","A past assumption turned out to be wrong in this codebase","The reviewer is likely to ask \"did you consider X?\""]}
 {"name":"guard","version":"0.1.1","description":"## Enterprise Preamble","agents":["swe","migration","cloud","security"],"keywords":[],"examples":[]}
 {"name":"health","version":"0.1.1","description":"## Enterprise Preamble","agents":["swe","qa-agent","cloud","security"],"keywords":[],"examples":[]}
@@ -21,6 +20,7 @@
 {"name":"learnings","version":"0.1.1","description":"## Enterprise Preamble","agents":["swe","orchestrate","pm"],"keywords":[],"examples":[]}
 {"name":"pre-commit-review","version":"0.1.0","description":"## Enterprise Preamble","agents":["swe","qa-agent","orchestrate","release-agent","_linter"],"keywords":[],"examples":[]}
 {"name":"qa","version":"0.1.1","description":"## Enterprise Preamble","agents":["qa-agent","swe"],"keywords":[],"examples":[]}
+{"name":"qa-verify","version":"1.0.0","description":"## Enterprise Preamble","agents":["qa-agent","swe","security","release-agent"],"keywords":[],"examples":[]}
 {"name":"receiving-code-review","version":"0.1.1","description":"## Enterprise Preamble","agents":["swe","qa-agent","security"],"keywords":[],"examples":[]}
 {"name":"reference-skill-patterns","version":"0.2.1","description":"## Enterprise Preamble","agents":["swe","orchestrate"],"keywords":[],"examples":[]}
 {"name":"release","version":"0.1.1","description":"## Enterprise Preamble","agents":["pm","cloud","release-agent"],"keywords":[],"examples":[]}
