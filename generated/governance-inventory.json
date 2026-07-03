@@ -2,12 +2,12 @@
   "generatedBy": "scripts/build-governance.js",
   "configVersion": 1,
   "counts": {
-    "total": 454,
+    "total": 455,
     "adapter": 12,
     "agent": 31,
     "mcp": 1,
     "plugin": 15,
-    "skill": 249,
+    "skill": 250,
     "stack": 146
   },
   "components": [
@@ -1677,13 +1677,13 @@
       "description": "Handle code review feedback with technical rigor. Verify before implementing.\nRequires evaluation, not performative agreement or blind implementation.\n"
     },
     {
-      "id": "skill:agent-architecture/plugins/agent-architecture/skills/reference-gstack-patterns/SKILL.md",
+      "id": "skill:agent-architecture/plugins/agent-architecture/skills/reference-agent-architecture-patterns/SKILL.md",
       "type": "skill",
-      "name": "reference-gstack-patterns",
-      "path": "agent-architecture/plugins/agent-architecture/skills/reference-gstack-patterns/SKILL.md",
+      "name": "reference-agent-architecture-patterns",
+      "path": "agent-architecture/plugins/agent-architecture/skills/reference-agent-architecture-patterns/SKILL.md",
       "namespace": "agent-architecture/plugins",
       "source": "SKILL.md",
-      "description": "Repo-local quick reference for the skill-pack pattern this repo uses.\nRead once when adding or refactoring a skill folder.\n"
+      "description": "Quick reference for the agent-architecture repo conventions. Covers\nagents, skills, governance, testing, and proof-of-done workflow.\nRead once when adding, editing, or restructuring any skill or agent.\n"
     },
     {
       "id": "skill:agent-architecture/plugins/agent-architecture/skills/reference-skill-patterns/SKILL.md",
@@ -2053,6 +2053,15 @@
       "namespace": "repo",
       "source": "SKILL.md",
       "description": "Handle code review feedback with technical rigor. Verify before implementing.\nRequires evaluation, not performative agreement or blind implementation.\n"
+    },
+    {
+      "id": "skill:agent-architecture/reference-agent-architecture-patterns/SKILL.md",
+      "type": "skill",
+      "name": "reference-agent-architecture-patterns",
+      "path": "agent-architecture/reference-agent-architecture-patterns/SKILL.md",
+      "namespace": "repo",
+      "source": "SKILL.md",
+      "description": "Quick reference for the agent-architecture repo conventions. Covers\nagents, skills, governance, testing, and proof-of-done workflow.\nRead once when adding, editing, or restructuring any skill or agent.\n"
     },
     {
       "id": "skill:agent-architecture/reference-skill-patterns/SKILL.md",
@@ -4098,5 +4107,5 @@
       "description": "SQL Server to Postgres migration planning with T-SQL compatibility checks,\npgloader experiments, and production cutover guardrails.\n"
     }
   ],
-  "digest": "4b89f0c6a8cb4098f07e117e63c5ab3b3177482e3b21d3188a2f33eddfe15768"
+  "digest": "ce4583aa0f3077041560f447e711798c26b6d010f84de61774e1cd898ac71a6c"
 }

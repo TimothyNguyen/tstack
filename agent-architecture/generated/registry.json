@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-07-03T02:41:32.917Z",
-  "count": 90,
+  "generatedAt": "2026-07-03T17:29:33.254Z",
+  "count": 91,
   "byAgent": {
     "_infrastructure": [
       "agent-architecture",
@@ -12,6 +12,7 @@
       "copilot",
       "guard",
       "learnings",
+      "reference-agent-architecture-patterns",
       "reference-skill-patterns",
       "skillify",
       "pm",
@@ -124,6 +125,7 @@
       "learn",
       "learnings",
       "pre-commit-review",
+      "reference-agent-architecture-patterns",
       "reference-skill-patterns",
       "retro",
       "skillify",
@@ -166,6 +168,7 @@
       "qa",
       "qa-verify",
       "receiving-code-review",
+      "reference-agent-architecture-patterns",
       "review",
       "systematic-debugging",
       "test",
@@ -255,6 +258,7 @@
       "qa",
       "qa-verify",
       "receiving-code-review",
+      "reference-agent-architecture-patterns",
       "reference-skill-patterns",
       "release-notes",
       "review",
@@ -1194,6 +1198,23 @@
         "Read",
         "Grep",
         "Glob"
+      ]
+    },
+    {
+      "name": "reference-agent-architecture-patterns",
+      "version": "0.1.0",
+      "description": "Quick reference for the agent-architecture repo conventions. Covers",
+      "agents": [
+        "_infrastructure",
+        "swe",
+        "orchestrate",
+        "qa-agent"
+      ],
+      "allowedTools": [
+        "Read",
+        "Grep",
+        "Glob",
+        "Bash"
       ]
     },
     {

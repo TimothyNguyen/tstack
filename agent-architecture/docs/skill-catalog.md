@@ -1,6 +1,6 @@
 # Skill Catalog
 
-Agent-architecture provides 35 reusable skills organized by category and specialized role.
+Agent-architecture provides 36 reusable skills organized by category and specialized role.
 
 **[Contributing?](./CONTRIBUTING.md)** See submission process and validation checklist.
 
@@ -31,6 +31,7 @@ Agent-architecture provides 35 reusable skills organized by category and special
 - **[`qa`](./qa/SKILL.md)** - Enterprise-safe QA workflow. Plans and verifies user-facing or service behavior using *(qa-agent, swe)*
 - **[`qa-verify`](./qa-verify/SKILL.md)** - Proof-of-done verification gate for AI coding agents. Scans changed files *(qa-agent, swe)*
 - **[`receiving-code-review`](./receiving-code-review/SKILL.md)** - Handle code review feedback with technical rigor. Verify before implementing. *(swe, qa-agent)*
+- **[`reference-agent-architecture-patterns`](./reference-agent-architecture-patterns/SKILL.md)** - Quick reference for the agent-architecture repo conventions. Covers *(swe, orchestrate)*
 - **[`reference-skill-patterns`](./reference-skill-patterns/SKILL.md)** - Repo-local quick reference for the skill-pack pattern this repo uses. *(swe, orchestrate)*
 - **[`release`](./release/SKILL.md)** - Policy-gated release preparation workflow. Checks readiness, tests, docs, risk, and rollback *(pm, cloud)*
 - **[`release-notes`](./release-notes/SKILL.md)** - Generate privacy-safe release notes from local changes, tests, and docs *(pm, swe)*
@@ -52,7 +53,7 @@ Agent-architecture provides 35 reusable skills organized by category and special
 
 ### `/swe`
 
-24 skills
+25 skills
 
 - [`autoplan`](./autoplan/SKILL.md) - Runs the plan review pipeline before coding begins, then a post-implementation critic gate before surfacing results.
 - [`brainstorming`](./brainstorming/SKILL.md) - Design-space exploration before coding. Explores user intent, requirements and design through collaborative dialogue.
@@ -69,6 +70,7 @@ Agent-architecture provides 35 reusable skills organized by category and special
 - [`qa`](./qa/SKILL.md) - Enterprise-safe QA workflow. Plans and verifies user-facing or service behavior using
 - [`qa-verify`](./qa-verify/SKILL.md) - Proof-of-done verification gate for AI coding agents. Scans changed files
 - [`receiving-code-review`](./receiving-code-review/SKILL.md) - Handle code review feedback with technical rigor. Verify before implementing.
+- [`reference-agent-architecture-patterns`](./reference-agent-architecture-patterns/SKILL.md) - Quick reference for the agent-architecture repo conventions. Covers
 - [`reference-skill-patterns`](./reference-skill-patterns/SKILL.md) - Repo-local quick reference for the skill-pack pattern this repo uses.
 - [`release-notes`](./release-notes/SKILL.md) - Generate privacy-safe release notes from local changes, tests, and docs
 - [`review`](./review/SKILL.md) - Enterprise-safe code review workflow. Reviews diffs and code paths for correctness,
@@ -81,7 +83,7 @@ Agent-architecture provides 35 reusable skills organized by category and special
 
 ### `/qa-agent`
 
-14 skills
+15 skills
 
 - [`canary`](./canary/SKILL.md) - Privacy-safe canary planning for post-deploy monitoring, rollback signals,
 - [`doubt-driven-development`](./doubt-driven-development/SKILL.md) - Challenge assumptions before and during implementation. Surface load-bearing doubts
@@ -92,6 +94,7 @@ Agent-architecture provides 35 reusable skills organized by category and special
 - [`qa`](./qa/SKILL.md) - Enterprise-safe QA workflow. Plans and verifies user-facing or service behavior using
 - [`qa-verify`](./qa-verify/SKILL.md) - Proof-of-done verification gate for AI coding agents. Scans changed files
 - [`receiving-code-review`](./receiving-code-review/SKILL.md) - Handle code review feedback with technical rigor. Verify before implementing.
+- [`reference-agent-architecture-patterns`](./reference-agent-architecture-patterns/SKILL.md) - Quick reference for the agent-architecture repo conventions. Covers
 - [`review`](./review/SKILL.md) - Enterprise-safe code review workflow. Reviews diffs and code paths for correctness,
 - [`systematic-debugging`](./systematic-debugging/SKILL.md) - Exhaustive root-cause investigation for complex bugs stuck after multiple fix attempts.
 - [`test`](./test/SKILL.md) - Designs and runs approved automated tests, including Playwright or Selenium when enabled by policy.
@@ -131,7 +134,7 @@ Agent-architecture provides 35 reusable skills organized by category and special
 
 ### `/orchestrate`
 
-14 skills
+15 skills
 
 - [`autoplan`](./autoplan/SKILL.md) - Runs the plan review pipeline before coding begins, then a post-implementation critic gate before surfacing results.
 - [`brainstorming`](./brainstorming/SKILL.md) - Design-space exploration before coding. Explores user intent, requirements and design through collaborative dialogue.
@@ -141,6 +144,7 @@ Agent-architecture provides 35 reusable skills organized by category and special
 - [`learn`](./learn/SKILL.md) - Knowledge capture workflow. Extracts Q&A flashcards from agent session context.
 - [`learnings`](./learnings/SKILL.md) - Local project learning workflow. Captures reusable project conventions, pitfalls, decisions,
 - [`pre-commit-review`](./pre-commit-review/SKILL.md) - Executable skill that runs pre-commit hooks on code to catch style issues
+- [`reference-agent-architecture-patterns`](./reference-agent-architecture-patterns/SKILL.md) - Quick reference for the agent-architecture repo conventions. Covers
 - [`reference-skill-patterns`](./reference-skill-patterns/SKILL.md) - Repo-local quick reference for the skill-pack pattern this repo uses.
 - [`retro`](./retro/SKILL.md) - Produces a local project retrospective from commits, incidents, decisions, and outcomes.
 - [`skillify`](./skillify/SKILL.md) - Turns a repeated local workflow into a reusable skill folder with template files.
@@ -230,7 +234,7 @@ Agent-architecture provides 35 reusable skills organized by category and special
 
 | Category | Count |
 |----------|-------|
-| Core Workflows | 35 |
-| **Total** | **35** |
+| Core Workflows | 36 |
+| **Total** | **36** |
 
 See [METADATA-SCHEMA.md](./METADATA-SCHEMA.md) for skill development and metadata reference.

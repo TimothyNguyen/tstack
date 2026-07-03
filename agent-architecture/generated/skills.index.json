@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-07-03T02:41:31.340Z",
-  "count": 90,
+  "generatedAt": "2026-07-03T17:29:31.591Z",
+  "count": 91,
   "skills": [
     {
       "name": "agent-architecture",
@@ -678,6 +678,18 @@
         "swe",
         "qa-agent",
         "security"
+      ]
+    },
+    {
+      "name": "reference-agent-architecture-patterns",
+      "version": "0.1.0",
+      "description": "Quick reference for the agent-architecture repo conventions. Covers",
+      "path": "reference-agent-architecture-patterns/SKILL.md.tmpl",
+      "agents": [
+        "_infrastructure",
+        "swe",
+        "orchestrate",
+        "qa-agent"
       ]
     },
     {

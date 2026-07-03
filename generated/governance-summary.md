@@ -8,9 +8,9 @@ Generated from `governance.config.json`.
 - agent: 31
 - mcp: 1
 - plugin: 15
-- skill: 249
+- skill: 250
 - stack: 146
-- total: 454
+- total: 455
 
 ## Components
 
@@ -596,8 +596,9 @@ local tests and approved tools. Browser automation is optional and disabled by d
 - `receiving-code-review` :: `agent-architecture/plugins/agent-architecture/skills/receiving-code-review/SKILL.md` - Handle code review feedback with technical rigor. Verify before implementing.
 Requires evaluation, not performative agreement or blind implementation.
 
-- `reference-gstack-patterns` :: `agent-architecture/plugins/agent-architecture/skills/reference-gstack-patterns/SKILL.md` - Repo-local quick reference for the skill-pack pattern this repo uses.
-Read once when adding or refactoring a skill folder.
+- `reference-agent-architecture-patterns` :: `agent-architecture/plugins/agent-architecture/skills/reference-agent-architecture-patterns/SKILL.md` - Quick reference for the agent-architecture repo conventions. Covers
+agents, skills, governance, testing, and proof-of-done workflow.
+Read once when adding, editing, or restructuring any skill or agent.
 
 - `reference-skill-patterns` :: `agent-architecture/plugins/agent-architecture/skills/reference-skill-patterns/SKILL.md` - Repo-local quick reference for the skill-pack pattern this repo uses.
 Read once when adding or refactoring a skill folder.
@@ -749,6 +750,10 @@ local tests and approved tools. Browser automation is optional and disabled by d
 
 - `receiving-code-review` :: `agent-architecture/receiving-code-review/SKILL.md` - Handle code review feedback with technical rigor. Verify before implementing.
 Requires evaluation, not performative agreement or blind implementation.
+
+- `reference-agent-architecture-patterns` :: `agent-architecture/reference-agent-architecture-patterns/SKILL.md` - Quick reference for the agent-architecture repo conventions. Covers
+agents, skills, governance, testing, and proof-of-done workflow.
+Read once when adding, editing, or restructuring any skill or agent.
 
 - `reference-skill-patterns` :: `agent-architecture/reference-skill-patterns/SKILL.md` - Repo-local quick reference for the skill-pack pattern this repo uses.
 Read once when adding or refactoring a skill folder.
