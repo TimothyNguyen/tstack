@@ -4,8 +4,8 @@
  * violate enterprise-safe defaults: public egress, telemetry, tunnels, etc.
  *
  * Vendored packs checked:
- *   stack-csharp/dotnet-skills/
- *   stack-databricks/databricks-agent-skills/
+ *   packages/stacks/stack-csharp/dotnet-skills/
+ *   packages/stacks/stack-databricks/databricks-agent-skills/
  *
  * Usage:
  *   node scripts/vet-vendored.mjs           # report findings
@@ -19,8 +19,8 @@ const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const STRICT = process.argv.includes('--strict');
 
 const VENDORED_DIRS = [
-  'stack-csharp/dotnet-skills',
-  'stack-databricks/databricks-agent-skills',
+  'packages/stacks/stack-csharp/dotnet-skills',
+  'packages/stacks/stack-databricks/databricks-agent-skills',
 ];
 
 const FORBIDDEN = [
