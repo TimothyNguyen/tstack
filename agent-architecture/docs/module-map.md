@@ -82,7 +82,6 @@ This preserves the agent-architecture ergonomics while keeping the new package g
 - `ship`
 - `codebase-understanding`
 - `codebase-engine`
-- `rtk-token-optimizer`
 - `context-save`
 - `context-restore`
 - `design-html`

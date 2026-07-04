@@ -4,8 +4,7 @@ version: 0.1.1
 description: |
   Token reduction for Python objects, API responses, logs, diffs, and code
   before LLM injection. Bundles Python Token Killer (ptk) with zero required
-  dependencies and a bundled fallback. Complements rtk-token-optimizer
-  (rtk = shell output, token-optimizer = structured data and Python objects).
+  dependencies and a bundled fallback.
 allowed-tools:
   - Read
   - Grep
@@ -118,17 +117,6 @@ Use ptk before injecting any of these into LLM context:
 - Do not minimize raw JSON contracts used in snapshot or contract tests.
 - Fall back to raw output when compressed output lacks enough context.
 - Record compression stats in the response when savings exceed 30%.
-
-## Complement: RTK
-
-Use rtk for shell command output; use ptk for Python objects and structured data:
-
-```bash
-rtk git status          # shell output → rtk
-rtk pytest              # noisy test runner stdout → rtk
-ptk.minimize(response)  # API JSON dict → ptk
-ptk.minimize(log_text)  # structured log string → ptk
-```
 
 ## Policy Requirements
 

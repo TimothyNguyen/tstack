@@ -3,10 +3,15 @@ name: adapter-docker-mcp
 version: 0.1.1
 description: |
   Docker MCP Registry and Toolkit adapter. Wires 300+ pre-built containerized
-  MCP servers (GitHub, Postgres, Playwright, Slack, Stripe, Docker ops, etc.)
+  MCP servers (GitHub, Postgres, Playwright, Slack, Docker ops, etc.)
   through the Docker MCP Gateway — one stdio multiplexer replaces N individual
   server configs. Use when deploying via Docker or consuming tools from the
   official docker/mcp-registry catalog.
+allowed-tools:
+  - Read
+  - Grep
+  - Glob
+  - Bash
 agents: [cloud, release-agent, orchestrate, swe, _infrastructure]
 ---
 
@@ -89,7 +94,6 @@ docker mcp server list --profile my-project
 | Postgres | `mcp/postgres` | SQL queries, schema inspection |
 | Playwright | `mcp/playwright` | Browser automation, screenshots |
 | Slack | `mcp/slack` | Send messages, read channels |
-| Stripe | `mcp/stripe` | Payment intents, customers |
 | Filesystem | `mcp/filesystem` | Scoped read/write of declared paths |
 
 Full catalog: `hub.docker.com/mcp`

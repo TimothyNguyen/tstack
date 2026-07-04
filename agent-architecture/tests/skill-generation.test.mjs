@@ -65,7 +65,6 @@ test('core skills have template and generated output', () => {
     { dir: root, name: 'test' },
     { dir: root, name: 'review' },
     { dir: path.join(root, 'packages', 'skills'), name: 'security-review' },
-    { dir: path.join(root, 'packages', 'skills'), name: 'rtk-token-optimizer' },
   ];
 
   for (const { dir, name: skill } of coreSkills) {
@@ -173,18 +172,6 @@ test('default policy denies public egress and sensitive capabilities', () => {
   assert.equal(policy.tools.credentialRead, 'disabled');
 });
 
-test('rtk token optimizer is optional and safe by default', () => {
-  const policy = JSON.parse(fs.readFileSync(path.join(root, 'policies', 'enterprise-default.json'), 'utf8'));
-  const doc = fs.readFileSync(path.join(root, 'docs', 'rtk-token-optimizer.md'), 'utf8');
-  const skill = fs.readFileSync(path.join(root, 'packages', 'skills', 'rtk-token-optimizer', 'SKILL.md.tmpl'), 'utf8');
-
-  assert.equal(policy.modules.rtkTokenOptimizer, 'optional');
-  assert.match(doc, /Do not run `curl \| sh`/);
-  assert.match(doc, /Do not enable telemetry/);
-  assert.match(doc, /Do not install global command-rewrite hooks by default/);
-  assert.match(skill, /Do not run `curl \| sh`/);
-  assert.match(skill, /Do not enable RTK telemetry/);
-});
 
 test('generated skills do not reintroduce forbidden default capabilities', () => {
   const forbidden = [

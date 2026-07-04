@@ -1,7 +1,127 @@
 {
-  "generatedAt": "2026-07-03T02:41:31.340Z",
-  "count": 90,
+  "generatedAt": "2026-07-04T18:24:21.788Z",
+  "count": 102,
   "skills": [
+    {
+      "name": "adapter-ag-ui",
+      "version": "0.1.1",
+      "description": "Map skill progress, approvals, tool actions, findings, and artifacts into",
+      "path": "packages/adapters/adapter-ag-ui/SKILL.md.tmpl",
+      "agents": [
+        "orchestrate",
+        "_infrastructure",
+        "swe",
+        "cloud"
+      ]
+    },
+    {
+      "name": "adapter-agentcore",
+      "version": "0.1.1",
+      "description": "Optional AgentCore adapter boundary for skills, tools, approvals, audit",
+      "path": "packages/adapters/adapter-agentcore/SKILL.md.tmpl",
+      "agents": [
+        "orchestrate",
+        "_infrastructure",
+        "cloud"
+      ]
+    },
+    {
+      "name": "adapter-databricks",
+      "version": "0.1.1",
+      "description": "Optional Databricks SDK adapter boundary for workspace, job, and bundle",
+      "path": "packages/adapters/adapter-databricks/SKILL.md.tmpl",
+      "agents": [
+        "data"
+      ]
+    },
+    {
+      "name": "adapter-docker-mcp",
+      "version": "0.1.1",
+      "description": "Docker MCP Registry and Toolkit adapter. Wires 300+ pre-built containerized",
+      "path": "packages/adapters/adapter-docker-mcp/SKILL.md.tmpl",
+      "agents": [
+        "cloud",
+        "release-agent",
+        "orchestrate",
+        "swe",
+        "_infrastructure"
+      ]
+    },
+    {
+      "name": "adapter-github",
+      "version": "0.1.1",
+      "description": "Optional GitHub MCP/CLI adapter guidance for repo, issue, and PR context",
+      "path": "packages/adapters/adapter-github/SKILL.md.tmpl",
+      "agents": [
+        "swe",
+        "orchestrate",
+        "pm"
+      ]
+    },
+    {
+      "name": "adapter-google-adk",
+      "version": "0.1.1",
+      "description": "Optional Google ADK host adapter boundary for invoking skills and tools",
+      "path": "packages/adapters/adapter-google-adk/SKILL.md.tmpl",
+      "agents": [
+        "orchestrate",
+        "_infrastructure",
+        "cloud"
+      ]
+    },
+    {
+      "name": "adapter-langgraph",
+      "version": "0.1.1",
+      "description": "Optional LangGraph orchestration boundary for durable app-level agents",
+      "path": "packages/adapters/adapter-langgraph/SKILL.md.tmpl",
+      "agents": [
+        "orchestrate",
+        "_infrastructure"
+      ]
+    },
+    {
+      "name": "adapter-mcp",
+      "version": "0.1.1",
+      "description": "Design optional Model Context Protocol adapters with default-deny tools,",
+      "path": "packages/adapters/adapter-mcp/SKILL.md.tmpl",
+      "agents": [
+        "swe",
+        "_infrastructure",
+        "orchestrate",
+        "cloud"
+      ]
+    },
+    {
+      "name": "adapter-openapi",
+      "version": "0.1.1",
+      "description": "Use OpenAPI contracts and optional generated clients/servers while keeping",
+      "path": "packages/adapters/adapter-openapi/SKILL.md.tmpl",
+      "agents": [
+        "swe",
+        "spec-agent"
+      ]
+    },
+    {
+      "name": "adapter-seniorswe-concise",
+      "version": "0.1.1",
+      "description": "Optional Seniorswe-Concise hook and MCP adapter for YAGNI mode injection across",
+      "path": "packages/adapters/adapter-seniorswe-concise/SKILL.md.tmpl",
+      "agents": [
+        "swe",
+        "_infrastructure"
+      ]
+    },
+    {
+      "name": "adapter-strands",
+      "version": "0.1.1",
+      "description": "Optional Strands adapter boundary for composing skills and tools with",
+      "path": "packages/adapters/adapter-strands/SKILL.md.tmpl",
+      "agents": [
+        "orchestrate",
+        "_infrastructure",
+        "cloud"
+      ]
+    },
     {
       "name": "agent-architecture",
       "version": "0.1.1",
@@ -681,6 +801,18 @@
       ]
     },
     {
+      "name": "reference-agent-architecture-patterns",
+      "version": "0.1.0",
+      "description": "Quick reference for the agent-architecture repo conventions. Covers",
+      "path": "reference-agent-architecture-patterns/SKILL.md.tmpl",
+      "agents": [
+        "_infrastructure",
+        "swe",
+        "orchestrate",
+        "qa-agent"
+      ]
+    },
+    {
       "name": "reference-skill-patterns",
       "version": "0.2.1",
       "description": "Repo-local quick reference for the skill-pack pattern this repo uses.",
@@ -741,17 +873,6 @@
       "agents": [
         "swe",
         "qa-agent"
-      ]
-    },
-    {
-      "name": "rtk-token-optimizer",
-      "version": "0.1.1",
-      "description": "Optional Rust Token Killer integration guidance. Uses RTK to reduce noisy shell output",
-      "path": "packages/skills/rtk-token-optimizer/SKILL.md.tmpl",
-      "agents": [
-        "_infrastructure",
-        "swe",
-        "data"
       ]
     },
     {
@@ -882,6 +1003,16 @@
       "path": "agents/spec-agent/SKILL.md.tmpl",
       "agents": [
         "_infrastructure"
+      ]
+    },
+    {
+      "name": "stack",
+      "version": "0.1.1",
+      "description": "Tech stack meta-loader. Auto-detects project tech stack from repo signals and",
+      "path": "packages/adapters/stack/SKILL.md.tmpl",
+      "agents": [
+        "_infrastructure",
+        "swe"
       ]
     },
     {

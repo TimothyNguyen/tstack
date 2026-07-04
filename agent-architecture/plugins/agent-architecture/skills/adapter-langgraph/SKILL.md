@@ -4,6 +4,11 @@ version: 0.1.1
 description: |
   Optional LangGraph orchestration boundary for durable app-level agents
   without expanding the core runtime dependency surface.
+allowed-tools:
+  - Read
+  - Grep
+  - Glob
+  - Bash
 agents: [orchestrate, _infrastructure]
 ---
 

@@ -94,7 +94,6 @@ Use commit discipline to stage and commit only the authentication fix.
 - Upgrade this skill pack: invoke `architecture-agent-upgrade`.
 - Codebase map, architecture lookup, dependency tracing, or AST graph indexing: invoke `codebase-engine`.
 - Internal Atlassian product docs, requirements, or Jira issue context for coding questions: invoke `atlassian-docs` only when an approved read-only connector is configured.
-- Token/cost reduction for noisy shell output: invoke `rtk-token-optimizer`.
 - Token/cost reduction for Python objects, API responses, logs, diffs, or code before LLM injection: invoke `token-optimizer`.
 - Commit after completing discrete work, Conventional Commits format, atomic-commit guidance: invoke `commit`.
 - Simplest/laziest solution, YAGNI enforcement: invoke `seniorswe-concise`.

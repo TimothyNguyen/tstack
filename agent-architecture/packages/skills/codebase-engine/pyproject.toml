@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "codebase-engine"
-version = "0.1.0"
+version = "0.1.1"
 description = "Enterprise-safe AST knowledge graph for AI coding agents. Extracts, builds, clusters, and queries local codebases. No external egress."
 readme = "README.md"
 license = { file = "LICENSE" }

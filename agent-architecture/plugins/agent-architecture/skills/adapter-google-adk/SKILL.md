@@ -4,6 +4,11 @@ version: 0.1.1
 description: |
   Optional Google ADK host adapter boundary for invoking skills and tools
   without making core architecture depend on ADK runtime packages.
+allowed-tools:
+  - Read
+  - Grep
+  - Glob
+  - Bash
 agents: [orchestrate, _infrastructure, cloud]
 ---
 

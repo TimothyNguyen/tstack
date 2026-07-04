@@ -2,12 +2,12 @@
   "generatedBy": "scripts/build-governance.js",
   "configVersion": 1,
   "counts": {
-    "total": 455,
+    "total": 453,
     "adapter": 12,
     "agent": 31,
     "mcp": 1,
     "plugin": 15,
-    "skill": 250,
+    "skill": 248,
     "stack": 146
   },
   "components": [
@@ -45,7 +45,7 @@
       "path": "agent-architecture/packages/adapters/adapter-docker-mcp/SKILL.md",
       "namespace": "agent-architecture/packages/adapters",
       "source": "SKILL.md",
-      "description": "Docker MCP Registry and Toolkit adapter. Wires 300+ pre-built containerized\nMCP servers (GitHub, Postgres, Playwright, Slack, Stripe, Docker ops, etc.)\nthrough the Docker MCP Gateway — one stdio multiplexer replaces N individual\nserver configs. Use when deploying via Docker or consuming tools from the\nofficial docker/mcp-registry catalog.\n"
+      "description": "Docker MCP Registry and Toolkit adapter. Wires 300+ pre-built containerized\nMCP servers (GitHub, Postgres, Playwright, Slack, Docker ops, etc.)\nthrough the Docker MCP Gateway — one stdio multiplexer replaces N individual\nserver configs. Use when deploying via Docker or consuming tools from the\nofficial docker/mcp-registry catalog.\n"
     },
     {
       "id": "adapter:agent-architecture/packages/adapters/adapter-github/SKILL.md",
@@ -1002,15 +1002,6 @@
       "description": "Enterprise-safe plan review workflow. Reviews a proposed implementation plan for scope,\narchitecture, testability, policy compliance, data risk, and delivery sequencing before code changes begin.\n"
     },
     {
-      "id": "skill:agent-architecture/packages/skills/rtk-token-optimizer/SKILL.md",
-      "type": "skill",
-      "name": "rtk-token-optimizer",
-      "path": "agent-architecture/packages/skills/rtk-token-optimizer/SKILL.md",
-      "namespace": "agent-architecture/packages/skills",
-      "source": "SKILL.md",
-      "description": "Optional Rust Token Killer integration guidance. Uses RTK to reduce noisy shell output\nwhen installed and approved by policy. Does not install global hooks or enable telemetry by default.\n"
-    },
-    {
       "id": "skill:agent-architecture/packages/skills/security-review/SKILL.md",
       "type": "skill",
       "name": "security-review",
@@ -1089,7 +1080,7 @@
       "path": "agent-architecture/packages/skills/token-optimizer/SKILL.md",
       "namespace": "agent-architecture/packages/skills",
       "source": "SKILL.md",
-      "description": "Token reduction for Python objects, API responses, logs, diffs, and code\nbefore LLM injection. Bundles Python Token Killer (ptk) with zero required\ndependencies and a bundled fallback. Complements rtk-token-optimizer\n(rtk = shell output, token-optimizer = structured data and Python objects).\n"
+      "description": "Token reduction for Python objects, API responses, logs, diffs, and code\nbefore LLM injection. Bundles Python Token Killer (ptk) with zero required\ndependencies and a bundled fallback.\n"
     },
     {
       "id": "skill:agent-architecture/plugins/agent-architecture/skills/adapter-ag-ui/SKILL.md",
@@ -1125,7 +1116,7 @@
       "path": "agent-architecture/plugins/agent-architecture/skills/adapter-docker-mcp/SKILL.md",
       "namespace": "agent-architecture/plugins",
       "source": "SKILL.md",
-      "description": "Docker MCP Registry and Toolkit adapter. Wires 300+ pre-built containerized\nMCP servers (GitHub, Postgres, Playwright, Slack, Stripe, Docker ops, etc.)\nthrough the Docker MCP Gateway — one stdio multiplexer replaces N individual\nserver configs. Use when deploying via Docker or consuming tools from the\nofficial docker/mcp-registry catalog.\n"
+      "description": "Docker MCP Registry and Toolkit adapter. Wires 300+ pre-built containerized\nMCP servers (GitHub, Postgres, Playwright, Slack, Docker ops, etc.)\nthrough the Docker MCP Gateway — one stdio multiplexer replaces N individual\nserver configs. Use when deploying via Docker or consuming tools from the\nofficial docker/mcp-registry catalog.\n"
     },
     {
       "id": "skill:agent-architecture/plugins/agent-architecture/skills/adapter-github/SKILL.md",
@@ -1470,15 +1461,6 @@
       "description": "Model interpretation review for feature effects, calibration, drift,\nuncertainty, explanation limits, and decision-risk communication.\n"
     },
     {
-      "id": "skill:agent-architecture/plugins/agent-architecture/skills/donecheck/SKILL.md",
-      "type": "skill",
-      "name": "donecheck",
-      "path": "agent-architecture/plugins/agent-architecture/skills/donecheck/SKILL.md",
-      "namespace": "agent-architecture/plugins",
-      "source": "SKILL.md",
-      "description": "Proof-of-done gate for AI coding agents. Scans changed files for AI\nanti-patterns (TODOs, placeholders, swallowed exceptions, eval/exec,\nhardcoded credentials) and generates a timestamped DONECHECK.md receipt.\nInvoke before any completion claim, PR creation, or task handoff.\n"
-    },
-    {
       "id": "skill:agent-architecture/plugins/agent-architecture/skills/doubt-driven-development/SKILL.md",
       "type": "skill",
       "name": "doubt-driven-development",
@@ -1686,13 +1668,13 @@
       "description": "Handle code review feedback with technical rigor. Verify before implementing.\nRequires evaluation, not performative agreement or blind implementation.\n"
     },
     {
-      "id": "skill:agent-architecture/plugins/agent-architecture/skills/reference-gstack-patterns/SKILL.md",
+      "id": "skill:agent-architecture/plugins/agent-architecture/skills/reference-agent-architecture-patterns/SKILL.md",
       "type": "skill",
-      "name": "reference-gstack-patterns",
-      "path": "agent-architecture/plugins/agent-architecture/skills/reference-gstack-patterns/SKILL.md",
+      "name": "reference-agent-architecture-patterns",
+      "path": "agent-architecture/plugins/agent-architecture/skills/reference-agent-architecture-patterns/SKILL.md",
       "namespace": "agent-architecture/plugins",
       "source": "SKILL.md",
-      "description": "Repo-local quick reference for the skill-pack pattern this repo uses.\nRead once when adding or refactoring a skill folder.\n"
+      "description": "Quick reference for the agent-architecture repo conventions. Covers\nagents, skills, governance, testing, and proof-of-done workflow.\nRead once when adding, editing, or restructuring any skill or agent.\n"
     },
     {
       "id": "skill:agent-architecture/plugins/agent-architecture/skills/reference-skill-patterns/SKILL.md",
@@ -1738,15 +1720,6 @@
       "namespace": "agent-architecture/plugins",
       "source": "SKILL.md",
       "description": "Enterprise-safe code review workflow. Reviews diffs and code paths for correctness,\nmaintainability, data access, policy violations, test gaps, and release risk.\n"
-    },
-    {
-      "id": "skill:agent-architecture/plugins/agent-architecture/skills/rtk-token-optimizer/SKILL.md",
-      "type": "skill",
-      "name": "rtk-token-optimizer",
-      "path": "agent-architecture/plugins/agent-architecture/skills/rtk-token-optimizer/SKILL.md",
-      "namespace": "agent-architecture/plugins",
-      "source": "SKILL.md",
-      "description": "Optional Rust Token Killer integration guidance. Uses RTK to reduce noisy shell output\nwhen installed and approved by policy. Does not install global hooks or enable telemetry by default.\n"
     },
     {
       "id": "skill:agent-architecture/plugins/agent-architecture/skills/security-review/SKILL.md",
@@ -2062,6 +2035,15 @@
       "namespace": "repo",
       "source": "SKILL.md",
       "description": "Handle code review feedback with technical rigor. Verify before implementing.\nRequires evaluation, not performative agreement or blind implementation.\n"
+    },
+    {
+      "id": "skill:agent-architecture/reference-agent-architecture-patterns/SKILL.md",
+      "type": "skill",
+      "name": "reference-agent-architecture-patterns",
+      "path": "agent-architecture/reference-agent-architecture-patterns/SKILL.md",
+      "namespace": "repo",
+      "source": "SKILL.md",
+      "description": "Quick reference for the agent-architecture repo conventions. Covers\nagents, skills, governance, testing, and proof-of-done workflow.\nRead once when adding, editing, or restructuring any skill or agent.\n"
     },
     {
       "id": "skill:agent-architecture/reference-skill-patterns/SKILL.md",
@@ -4107,5 +4089,5 @@
       "description": "SQL Server to Postgres migration planning with T-SQL compatibility checks,\npgloader experiments, and production cutover guardrails.\n"
     }
   ],
-  "digest": "158fd9d2dd5b33f71e217181d393a605dae68b1f7b95bd43d95a608ceaa9e2fe"
+  "digest": "f54db45867f3a0866b2ff1541f60add1b0e6abed95eeb65ed8c92ebc24646096"
 }

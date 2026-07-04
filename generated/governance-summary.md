@@ -8,9 +8,9 @@ Generated from `governance.config.json`.
 - agent: 31
 - mcp: 1
 - plugin: 15
-- skill: 250
+- skill: 248
 - stack: 146
-- total: 455
+- total: 453
 
 ## Components
 
@@ -26,7 +26,7 @@ events, and local privacy controls.
 operations with explicit policy gates.
 
 - `adapter-docker-mcp` :: `agent-architecture/packages/adapters/adapter-docker-mcp/SKILL.md` - Docker MCP Registry and Toolkit adapter. Wires 300+ pre-built containerized
-MCP servers (GitHub, Postgres, Playwright, Slack, Stripe, Docker ops, etc.)
+MCP servers (GitHub, Postgres, Playwright, Slack, Docker ops, etc.)
 through the Docker MCP Gateway — one stdio multiplexer replaces N individual
 server configs. Use when deploying via Docker or consuming tools from the
 official docker/mcp-registry catalog.
@@ -334,9 +334,6 @@ criteria, rollout, measurement, stakeholder impact, and non-goals.
 - `plan-review` :: `agent-architecture/packages/skills/plan-review/SKILL.md` - Enterprise-safe plan review workflow. Reviews a proposed implementation plan for scope,
 architecture, testability, policy compliance, data risk, and delivery sequencing before code changes begin.
 
-- `rtk-token-optimizer` :: `agent-architecture/packages/skills/rtk-token-optimizer/SKILL.md` - Optional Rust Token Killer integration guidance. Uses RTK to reduce noisy shell output
-when installed and approved by policy. Does not install global hooks or enable telemetry by default.
-
 - `security-review` :: `agent-architecture/packages/skills/security-review/SKILL.md` - Enterprise security and governance review for application code, data access, agent
 tools, cloud integrations, and release workflows.
 
@@ -386,8 +383,7 @@ boilerplate.
 
 - `token-optimizer` :: `agent-architecture/packages/skills/token-optimizer/SKILL.md` - Token reduction for Python objects, API responses, logs, diffs, and code
 before LLM injection. Bundles Python Token Killer (ptk) with zero required
-dependencies and a bundled fallback. Complements rtk-token-optimizer
-(rtk = shell output, token-optimizer = structured data and Python objects).
+dependencies and a bundled fallback.
 
 - `adapter-ag-ui` :: `agent-architecture/plugins/agent-architecture/skills/adapter-ag-ui/SKILL.md` - Map skill progress, approvals, tool actions, findings, and artifacts into
 AG-UI-compatible event concepts.
@@ -399,7 +395,7 @@ events, and local privacy controls.
 operations with explicit policy gates.
 
 - `adapter-docker-mcp` :: `agent-architecture/plugins/agent-architecture/skills/adapter-docker-mcp/SKILL.md` - Docker MCP Registry and Toolkit adapter. Wires 300+ pre-built containerized
-MCP servers (GitHub, Postgres, Playwright, Slack, Stripe, Docker ops, etc.)
+MCP servers (GitHub, Postgres, Playwright, Slack, Docker ops, etc.)
 through the Docker MCP Gateway — one stdio multiplexer replaces N individual
 server configs. Use when deploying via Docker or consuming tools from the
 official docker/mcp-registry catalog.
@@ -523,11 +519,6 @@ governed production ML workflows.
 - `domain-model-interpretation` :: `agent-architecture/plugins/agent-architecture/skills/domain-model-interpretation/SKILL.md` - Model interpretation review for feature effects, calibration, drift,
 uncertainty, explanation limits, and decision-risk communication.
 
-- `donecheck` :: `agent-architecture/plugins/agent-architecture/skills/donecheck/SKILL.md` - Proof-of-done gate for AI coding agents. Scans changed files for AI
-anti-patterns (TODOs, placeholders, swallowed exceptions, eval/exec,
-hardcoded credentials) and generates a timestamped DONECHECK.md receipt.
-Invoke before any completion claim, PR creation, or task handoff.
-
 - `doubt-driven-development` :: `agent-architecture/plugins/agent-architecture/skills/doubt-driven-development/SKILL.md` - Challenge assumptions before and during implementation. Surface load-bearing doubts
 early so they can be resolved with evidence rather than discovered as bugs.
 
@@ -601,8 +592,9 @@ local tests and approved tools. Browser automation is optional and disabled by d
 - `receiving-code-review` :: `agent-architecture/plugins/agent-architecture/skills/receiving-code-review/SKILL.md` - Handle code review feedback with technical rigor. Verify before implementing.
 Requires evaluation, not performative agreement or blind implementation.
 
-- `reference-gstack-patterns` :: `agent-architecture/plugins/agent-architecture/skills/reference-gstack-patterns/SKILL.md` - Repo-local quick reference for the skill-pack pattern this repo uses.
-Read once when adding or refactoring a skill folder.
+- `reference-agent-architecture-patterns` :: `agent-architecture/plugins/agent-architecture/skills/reference-agent-architecture-patterns/SKILL.md` - Quick reference for the agent-architecture repo conventions. Covers
+agents, skills, governance, testing, and proof-of-done workflow.
+Read once when adding, editing, or restructuring any skill or agent.
 
 - `reference-skill-patterns` :: `agent-architecture/plugins/agent-architecture/skills/reference-skill-patterns/SKILL.md` - Repo-local quick reference for the skill-pack pattern this repo uses.
 Read once when adding or refactoring a skill folder.
@@ -617,9 +609,6 @@ before handoff to human-approved merge or deploy steps.
 
 - `review` :: `agent-architecture/plugins/agent-architecture/skills/review/SKILL.md` - Enterprise-safe code review workflow. Reviews diffs and code paths for correctness,
 maintainability, data access, policy violations, test gaps, and release risk.
-
-- `rtk-token-optimizer` :: `agent-architecture/plugins/agent-architecture/skills/rtk-token-optimizer/SKILL.md` - Optional Rust Token Killer integration guidance. Uses RTK to reduce noisy shell output
-when installed and approved by policy. Does not install global hooks or enable telemetry by default.
 
 - `security-review` :: `agent-architecture/plugins/agent-architecture/skills/security-review/SKILL.md` - Enterprise security and governance review for application code, data access, agent
 tools, cloud integrations, and release workflows.
@@ -754,6 +743,10 @@ local tests and approved tools. Browser automation is optional and disabled by d
 
 - `receiving-code-review` :: `agent-architecture/receiving-code-review/SKILL.md` - Handle code review feedback with technical rigor. Verify before implementing.
 Requires evaluation, not performative agreement or blind implementation.
+
+- `reference-agent-architecture-patterns` :: `agent-architecture/reference-agent-architecture-patterns/SKILL.md` - Quick reference for the agent-architecture repo conventions. Covers
+agents, skills, governance, testing, and proof-of-done workflow.
+Read once when adding, editing, or restructuring any skill or agent.
 
 - `reference-skill-patterns` :: `agent-architecture/reference-skill-patterns/SKILL.md` - Repo-local quick reference for the skill-pack pattern this repo uses.
 Read once when adding or refactoring a skill folder.

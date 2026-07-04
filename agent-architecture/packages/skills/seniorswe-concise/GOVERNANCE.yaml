@@ -66,10 +66,9 @@ used_by:
   - pre-commit-review
   - qa
   - receiving-code-review
-  - reference-gstack-patterns
+  - reference-skill-patterns
   - release-notes
   - review
-  - rtk-token-optimizer
   - security-review
   - seniorswe-concise
   - seniorswe-concise-audit

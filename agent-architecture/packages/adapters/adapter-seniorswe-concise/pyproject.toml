@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "adapter-seniorswe-concise"
-version = "0.1.0"
+version = "0.1.1"
 description = "Agent-architecture adapter for SeniorSWE-Concise integration"
 requires-python = ">=3.8"
 license = "Apache-2.0"
