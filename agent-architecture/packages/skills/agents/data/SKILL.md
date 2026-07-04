@@ -93,7 +93,6 @@ Skills that declare this agent in their frontmatter `agents:` field.
 | `domain-model-interpretation` | Model interpretation review for feature effects, calibration, drift, |
 | `learn` | Knowledge capture workflow. Extracts Q&A flashcards from agent session context. |
 | `plan-eng-review` | Reviews plans for architecture, data flow, reliability, and testability. |
-| `rtk-token-optimizer` | Optional Rust Token Killer integration guidance. Uses RTK to reduce noisy shell output |
 | `seniorswe-concise` | Senior SWE concise mode: forces the laziest solution that actually works. |
 | `stack-databricks` | Databricks engineering workflows for Asset Bundles, jobs, notebooks, SDK |
 | `stack-databricks-dbt` | dbt on Databricks patterns for models, tests, docs, lineage, and governed |

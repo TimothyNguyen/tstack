@@ -8,9 +8,9 @@ Generated from `governance.config.json`.
 - agent: 31
 - mcp: 1
 - plugin: 15
-- skill: 250
+- skill: 248
 - stack: 146
-- total: 455
+- total: 453
 
 ## Components
 
@@ -334,9 +334,6 @@ criteria, rollout, measurement, stakeholder impact, and non-goals.
 - `plan-review` :: `agent-architecture/packages/skills/plan-review/SKILL.md` - Enterprise-safe plan review workflow. Reviews a proposed implementation plan for scope,
 architecture, testability, policy compliance, data risk, and delivery sequencing before code changes begin.
 
-- `rtk-token-optimizer` :: `agent-architecture/packages/skills/rtk-token-optimizer/SKILL.md` - Optional Rust Token Killer integration guidance. Uses RTK to reduce noisy shell output
-when installed and approved by policy. Does not install global hooks or enable telemetry by default.
-
 - `security-review` :: `agent-architecture/packages/skills/security-review/SKILL.md` - Enterprise security and governance review for application code, data access, agent
 tools, cloud integrations, and release workflows.
 
@@ -386,8 +383,7 @@ boilerplate.
 
 - `token-optimizer` :: `agent-architecture/packages/skills/token-optimizer/SKILL.md` - Token reduction for Python objects, API responses, logs, diffs, and code
 before LLM injection. Bundles Python Token Killer (ptk) with zero required
-dependencies and a bundled fallback. Complements rtk-token-optimizer
-(rtk = shell output, token-optimizer = structured data and Python objects).
+dependencies and a bundled fallback.
 
 - `adapter-ag-ui` :: `agent-architecture/plugins/agent-architecture/skills/adapter-ag-ui/SKILL.md` - Map skill progress, approvals, tool actions, findings, and artifacts into
 AG-UI-compatible event concepts.
@@ -613,9 +609,6 @@ before handoff to human-approved merge or deploy steps.
 
 - `review` :: `agent-architecture/plugins/agent-architecture/skills/review/SKILL.md` - Enterprise-safe code review workflow. Reviews diffs and code paths for correctness,
 maintainability, data access, policy violations, test gaps, and release risk.
-
-- `rtk-token-optimizer` :: `agent-architecture/plugins/agent-architecture/skills/rtk-token-optimizer/SKILL.md` - Optional Rust Token Killer integration guidance. Uses RTK to reduce noisy shell output
-when installed and approved by policy. Does not install global hooks or enable telemetry by default.
 
 - `security-review` :: `agent-architecture/plugins/agent-architecture/skills/security-review/SKILL.md` - Enterprise security and governance review for application code, data access, agent
 tools, cloud integrations, and release workflows.

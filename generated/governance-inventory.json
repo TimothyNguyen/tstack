@@ -2,12 +2,12 @@
   "generatedBy": "scripts/build-governance.js",
   "configVersion": 1,
   "counts": {
-    "total": 455,
+    "total": 453,
     "adapter": 12,
     "agent": 31,
     "mcp": 1,
     "plugin": 15,
-    "skill": 250,
+    "skill": 248,
     "stack": 146
   },
   "components": [
@@ -1002,15 +1002,6 @@
       "description": "Enterprise-safe plan review workflow. Reviews a proposed implementation plan for scope,\narchitecture, testability, policy compliance, data risk, and delivery sequencing before code changes begin.\n"
     },
     {
-      "id": "skill:agent-architecture/packages/skills/rtk-token-optimizer/SKILL.md",
-      "type": "skill",
-      "name": "rtk-token-optimizer",
-      "path": "agent-architecture/packages/skills/rtk-token-optimizer/SKILL.md",
-      "namespace": "agent-architecture/packages/skills",
-      "source": "SKILL.md",
-      "description": "Optional Rust Token Killer integration guidance. Uses RTK to reduce noisy shell output\nwhen installed and approved by policy. Does not install global hooks or enable telemetry by default.\n"
-    },
-    {
       "id": "skill:agent-architecture/packages/skills/security-review/SKILL.md",
       "type": "skill",
       "name": "security-review",
@@ -1089,7 +1080,7 @@
       "path": "agent-architecture/packages/skills/token-optimizer/SKILL.md",
       "namespace": "agent-architecture/packages/skills",
       "source": "SKILL.md",
-      "description": "Token reduction for Python objects, API responses, logs, diffs, and code\nbefore LLM injection. Bundles Python Token Killer (ptk) with zero required\ndependencies and a bundled fallback. Complements rtk-token-optimizer\n(rtk = shell output, token-optimizer = structured data and Python objects).\n"
+      "description": "Token reduction for Python objects, API responses, logs, diffs, and code\nbefore LLM injection. Bundles Python Token Killer (ptk) with zero required\ndependencies and a bundled fallback.\n"
     },
     {
       "id": "skill:agent-architecture/plugins/agent-architecture/skills/adapter-ag-ui/SKILL.md",
@@ -1729,15 +1720,6 @@
       "namespace": "agent-architecture/plugins",
       "source": "SKILL.md",
       "description": "Enterprise-safe code review workflow. Reviews diffs and code paths for correctness,\nmaintainability, data access, policy violations, test gaps, and release risk.\n"
-    },
-    {
-      "id": "skill:agent-architecture/plugins/agent-architecture/skills/rtk-token-optimizer/SKILL.md",
-      "type": "skill",
-      "name": "rtk-token-optimizer",
-      "path": "agent-architecture/plugins/agent-architecture/skills/rtk-token-optimizer/SKILL.md",
-      "namespace": "agent-architecture/plugins",
-      "source": "SKILL.md",
-      "description": "Optional Rust Token Killer integration guidance. Uses RTK to reduce noisy shell output\nwhen installed and approved by policy. Does not install global hooks or enable telemetry by default.\n"
     },
     {
       "id": "skill:agent-architecture/plugins/agent-architecture/skills/security-review/SKILL.md",
@@ -4107,5 +4089,5 @@
       "description": "SQL Server to Postgres migration planning with T-SQL compatibility checks,\npgloader experiments, and production cutover guardrails.\n"
     }
   ],
-  "digest": "012d48070e2698282c0770da8b41f4bf85fd37a2126cc6bcad7296832499daff"
+  "digest": "f54db45867f3a0866b2ff1541f60add1b0e6abed95eeb65ed8c92ebc24646096"
 }

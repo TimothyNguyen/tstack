@@ -38,7 +38,6 @@ used_by:
   - domain-model-interpretation
   - learn
   - plan-eng-review
-  - rtk-token-optimizer
   - seniorswe-concise
   - stack-databricks
   - stack-databricks-dbt

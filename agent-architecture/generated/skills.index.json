@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-07-03T22:18:13.454Z",
-  "count": 103,
+  "generatedAt": "2026-07-04T17:27:30.442Z",
+  "count": 102,
   "skills": [
     {
       "name": "adapter-ag-ui",
@@ -873,17 +873,6 @@
       "agents": [
         "swe",
         "qa-agent"
-      ]
-    },
-    {
-      "name": "rtk-token-optimizer",
-      "version": "0.1.1",
-      "description": "Optional Rust Token Killer integration guidance. Uses RTK to reduce noisy shell output",
-      "path": "packages/skills/rtk-token-optimizer/SKILL.md.tmpl",
-      "agents": [
-        "_infrastructure",
-        "swe",
-        "data"
       ]
     },
     {

@@ -123,7 +123,6 @@ Skills that declare this agent in their frontmatter `agents:` field.
 | `reference-skill-patterns` | Repo-local quick reference for the skill-pack pattern this repo uses. |
 | `release-notes` | Generate privacy-safe release notes from local changes, tests, and docs |
 | `review` | Enterprise-safe code review workflow. Reviews diffs and code paths for correctness, |
-| `rtk-token-optimizer` | Optional Rust Token Killer integration guidance. Uses RTK to reduce noisy shell output |
 | `security-review` | Enterprise security and governance review for application code, data access, agent |
 | `seniorswe-concise` | Senior SWE concise mode: forces the laziest solution that actually works. |
 | `seniorswe-concise-audit` | Whole-repo audit for over-engineering. Like /seniorswe-concise-review but |

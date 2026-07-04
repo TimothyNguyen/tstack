@@ -69,7 +69,6 @@ used_by:
   - reference-gstack-patterns
   - release-notes
   - review
-  - rtk-token-optimizer
   - security-review
   - seniorswe-concise
   - seniorswe-concise-audit

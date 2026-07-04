@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-07-03T22:18:15.399Z",
-  "count": 103,
+  "generatedAt": "2026-07-04T17:27:32.647Z",
+  "count": 102,
   "byAgent": {
     "_infrastructure": [
       "agent-architecture",
@@ -20,7 +20,6 @@
       "spec-agent",
       "swe",
       "architecture-agent-upgrade",
-      "rtk-token-optimizer",
       "seniorswe-concise-help",
       "cloud",
       "data",
@@ -76,7 +75,6 @@
       "benchmark",
       "codebase-engine",
       "plan-eng-review",
-      "rtk-token-optimizer",
       "seniorswe-concise",
       "token-optimizer",
       "adapter-databricks"
@@ -311,7 +309,6 @@
       "plan-devex-review",
       "plan-eng-review",
       "plan-review",
-      "rtk-token-optimizer",
       "security-review",
       "security-scanner",
       "seniorswe-concise",
@@ -1506,22 +1503,6 @@
       "agents": [
         "swe",
         "qa-agent"
-      ],
-      "allowedTools": [
-        "Read",
-        "Grep",
-        "Glob",
-        "Bash"
-      ]
-    },
-    {
-      "name": "rtk-token-optimizer",
-      "version": "0.1.1",
-      "description": "Optional Rust Token Killer integration guidance. Uses RTK to reduce noisy shell output",
-      "agents": [
-        "_infrastructure",
-        "swe",
-        "data"
       ],
       "allowedTools": [
         "Read",

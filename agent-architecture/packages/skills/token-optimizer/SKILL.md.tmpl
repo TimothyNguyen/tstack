@@ -4,8 +4,7 @@ version: 0.1.1
 description: |
   Token reduction for Python objects, API responses, logs, diffs, and code
   before LLM injection. Bundles Python Token Killer (ptk) with zero required
-  dependencies and a bundled fallback. Complements rtk-token-optimizer
-  (rtk = shell output, token-optimizer = structured data and Python objects).
+  dependencies and a bundled fallback.
 allowed-tools:
   - Read
   - Grep
