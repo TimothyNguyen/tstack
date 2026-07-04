@@ -118,17 +118,6 @@ Use ptk before injecting any of these into LLM context:
 - Fall back to raw output when compressed output lacks enough context.
 - Record compression stats in the response when savings exceed 30%.
 
-## Complement: RTK
-
-Use rtk for shell command output; use ptk for Python objects and structured data:
-
-```bash
-rtk git status          # shell output → rtk
-rtk pytest              # noisy test runner stdout → rtk
-ptk.minimize(response)  # API JSON dict → ptk
-ptk.minimize(log_text)  # structured log string → ptk
-```
-
 ## Policy Requirements
 
 - Read-only code inspection is allowed.
