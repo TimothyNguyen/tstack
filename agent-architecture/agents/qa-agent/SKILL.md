@@ -72,15 +72,27 @@ Skills that declare this agent in their frontmatter `agents:` field.
 | `chrome-devtools` | Chrome DevTools MCP integration for browser automation, debugging, performance analysis, |
 | `codebase-engine` | Enterprise-safe AST knowledge graph for local codebases. Indexes source |
 | `design-review` | Reviews product UI and interaction quality for practical design issues. |
+| `diagram-validate` | Validate diagram completeness and design patterns. |
 | `documentation` | Documentation workflow for generating, updating, and reviewing project docs after implementation. |
+| `doubt-driven-development` | Challenge assumptions before and during implementation. Surface load-bearing doubts |
 | `health` | Enterprise-safe code health dashboard. Detects and runs approved local quality checks |
 | `investigate` | Root-cause investigation workflow for bugs, failing tests, broken integrations, and unexpected behavior. |
 | `learn` | Knowledge capture workflow. Extracts Q&A flashcards from agent session context. |
+| `migration-sqlserver-test` | Validate migrated data matches source. |
+| `observability-and-instrumentation` | Add structured observability to code and agent outputs: tracing, structured logging, |
 | `plan-devex-review` | Reviews plans for developer experience, APIs, onboarding, and operability. |
 | `plan-review` | Enterprise-safe plan review workflow. Reviews a proposed implementation plan for scope, |
+| `pre-commit-review` | Executable skill that runs pre-commit hooks on code to catch style issues |
 | `qa` | Enterprise-safe QA workflow. Plans and verifies user-facing or service behavior using |
+| `qa-verify` | Proof-of-done verification gate for AI coding agents. Scans changed files |
+| `receiving-code-review` | Handle code review feedback with technical rigor. Verify before implementing. |
+| `reference-agent-architecture-patterns` | Quick reference for the agent-architecture repo conventions. Covers |
 | `review` | Enterprise-safe code review workflow. Reviews diffs and code paths for correctness, |
 | `security-review` | Enterprise security and governance review for application code, data access, agent |
+| `security-scanner` | MCP server providing Checkov (IaC), Semgrep (source), Bandit (Python), and |
+| `systematic-debugging` | Exhaustive root-cause investigation for complex bugs stuck after multiple fix attempts. |
 | `test` | Designs and runs approved automated tests, including Playwright or Selenium when enabled by policy. |
 | `token-optimizer` | Token reduction for Python objects, API responses, logs, diffs, and code |
+| `using-agent-skills` | Use when starting any conversation - establishes how to find and use agent-architecture skills, |
+| `verification-before-completion` | Ship-readiness verification workflow. Run verification commands and confirm output |
 <!-- agent-skills:end -->

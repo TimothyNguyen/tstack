@@ -47,7 +47,7 @@ used_by:
   - plan-director-review
   - plan-review
   - pre-commit-review
-  - reference-gstack-patterns
+  - reference-skill-patterns
   - retro
   - seniorswe-concise-review
   - skillify
