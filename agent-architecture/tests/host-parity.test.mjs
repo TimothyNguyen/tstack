@@ -36,6 +36,18 @@ function routingSection(text) {
   return next === -1 ? text.slice(start) : text.slice(start, next);
 }
 
+function captureConsoleError(fn) {
+  const originalError = console.error;
+  const lines = [];
+  console.error = line => lines.push(line);
+  try {
+    fn(lines);
+  } finally {
+    console.error = originalError;
+  }
+  return lines;
+}
+
 describe('host-parity', () => {
   test('generated host artifacts exist', () => {
     assert.ok(
@@ -174,8 +186,11 @@ test('write() in check mode detects stale file', () => {
     fs.writeFileSync(path.join(dir, 'generated/codex/AGENTS.md'), 'old content');
 
     const prevExitCode = process.exitCode;
-    write('generated/codex/AGENTS.md', 'new content', { check: true, root: dir });
+    const lines = captureConsoleError(() => {
+      write('generated/codex/AGENTS.md', 'new content', { check: true, root: dir });
+    });
     assert.equal(process.exitCode, 1);
+    assert.equal(lines.length, 1);
     process.exitCode = prevExitCode;
   } finally {
     fs.rmSync(dir, { recursive: true, force: true });
@@ -221,8 +236,11 @@ test('write() in check mode treats missing file as stale', () => {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'arch-host-missing-'));
   try {
     const prevExitCode = process.exitCode;
-    write('generated/codex/AGENTS.md', 'some content', { check: true, root: dir });
+    const lines = captureConsoleError(() => {
+      write('generated/codex/AGENTS.md', 'some content', { check: true, root: dir });
+    });
     assert.equal(process.exitCode, 1);
+    assert.equal(lines.length, 1);
     process.exitCode = prevExitCode;
   } finally {
     fs.rmSync(dir, { recursive: true, force: true });
@@ -230,8 +248,20 @@ test('write() in check mode treats missing file as stale', () => {
 });
 
 test('logOutputs logs when check=false and suppresses when check=true', () => {
-  assert.doesNotThrow(() => logOutputs(false));
-  assert.doesNotThrow(() => logOutputs(true));
+  const originalLog = console.log;
+  const lines = [];
+  console.log = line => lines.push(line);
+  try {
+    assert.doesNotThrow(() => logOutputs(false));
+    assert.doesNotThrow(() => logOutputs(true));
+  } finally {
+    console.log = originalLog;
+  }
+  assert.deepEqual(lines, [
+    'generated/claude/CLAUDE.md',
+    'generated/codex/AGENTS.md',
+    'generated/copilot/copilot-instructions.md',
+  ]);
 });
 
 test('stripFrontmatter returns content unchanged when no frontmatter marker', () => {
@@ -267,4 +297,3 @@ test('scriptRoutingSection returns only the routing section when followed by ano
   assert.match(result, /## Routing/);
   assert.ok(!result.includes('## Policy'), 'should not include sections after routing');
 });
-

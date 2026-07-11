@@ -16,6 +16,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const rootDir = path.join(__dirname, '..');
 const catalogPath = path.join(rootDir, 'docs', 'skill-catalog.md');
 const CHECK_MODE = process.argv.includes('--check');
+const CATALOG_ROOTS = ['skills'];
 
 function parseFrontmatter(content) {
   const match = content.match(/^---\n([\s\S]*?)\n---\n/);
@@ -71,30 +72,35 @@ function getDescription(fm) {
 
 function collectSkills() {
   const skills = [];
-  const entries = fs.readdirSync(rootDir, { withFileTypes: true });
 
-  for (const entry of entries) {
-    if (!entry.isDirectory()) continue;
-    if (entry.name.startsWith('.')) continue;
+  for (const base of CATALOG_ROOTS) {
+    const baseDir = path.join(rootDir, base);
+    if (!fs.existsSync(baseDir)) continue;
 
-    const skillPath = path.join(rootDir, entry.name, 'SKILL.md.tmpl');
-    if (!fs.existsSync(skillPath)) continue;
+    const entries = fs.readdirSync(baseDir, { withFileTypes: true });
+    for (const entry of entries) {
+      if (!entry.isDirectory()) continue;
+      if (entry.name.startsWith('.')) continue;
 
-    try {
-      const content = fs.readFileSync(skillPath, 'utf8');
-      const fm = parseFrontmatter(content);
-      if (!fm?.name) continue;
+      const skillPath = path.join(baseDir, entry.name, 'SKILL.md.tmpl');
+      if (!fs.existsSync(skillPath)) continue;
 
-      skills.push({
-        name: fm.name,
-        version: fm.version || '0.1.0',
-        description: getDescription(fm),
-        agents: Array.isArray(fm.agents) ? fm.agents : [],
-        category: fm.category || 'core',
-        directory: entry.name,
-      });
-    } catch (error) {
-      console.error(`Error parsing ${skillPath}: ${error.message}`);
+      try {
+        const content = fs.readFileSync(skillPath, 'utf8');
+        const fm = parseFrontmatter(content);
+        if (!fm?.name) continue;
+
+        skills.push({
+          name: fm.name,
+          version: fm.version || '0.1.0',
+          description: getDescription(fm),
+          agents: Array.isArray(fm.agents) ? fm.agents : [],
+          category: fm.category || 'core',
+          directory: `${base}/${entry.name}`,
+        });
+      } catch (error) {
+        console.error(`Error parsing ${skillPath}: ${error.message}`);
+      }
     }
   }
 

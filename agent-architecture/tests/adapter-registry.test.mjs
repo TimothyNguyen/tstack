@@ -4,7 +4,7 @@ import path from 'node:path';
 import test from 'node:test';
 
 const root = path.resolve(import.meta.dirname, '..');
-const adaptersRoot = path.join(root, 'packages', 'adapters');
+const adaptersRoot = path.join(root, 'adapters');
 const registry = JSON.parse(fs.readFileSync(path.join(adaptersRoot, 'adapters', 'registry.json'), 'utf8'));
 const policy = JSON.parse(fs.readFileSync(path.join(root, 'policies', 'enterprise-default.json'), 'utf8'));
 

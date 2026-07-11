@@ -7,6 +7,7 @@
 - [Adoption](ADOPTION.md)
 - [Glossary](GLOSSARY.md)
 - [Module Map](module-map.md)
+- [Cleanup Map](CLEANUP_MAP.md)
 - [Metadata Schema](METADATA-SCHEMA.md)
 
 ## Operational

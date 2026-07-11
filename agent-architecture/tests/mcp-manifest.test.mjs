@@ -4,7 +4,7 @@ import path from 'node:path';
 import test from 'node:test';
 
 const root = path.resolve(import.meta.dirname, '..');
-const adaptersRoot = path.join(root, 'packages', 'adapters');
+const adaptersRoot = path.join(root, 'adapters');
 
 function walk(dir, out = []) {
   for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {

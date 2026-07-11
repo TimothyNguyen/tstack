@@ -7,9 +7,9 @@ import { execSync } from 'node:child_process';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = path.resolve(__dirname, '..');
-const SERVER_SCRIPT = path.join(REPO_ROOT, 'brainstorming', 'scripts', 'server.cjs');
-const START_SCRIPT = path.join(REPO_ROOT, 'brainstorming', 'scripts', 'start-server.sh');
-const STOP_SCRIPT = path.join(REPO_ROOT, 'brainstorming', 'scripts', 'stop-server.sh');
+const SERVER_SCRIPT = path.join(REPO_ROOT, 'skills', 'brainstorming', 'scripts', 'server.cjs');
+const START_SCRIPT = path.join(REPO_ROOT, 'skills', 'brainstorming', 'scripts', 'start-server.sh');
+const STOP_SCRIPT = path.join(REPO_ROOT, 'skills', 'brainstorming', 'scripts', 'stop-server.sh');
 
 test('brainstorm-server.cjs exists and is valid CommonJS', () => {
   assert(fs.existsSync(SERVER_SCRIPT), 'server.cjs should exist');
@@ -75,28 +75,28 @@ test('stop-server.sh exists and is valid bash', () => {
 });
 
 test('helper.js exists and exports brainstorming utilities', () => {
-  const helperScript = path.join(REPO_ROOT, 'brainstorming', 'scripts', 'helper.js');
+  const helperScript = path.join(REPO_ROOT, 'skills', 'brainstorming', 'scripts', 'helper.js');
   assert(fs.existsSync(helperScript), 'helper.js should exist');
   const content = fs.readFileSync(helperScript, 'utf8');
   assert(content.includes('export'), 'should export functions');
 });
 
 test('frame-template.html exists for brainstorming UI', () => {
-  const templatePath = path.join(REPO_ROOT, 'brainstorming', 'scripts', 'frame-template.html');
+  const templatePath = path.join(REPO_ROOT, 'skills', 'brainstorming', 'scripts', 'frame-template.html');
   assert(fs.existsSync(templatePath), 'frame-template.html should exist');
   const content = fs.readFileSync(templatePath, 'utf8');
   assert(content.includes('<html'), 'should be valid HTML');
 });
 
 test('brainstorming SKILL.md has server lifecycle documentation', () => {
-  const skillPath = path.join(REPO_ROOT, 'brainstorming', 'SKILL.md');
+  const skillPath = path.join(REPO_ROOT, 'skills', 'brainstorming', 'SKILL.md');
   assert(fs.existsSync(skillPath), 'SKILL.md should exist');
   const content = fs.readFileSync(skillPath, 'utf8');
   assert(content.includes('server'), 'should document server');
 });
 
 test('brainstorming skill declares agents availability', () => {
-  const skillPath = path.join(REPO_ROOT, 'brainstorming', 'SKILL.md.tmpl');
+  const skillPath = path.join(REPO_ROOT, 'skills', 'brainstorming', 'SKILL.md.tmpl');
   assert(fs.existsSync(skillPath), 'SKILL.md.tmpl should exist');
   const content = fs.readFileSync(skillPath, 'utf8');
   assert(content.includes('agents:'), 'should declare agents');

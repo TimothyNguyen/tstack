@@ -5,7 +5,7 @@ import path from "path";
 import { fileURLToPath } from "node:url";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const rootDir = path.join(__dirname, "..", "packages", "skills");
+const rootDir = path.join(__dirname, "..", "skills");
 
 test("migration-sqlserver-assess: RED phase", () => {
   const skillPath = path.join(rootDir, "migration-sqlserver-assess", "SKILL.md.tmpl");
@@ -123,7 +123,7 @@ test("migration-sqlserver-perf: RED phase", () => {
 });
 
 test("migration-engineer agent: RED phase", () => {
-  const agentPath = path.join(rootDir, "agents", "migration-engineer", "SKILL.md.tmpl");
+  const agentPath = path.join(__dirname, "..", "agents", "migration-engineer", "SKILL.md.tmpl");
   assert.ok(fs.existsSync(agentPath), "Agent file must exist");
 
   const content = fs.readFileSync(agentPath, "utf8");

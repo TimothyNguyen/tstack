@@ -5,6 +5,9 @@ This is canonical navigation map for repo docs.
 ## Primary
 
 - [Start Here](START_HERE.md)
+- [Architecture Split](ARCHITECTURE_SPLIT.md)
+- [Repo Organization](REPO_ORGANIZATION.md)
+- [Confluence Env](CONFLUENCE_ENV.md)
 - [Installation](INSTALLATION.md)
 - [Workflows](WORKFLOWS.md)
 - [MCP Integration](MCP_INTEGRATION.md)

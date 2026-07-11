@@ -2,6 +2,8 @@
 
 Use this file as operational source for Claude, Codex, Copilot, and humans working in this repo.
 
+This is transition tooling. Long-term, governance checks should run as `tstack-harness` runtime gates and catalog discovery should move to `tregistry`.
+
 ## Purpose
 
 Governance automation keeps inventory of repository components in sync whenever new skills, agents, adapters, plugins, stacks, or MCP implementations are added.

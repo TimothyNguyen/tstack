@@ -6,7 +6,7 @@
   "ignorePathPrefixes": [
     "docs/archive/",
     "graphify/worked/",
-    "agent-architecture/packages/stacks/stack-databricks/bundle-examples/"
+    "agent-architecture/stacks/stack-databricks/bundle-examples/"
   ],
   "alwaysIncludeDirectories": [
     ".claude-plugin",

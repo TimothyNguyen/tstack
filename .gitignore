@@ -28,11 +28,19 @@ agent-architecture/codebase-out/
 agent-architecture/coverage/
 agent-architecture/test-results/
 agent-architecture/.agent/
+agent-architecture/.mypy_cache/
+agent-architecture/.pytest_cache/
+agent-architecture/.ruff_cache/
+agent-architecture/**/*.egg-info/
 
 # Repo-level generated/runtime artifacts
 /.agent/
 /generated/
 /claude-code-best-practice/
+/.claude/worktrees/
+/.claude/*.md
+/.claude/*.tmp
+/.claude/*.diff
 
 # External repos cloned for reference
 /sample-mcp-security-scanner/

@@ -14,7 +14,7 @@ function catalogRows() {
   const rows = [];
   for (const line of catalog.split(/\r?\n/)) {
     // Match: - **[`skill-name`](./skill-name/SKILL.md)** — description
-    const match = line.match(/^- \*\*\[`([^`]+)`\]\(\.\/([^/]+)\/SKILL\.md\)\*\*/);
+    const match = line.match(/^- \*\*\[`([^`]+)`\]\(\.\/(.+)\/SKILL\.md\)\*\*/);
     if (match) {
       const skill = match[1];
       const dir = match[2];
@@ -25,25 +25,11 @@ function catalogRows() {
 }
 
 function skillDirs() {
-  const skip = new Set([
-    '.git',
-    'adapters',
-    'agents',
-    'core',
-    'docs',
-    'generated',
-    'hosts',
-    'node_modules',
-    'policies',
-    'profiles',
-    'scripts',
-    'stack',
-    'tests',
-  ]);
-  return fs.readdirSync(root, { withFileTypes: true })
+  const skillsRoot = path.join(root, 'skills');
+  return fs.readdirSync(skillsRoot, { withFileTypes: true })
     .filter((entry) => entry.isDirectory())
-    .filter((entry) => !entry.name.startsWith('.') && !skip.has(entry.name))
-    .filter((entry) => fs.existsSync(path.join(root, entry.name, 'SKILL.md.tmpl')))
+    .filter((entry) => !entry.name.startsWith('.'))
+    .filter((entry) => fs.existsSync(path.join(skillsRoot, entry.name, 'SKILL.md.tmpl')))
     .map((entry) => entry.name)
     .sort();
 }
@@ -53,9 +39,9 @@ test('skill catalog rows point to generated top-level skills', () => {
   assert.ok(rows.length >= 30, `expected substantial default catalog, found ${rows.length}`);
 
   for (const row of rows) {
-    assert.equal(row.source, `${row.skill}/SKILL.md.tmpl`, `${row.skill} source must match folder contract`);
+    assert.equal(row.source, `skills/${row.skill}/SKILL.md.tmpl`, `${row.skill} source must match folder contract`);
     assert.equal(fs.existsSync(path.join(root, row.source)), true, `${row.skill} template missing`);
-    assert.equal(fs.existsSync(path.join(root, row.skill, 'SKILL.md')), true, `${row.skill} generated skill missing`);
+    assert.equal(fs.existsSync(path.join(root, 'skills', row.skill, 'SKILL.md')), true, `${row.skill} generated skill missing`);
   }
 });
 
@@ -71,19 +57,25 @@ test('root router skill routing is consistent', () => {
   }
 
   // Check that routed skills are cataloged
-  // adapter- skills are now in packages/adapters/ and are excluded from the top-level catalog
-  // stack- and domain- skills are now in packages/stacks/ and are excluded from the top-level catalog
-  // specialty skills are now in packages/skills/ and are excluded from the top-level catalog
-  const specialtySkillsRoot = path.join(root, 'packages', 'skills');
+  // adapter- skills are now in adapters/ and are excluded from the top-level catalog
+  // stack- and domain- skills are now in stacks/ and are excluded from the top-level catalog
+  // specialty skills are now in skills/ and are excluded from the top-level catalog
+  const specialtySkillsRoot = path.join(root, 'skills');
   const specialtySkillNames = fs.existsSync(specialtySkillsRoot)
     ? new Set(fs.readdirSync(specialtySkillsRoot, { withFileTypes: true })
         .filter((e) => e.isDirectory() && fs.existsSync(path.join(specialtySkillsRoot, e.name, 'SKILL.md.tmpl')))
         .map((e) => e.name))
     : new Set();
+  const toolProviderRoot = path.join(root, 'tool-providers');
+  const toolProviderNames = fs.existsSync(toolProviderRoot)
+    ? new Set(fs.readdirSync(toolProviderRoot, { withFileTypes: true })
+        .filter((e) => e.isDirectory() && fs.existsSync(path.join(toolProviderRoot, e.name, 'SKILL.md.tmpl')))
+        .map((e) => e.name))
+    : new Set();
   for (const skill of routedSkills) {
     if (!skill.startsWith('architecture-agent-') && !skill.startsWith('adapter-') &&
         !skill.startsWith('stack-') && !skill.startsWith('domain-') &&
-        skill !== 'subagent-orchestrator' && !specialtySkillNames.has(skill)) {
+        skill !== 'subagent-orchestrator' && !specialtySkillNames.has(skill) && !toolProviderNames.has(skill)) {
       assert.ok(catalogedSkills.has(skill),
         `${skill} is routed by root but not in catalog`);
     }

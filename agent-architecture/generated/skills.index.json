@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-07-04T18:24:21.788Z",
-  "count": 102,
+  "generatedAt": "2026-07-11T05:30:06.718Z",
+  "count": 120,
   "skills": [
     {
       "name": "adapter-ag-ui",
       "version": "0.1.1",
       "description": "Map skill progress, approvals, tool actions, findings, and artifacts into",
-      "path": "packages/adapters/adapter-ag-ui/SKILL.md.tmpl",
+      "path": "adapters/adapter-ag-ui/SKILL.md.tmpl",
       "agents": [
         "orchestrate",
         "_infrastructure",
@@ -18,7 +18,7 @@
       "name": "adapter-agentcore",
       "version": "0.1.1",
       "description": "Optional AgentCore adapter boundary for skills, tools, approvals, audit",
-      "path": "packages/adapters/adapter-agentcore/SKILL.md.tmpl",
+      "path": "adapters/adapter-agentcore/SKILL.md.tmpl",
       "agents": [
         "orchestrate",
         "_infrastructure",
@@ -29,7 +29,7 @@
       "name": "adapter-databricks",
       "version": "0.1.1",
       "description": "Optional Databricks SDK adapter boundary for workspace, job, and bundle",
-      "path": "packages/adapters/adapter-databricks/SKILL.md.tmpl",
+      "path": "adapters/adapter-databricks/SKILL.md.tmpl",
       "agents": [
         "data"
       ]
@@ -38,7 +38,7 @@
       "name": "adapter-docker-mcp",
       "version": "0.1.1",
       "description": "Docker MCP Registry and Toolkit adapter. Wires 300+ pre-built containerized",
-      "path": "packages/adapters/adapter-docker-mcp/SKILL.md.tmpl",
+      "path": "adapters/adapter-docker-mcp/SKILL.md.tmpl",
       "agents": [
         "cloud",
         "release-agent",
@@ -51,7 +51,7 @@
       "name": "adapter-github",
       "version": "0.1.1",
       "description": "Optional GitHub MCP/CLI adapter guidance for repo, issue, and PR context",
-      "path": "packages/adapters/adapter-github/SKILL.md.tmpl",
+      "path": "adapters/adapter-github/SKILL.md.tmpl",
       "agents": [
         "swe",
         "orchestrate",
@@ -62,7 +62,7 @@
       "name": "adapter-google-adk",
       "version": "0.1.1",
       "description": "Optional Google ADK host adapter boundary for invoking skills and tools",
-      "path": "packages/adapters/adapter-google-adk/SKILL.md.tmpl",
+      "path": "adapters/adapter-google-adk/SKILL.md.tmpl",
       "agents": [
         "orchestrate",
         "_infrastructure",
@@ -73,7 +73,7 @@
       "name": "adapter-langgraph",
       "version": "0.1.1",
       "description": "Optional LangGraph orchestration boundary for durable app-level agents",
-      "path": "packages/adapters/adapter-langgraph/SKILL.md.tmpl",
+      "path": "adapters/adapter-langgraph/SKILL.md.tmpl",
       "agents": [
         "orchestrate",
         "_infrastructure"
@@ -83,7 +83,7 @@
       "name": "adapter-mcp",
       "version": "0.1.1",
       "description": "Design optional Model Context Protocol adapters with default-deny tools,",
-      "path": "packages/adapters/adapter-mcp/SKILL.md.tmpl",
+      "path": "adapters/adapter-mcp/SKILL.md.tmpl",
       "agents": [
         "swe",
         "_infrastructure",
@@ -95,7 +95,7 @@
       "name": "adapter-openapi",
       "version": "0.1.1",
       "description": "Use OpenAPI contracts and optional generated clients/servers while keeping",
-      "path": "packages/adapters/adapter-openapi/SKILL.md.tmpl",
+      "path": "adapters/adapter-openapi/SKILL.md.tmpl",
       "agents": [
         "swe",
         "spec-agent"
@@ -105,7 +105,7 @@
       "name": "adapter-seniorswe-concise",
       "version": "0.1.1",
       "description": "Optional Seniorswe-Concise hook and MCP adapter for YAGNI mode injection across",
-      "path": "packages/adapters/adapter-seniorswe-concise/SKILL.md.tmpl",
+      "path": "adapters/adapter-seniorswe-concise/SKILL.md.tmpl",
       "agents": [
         "swe",
         "_infrastructure"
@@ -115,7 +115,7 @@
       "name": "adapter-strands",
       "version": "0.1.1",
       "description": "Optional Strands adapter boundary for composing skills and tools with",
-      "path": "packages/adapters/adapter-strands/SKILL.md.tmpl",
+      "path": "adapters/adapter-strands/SKILL.md.tmpl",
       "agents": [
         "orchestrate",
         "_infrastructure",
@@ -135,7 +135,7 @@
       "name": "architecture-agent-upgrade",
       "version": "0.1.1",
       "description": "Upgrades an installed architecture-agent skill pack through a policy-approved internal,",
-      "path": "packages/skills/architecture-agent-upgrade/SKILL.md.tmpl",
+      "path": "skills/architecture-agent-upgrade/SKILL.md.tmpl",
       "agents": [
         "_infrastructure"
       ]
@@ -144,7 +144,7 @@
       "name": "atlassian-docs",
       "version": "0.2.1",
       "description": "Atlassian MCP integration for Jira, Confluence, and Bitbucket. Provides read and write",
-      "path": "packages/skills/atlassian-docs/SKILL.md.tmpl",
+      "path": "tool-providers/atlassian-docs/SKILL.md.tmpl",
       "agents": [
         "spec-agent",
         "pm",
@@ -157,7 +157,7 @@
       "name": "autoplan",
       "version": "0.1.2",
       "description": "Runs the plan review pipeline before coding begins, then a post-implementation critic gate before surfacing results.",
-      "path": "autoplan/SKILL.md.tmpl",
+      "path": "skills/autoplan/SKILL.md.tmpl",
       "agents": [
         "swe",
         "orchestrate",
@@ -168,7 +168,7 @@
       "name": "benchmark",
       "version": "0.1.1",
       "description": "Local benchmark and regression-check workflow for performance or quality",
-      "path": "packages/skills/benchmark/SKILL.md.tmpl",
+      "path": "skills/benchmark/SKILL.md.tmpl",
       "agents": [
         "qa-agent",
         "swe",
@@ -179,7 +179,7 @@
       "name": "brainstorming",
       "version": "0.1.1",
       "description": "Design-space exploration before coding. Explores user intent, requirements and design through collaborative dialogue.",
-      "path": "brainstorming/SKILL.md.tmpl",
+      "path": "skills/brainstorming/SKILL.md.tmpl",
       "agents": [
         "swe",
         "orchestrate",
@@ -191,7 +191,7 @@
       "name": "canary",
       "version": "0.1.1",
       "description": "Privacy-safe canary planning for post-deploy monitoring, rollback signals,",
-      "path": "canary/SKILL.md.tmpl",
+      "path": "skills/canary/SKILL.md.tmpl",
       "agents": [
         "qa-agent",
         "cloud",
@@ -202,7 +202,7 @@
       "name": "careful",
       "version": "0.1.1",
       "description": "Destructive command guardrails. Warns before rm -rf, DROP TABLE, force-push,",
-      "path": "careful/SKILL.md.tmpl",
+      "path": "skills/careful/SKILL.md.tmpl",
       "agents": [
         "migration",
         "cloud",
@@ -215,7 +215,7 @@
       "name": "change-router",
       "version": "0.1.2",
       "description": "Routes changed files to the appropriate agent roles using agents/routing.json.",
-      "path": "change-router/SKILL.md.tmpl",
+      "path": "skills/change-router/SKILL.md.tmpl",
       "agents": [
         "orchestrate"
       ]
@@ -224,7 +224,7 @@
       "name": "chrome-devtools",
       "version": "0.1.1",
       "description": "Chrome DevTools MCP integration for browser automation, debugging, performance analysis,",
-      "path": "packages/skills/chrome-devtools/SKILL.md.tmpl",
+      "path": "skills/chrome-devtools/SKILL.md.tmpl",
       "agents": [
         "qa-agent",
         "design-agent",
@@ -235,7 +235,7 @@
       "name": "claude",
       "version": "0.1.1",
       "description": "Claude Code host adapter. Covers enterprise-safe tool use, knowledge graph",
-      "path": "claude/SKILL.md.tmpl",
+      "path": "skills/claude/SKILL.md.tmpl",
       "agents": [
         "_infrastructure"
       ]
@@ -244,7 +244,7 @@
       "name": "cloud",
       "version": "0.1.1",
       "description": "Cloud and DevOps engineer agent. Handles AWS infrastructure, DMS migrations,",
-      "path": "packages/skills/agents/cloud/SKILL.md.tmpl",
+      "path": "agents/cloud/SKILL.md.tmpl",
       "agents": [
         "_infrastructure"
       ]
@@ -253,7 +253,7 @@
       "name": "codebase-engine",
       "version": "0.1.1",
       "description": "Enterprise-safe AST knowledge graph for local codebases. Indexes source",
-      "path": "packages/skills/codebase-engine/SKILL.md.tmpl",
+      "path": "skills/codebase-engine/SKILL.md.tmpl",
       "agents": [
         "swe",
         "migration",
@@ -272,7 +272,7 @@
       "name": "codex",
       "version": "0.1.1",
       "description": "OpenAI Codex host adapter. Covers how to use this skill pack inside a",
-      "path": "codex/SKILL.md.tmpl",
+      "path": "skills/codex/SKILL.md.tmpl",
       "agents": [
         "_infrastructure"
       ]
@@ -281,7 +281,7 @@
       "name": "commit",
       "version": "0.1.1",
       "description": "Atomic commit discipline for any code change. Enforces Conventional Commits",
-      "path": "commit/SKILL.md.tmpl",
+      "path": "skills/commit/SKILL.md.tmpl",
       "agents": [
         "swe",
         "migration",
@@ -294,7 +294,7 @@
       "name": "context-restore",
       "version": "0.1.1",
       "description": "Restores previously saved local working context without relying on external services.",
-      "path": "context-restore/SKILL.md.tmpl",
+      "path": "skills/context-restore/SKILL.md.tmpl",
       "agents": [
         "_infrastructure",
         "swe",
@@ -306,7 +306,7 @@
       "name": "context-save",
       "version": "0.1.1",
       "description": "Captures local working context so a future agent session can resume safely.",
-      "path": "context-save/SKILL.md.tmpl",
+      "path": "skills/context-save/SKILL.md.tmpl",
       "agents": [
         "_infrastructure",
         "swe",
@@ -318,7 +318,7 @@
       "name": "copilot",
       "version": "0.1.1",
       "description": "GitHub Copilot host adapter. Covers how to install this skill pack into a",
-      "path": "copilot/SKILL.md.tmpl",
+      "path": "skills/copilot/SKILL.md.tmpl",
       "agents": [
         "_infrastructure"
       ]
@@ -327,7 +327,7 @@
       "name": "data",
       "version": "0.1.1",
       "description": "Data and MLOps engineer agent. Handles Databricks jobs, dbt transformations,",
-      "path": "packages/skills/agents/data/SKILL.md.tmpl",
+      "path": "agents/data/SKILL.md.tmpl",
       "agents": [
         "_infrastructure"
       ]
@@ -336,7 +336,7 @@
       "name": "design-agent",
       "version": "0.1.1",
       "description": "UI and design agent. Handles design review, implementation-ready HTML",
-      "path": "packages/skills/agents/design-agent/SKILL.md.tmpl",
+      "path": "agents/design-agent/SKILL.md.tmpl",
       "agents": [
         "_infrastructure"
       ]
@@ -345,7 +345,7 @@
       "name": "design-html",
       "version": "0.1.1",
       "description": "Turns approved UI design direction into implementation-ready HTML guidance.",
-      "path": "packages/skills/design-html/SKILL.md.tmpl",
+      "path": "skills/design-html/SKILL.md.tmpl",
       "agents": [
         "design-agent",
         "swe"
@@ -355,7 +355,7 @@
       "name": "design-review",
       "version": "0.1.1",
       "description": "Reviews product UI and interaction quality for practical design issues.",
-      "path": "packages/skills/design-review/SKILL.md.tmpl",
+      "path": "skills/design-review/SKILL.md.tmpl",
       "agents": [
         "design-agent",
         "swe",
@@ -366,7 +366,7 @@
       "name": "diagram",
       "version": "0.1.1",
       "description": "Creates text-first architecture and workflow diagrams from local project context.",
-      "path": "packages/skills/diagram/SKILL.md.tmpl",
+      "path": "skills/diagram/SKILL.md.tmpl",
       "agents": [
         "spec-agent",
         "design-agent",
@@ -378,7 +378,7 @@
       "name": "diagram-agent",
       "version": "0.1.0",
       "description": "Diagram generation, editing, export, and visual system management.",
-      "path": "packages/skills/agents/diagram-agent/SKILL.md.tmpl",
+      "path": "agents/diagram-agent/SKILL.md.tmpl",
       "agents": [
         "_infrastructure"
       ]
@@ -387,7 +387,7 @@
       "name": "diagram-export",
       "version": "0.1.0",
       "description": "Export Draw.io diagrams to PNG, SVG, PDF with styling options.",
-      "path": "packages/skills/diagram-export/SKILL.md.tmpl",
+      "path": "skills/diagram-export/SKILL.md.tmpl",
       "agents": [
         "design-agent",
         "diagram-agent",
@@ -399,7 +399,7 @@
       "name": "diagram-generate",
       "version": "0.1.0",
       "description": "Generate Draw.io diagrams from text descriptions.",
-      "path": "packages/skills/diagram-generate/SKILL.md.tmpl",
+      "path": "skills/diagram-generate/SKILL.md.tmpl",
       "agents": [
         "design-agent",
         "diagram-agent",
@@ -411,7 +411,7 @@
       "name": "diagram-search",
       "version": "0.1.0",
       "description": "Search Draw.io shape library for icons, shapes, and templates.",
-      "path": "packages/skills/diagram-search/SKILL.md.tmpl",
+      "path": "skills/diagram-search/SKILL.md.tmpl",
       "agents": [
         "design-agent",
         "diagram-agent",
@@ -423,7 +423,7 @@
       "name": "diagram-style",
       "version": "0.1.0",
       "description": "Apply consistent styling to diagrams. Colors, fonts, themes.",
-      "path": "packages/skills/diagram-style/SKILL.md.tmpl",
+      "path": "skills/diagram-style/SKILL.md.tmpl",
       "agents": [
         "design-agent",
         "diagram-agent"
@@ -433,7 +433,7 @@
       "name": "diagram-validate",
       "version": "0.1.0",
       "description": "Validate diagram completeness and design patterns.",
-      "path": "packages/skills/diagram-validate/SKILL.md.tmpl",
+      "path": "skills/diagram-validate/SKILL.md.tmpl",
       "agents": [
         "diagram-agent",
         "qa-agent",
@@ -445,7 +445,7 @@
       "name": "document-generate",
       "version": "0.1.1",
       "description": "Generates missing local project documentation from code-backed evidence.",
-      "path": "packages/skills/document-generate/SKILL.md.tmpl",
+      "path": "skills/document-generate/SKILL.md.tmpl",
       "agents": [
         "spec-agent",
         "pm"
@@ -455,7 +455,7 @@
       "name": "document-release",
       "version": "0.1.1",
       "description": "Updates documentation after shipped behavior changes.",
-      "path": "packages/skills/document-release/SKILL.md.tmpl",
+      "path": "skills/document-release/SKILL.md.tmpl",
       "agents": [
         "pm",
         "swe",
@@ -467,7 +467,7 @@
       "name": "documentation",
       "version": "0.1.1",
       "description": "Documentation workflow for generating, updating, and reviewing project docs after implementation.",
-      "path": "packages/skills/documentation/SKILL.md.tmpl",
+      "path": "skills/documentation/SKILL.md.tmpl",
       "agents": [
         "qa-agent",
         "pm",
@@ -475,10 +475,49 @@
       ]
     },
     {
+      "name": "domain-data-governance",
+      "version": "0.1.1",
+      "description": "Data governance review for classification, lineage, permissions, retention,",
+      "path": "domains/domain-data-governance/SKILL.md.tmpl",
+      "agents": [
+        "data",
+        "pm"
+      ]
+    },
+    {
+      "name": "domain-experiment-design",
+      "version": "0.1.1",
+      "description": "Experiment design review for randomization, power, metrics, guardrails,",
+      "path": "domains/domain-experiment-design/SKILL.md.tmpl",
+      "agents": [
+        "data",
+        "pm"
+      ]
+    },
+    {
+      "name": "domain-mlops-databricks",
+      "version": "0.1.1",
+      "description": "Databricks MLOps project structure, model lifecycle, CI/CD, monitoring, and",
+      "path": "domains/domain-mlops-databricks/SKILL.md.tmpl",
+      "agents": [
+        "data"
+      ]
+    },
+    {
+      "name": "domain-model-interpretation",
+      "version": "0.1.1",
+      "description": "Model interpretation review for feature effects, calibration, drift,",
+      "path": "domains/domain-model-interpretation/SKILL.md.tmpl",
+      "agents": [
+        "data",
+        "pm"
+      ]
+    },
+    {
       "name": "doubt-driven-development",
       "version": "0.1.0",
       "description": "Challenge assumptions before and during implementation. Surface load-bearing doubts",
-      "path": "doubt-driven-development/SKILL.md.tmpl",
+      "path": "skills/doubt-driven-development/SKILL.md.tmpl",
       "agents": [
         "swe",
         "qa-agent",
@@ -486,10 +525,21 @@
       ]
     },
     {
+      "name": "drawio-mcp-python",
+      "version": "0.1.0",
+      "description": "Python FastMCP server for opening draw.io diagrams from XML, CSV, and Mermaid",
+      "path": "tool-providers/drawio-mcp-python/SKILL.md.tmpl",
+      "agents": [
+        "diagram-agent",
+        "swe",
+        "qa-agent"
+      ]
+    },
+    {
       "name": "guard",
       "version": "0.1.1",
       "description": "Applies stricter local safety posture for risky tools and filesystem boundaries.",
-      "path": "guard/SKILL.md.tmpl",
+      "path": "skills/guard/SKILL.md.tmpl",
       "agents": [
         "swe",
         "migration",
@@ -502,7 +552,7 @@
       "name": "health",
       "version": "0.1.1",
       "description": "Enterprise-safe code health dashboard. Detects and runs approved local quality checks",
-      "path": "health/SKILL.md.tmpl",
+      "path": "skills/health/SKILL.md.tmpl",
       "agents": [
         "swe",
         "qa-agent",
@@ -514,7 +564,7 @@
       "name": "interviewer",
       "version": "0.1.1",
       "description": "Technical interviewer agent. Conducts interviews grounded in the actual",
-      "path": "packages/skills/agents/interviewer/SKILL.md.tmpl",
+      "path": "agents/interviewer/SKILL.md.tmpl",
       "agents": [
         "_infrastructure"
       ]
@@ -523,7 +573,7 @@
       "name": "investigate",
       "version": "0.1.1",
       "description": "Root-cause investigation workflow for bugs, failing tests, broken integrations, and unexpected behavior.",
-      "path": "investigate/SKILL.md.tmpl",
+      "path": "skills/investigate/SKILL.md.tmpl",
       "agents": [
         "swe",
         "qa-agent",
@@ -534,7 +584,7 @@
       "name": "learn",
       "version": "0.1.1",
       "description": "Knowledge capture workflow. Extracts Q&A flashcards from agent session context.",
-      "path": "learn/SKILL.md.tmpl",
+      "path": "skills/learn/SKILL.md.tmpl",
       "agents": [
         "swe",
         "qa-agent",
@@ -554,7 +604,7 @@
       "name": "learnings",
       "version": "0.1.1",
       "description": "Local project learning workflow. Captures reusable project conventions, pitfalls, decisions,",
-      "path": "learnings/SKILL.md.tmpl",
+      "path": "skills/learnings/SKILL.md.tmpl",
       "agents": [
         "swe",
         "_infrastructure",
@@ -566,7 +616,7 @@
       "name": "migration",
       "version": "0.1.1",
       "description": "Migration engineer agent. Handles .NET/SQL Server modernization, SQL-to-Postgres",
-      "path": "packages/skills/agents/migration/SKILL.md.tmpl",
+      "path": "agents/migration/SKILL.md.tmpl",
       "agents": [
         "_infrastructure"
       ]
@@ -575,7 +625,7 @@
       "name": "migration-dotnet-sqlserver-modernization",
       "version": "0.1.1",
       "description": "Plan .NET Framework and SQL Server modernization using compatibility",
-      "path": "packages/skills/migration-dotnet-sqlserver-modernization/SKILL.md.tmpl",
+      "path": "skills/migration-dotnet-sqlserver-modernization/SKILL.md.tmpl",
       "agents": [
         "migration"
       ]
@@ -584,7 +634,7 @@
       "name": "migration-engineer",
       "version": "0.1.0",
       "description": "Specialist in SQL Server -> Postgres migrations.",
-      "path": "packages/skills/agents/migration-engineer/SKILL.md.tmpl",
+      "path": "agents/migration-engineer/SKILL.md.tmpl",
       "agents": [
         "_infrastructure"
       ]
@@ -593,7 +643,7 @@
       "name": "migration-review",
       "version": "0.1.1",
       "description": "Review modernization and migration plans for sequencing, rollback,",
-      "path": "packages/skills/migration-review/SKILL.md.tmpl",
+      "path": "skills/migration-review/SKILL.md.tmpl",
       "agents": [
         "migration",
         "swe",
@@ -604,7 +654,7 @@
       "name": "migration-sqlserver-assess",
       "version": "0.1.0",
       "description": "Assess SQL Server database for Postgres migration readiness.",
-      "path": "packages/skills/migration-sqlserver-assess/SKILL.md.tmpl",
+      "path": "skills/migration-sqlserver-assess/SKILL.md.tmpl",
       "agents": [
         "migration-engineer",
         "swe"
@@ -614,7 +664,7 @@
       "name": "migration-sqlserver-data",
       "version": "0.1.0",
       "description": "Execute data migration from SQL Server to Postgres.",
-      "path": "packages/skills/migration-sqlserver-data/SKILL.md.tmpl",
+      "path": "skills/migration-sqlserver-data/SKILL.md.tmpl",
       "agents": [
         "migration-engineer",
         "swe"
@@ -624,7 +674,7 @@
       "name": "migration-sqlserver-perf",
       "version": "0.1.0",
       "description": "Performance tune PostgreSQL after migration.",
-      "path": "packages/skills/migration-sqlserver-perf/SKILL.md.tmpl",
+      "path": "skills/migration-sqlserver-perf/SKILL.md.tmpl",
       "agents": [
         "migration-engineer",
         "swe"
@@ -634,7 +684,7 @@
       "name": "migration-sqlserver-schema",
       "version": "0.1.0",
       "description": "Convert SQL Server T-SQL DDL to PostgreSQL schema.",
-      "path": "packages/skills/migration-sqlserver-schema/SKILL.md.tmpl",
+      "path": "skills/migration-sqlserver-schema/SKILL.md.tmpl",
       "agents": [
         "migration-engineer",
         "swe"
@@ -644,7 +694,7 @@
       "name": "migration-sqlserver-test",
       "version": "0.1.0",
       "description": "Validate migrated data matches source.",
-      "path": "packages/skills/migration-sqlserver-test/SKILL.md.tmpl",
+      "path": "skills/migration-sqlserver-test/SKILL.md.tmpl",
       "agents": [
         "migration-engineer",
         "qa-agent"
@@ -654,7 +704,7 @@
       "name": "observability-and-instrumentation",
       "version": "0.1.0",
       "description": "Add structured observability to code and agent outputs: tracing, structured logging,",
-      "path": "packages/skills/observability-and-instrumentation/SKILL.md.tmpl",
+      "path": "skills/observability-and-instrumentation/SKILL.md.tmpl",
       "agents": [
         "swe",
         "cloud",
@@ -665,7 +715,7 @@
       "name": "orchestrate",
       "version": "0.1.1",
       "description": "Coordinator agent for large features. Decomposes work into parallel subagents",
-      "path": "packages/skills/agents/orchestrate/SKILL.md.tmpl",
+      "path": "agents/orchestrate/SKILL.md.tmpl",
       "agents": [
         "_infrastructure"
       ]
@@ -674,7 +724,7 @@
       "name": "plan-design-review",
       "version": "0.1.1",
       "description": "Reviews plans for user experience, UI quality, and product interaction risk.",
-      "path": "packages/skills/plan-design-review/SKILL.md.tmpl",
+      "path": "skills/plan-design-review/SKILL.md.tmpl",
       "agents": [
         "design-agent",
         "spec-agent",
@@ -685,7 +735,7 @@
       "name": "plan-devex-review",
       "version": "0.1.1",
       "description": "Reviews plans for developer experience, APIs, onboarding, and operability.",
-      "path": "packages/skills/plan-devex-review/SKILL.md.tmpl",
+      "path": "skills/plan-devex-review/SKILL.md.tmpl",
       "agents": [
         "qa-agent",
         "swe",
@@ -696,7 +746,7 @@
       "name": "plan-director-review",
       "version": "0.1.1",
       "description": "Director or senior-principal plan review. Reviews scope, sequencing, architecture risk,",
-      "path": "packages/skills/plan-director-review/SKILL.md.tmpl",
+      "path": "skills/plan-director-review/SKILL.md.tmpl",
       "agents": [
         "orchestrate",
         "pm"
@@ -706,7 +756,7 @@
       "name": "plan-eng-review",
       "version": "0.1.1",
       "description": "Reviews plans for architecture, data flow, reliability, and testability.",
-      "path": "packages/skills/plan-eng-review/SKILL.md.tmpl",
+      "path": "skills/plan-eng-review/SKILL.md.tmpl",
       "agents": [
         "swe",
         "migration",
@@ -718,7 +768,7 @@
       "name": "plan-pm-review",
       "version": "0.1.1",
       "description": "Product manager plan review. Reviews user value, requirements clarity, acceptance",
-      "path": "packages/skills/plan-pm-review/SKILL.md.tmpl",
+      "path": "skills/plan-pm-review/SKILL.md.tmpl",
       "agents": [
         "pm",
         "spec-agent"
@@ -728,7 +778,7 @@
       "name": "plan-review",
       "version": "0.1.1",
       "description": "Enterprise-safe plan review workflow. Reviews a proposed implementation plan for scope,",
-      "path": "packages/skills/plan-review/SKILL.md.tmpl",
+      "path": "skills/plan-review/SKILL.md.tmpl",
       "agents": [
         "swe",
         "qa-agent",
@@ -749,7 +799,7 @@
       "name": "pre-commit-review",
       "version": "0.1.0",
       "description": "Executable skill that runs pre-commit hooks on code to catch style issues",
-      "path": "pre-commit-review/SKILL.md.tmpl",
+      "path": "skills/pre-commit-review/SKILL.md.tmpl",
       "agents": [
         "swe",
         "qa-agent",
@@ -762,7 +812,7 @@
       "name": "qa",
       "version": "0.1.1",
       "description": "Enterprise-safe QA workflow. Plans and verifies user-facing or service behavior using",
-      "path": "qa/SKILL.md.tmpl",
+      "path": "skills/qa/SKILL.md.tmpl",
       "agents": [
         "qa-agent",
         "swe"
@@ -781,7 +831,7 @@
       "name": "qa-verify",
       "version": "1.0.0",
       "description": "Proof-of-done verification gate for AI coding agents. Scans changed files",
-      "path": "qa-verify/SKILL.md.tmpl",
+      "path": "skills/qa-verify/SKILL.md.tmpl",
       "agents": [
         "qa-agent",
         "swe",
@@ -793,7 +843,7 @@
       "name": "receiving-code-review",
       "version": "0.1.1",
       "description": "Handle code review feedback with technical rigor. Verify before implementing.",
-      "path": "receiving-code-review/SKILL.md.tmpl",
+      "path": "skills/receiving-code-review/SKILL.md.tmpl",
       "agents": [
         "swe",
         "qa-agent",
@@ -804,7 +854,7 @@
       "name": "reference-agent-architecture-patterns",
       "version": "0.1.0",
       "description": "Quick reference for the agent-architecture repo conventions. Covers",
-      "path": "reference-agent-architecture-patterns/SKILL.md.tmpl",
+      "path": "skills/reference-agent-architecture-patterns/SKILL.md.tmpl",
       "agents": [
         "_infrastructure",
         "swe",
@@ -816,7 +866,7 @@
       "name": "reference-skill-patterns",
       "version": "0.2.1",
       "description": "Repo-local quick reference for the skill-pack pattern this repo uses.",
-      "path": "reference-skill-patterns/SKILL.md.tmpl",
+      "path": "skills/reference-skill-patterns/SKILL.md.tmpl",
       "agents": [
         "_infrastructure",
         "swe",
@@ -827,7 +877,7 @@
       "name": "release",
       "version": "0.1.1",
       "description": "Policy-gated release preparation workflow. Checks readiness, tests, docs, risk, and rollback",
-      "path": "release/SKILL.md.tmpl",
+      "path": "skills/release/SKILL.md.tmpl",
       "agents": [
         "pm",
         "cloud",
@@ -838,7 +888,7 @@
       "name": "release-agent",
       "version": "0.1.1",
       "description": "Release engineer agent. Handles release preparation, release notes, retros,",
-      "path": "packages/skills/agents/release-agent/SKILL.md.tmpl",
+      "path": "agents/release-agent/SKILL.md.tmpl",
       "agents": [
         "_infrastructure"
       ]
@@ -847,7 +897,7 @@
       "name": "release-notes",
       "version": "0.1.1",
       "description": "Generate privacy-safe release notes from local changes, tests, and docs",
-      "path": "release-notes/SKILL.md.tmpl",
+      "path": "skills/release-notes/SKILL.md.tmpl",
       "agents": [
         "pm",
         "swe",
@@ -858,7 +908,7 @@
       "name": "retro",
       "version": "0.1.1",
       "description": "Produces a local project retrospective from commits, incidents, decisions, and outcomes.",
-      "path": "retro/SKILL.md.tmpl",
+      "path": "skills/retro/SKILL.md.tmpl",
       "agents": [
         "pm",
         "orchestrate",
@@ -869,7 +919,7 @@
       "name": "review",
       "version": "0.1.1",
       "description": "Enterprise-safe code review workflow. Reviews diffs and code paths for correctness,",
-      "path": "review/SKILL.md.tmpl",
+      "path": "skills/review/SKILL.md.tmpl",
       "agents": [
         "swe",
         "qa-agent"
@@ -879,7 +929,7 @@
       "name": "security",
       "version": "0.1.1",
       "description": "Security engineer agent. Handles security reviews, threat modeling, access",
-      "path": "packages/skills/agents/security/SKILL.md.tmpl",
+      "path": "agents/security/SKILL.md.tmpl",
       "agents": [
         "_infrastructure"
       ]
@@ -888,7 +938,7 @@
       "name": "security-review",
       "version": "0.1.1",
       "description": "Enterprise security and governance review for application code, data access, agent",
-      "path": "packages/skills/security-review/SKILL.md.tmpl",
+      "path": "skills/security-review/SKILL.md.tmpl",
       "agents": [
         "swe",
         "qa-agent",
@@ -900,7 +950,7 @@
       "name": "security-scanner",
       "version": "0.1.0",
       "description": "MCP server providing Checkov (IaC), Semgrep (source), Bandit (Python), and",
-      "path": "packages/skills/security-scanner/SKILL.md.tmpl",
+      "path": "tool-providers/security-scanner/SKILL.md.tmpl",
       "agents": [
         "security",
         "swe",
@@ -911,7 +961,7 @@
       "name": "seniorswe-concise",
       "version": "0.1.1",
       "description": "Senior SWE concise mode: forces the laziest solution that actually works.",
-      "path": "packages/skills/seniorswe-concise/SKILL.md.tmpl",
+      "path": "skills/seniorswe-concise/SKILL.md.tmpl",
       "agents": [
         "swe",
         "data"
@@ -921,7 +971,7 @@
       "name": "seniorswe-concise-audit",
       "version": "0.1.1",
       "description": "Whole-repo audit for over-engineering. Like /seniorswe-concise-review but",
-      "path": "packages/skills/seniorswe-concise-audit/SKILL.md.tmpl",
+      "path": "skills/seniorswe-concise-audit/SKILL.md.tmpl",
       "agents": [
         "swe"
       ]
@@ -930,7 +980,7 @@
       "name": "seniorswe-concise-debt",
       "version": "0.1.1",
       "description": "Harvest every `seniorswe-concise:` comment in the codebase into a debt ledger",
-      "path": "packages/skills/seniorswe-concise-debt/SKILL.md.tmpl",
+      "path": "skills/seniorswe-concise-debt/SKILL.md.tmpl",
       "agents": [
         "swe"
       ]
@@ -939,7 +989,7 @@
       "name": "seniorswe-concise-gain",
       "version": "0.1.1",
       "description": "Show measured impact of concise/lazy-mode coding as a compact scoreboard:",
-      "path": "packages/skills/seniorswe-concise-gain/SKILL.md.tmpl",
+      "path": "skills/seniorswe-concise-gain/SKILL.md.tmpl",
       "agents": [
         "swe"
       ]
@@ -948,7 +998,7 @@
       "name": "seniorswe-concise-help",
       "version": "0.1.1",
       "description": "Quick-reference card for Senior SWE Concise mode: all levels, skills, and",
-      "path": "packages/skills/seniorswe-concise-help/SKILL.md.tmpl",
+      "path": "skills/seniorswe-concise-help/SKILL.md.tmpl",
       "agents": [
         "swe",
         "_infrastructure"
@@ -958,7 +1008,7 @@
       "name": "seniorswe-concise-review",
       "version": "0.1.1",
       "description": "Code review focused exclusively on over-engineering. Finds what to delete:",
-      "path": "packages/skills/seniorswe-concise-review/SKILL.md.tmpl",
+      "path": "skills/seniorswe-concise-review/SKILL.md.tmpl",
       "agents": [
         "swe",
         "orchestrate"
@@ -968,7 +1018,7 @@
       "name": "ship",
       "version": "0.1.2",
       "description": "Prepares a human-approved PR, merge, or release handoff. Runs parallel specialist",
-      "path": "ship/SKILL.md.tmpl",
+      "path": "skills/ship/SKILL.md.tmpl",
       "agents": [
         "swe",
         "cloud",
@@ -979,7 +1029,7 @@
       "name": "skillify",
       "version": "0.1.1",
       "description": "Turns a repeated local workflow into a reusable skill folder with template files.",
-      "path": "skillify/SKILL.md.tmpl",
+      "path": "skills/skillify/SKILL.md.tmpl",
       "agents": [
         "_infrastructure",
         "swe",
@@ -990,7 +1040,7 @@
       "name": "spec",
       "version": "0.1.1",
       "description": "Converts product or engineering intent into a scoped, reviewable specification with",
-      "path": "spec/SKILL.md.tmpl",
+      "path": "skills/spec/SKILL.md.tmpl",
       "agents": [
         "spec-agent",
         "pm"
@@ -1009,17 +1059,142 @@
       "name": "stack",
       "version": "0.1.1",
       "description": "Tech stack meta-loader. Auto-detects project tech stack from repo signals and",
-      "path": "packages/adapters/stack/SKILL.md.tmpl",
+      "path": "adapters/stack/SKILL.md.tmpl",
       "agents": [
         "_infrastructure",
         "swe"
       ]
     },
     {
+      "name": "stack-aws",
+      "version": "0.1.1",
+      "description": "AWS application modernization planning with least-privilege, local-first",
+      "path": "stacks/stack-aws/SKILL.md.tmpl",
+      "agents": [
+        "cloud"
+      ]
+    },
+    {
+      "name": "stack-aws-dms",
+      "version": "0.1.1",
+      "description": "AWS DMS/SCT migration planning patterns for governed database migration",
+      "path": "stacks/stack-aws-dms/SKILL.md.tmpl",
+      "agents": [
+        "migration",
+        "cloud"
+      ]
+    },
+    {
+      "name": "stack-csharp",
+      "version": "0.1.1",
+      "description": "C# and .NET modernization guidance for projects, packages, services, tests,",
+      "path": "stacks/stack-csharp/SKILL.md.tmpl",
+      "agents": [
+        "swe",
+        "migration"
+      ]
+    },
+    {
+      "name": "stack-databricks",
+      "version": "0.1.1",
+      "description": "Databricks engineering workflows for Asset Bundles, jobs, notebooks, SDK",
+      "path": "stacks/stack-databricks/SKILL.md.tmpl",
+      "agents": [
+        "data"
+      ]
+    },
+    {
+      "name": "stack-databricks-dbt",
+      "version": "0.1.1",
+      "description": "dbt on Databricks patterns for models, tests, docs, lineage, and governed",
+      "path": "stacks/stack-databricks-dbt/SKILL.md.tmpl",
+      "agents": [
+        "data"
+      ]
+    },
+    {
+      "name": "stack-legacy-frontend",
+      "version": "0.1.1",
+      "description": "Modernize legacy frontend stacks such as Knockout, YUI, old jQuery widgets,",
+      "path": "stacks/stack-legacy-frontend/SKILL.md.tmpl",
+      "agents": [
+        "migration",
+        "swe"
+      ]
+    },
+    {
+      "name": "stack-postgres",
+      "version": "0.1.1",
+      "description": "Postgres schema, query, migration, performance, and data-governance workflows",
+      "path": "stacks/stack-postgres/SKILL.md.tmpl",
+      "agents": [
+        "swe",
+        "migration",
+        "data"
+      ]
+    },
+    {
+      "name": "stack-python",
+      "version": "0.1.1",
+      "description": "Python service, library, and data workflow modernization with minimal",
+      "path": "stacks/stack-python/SKILL.md.tmpl",
+      "agents": [
+        "swe",
+        "data"
+      ]
+    },
+    {
+      "name": "stack-react-typescript",
+      "version": "0.1.1",
+      "description": "React and TypeScript application modernization, including codemods, Redux",
+      "path": "stacks/stack-react-typescript/SKILL.md.tmpl",
+      "agents": [
+        "swe",
+        "design-agent"
+      ]
+    },
+    {
+      "name": "stack-spring-ai",
+      "version": "0.1.1",
+      "description": "Spring-native AI application patterns using Spring AI and Spring AI examples",
+      "path": "stacks/stack-spring-ai/SKILL.md.tmpl",
+      "agents": [
+        "swe"
+      ]
+    },
+    {
+      "name": "stack-spring-boot",
+      "version": "0.1.1",
+      "description": "Spring Boot upgrade and API modernization using OpenRewrite recipes,",
+      "path": "stacks/stack-spring-boot/SKILL.md.tmpl",
+      "agents": [
+        "swe"
+      ]
+    },
+    {
+      "name": "stack-sql-server",
+      "version": "0.1.1",
+      "description": "SQL Server schema, T-SQL, stored procedure, job, and application data-access",
+      "path": "stacks/stack-sql-server/SKILL.md.tmpl",
+      "agents": [
+        "swe",
+        "migration"
+      ]
+    },
+    {
+      "name": "stack-sqlserver-to-postgres",
+      "version": "0.1.1",
+      "description": "SQL Server to Postgres migration planning with T-SQL compatibility checks,",
+      "path": "stacks/stack-sqlserver-to-postgres/SKILL.md.tmpl",
+      "agents": [
+        "migration"
+      ]
+    },
+    {
       "name": "subagent-orchestrator",
       "version": "0.1.1",
       "description": "Plans and materializes local-only subagent manifests for scoped parallel work.",
-      "path": "subagent-orchestrator/SKILL.md.tmpl",
+      "path": "skills/subagent-orchestrator/SKILL.md.tmpl",
       "agents": [
         "orchestrate"
       ]
@@ -1037,7 +1212,7 @@
       "name": "systematic-debugging",
       "version": "0.1.1",
       "description": "Exhaustive root-cause investigation for complex bugs stuck after multiple fix attempts.",
-      "path": "systematic-debugging/SKILL.md.tmpl",
+      "path": "skills/systematic-debugging/SKILL.md.tmpl",
       "agents": [
         "swe",
         "qa-agent",
@@ -1051,7 +1226,7 @@
       "name": "test",
       "version": "0.1.1",
       "description": "Designs and runs approved automated tests, including Playwright or Selenium when enabled by policy.",
-      "path": "test/SKILL.md.tmpl",
+      "path": "skills/test/SKILL.md.tmpl",
       "agents": [
         "swe",
         "qa-agent"
@@ -1061,7 +1236,7 @@
       "name": "token-optimizer",
       "version": "0.1.1",
       "description": "Token reduction for Python objects, API responses, logs, diffs, and code",
-      "path": "packages/skills/token-optimizer/SKILL.md.tmpl",
+      "path": "skills/token-optimizer/SKILL.md.tmpl",
       "agents": [
         "swe",
         "qa-agent",
@@ -1073,7 +1248,7 @@
       "name": "using-agent-skills",
       "version": "0.1.1",
       "description": "Use when starting any conversation - establishes how to find and use agent-architecture skills,",
-      "path": "using-agent-skills/SKILL.md.tmpl",
+      "path": "skills/using-agent-skills/SKILL.md.tmpl",
       "agents": [
         "swe",
         "orchestrate",
@@ -1093,7 +1268,7 @@
       "name": "verification-before-completion",
       "version": "0.1.1",
       "description": "Ship-readiness verification workflow. Run verification commands and confirm output",
-      "path": "verification-before-completion/SKILL.md.tmpl",
+      "path": "skills/verification-before-completion/SKILL.md.tmpl",
       "agents": [
         "swe",
         "qa-agent",
@@ -1105,7 +1280,7 @@
       "name": "writing-skills",
       "version": "0.1.1",
       "description": "Skill creation and editing using test-driven development. Write test cases first,",
-      "path": "writing-skills/SKILL.md.tmpl",
+      "path": "skills/writing-skills/SKILL.md.tmpl",
       "agents": [
         "orchestrate"
       ]

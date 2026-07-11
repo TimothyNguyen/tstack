@@ -4,7 +4,7 @@ import path from 'node:path';
 import test from 'node:test';
 
 const root = path.resolve(import.meta.dirname, '..');
-const pkgRoot = path.join(root, 'packages', 'skills', 'codebase-engine');
+const pkgRoot = path.join(root, 'skills', 'codebase-engine');
 const srcRoot = path.join(pkgRoot, 'codebase_engine');
 
 function read(rel) {

@@ -4,9 +4,12 @@ import path from 'node:path';
 import test from 'node:test';
 
 const root = path.resolve(import.meta.dirname, '..');
-const adaptersRoot = path.join(root, 'packages', 'adapters');
-const stacksRoot = path.join(root, 'packages', 'stacks');
-const skillsRoot = path.join(root, 'packages', 'skills');
+const adaptersRoot = path.join(root, 'adapters');
+const stacksRoot = path.join(root, 'stacks');
+const domainsRoot = path.join(root, 'domains');
+const skillsRoot = path.join(root, 'skills');
+const agentsRoot = path.join(root, 'agents');
+const toolProvidersRoot = path.join(root, 'tool-providers');
 const profilesDir = path.join(root, 'profiles');
 const policy = JSON.parse(fs.readFileSync(path.join(root, 'policies', 'enterprise-default.json'), 'utf8'));
 
@@ -18,6 +21,10 @@ function skillDirs() {
   const fromRoot = fs.readdirSync(root, { withFileTypes: true })
     .filter((entry) => entry.isDirectory())
     .filter((entry) => fs.existsSync(path.join(root, entry.name, 'SKILL.md.tmpl')))
+    .map((entry) => entry.name);
+  const fromAgents = fs.readdirSync(agentsRoot, { withFileTypes: true })
+    .filter((entry) => entry.isDirectory())
+    .filter((entry) => fs.existsSync(path.join(agentsRoot, entry.name, 'SKILL.md.tmpl')))
     .map((entry) => entry.name);
   const fromAdapters = fs.readdirSync(adaptersRoot, { withFileTypes: true })
     .filter((entry) => entry.isDirectory())
@@ -33,7 +40,15 @@ function skillDirs() {
         .filter((entry) => fs.existsSync(path.join(skillsRoot, entry.name, 'SKILL.md.tmpl')))
         .map((entry) => entry.name)
     : [];
-  return new Set([...fromRoot, ...fromAdapters, ...fromStacks, ...fromSkills]);
+  const fromDomains = fs.readdirSync(domainsRoot, { withFileTypes: true })
+    .filter((entry) => entry.isDirectory())
+    .filter((entry) => fs.existsSync(path.join(domainsRoot, entry.name, 'SKILL.md.tmpl')))
+    .map((entry) => entry.name);
+  const fromToolProviders = fs.readdirSync(toolProvidersRoot, { withFileTypes: true })
+    .filter((entry) => entry.isDirectory())
+    .filter((entry) => fs.existsSync(path.join(toolProvidersRoot, entry.name, 'SKILL.md.tmpl')))
+    .map((entry) => entry.name);
+  return new Set([...fromRoot, ...fromAgents, ...fromAdapters, ...fromStacks, ...fromDomains, ...fromSkills, ...fromToolProviders]);
 }
 
 function profileFiles() {

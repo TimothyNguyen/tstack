@@ -1,6 +1,8 @@
 # Installation
 
-This is short install path. Use this doc first.
+This is the legacy `agent-architecture` install path for the transition repo.
+
+Target runtime install should move to `agent-harness`; reusable catalog content should resolve from `agent-registry`.
 
 ## Quick Start
 

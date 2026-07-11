@@ -60,7 +60,7 @@ test('install manifest sample contains required fields and no forbidden fields',
 
 test('install and upgrade docs require offline-safe upgrade behavior', () => {
   const installSpec = read('docs/install-spec.md');
-  const upgradeSkill = read('packages/skills/architecture-agent-upgrade/SKILL.md.tmpl');
+  const upgradeSkill = read('skills/architecture-agent-upgrade/SKILL.md.tmpl');
 
   for (const content of [installSpec, upgradeSkill]) {
     assert.match(content, /No public update check|Do not call public update endpoints/i);

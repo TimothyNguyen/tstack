@@ -11,7 +11,7 @@ function read(rel) {
 
 test('design skills document Figma MCP and OpenPencil MCP options', () => {
   for (const skill of ['design-review', 'design-html']) {
-    const body = read(`packages/skills/${skill}/SKILL.md.tmpl`);
+    const body = read(`skills/${skill}/SKILL.md.tmpl`);
     for (const phrase of [
       'Figma MCP',
       'https://github.com/mcp/com.figma.mcp/mcp',
@@ -34,7 +34,7 @@ test('enterprise policy gates design MCP tools and modules', () => {
 });
 
 test('adapter registry includes optional design MCP adapters', () => {
-  const registry = JSON.parse(read('packages/adapters/adapters/registry.json'));
+  const registry = JSON.parse(read('adapters/adapters/registry.json'));
   const byId = new Map(registry.adapters.map((adapter) => [adapter.id, adapter]));
 
   assert.equal(byId.get('figma-mcp')?.module, 'figmaMcp');

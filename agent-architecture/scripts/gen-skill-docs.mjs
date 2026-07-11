@@ -46,21 +46,15 @@ function render(content, tmplPath) {
 }
 
 function pluginMirrorFor(outputRel, pluginSkillsDir) {
-  // outputRel is "<skill>/SKILL.md" — mirror only top-level SKILL.md (skip
-  // sections/* and the repo-root SKILL.md which has no skill folder).
   const parts = outputRel.split('/');
-  if (parts.length === 2 && parts[1] === 'SKILL.md') {
-    return path.join(pluginSkillsDir, parts[0], 'SKILL.md');
-  }
-  // Also mirror adapters: packages/adapters/<name>/SKILL.md
-  if (parts.length === 4 && parts[0] === 'packages' && parts[1] === 'adapters' && parts[3] === 'SKILL.md') {
-    return path.join(pluginSkillsDir, parts[2], 'SKILL.md');
+  if (parts.length >= 2 && parts.at(-1) === 'SKILL.md') {
+    return path.join(pluginSkillsDir, parts.at(-2), 'SKILL.md');
   }
   return null;
 }
 
 function writeRendered(tmplRel, outputRel, { check = CHECK, root = ROOT } = {}) {
-  const pluginSkillsDir = path.join(root, 'plugins', 'agent-architecture', 'skills');
+  const pluginSkillsDir = path.join(root, 'plugins', 'agent-pack', 'skills');
   const tmplPath = path.join(root, tmplRel);
   const outputPath = path.join(root, outputRel);
   const rendered = render(fs.readFileSync(tmplPath, 'utf8').replace(/\r\n/g, '\n'), tmplRel);

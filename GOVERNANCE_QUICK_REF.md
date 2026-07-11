@@ -2,6 +2,8 @@
 
 Canonical governance doc is [GOVERNANCE_AUTOMATION.md](GOVERNANCE_AUTOMATION.md).
 
+This is transition guidance for the current repo. Target runtime governance belongs in `tstack-harness`.
+
 ## Commands
 
 ```bash
@@ -21,5 +23,6 @@ npm run governance:report
 ## Read Next
 
 - [README.md](README.md)
+- [docs/ARCHITECTURE_SPLIT.md](docs/ARCHITECTURE_SPLIT.md)
 - [GOVERNANCE_AUTOMATION.md](GOVERNANCE_AUTOMATION.md)
 - [docs/DOCS_INDEX.md](docs/DOCS_INDEX.md)

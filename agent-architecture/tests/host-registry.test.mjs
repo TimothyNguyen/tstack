@@ -4,7 +4,8 @@ import path from 'node:path';
 import test from 'node:test';
 
 const root = path.resolve(import.meta.dirname, '..');
-const adaptersRoot = path.join(root, 'packages', 'adapters');
+const adaptersRoot = path.join(root, 'adapters');
+const skillsRoot = path.join(root, 'skills');
 const registry = JSON.parse(fs.readFileSync(path.join(root, 'hosts', 'registry.json'), 'utf8'));
 
 test('host registry is declarative and repo-local', () => {
@@ -17,7 +18,8 @@ test('host registry is declarative and repo-local', () => {
     ids.add(host.id);
     const skillAtRoot = fs.existsSync(path.join(root, host.skill, 'SKILL.md.tmpl'));
     const skillAtAdapters = fs.existsSync(path.join(adaptersRoot, host.skill, 'SKILL.md.tmpl'));
-    assert.equal(skillAtRoot || skillAtAdapters, true, `${host.id} skill missing`);
+    const skillAtSkills = fs.existsSync(path.join(skillsRoot, host.skill, 'SKILL.md.tmpl'));
+    assert.equal(skillAtRoot || skillAtAdapters || skillAtSkills, true, `${host.id} skill missing`);
     assert.equal(path.isAbsolute(host.generatedPath), false, `${host.id} path must be relative`);
     assert.equal(host.generatedPath.startsWith('.architecture-agent/generated/'), true, `${host.id} path must be repo-local`);
     assert.doesNotMatch(host.generatedPath, /\.\./, `${host.id} path must not escape repo`);

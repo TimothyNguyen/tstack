@@ -6,6 +6,7 @@ import { fileURLToPath } from "node:url";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const rootDir = path.join(__dirname, "..");
+const skillRoots = ["skills", "agents", "adapters", "stacks", "domains", "tool-providers"];
 
 /**
  * Simple YAML frontmatter parser (subset we care about)
@@ -33,15 +34,20 @@ function parseFrontmatter(content) {
  */
 function getAllSkillFiles() {
   const skills = [];
-  const entries = fs.readdirSync(rootDir);
 
-  for (const entry of entries) {
-    const fullPath = path.join(rootDir, entry);
-    if (!fs.statSync(fullPath).isDirectory()) continue;
+  for (const base of skillRoots) {
+    const baseDir = path.join(rootDir, base);
+    if (!fs.existsSync(baseDir)) continue;
 
-    const skillPath = path.join(fullPath, "SKILL.md.tmpl");
-    if (fs.existsSync(skillPath)) {
-      skills.push({ name: entry, path: skillPath });
+    const entries = fs.readdirSync(baseDir);
+    for (const entry of entries) {
+      const fullPath = path.join(baseDir, entry);
+      if (!fs.statSync(fullPath).isDirectory()) continue;
+
+      const skillPath = path.join(fullPath, "SKILL.md.tmpl");
+      if (fs.existsSync(skillPath)) {
+        skills.push({ name: entry, path: skillPath, rel: `${base}/${entry}` });
+      }
     }
   }
 
@@ -69,7 +75,7 @@ test("metadata: all skills have required frontmatter fields", () => {
       missing.push(`${skill.name}: Missing 'version' field`);
     if (!fm.description)
       missing.push(`${skill.name}: Missing 'description' field`);
-    if (!("allowed-tools" in fm))
+    if (!skill.rel.startsWith("agents/") && !("allowed-tools" in fm))
       missing.push(`${skill.name}: Missing 'allowed-tools' field`);
     if (!fm.agents)
       missing.push(`${skill.name}: Missing 'agents' field`);
@@ -217,8 +223,8 @@ test("metadata: all skills are registered in package.json files", () => {
   const unregistered = [];
 
   for (const skill of skills) {
-    if (!packageJson.files.includes(skill.name + "/")) {
-      unregistered.push(skill.name);
+    if (!packageJson.files.includes(`${skill.rel.split("/")[0]}/`)) {
+      unregistered.push(skill.rel);
     }
   }
 

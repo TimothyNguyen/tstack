@@ -46,7 +46,6 @@ function stripFrontmatter(content) {
 function buildAgentsSection() {
   const agentDirs = [
     path.join(ROOT, 'agents'),
-    path.join(ROOT, 'packages', 'skills', 'agents'),
   ];
   const lines = ['## Role-Based Agents', ''];
   const entries = [];

@@ -199,9 +199,11 @@ function discoverInstallableSkillCatalog() {
   }
   const roots = [
     { abs: path.join(ROOT, 'agents'), rel: 'agents' },
-    { abs: path.join(ROOT, 'packages', 'skills'), rel: 'packages/skills' },
-    { abs: path.join(ROOT, 'packages', 'adapters'), rel: 'packages/adapters' },
-    { abs: path.join(ROOT, 'packages', 'stacks'), rel: 'packages/stacks' },
+    { abs: path.join(ROOT, 'skills'), rel: 'skills' },
+    { abs: path.join(ROOT, 'adapters'), rel: 'adapters' },
+    { abs: path.join(ROOT, 'stacks'), rel: 'stacks' },
+    { abs: path.join(ROOT, 'domains'), rel: 'domains' },
+    { abs: path.join(ROOT, 'tool-providers'), rel: 'tool-providers' },
     ...discoverAddonPackages().map((addonRoot) => ({ abs: addonRoot, rel: '' })),
   ];
 
@@ -221,7 +223,6 @@ function discoverInstallableSkillCatalog() {
         ...entry,
         kind: (
           /^agents\/[^/]+\/SKILL\.md$/.test(entry.relPath)
-          || /^packages\/skills\/agents\/[^/]+\/SKILL\.md$/.test(entry.relPath)
         ) ? 'agent' : 'skill',
       });
     }
@@ -353,7 +354,6 @@ function writeFile(rel, content) {
 function readAgentFrontmatter(agentName) {
   const roots = [
     path.join(ROOT, 'agents'),
-    path.join(ROOT, 'packages', 'skills', 'agents'),
   ];
 
   for (const base of roots) {
@@ -722,8 +722,6 @@ export {
   validateAgentNames,
   validateHostNames,
 };
-
-
 
 
 

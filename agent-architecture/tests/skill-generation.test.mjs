@@ -8,29 +8,10 @@ import { render, writeRendered } from '../scripts/gen-skill-docs.mjs';
 import { discoverTemplates, discoverSectionTemplates, parseFrontmatterAgents } from '../scripts/discover-skills.mjs';
 
 const root = path.resolve(import.meta.dirname, '..');
-const skipDirs = new Set([
-  '.git',
-  'adapters',
-  'core',
-  'docs',
-  'generated',
-  'hosts',
-  'node_modules',
-  'policies',
-  'profiles',
-  'scripts',
-  'tests',
-]);
-
 function skillDirs() {
-  const dirs = [];
-  if (fs.existsSync(path.join(root, 'SKILL.md.tmpl'))) dirs.push('.');
-  for (const entry of fs.readdirSync(root, { withFileTypes: true })) {
-    if (!entry.isDirectory()) continue;
-    if (entry.name.startsWith('.') || skipDirs.has(entry.name)) continue;
-    if (fs.existsSync(path.join(root, entry.name, 'SKILL.md.tmpl'))) dirs.push(entry.name);
-  }
-  return dirs.sort();
+  return discoverTemplates(root)
+    .map(({ output }) => (output === 'SKILL.md' ? '.' : path.dirname(output).split(path.sep).join('/')))
+    .sort();
 }
 
 function readGeneratedSkill(skill) {
@@ -61,10 +42,10 @@ test('generated skills are fresh', () => {
 
 test('core skills have template and generated output', () => {
   const coreSkills = [
-    { dir: root, name: 'health' },
-    { dir: root, name: 'test' },
-    { dir: root, name: 'review' },
-    { dir: path.join(root, 'packages', 'skills'), name: 'security-review' },
+    { dir: path.join(root, 'skills'), name: 'health' },
+    { dir: path.join(root, 'skills'), name: 'test' },
+    { dir: path.join(root, 'skills'), name: 'review' },
+    { dir: path.join(root, 'skills'), name: 'security-review' },
   ];
 
   for (const { dir, name: skill } of coreSkills) {
@@ -101,9 +82,9 @@ test('generated skills have no unresolved placeholders', () => {
 });
 
 test('test skill has automation section manifest and generated section', () => {
-  assert.equal(fs.existsSync(path.join(root, 'test', 'sections', 'manifest.json')), true);
-  assert.equal(fs.existsSync(path.join(root, 'test', 'sections', 'automation-matrix.md.tmpl')), true);
-  assert.equal(fs.existsSync(path.join(root, 'test', 'sections', 'automation-matrix.md')), true);
+  assert.equal(fs.existsSync(path.join(root, 'skills', 'test', 'sections', 'manifest.json')), true);
+  assert.equal(fs.existsSync(path.join(root, 'skills', 'test', 'sections', 'automation-matrix.md.tmpl')), true);
+  assert.equal(fs.existsSync(path.join(root, 'skills', 'test', 'sections', 'automation-matrix.md')), true);
 });
 
 test('section manifests reference existing generated files', () => {
@@ -112,7 +93,7 @@ test('section manifests reference existing generated files', () => {
     if (!fs.existsSync(manifestPath)) continue;
 
     const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
-    assert.equal(manifest.skill, skill);
+    assert.equal(manifest.skill, path.basename(skill));
     assert.equal(Array.isArray(manifest.sections), true);
 
     for (const section of manifest.sections) {
@@ -137,7 +118,7 @@ test('section templates have generated outputs', () => {
 });
 
 test('upgrade skill uses architecture-agent name', () => {
-  const skillsRoot = path.join(root, 'packages', 'skills');
+  const skillsRoot = path.join(root, 'skills');
   assert.equal(fs.existsSync(path.join(skillsRoot, 'architecture-agent-upgrade', 'SKILL.md.tmpl')), true);
   assert.equal(fs.existsSync(path.join(skillsRoot, 'architecture-agent-upgrade', 'SKILL.md')), true);
   assert.equal(fs.existsSync(path.join(root, 'tstack-upgrade')), false);
@@ -249,7 +230,7 @@ test('writeRendered write mode creates output and mirror files', () => {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'arch-genskill-write-'));
   try {
     const skillDir = path.join(dir, 'my-skill');
-    const pluginDir = path.join(dir, 'plugins', 'agent-architecture', 'skills', 'my-skill');
+    const pluginDir = path.join(dir, 'plugins', 'agent-pack', 'skills', 'my-skill');
     fs.mkdirSync(skillDir, { recursive: true });
     fs.mkdirSync(pluginDir, { recursive: true });
 
@@ -289,7 +270,7 @@ test('writeRendered check mode detects stale mirror file', () => {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'arch-genskill-mirror-'));
   try {
     const skillDir = path.join(dir, 'my-skill');
-    const pluginDir = path.join(dir, 'plugins', 'agent-architecture', 'skills', 'my-skill');
+    const pluginDir = path.join(dir, 'plugins', 'agent-pack', 'skills', 'my-skill');
     fs.mkdirSync(skillDir, { recursive: true });
     fs.mkdirSync(pluginDir, { recursive: true });
 
@@ -316,7 +297,7 @@ test('writeRendered handles root SKILL.md outputRel (null mirror path, non-check
     assert.equal(fs.existsSync(path.join(dir, 'SKILL.md')), true);
     // 'SKILL.md' has parts.length=1 → pluginMirrorFor returns null → no mirror file
     assert.equal(
-      fs.existsSync(path.join(dir, 'plugins', 'agent-architecture', 'skills', 'SKILL.md')),
+      fs.existsSync(path.join(dir, 'plugins', 'agent-pack', 'skills', 'SKILL.md')),
       false,
     );
   } finally {
@@ -363,7 +344,7 @@ test('writeRendered with 2-part non-SKILL.md outputRel skips mirror (covers part
     writeRendered('my-skill/README.md.tmpl', 'my-skill/README.md', { check: false, root: dir });
     assert.equal(fs.existsSync(path.join(dir, 'my-skill', 'README.md')), true);
     assert.equal(
-      fs.existsSync(path.join(dir, 'plugins', 'agent-architecture', 'skills', 'my-skill', 'README.md')),
+      fs.existsSync(path.join(dir, 'plugins', 'agent-pack', 'skills', 'my-skill', 'README.md')),
       false,
     );
   } finally {
@@ -374,7 +355,7 @@ test('writeRendered with 2-part non-SKILL.md outputRel skips mirror (covers part
 test('discoverSectionTemplates skips non-.md.tmpl files and directories in sections/', () => {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'arch-discover-sections-skip-'));
   try {
-    const mySkillDir = path.join(dir, 'my-skill');
+    const mySkillDir = path.join(dir, 'skills', 'my-skill');
     const sectionsDir = path.join(mySkillDir, 'sections');
     fs.mkdirSync(sectionsDir, { recursive: true });
     fs.mkdirSync(path.join(sectionsDir, 'subdir'), { recursive: true });

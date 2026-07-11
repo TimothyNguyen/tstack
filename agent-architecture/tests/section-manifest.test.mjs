@@ -18,9 +18,12 @@ const root = path.resolve(import.meta.dirname, '..');
 
 const packageRoots = [
   root,
-  path.join(root, 'packages', 'adapters'),
-  path.join(root, 'packages', 'stacks'),
-  path.join(root, 'packages', 'skills'),
+  path.join(root, 'agents'),
+  path.join(root, 'adapters'),
+  path.join(root, 'stacks'),
+  path.join(root, 'domains'),
+  path.join(root, 'skills'),
+  path.join(root, 'tool-providers'),
 ].filter(fs.existsSync);
 
 function discoverCarvedSkills() {
@@ -44,7 +47,7 @@ test('at least one skill with sections/manifest.json is discovered', () => {
 });
 
 test('known carved skills exist', () => {
-  for (const expected of ['test', 'packages/skills/security-review']) {
+  for (const expected of ['skills/test', 'skills/security-review']) {
     assert.ok(
       carvedSkills.includes(expected),
       `${expected}/sections/manifest.json missing`,

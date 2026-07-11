@@ -2,6 +2,17 @@
 
 All notable changes to TStack Governance Engine are documented in this file.
 
+## [1.1.0] - 2026-07-11
+
+### Changed
+- Renamed the agent definition package and plugin identity from `agent-architecture` to `agent-pack`.
+- Moved the consumer plugin boundary to `agent-architecture/plugins/agent-pack`.
+- Reorganized agent definitions into top-level `agents`, `adapters`, `skills`, `stacks`, `domains`, and `tool-providers` buckets for agent-registry and agent-harness consumption.
+
+### Fixed
+- Export stack-embedded `.agent.md` files as agent resources instead of stack resources.
+- Added the missing `drawio-mcp-python` tool-provider skill template and generated registry artifacts.
+
 ## [1.0.0] - 2026-06-27
 
 ### Added

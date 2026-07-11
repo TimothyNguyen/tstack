@@ -23,6 +23,7 @@ import { fileURLToPath } from "node:url";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const rootDir = path.join(__dirname, "..");
 const outputPath = path.join(rootDir, "docs", "TRAINING-DATA.jsonl");
+const TRAINING_ROOTS = ["skills", "agents", "adapters", "stacks", "domains", "tool-providers"];
 
 const CHECK_MODE = process.argv.includes("--check");
 
@@ -136,47 +137,51 @@ function extractUseCases(content) {
  */
 function collectSkills() {
   const skills = [];
-  const entries = fs.readdirSync(rootDir);
 
-  for (const entry of entries) {
-    const fullPath = path.join(rootDir, entry);
-    if (!fs.statSync(fullPath).isDirectory()) continue;
-    if (entry.startsWith(".")) continue;
+  for (const base of TRAINING_ROOTS) {
+    const baseDir = path.join(rootDir, base);
+    if (!fs.existsSync(baseDir)) continue;
 
-    const skillPath = path.join(fullPath, "SKILL.md.tmpl");
-    if (!fs.existsSync(skillPath)) continue;
+    const entries = fs.readdirSync(baseDir);
+    for (const entry of entries) {
+      const fullPath = path.join(baseDir, entry);
+      if (!fs.statSync(fullPath).isDirectory()) continue;
+      if (entry.startsWith(".")) continue;
 
-    try {
-      const content = fs.readFileSync(skillPath, "utf8");
-      const fm = parseFrontmatter(content);
+      const skillPath = path.join(fullPath, "SKILL.md.tmpl");
+      if (!fs.existsSync(skillPath)) continue;
 
-      if (fm && fm.name) {
-        // Extract description (first line only)
-        let description = "";
-        if (fm.description && typeof fm.description === "string") {
-          description = fm.description.split("\n")[0].trim();
-        }
+      try {
+        const content = fs.readFileSync(skillPath, "utf8");
+        const fm = parseFrontmatter(content);
 
-        // If description is missing, try to extract from generated SKILL.md
-        if (!description) {
-          try {
-            const skillMdPath = path.join(fullPath, "SKILL.md");
-            if (fs.existsSync(skillMdPath)) {
-              const skillMdContent = fs.readFileSync(skillMdPath, "utf8");
-              // Extract first paragraph after frontmatter
-              const match = skillMdContent.match(/^---[\s\S]*?^---\n+([\s\S]*?)(?:\n##|\n$)/m);
-              if (match && match[1]) {
-                description = match[1].split("\n")[0].trim();
-              }
-            }
-          } catch {
-            // Ignore, use empty description
+        if (fm && fm.name) {
+          // Extract description (first line only)
+          let description = "";
+          if (fm.description && typeof fm.description === "string") {
+            description = fm.description.split("\n")[0].trim();
           }
-        }
 
-        // Extract examples and use cases
-        const examples = extractExamples(content);
-        const useCases = extractUseCases(content);
+          // If description is missing, try to extract from generated SKILL.md
+          if (!description) {
+            try {
+              const skillMdPath = path.join(fullPath, "SKILL.md");
+              if (fs.existsSync(skillMdPath)) {
+                const skillMdContent = fs.readFileSync(skillMdPath, "utf8");
+                // Extract first paragraph after frontmatter
+                const match = skillMdContent.match(/^---[\s\S]*?^---\n+([\s\S]*?)(?:\n##|\n$)/m);
+                if (match && match[1]) {
+                  description = match[1].split("\n")[0].trim();
+                }
+              }
+            } catch {
+              // Ignore, use empty description
+            }
+          }
+
+          // Extract examples and use cases
+          const examples = extractExamples(content);
+          const useCases = extractUseCases(content);
 
         // Parse metadata
         let keywords = [];
@@ -193,18 +198,19 @@ function collectSkills() {
           }
         }
 
-        skills.push({
-          name: fm.name,
-          version: fm.version || "0.1.0",
-          description,
-          agents: agents.filter((a) => a !== "_infrastructure"),
-          keywords: keywords,
-          examples: examples,
-          useCases: useCases.length > 0 ? useCases : undefined,
-        });
+          skills.push({
+            name: fm.name,
+            version: fm.version || "0.1.0",
+            description,
+            agents: agents.filter((a) => a !== "_infrastructure"),
+            keywords: keywords,
+            examples: examples,
+            useCases: useCases.length > 0 ? useCases : undefined,
+          });
+        }
+      } catch (e) {
+        console.error(`Error parsing ${skillPath}:`, e.message);
       }
-    } catch (e) {
-      console.error(`Error parsing ${skillPath}:`, e.message);
     }
   }
 

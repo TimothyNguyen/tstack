@@ -8,15 +8,20 @@ const root = path.resolve(import.meta.dirname, '..');
 const skipDirs = new Set([
   '.git',
   'adapters',
+  'agents',
   'core',
   'docs',
+  'domains',
   'generated',
   'hosts',
   'node_modules',
   'policies',
   'profiles',
   'scripts',
+  'skills',
+  'stacks',
   'tests',
+  'tool-providers',
 ]);
 
 function skillDirs(scanRoot) {
@@ -32,9 +37,12 @@ function skillDirs(scanRoot) {
 
 const packageRoots = [
   root,
-  path.join(root, 'packages', 'adapters'),
-  path.join(root, 'packages', 'stacks'),
-  path.join(root, 'packages', 'skills'),
+  path.join(root, 'agents'),
+  path.join(root, 'adapters'),
+  path.join(root, 'stacks'),
+  path.join(root, 'domains'),
+  path.join(root, 'skills'),
+  path.join(root, 'tool-providers'),
 ].filter(fs.existsSync);
 
 function readSkill(scanRoot, skill) {

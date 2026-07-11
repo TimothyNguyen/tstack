@@ -4,6 +4,10 @@ This package is split by responsibility so teams can adopt the core without
 pulling in project-specific domains, optional browser tooling, or external
 integrations.
 
+This map describes the current legacy package layout. For the TStack split, see
+[TRANSITION_SPLIT.md](TRANSITION_SPLIT.md). Runtime modules should migrate toward
+`agent-harness`; catalog/content modules should migrate toward `agent-registry`.
+
 ## Core Modules
 
 | Module | Responsibility | May depend on | Must not depend on |
@@ -14,6 +18,9 @@ integrations.
 | `core/install` | Install generated artifacts into declared local targets. | Host configs, policy | Public update checks, global mutation by default |
 | `core/audit` | Write local audit events for privileged actions and policy decisions. | Policy, shared types | Secrets, full prompts, file contents |
 | `core/events` | Create AG-UI-compatible local event envelopes with redacted payloads. | Audit redaction helper | External telemetry transports |
+
+These runtime-adjacent modules should not expand here except for compatibility.
+New execution, gate, checkpoint, and trace behavior belongs in `agent-harness`.
 
 ## Host Modules
 
@@ -59,6 +66,10 @@ Optional supporting files live beside that entrypoint:
 ```
 
 This preserves the agent-architecture ergonomics while keeping the new package generic.
+
+Long-term, these should become registry content records in `agent-registry`. Keep
+this package as source only until the registry contract can represent the
+template, generated host variants, policy requirements, and agent compatibility.
 
 - `spec`
 - `autoplan`
@@ -170,6 +181,9 @@ Current profile manifests:
 
 Adapters integrate external runtimes or tools. They are optional and disabled
 unless a profile and policy enable them.
+
+Adapter catalog metadata belongs in `agent-registry`; executable adapter interfaces
+and runtime calls belong in `agent-harness`.
 
 Candidate adapters:
 

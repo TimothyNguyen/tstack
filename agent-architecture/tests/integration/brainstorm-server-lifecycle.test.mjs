@@ -8,7 +8,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = path.resolve(__dirname, '../..');
 
 test('brainstorm-server.cjs has idle timeout configuration', () => {
-  const serverPath = path.join(REPO_ROOT, 'brainstorming', 'scripts', 'server.cjs');
+  const serverPath = path.join(REPO_ROOT, 'skills', 'brainstorming', 'scripts', 'server.cjs');
   const content = fs.readFileSync(serverPath, 'utf8');
 
   assert(content.includes('BRAINSTORM_IDLE_TIMEOUT_MS'), 'should have idle timeout env var');
@@ -16,7 +16,7 @@ test('brainstorm-server.cjs has idle timeout configuration', () => {
 });
 
 test('brainstorm-server.cjs has lifecycle watchdog', () => {
-  const serverPath = path.join(REPO_ROOT, 'brainstorming', 'scripts', 'server.cjs');
+  const serverPath = path.join(REPO_ROOT, 'skills', 'brainstorming', 'scripts', 'server.cjs');
   const content = fs.readFileSync(serverPath, 'utf8');
 
   assert(content.includes('LIFECYCLE_CHECK_MS'), 'should have lifecycle check interval');
@@ -25,7 +25,7 @@ test('brainstorm-server.cjs has lifecycle watchdog', () => {
 });
 
 test('brainstorm-server.cjs has token-based authentication', () => {
-  const serverPath = path.join(REPO_ROOT, 'brainstorming', 'scripts', 'server.cjs');
+  const serverPath = path.join(REPO_ROOT, 'skills', 'brainstorming', 'scripts', 'server.cjs');
   const content = fs.readFileSync(serverPath, 'utf8');
 
   assert(content.includes('generateToken'), 'should have token generation');
@@ -34,7 +34,7 @@ test('brainstorm-server.cjs has token-based authentication', () => {
 });
 
 test('brainstorm-server.cjs has WebSocket security headers', () => {
-  const serverPath = path.join(REPO_ROOT, 'brainstorming', 'scripts', 'server.cjs');
+  const serverPath = path.join(REPO_ROOT, 'skills', 'brainstorming', 'scripts', 'server.cjs');
   const content = fs.readFileSync(serverPath, 'utf8');
 
   assert(content.includes('securityHeaders'), 'should have security headers function');
@@ -42,7 +42,7 @@ test('brainstorm-server.cjs has WebSocket security headers', () => {
 });
 
 test('brainstorm-server.cjs enforces loopback-only by default', () => {
-  const serverPath = path.join(REPO_ROOT, 'brainstorming', 'scripts', 'server.cjs');
+  const serverPath = path.join(REPO_ROOT, 'skills', 'brainstorming', 'scripts', 'server.cjs');
   const content = fs.readFileSync(serverPath, 'utf8');
 
   assert(content.includes("'127.0.0.1'"), 'should default to loopback address');
@@ -50,7 +50,7 @@ test('brainstorm-server.cjs enforces loopback-only by default', () => {
 });
 
 test('brainstorm-server.cjs has port fallback for collisions', () => {
-  const serverPath = path.join(REPO_ROOT, 'brainstorming', 'scripts', 'server.cjs');
+  const serverPath = path.join(REPO_ROOT, 'skills', 'brainstorming', 'scripts', 'server.cjs');
   const content = fs.readFileSync(serverPath, 'utf8');
 
   assert(content.includes('EADDRINUSE'), 'should handle port in use');
@@ -58,7 +58,7 @@ test('brainstorm-server.cjs has port fallback for collisions', () => {
 });
 
 test('start-server.sh creates owner-only session files', () => {
-  const scriptPath = path.join(REPO_ROOT, 'brainstorming', 'scripts', 'start-server.sh');
+  const scriptPath = path.join(REPO_ROOT, 'skills', 'brainstorming', 'scripts', 'start-server.sh');
   const content = fs.readFileSync(scriptPath, 'utf8');
 
   assert(content.includes('umask 077'), 'should set strict umask');
@@ -66,7 +66,7 @@ test('start-server.sh creates owner-only session files', () => {
 });
 
 test('start-server.sh validates idle timeout argument', () => {
-  const scriptPath = path.join(REPO_ROOT, 'brainstorming', 'scripts', 'start-server.sh');
+  const scriptPath = path.join(REPO_ROOT, 'skills', 'brainstorming', 'scripts', 'start-server.sh');
   const content = fs.readFileSync(scriptPath, 'utf8');
 
   assert(content.includes('--idle-timeout-minutes'), 'should accept idle timeout argument');
@@ -74,7 +74,7 @@ test('start-server.sh validates idle timeout argument', () => {
 });
 
 test('start-server.sh auto-foregrounds in Windows environments', () => {
-  const scriptPath = path.join(REPO_ROOT, 'brainstorming', 'scripts', 'start-server.sh');
+  const scriptPath = path.join(REPO_ROOT, 'skills', 'brainstorming', 'scripts', 'start-server.sh');
   const content = fs.readFileSync(scriptPath, 'utf8');
 
   assert(content.includes('is_windows_like_shell'), 'should detect Windows shell');
@@ -82,7 +82,7 @@ test('start-server.sh auto-foregrounds in Windows environments', () => {
 });
 
 test('start-server.sh monitors server startup', () => {
-  const scriptPath = path.join(REPO_ROOT, 'brainstorming', 'scripts', 'start-server.sh');
+  const scriptPath = path.join(REPO_ROOT, 'skills', 'brainstorming', 'scripts', 'start-server.sh');
   const content = fs.readFileSync(scriptPath, 'utf8');
 
   assert(content.includes('server-started'), 'should wait for server-started message');
@@ -90,7 +90,7 @@ test('start-server.sh monitors server startup', () => {
 });
 
 test('stop-server.sh kills process by PID', () => {
-  const scriptPath = path.join(REPO_ROOT, 'brainstorming', 'scripts', 'stop-server.sh');
+  const scriptPath = path.join(REPO_ROOT, 'skills', 'brainstorming', 'scripts', 'stop-server.sh');
   const content = fs.readFileSync(scriptPath, 'utf8');
 
   assert(content.includes('kill'), 'should kill server process');
@@ -98,7 +98,7 @@ test('stop-server.sh kills process by PID', () => {
 });
 
 test('brainstorm-server.cjs persists events to disk', () => {
-  const serverPath = path.join(REPO_ROOT, 'brainstorming', 'scripts', 'server.cjs');
+  const serverPath = path.join(REPO_ROOT, 'skills', 'brainstorming', 'scripts', 'server.cjs');
   const content = fs.readFileSync(serverPath, 'utf8');
 
   assert(content.includes('events'), 'should persist events');
@@ -107,7 +107,7 @@ test('brainstorm-server.cjs persists events to disk', () => {
 });
 
 test('brainstorm-server.cjs watches content directory', () => {
-  const serverPath = path.join(REPO_ROOT, 'brainstorming', 'scripts', 'server.cjs');
+  const serverPath = path.join(REPO_ROOT, 'skills', 'brainstorming', 'scripts', 'server.cjs');
   const content = fs.readFileSync(serverPath, 'utf8');
 
   assert(content.includes('fs.watch'), 'should watch content directory');
@@ -116,7 +116,7 @@ test('brainstorm-server.cjs watches content directory', () => {
 });
 
 test('brainstorm-server.cjs broadcasts updates to all clients', () => {
-  const serverPath = path.join(REPO_ROOT, 'brainstorming', 'scripts', 'server.cjs');
+  const serverPath = path.join(REPO_ROOT, 'skills', 'brainstorming', 'scripts', 'server.cjs');
   const content = fs.readFileSync(serverPath, 'utf8');
 
   assert(content.includes('broadcast'), 'should have broadcast function');
@@ -125,7 +125,7 @@ test('brainstorm-server.cjs broadcasts updates to all clients', () => {
 });
 
 test('brainstorm-server.cjs has cross-origin protection', () => {
-  const serverPath = path.join(REPO_ROOT, 'brainstorming', 'scripts', 'server.cjs');
+  const serverPath = path.join(REPO_ROOT, 'skills', 'brainstorming', 'scripts', 'server.cjs');
   const content = fs.readFileSync(serverPath, 'utf8');
 
   assert(content.includes('isAllowedWebSocketOrigin'), 'should validate WebSocket origin');
@@ -133,7 +133,7 @@ test('brainstorm-server.cjs has cross-origin protection', () => {
 });
 
 test('brainstorm-server.cjs prevents directory traversal', () => {
-  const serverPath = path.join(REPO_ROOT, 'brainstorming', 'scripts', 'server.cjs');
+  const serverPath = path.join(REPO_ROOT, 'skills', 'brainstorming', 'scripts', 'server.cjs');
   const content = fs.readFileSync(serverPath, 'utf8');
 
   assert(content.includes('path.basename'), 'should use path.basename to strip paths');
@@ -141,7 +141,7 @@ test('brainstorm-server.cjs prevents directory traversal', () => {
 });
 
 test('brainstorming skill documents server lifecycle', () => {
-  const skillPath = path.join(REPO_ROOT, 'brainstorming', 'SKILL.md');
+  const skillPath = path.join(REPO_ROOT, 'skills', 'brainstorming', 'SKILL.md');
   const content = fs.readFileSync(skillPath, 'utf8');
 
   assert(content.includes('server') || content.includes('WebSocket'), 'should document server');

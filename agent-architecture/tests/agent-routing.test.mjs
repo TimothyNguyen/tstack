@@ -41,27 +41,27 @@ test('core agents exist in agents/ directory', () => {
   }
 });
 
-test('specialty agents exist in packages/skills/agents/ directory', () => {
-  const specialtyDir = path.join(root, 'packages', 'skills', 'agents');
-  assert.ok(fs.existsSync(specialtyDir), 'packages/skills/agents/ directory missing');
+test('specialty agents exist in agents/ directory', () => {
+  const specialtyDir = path.join(root, 'agents');
+  assert.ok(fs.existsSync(specialtyDir), 'agents/ directory missing');
   const SPECIALTY_AGENTS = [
     'orchestrate', 'design-agent', 'migration', 'data', 'cloud',
     'interviewer', 'release-agent', 'security', 'diagram-agent', 'migration-engineer',
   ];
   for (const agent of SPECIALTY_AGENTS) {
     const skillPath = path.join(specialtyDir, agent, 'SKILL.md.tmpl');
-    assert.ok(fs.existsSync(skillPath), `packages/skills/agents/${agent}/SKILL.md.tmpl missing`);
+    assert.ok(fs.existsSync(skillPath), `agents/${agent}/SKILL.md.tmpl missing`);
   }
 });
 
-test('discoverSkillAgents returns empty agentDirs when root has no agents/ directory (covers line 71 else branch)', () => {
+test('discoverSkillAgents discovers skill buckets without agents/ directory', () => {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'arch-discover-no-agents-'));
   try {
-    fs.mkdirSync(path.join(dir, 'my-skill'), { recursive: true });
-    fs.writeFileSync(path.join(dir, 'my-skill', 'SKILL.md.tmpl'), '---\nname: my-skill\nagents: [swe]\n---\n');
+    fs.mkdirSync(path.join(dir, 'skills', 'my-skill'), { recursive: true });
+    fs.writeFileSync(path.join(dir, 'skills', 'my-skill', 'SKILL.md.tmpl'), '---\nname: my-skill\nagents: [swe]\n---\n');
     const map = discoverSkillAgents(dir);
-    assert.ok(map.has('my-skill'), 'skill should be discovered from root');
-    assert.deepEqual(map.get('my-skill'), ['swe']);
+    assert.ok(map.has('skills/my-skill'), 'skill should be discovered from skills/');
+    assert.deepEqual(map.get('skills/my-skill'), ['swe']);
   } finally {
     fs.rmSync(dir, { recursive: true, force: true });
   }

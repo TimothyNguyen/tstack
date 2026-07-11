@@ -110,16 +110,20 @@ function inferTypeFromSkillPath(relativePath) {
     return 'agent';
   }
 
-  if (normalized.includes('/packages/skills/agents/')) {
-    return 'agent';
-  }
-
-  if (normalized.includes('/packages/adapters/')) {
+  if (normalized.includes('/adapters/')) {
     return 'adapter';
   }
 
-  if (normalized.includes('/packages/stacks/')) {
+  if (normalized.includes('/stacks/')) {
     return 'stack';
+  }
+
+  if (normalized.includes('/domains/')) {
+    return 'domain';
+  }
+
+  if (normalized.includes('/tool-providers/')) {
+    return 'mcp';
   }
 
   return 'skill';
@@ -148,9 +152,11 @@ function inferComponentName(relativePath, metadata) {
 
 function inferNamespace(relativePath) {
   const normalized = toPosix(relativePath);
-  if (normalized.startsWith('agent-architecture/packages/skills/')) return 'agent-architecture/packages/skills';
-  if (normalized.startsWith('agent-architecture/packages/stacks/')) return 'agent-architecture/packages/stacks';
-  if (normalized.startsWith('agent-architecture/packages/adapters/')) return 'agent-architecture/packages/adapters';
+  if (normalized.startsWith('agent-architecture/skills/')) return 'agent-architecture/skills';
+  if (normalized.startsWith('agent-architecture/stacks/')) return 'agent-architecture/stacks';
+  if (normalized.startsWith('agent-architecture/domains/')) return 'agent-architecture/domains';
+  if (normalized.startsWith('agent-architecture/adapters/')) return 'agent-architecture/adapters';
+  if (normalized.startsWith('agent-architecture/tool-providers/')) return 'agent-architecture/tool-providers';
   if (normalized.startsWith('agent-architecture/plugins/')) return 'agent-architecture/plugins';
   if (normalized.startsWith('agent-architecture/agents/')) return 'agent-architecture/agents';
   if (normalized.startsWith('agents/')) return 'agents';

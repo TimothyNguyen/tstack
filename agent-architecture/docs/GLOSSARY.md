@@ -54,6 +54,8 @@ Generated file (committed). Auto-generated from .tmpl by `npm run build:skills`.
 **Registry**
 Auto-generated `generated/registry.json`. Maps: skill name → metadata (agents, dependencies, category, tier, keywords). Used for discovery & routing.
 
+In the TStack split, `agent-registry` owns registry/catalog records. This package's generated registry is a migration input, not the final registry API.
+
 **Catalog**
 Auto-generated `docs/skill-catalog.md`. Human-readable skill directory grouped by category & agent. ~2000 lines, links to each skill.
 
