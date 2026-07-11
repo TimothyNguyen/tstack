@@ -4,7 +4,7 @@ Use this after install. Keep it short.
 
 ## Checklist
 
-- `npx agent-architecture doctor` passes
+- `npx agent-pack doctor` passes
 - `.agent/generated/registry.json` exists
 - session-start hook exists
 - Claude, Codex, or Copilot opens without bootstrap errors

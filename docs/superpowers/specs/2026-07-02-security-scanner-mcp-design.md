@@ -8,7 +8,7 @@
 
 ## Goal
 
-Port the security scanner MCP server into agent-architecture as a first-class skill package. Containerise it with Docker. Wire it into the agent skill system so any agent (`/security`, `/swe`, `/qa-agent`) can invoke scanning tools without extra setup.
+Port the security scanner MCP server into agent-pack as a first-class skill package. Containerise it with Docker. Wire it into the agent skill system so any agent (`/security`, `/swe`, `/qa-agent`) can invoke scanning tools without extra setup.
 
 No external API keys. No Bedrock. No Ollama. No Strands. Pure MCP server + Docker.
 
@@ -27,10 +27,10 @@ No external API keys. No Bedrock. No Ollama. No Strands. Pure MCP server + Docke
 ## Target Location
 
 ```
-agent-architecture/packages/skills/security-scanner/
+agent-pack/packages/skills/security-scanner/
 ```
 
-Installed as an `@agent-arch/security-scanner` workspace package, parallel to `atlassian-docs`, `codebase-engine`, etc.
+Installed as an `@agent-pack/security-scanner` workspace package, parallel to `atlassian-docs`, `codebase-engine`, etc.
 
 ---
 
@@ -166,7 +166,7 @@ Controlled by env var, defaulting to stdio for local, SSE for container.
 
 ---
 
-## agent-architecture Integration
+## agent-pack Integration
 
 ### SKILL.md frontmatter
 
@@ -260,5 +260,5 @@ Integration tests verify real tool output shape, not exact findings (tool versio
 2. `scan_with_checkov`, `scan_with_semgrep`, `scan_with_bandit` callable via MCP
 3. `generate_security_report` produces valid SECURITY.md
 4. `pytest --cov` reports ≥95% coverage
-5. `npx agent-architecture install` wires `mcp.json` into `.agent/`
+5. `npx agent-pack install` wires `mcp.json` into `.agent/`
 6. `/security`, `/swe`, `/qa-agent` agents list `security-scanner` MCP in their configs

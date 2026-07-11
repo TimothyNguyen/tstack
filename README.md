@@ -1,10 +1,10 @@
 # TStack
 
-This repo is now a transition workspace. The cleaner product shape lives across sibling repos:
+This repo is the TStack governance workspace plus the `agent-pack` authoring package.
 
 - `agent-harness` currently in `tstack-harness`: runtime, workflow execution, governance gates, observability
 - `agent-registry` currently in `tregistry`: definitions, contracts, discovery, catalog/control plane
-- `tstack`: legacy governance tooling plus embedded `agent-architecture` content while migration finishes
+- `agent-pack/`: authored skills, agents, workflows, stacks, domains, adapters, and tool providers
 
 Use this file as entrypoint, not as full reference.
 
@@ -41,7 +41,7 @@ Useful commands:
 - `generated/` generated governance inventory
 - `docs/` human navigation docs
 - `agents/` top-level governance agent
-- `agent-architecture/` embedded package, examples, and package-specific docs
+- `agent-pack/` authored agent-pack content plus package-specific docs
 
 ## Split Direction
 
@@ -53,11 +53,11 @@ Governance validates every step.
 Observability records every step.
 ```
 
-Runtime work belongs in `agent-harness`. Reusable skills, workflows, stacks, adapters, tool providers, domains, profiles, and agent roles belong in `agent-registry`. This repo should shrink until it can become archive or umbrella docs.
+Runtime work belongs in `agent-harness`. Reusable skills, workflows, stacks, adapters, tool providers, domains, profiles, and agent roles are authored in `agent-pack/` and exported for `agent-registry`.
 
 ## Canonical Docs
 
-- [docs/ARCHITECTURE_SPLIT.md](docs/ARCHITECTURE_SPLIT.md): source of truth for repo cleanup and migration
+- [docs/ARCHITECTURE_SPLIT.md](docs/ARCHITECTURE_SPLIT.md): source of truth for package, registry, and harness boundaries
 - [docs/REPO_ORGANIZATION.md](docs/REPO_ORGANIZATION.md): target repo layout and consumption contract
 - [GOVERNANCE_AUTOMATION.md](GOVERNANCE_AUTOMATION.md): source of truth for governance automation
 - [docs/INSTALLATION.md](docs/INSTALLATION.md): install and first run

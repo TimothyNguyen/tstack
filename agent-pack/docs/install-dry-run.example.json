@@ -1,0 +1,42 @@
+{
+  "name": "agent-pack",
+  "version": "0.1.0",
+  "mode": "repo-local",
+  "source": "agent-pack",
+  "policy": "policies/enterprise-default.json",
+  "profiles": [
+    "privacy-default",
+    "enterprise-modernization"
+  ],
+  "hosts": [
+    "claude",
+    "codex",
+    "copilot"
+  ],
+  "adapters": [
+    "seniorswe-concise",
+    "mcp",
+    "ag-ui"
+  ],
+  "writePlan": [
+    ".agent/VERSION",
+    ".agent/SKILL.md",
+    ".agent/policies/enterprise-default.json",
+    ".agent/profiles/privacy-default.json",
+    ".agent/profiles/enterprise-modernization.json",
+    ".agent/generated/claude/SKILL.md",
+    ".agent/generated/codex/SKILL.md",
+    ".agent/generated/copilot/SKILL.md",
+    ".agent/install-manifest.json"
+  ],
+  "skippedByDefault": [
+    "publicTelemetry",
+    "publicUpdateChecks",
+    "publicTunnels",
+    "publicWebScraping",
+    "cookieImport",
+    "credentialRead",
+    "databaseWrite",
+    "deploy"
+  ]
+}

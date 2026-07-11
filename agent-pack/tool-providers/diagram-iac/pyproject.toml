@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "diagram-iac"
+version = "0.1.0"
+description = "AWS architecture diagrams from YAML (IaC) via FastMCP"
+requires-python = ">=3.8"
+license = "Apache-2.0"
+authors = [{ name = "Agent Pack" }]
+
+dependencies = [
+    "fastmcp>=0.1.0",
+    "pydantic>=2.0.0",
+    "PyYAML>=6.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0",
+]
+
+
+[tool.setuptools]
+packages = []

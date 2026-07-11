@@ -1,38 +1,47 @@
-# TStack Repo Split
+# TStack Architecture
 
-This repository is a transition workspace. Canonical organization is [REPO_ORGANIZATION.md](REPO_ORGANIZATION.md).
+Canonical organization is [REPO_ORGANIZATION.md](REPO_ORGANIZATION.md).
+This repo currently hosts `agent-pack` plus governance tooling.
 
 ## Current Folders And Target Names
 
 | Target Repo | Current Folder | Role |
 | --- | --- | --- |
+| `agent-pack` | `agent-pack/` in this repo | Authored skills, agents, workflows, stacks, domains, adapters, tool providers, profiles, generated host artifacts. |
 | `agent-registry` | `C:\Users\quynh\OneDrive\Desktop\tregistry` | Definitions, contracts, discovery, registry/control-plane APIs. |
 | `agent-harness` | `C:\Users\quynh\OneDrive\Desktop\tstack-harness` | Runtime execution, policy gates, events, audit, CLI, SDK. |
-| `tstack` | this repo | Migration workspace with legacy governance and embedded `agent-architecture`. |
+| `tstack` | this repo | Governance workspace and current `agent-pack` source location. |
 
-## Target Boundary
+## Boundary
 
 ```text
+agent-pack
+  owns authored definitions: skills, agents, workflows, adapters,
+  tool-providers, stacks, domains, profiles, host artifacts, package docs
+
 agent-registry
-  owns skills, agents, workflows, adapters, tool-providers, stacks,
-  domains, profiles, schemas, generated/registry.json, docs
+  owns published registry records, contracts, discovery, schemas,
+  registry APIs, generated/registry.json
 
 agent-harness
   owns loader, planner, workflow-engine, policy-engine, approval-gates,
   mcp-client, adapter-runtime, event-bus, audit-log, test-runner, cli, sdk
 
 tstack
-  owns transition notes and compatibility exports only, then becomes archive or umbrella docs
+  owns governance checks, repo docs, compatibility exports, and split coordination
 ```
 
 ## Product Spine
 
 ```text
-agent-harness loads agent-registry.
+agent-pack authors definitions.
+agent-pack exports registry-shaped artifacts.
+agent-registry publishes versioned registry records.
+agent-harness loads registry records.
 Planner selects workflow.
 Workflow engine runs steps.
 Skills use adapter runtime and MCP client.
-Policy engine and approval gates validate each risky step.
+Policy engine and approval gates validate risky steps.
 Event bus emits traces.
 Audit log records decisions.
 Test runner verifies outputs.
@@ -42,18 +51,20 @@ Test runner verifies outputs.
 
 | Current Path | Target | Notes |
 | --- | --- | --- |
-| `agent-architecture/skills` | `agent-registry/skills` | Main skill definition catalog. |
-| `agent-architecture/agents` | `agent-registry/agents` | Role definitions; collapse specialized roles later. |
-| `agent-architecture/docs/workflows` | `agent-registry/workflows` | Workflow definitions only. |
-| `agent-architecture/adapters` | split | Definitions in `agent-registry/adapters`; execution in `agent-harness/adapter-runtime`. |
-| MCP/server package metadata | `agent-registry/tool-providers` | Tool providers are definitions; calls happen in harness. |
-| `agent-architecture/stacks` | `agent-registry/stacks` | Curated bundles. |
-| domain packs | `agent-registry/domains` | Business/domain bundles. |
-| `agent-architecture/profiles` | `agent-registry/profiles` | Profiles compose definitions and policies. |
+| Current Path | Owner | Notes |
+| --- | --- | --- |
+| `agent-pack/skills` | `agent-pack` -> `agent-registry/skills` | Authored skill source; registry receives exported records. |
+| `agent-pack/agents` | `agent-pack` -> `agent-registry/agents` | Role definitions and agent entrypoints. |
+| `agent-pack/workflows` and `agent-pack/docs/workflows` | `agent-pack` -> `agent-registry/workflows` | Declarative workflow definitions only. |
+| `agent-pack/adapters` | split | Definitions authored in `agent-pack`; runtime execution belongs in `agent-harness/adapter-runtime`. |
+| `agent-pack/tool-providers` | `agent-pack` -> `agent-registry/tool-providers` | Tool-provider definitions; calls happen in harness. |
+| `agent-pack/stacks` | `agent-pack` -> `agent-registry/stacks` | Curated technology bundles. |
+| `agent-pack/domains` | `agent-pack` -> `agent-registry/domains` | Business/domain bundles. |
+| `agent-pack/profiles` | `agent-pack` -> `agent-registry/profiles` | Profiles compose definitions and policies. |
 | metadata schemas | `agent-registry/schemas` | Registry record contracts. |
-| `agent-architecture/core`, `hooks`, `hosts`, `policies` | `agent-harness` | Runtime-adjacent behavior. |
-| root `bin/`, `scripts/`, governance docs | `agent-harness/policy-engine`, `agent-harness/approval-gates` | Wrap Node first, port after parity tests. |
-| `agent-architecture/generated`, `codebase-out`, `coverage`, `test-results`, `.agent` | generated/ignored | Never source truth. |
+| `agent-pack/core`, `hooks`, `hosts`, `policies` | `agent-harness` candidate | Runtime-adjacent behavior kept here only for current compatibility. |
+| root `bin/`, `scripts/`, governance docs | `tstack` then `agent-harness` candidate | Current governance implementation; may later become harness policy/approval gates. |
+| `agent-pack/generated`, `codebase-out`, `coverage`, `test-results`, `.agent` | generated/ignored | Never authored source. |
 
 ## Consumption Contract
 
@@ -63,9 +74,10 @@ Test runner verifies outputs.
 agent-registry/generated/registry.json
 ```
 
-It should resolve by IDs, versions, and lockfile entries. It should not require legacy `agent-architecture` directory conventions.
+It should resolve by IDs, versions, and lockfile entries. It should not require
+local `agent-pack` directory conventions.
 
-This transition repo now has a bridge command:
+This repo has a bridge command:
 
 ```bash
 npm run registry:export
@@ -77,21 +89,22 @@ It writes:
 generated/agent-registry/registry.json
 ```
 
-The output is migration input for `agent-registry`, not final source truth.
+The output is registry input for `agent-registry`. Source truth remains in
+`agent-pack/` until `agent-pack` moves to its own repo.
 
-## Migration Order
+## Split Order
 
-1. Export legacy `agent-architecture` content to `generated/agent-registry/registry.json`.
+1. Keep authoring definitions in `agent-pack/`.
 2. Make `agent-registry` import/export the same shape from real source directories.
 3. Make `agent-harness` load that registry shape and run one workflow path.
-4. Move definitions into `agent-registry`.
-5. Wrap root governance from `agent-harness` as policy/approval gates.
-6. Delete `agent-architecture` source after parity checks pass.
+4. Move `agent-pack` to its own repo when parity checks pass.
+5. Wrap root governance from `agent-harness` as policy/approval gates where useful.
+6. Keep `tstack` as governance/docs umbrella or archive after split.
 
 ## Cleanup Rules
 
 - Do not add runtime execution to `agent-registry`.
 - Do not add catalogs or stacks to `agent-harness`.
 - Do not add new product primitives to `tstack`.
-- Do not add new specialized agents in `agent-architecture`.
+- Add reusable definitions to `agent-pack`; avoid one-off project-specific agents.
 - Move by contract, not directory copy.

@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "hooks": {
+    "sessionStart": [
+      {
+        "type": "command",
+        "bash": "node \"${AGENT_PACK_ROOT}/adapters/seniorswe-concise/hooks/seniorswe-concise-activate.cjs\"",
+        "powershell": "node \"${AGENT_PACK_ROOT}\\adapters\\seniorswe-concise\\hooks\\seniorswe-concise-activate.cjs\"",
+        "timeoutSec": 5
+      }
+    ],
+    "userPromptSubmitted": [
+      {
+        "type": "command",
+        "bash": "node \"${AGENT_PACK_ROOT}/adapters/seniorswe-concise/hooks/seniorswe-concise-mode-tracker.cjs\"",
+        "powershell": "node \"${AGENT_PACK_ROOT}\\adapters\\seniorswe-concise\\hooks\\seniorswe-concise-mode-tracker.cjs\"",
+        "timeoutSec": 5
+      }
+    ]
+  }
+}

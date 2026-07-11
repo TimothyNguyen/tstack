@@ -2,10 +2,10 @@ const fs = require('fs');
 const path = require('path');
 
 const REPO_ROOT = path.join(__dirname, '..');
-const DEFAULT_INPUT = path.join(REPO_ROOT, 'agent-architecture', 'generated', 'skills.index.json');
+const DEFAULT_INPUT = path.join(REPO_ROOT, 'agent-pack', 'generated', 'skills.index.json');
 const DEFAULT_INVENTORY = path.join(REPO_ROOT, 'generated', 'governance-inventory.json');
 const DEFAULT_OUTPUT = path.join(REPO_ROOT, 'generated', 'agent-registry', 'registry.json');
-const DEFAULT_PLUGIN_OUTPUT = path.join(REPO_ROOT, 'agent-architecture', 'plugins', 'agent-pack', 'registry.json');
+const DEFAULT_PLUGIN_OUTPUT = path.join(REPO_ROOT, 'agent-pack', 'plugins', 'agent-pack', 'registry.json');
 const DEFAULT_REPOSITORY_URL = 'https://github.com/TimothyNguyen/tstack';
 
 function toPosix(value) {
@@ -52,7 +52,7 @@ function parseArgs(argv) {
 }
 
 function classifyCategory(skillPath) {
-  const normalized = skillPath.replace(/\\/g, '/').replace(/^agent-architecture\//, '');
+  const normalized = skillPath.replace(/\\/g, '/').replace(/^agent-pack\//, '');
   if (normalized.includes('/agents/') || normalized.startsWith('agents/')) return 'agent';
   if (normalized.startsWith('stacks/')) return 'stack';
   if (normalized.startsWith('domains/')) return 'domain';
@@ -72,9 +72,9 @@ function sourceSubfolder(skillPath) {
 
 function generatedHostPaths(name) {
   return {
-    claude: `agent-architecture/generated/claude/skills/${name}`,
-    codex: `agent-architecture/generated/codex/skills/${name}`,
-    copilot: `agent-architecture/generated/copilot/skills/${name}`,
+    claude: `agent-pack/generated/claude/skills/${name}`,
+    codex: `agent-pack/generated/codex/skills/${name}`,
+    copilot: `agent-pack/generated/copilot/skills/${name}`,
   };
 }
 
@@ -101,7 +101,7 @@ function skillToResource(skill, options) {
         repository: {
           url: options.repositoryUrl,
           commit: options.commit,
-          subfolder: `agent-architecture/${subfolder}`,
+          subfolder: `agent-pack/${subfolder}`,
         },
       },
       tstack: {
@@ -119,12 +119,12 @@ function skillToResource(skill, options) {
 function componentToResource(component, indexByName, options) {
   const indexed = indexByName.get(component.name) || {};
   const normalizedPath = component.path.replace(/\\/g, '/');
-  const hasAgentArchitecturePrefix = normalizedPath.startsWith('agent-architecture/');
+  const hasAgentArchitecturePrefix = normalizedPath.startsWith('agent-pack/');
   const relativePath = hasAgentArchitecturePrefix
-    ? normalizedPath.slice('agent-architecture/'.length)
+    ? normalizedPath.slice('agent-pack/'.length)
     : normalizedPath;
   const subfolder = hasAgentArchitecturePrefix
-    ? `agent-architecture/${sourceSubfolder(relativePath)}`
+    ? `agent-pack/${sourceSubfolder(relativePath)}`
     : sourceSubfolder(relativePath);
   const category = component.type === 'mcp' ? 'toolProvider' : classifyCategory(relativePath);
   const entrypoint = path.posix.basename(relativePath);

@@ -1,0 +1,20 @@
+{
+  "name": "agent-pack",
+  "interface": {
+    "displayName": "agent-pack"
+  },
+  "plugins": [
+    {
+      "name": "agent-pack",
+      "source": {
+        "source": "local",
+        "path": "./plugins/agent-pack"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "OPTIONAL"
+      },
+      "category": "Coding"
+    }
+  ]
+}

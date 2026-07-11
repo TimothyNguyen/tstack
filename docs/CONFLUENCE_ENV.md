@@ -3,15 +3,15 @@
 Confluence and Jira MCP profiles live under:
 
 ```text
-agent-architecture/tool-providers/atlassian-docs/
+agent-pack/tool-providers/atlassian-docs/
 ```
 
 The relevant env files are:
 
 | File | Purpose |
 | --- | --- |
-| `agent-architecture/tool-providers/atlassian-docs/references/safe-profile.env.example` | Safe read-only profile template. Real URLs and secrets should come from approved secret management. |
-| `agent-architecture/tool-providers/atlassian-docs/.env.dummy` | Dummy local placeholder values for examples/tests. Do not put real tokens here. |
+| `agent-pack/tool-providers/atlassian-docs/references/safe-profile.env.example` | Safe read-only profile template. Real URLs and secrets should come from approved secret management. |
+| `agent-pack/tool-providers/atlassian-docs/.env.dummy` | Dummy local placeholder values for examples/tests. Do not put real tokens here. |
 
 Expected variables:
 

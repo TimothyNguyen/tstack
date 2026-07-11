@@ -2,7 +2,7 @@
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** Port `aws-samples/sample-mcp-security-scanner` into `agent-architecture/packages/skills/security-scanner/` as a pure FastMCP server with Docker support, 95% test coverage, and agent-architecture integration for `/security`, `/swe`, and `/qa-agent`.
+**Goal:** Port `aws-samples/sample-mcp-security-scanner` into `agent-pack/packages/skills/security-scanner/` as a pure FastMCP server with Docker support, 95% test coverage, and agent-pack integration for `/security`, `/swe`, and `/qa-agent`.
 
 **Architecture:** Monolithic 1200-line `server.py` split into focused scanner modules (`checkov.py`, `semgrep.py`, `bandit.py`, `ash.py`) and a `report_generator.py`. `server.py` owns only FastMCP init, tool registration, and the `handle_exceptions` decorator. Docker multi-stage build: `base` (core tools) and `full` (+ Ruby/Node for ASH).
 
@@ -17,7 +17,7 @@
 - No Strands, no Ollama, no Bedrock, no SQLite
 - Directory scan tools write results to `.security-reports/<tool>/<timestamp>.json`
 - MCP transport: `sse` (port 8765) when `MCP_TRANSPORT=sse`, `stdio` otherwise
-- All paths below are relative to `agent-architecture/packages/skills/security-scanner/`
+- All paths below are relative to `agent-pack/packages/skills/security-scanner/`
 - Conventional Commits: `feat:`, `test:`, `chore:` prefixes
 
 ---
@@ -25,7 +25,7 @@
 ## File Map
 
 ```
-agent-architecture/packages/skills/security-scanner/
+agent-pack/packages/skills/security-scanner/
 ├── security_scanner/
 │   ├── __init__.py
 │   ├── server.py              # FastMCP instance, tool registration, handle_exceptions, main()
@@ -66,7 +66,7 @@ agent-architecture/packages/skills/security-scanner/
 ```
 
 Modify:
-- `agent-architecture/packages/skills/package.json` — add `"security-scanner/"` to `files[]`
+- `agent-pack/packages/skills/package.json` — add `"security-scanner/"` to `files[]`
 
 ---
 
@@ -90,9 +90,9 @@ Modify:
 - [ ] **Step 1: Create package directory**
 
 ```bash
-mkdir -p agent-architecture/packages/skills/security-scanner/security_scanner/scanners
-mkdir -p agent-architecture/packages/skills/security-scanner/tests/unit
-mkdir -p agent-architecture/packages/skills/security-scanner/tests/integration/fixtures
+mkdir -p agent-pack/packages/skills/security-scanner/security_scanner/scanners
+mkdir -p agent-pack/packages/skills/security-scanner/tests/unit
+mkdir -p agent-pack/packages/skills/security-scanner/tests/integration/fixtures
 ```
 
 - [ ] **Step 2: Write pyproject.toml**
@@ -291,7 +291,7 @@ docker compose up security-scanner
 - [ ] **Step 8: Commit scaffold**
 
 ```bash
-git add agent-architecture/packages/skills/security-scanner/
+git add agent-pack/packages/skills/security-scanner/
 git commit -m "chore(security-scanner): scaffold package — pyproject, SKILL.md, mcp.json"
 ```
 
@@ -443,7 +443,7 @@ class TestRunDirectoryCheckovScan:
 - [ ] **Step 2: Run tests — verify they fail**
 
 ```bash
-cd agent-architecture/packages/skills/security-scanner
+cd agent-pack/packages/skills/security-scanner
 pip install -e ".[dev]"
 pytest tests/unit/test_checkov.py -v --no-cov 2>&1 | head -20
 ```
@@ -2238,18 +2238,18 @@ git commit -m "feat(security-scanner): add Dockerfile (base+full) and docker-com
 
 ---
 
-### Task 10: Wire into agent-architecture
+### Task 10: Wire into agent-pack
 
 **Files:**
-- Modify: `agent-architecture/packages/skills/package.json` — add `"security-scanner/"` to `files[]`
+- Modify: `agent-pack/packages/skills/package.json` — add `"security-scanner/"` to `files[]`
 
 **Interfaces:**
 - Consumes: SKILL.md, mcp.json from Task 1
-- Produces: `security-scanner` skill visible in agent-architecture catalog; `npx agent-architecture install` picks up `mcp.json`
+- Produces: `security-scanner` skill visible in agent-pack catalog; `npx agent-pack install` picks up `mcp.json`
 
 - [ ] **Step 1: Add security-scanner to skills package.json**
 
-Edit `agent-architecture/packages/skills/package.json`. Add `"security-scanner/"` to the `files[]` array in alphabetical order (between `"security-review/"` and `"seniorswe-concise/"`):
+Edit `agent-pack/packages/skills/package.json`. Add `"security-scanner/"` to the `files[]` array in alphabetical order (between `"security-review/"` and `"seniorswe-concise/"`):
 
 ```json
 "security-review/",
@@ -2260,16 +2260,16 @@ Edit `agent-architecture/packages/skills/package.json`. Add `"security-scanner/"
 - [ ] **Step 2: Rebuild governance inventory and run governance check**
 
 ```bash
-cd agent-architecture/../../   # repo root (tstack/)
+cd agent-pack/../../   # repo root (tstack/)
 npm run governance:build
 ```
 
 Expected output: `Components discovered: <N>` where N is ≥693 (one more than before).
 
-- [ ] **Step 3: Run agent-architecture metadata validation**
+- [ ] **Step 3: Run agent-pack metadata validation**
 
 ```bash
-cd agent-architecture
+cd agent-pack
 npm run validate:metadata
 ```
 
@@ -2278,7 +2278,7 @@ Expected: PASS (SKILL.md has required `name`, `description`, `agents` fields).
 - [ ] **Step 4: Full unit test run with coverage gate**
 
 ```bash
-cd agent-architecture/packages/skills/security-scanner
+cd agent-pack/packages/skills/security-scanner
 pytest tests/unit/ -v
 ```
 
@@ -2288,11 +2288,11 @@ Expected: all PASS, coverage ≥ 95%.
 
 ```bash
 # From repo root
-git add agent-architecture/packages/skills/package.json \
-        agent-architecture/packages/skills/security-scanner/ \
+git add agent-pack/packages/skills/package.json \
+        agent-pack/packages/skills/security-scanner/ \
         generated/governance-inventory.json \
         generated/governance-summary.md
-git commit -m "feat(security-scanner): wire into agent-architecture skills package"
+git commit -m "feat(security-scanner): wire into agent-pack skills package"
 ```
 
 ---
@@ -2315,7 +2315,7 @@ git commit -m "feat(security-scanner): wire into agent-architecture skills packa
 | Docker base + full targets | Task 9 |
 | SSE port 8765 / stdio local | Task 9 + server.py |
 | SKILL.md with agents: [security, swe, qa-agent] | Task 1 |
-| mcp.json wired via agent-architecture install | Task 1 + Task 10 |
+| mcp.json wired via agent-pack install | Task 1 + Task 10 |
 | Wire packages/skills/package.json | Task 10 |
 
 All spec requirements covered. No gaps.

@@ -25,6 +25,6 @@ npm run governance:check
 - `scripts/check-governance.js` for consistency checks
 - `bin/governance.js` for CLI access
 
-## If You Are Installing Agent-Architecture
+## If You Are Installing agent-pack
 
 Use [docs/INSTALLATION.md](docs/INSTALLATION.md), not this file.

@@ -42,9 +42,9 @@ test('discoverComponents finds representative component types', () => {
   assert.ok(report.counts.plugin > 0);
   assert.ok(report.counts.adapter > 0);
   assert.ok(report.components.some(component => component.path === 'agents/governance/SKILL.md'));
-  assert.ok(report.components.some(component => component.path === 'agent-architecture/tool-providers/atlassian-docs/SKILL.md'));
-  assert.ok(report.components.some(component => component.path === 'agent-architecture/adapters/adapter-github/SKILL.md'));
-  assert.ok(report.components.some(component => component.path === 'agent-architecture/stacks/stack-python/SKILL.md'));
+  assert.ok(report.components.some(component => component.path === 'agent-pack/tool-providers/atlassian-docs/SKILL.md'));
+  assert.ok(report.components.some(component => component.path === 'agent-pack/adapters/adapter-github/SKILL.md'));
+  assert.ok(report.components.some(component => component.path === 'agent-pack/stacks/stack-python/SKILL.md'));
 });
 
 test('withDigest produces stable digest metadata', () => {
@@ -114,8 +114,8 @@ test('shouldSkipPath blocks known doc-noise roots', () => {
   const config = loadConfig();
   assert.equal(shouldSkipPath('graphify/worked/example', config), true);
   assert.equal(
-    shouldSkipPath('agent-architecture/stacks/stack-databricks/bundle-examples/default_python', config),
+    shouldSkipPath('agent-pack/stacks/stack-databricks/bundle-examples/default_python', config),
     true,
   );
-  assert.equal(shouldSkipPath('agent-architecture/stacks/stack-databricks/databricks-agent-skills', config), false);
+  assert.equal(shouldSkipPath('agent-pack/stacks/stack-databricks/databricks-agent-skills', config), false);
 });

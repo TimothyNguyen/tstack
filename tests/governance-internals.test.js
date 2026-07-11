@@ -29,13 +29,13 @@ test('internal path helpers cover classification branches', () => {
   assert.equal(lib.inferComponentName('foo.agent.md', {}), 'foo');
   assert.equal(lib.inferComponentName('x/SKILL.md', { name: 'named' }), 'named');
 
-  assert.equal(lib.inferNamespace('agent-architecture/skills/x/SKILL.md'), 'agent-architecture/skills');
-  assert.equal(lib.inferNamespace('agent-architecture/stacks/x/SKILL.md'), 'agent-architecture/stacks');
-  assert.equal(lib.inferNamespace('agent-architecture/adapters/x/SKILL.md'), 'agent-architecture/adapters');
-  assert.equal(lib.inferNamespace('agent-architecture/domains/x/SKILL.md'), 'agent-architecture/domains');
-  assert.equal(lib.inferNamespace('agent-architecture/tool-providers/x/SKILL.md'), 'agent-architecture/tool-providers');
-  assert.equal(lib.inferNamespace('agent-architecture/plugins/x/skills/y/SKILL.md'), 'agent-architecture/plugins');
-  assert.equal(lib.inferNamespace('agent-architecture/agents/x/SKILL.md'), 'agent-architecture/agents');
+  assert.equal(lib.inferNamespace('agent-pack/skills/x/SKILL.md'), 'agent-pack/skills');
+  assert.equal(lib.inferNamespace('agent-pack/stacks/x/SKILL.md'), 'agent-pack/stacks');
+  assert.equal(lib.inferNamespace('agent-pack/adapters/x/SKILL.md'), 'agent-pack/adapters');
+  assert.equal(lib.inferNamespace('agent-pack/domains/x/SKILL.md'), 'agent-pack/domains');
+  assert.equal(lib.inferNamespace('agent-pack/tool-providers/x/SKILL.md'), 'agent-pack/tool-providers');
+  assert.equal(lib.inferNamespace('agent-pack/plugins/x/skills/y/SKILL.md'), 'agent-pack/plugins');
+  assert.equal(lib.inferNamespace('agent-pack/agents/x/SKILL.md'), 'agent-pack/agents');
   assert.equal(lib.inferNamespace('agents/x/SKILL.md'), 'agents');
   assert.equal(lib.inferNamespace('mcp-atlassian'), 'mcps');
   assert.equal(lib.inferNamespace('README.md'), 'repo');
@@ -43,8 +43,8 @@ test('internal path helpers cover classification branches', () => {
 
 test('internal discovery helpers handle duplicates, invalid paths, and summaries', () => {
   const plugins = lib.detectPluginDirectories([
-    'agent-architecture/plugins/agent-pack',
-    'agent-architecture/plugins/agent-pack',
+    'agent-pack/plugins/agent-pack',
+    'agent-pack/plugins/agent-pack',
     'missing/plugins/not-real',
   ]);
   assert.equal(plugins.length, 1);

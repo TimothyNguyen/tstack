@@ -1,0 +1,121 @@
+# Training data for LLM skill discovery and invocation
+# One JSON object per line: skill name, description, agents, keywords, examples
+
+{"name":"adapter-ag-ui","version":"0.1.1","description":"## Enterprise Preamble","agents":["orchestrate","swe","cloud"],"keywords":[],"examples":[]}
+{"name":"adapter-agentcore","version":"0.1.1","description":"## Enterprise Preamble","agents":["orchestrate","cloud"],"keywords":[],"examples":[]}
+{"name":"adapter-databricks","version":"0.1.1","description":"## Enterprise Preamble","agents":["data"],"keywords":[],"examples":[]}
+{"name":"adapter-docker-mcp","version":"0.1.1","description":"## Enterprise Preamble","agents":["cloud","release-agent","orchestrate","swe"],"keywords":[],"examples":[],"useCases":["official docker/mcp-registry catalog.","allowed-tools:","- Read","- Grep","- Glob"]}
+{"name":"adapter-github","version":"0.1.1","description":"## Enterprise Preamble","agents":["swe","orchestrate","pm"],"keywords":[],"examples":[]}
+{"name":"adapter-google-adk","version":"0.1.1","description":"## Enterprise Preamble","agents":["orchestrate","cloud"],"keywords":[],"examples":[]}
+{"name":"adapter-langgraph","version":"0.1.1","description":"## Enterprise Preamble","agents":["orchestrate"],"keywords":[],"examples":[]}
+{"name":"adapter-mcp","version":"0.1.1","description":"## Enterprise Preamble","agents":["swe","orchestrate","cloud"],"keywords":[],"examples":[]}
+{"name":"adapter-openapi","version":"0.1.1","description":"## Enterprise Preamble","agents":["swe","spec-agent"],"keywords":[],"examples":[]}
+{"name":"adapter-seniorswe-concise","version":"0.1.1","description":"## Enterprise Preamble","agents":["swe"],"keywords":[],"examples":[]}
+{"name":"adapter-strands","version":"0.1.1","description":"## Enterprise Preamble","agents":["orchestrate","cloud"],"keywords":[],"examples":[]}
+{"name":"agent-pack-upgrade","version":"0.1.1","description":"## Enterprise Preamble","agents":[],"keywords":[],"examples":[]}
+{"name":"atlassian-docs","version":"0.2.1","description":"## Enterprise Preamble","agents":["spec-agent","pm","qa-agent","interviewer","swe"],"keywords":[],"examples":[]}
+{"name":"autoplan","version":"0.1.2","description":"## Enterprise Preamble","agents":["swe","orchestrate","spec-agent"],"keywords":[],"examples":[]}
+{"name":"benchmark","version":"0.1.1","description":"## Enterprise Preamble","agents":["qa-agent","swe","data"],"keywords":[],"examples":[]}
+{"name":"brainstorming","version":"0.1.1","description":"## Enterprise Preamble","agents":["swe","orchestrate","spec-agent","design-agent"],"keywords":[],"examples":[]}
+{"name":"canary","version":"0.1.1","description":"## Enterprise Preamble","agents":["qa-agent","cloud","release-agent"],"keywords":[],"examples":[]}
+{"name":"careful","version":"0.1.1","description":"## Enterprise Preamble","agents":["migration","cloud","security","release-agent"],"keywords":[],"examples":[],"useCases":["allowed-tools:","- Read","- Bash","agents: [migration, cloud, _infrastructure, security, release-agent]","--"]}
+{"name":"change-router","version":"0.1.2","description":"## Enterprise Preamble","agents":["orchestrate"],"keywords":[],"examples":[]}
+{"name":"chrome-devtools","version":"0.1.1","description":"## Enterprise Preamble","agents":["qa-agent","design-agent","swe"],"keywords":[],"examples":[]}
+{"name":"claude","version":"0.1.1","description":"## Enterprise Preamble","agents":[],"keywords":[],"examples":[]}
+{"name":"cloud","version":"0.1.1","description":"## Enterprise Preamble","agents":[],"keywords":[],"examples":[]}
+{"name":"codebase-engine","version":"0.1.1","description":"## Enterprise Preamble","agents":["swe","migration","data","orchestrate","qa-agent","spec-agent","cloud","design-agent","interviewer","release-agent","security"],"keywords":[],"examples":[]}
+{"name":"codex","version":"0.1.1","description":"## Enterprise Preamble","agents":[],"keywords":[],"examples":[],"useCases":["Codex-managed repo: AGENTS.md-driven skill invocation, tool availability,","environment variables, and enterprise-safe defaults.","allowed-tools:","- Read","- Grep"]}
+{"name":"commit","version":"0.1.1","description":"## Enterprise Preamble","agents":["swe","migration","data","cloud","release-agent"],"keywords":[],"examples":[],"useCases":["A function/class is added or changed and tests pass","A refactor is complete (behavior unchanged, tests still green)","A bug is fixed with a reproducing test","A config or build change is isolated"]}
+{"name":"context-restore","version":"0.1.1","description":"## Enterprise Preamble","agents":["swe","orchestrate","migration"],"keywords":[],"examples":[]}
+{"name":"context-save","version":"0.1.1","description":"## Enterprise Preamble","agents":["swe","orchestrate","migration"],"keywords":[],"examples":[]}
+{"name":"copilot","version":"0.1.1","description":"## Enterprise Preamble","agents":[],"keywords":[],"examples":[]}
+{"name":"data","version":"0.1.1","description":"## Enterprise Preamble","agents":[],"keywords":[],"examples":[]}
+{"name":"design-agent","version":"0.1.1","description":"## Enterprise Preamble","agents":[],"keywords":[],"examples":[]}
+{"name":"design-html","version":"0.1.1","description":"## Enterprise Preamble","agents":["design-agent","swe"],"keywords":[],"examples":[],"useCases":["`openPencilMcp` tool are policy-approved. MCP clients should allow","`mcp__open-pencil__*` only for this scoped design work."]}
+{"name":"design-review","version":"0.1.1","description":"## Enterprise Preamble","agents":["design-agent","swe","qa-agent"],"keywords":[],"examples":[],"useCases":["`openPencilMcp` tool are policy-approved. MCP clients should allow","`mcp__open-pencil__*` only for this scoped design work."]}
+{"name":"diagram","version":"0.1.1","description":"## Enterprise Preamble","agents":["spec-agent","design-agent","orchestrate","interviewer"],"keywords":[],"examples":[]}
+{"name":"diagram-agent","version":"0.1.0","description":"## Enterprise Preamble","agents":[],"keywords":[],"examples":["/diagram-style","/diagram-search"],"useCases":["`/diagram-agent` when user says: \"Draw the architecture\", \"Create a flowchart\", \"Design a data model\"","User wants diagrams as primary deliverable (not secondary visuals)","Diagram needs editing, styling, or multi-format export","Architecture/flow documentation is critical to spec"]}
+{"name":"diagram-export","version":"0.1.0","description":"## Enterprise Preamble","agents":["design-agent","diagram-agent","spec-agent","pm"],"keywords":[],"examples":[]}
+{"name":"diagram-generate","version":"0.1.0","description":"## Enterprise Preamble","agents":["design-agent","diagram-agent","spec-agent","orchestrate"],"keywords":[],"examples":["/diagram-agent","/diagram-validate","/diagram-export"]}
+{"name":"diagram-search","version":"0.1.0","description":"## Enterprise Preamble","agents":["design-agent","diagram-agent","spec-agent","orchestrate"],"keywords":[],"examples":[]}
+{"name":"diagram-style","version":"0.1.0","description":"## Enterprise Preamble","agents":["design-agent","diagram-agent"],"keywords":[],"examples":[]}
+{"name":"diagram-validate","version":"0.1.0","description":"## Enterprise Preamble","agents":["diagram-agent","qa-agent","design-agent","spec-agent"],"keywords":[],"examples":[]}
+{"name":"document-generate","version":"0.1.1","description":"## Enterprise Preamble","agents":["spec-agent","pm"],"keywords":[],"examples":[]}
+{"name":"document-release","version":"0.1.1","description":"## Enterprise Preamble","agents":["pm","swe","spec-agent","release-agent"],"keywords":[],"examples":[]}
+{"name":"documentation","version":"0.1.1","description":"## Enterprise Preamble","agents":["qa-agent","pm","spec-agent"],"keywords":[],"examples":[]}
+{"name":"domain-data-governance","version":"0.1.1","description":"## Enterprise Preamble","agents":["data","pm"],"keywords":[],"examples":[]}
+{"name":"domain-experiment-design","version":"0.1.1","description":"## Enterprise Preamble","agents":["data","pm"],"keywords":[],"examples":[]}
+{"name":"domain-mlops-databricks","version":"0.1.1","description":"## Enterprise Preamble","agents":["data"],"keywords":[],"examples":[]}
+{"name":"domain-model-interpretation","version":"0.1.1","description":"## Enterprise Preamble","agents":["data","pm"],"keywords":[],"examples":[]}
+{"name":"doubt-driven-development","version":"0.1.0","description":"## Enterprise Preamble","agents":["swe","qa-agent","spec-agent"],"keywords":[],"examples":[],"useCases":["Starting a task with unclear requirements","The implementation path has multiple plausible interpretations","A past assumption turned out to be wrong in this codebase","The reviewer is likely to ask \"did you consider X?\""]}
+{"name":"drawio-mcp-python","version":"0.1.0","description":"## Enterprise Preamble","agents":["diagram-agent","swe","qa-agent"],"keywords":[],"examples":[],"useCases":["local MCP tool provider compatible with the Node drawio-mcp protocol.","allowed-tools:","- Read","- Grep","- Glob"]}
+{"name":"guard","version":"0.1.1","description":"## Enterprise Preamble","agents":["swe","migration","cloud","security"],"keywords":[],"examples":[]}
+{"name":"health","version":"0.1.1","description":"## Enterprise Preamble","agents":["swe","qa-agent","cloud","security"],"keywords":[],"examples":[]}
+{"name":"interviewer","version":"0.1.1","description":"## Enterprise Preamble","agents":[],"keywords":[],"examples":[]}
+{"name":"investigate","version":"0.1.1","description":"## Enterprise Preamble","agents":["swe","qa-agent","security"],"keywords":[],"examples":[]}
+{"name":"learn","version":"0.1.1","description":"## Enterprise Preamble","agents":["swe","qa-agent","pm","spec-agent","orchestrate","data","cloud","security","design-agent","migration","release-agent","interviewer"],"keywords":[],"examples":[],"useCases":["After implementing a feature (what did we decide and why)","After debugging (what was the root cause, what does it teach)","After spec writing (key product decisions)","After any multi-agent orchestration run"]}
+{"name":"learnings","version":"0.1.1","description":"## Enterprise Preamble","agents":["swe","orchestrate","pm"],"keywords":[],"examples":[]}
+{"name":"migration","version":"0.1.1","description":"## Enterprise Preamble","agents":[],"keywords":[],"examples":[]}
+{"name":"migration-dotnet-sqlserver-modernization","version":"0.1.1","description":"## Enterprise Preamble","agents":["migration"],"keywords":[],"examples":[]}
+{"name":"migration-engineer","version":"0.1.0","description":"## Enterprise Preamble","agents":[],"keywords":[],"examples":["/migration-engineer"],"useCases":["SQL Server -> PostgreSQL migration needed","❌ Simple dump/restore (use migration-review)"]}
+{"name":"migration-review","version":"0.1.1","description":"## Enterprise Preamble","agents":["migration","swe","cloud"],"keywords":[],"examples":[]}
+{"name":"migration-sqlserver-assess","version":"0.1.0","description":"## Enterprise Preamble","agents":["migration-engineer","swe"],"keywords":[],"examples":["/migration-sqlserver-assess"],"useCases":["Use `/migration-sqlserver-assess` when:","Planning SQL Server → Postgres migration","Need baseline data before architecture review","Assessing migration effort and risk","Identifying blocking incompatibilities"]}
+{"name":"migration-sqlserver-data","version":"0.1.0","description":"## Enterprise Preamble","agents":["migration-engineer","swe"],"keywords":[],"examples":["/migration-sqlserver-schema"],"useCases":["Use after `/migration-sqlserver-schema` to migrate actual data."]}
+{"name":"migration-sqlserver-perf","version":"0.1.0","description":"## Enterprise Preamble","agents":["migration-engineer","swe"],"keywords":[],"examples":["/migration-sqlserver-test"],"useCases":["Use after `/migration-sqlserver-test` to optimize performance."]}
+{"name":"migration-sqlserver-schema","version":"0.1.0","description":"## Enterprise Preamble","agents":["migration-engineer","swe"],"keywords":[],"examples":["/migration-sqlserver-assess"],"useCases":["Use after `/migration-sqlserver-assess` to convert schema."]}
+{"name":"migration-sqlserver-test","version":"0.1.0","description":"## Enterprise Preamble","agents":["migration-engineer","qa-agent"],"keywords":[],"examples":["/migration-sqlserver-data"],"useCases":["Use after `/migration-sqlserver-data` to validate correctness."]}
+{"name":"observability-and-instrumentation","version":"0.1.0","description":"## Enterprise Preamble","agents":["swe","cloud","qa-agent"],"keywords":[],"examples":[],"useCases":["Adding a new service, endpoint, or agent tool","A production failure was diagnosed by reading logs manually","An agent output is consumed by a downstream system","A background job or migration runs without progress reporting"]}
+{"name":"orchestrate","version":"0.1.1","description":"## Enterprise Preamble","agents":[],"keywords":[],"examples":[],"useCases":["Feature or refactor spans 4+ files or 3+ components.","Work can be parallelized (front-end + back-end, schema + API + tests).","A tech lead would assign it to 2–3 engineers simultaneously."]}
+{"name":"plan-design-review","version":"0.1.1","description":"## Enterprise Preamble","agents":["design-agent","spec-agent","pm"],"keywords":[],"examples":[]}
+{"name":"plan-devex-review","version":"0.1.1","description":"## Enterprise Preamble","agents":["qa-agent","swe","spec-agent"],"keywords":[],"examples":[]}
+{"name":"plan-director-review","version":"0.1.1","description":"## Enterprise Preamble","agents":["orchestrate","pm"],"keywords":[],"examples":[]}
+{"name":"plan-eng-review","version":"0.1.1","description":"## Enterprise Preamble","agents":["swe","migration","data","cloud"],"keywords":[],"examples":[]}
+{"name":"plan-pm-review","version":"0.1.1","description":"## Enterprise Preamble","agents":["pm","spec-agent"],"keywords":[],"examples":[]}
+{"name":"plan-review","version":"0.1.1","description":"## Enterprise Preamble","agents":["swe","qa-agent","spec-agent","orchestrate"],"keywords":[],"examples":[]}
+{"name":"pm","version":"0.1.1","description":"## Enterprise Preamble","agents":[],"keywords":[],"examples":[],"useCases":["<!-- agent-skills:end -->"]}
+{"name":"pre-commit-review","version":"0.1.0","description":"## Enterprise Preamble","agents":["swe","qa-agent","orchestrate","release-agent","_linter"],"keywords":[],"examples":[]}
+{"name":"qa","version":"0.1.1","description":"## Enterprise Preamble","agents":["qa-agent","swe"],"keywords":[],"examples":[]}
+{"name":"qa-agent","version":"0.1.1","description":"## Enterprise Preamble","agents":[],"keywords":[],"examples":[],"useCases":["| `verification-before-completion` | Ship-readiness verification workflow. Run verification commands and confirm output |","<!-- agent-skills:end -->"]}
+{"name":"qa-verify","version":"1.0.0","description":"## Enterprise Preamble","agents":["qa-agent","swe","security","release-agent"],"keywords":[],"examples":[]}
+{"name":"receiving-code-review","version":"0.1.1","description":"## Enterprise Preamble","agents":["swe","qa-agent","security"],"keywords":[],"examples":[]}
+{"name":"reference-agent-pack-patterns","version":"0.1.0","description":"## Enterprise Preamble","agents":["swe","orchestrate","qa-agent"],"keywords":[],"examples":[]}
+{"name":"release","version":"0.1.1","description":"## Enterprise Preamble","agents":["pm","cloud","release-agent"],"keywords":[],"examples":[]}
+{"name":"release-agent","version":"0.1.1","description":"## Enterprise Preamble","agents":[],"keywords":[],"examples":[]}
+{"name":"release-notes","version":"0.1.1","description":"## Enterprise Preamble","agents":["pm","swe","release-agent"],"keywords":[],"examples":[]}
+{"name":"retro","version":"0.1.1","description":"## Enterprise Preamble","agents":["pm","orchestrate","release-agent"],"keywords":[],"examples":[]}
+{"name":"review","version":"0.1.1","description":"## Enterprise Preamble","agents":["swe","qa-agent"],"keywords":[],"examples":[]}
+{"name":"security","version":"0.1.1","description":"## Enterprise Preamble","agents":[],"keywords":[],"examples":[]}
+{"name":"security-review","version":"0.1.1","description":"## Enterprise Preamble","agents":["swe","qa-agent","cloud","security"],"keywords":[],"examples":[]}
+{"name":"security-scanner","version":"0.1.0","description":"## Enterprise Preamble","agents":["security","swe","qa-agent"],"keywords":[],"examples":[]}
+{"name":"seniorswe-concise","version":"0.1.1","description":"# Senior SWE: Concise Mode","agents":["swe","data"],"keywords":[],"examples":[]}
+{"name":"seniorswe-concise-audit","version":"0.1.1","description":"/seniorswe-concise-review, repo-wide. Scan the whole tree instead of a diff.","agents":["swe"],"keywords":[],"examples":[]}
+{"name":"seniorswe-concise-debt","version":"0.1.1","description":"Every deliberate shortcut made in concise mode is marked with a `seniorswe-concise:`","agents":["swe"],"keywords":[],"examples":[]}
+{"name":"seniorswe-concise-gain","version":"0.1.1","description":"# Senior SWE Concise: Impact Scoreboard","agents":["swe"],"keywords":[],"examples":[]}
+{"name":"seniorswe-concise-help","version":"0.1.1","description":"# Senior SWE Concise: Quick Reference","agents":["swe"],"keywords":[],"examples":[]}
+{"name":"seniorswe-concise-review","version":"0.1.1","description":"Review diffs for unnecessary complexity. One line per finding: location, what","agents":["swe","orchestrate"],"keywords":[],"examples":[],"useCases":["delete\", \"is this over-engineered\", \"simplify review\", or invokes","/seniorswe-concise-review. Complements correctness-focused review, this one only","allowed-tools:","- Read","- Grep"]}
+{"name":"ship","version":"0.1.2","description":"## Enterprise Preamble","agents":["swe","cloud","release-agent"],"keywords":[],"examples":[]}
+{"name":"skillify","version":"0.1.1","description":"## Enterprise Preamble","agents":["swe","orchestrate"],"keywords":[],"examples":[]}
+{"name":"spec","version":"0.1.1","description":"## Enterprise Preamble","agents":["spec-agent","pm"],"keywords":[],"examples":[]}
+{"name":"spec-agent","version":"0.1.1","description":"## Enterprise Preamble","agents":[],"keywords":[],"examples":[],"useCases":["<!-- agent-skills:end -->"]}
+{"name":"stack","version":"0.1.1","description":"## Enterprise Preamble","agents":["swe"],"keywords":[],"examples":[]}
+{"name":"stack-aws","version":"0.1.1","description":"## Enterprise Preamble","agents":["cloud"],"keywords":[],"examples":[]}
+{"name":"stack-aws-dms","version":"0.1.1","description":"## Enterprise Preamble","agents":["migration","cloud"],"keywords":[],"examples":[]}
+{"name":"stack-csharp","version":"0.1.1","description":"## Enterprise Preamble","agents":["swe","migration"],"keywords":[],"examples":[]}
+{"name":"stack-databricks","version":"0.1.1","description":"## Enterprise Preamble","agents":["data"],"keywords":[],"examples":[]}
+{"name":"stack-databricks-dbt","version":"0.1.1","description":"## Enterprise Preamble","agents":["data"],"keywords":[],"examples":[]}
+{"name":"stack-legacy-frontend","version":"0.1.1","description":"## Enterprise Preamble","agents":["migration","swe"],"keywords":[],"examples":[]}
+{"name":"stack-postgres","version":"0.1.1","description":"## Enterprise Preamble","agents":["swe","migration","data"],"keywords":[],"examples":[]}
+{"name":"stack-python","version":"0.1.1","description":"## Enterprise Preamble","agents":["swe","data"],"keywords":[],"examples":[]}
+{"name":"stack-react-typescript","version":"0.1.1","description":"## Enterprise Preamble","agents":["swe","design-agent"],"keywords":[],"examples":[]}
+{"name":"stack-spring-ai","version":"0.1.1","description":"## Enterprise Preamble","agents":["swe"],"keywords":[],"examples":[]}
+{"name":"stack-spring-boot","version":"0.1.1","description":"## Enterprise Preamble","agents":["swe"],"keywords":[],"examples":[]}
+{"name":"stack-sql-server","version":"0.1.1","description":"## Enterprise Preamble","agents":["swe","migration"],"keywords":[],"examples":[]}
+{"name":"stack-sqlserver-to-postgres","version":"0.1.1","description":"## Enterprise Preamble","agents":["migration"],"keywords":[],"examples":[]}
+{"name":"subagent-orchestrator","version":"0.1.1","description":"## Enterprise Preamble","agents":["orchestrate"],"keywords":[],"examples":[]}
+{"name":"swe","version":"0.1.1","description":"## Enterprise Preamble","agents":[],"keywords":[],"examples":[],"useCases":["| `verification-before-completion` | Ship-readiness verification workflow. Run verification commands and confirm output |","<!-- agent-skills:end -->"]}
+{"name":"systematic-debugging","version":"0.1.1","description":"## Enterprise Preamble","agents":["swe","qa-agent","security","data","cloud","migration"],"keywords":[],"examples":["/investigate","/test-driven-development"],"useCases":["Emphasizes evidence gathering, architecture questioning, and preventing self-deception.","allowed-tools:","- Read","- Grep","- Glob"]}
+{"name":"test","version":"0.1.1","description":"## Enterprise Preamble","agents":["swe","qa-agent"],"keywords":[],"examples":[]}
+{"name":"token-optimizer","version":"0.1.1","description":"## Enterprise Preamble","agents":["swe","qa-agent","data","orchestrate"],"keywords":[],"examples":[],"useCases":["API responses with null fields, empty arrays, empty dicts","Log output from pytest, cargo test, go test, Docker, CI","Git diffs with large unchanged context blocks","Code files when only signatures matter (use `--aggressive`)","Large JSON datasets (list-of-dicts → tabular, saves 50–80%)"]}
+{"name":"using-agent-skills","version":"0.1.1","description":"## Enterprise Preamble","agents":["swe","orchestrate","qa-agent","spec-agent","design-agent","pm","cloud","data","migration","security","release-agent","interviewer"],"keywords":[],"examples":[],"useCases":["allowed-tools:","- Read","- Grep","- Glob","- Bash"]}
+{"name":"verification-before-completion","version":"0.1.1","description":"## Enterprise Preamble","agents":["swe","qa-agent","security","release-agent"],"keywords":[],"examples":[]}
+{"name":"writing-skills","version":"0.1.1","description":"## Enterprise Preamble","agents":["orchestrate"],"keywords":[],"examples":[],"useCases":["Technique wasn't intuitively obvious to you","You'd reference this again across projects","Pattern applies broadly (not project-specific)","Others would benefit","One-off solutions"]}

@@ -152,13 +152,13 @@ function inferComponentName(relativePath, metadata) {
 
 function inferNamespace(relativePath) {
   const normalized = toPosix(relativePath);
-  if (normalized.startsWith('agent-architecture/skills/')) return 'agent-architecture/skills';
-  if (normalized.startsWith('agent-architecture/stacks/')) return 'agent-architecture/stacks';
-  if (normalized.startsWith('agent-architecture/domains/')) return 'agent-architecture/domains';
-  if (normalized.startsWith('agent-architecture/adapters/')) return 'agent-architecture/adapters';
-  if (normalized.startsWith('agent-architecture/tool-providers/')) return 'agent-architecture/tool-providers';
-  if (normalized.startsWith('agent-architecture/plugins/')) return 'agent-architecture/plugins';
-  if (normalized.startsWith('agent-architecture/agents/')) return 'agent-architecture/agents';
+  if (normalized.startsWith('agent-pack/skills/')) return 'agent-pack/skills';
+  if (normalized.startsWith('agent-pack/stacks/')) return 'agent-pack/stacks';
+  if (normalized.startsWith('agent-pack/domains/')) return 'agent-pack/domains';
+  if (normalized.startsWith('agent-pack/adapters/')) return 'agent-pack/adapters';
+  if (normalized.startsWith('agent-pack/tool-providers/')) return 'agent-pack/tool-providers';
+  if (normalized.startsWith('agent-pack/plugins/')) return 'agent-pack/plugins';
+  if (normalized.startsWith('agent-pack/agents/')) return 'agent-pack/agents';
   if (normalized.startsWith('agents/')) return 'agents';
   if (normalized.startsWith('mcp-')) return 'mcps';
   return 'repo';

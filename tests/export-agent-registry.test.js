@@ -33,9 +33,9 @@ test('sourceSubfolder strips skill entrypoint path', () => {
 
 test('generatedHostPaths keeps host output paths predictable', () => {
   assert.deepEqual(generatedHostPaths('spec'), {
-    claude: 'agent-architecture/generated/claude/skills/spec',
-    codex: 'agent-architecture/generated/codex/skills/spec',
-    copilot: 'agent-architecture/generated/copilot/skills/spec',
+    claude: 'agent-pack/generated/claude/skills/spec',
+    codex: 'agent-pack/generated/codex/skills/spec',
+    copilot: 'agent-pack/generated/copilot/skills/spec',
   });
 });
 
@@ -82,7 +82,7 @@ test('writeExport converts skills index to agent-registry resources', () => {
   assert.equal(payload.counts.total, 1);
   assert.equal(payload.registry.skills[0].kind, 'Skill');
   assert.equal(payload.registry.skills[0].metadata.name, 'spec');
-  assert.equal(payload.registry.skills[0].spec.source.repository.subfolder, 'agent-architecture/skills/spec');
+  assert.equal(payload.registry.skills[0].spec.source.repository.subfolder, 'agent-pack/skills/spec');
   assert.equal(payload.registry.skills[0].spec.tstack.agents[0], 'spec-agent');
 });
 
@@ -103,7 +103,7 @@ test('writeExport uses governance inventory to fill registry sections', () => {
   }));
   fs.writeFileSync(inventoryPath, JSON.stringify({
     components: [
-      { type: 'stack', name: 'stack-python', path: 'agent-architecture/stacks/stack-python/SKILL.md', description: '' },
+      { type: 'stack', name: 'stack-python', path: 'agent-pack/stacks/stack-python/SKILL.md', description: '' },
       { type: 'agent', name: 'governance', path: 'agents/governance/SKILL.md', description: '' },
     ],
   }));
@@ -119,11 +119,11 @@ test('writeExport uses governance inventory to fill registry sections', () => {
   assert.equal(payload.counts.total, 2);
   assert.equal(payload.registry.stacks.length, 1);
   assert.equal(payload.registry.agents.length, 1);
-  assert.equal(payload.registry.stacks[0].spec.source.repository.subfolder, 'agent-architecture/stacks/stack-python');
+  assert.equal(payload.registry.stacks[0].spec.source.repository.subfolder, 'agent-pack/stacks/stack-python');
   assert.equal(payload.registry.agents[0].spec.source.repository.subfolder, 'agents/governance');
 });
 
-test('componentToResource preserves root and agent-architecture paths', () => {
+test('componentToResource preserves root and agent-pack paths', () => {
   const resource = componentToResource(
     { type: 'skill', name: 'root-skill', path: 'root-skill/SKILL.md', description: '' },
     new Map(),

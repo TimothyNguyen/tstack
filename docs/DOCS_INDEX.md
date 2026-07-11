@@ -1,6 +1,6 @@
 # Docs Index
 
-This is canonical navigation map for repo docs.
+Canonical navigation map for TStack governance plus `agent-pack`.
 
 ## Primary
 

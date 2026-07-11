@@ -22,8 +22,8 @@ Add MCPs to `.agent-config.json`:
 Then:
 
 ```bash
-npx agent-architecture install --upgrade
-npx agent-architecture doctor
+npx agent-pack install --upgrade
+npx agent-pack doctor
 ```
 
 ## Typical MCPs

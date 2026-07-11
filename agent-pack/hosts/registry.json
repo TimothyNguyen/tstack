@@ -1,0 +1,60 @@
+{
+  "version": 1,
+  "defaultInstallMode": "repo-local",
+  "hosts": [
+    {
+      "id": "claude",
+      "skill": "claude",
+      "generatedPath": ".agent-pack/generated/claude",
+      "output": "markdown-skill-directory",
+      "globalMutation": false,
+      "telemetry": "disabled",
+      "egress": "disabled"
+    },
+    {
+      "id": "codex",
+      "skill": "codex",
+      "generatedPath": ".agent-pack/generated/codex",
+      "output": "markdown-skill-directory",
+      "globalMutation": false,
+      "telemetry": "disabled",
+      "egress": "disabled"
+    },
+    {
+      "id": "copilot",
+      "skill": "copilot",
+      "generatedPath": ".agent-pack/generated/copilot",
+      "output": "markdown-skill-directory",
+      "globalMutation": false,
+      "telemetry": "disabled",
+      "egress": "disabled"
+    },
+    {
+      "id": "google-adk",
+      "skill": "adapter-google-adk",
+      "generatedPath": ".agent-pack/generated/google-adk",
+      "output": "host-adapter-config",
+      "globalMutation": false,
+      "telemetry": "disabled",
+      "egress": "disabled"
+    },
+    {
+      "id": "strands",
+      "skill": "adapter-strands",
+      "generatedPath": ".agent-pack/generated/strands",
+      "output": "host-adapter-config",
+      "globalMutation": false,
+      "telemetry": "disabled",
+      "egress": "disabled"
+    },
+    {
+      "id": "agentcore",
+      "skill": "adapter-agentcore",
+      "generatedPath": ".agent-pack/generated/agentcore",
+      "output": "host-adapter-config",
+      "globalMutation": false,
+      "telemetry": "disabled",
+      "egress": "disabled"
+    }
+  ]
+}

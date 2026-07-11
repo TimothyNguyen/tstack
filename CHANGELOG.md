@@ -5,8 +5,8 @@ All notable changes to TStack Governance Engine are documented in this file.
 ## [1.1.0] - 2026-07-11
 
 ### Changed
-- Renamed the agent definition package and plugin identity from `agent-architecture` to `agent-pack`.
-- Moved the consumer plugin boundary to `agent-architecture/plugins/agent-pack`.
+- Renamed the agent definition package and plugin identity to `agent-pack`.
+- Moved the consumer plugin boundary to `agent-pack/plugins/agent-pack`.
 - Reorganized agent definitions into top-level `agents`, `adapters`, `skills`, `stacks`, `domains`, and `tool-providers` buckets for agent-registry and agent-harness consumption.
 
 ### Fixed

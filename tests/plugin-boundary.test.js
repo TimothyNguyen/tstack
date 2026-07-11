@@ -3,7 +3,7 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const path = require('node:path');
 
-const pluginRoot = path.join(__dirname, '..', 'agent-architecture', 'plugins', 'agent-pack');
+const pluginRoot = path.join(__dirname, '..', 'agent-pack', 'plugins', 'agent-pack');
 
 test('agent-pack plugin exposes manifest and registry for consumers', () => {
   const pluginJsonPath = path.join(pluginRoot, 'plugin.json');

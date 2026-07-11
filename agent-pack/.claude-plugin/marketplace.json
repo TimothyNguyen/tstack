@@ -1,0 +1,20 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "agent-pack",
+  "owner": {
+    "name": "agent-pack"
+  },
+  "plugins": [
+    {
+      "name": "agent-pack",
+      "description": "Enterprise-safe agent skill pack: spec/build/review/qa/ship workflows, anti-bloat (seniorswe-concise), and optional stacks (.NET, Databricks, Spring, AWS, Postgres, SQL Server, Python, React), domain (MLOps, governance, experiment design), and adapter (MCP, GitHub, AG-UI, OpenAPI, LangGraph) packs. No public telemetry, tunnels, scraping, or unscoped credential reads.",
+      "version": "0.1.0",
+      "author": {
+        "name": "agent-pack"
+      },
+      "source": "./plugins/agent-pack",
+      "category": "development",
+      "homepage": "https://github.com/TimothyNguyen/tstack/tree/master/agent-pack"
+    }
+  ]
+}
