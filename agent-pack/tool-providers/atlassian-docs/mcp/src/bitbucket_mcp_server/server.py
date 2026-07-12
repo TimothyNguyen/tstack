@@ -803,7 +803,7 @@ def main() -> None:
 
         from importlib.metadata import version as pkg_version
 
-        _version = pkg_version("atlassian-bitbucket-mcp")
+        _version = pkg_version("mcp-atlassian-agent")
         logger.info("Starting Bitbucket MCP Server v%s...", _version)
         logger.info("Bitbucket URL: %s", config.url)
         logger.info("Auth Type: %s", config.auth_type.value if config.auth_type else "auto")

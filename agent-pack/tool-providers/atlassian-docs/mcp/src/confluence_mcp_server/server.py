@@ -747,7 +747,7 @@ def main() -> None:
 
         from importlib.metadata import version as pkg_version
 
-        _version = pkg_version("atlassian-confluence-mcp")
+        _version = pkg_version("mcp-atlassian-agent")
         logger.info("Starting Confluence MCP Server v%s...", _version)
         logger.info("Confluence URL: %s", config.url)
         logger.info("Auth Type: %s", config.auth_type.value if config.auth_type else "auto")

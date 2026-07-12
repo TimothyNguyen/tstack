@@ -892,7 +892,7 @@ def main() -> None:
 
         from importlib.metadata import version as pkg_version
 
-        _version = pkg_version("atlassian-jira-mcp")
+        _version = pkg_version("mcp-atlassian-agent")
         logger.info("Starting Jira MCP Server v%s...", _version)
         logger.info("Jira URL: %s", config.url)
         logger.info("Auth Type: %s", config.auth_type.value if config.auth_type else "auto")
