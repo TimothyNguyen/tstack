@@ -21,6 +21,7 @@ current `agent-pack` source while extracting the registry and harness contracts.
 agent-registry       Declarative catalog and dependency resolution
 agent-harness        Execution engine, policies, checkpoints, adapters
 agent-pack           Authored skills, agents, workflows, stacks, domains
+agent-evals          Evaluation of individual runs and loop convergence
 agent-control-plane  Optional hosted UI/API for remote and team execution
 ```
 
@@ -73,6 +74,866 @@ Packs define reusable behavior.
 Adjustment from earlier transition notes: `agent-pack` owns authored Markdown,
 templates, packs, and source definitions. `agent-registry` owns normalized
 catalog records, schemas, indexes, compatibility metadata, and lockfiles.
+
+## Loop Engineering
+
+Loop Engineering is a first-class abstraction across registry and harness,
+positioned above individual workflows.
+
+```text
+Prompt -> Skill -> Workflow -> Harness -> Loop
+```
+
+A workflow describes a bounded sequence of steps. A loop repeatedly invokes one
+or more workflows until verification succeeds, a stopping condition is reached,
+or human intervention is required.
+
+Do not create a separate loop-engineering repo initially. Loop Engineering is a
+core contract shared by `agent-registry`, `agent-harness`, `agent-pack`, and
+`agent-evals`.
+
+Updated ownership:
+
+```text
+agent-registry  Skills, agents, workflows, loops, profiles, metadata
+agent-harness   Executes workflows and manages loop lifecycles
+agent-pack      Reusable implementation, review, testing, and repair loops
+agent-evals     Evaluates individual runs and loop convergence
+```
+
+### Loop Entity
+
+Registry entity hierarchy:
+
+```text
+Skill
+Agent
+Workflow
+Loop
+Profile
+Pack
+Tool
+ToolProvider
+PolicyBundle
+Verifier
+```
+
+Entity purposes:
+
+| Entity | Purpose |
+| --- | --- |
+| Skill | Reusable instructions for one type of work. |
+| Agent | Role, model preferences, tools, and behavioral constraints. |
+| Workflow | Directed execution graph with defined beginning and end. |
+| Loop | Repeated workflow execution driven by verification feedback. |
+| Profile | Environment-specific composition of packages and providers. |
+| Pack | Installable collection of registry entities. |
+| Verifier | Deterministic, model, human, or composite verification contract. |
+
+A loop is not:
+
+```python
+while tests_fail:
+    ask_agent_to_fix()
+```
+
+A loop is a versioned, policy-controlled execution specification.
+
+### Loop Specification
+
+Add `schemas/loop.schema.json`:
+
+```yaml
+apiVersion: tstack.dev/v1alpha1
+kind: Loop
+metadata:
+  id: tstack/verified-implementation
+  version: 0.1.0
+  description: >
+    Iteratively implement, review, test, and repair a feature until
+    acceptance criteria are satisfied.
+spec:
+  trigger:
+    type: manual
+  objective:
+    input: task
+    successCriteria:
+      - acceptance-criteria-satisfied
+      - required-tests-pass
+      - no-blocking-review-findings
+  workflow:
+    uses: workflow:tstack/feature-delivery@^1
+  feedback:
+    sources:
+      - step:test
+      - step:review
+      - step:security-review
+    mapping:
+      test-failure: workflow:tstack/test-repair
+      review-finding: workflow:tstack/review-repair
+      security-finding: workflow:tstack/security-repair
+  verification:
+    strategy: all
+    checks:
+      - uses: verifier:tstack/test-suite
+      - uses: verifier:tstack/acceptance-criteria
+      - uses: verifier:tstack/code-review
+      - uses: verifier:tstack/security-policy
+  termination:
+    success:
+      when: verification.passed
+    failure:
+      maxIterations: 8
+      maxDuration: 2h
+      maxTokens: 500000
+      maxCostUsd: 20
+      noProgressIterations: 2
+    escalation:
+      when:
+        - conflicting-verifiers
+        - repeated-failure
+        - policy-blocked
+        - ambiguous-requirement
+  memory:
+    strategy: structured
+    retain:
+      - decisions
+      - failed-attempts
+      - verifier-results
+      - changed-files
+      - unresolved-findings
+  isolation:
+    workspace: git-worktree
+    resetBetweenIterations: false
+  policy:
+    required:
+      - enterprise-default
+      - no-production-deploy
+```
+
+### Canonical Loop Anatomy
+
+Every loop has eight explicit elements:
+
+1. Trigger
+2. Goal
+3. Work unit
+4. Feedback
+5. Verification
+6. Memory
+7. Stopping rules
+8. Terminal state
+
+Triggers:
+
+```yaml
+trigger:
+  type: manual
+```
+
+```yaml
+trigger:
+  type: github-issue
+  filters:
+    labels: [agent-ready]
+```
+
+```yaml
+trigger:
+  type: schedule
+  cron: "0 7 * * 1-5"
+```
+
+```yaml
+trigger:
+  type: event
+  event: ci.failed
+```
+
+Goals must be testable:
+
+```yaml
+objective:
+  successCriteria:
+    - all-tests-pass
+    - no-critical-vulnerabilities
+    - latency-regression-below-5-percent
+```
+
+Avoid vague goals like:
+
+```yaml
+goal: improve the code
+```
+
+Work units should usually be workflows:
+
+```yaml
+workflow:
+  uses: workflow:tstack/investigate-fix-verify@1.2.0
+```
+
+Loops may route to different workflows:
+
+```yaml
+routing:
+  test-failure: workflow:tstack/test-repair
+  architecture-failure: workflow:tstack/redesign
+  requirement-failure: workflow:tstack/spec-refinement
+```
+
+### Verification Ladder
+
+Verification is the center of Loop Engineering. Autonomous loops are only as
+reliable as their verifiers.
+
+```text
+Level 0: Agent claims completion
+Level 1: Format/static validation
+Level 2: Deterministic tests
+Level 3: Behavioral/integration tests
+Level 4: Independent evaluator or external system
+Level 5: Human or production outcome
+```
+
+Prefer levels 2-4 for autonomous coding loops.
+
+### Loop Memory
+
+Do not forward complete history on every iteration. Maintain structured loop
+memory:
+
+```json
+{
+  "iteration": 4,
+  "objective": "Implement pagination",
+  "decisions": [
+    {
+      "decision": "Use cursor pagination",
+      "reason": "Stable ordering required"
+    }
+  ],
+  "failedApproaches": [
+    {
+      "approach": "Offset pagination",
+      "failure": "Duplicate records under concurrent writes"
+    }
+  ],
+  "openFindings": [
+    {
+      "id": "review-17",
+      "severity": "high",
+      "description": "Cursor is not cryptographically signed"
+    }
+  ],
+  "verificationHistory": [
+    {
+      "iteration": 3,
+      "passed": 84,
+      "failed": 2
+    }
+  ]
+}
+```
+
+Every loop must have bounded stopping rules:
+
+```yaml
+termination:
+  maxIterations: 6
+  maxTokens: 300000
+  maxDuration: 90m
+  noProgressIterations: 2
+```
+
+Never allow this without resource limits and a no-progress detector:
+
+```yaml
+while: objective-not-complete
+```
+
+### Registry Loop Additions
+
+Extend `agent-registry`:
+
+```text
+agent-registry/
+  schemas/
+    loop.schema.json
+    verifier.schema.json
+    loop-lock.schema.json
+  catalog/
+    loops/
+    verifiers/
+  src/
+    resolver/
+      loop-resolver.ts
+      verifier-resolver.ts
+      feedback-routing.ts
+    validation/
+      termination-validator.ts
+      verification-validator.ts
+```
+
+Registry validation rejects loops that:
+
+- Have no verification mechanism
+- Have no maximum iterations, time, tokens, or cost
+- Use the same agent as producer and sole verifier for high-risk work
+- Reference unavailable capabilities
+- Cannot produce a terminal state
+- Allow write or deployment actions without policies
+- Have circular feedback routing without progress criteria
+- Use mutable, unpinned workflow versions
+- Have no strategy for repeated failures
+- Store secrets or raw credentials in memory
+
+Example validation:
+
+```text
+areg validate loop:tstack/verified-implementation
+ERROR LE104:
+Loop has no independent verification source.
+Producer:
+  agent:tstack/implementation-agent
+Verifier:
+  agent:tstack/implementation-agent
+Recommended:
+  Use agent:tstack/reviewer or verifier:tstack/test-suite.
+```
+
+### Loop Lockfile
+
+The lockfile preserves the complete loop graph:
+
+```json
+{
+  "lockfileVersion": 1,
+  "loop": {
+    "id": "tstack/verified-implementation",
+    "version": "0.1.0",
+    "digest": "sha256:..."
+  },
+  "workflow": {
+    "id": "tstack/feature-delivery",
+    "version": "1.3.0",
+    "digest": "sha256:..."
+  },
+  "verifiers": {
+    "test-suite": {
+      "version": "1.1.0",
+      "digest": "sha256:..."
+    },
+    "code-review": {
+      "version": "0.8.2",
+      "digest": "sha256:..."
+    }
+  },
+  "termination": {
+    "maxIterations": 8,
+    "maxTokens": 500000
+  },
+  "providers": {
+    "implementation.model": "claude-code",
+    "review.model": "codex",
+    "workspace": "git-worktree"
+  }
+}
+```
+
+This makes a loop reproducible, not merely repeatable.
+
+### Harness Loop Engine
+
+Add a dedicated layer above the workflow executor:
+
+```text
+agent-harness/
+  src/
+    loop/
+      loop-controller.ts
+      loop-state-machine.ts
+      progress-evaluator.ts
+      feedback-router.ts
+      termination-engine.ts
+      memory-manager.ts
+      escalation-manager.ts
+    verification/
+      verifier.ts
+      deterministic-verifier.ts
+      model-verifier.ts
+      human-verifier.ts
+      composite-verifier.ts
+```
+
+Execution:
+
+```text
+Loop controller
+  -> Resolve current objective
+  -> Execute workflow
+  -> Collect evidence
+  -> Run independent verification
+  -> Classify findings
+  -> Measure progress
+  -> Route feedback
+  -> Continue / succeed / fail / escalate
+```
+
+Loop state machine:
+
+```text
+CREATED
+  -> VALIDATING
+  -> READY
+  -> ITERATION_PLANNING
+  -> WORKFLOW_RUNNING
+  -> VERIFYING
+  -> PASSED        -> SUCCEEDED
+  -> REPAIRABLE    -> FEEDBACK_ROUTING -> ITERATION_PLANNING
+  -> BLOCKED       -> WAITING_FOR_HUMAN
+  -> NO_PROGRESS   -> ESCALATED
+  -> LIMIT_HIT     -> EXHAUSTED
+  -> POLICY_DENY   -> BLOCKED
+```
+
+Terminal states:
+
+```text
+SUCCEEDED
+EXHAUSTED
+BLOCKED
+ESCALATED
+CANCELLED
+FAILED
+```
+
+Do not collapse terminal states into `FAILED`. `EXHAUSTED` is different from a
+runtime crash.
+
+### Progress Detection
+
+A loop should not count activity as progress. Track measurable signals:
+
+```json
+{
+  "iteration": 4,
+  "progress": {
+    "testsPassing": {
+      "previous": 82,
+      "current": 91,
+      "delta": 9
+    },
+    "blockingFindings": {
+      "previous": 5,
+      "current": 2,
+      "delta": -3
+    },
+    "coverage": {
+      "previous": 74.1,
+      "current": 76.3,
+      "delta": 2.2
+    },
+    "acceptanceCriteriaMet": {
+      "previous": 3,
+      "current": 4,
+      "total": 5
+    }
+  }
+}
+```
+
+Simple progress score:
+
+```text
+progress =
+    test-improvement
+  + finding-reduction
+  + acceptance-criteria-improvement
+  - regression-penalty
+  - repeated-failure-penalty
+```
+
+Stop or escalate when progress stays below threshold for N iterations.
+
+### Reward-Hacking Prevention
+
+Implementation agent should generally not control its own success metric.
+
+Preferred separation:
+
+```text
+Implementation agent
+  -> produces patch
+Deterministic verifier
+  -> runs tests/lints/security
+Independent review agent
+  -> reviews behavior and design
+Harness
+  -> decides whether loop terminates
+```
+
+Bad:
+
+```text
+Claude implements code
+Claude reviews its own code
+Claude declares success
+```
+
+Better:
+
+```text
+Claude implements
+Tests verify behavior
+Codex performs independent review
+Harness evaluates both
+```
+
+For high-risk changes:
+
+```text
+Claude implementation
+Codex review
+Deterministic tests
+Security scanner
+Human approval
+```
+
+### Loop Library
+
+Add reusable loops to `agent-pack`:
+
+```text
+agent-pack/
+  loops/
+    feature-delivery/
+    bug-repair/
+    ci-repair/
+    test-coverage/
+    dependency-upgrade/
+    security-remediation/
+    migration/
+    performance-optimization/
+    documentation-drift/
+    architecture-convergence/
+```
+
+Feature-delivery loop:
+
+```text
+spec
+  -> implement
+  -> test
+  -> review
+  -> repair
+  -> verify
+```
+
+Exit when:
+
+- Acceptance tests pass
+- No blocking review findings remain
+- Policy checks pass
+- Change is inside scope
+
+Bug-repair loop:
+
+```text
+reproduce
+  -> localize
+  -> hypothesize
+  -> patch
+  -> regression-test
+  -> verify original reproduction no longer fails
+```
+
+Rule: bug-repair cannot succeed unless it first reproduces the failure, unless
+the loop explicitly records why reproduction was impossible.
+
+CI-repair loop:
+
+```text
+fetch failing check
+  -> classify failure
+  -> apply minimal repair
+  -> run relevant checks locally
+  -> rerun CI
+  -> repeat or escalate
+```
+
+Stop when:
+
+- Same failure repeats twice
+- Failure appears infrastructure-related
+- Repair would modify unrelated scope
+- Required secret/environment is unavailable
+
+Architecture-convergence loop:
+
+```text
+proposal
+  -> architecture review
+  -> threat review
+  -> cost/reliability review
+  -> revise
+  -> decision record
+```
+
+This loop is useful for AgentCore, AWS serverless, EKS, data, and ML
+architecture work.
+
+### Loop Profiles
+
+Add Loop Engineering defaults to profiles:
+
+```yaml
+apiVersion: tstack.dev/v1alpha1
+kind: Profile
+metadata:
+  id: tstack/local-loop-engineering
+  version: 0.1.0
+spec:
+  runtime:
+    type: tmux
+  models:
+    implementation: claude-code
+    review: codex
+    fallback: copilot
+  workspace:
+    type: git-worktree
+    onePerWorker: true
+  loops:
+    defaults:
+      maxIterations: 6
+      noProgressIterations: 2
+      checkpointEveryIteration: true
+  policies:
+    - enterprise-default
+    - no-production-deploy
+  observability:
+    eventLog: .agent/runs
+    retainPrompts: false
+    retainArtifacts: true
+```
+
+### Loop CLI
+
+Registry commands:
+
+```bash
+areg loop validate loops/feature-delivery
+areg loop inspect tstack/feature-delivery
+areg loop graph tstack/feature-delivery
+areg loop lock tstack/feature-delivery
+areg loop publish loops/feature-delivery
+```
+
+Harness commands:
+
+```bash
+ah loop plan tstack/feature-delivery
+ah loop run tstack/feature-delivery --task issue.md
+ah loop status run_123
+ah loop pause run_123
+ah loop resume run_123
+ah loop approve run_123 --gate production-like-test
+ah loop stop run_123
+ah loop fork run_123 --from-iteration 3 --model codex
+```
+
+Inspection:
+
+```bash
+ah loop explain run_123
+```
+
+Output shape:
+
+```text
+Loop stopped: NO_PROGRESS
+Iterations completed: 5
+Last measurable improvement: iteration 3
+Repeated failure:
+  Integration test expects cursor expiration handling.
+Attempts:
+  1. Added expiration validation.
+  2. Reworked token parser.
+  3. Changed test fixture.
+Recommended escalation:
+  Requirement ambiguity regarding expired cursor behavior.
+```
+
+### Loop Observability
+
+Metrics:
+
+```text
+loop_iterations_total
+loop_convergence_rate
+loop_success_rate
+loop_exhaustion_rate
+loop_human_escalation_rate
+loop_no_progress_iterations
+loop_regressions_introduced
+loop_findings_resolved
+loop_tokens_per_success
+loop_time_to_verified_success
+loop_cost_per_verified_success
+```
+
+Trace hierarchy:
+
+```text
+Loop run
+  Iteration 1
+    Planning workflow
+    Implementation workflow
+    Verification workflow
+  Iteration 2
+    Feedback routing
+    Repair workflow
+    Verification workflow
+  Terminal decision
+```
+
+### Loop Evals
+
+`agent-evals` should score more than final success:
+
+- Correctness
+- Convergence
+- Efficiency
+- Stability
+- Scope discipline
+- Regression rate
+- Verifier reliability
+- Human intervention rate
+- Comprehension debt
+
+A loop that succeeds after 15 noisy iterations can be worse than one that
+escalates correctly after three.
+
+Example scorecard:
+
+```json
+{
+  "loop": "tstack/bug-repair@0.3.0",
+  "scenario": "pagination-duplicate-records",
+  "result": "succeeded",
+  "iterations": 4,
+  "testsPassed": true,
+  "regressions": 0,
+  "scopeViolations": 0,
+  "tokens": 182000,
+  "humanInterventions": 0,
+  "convergenceScore": 0.91,
+  "verificationConfidence": 0.95
+}
+```
+
+### Loop Implementation Order
+
+Phase 1: contracts.
+
+- `Loop`
+- `Verifier`
+- `LoopState`
+- `LoopMemory`
+- `TerminationRule`
+- `ProgressSignal`
+- `FeedbackRoute`
+- `TerminalState`
+
+Phase 2: sequential loop engine.
+
+- One loop
+- One workflow
+- One implementation agent
+- Deterministic verification
+- Maximum iterations
+- JSONL state
+- Checkpoint/resume
+
+Phase 3: independent review.
+
+- Producer model
+- Reviewer model
+- Deterministic verifier
+- Feedback classification
+
+Phase 4: tmux workers.
+
+- Isolated worktrees
+- Parallel workers
+- Worker heartbeats
+- Structured inbox/outbox
+- Review and merge loop
+
+Phase 5: event-triggered loops.
+
+- GitHub issue trigger
+- CI failure trigger
+- Scheduled maintenance
+- Dependency update trigger
+- Documentation drift trigger
+
+Phase 6: remote execution.
+
+- AgentCore
+- ECS
+- Kubernetes
+- Remote SSH workers
+
+Final Loop Engineering architecture:
+
+```text
++----------------------------------------------+
+|                agent-registry                |
+| Skills, Agents, Workflows, Loops             |
+| Verifiers, Profiles, Packs, Policies         |
+| Dependency resolution, Lockfiles             |
++----------------------+-----------------------+
+                       |
+                       | resolved loop graph
+                       v
++----------------------------------------------+
+|                 agent-harness                |
+| Loop controller                              |
+| Workflow executor                            |
+| Feedback router                              |
+| Verification engine                          |
+| Progress and termination engine              |
+| Memory and checkpoints                       |
+| Policy and approval gates                    |
+| Runtime/model/tool/workspace adapters        |
++----------------------+-----------------------+
+                       |
+          +------------+---------------+
+          v            v               v
+       Claude        Codex          Copilot
+       tmux           CLI            CLI
+          |            |               |
+          +------------+---------------+
+                       v
+              Verified artifacts
+```
+
+Revised first end-to-end target:
+
+```bash
+areg loop lock tstack/verified-feature-delivery \
+  --profile tstack/local-loop-engineering \
+  --output agent.lock.json
+
+ah loop run \
+  --lock agent.lock.json \
+  --task issue.md
+```
+
+The key product is not an agent that can perform a task. It is a bounded
+engineering loop that can produce evidence, recognize progress, stop safely,
+and explain why it succeeded or failed.
 
 ## `agent-registry`
 
@@ -1245,11 +2106,13 @@ This foundation supports:
 First end-to-end success criterion:
 
 ```bash
-areg lock profile:tstack/local-swe
-ah run workflow:tstack/feature-delivery \
+areg loop lock tstack/verified-feature-delivery \
+  --profile tstack/local-loop-engineering \
+  --output agent.lock.json
+
+ah loop run \
   --lock agent.lock.json \
-  --runtime tmux \
-  --model claude-code
+  --task issue.md
 ```
 
 That flow forces the right contracts between authored content, registry
