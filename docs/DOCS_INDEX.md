@@ -6,6 +6,7 @@ Canonical navigation map for TStack governance plus `agent-pack`.
 
 - [Start Here](START_HERE.md)
 - [Next Steps](NEXT_STEPS.md)
+- [Platform Blueprint](PLATFORM_BLUEPRINT.md)
 - [Architecture Split](ARCHITECTURE_SPLIT.md)
 - [Repo Organization](REPO_ORGANIZATION.md)
 - [Confluence Env](CONFLUENCE_ENV.md)
