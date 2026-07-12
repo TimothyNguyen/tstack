@@ -13,12 +13,14 @@ If you are new, ignore most markdown at first.
 3. If your goal is governance, read [GOVERNANCE_AUTOMATION.md](../GOVERNANCE_AUTOMATION.md)
 4. If your goal is installing/using agent-pack, read [INSTALLATION.md](INSTALLATION.md)
 5. If your goal is workflow usage, read [WORKFLOWS.md](WORKFLOWS.md)
+6. If your goal is roadmap planning, read [NEXT_STEPS.md](NEXT_STEPS.md)
 
 ## What Lives Where
 
 - Root `README.md`: repo overview and navigation
 - `docs/REPO_ORGANIZATION.md`: `agent-pack`, `agent-registry`, and `agent-harness` layout
 - `docs/ARCHITECTURE_SPLIT.md`: split boundary between `tstack`, `agent-registry`, and `agent-harness`
+- `docs/NEXT_STEPS.md`: next-step roadmap for registry, harness, loops, and evals
 - Root `GOVERNANCE_AUTOMATION.md`: actual governance build/check flow
 - `docs/INSTALLATION.md`: install and first-run flow
 - `docs/WORKFLOWS.md`: common user workflows
@@ -43,4 +45,5 @@ You usually do not need these on day one:
 - Split: [ARCHITECTURE_SPLIT.md](ARCHITECTURE_SPLIT.md)
 - Install: [INSTALLATION.md](INSTALLATION.md)
 - Workflows: [WORKFLOWS.md](WORKFLOWS.md)
+- Next Steps: [NEXT_STEPS.md](NEXT_STEPS.md)
 - Docs map: [DOCS_INDEX.md](DOCS_INDEX.md)
