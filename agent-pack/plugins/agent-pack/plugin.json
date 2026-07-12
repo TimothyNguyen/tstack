@@ -1,7 +1,7 @@
 {
   "$schema": "https://tstack.dev/schemas/agent-plugin.schema.json",
   "name": "agent-pack",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Enterprise-safe agent skills, agents, workflows, adapters, tool providers, stacks, domains, and profiles for agent-registry and agent-harness.",
   "registry": "./registry.json",
   "skills": "./skills",
