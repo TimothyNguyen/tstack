@@ -68,19 +68,25 @@ Skills that declare this agent in their frontmatter `agents:` field.
 | `adapter-mcp` | Design optional Model Context Protocol adapters with default-deny tools, |
 | `adapter-strands` | Optional Strands adapter boundary for composing skills and tools with |
 | `autoplan` | Runs the plan review pipeline before coding begins, then a post-implementation critic gate before surfacing results. |
+| `brainstorming` | Design-space exploration before coding. Explores user intent, requirements and design through collaborative dialogue. |
 | `change-router` | Routes changed files to the appropriate agent roles using agents/routing.json. |
 | `codebase-engine` | Enterprise-safe AST knowledge graph for local codebases. Indexes source |
 | `context-restore` | Restores previously saved local working context without relying on external services. |
 | `context-save` | Captures local working context so a future agent session can resume safely. |
 | `diagram` | Creates text-first architecture and workflow diagrams from local project context. |
+| `diagram-generate` | Generate Draw.io diagrams from text descriptions. |
+| `diagram-search` | Search Draw.io shape library for icons, shapes, and templates. |
 | `learn` | Knowledge capture workflow. Extracts Q&A flashcards from agent session context. |
 | `learnings` | Local project learning workflow. Captures reusable project conventions, pitfalls, decisions, |
 | `plan-director-review` | Director or senior-principal plan review. Reviews scope, sequencing, architecture risk, |
 | `plan-review` | Enterprise-safe plan review workflow. Reviews a proposed implementation plan for scope, |
-| `reference-agent-pack-patterns` | Quick reference for the agent-pack repo conventions. |
+| `pre-commit-review` | Executable skill that runs pre-commit hooks on code to catch style issues |
+| `reference-agent-pack-patterns` | Quick reference for the agent-pack repo conventions. Covers |
 | `retro` | Produces a local project retrospective from commits, incidents, decisions, and outcomes. |
 | `seniorswe-concise-review` | Code review focused exclusively on over-engineering. Finds what to delete: |
 | `skillify` | Turns a repeated local workflow into a reusable skill folder with template files. |
 | `subagent-orchestrator` | Plans and materializes local-only subagent manifests for scoped parallel work. |
 | `token-optimizer` | Token reduction for Python objects, API responses, logs, diffs, and code |
+| `using-agent-skills` | Use when starting any conversation - establishes how to find and use agent-pack skills, |
+| `writing-skills` | Skill creation and editing using test-driven development. Write test cases first, |
 <!-- agent-skills:end -->

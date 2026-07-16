@@ -84,10 +84,13 @@ Skills that declare this agent in their frontmatter `agents:` field.
 | `health` | Enterprise-safe code health dashboard. Detects and runs approved local quality checks |
 | `learn` | Knowledge capture workflow. Extracts Q&A flashcards from agent session context. |
 | `migration-review` | Review modernization and migration plans for sequencing, rollback, |
+| `observability-and-instrumentation` | Add structured observability to code and agent outputs: tracing, structured logging, |
 | `plan-eng-review` | Reviews plans for architecture, data flow, reliability, and testability. |
 | `release` | Policy-gated release preparation workflow. Checks readiness, tests, docs, risk, and rollback |
 | `security-review` | Enterprise security and governance review for application code, data access, agent |
-| `ship` | Prepares a human-approved PR, merge, or release handoff. |
+| `ship` | Prepares a human-approved PR, merge, or release handoff. Runs parallel specialist |
 | `stack-aws` | AWS application modernization planning with least-privilege, local-first |
 | `stack-aws-dms` | AWS DMS/SCT migration planning patterns for governed database migration |
+| `systematic-debugging` | Exhaustive root-cause investigation for complex bugs stuck after multiple fix attempts. |
+| `using-agent-skills` | Use when starting any conversation - establishes how to find and use agent-pack skills, |
 <!-- agent-skills:end -->

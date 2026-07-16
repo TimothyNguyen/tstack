@@ -63,5 +63,7 @@ Skills that declare this agent in their frontmatter `agents:` field.
 |-------|-------------|
 | `atlassian-docs` | Atlassian MCP integration for Jira, Confluence, and Bitbucket. Provides read and write |
 | `codebase-engine` | Enterprise-safe AST knowledge graph for local codebases. Indexes source |
+| `diagram` | Creates text-first architecture and workflow diagrams from local project context. |
 | `learn` | Knowledge capture workflow. Extracts Q&A flashcards from agent session context. |
+| `using-agent-skills` | Use when starting any conversation - establishes how to find and use agent-pack skills, |
 <!-- agent-skills:end -->

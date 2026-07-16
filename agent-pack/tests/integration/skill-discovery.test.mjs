@@ -21,22 +21,22 @@ test('registry.json exists and is valid', () => {
   assert(typeof registry.byAgent === 'object', 'byAgent should be object');
 });
 
-test('registry maps 102 skills', () => {
+test('registry maps 119 skills', () => {
   const registryPath = path.join(REPO_ROOT, 'generated', 'registry.json');
   const content = fs.readFileSync(registryPath, 'utf8');
   const registry = JSON.parse(content);
 
-  assert.strictEqual(registry.count, 102, 'should have 102 skills');
-  assert.strictEqual(registry.skills.length, 102, 'skills array should have 102 items');
+  assert.strictEqual(registry.count, 119, 'should have 119 skills');
+  assert.strictEqual(registry.skills.length, 119, 'skills array should have 119 items');
 });
 
-test('registry maps skills to 13 agents', () => {
+test('registry maps skills to 15 agents', () => {
   const registryPath = path.join(REPO_ROOT, 'generated', 'registry.json');
   const content = fs.readFileSync(registryPath, 'utf8');
   const registry = JSON.parse(content);
 
   const agents = Object.keys(registry.byAgent).filter(a => a !== '_infrastructure');
-  assert.strictEqual(agents.length, 12, 'should have 12 role agents');
+  assert.strictEqual(agents.length, 15, 'should have 15 role agents');
 });
 
 test('registry has expected core agents', () => {

@@ -98,5 +98,7 @@ Skills that declare this agent in their frontmatter `agents:` field.
 | `stack-databricks-dbt` | dbt on Databricks patterns for models, tests, docs, lineage, and governed |
 | `stack-postgres` | Postgres schema, query, migration, performance, and data-governance workflows |
 | `stack-python` | Python service, library, and data workflow modernization with minimal |
+| `systematic-debugging` | Exhaustive root-cause investigation for complex bugs stuck after multiple fix attempts. |
 | `token-optimizer` | Token reduction for Python objects, API responses, logs, diffs, and code |
+| `using-agent-skills` | Use when starting any conversation - establishes how to find and use agent-pack skills, |
 <!-- agent-skills:end -->

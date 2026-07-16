@@ -53,12 +53,19 @@ Skills that declare this agent in their frontmatter `agents:` field.
 
 | Skill | Description |
 |-------|-------------|
+| `brainstorming` | Design-space exploration before coding. Explores user intent, requirements and design through collaborative dialogue. |
 | `chrome-devtools` | Chrome DevTools MCP integration for browser automation, debugging, performance analysis, |
 | `codebase-engine` | Enterprise-safe AST knowledge graph for local codebases. Indexes source |
 | `design-html` | Turns approved UI design direction into implementation-ready HTML guidance. |
 | `design-review` | Reviews product UI and interaction quality for practical design issues. |
 | `diagram` | Creates text-first architecture and workflow diagrams from local project context. |
+| `diagram-export` | Export Draw.io diagrams to PNG, SVG, PDF with styling options. |
+| `diagram-generate` | Generate Draw.io diagrams from text descriptions. |
+| `diagram-search` | Search Draw.io shape library for icons, shapes, and templates. |
+| `diagram-style` | Apply consistent styling to diagrams. Colors, fonts, themes. |
+| `diagram-validate` | Validate diagram completeness and design patterns. |
 | `learn` | Knowledge capture workflow. Extracts Q&A flashcards from agent session context. |
 | `plan-design-review` | Reviews plans for user experience, UI quality, and product interaction risk. |
 | `stack-react-typescript` | React and TypeScript application modernization, including codemods, Redux |
+| `using-agent-skills` | Use when starting any conversation - establishes how to find and use agent-pack skills, |
 <!-- agent-skills:end -->

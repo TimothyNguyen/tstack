@@ -612,61 +612,267 @@ function install() {
   }
 }
 
-function doctor() {
-  const errors = [];
+/**
+ * Try running a command; return true if it exits 0, false otherwise.
+ *
+ * Pass shell:true for commands that live as .cmd wrappers on Windows
+ * (npx, uvx, etc.). Do NOT use shell:true for python/python3 â€” those are
+ * real executables and shell:true can resolve to a different Python than
+ * the active venv.
+ */
+function tryExec(cmd, args, { shell = false } = {}) {
+  try {
+    execFileSync(cmd, args, { stdio: 'pipe', shell });
+    return true;
+  } catch {
+    return false;
+  }
+}
 
-  // Check VERSION
+/**
+ * Find a Python executable satisfying >= 3.10. Returns binary name or null.
+ */
+function detectPython() {
+  for (const bin of ['python3', 'python']) {
+    try {
+      const out = execFileSync(bin, ['--version'], { stdio: 'pipe' }).toString().trim();
+      const m = out.match(/Python (\d+)\.(\d+)/);
+      if (m && (Number(m[1]) > 3 || (Number(m[1]) === 3 && Number(m[2]) >= 10))) return bin;
+    } catch { /* not found */ }
+  }
+  return null;
+}
+
+/**
+ * Collect Python-backed components:
+ *   tool-providers/<n>/mcp/pyproject.toml  -> MCP servers
+ *   adapters/adapter-<n>/pyproject.toml    -> Python adapters (stubs)
+ */
+function collectPythonComponents() {
+  const results = [];
+  const toolProvidersDir = path.join(ROOT, 'tool-providers');
+  if (fs.existsSync(toolProvidersDir)) {
+    for (const entry of fs.readdirSync(toolProvidersDir, { withFileTypes: true })) {
+      if (!entry.isDirectory()) continue;
+      const mcpPyproject = path.join(toolProvidersDir, entry.name, 'mcp', 'pyproject.toml');
+      if (fs.existsSync(mcpPyproject)) {
+        results.push({ kind: 'mcp-server', name: entry.name, pyproject: mcpPyproject });
+      }
+    }
+  }
+  const adaptersDir = path.join(ROOT, 'adapters');
+  if (fs.existsSync(adaptersDir)) {
+    for (const entry of fs.readdirSync(adaptersDir, { withFileTypes: true })) {
+      if (!entry.isDirectory() || !entry.name.startsWith('adapter-')) continue;
+      const pyproject = path.join(adaptersDir, entry.name, 'pyproject.toml');
+      if (fs.existsSync(pyproject)) {
+        results.push({ kind: 'adapter', name: entry.name, pyproject });
+      }
+    }
+  }
+  return results;
+}
+
+/**
+ * Parse [project] name from a pyproject.toml via simple regex.
+ */
+function parsePyprojectName(tomlPath) {
+  const content = fs.readFileSync(tomlPath, 'utf8');
+  const m = content.match(/^\s*name\s*=\s*["']([\.\w-]+)['"]/m);
+  return m ? m[1] : null;
+}
+
+function doctor() {
+  const items = []; // { ok: bool, label: string, fix?: string }
+
+  // -- Install health ---------------------------------------------------------
+
   const versionPath = path.join(TARGET, 'VERSION');
   if (!fs.existsSync(versionPath)) {
-    errors.push(`VERSION missing at ${TARGET}/VERSION — run install first`);
+    items.push({ ok: false, label: `install: VERSION missing at ${TARGET}/VERSION`, fix: 'npx agent-pack install' });
+  } else {
+    items.push({ ok: true, label: `install: VERSION present (${fs.readFileSync(versionPath, 'utf8').trim()})` });
   }
 
-  // Check manifest
   const manifestPath = path.join(TARGET, 'install-manifest.json');
   if (!fs.existsSync(manifestPath)) {
-    errors.push(`install-manifest.json missing — run install first`);
+    items.push({ ok: false, label: 'install: install-manifest.json missing', fix: 'npx agent-pack install' });
   } else {
     const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
-    for (const agent of (manifest.agents || [])) {
-      const skillPath = path.join(TARGET, 'skills', agent, 'SKILL.md');
-      if (!fs.existsSync(skillPath)) {
-        errors.push(`agent "${agent}" declared in manifest but skills/${agent}/SKILL.md missing`);
-      }
+    const missingAgents = (manifest.agents || []).filter(
+      (a) => !fs.existsSync(path.join(TARGET, 'skills', a, 'SKILL.md')),
+    );
+    const missingSkills = (manifest.skills || []).filter(
+      (s) => !fs.existsSync(path.join(TARGET, 'skills', s, 'SKILL.md')),
+    );
+    if (missingAgents.length > 0) {
+      items.push({
+        ok: false,
+        label: `install: agent SKILL.md missing -- ${missingAgents.join(', ')}`,
+        fix: 'npx agent-pack upgrade',
+      });
     }
-    for (const skill of (manifest.skills || [])) {
-      const skillPath = path.join(TARGET, 'skills', skill, 'SKILL.md');
-      if (!fs.existsSync(skillPath)) {
-        errors.push(`utility skill "${skill}" declared in manifest but skills/${skill}/SKILL.md missing`);
-      }
+    if (missingSkills.length > 0) {
+      items.push({
+        ok: false,
+        label: `install: utility skill SKILL.md missing -- ${missingSkills.join(', ')}`,
+        fix: 'npx agent-pack install',
+      });
+    }
+    if (missingAgents.length === 0 && missingSkills.length === 0) {
+      const agentCount = (manifest.agents || []).length;
+      const skillCount = (manifest.skills || []).length;
+      items.push({ ok: true, label: `install: manifest OK (${agentCount} agents, ${skillCount} utility skills)` });
     }
   }
 
-  // Check settings
   const settingsPath = path.join(TARGET, 'settings.json');
   if (!fs.existsSync(settingsPath)) {
-    errors.push(`settings.json missing at ${TARGET}/settings.json`);
+    items.push({
+      ok: false,
+      label: `install: settings.json missing at ${TARGET}/settings.json`,
+      fix: 'npx agent-pack install',
+    });
   } else {
-    // If docker-gateway MCP is configured, verify Docker Desktop + MCP Toolkit
+    items.push({ ok: true, label: 'install: settings.json present' });
+  }
+
+  // -- Node.js runtimes -------------------------------------------------------
+  // npx/uvx are .cmd wrappers on Windows â€” must use shell:true to find them.
+  const WIN = process.platform === 'win32';
+
+  if (!tryExec('npx', ['--version'], { shell: WIN })) {
+    items.push({
+      ok: false,
+      label: 'runtime: npx not found -- Node MCP servers (github, slack) will not start',
+      fix: 'Install Node.js >= 18 from https://nodejs.org',
+    });
+  } else {
+    items.push({ ok: true, label: 'runtime: npx available' });
+  }
+
+  // -- Python runtimes --------------------------------------------------------
+
+  const pythonBin = detectPython();
+  if (!pythonBin) {
+    items.push({
+      ok: false,
+      label: 'runtime: Python >= 3.10 not found -- codebase-engine and Python MCP servers will not work',
+      fix: 'Install Python >= 3.10 from https://python.org  or  brew install python@3.12',
+    });
+  } else {
+    items.push({ ok: true, label: `runtime: ${pythonBin} (>= 3.10) available` });
+  }
+
+  if (!tryExec('uvx', ['--version'], { shell: WIN })) {
+    items.push({
+      ok: false,
+      label: 'runtime: uvx not found -- uvx-based MCPs (e.g. mcp-server-postgres) will not start',
+      fix: 'pip install uv  or  curl -LsSf https://astral.sh/uv/install.sh | sh',
+    });
+  } else {
+    items.push({ ok: true, label: 'runtime: uvx available' });
+  }
+
+  if (pythonBin && !tryExec(pythonBin, ['-m', 'pip', '--version'])) {
+    items.push({
+      ok: false,
+      label: 'runtime: pip not available -- cannot install Python packages',
+      fix: `${pythonBin} -m ensurepip --upgrade`,
+    });
+  } else if (pythonBin) {
+    items.push({ ok: true, label: 'runtime: pip available' });
+  }
+
+  // -- codebase-engine --------------------------------------------------------
+
+  if (pythonBin) {
+    if (!tryExec(pythonBin, ['-c', 'import codebase_engine'])) {
+      const skillSrc = path.join(ROOT, 'skills', 'codebase-engine');
+      const fix = fs.existsSync(skillSrc)
+        ? `pip install -e "${skillSrc}"`
+        : 'pip install codebase-engine  (or locate the codebase-engine skill source and run pip install -e <path>)';
+      items.push({ ok: false, label: 'codebase-engine: not importable in active Python environment', fix });
+    } else {
+      items.push({ ok: true, label: 'codebase-engine: importable OK' });
+    }
+  }
+
+  // -- Python components (tool-providers + adapters) --------------------------
+
+  for (const comp of collectPythonComponents()) {
+    const pkgName = parsePyprojectName(comp.pyproject) || comp.name;
+    const pyContent = fs.readFileSync(comp.pyproject, 'utf8');
+    if (!pyContent.includes('[project]')) {
+      items.push({
+        ok: false,
+        label: `${comp.kind} ${comp.name}: pyproject.toml missing [project] section`,
+        fix: `Repair ${comp.pyproject} to include [project] name and version`,
+      });
+      continue;
+    }
+    if (comp.kind === 'mcp-server' && pythonBin) {
+      const importName = pkgName.replace(/-/g, '_');
+      const installed = tryExec(pythonBin, [
+        '-c',
+        `import importlib.util; assert importlib.util.find_spec("${importName}") is not None`,
+      ]);
+      if (!installed) {
+        const mcpDir = path.dirname(comp.pyproject);
+        items.push({
+          ok: false,
+          label: `mcp-server ${comp.name}: Python package "${pkgName}" not installed`,
+          fix: `pip install -e "${mcpDir}"  (then restart your MCP host)`,
+        });
+      } else {
+        items.push({ ok: true, label: `mcp-server ${comp.name}: "${pkgName}" installed OK` });
+      }
+    } else {
+      items.push({ ok: true, label: `${comp.kind} ${comp.name}: pyproject.toml valid` });
+    }
+  }
+
+  // -- Docker MCP gateway -----------------------------------------------------
+
+  if (fs.existsSync(settingsPath)) {
     const settings = JSON.parse(fs.readFileSync(settingsPath, 'utf8'));
     if (settings.mcpServers && settings.mcpServers['docker-gateway']) {
-      try {
-        execFileSync('docker', ['info'], { stdio: 'pipe' });
-      } catch {
-        errors.push('docker-gateway configured but "docker info" failed — ensure Docker Desktop is running');
+      if (!tryExec('docker', ['info'])) {
+        items.push({
+          ok: false,
+          label: 'docker-gateway: "docker info" failed -- Docker Desktop is not running',
+          fix: 'Start Docker Desktop, then re-run: npx agent-pack doctor',
+        });
+      } else {
+        items.push({ ok: true, label: 'docker-gateway: Docker Desktop running' });
       }
-      try {
-        execFileSync('docker', ['mcp', '--help'], { stdio: 'pipe' });
-      } catch {
-        errors.push('docker-gateway configured but "docker mcp --help" failed — requires Docker Desktop 4.62+');
+      if (!tryExec('docker', ['mcp', '--help'])) {
+        items.push({
+          ok: false,
+          label: 'docker-gateway: "docker mcp" not found -- requires Docker Desktop 4.62+',
+          fix: 'Upgrade Docker Desktop to 4.62 or later',
+        });
+      } else {
+        items.push({ ok: true, label: 'docker-gateway: docker mcp available' });
       }
     }
   }
 
+  // -- Report -----------------------------------------------------------------
+
+  const errors = items.filter((i) => !i.ok);
+  for (const item of items.filter((i) => i.ok)) {
+    console.log(`  ok  ${item.label}`);
+  }
+  for (const item of errors) {
+    console.error(`  ERR ${item.label}`);
+    if (item.fix) console.error(`      Fix: ${item.fix}`);
+  }
   if (errors.length > 0) {
-    for (const err of errors) console.error(`ERROR: ${err}`);
+    console.error(`\ndoctor: ${errors.length} problem(s) found`);
     process.exitCode = 1;
   } else {
-    console.log(`doctor: OK (${TARGET})`);
+    console.log(`\ndoctor: OK (${TARGET})`);
   }
 }
 
@@ -697,7 +903,9 @@ export {
   PRIVATE_STRIP_MCPS,
   SUPPORTED_HOSTS,
   TARGET,
+  collectPythonComponents,
   collectSkillEntries,
+  detectPython,
   discoverAddonPackages,
   discoverInstallableSkillCatalog,
   discoverUtilitySkills,
@@ -715,10 +923,12 @@ export {
   installSkillEntry,
   main,
   parseFrontmatter,
+  parsePyprojectName,
   printList,
   readAgentFrontmatter,
   readConfig,
   resolveBuiltinMcps,
+  tryExec,
   validateAgentNames,
   validateHostNames,
 };

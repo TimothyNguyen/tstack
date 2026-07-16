@@ -68,11 +68,15 @@ Skills that declare this agent in their frontmatter `agents:` field.
 
 | Skill | Description |
 |-------|-------------|
+| `adapter-github` | Optional GitHub MCP/CLI adapter guidance for repo, issue, and PR context |
 | `atlassian-docs` | Atlassian MCP integration for Jira, Confluence, and Bitbucket. Provides read and write |
 | `diagram-export` | Export Draw.io diagrams to PNG, SVG, PDF with styling options. |
 | `document-generate` | Generates missing local project documentation from code-backed evidence. |
 | `document-release` | Updates documentation after shipped behavior changes. |
 | `documentation` | Documentation workflow for generating, updating, and reviewing project docs after implementation. |
+| `domain-data-governance` | Data governance review for classification, lineage, permissions, retention, |
+| `domain-experiment-design` | Experiment design review for randomization, power, metrics, guardrails, |
+| `domain-model-interpretation` | Model interpretation review for feature effects, calibration, drift, |
 | `learn` | Knowledge capture workflow. Extracts Q&A flashcards from agent session context. |
 | `learnings` | Local project learning workflow. Captures reusable project conventions, pitfalls, decisions, |
 | `plan-design-review` | Reviews plans for user experience, UI quality, and product interaction risk. |

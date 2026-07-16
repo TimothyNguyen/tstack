@@ -69,5 +69,11 @@ Skills that declare this agent in their frontmatter `agents:` field.
 | `health` | Enterprise-safe code health dashboard. Detects and runs approved local quality checks |
 | `investigate` | Root-cause investigation workflow for bugs, failing tests, broken integrations, and unexpected behavior. |
 | `learn` | Knowledge capture workflow. Extracts Q&A flashcards from agent session context. |
+| `qa-verify` | Proof-of-done verification gate for AI coding agents. Scans changed files |
+| `receiving-code-review` | Handle code review feedback with technical rigor. Verify before implementing. |
 | `security-review` | Enterprise security and governance review for application code, data access, agent |
+| `security-scanner` | MCP server providing Checkov (IaC), Semgrep (source), Bandit (Python), and |
+| `systematic-debugging` | Exhaustive root-cause investigation for complex bugs stuck after multiple fix attempts. |
+| `using-agent-skills` | Use when starting any conversation - establishes how to find and use agent-pack skills, |
+| `verification-before-completion` | Ship-readiness verification workflow. Run verification commands and confirm output |
 <!-- agent-skills:end -->
